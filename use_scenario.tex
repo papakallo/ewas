@@ -1,0 +1,31 @@
+The primary use scenario of \abbr{EWAS} is missile threat detection and alert generation and dissemination. The flow of events in this scenario is generally linear and begins with the detection of a thermal change, which might indicate a missile launch, by autonomous satellite constellation. Such event serves as an entry point to a processing pipeline ending with alert dissemination as well as storing the event data for future uses.
+
+\textbf{Primary actors}: Satellite operators, national authorities 
+
+\textbf{Event flow}: 
+
+\begin{enumerate}
+    \item Wide-field infrared sensor located aboard a \abbr{GEO} satellite detects a thermal spike and flags the event.
+
+    \item Onboard processor filters out noise and determines the source is a missile.
+
+    \item The two \abbr{LEO} satellites closest to the detected location orient their narrow-field sensors toward the moving target, perform stereoscopic tracking, and calculate a preliminary trajectory estimate.
+
+    \item The two \abbr{LEO} satellites downlink their encrypted telemetry and preliminary trajectory estimate to the ground segment, which verifies the data, calculates the definitive trajectory, and estimates the missile impact zone.
+
+    \item The system operator's console displays a warning and detailed information about the incoming missile and waits for confirmation. 
+
+    \item Information about the missile event is written to a database after the operator's confirmation. 
+
+
+    \item The system generates and disseminates adequate warnings to the authorities of endangered areas. 
+\end{enumerate}
+
+The flow of events in the use scenario is presented as the following use case diagram:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/use_scenario.png}
+    \caption{Use case diagram}
+    \label{fig:use_case_diagram}
+\end{figure}

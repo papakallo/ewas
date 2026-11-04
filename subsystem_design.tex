@@ -1,0 +1,91 @@
+The purpose of this chapter is to define the architecture of the Early Warning Alarm System space segment. Following the top-level mission objectives and requirements, the spacecraft architecture is decomposed into specialized operational subsystems. To ensure continuous, 24/7 global temporal coverage with minimal blind spots and meet the strict latency requirements, the design focuses on a modular architecture. This approach couples a standardized satellite bus with highly specialized mission payloads optimized for multi-tier ballistic event tracking.
+
+To fulfill the \abbr{EWAS} mandate of global, high-coverage civil protection, the system architecture utilizes a dual-tier space segment constellation:
+\begin{itemize}
+    \item \textbf{High-Altitude Detection Layer (\abbr{GEO}):} Comprises 6 satellites in Geosynchronous Earth Orbit (35,786 km), spaced uniformly at 60 degree intervals along the equator to provide continuous staring detection across mid-and-low latitudes.
+    \item \textbf{Low-Altitude Tracking Layer (\abbr{LEO}):} Comprises a Walker Delta constellation of 72 small satellites operating at an altitude of 1,200 km across 8 high-inclination orbital planes, with 9 satellites per plane. This configuration ensures complete high-latitude and polar coverage with dense multi-satellite stereoscopic overlap.
+\end{itemize}
+The subsystem design presented in this section prioritizes ultra-high-sensitivity detection, structural longevity, and rapid, secure data dissemination.
+
+\subsection{Standard Satellite Bus Architecture}
+The \abbr{EWAS} space segment is based on a modular satellite bus utilizing flight-proven Commercial Off-The-Shelf (\abbr{COTS}) components to minimize development risks, control baseline procurement costs, and ensure maximum reliability. This standardized platform provides the essential operational infrastructure via the following subsystems:
+
+\begin{description}
+    \item[Structure:] Modular aluminium frame designed for launch load endurance and internal component protection. It incorporates localized structural shielding to mitigate radiation degradation (radiation hardening) encountered during extended operations in \abbr{GEO} and persistent \abbr{LEO} orbital environments.
+    \item[Electrical Power System:] Deployable solar arrays and high-capacity Lithium-Ion (Li-Ion) battery storage to guarantee uninterrupted power distribution during orbital eclipse phases. The system is scaled to accommodate standard spacecraft operations alongside the transient peak-power demands of the primary computational assets during active threat tracking.
+    \item[Thermal Control System:] Passive thermal regulation utilizing Multi-Layer Insulation (\abbr{MLI}), optical surface reflectors, and dedicated heat-pipe radiators. Special architectural isolation is implemented to handle the cryogenic cooling requirements of the infrared sensors to maintain nominal detector sensitivity.
+    \item[Propulsion System:] A low-thrust monopropellant or electric propulsion module. Its primary functions are to perform autonomous station-keeping manoeuvres to maintain precise slot positioning within the \abbr{GEO}/\abbr{LEO} constellation grids, and execute orbital phase management.
+    \item[Communications Subsystem:] Incorporates high-gain, highly directional antennas coupled with a dedicated hardware cryptographic module to safeguard data integrity. Crucially, the system features Inter-Satellite Links (\abbr{ISL}) to route data across the orbital shells, allowing a satellite tracking an event over remote oceans to relay alert data to a node directly over a secure Baltic ground station, preserving the under-60-second end-to-end latency constraint.
+\end{description}
+
+\subsubsection[GEO vs LEO Platform Differentiation]{\abbr{GEO} vs \abbr{LEO} Platform Differentiation}
+While both platforms share \abbr{COTS}-derived design patterns, their drastically different orbital environments require separate engineering margins. Table~\ref{tab:bus_differentiation} outlines the specific requirements allocated to the \abbr{GEO} and \abbr{LEO} satellite buses.
+
+\begin{table}[h!]
+\centering
+\caption[Engineering Requirements for GEO and LEO Satellite Bus Configurations]{Engineering Requirements for \abbr{GEO} and \abbr{LEO} Satellite Bus Configurations}
+\label{tab:bus_differentiation}
+\begin{tabular}{|l|p{6cm}|p{6cm}|}
+\hline
+\textbf{Subsystem} & \textbf{\abbr{GEO} Bus Specifications} & \textbf{\abbr{LEO} Bus Specifications} \\ \hline
+\textbf{Structure} & Heavy radiation shielding for Geostationary environment. & Lightweight composite/aluminium structure optimized for batch launch. \\ \hline
+\textbf{\abbr{EPS}} & Large solar arrays, continuous exposure with rare equinox eclipses. & High-cycle Li-Ion batteries to handle 15 orbital eclipses per day. \\ \hline
+\textbf{\abbr{ADCS}} & Earth-pointing nadir stabilization with low angular velocity. & High-agility reaction wheels and magnetorquers for fast target cross-cueing. \\ \hline
+\textbf{\abbr{TTC} / \abbr{ISL}} & Persistent high-power ground links and multi-channel \abbr{ISL} routing nodes. & Dynamic, steerable \abbr{ISL} antennas to lock onto moving adjacent \abbr{LEO} nodes. \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Mission-Specific Payloads}
+\begin{description}
+    \item[Global Multi-Tier Infrared (\abbr{IR}) Sensor Suite:] The primary mission payload is an advanced infrared optical assembly tailored to capture the massive thermal energy of ballistic missile plumes during the boost phase against the cold background of space. The sensors operate in complementary Short-Wave (\abbr{SWIR}) and Medium-Wave (\abbr{MWIR}) bands to minimize false alarms and maximize detection probability.
+    \item[\abbr{GEO} Observation Layer:] Focuses on global detection using Wide Field of View (\abbr{WFOV}) staring optics. While spatial resolution is low (approx. 1–2 km per pixel), the extreme radiometric contrast of a rocket motor firing acts as an immediate point-source digital trigger.
+    \item[\abbr{LEO} Tracking Layer:] Features Narrow Field of View (\abbr{NFOV}) tracking sensors integrated onto dynamic, dual-axis gimbals. Cued by initial high-altitude alerts, these optics mechanically steer their line of sight to lock onto the target footprint, crossing paths with adjacent \abbr{LEO} nodes to establish multi-angle stereoscopic tracking of the missile post-burnout.
+\end{description}
+\textbf{Key Design Drivers:} High imagery sampling rates for rapid trajectory tracking and precise signal discrimination to isolate missile plumes from natural solar glints or heavy background atmospheric clutter.
+
+\subsection[On-Board Data Handling and Advanced Processing]{On-Board Data Handling and Advanced Processing}
+The On-Board Data Handling (\abbr{OBDH}) system manages all data flows and executes mission-critical software. \abbr{EWAS} utilizes a high-performance computational architecture to process information in real-time while on orbit. To handle data transmission reliably under extreme environmental conditions, the internal data architecture implements the \textbf{SpaceWire} protocol for high-rate payload data and a redundant \textbf{\abbr{CAN} bus} for critical platform telemetry.
+
+Key design drivers include:
+\begin{itemize}
+    \item \textbf{On-board Event Filtering:} Capability to distinguish between missile plumes and background noise using advanced algorithms to reduce false alarm rates.
+    \item \textbf{Latency Optimization:} Significant reduction in warning time by generating detection alerts locally, eliminating the need to downlink massive volumes of raw infrared imagery.
+    \item \textbf{Secure Data Management:} All processed data and event logs are encrypted and archived in a secure on-board memory unit for later technical review and algorithm refinement.
+\end{itemize}
+
+\subsection[Attitude Determination and Control System]{Attitude Determination and Control System}
+Given the high velocity of \abbr{LEO} nodes and the dynamic motion of \abbr{GEO} platforms relative to sudden threats, the Attitude Determination and Control System (\abbr{ADCS}) must continuously manipulate the spacecraft’s spatial orientation to maintain stable ground tracking. 
+
+Key design drivers include:
+\begin{itemize}
+    \item \textbf{Precision Pointing:} System-level capability to aim the \abbr{IR} optics at targeted coordinates without image blurring. The target pointing stability is maintained below 2 arcseconds per second to ensure clear pixel capture.
+    \item \textbf{Stability Management:} Active elimination of high-frequency micro-vibrations and structural jitter that confuse small plume detection algorithms.
+    \item \textbf{Autonomous Target Tracking:} Dynamic adjustments to the spacecraft attitude in real-time to match cued geographic coordinates received from the detection layer.
+\end{itemize}
+
+\subsection{Spacecraft Subsystem Interactivity and Command Data Flow}
+To meet the strict under-60-second end-to-end latency constraint, the command logic and cross-layer data exchange operate as a synchronized, autonomous loop across the space and ground segments. The operational data flow is executed as follows:
+
+\begin{enumerate}
+    \item \textbf{\abbr{GEO} Constellation Detection:}
+    \begin{itemize}
+        \item The \abbr{GEO} \abbr{WFOV} infrared payload detects a sudden thermal burst within the monitored region.
+        \item The onboard \abbr{OBDH} processing layer conducts real-time digital denoising to filter out solar bursts, solar glints, and Earth background noise.
+        \item The onboard classification algorithm validates the signature as a potential missile and immediately commands the \abbr{TTC} system to transmit the target's coordinates to the 2 closest \abbr{LEO} satellites via Inter-Satellite Links (\abbr{ISL}).
+    \end{itemize}
+    
+    \item \textbf{\abbr{LEO} Constellation Tracking:}
+    \begin{itemize}
+        \item The 2 cued \abbr{LEO} satellites receive the threat coordinates via their \abbr{ISL} receiver terminals.
+        \item The \abbr{LEO} \abbr{ADCS} autonomously re-orients the satellite bus, and the dual-axis gimbals mechanically lock the \abbr{NFOV} tracking sensors onto the moving missile plume.
+        \item The cued \abbr{LEO} satellites track the target simultaneously from different observation angles, allowing the \abbr{OBDH} layer to calculate a preliminary stereoscopic trajectory.
+        \item The \abbr{LEO} communications subsystem encrypts the telemetry and trajectory dataset via the hardware cryptographic module and downlinks it to the Ground Station Network.
+    \end{itemize}
+    
+    \item \textbf{Ground Segment Processing:}
+    \begin{itemize}
+        \item The Ground Station receives the encrypted telemetry packet, decrypts it, and verifies its data integrity.
+        \item High-speed data fusion pipelines calculate the definitive missile trajectory and predict the civil impact zones.
+        \item The ground system automatically generates a live, standardized alert and routes it directly to the appropriate national authority body for civil protection.
+    \end{itemize}
+\end{enumerate}

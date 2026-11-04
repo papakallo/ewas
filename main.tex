@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Core packages
+\usepackage{amsmath,amssymb}
+\usepackage[table]{xcolor}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\abbr}[1]{\texorpdfstring{\hyperlink{abbr:#1}{#1}}{#1}}
+\newcommand{\abbrtext}[2]{\texorpdfstring{\hyperlink{abbr:#1}{#2}}{#2}}
+\newcommand{\abbrentry}[2]{\hypertarget{abbr:#1}{\textbf{#1}} & #2 \\}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+
+% Number figures and tables within each section (e.g., Figure 4.1).
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+\usepackage{float} 
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+
+% Paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+\setlength{\headheight}{40pt}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[L]{
+    \includegraphics[height=1.05cm]{Figures/hsb_logo.png} 
+}
+
+\fancyhead[R]{
+    \includegraphics[height=1.2cm]{Figures/pg_logo.jpg} 
+}
+
+\fancyhead[C]{
+  {\small\textbf{Early Warning Alarm System (\abbr{EWAS})}}
+}
+
+\title{
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/ewas_logo.png}
+\end{figure}
+\vfill
+Early Warning Alarm System - final report
+}
+
+\author{
+    \begin{tabular}{p{\textwidth}}
+        \centering
+        Grzegorz Macioch, Jan Krajewski, Julia Hoduń, Krzysztof Pankiewicz, Ludwik Piksa, Maciej Raciniewski, Michał Sugalski, Aleksandra Susmarska, Sergiusz Pyskowacki 
+    \end{tabular}
+}
+\date{}
+
+\begin{document}
+
+\begin{figure}
+\begin{minipage}{.5\textwidth}
+  \raggedright
+  \includegraphics[width=.6\linewidth]{Figures/pg_logo.jpg}
+\end{minipage}%
+\hfill
+\begin{minipage}{.5\textwidth}
+  \raggedleft
+  \includegraphics[width=.6\linewidth]{Figures/hsb_logo.png}
+\end{minipage}
+\end{figure}
+
+
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+
+\section*{List of Abbreviations}
+\addcontentsline{toc}{section}{List of Abbreviations}
+
+\begin{tabular}{ll}
+\abbrentry{ADCS}{Attitude Determination and Control System}
+\abbrentry{CAN}{Controller Area Network}
+\abbrentry{CDH}{Command and Data Handling (C\&DH)}
+\abbrentry{CDS}{Cross-Domain Solution}
+\abbrentry{CONOPS}{Concept of Operations}
+\abbrentry{COTS}{Commercial Off-The-Shelf}
+\abbrentry{EPS}{Electrical Power System}
+\abbrentry{EU}{European Union}
+\abbrentry{EWAS}{Early Warning Alarm System}
+\abbrentry{FMEA}{Failure Modes and Effects Analysis}
+\abbrentry{GEO}{Geostationary Earth Orbit}
+\abbrentry{GMAT}{General Mission Analysis Tool}
+\abbrentry{HIL}{Hardware-in-the-Loop}
+\abbrentry{IR}{Infrared}
+\abbrentry{ISL}{Inter-Satellite Link}
+\abbrentry{LEO}{Low Earth Orbit}
+\abbrentry{MEO}{Medium Earth Orbit}
+\abbrentry{MLI}{Multi-Layer Insulation}
+\abbrentry{MWIR}{Medium-Wave Infrared}
+\abbrentry{NATO}{North Atlantic Treaty Organization}
+\abbrentry{NFOV}{Narrow Field of View}
+\abbrentry{OBDH}{On-Board Data Handling}
+\abbrentry{RBAC}{Role-Based Access Control}
+\abbrentry{RF}{Radio Frequency}
+\abbrentry{SO}{Strengths--Opportunities strategy}
+\abbrentry{SWIR}{Short-Wave Infrared}
+\abbrentry{SWOT}{Strengths, Weaknesses, Opportunities, and Threats}
+\abbrentry{TCS}{Thermal Control System}
+\abbrentry{TTC}{Telemetry, Tracking, and Command}
+\abbrentry{UI}{User Interface}
+\abbrentry{VTS}{Visualization Tool for Space Data}
+\abbrentry{WBS}{Work Breakdown Structure}
+\abbrentry{WFOV}{Wide Field of View}
+\abbrentry{WT}{Weaknesses--Threats strategy}
+\end{tabular}
+
+
+\newpage
+\section{Analysis} % Grzegorz
+\input{analysis.tex}
+
+\newpage
+\section{Use Scenario} % Michał
+\input{use_scenario.tex}
+
+\newpage
+\section{Concept of Operations} % Michał
+\input{conops.tex}
+
+\newpage
+\section{Proposed solution} % Krzysztof
+\input{proposed_solution.tex}
+
+\newpage
+\section{Overall system requirements} % Sergiusz
+\input{system_req.tex}
+
+\newpage
+\section{Functional Analysis} % Sergiusz
+\input{fucntional_analysis.tex}
+
+\newpage
+\section{Subsystem Design} % Jan
+\input{subsystem_design.tex}
+
+% rozwazam usuniecie tego - Sergiusz
+% \newpage
+% \section{Project Plan} % Grzegorz, Ola
+% \input{project_plan.tex}
+
+\newpage
+\section{Stakeholder Analysis} % Julia, Ola
+\input{stakeholder_analysis.tex}
+
+\newpage
+\section[Risk/SWOT Analysis]{Risk/\abbr{SWOT} Analysis} % Julia, Ola
+\input{risk_swot_analysis.tex}
+
+\newpage
+\section{Work Breakdown Structure} % Maciej
+\input{wbs.tex}
+
+\newpage
+\section{Overall Schedule} % Sergiusz
+\input{schedule_milestones.tex}
+
+
+\end{document}

@@ -1,0 +1,61 @@
+The goal of this Concept of Operations is to provide a high-level description about what \abbr{EWAS} should achieve, to what extent, how it would be operated and what phases does the mission's life cycle consist of. 
+
+\subsection{Mission objectives and requirements}
+
+The primary purpose of Early Warning Alarm System is to provide continuous surveillance to the Baltic region, detect ballistic missile threats through spikes in thermal signatures, estimate the potential impact zones and generate and broadcast alerts about the events. 
+
+\textbf{Main objectives}
+
+\begin{itemize}
+    \item Detecting ballistic missile events threatening the Baltic region at the earliest possible stage of flight using infrared signatures. 
+
+    \item Tracking and prediction of detected missile's trajectory to efficiently estimate the possible impact area. 
+
+    \item Generating and dissemination clear warning information to authorities of potentially endangered areas enabling alerting civilians ahead of the impact. 
+
+    \item Storing historical event data to support analysis and improve the system's prediction capability. 
+\end{itemize}
+
+\textbf{Main requirements}
+
+\begin{itemize}
+    \item High global coverage 
+    
+    \item Low end-to-end latency between the space and ground segments ensuring sufficient time for users to react to the incoming missile threat before impact. 
+
+    \item Accurate estimation of the preliminary impact area of the tracked missile. 
+
+    \item High classification accuracy resulting in maximizing the missile detection probability and minimizing the false alarm rate. 
+
+    \item High availability, preventing time windows in which the system is "blind" and ensuring proper alert dissemination. 
+\end{itemize}
+
+\subsection{System characteristics}
+
+From the perspective of the strategic operator, the \abbr{EWAS} acts as a seamless, automated "eye in the sky." The system abstracts complex orbital mechanics and raw sensor data into an intuitive, tactical display. Operators interact with a two-dimensional map on which the system automatically highlights the launch site, current position of the missile as well as estimated area of impact.  Furthermore, the system displays color-coded alerts and features audio cues to eliminate human latency during a crisis. The system asks for cross-verification of such an event by the operator and if confirmed it generates and disseminates warnings about the incoming missile to adequate national authorities of endangered areas. 
+
+\subsection{Mission operation}
+
+The Emergency Warning Alarm System operates in a continuous, synchronized loop consisting of surveillance, detection and tracking of detected missile threats. 
+
+\textbf{Space segment operation}
+
+The space segment operates autonomously as a combination of \abbr{GEO} and \abbr{LEO} satellites to ensure high global coverage and high-resolution tracking. \abbr{GEO} satellites equipped with infrared sensors continuously scan the designated area to detect sudden thermal changes. When a potential missile threat is identified, the \abbr{GEO} segment cues the two \abbr{LEO} satellites closest to the detected location. The two \abbr{LEO} satellites track the missile from different observation angles, calculate a preliminary stereoscopic trajectory, and downlink the encrypted telemetry and preliminary trajectory estimate to the ground segment.
+
+\textbf{Ground segment operation}
+
+The ground segment receives the encrypted telemetry and preliminary trajectory estimate from the two \abbr{LEO} satellites, decrypts the data, and verifies its integrity. It then performs data fusion to calculate the definitive missile trajectory and estimate the potential impact area. Upon completion of the processing, it displays a warning to the operator, who verifies and confirms that a missile event took place. After confirmation, the system generates and disseminates clear warning information to the appropriate authorities in potentially endangered areas. Moreover, the ground segment stores selected historical event data to improve prediction capability and support post-event analysis.
+
+\subsection{Life cycle concept}
+
+\begin{enumerate}
+    \item \textbf{Concept definition}: The initial phase of the mission's life cycle consists of defining sensor parameters, designing the orbital constellation as well as preliminary testing and software validation. 
+
+    \item \textbf{Production and deployment}: Satellite components are built in cleanroom facilities, subjected to rigorous testing and integrated together. Afterwards, the satellites are launched into their designated orbits and the ground segment is established. 
+
+    \item \textbf{Operation and maintenance}: Following the checkout and calibration the satellites enter their active service life during which trained operators monitor the state of the system and react accordingly to any detected missile threat.  
+    
+    During this phase software upgrades are delivered to both the space and ground segments, while hardware maintenance is limited to the ground segment only. 
+
+    \item \textbf{End-of-life and disposal}: At the end of operational life, to prevent space debris accumulation, \abbr{LEO} satellites are de-orbited and are left to burn-up safely in the Earth's atmosphere while \abbr{GEO} satellites are moved into graveyard orbit. 
+\end{enumerate}
