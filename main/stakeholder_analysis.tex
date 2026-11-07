@@ -19,7 +19,7 @@ This group consists of high-level government entities and civil protection agenc
 This group includes the internal team roles responsible for the day-to-day survival, maintenance, and continuous optimization of both the Space and Ground segments. They ensure the system maintains its required 99.9\% availability.
 
 \begin{itemize}
-    \item \textbf{System Operators \& Satellite Controllers:} Tactical personnel working in a secure ground station. The Ground Segment receives \abbr{GEO} detection reports, selects two suitable \abbr{LEO} tracking satellites and issues commands through an available ground-station link or supported \abbrtext{ISL}{ISL} relay path. Tracking data returns over an available supported path; not all observations are assumed to pass through \abbr{GEO} relays.
+    \item \textbf{System Operators \& Satellite Controllers:} Tactical personnel working in a secure ground station. The Ground Segment receives \abbr{GEO} detection reports, selects two suitable \abbr{LEO} tracking satellites, and issues commands via direct ground-station links or mandatory Space Segment \abbrtext{ISL}{ISL} relay paths. Tracking data and onboard preliminary trajectory estimates return over direct ground links or mandatory \abbr{ISL} relay paths.
     
     \item \textbf{Subsystem \& Payload Engineers:} Responsible for satellite bus configuration, multi-orbit mechanics, fleet synchronization (6 \abbr{GEO} + 72 \abbr{LEO}), cryogenic \abbr{IR} sensor systems, and \abbr{ISL} routing protocols.
     
@@ -129,7 +129,7 @@ Require 99.9\% system availability, high-fidelity visualization tools, and a str
 Subsystem \& Payload Engineers &
 Low &
 High &
-Require stable requirements to manage multi-orbit fleet synchronization (6 \abbr{GEO} + 72 \abbr{LEO} across 8 orbital planes), complex tracking geometry from 1,200 km, and structural radiation shielding. &
+Require stable requirements to manage multi-orbit fleet synchronization (6 \abbr{GEO} + 72 \abbr{LEO} across 8 orbital planes), complex tracking geometry from 1,000 km, and structural radiation shielding. &
 \textbf{Keep Informed:} Establish clear communication channels between technical layers to ensure seamless hardware and dual-orbit integration. \\
 \hline
 
@@ -185,7 +185,7 @@ Expect efficient use of dual-use resources, strict project milestone tracking, a
 Space Regulatory Agencies \& Traffic Management &
 High &
 Low &
-Demand compliance with radio frequency allocations for dense \abbr{ISL} networks, safe positioning within crowded \abbr{GEO} slots, and active space debris mitigation at 1200 km (\abbr{LEO} end-of-life disposal). &
+Demand compliance with radio frequency allocations for dense \abbr{ISL} networks, safe positioning within crowded \abbr{GEO} slots, and active space debris mitigation at 1,000 km (\abbr{LEO} end-of-life disposal). &
 \textbf{Keep Satisfied:} Submit complex orbital slot applications and regulatory frequency coordination paperwork very early in the system design phase. \\
 \hline
 

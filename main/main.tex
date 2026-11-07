@@ -8,8 +8,8 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
-\newcommand{\abbr}[1]{\texorpdfstring{\hyperlink{abbr:#1}{#1}}{#1}}
-\newcommand{\abbrtext}[2]{\texorpdfstring{\hyperlink{abbr:#1}{#2}}{#2}}
+\DeclareRobustCommand{\abbr}[1]{\texorpdfstring{\hyperlink{abbr:#1}{#1}}{#1}}
+\DeclareRobustCommand{\abbrtext}[2]{\texorpdfstring{\hyperlink{abbr:#1}{#2}}{#2}}
 \newcommand{\abbrentry}[2]{\hypertarget{abbr:#1}{\textbf{#1}} & #2 \\}
 \usepackage{array}
 \usepackage{booktabs}
