@@ -1,0 +1,340 @@
+\documentclass[11pt,a4paper]{article}
+
+% =============================================================================
+% 1. PACKAGES (DO NOT EDIT)
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+% =============================================================================
+% 2. DOCUMENT METADATA —>>> PUT PROJECT DATA HERE <<<—
+% (Values entered here will automatically populate Page 1 and all page headers)
+% =============================================================================
+\newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
+\newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
+\newcommand{\DocTitle}{Space Segment}  % <-- Put document title here
+\newcommand{\DocNumber}{EWAS-HSB-SSEG-TN-01 0.1}         % <-- Put document number here (DOC-NO)
+\newcommand{\DocIssue}{0.1}           % <-- Put issue/version number here (e.g., 1.0)
+\newcommand{\DocDate}{04.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
+\newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
+
+% =============================================================================
+% 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
+% =============================================================================
+\definecolor{TitleBlue}{HTML}{1F497D}         % Main title color on Page 1
+\definecolor{HeadingBlue}{HTML}{365F91}       % Section heading color (H1)
+\definecolor{SubHeadingBlue}{HTML}{4F81BD}    % Subsection heading (H2) and rule color
+\definecolor{TableHeaderBlue}{HTML}{4F81BD}   % Table header background color
+\definecolor{TableRowLightBlue}{HTML}{DBE5F1} % Alternating table row background color
+\definecolor{TableBorderBlue}{HTML}{95B3D7}   % Styled table border color
+
+% Paragraph settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% Disable section numbering (matching the PDF template) while keeping TOC entries.
+% To enable section numbering (e.g., 1, 1.1), change -1 to 3.
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{2}
+
+% Section, subsection, and list title styling
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-3.0ex \@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\Large\bfseries\sffamily\color{HeadingBlue}}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-2.5ex \@plus -1ex \@minus -.2ex}%
+    {1.0ex \@plus .2ex}%
+    {\normalfont\large\bfseries\sffamily\color{SubHeadingBlue}}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-2.0ex \@plus -1ex \@minus -.2ex}%
+    {0.8ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries\sffamily\color{SubHeadingBlue}}}
+
+% Dotted leaders in the Table of Contents for top-level sections as well
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{1.5em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+
+% Centered blue headings for Table of Contents, List of Tables, and List of Figures
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\listfigurename}{List of Figures}
+
+\renewcommand\tableofcontents{%
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\contentsname\par}%
+    \vspace{0.8em}%
+    \@starttoc{toc}%
+}
+\renewcommand\listoftables{%
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\listtablename\par}%
+    \vspace{0.8em}%
+    \@starttoc{lot}%
+}
+\renewcommand\listoffigures{%
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\listfigurename\par}%
+    \vspace{0.8em}%
+    \@starttoc{lof}%
+}
+\makeatother
+
+% Helper macros
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
+\providecommand{\abbr}[1]{#1}
+
+% =============================================================================
+% 4. HEADER AND FOOTER (WITH UNIVERSITY LOGOS)
+% =============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyhead[L]{%
+    \raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}%
+}
+\fancyhead[C]{%
+    {\small\textbf{Early Warning Alarm System (\abbr{EWAS})}}%
+}
+\fancyhead[R]{%
+    \raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}%
+}
+\fancyfoot[R]{\thepage}
+
+% Style for Page 1 (logos in top corners, no page number in footer)
+\fancypagestyle{firstpage}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyhead[L]{\raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}}%
+    \fancyhead[R]{\raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}}%
+}
+
+% =============================================================================
+% DOCUMENT BODY
+% =============================================================================
+\begin{document}
+
+% -----------------------------------------------------------------------------
+% PAGE 1: TITLE PAGE & DOCUMENT INFORMATION
+% -----------------------------------------------------------------------------
+\thispagestyle{firstpage} % Use \thispagestyle{empty} if you do not want logos on Page 1
+\phantomsection
+\addcontentsline{toc}{section}{Document Information}
+
+\begin{center}
+    {\large \ProjectName}
+\end{center}
+
+\vspace*{5.5cm}
+
+\begin{center}
+    {\fontsize{24}{28}\selectfont\sffamily\color{TitleBlue}\DocTitle\par}
+    \vspace{0.35cm}
+    {\color{SubHeadingBlue}\hrule height 0.8pt}
+\end{center}
+
+\vfill
+
+% --- HOW TO EDIT THE PAGE 1 TABLE ---
+% Part 1 (first 4 rows): automatically populated from Section 2 at the top of the file.
+% Part 2 (signatures & roles): enter data between the & symbols in the format:
+%     {Full Name} & {Role Name} & {Signature/Date (or leave blank)} \\[1.2em] \hline
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{black}%
+\noindent
+\begin{tabularx}{\textwidth}{|X|X|}
+    \hline
+    Document Number & \DocNumber \\ \hline
+    Issue           & \DocIssue  \\ \hline
+    Issue Date      & \DocDate   \\ \hline
+    CI Number       & \CINumber  \\
+\end{tabularx}\par\nointerlineskip
+\noindent
+\begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline
+    % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
+    Name                         & Responsibility           & Signature/Date                   \\ \hline
+    Prepared by                  &                          &                                  \\ \hline
+    {Jan Krajewski}              & {Author}     & {Krajewski 04.11.2026} \\[1.2em] \hline
+    Checked by                   &                          &                                  \\ \hline
+    {Sergiusz Pyskowacki}              & {Reviewer}     & {Pyskowacki 04.11.2026} \\[1.2em] \hline
+    Approved by                  &                          &                                  \\ \hline
+    {Maciej Wójcik}              & {Approver}     & {Wójcik 04.11.2026} \\[1.2em] \hline
+    {Put Name here}              & {Put Role Name here}     & {Put Date/Signature or leave empty} \\[1.2em] \hline
+\end{tabularx}}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 2: DOCUMENT CHANGE RECORD
+% -----------------------------------------------------------------------------
+\section{Document Change Record}
+
+% --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
+% Each row has 4 columns separated by &:
+% \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
+% To add a new row, copy the last line before \end{tabularx}.
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|p{2.0cm}|p{2.5cm}|X|p{4.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
+    \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
+    \textbf{0.1}      & {Put Date here} & Initial Issue              & Initial Draft                 \\ \hline
+    \textbf{1.0}      & {Put Date here} & First Release              & All                           \\ \hline
+    % \textbf{1.1}    & {Put Date here} & {Put change description}   & {Put affected sections}       \\ \hline
+\end{tabularx}}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 3: TABLE OF CONTENTS, LIST OF TABLES, LIST OF FIGURES (AUTO-GENERATED)
+% -----------------------------------------------------------------------------
+\tableofcontents
+
+\vspace{2.5cm}
+\listoftables
+
+\vspace{2.5cm}
+\listoffigures
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
+% -----------------------------------------------------------------------------
+\section{References}
+
+\subsection{Applicable Documents (AD)}
+
+% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
+% Columns are separated by &:
+% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
+    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
+    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+\end{tabularx}}
+
+\vspace{0.8em}
+\subsection{Reference Documents (RD)}
+
+% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
+% Columns are separated by &:
+% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
+    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
+    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+\end{tabularx}}
+
+\vspace{0.8em}
+\subsection{Terms, Definitions and Abbreviations}
+
+% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
+% Columns are separated by &:
+% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|X|X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
+    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
+    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
+    \textbf{CI}                       & Configuration Item                                \\ \hline
+    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
+\end{tabularx}}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 5: SCOPE
+% -----------------------------------------------------------------------------
+\section{Scope}
+
+% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
+{Put Scope content here.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 6: INTRODUCTION
+% -----------------------------------------------------------------------------
+\section{Introduction}
+
+% ---> PUT DATA HERE (INTRODUCTION SECTION CONTENT) <---
+{Put Introduction content here.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 7: MAIN CONTENT
+% -----------------------------------------------------------------------------
+\section{Main Content}
+
+% ---> PUT DATA HERE (MAIN CONTENT OF THE DOCUMENT) <---
+{Put Main Content here.}
+
+% EXAMPLE OF ADDING A SUBSECTION (uncomment if needed):
+% \subsection{Put Subsection Title here}
+% {Put subsection content here.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 8: ANNEX A
+% -----------------------------------------------------------------------------
+\section{Annex A}
+
+% ---> PUT DATA HERE (ANNEX A CONTENT) <---
+{Put Annex A content here.}
+
+\newpage
+
+% -----------------------------------------------------------------------------
+% PAGE 9: ANNEX B
+% -----------------------------------------------------------------------------
+\section{Annex B}
+
+% ---> PUT DATA HERE (ANNEX B CONTENT) <---
+{Put Annex B content here.}
+
+\end{document}
