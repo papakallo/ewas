@@ -1,9 +1,9 @@
-The purpose of this chapter is to define the architecture of the Early Warning Alarm System space segment. Following the top-level mission objectives and requirements, the spacecraft architecture is decomposed into specialized operational subsystems. To ensure continuous, 24/7 global temporal coverage with minimal blind spots and meet the strict latency requirements, the design focuses on a modular architecture. This approach couples a standardized satellite bus with highly specialized mission payloads optimized for multi-tier ballistic event tracking.
+The purpose of this chapter is to define the architecture of the Early Warning Alarm System space segment. Following the top-level mission objectives and requirements, the spacecraft architecture is decomposed into specialized operational subsystems. To pursue persistent observation relevant to Baltic-region threats and the ambitious latency requirement, the design focuses on a modular architecture; detailed coverage and end-to-end latency performance require verification. This approach couples a standardized satellite bus with highly specialized mission payloads optimized for multi-tier ballistic event tracking.
 
-To fulfill the \abbr{EWAS} mandate of global, high-coverage civil protection, the system architecture utilizes a dual-tier space segment constellation:
+To support regional protection against missile launches that may originate beyond the Baltic region, the system architecture utilizes a dual-tier space segment constellation:
 \begin{itemize}
     \item \textbf{High-Altitude Detection Layer (\abbr{GEO}):} Comprises 6 satellites in Geosynchronous Earth Orbit (35,786 km), spaced uniformly at 60 degree intervals along the equator to provide continuous staring detection across mid-and-low latitudes.
-    \item \textbf{Low-Altitude Tracking Layer (\abbr{LEO}):} Comprises a Walker Delta constellation of 72 small satellites operating at an altitude of 1,200 km across 8 high-inclination orbital planes, with 9 satellites per plane. This configuration ensures complete high-latitude and polar coverage with dense multi-satellite stereoscopic overlap.
+    \item \textbf{Low-Altitude Tracking Layer (\abbr{LEO}):} Comprises a Walker Delta constellation of 72 small satellites operating at an altitude of 1,200 km across 8 high-inclination orbital planes, with 9 satellites per plane. This configuration is intended to support high-latitude and polar observations; quantitative coverage and stereoscopic overlap are subject to the constellation simulation results.
 \end{itemize}
 The subsystem design presented in this section prioritizes ultra-high-sensitivity detection, structural longevity, and rapid, secure data dissemination.
 
@@ -15,7 +15,7 @@ The \abbr{EWAS} space segment is based on a modular satellite bus utilizing flig
     \item[Electrical Power System:] Deployable solar arrays and high-capacity Lithium-Ion (Li-Ion) battery storage to guarantee uninterrupted power distribution during orbital eclipse phases. The system is scaled to accommodate standard spacecraft operations alongside the transient peak-power demands of the primary computational assets during active threat tracking.
     \item[Thermal Control System:] Passive thermal regulation utilizing Multi-Layer Insulation (\abbr{MLI}), optical surface reflectors, and dedicated heat-pipe radiators. Special architectural isolation is implemented to handle the cryogenic cooling requirements of the infrared sensors to maintain nominal detector sensitivity.
     \item[Propulsion System:] A low-thrust monopropellant or electric propulsion module. Its primary functions are to perform autonomous station-keeping manoeuvres to maintain precise slot positioning within the \abbr{GEO}/\abbr{LEO} constellation grids, and execute orbital phase management.
-    \item[Communications Subsystem:] Incorporates high-gain, highly directional antennas coupled with a dedicated hardware cryptographic module to safeguard data integrity. Crucially, the system features Inter-Satellite Links (\abbr{ISL}) to route data across the orbital shells, allowing a satellite tracking an event over remote oceans to relay alert data to a node directly over a secure Baltic ground station, preserving the under-60-second end-to-end latency constraint.
+    \item[Communications Subsystem:] Incorporates high-gain, highly directional antennas coupled with a dedicated hardware cryptographic module to safeguard data integrity. Crucially, the system features Inter-Satellite Links (\abbr{ISL}) to route data across the orbital shells, providing a potential relay route where direct ground contact is unavailable. Command and observation traffic can use suitable ground-station links or supported \abbr{ISL} relay paths. Neither route is assumed to guarantee the 60-second end-to-end requirement without analysis.
 \end{description}
 
 \subsubsection[GEO vs LEO Platform Differentiation]{\abbr{GEO} vs \abbr{LEO} Platform Differentiation}
@@ -50,7 +50,7 @@ Key design drivers include:
 \begin{itemize}
     \item \textbf{On-board Event Filtering:} Capability to distinguish between missile plumes and background noise using advanced algorithms to reduce false alarm rates.
     \item \textbf{Latency Optimization:} Significant reduction in warning time by generating detection alerts locally, eliminating the need to downlink massive volumes of raw infrared imagery.
-    \item \textbf{Secure Data Management:} All processed data and event logs are encrypted and archived in a secure on-board memory unit for later technical review and algorithm refinement.
+    \item \textbf{Secure Data Management:} Relevant onboard processing records and event logs are held in secure temporary spacecraft storage and downlinked to the Ground Segment Data Archiving System for controlled retention and the technical uses permitted by R-004.
 \end{itemize}
 
 \subsection[Attitude Determination and Control System]{Attitude Determination and Control System}
@@ -64,28 +64,32 @@ Key design drivers include:
 \end{itemize}
 
 \subsection{Spacecraft Subsystem Interactivity and Command Data Flow}
-To meet the strict under-60-second end-to-end latency constraint, the command logic and cross-layer data exchange operate as a synchronized, autonomous loop across the space and ground segments. The operational data flow is executed as follows:
+The baseline operating sequence is Ground Segment-directed rather than GEO-initiated cross-cueing. The GEO detection report reaches the Ground Segment first; ground command-and-control functions then select two suitable LEO satellites. A 60-second end-to-end warning-delivery target is retained, but the feasibility of completing this full sequence has not yet been verified.
 
 \begin{enumerate}
-    \item \textbf{\abbr{GEO} Constellation Detection:}
+    \item \textbf{GEO Constellation Detection and Reporting:}
     \begin{itemize}
-        \item The \abbr{GEO} \abbr{WFOV} infrared payload detects a sudden thermal burst within the monitored region.
-        \item The onboard \abbr{OBDH} processing layer conducts real-time digital denoising to filter out solar bursts, solar glints, and Earth background noise.
-        \item The onboard classification algorithm validates the signature as a potential missile and immediately commands the \abbr{TTC} system to transmit the target's coordinates to the 2 closest \abbr{LEO} satellites via Inter-Satellite Links (\abbr{ISL}).
+        \item The \abbr{GEO} infrared payload detects a candidate thermal event and performs initial filtering and event classification.
+        \item The \abbr{GEO} communications subsystem transmits the event location, timestamp and available detection data to the Ground Segment over an available secure link.
     \end{itemize}
-    
-    \item \textbf{\abbr{LEO} Constellation Tracking:}
+    \item \textbf{Ground-Directed LEO Selection and Cueing:}
     \begin{itemize}
-        \item The 2 cued \abbr{LEO} satellites receive the threat coordinates via their \abbr{ISL} receiver terminals.
-        \item The \abbr{LEO} \abbr{ADCS} autonomously re-orients the satellite bus, and the dual-axis gimbals mechanically lock the \abbr{NFOV} tracking sensors onto the moving missile plume.
-        \item The cued \abbr{LEO} satellites track the target simultaneously from different observation angles, allowing the \abbr{OBDH} layer to calculate a preliminary stereoscopic trajectory.
-        \item The \abbr{LEO} communications subsystem encrypts the telemetry and trajectory dataset via the hardware cryptographic module and downlinks it to the Ground Station Network.
+        \item Ground Segment functions identify two suitable \abbr{LEO} satellites based on geometry, visibility, operational state and link availability.
+        \item Ground Segment command-and-control functions deliver observation commands via a suitable ground station or a supported \abbr{ISL} relay route, depending on availability. Inter-satellite coordination can supplement the observation when needed.
     \end{itemize}
-    
-    \item \textbf{Ground Segment Processing:}
+    \item \textbf{LEO Constellation Tracking:}
     \begin{itemize}
-        \item The Ground Station receives the encrypted telemetry packet, decrypts it, and verifies its data integrity.
-        \item High-speed data fusion pipelines calculate the definitive missile trajectory and predict the civil impact zones.
-        \item The ground system automatically generates a live, standardized alert and routes it directly to the appropriate national authority body for civil protection.
+        \item The selected \abbr{LEO} satellites receive the tracking requests, point their sensors and acquire complementary observations.
+        \item Onboard processing derives a preliminary trajectory estimate from the available stereoscopic observations.
+        \item The satellites encrypt and transmit relevant observations and the preliminary estimate to the Ground Segment through an available supported communication path.
+    \end{itemize}
+    \item \textbf{Ground Segment Processing and Warning:}
+    \begin{itemize}
+        \item The Ground Station Network securely receives and forwards satellite data, while central Ground Segment Data Processing performs the principal data fusion.
+        \item The system generates a refined trajectory estimate and associated uncertainty-based impact area. It evaluates relevance to the Baltic region.
+        \item Only after the two \abbr{LEO} tracking datasets are available and processed does the Early Warning System automatically dispatch a preliminary warning to authorized national authority interfaces; no prior operator confirmation is required.
+        \item The Mission Control Center supports subsequent operator review, updates or cancellation, and the Ground Segment Data Archiving System stores the applicable records for the purposes permitted by R-004.
     \end{itemize}
 \end{enumerate}
+
+The Ground Segment must not assume that the combined GEO downlink, LEO selection, command uplink/relay, dual-satellite observation, data return, central processing and warning delivery necessarily fits within 60 seconds. This remains a critical engineering verification item. 

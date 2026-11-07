@@ -2,7 +2,7 @@
 
 There are increasing security concerns in the Baltic region, primarily associated with ongoing conflicts. Ballistic missile launches pose a significant risk to civilian populations due to insufficient warning times. Therefore, national security authorities require a wide-coverage, high-reliability detection system capable of persistent monitoring and timely alerting.
 
-We propose a reliable space-based satellite system to detect missile launches at the earliest possible stage and to track them sufficiently enough to support rapid, preliminary impact-area estimation. The system will distribute warning information to national authorities responsible for national crisis management and emergency response. Additionally, the system should include the capability to store historical data of previous events to support threat analysis, enhance national resilience planning, and facilitate information sharing with partner governments and international crisis-response mechanisms.
+We propose a reliable space-based satellite system to detect missile launches at the earliest possible stage and to track them sufficiently enough to support rapid, preliminary impact-area estimation. The system will distribute warning information to national authorities responsible for national crisis management and emergency response. Additionally, the system should include the capability to store historical data of previous events for algorithm improvement, system calibration, performance verification, operator training, and post-event technical analysis, in line with R-004.
 
 \subsection{Mission Definition}
 
@@ -25,7 +25,7 @@ The mission is intended to:
     \item Track and process detected events sufficiently to support rapid preliminary estimation of the potential impact area.
     \item Generate clear warning information for authorized national crisis-management and emergency-response authorities.
     \item Maintain selected historical event data to improve future warning quality, support post-event analysis, refine classification methods, reduce false alarms, and calibrate preliminary impact-area estimation models.
-    \item Support national resilience planning and controlled information sharing with partner governments or international crisis-response mechanisms.
+    \item Provide actionable warning products to authorized national authorities for decisions concerning protection of the Baltic region, including potential threats originating outside that region.
 \end{enumerate}
 
 \subsubsection{Mission Scope and Boundaries}
@@ -35,7 +35,7 @@ The scope of the \abbr{EWAS} mission includes the space-based detection of missi
 Within this scope, \abbr{EWAS} should support:
 
 \begin{itemize}
-    \item Launch detection and initial event confirmation;
+    \item Automated detection and preliminary event screening, followed by operator review of issued warnings;
     \item Preliminary classification of the detected event;
     \item Preliminary missile characterization based on observable event features and available aviation data;
     \item Preliminary trajectory and impact-area estimation;
@@ -56,5 +56,10 @@ The mission may be considered successful if it can:
     \item Generate a preliminary assessment of the event, including confidence level and estimated threat area.
     \item Maintain sufficient reliability and availability to support operation during crisis conditions.
     \item Provide warning products that are understandable and actionable for national emergency-management users without requiring them to operate or interpret the space system directly. Warning and data should be delivered within a time frame useful for crisis-management and civil-protection decisions.
-    \item Store data securely and use selected historical event data to support post-event review, missile characterization, reduction of false alarms, and refinement of detection, classification, and impact-area estimation methods.
+    \item Store mission data securely and use historical event data only for the technical purposes permitted by R-004, including post-event review, calibration, training, verification, and refinement of classification and estimation methods.
 \end{enumerate}
+
+\subsubsection{High-Level System Boundary}
+The current system baseline contains two system segments: the Space Segment and the Ground Segment. Governmental crisis-management and civil-protection authorities are external recipients of warning products rather than a separate User and Data Segment. Within the Ground Segment, the Early Warning System prepares and dispatches these products and the Data Archiving System retains the applicable records. This allocation follows the Ground Systems decomposition in Section~\ref{sec:ground-segment-boundary} and the existing work breakdown structure.
+
+A launch may occur outside the Baltic region; the operational purpose is to assess whether the event could threaten the Baltic region and to provide appropriate warning information to its authorized authorities. This mission concept does not, by itself, demonstrate continuous global detection capability; supporting constellation-coverage evidence is to be supplied by the Space Segment team.

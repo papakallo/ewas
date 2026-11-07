@@ -2,7 +2,7 @@ The goal of this Concept of Operations is to provide a high-level description ab
 
 \subsection{Mission objectives and requirements}
 
-The primary purpose of Early Warning Alarm System is to provide continuous surveillance to the Baltic region, detect ballistic missile threats through spikes in thermal signatures, estimate the potential impact zones and generate and broadcast alerts about the events. 
+The primary purpose of the Early Warning Alarm System is to identify missile-launch events that could threaten the Baltic region, including launches originating outside it, derive impact-area estimates from satellite observations, and send secure warning products to authorized national authorities. 
 
 \textbf{Main objectives}
 
@@ -19,7 +19,7 @@ The primary purpose of Early Warning Alarm System is to provide continuous surve
 \textbf{Main requirements}
 
 \begin{itemize}
-    \item High global coverage 
+    \item Observation coverage adequate to identify relevant threats to the Baltic region, including launch events occurring outside that region; global coverage remains subject to supporting simulation evidence. 
     
     \item Low end-to-end latency between the space and ground segments ensuring sufficient time for users to react to the incoming missile threat before impact. 
 
@@ -32,19 +32,19 @@ The primary purpose of Early Warning Alarm System is to provide continuous surve
 
 \subsection{System characteristics}
 
-From the perspective of the strategic operator, the \abbr{EWAS} acts as a seamless, automated "eye in the sky." The system abstracts complex orbital mechanics and raw sensor data into an intuitive, tactical display. Operators interact with a two-dimensional map on which the system automatically highlights the launch site, current position of the missile as well as estimated area of impact.  Furthermore, the system displays color-coded alerts and features audio cues to eliminate human latency during a crisis. The system asks for cross-verification of such an event by the operator and if confirmed it generates and disseminates warnings about the incoming missile to adequate national authorities of endangered areas. 
+From the perspective of the strategic operator, \abbr{EWAS} presents a concise, continuously updated view of the event. The Mission Control Center displays the candidate launch location, the refined trajectory estimate, the probabilistic impact area, and the confidence in those results. It uses clear visual and audible notifications. After the Ground Segment has received observations from the two selected \abbr{LEO} satellites and produced an impact assessment, the Early Warning System sends the first preliminary warning automatically to authorized authorities, without waiting for operator approval. The operator then reviews the event and can confirm, update, or cancel the preliminary warning through a controlled and audited workflow. Public alerting beyond the authorized authority interface is outside the \abbr{EWAS} boundary. 
 
 \subsection{Mission operation}
 
-The Emergency Warning Alarm System operates in a continuous, synchronized loop consisting of surveillance, detection and tracking of detected missile threats. 
+The Early Warning Alarm System comprises only the Space Segment and the Ground Segment. It operates a continuous surveillance and event-response loop; governmental authority systems are external warning recipients, not a third system segment. 
 
 \textbf{Space segment operation}
 
-The space segment operates autonomously as a combination of \abbr{GEO} and \abbr{LEO} satellites to ensure high global coverage and high-resolution tracking. \abbr{GEO} satellites equipped with infrared sensors continuously scan the designated area to detect sudden thermal changes. When a potential missile threat is identified, the \abbr{GEO} segment cues the two \abbr{LEO} satellites closest to the detected location. The two \abbr{LEO} satellites track the missile from different observation angles, calculate a preliminary stereoscopic trajectory, and downlink the encrypted telemetry and preliminary trajectory estimate to the ground segment.
+The Space Segment combines \abbr{GEO} detection and \abbr{LEO} tracking layers. Following a candidate thermal-event detection and onboard filtering, the detecting \abbr{GEO} satellite sends an event report to the Ground Segment. The Ground Segment selects two suitable \abbr{LEO} tracking satellites on the basis of the reported position, viewing geometry, and link availability, and sends them tracking commands through an available ground-station link or an \abbr{ISL} relay route where available. Inter-satellite communication remains possible when needed. The selected \abbr{LEO} satellites obtain complementary observations, form a preliminary trajectory estimate, and transmit the observations and estimate to the Ground Segment. The timeliness of this architecture is a verification item, not an assumed proven capability.
 
 \textbf{Ground segment operation}
 
-The ground segment receives the encrypted telemetry and preliminary trajectory estimate from the two \abbr{LEO} satellites, decrypts the data, and verifies its integrity. It then performs data fusion to calculate the definitive missile trajectory and estimate the potential impact area. Upon completion of the processing, it displays a warning to the operator, who verifies and confirms that a missile event took place. After confirmation, the system generates and disseminates clear warning information to the appropriate authorities in potentially endangered areas. Moreover, the ground segment stores selected historical event data to improve prediction capability and support post-event analysis.
+The Ground Segment receives and validates the initial \abbr{GEO} report, selects and cues two \abbr{LEO} satellites, and receives their encrypted observations. Ground Station Network functions handle reception and secure forwarding; the Data Processing System conducts the principal fusion and computes a refined trajectory and probabilistic impact-area estimate. Once these \abbr{LEO}-based results are available, the Ground Segment Early Warning System automatically sends a preliminary warning to the appropriate authorized national authority interface. The Mission Control Center displays the information for subsequent operator review and controlled follow-up notifications. The Data Archiving System maintains the required records. The end-to-end delivery target remains 60 seconds from initial \abbr{GEO} detection; meeting this target depends on command routing, tracking availability, downlink and processing performance and has not yet been demonstrated.
 
 \subsection{Life cycle concept}
 

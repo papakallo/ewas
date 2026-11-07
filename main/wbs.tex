@@ -206,61 +206,131 @@ external users or systems.\\
 \begin{landscape}
 \begin{figure}[p]
     \centering
-    \includegraphics[width=\linewidth]{Figures/Space_Segment.png}
-    \caption{Space Segment extension}
-    \label{fig:wbs-space-segment}
+    \includegraphics[width=\linewidth]{Figures/spacesegment_leo.png}
+    \caption{Space Segment extension for LEO}
+    \label{fig:wbs-space-segment-leo}
 \end{figure}
 \end{landscape}
-\textbf{Element 123456.03 - Space Segment:} The hardware and software elements
-required to perform the space-based mission functions. This includes the satellite
-system and constellation configuration defining orbital parameters and satellite
-distribution.\\
-\textbf{Element 123456.03.01 - Satellite:} The flight system consisting of all onboard
-subsystems required to support mission operations in orbit. Includes payload,
-spacecraft bus subsystems, avionics, propulsion, and flight software.\\
+
+\textbf{Element 123456.03 - Space Segment (SSEG):} The hardware and software elements
+required to perform the space-based mission functions. This includes the \abbr{LEO} and
+\abbr{GEO} satellite systems, their onboard subsystems, and their respective constellation
+configurations defining orbital parameters and satellite distribution.\\
+\textbf{Element 123456.03.01 - Satellite \abbr{LEO} (SATL):} The low-altitude flight system
+consisting of all onboard subsystems and constellation configuration elements required to
+support target tracking and stereoscopic observation operations in Low Earth Orbit (\abbr{LEO}).
+Includes thermal control, \abbr{ADCS}, power, payload, propulsion, avionics, and \abbr{LEO}
+constellation configuration.\\
 \textbf{Element 123456.03.01.01 - Thermal Control:} Subsystem responsible for maintaining
-spacecraft temperature within operational limits. Includes passive and active thermal
-control components and associated hardware.\\
+\abbr{LEO} spacecraft and sensor temperatures within operational limits across frequent
+orbital day-night cycles. Includes passive and active thermal control components and
+associated hardware.\\
 \textbf{Element 123456.03.01.01.01 - Passive Thermal Control:} Subsystem components
-that maintain spacecraft temperature within acceptable limits without active power
+that maintain \abbr{LEO} spacecraft temperature within acceptable limits without active power
 consumption. Includes thermal coatings, insulation (\abbr{MLI}), radiators, and structural
 thermal design features.\\
 \textbf{Element 123456.03.01.01.02 - Active Thermal Control:} Subsystem components that
-regulate spacecraft temperature using powered devices. Includes heaters,
-thermostats, fluid loops, heat pipes, and associated control electronics.\\
+regulate \abbr{LEO} spacecraft and infrared detector temperatures using powered devices.
+Includes heaters, thermostats, fluid loops, heat pipes, cryogenic cooling elements, and
+associated control electronics.\\
 \textbf{Element 123456.03.01.02 - Attitude Determination and Control System (\abbr{ADCS}):}
-Subsystem providing spacecraft orientation determination and control. Includes
-sensors, actuators, and control algorithms required for pointing and stabilization.\\
+Subsystem providing high-agility \abbr{LEO} spacecraft orientation determination and control
+for rapid target cross-cueing and tracking. Includes sensors, actuators, and control
+algorithms required for precision pointing and stabilization.\\
 \textbf{Element 123456.03.01.03 - Power Subsystem:} Subsystem responsible for
-generation, storage, conditioning, and distribution of electrical power, including solar
-arrays, batteries, and power management electronics.\\
-\textbf{Element 123456.03.01.04 - Payload:} Mission-specific instruments and sensors
-responsible for detection and data acquisition required to fulfill mission objectives.\\
-\textbf{Element 123456.03.01.05 - Propulsion Subsystem:} Subsystem providing thrust for
-orbit insertion, maintenance, and maneuvering, including thrusters, propellant
-storage, and associated control components.\\
-\textbf{Element 123456.03.01.06 - Avionics:} Onboard electronic systems responsible for
-command, data processing, communication, and software execution.\\
+generation, storage, conditioning, and distribution of electrical power on the \abbr{LEO}
+spacecraft, including solar arrays, high-cycle batteries for frequent orbital eclipses, and
+power management electronics.\\
+\textbf{Element 123456.03.01.04 - Payload:} Mission-specific Narrow Field of View (\abbr{NFOV})
+infrared tracking instruments and gimbaled sensors on the \abbr{LEO} spacecraft responsible for
+follow-on target observation, trajectory tracking, and data acquisition.\\
+\textbf{Element 123456.03.01.05 - Propulsion:} Subsystem providing thrust for
+\abbr{LEO} orbit insertion, station-keeping, constellation phase maintenance, and maneuvering,
+including thrusters, propellant storage, and associated control components.\\
+\textbf{Element 123456.03.01.06 - Avionics:} Onboard electronic systems of the \abbr{LEO}
+spacecraft responsible for command, data processing, communication, and software execution.\\
 \textbf{Element 123456.03.01.06.01 - Command \& Data Handling (\abbrtext{CDH}{C\&DH}):} Subsystem
 responsible for onboard data processing, command execution, and data
-management. Includes onboard computers, data buses, memory units, and
-associated control software required for spacecraft operations.\\
+management on the \abbr{LEO} spacecraft. Includes onboard computers, data buses, memory
+units, and associated control hardware required for spacecraft operations.\\
 \textbf{Element 123456.03.01.06.02 - Communications:} Subsystem responsible for
-transmission and reception of telemetry, tracking, and command (\abbrtext{TTC}{TT\&C}) data
-between the spacecraft and ground systems. Includes antennas, transceivers, \abbr{RF}
-components, and communication protocols.\\
+transmission and reception of telemetry, tracking, and command (\abbrtext{TTC}{TT\&C}) data,
+observation data, and Inter-Satellite Link (\abbr{ISL}) communications for the \abbr{LEO}
+spacecraft. Includes antennas, transceivers, \abbr{RF} components, and communication protocols.\\
 \textbf{Element 123456.03.01.06.03 - Flight Software:} Software executed onboard the
-spacecraft to control system functions, manage subsystem operations, process data,
-and execute mission tasks. Includes control algorithms, fault management, and
-operational logic.\\
-\textbf{Element 123456.03.02 - Constellation Configuration:} Definition of the orbital
-architecture and spatial distribution of satellites within the constellation, including
-orbital parameters and phasing.\\
-\textbf{Element 123456.03.02.01 - Constellation Phasing Plan:} The definition of satellite
-distribution and relative positioning within orbital planes to ensure required coverage
-and mission performance.\\
-\textbf{Element 123456.03.02.02 - Orbit Definition:} The specification of orbital parameters
-including altitude, inclination, eccentricity, and orbital plane configuration.
+\abbr{LEO} spacecraft to control system functions, manage subsystem operations, process tracking
+data, derive preliminary trajectory estimates, and execute mission tasks. Includes control
+algorithms, fault management, and operational logic.\\
+\textbf{Element 123456.03.01.07 - Constellation Configuration (CONF):} Definition of the orbital
+architecture and spatial distribution of satellites within the \abbr{LEO} tracking constellation,
+including orbital parameters and phasing.\\
+\textbf{Element 123456.03.01.07.01 - Phasing Plan:} The definition of \abbr{LEO} satellite
+distribution and relative positioning across orbital planes to ensure required high-latitude
+coverage, stereoscopic observation geometry, and mission performance.\\
+\textbf{Element 123456.03.01.07.02 - Orbit Definition:} The specification of \abbr{LEO} orbital
+parameters including altitude, inclination, eccentricity, and orbital plane configuration.\\
+\begin{landscape}
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/spacesegment_geo.png}
+    \caption{Space Segment extension for GEO}
+    \label{fig:wbs-space-segment-geo}
+\end{figure}
+\end{landscape}
+\textbf{Element 123456.03.02 - Satellite \abbr{GEO} (SATG):} The high-altitude flight system
+consisting of all onboard subsystems and constellation configuration elements required to
+support persistent wide-area boost-phase detection operations in Geostationary Earth Orbit
+(\abbr{GEO}). Includes thermal control, \abbr{ADCS}, power, payload, propulsion, avionics, and
+\abbr{GEO} constellation configuration.\\
+\textbf{Element 123456.03.02.01 - Thermal Control:} Subsystem responsible for maintaining
+\abbr{GEO} spacecraft and sensor temperatures within operational limits under geostationary
+solar and thermal environments. Includes passive and active thermal control components and
+associated hardware.\\
+\textbf{Element 123456.03.02.01.01 - Passive Thermal Control:} Subsystem components
+that maintain \abbr{GEO} spacecraft temperature within acceptable limits without active power
+consumption. Includes thermal coatings, insulation (\abbr{MLI}), optical surface reflectors,
+radiators, and structural thermal design features.\\
+\textbf{Element 123456.03.02.01.02 - Active Thermal Control:} Subsystem components that
+regulate \abbr{GEO} spacecraft and infrared detector temperatures using powered devices.
+Includes heaters, thermostats, fluid loops, heat pipes, cryogenic cooling elements, and
+associated control electronics.\\
+\textbf{Element 123456.03.02.02 - Attitude Determination and Control System (\abbr{ADCS}):}
+Subsystem providing \abbr{GEO} spacecraft orientation determination and nadir-pointing
+stabilization. Includes sensors, actuators, and control algorithms required for continuous
+staring observation and jitter suppression.\\
+\textbf{Element 123456.03.02.03 - Power Subsystem:} Subsystem responsible for
+generation, storage, conditioning, and distribution of electrical power on the \abbr{GEO}
+spacecraft, including solar arrays, batteries for equinox eclipse operations, and power
+management electronics.\\
+\textbf{Element 123456.03.02.04 - Payload:} Mission-specific Wide Field of View (\abbr{WFOV})
+staring infrared instruments and sensors on the \abbr{GEO} spacecraft responsible for continuous
+boost-phase launch detection and initial event data acquisition.\\
+\textbf{Element 123456.03.02.05 - Propulsion:} Subsystem providing thrust for
+\abbr{GEO} orbit insertion, longitudinal and latitudinal station-keeping, and momentum
+dumping, including thrusters, propellant storage, and associated control components.\\
+\textbf{Element 123456.03.02.06 - Avionics:} Onboard electronic systems of the \abbr{GEO}
+spacecraft responsible for command, data processing, communication, and software execution.\\
+\textbf{Element 123456.03.02.06.01 - Command \& Data Handling (\abbrtext{CDH}{C\&DH}):} Subsystem
+responsible for onboard data processing, command execution, and data
+management on the \abbr{GEO} spacecraft. Includes onboard computers, data buses, memory
+units, and associated control hardware required for spacecraft operations.\\
+\textbf{Element 123456.03.02.06.02 - Communications:} Subsystem responsible for
+transmission and reception of telemetry, tracking, and command (\abbrtext{TTC}{TT\&C}) data,
+candidate event reports, and Inter-Satellite Link (\abbr{ISL}) communications for the \abbr{GEO}
+spacecraft. Includes antennas, transceivers, \abbr{RF} components, and communication protocols.\\
+\textbf{Element 123456.03.02.06.03 - Flight Software:} Software executed onboard the
+\abbr{GEO} spacecraft to control system functions, manage subsystem operations, perform
+onboard event filtering and classification, and execute mission tasks. Includes control
+algorithms, fault management, and operational logic.\\
+\textbf{Element 123456.03.02.07 - Constellation Configuration (CONF):} Definition of the orbital
+architecture and spatial distribution of satellites within the \abbr{GEO} detection constellation,
+including orbital parameters and longitudinal phasing.\\
+\textbf{Element 123456.03.02.07.01 - Phasing Plan:} The definition of \abbr{GEO} satellite
+spacing and longitudinal slot allocation along the geostationary belt to ensure continuous
+wide-area observation coverage.\\
+\textbf{Element 123456.03.02.07.02 - Orbit Definition:} The specification of \abbr{GEO} orbital
+parameters including geostationary altitude, inclination, eccentricity, and longitudinal station
+assignments.
 
 \begin{landscape}
 \begin{figure}[p]

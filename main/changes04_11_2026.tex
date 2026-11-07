@@ -1,0 +1,24 @@
+
+\newpage
+\section{Revision Notes and Open Engineering Items}
+This consolidated report integrates the team decisions recorded on 4 November 2026. The operational architecture comprises only the Space Segment and Ground Segment; the separate User and Data Segment has been retired. Within Ground Systems, the Early Warning System and Data Archiving System perform warning delivery and archival functions. The established WBS is deliberately unchanged.
+
+\subsection{Summary of Agreed Changes}
+\begin{itemize}
+  \item The detecting GEO satellite sends a candidate-event report to the Ground Segment. The ground system selects two suitable LEO satellites and cues them using an available ground-station or supported ISL-relay path; inter-satellite coordination is used when helpful and available.
+  \item The first automated preliminary warning is dispatched to authorized national authorities only after observations from the two selected LEO satellites have been processed and a refined trajectory and impact area have been estimated. Operator review, confirmation, update or cancellation follows dispatch; it is not a mandatory precondition.
+  \item The end-to-end 60-second limit is measured from initial GEO detection to delivery of the first preliminary warning at the authorized authority interface. All intervening transmission, tracking and processing steps must be included in the latency budget.
+  \item The protected mission focus is the Baltic region, with event identification permitted outside the region when an event could threaten it. Global detection coverage is not independently substantiated by the documents in this archive.
+  \item The central Ground Segment Data Processing System performs the primary fusion; edge preprocessing at individual ground stations is optional. Historical mission data use remains restricted to the purposes of R-004.
+  \item R-016 and R-018 are withdrawn from the active requirements list; their identifiers are not reused. R-015, R-017 and R-030 remain in force. The term ``definitive trajectory'' has been replaced by ``refined trajectory estimate'' for the computed result.
+  \item Original WBS and course DRL allocations are not modified. Document and Configuration Item numbering remains provisional pending team agreement. The verification plan will be authored separately.
+\end{itemize}
+
+\subsection{Items Still Requiring Supporting Evidence}
+\begin{itemize}
+  \item \textbf{Latency feasibility:} No verified budget currently demonstrates that GEO reporting, ground selection, command transfer, two-LEO observation, telemetry return, processing and authority delivery fit within 60 seconds. This requirement is retained as a target, not declared compliant.
+  \item \textbf{Constellation evidence:} The Space Segment team reports completed \abbr{GMAT}/\abbr{VTS} analyses. Models, inputs and results are to be incorporated or referenced after delivery.
+  \item \textbf{Link routing:} Availability, geometrical accessibility and security of alternative ground-station and \abbr{ISL} paths require technical assessment.
+  \item \textbf{System-level traceability:} Proposed added requirements R-042--R-049 must be reviewed and approved by the project team. The numerical limit formerly stated by R-018 is withdrawn; event-classification performance remains an engineering consideration without that specific threshold.
+  \item \textbf{Verification:} Planned simulation, analysis and testing do not constitute completed verification; a separate Verification Plan and evidence record are still required.
+\end{itemize}

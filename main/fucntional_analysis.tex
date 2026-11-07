@@ -11,13 +11,13 @@ Functional analysis defines how \abbr{EWAS} performs its mission from initial ob
 
 
 \subsection{Primary Threat Detection and Warning Flow}
-The primary responsibility of the \abbr{EWAS} mission is to detect missile threats worldwide, determine whether they could affect the Baltic region, and generate dedicated alerts for emergency authorities. This mission is conducted in accordance with the functional flow shown in Figure~\ref{fig:mission-operation-flow}.
+The primary objective is to identify launch events that may threaten the Baltic region, including launches outside that region, assess the potential threat and communicate actionable preliminary warnings to authorized authorities. This mission is conducted in accordance with the functional flow shown in Figure~\ref{fig:mission-operation-flow}.
 
-The combined constellation of six \abbr{GEO} satellites and 72 high-inclination \abbr{LEO} satellites is responsible for detecting unusual thermal bursts. \abbr{GEO} satellites provide persistent wide-area observation where viewing geometry is favorable, while \abbr{LEO} satellites provide high-elevation coverage at high latitudes. The detecting satellite conducts denoising to rule out solar bursts, Earth background noise, and other non-threat thermal signatures.
+The baseline constellation includes six \abbr{GEO} and 72 high-inclination \abbr{LEO} satellites. The \abbr{GEO} layer provides initial wide-area thermal-event detection and onboard preliminary filtering. The \abbr{LEO} layer provides follow-on tracking. The quantitative coverage and link performance of this design are to be supported by the Space Segment analysis results when available.
 
-In case of an unusual burst detection, the burst coordinates are sent to the two \abbr{LEO} satellites closest to the detected location. The two \abbr{LEO} satellites track the potential missile from different observation angles and calculate a preliminary stereoscopic trajectory. They then transmit the encrypted telemetry and preliminary trajectory estimate to the Ground Segment.
+After the initial thermal event is identified, the detecting \abbr{GEO} satellite reports the event to the Ground Segment. The Ground Segment selects two suitable \abbr{LEO} satellites according to the location, observation geometry and available links, and issues tracking commands over a supported ground-station or \abbr{ISL}-relay route. The selected \abbr{LEO} satellites obtain complementary observations and return encrypted telemetry and a preliminary trajectory estimate to the Ground Segment. Inter-satellite coordination is optional when operationally necessary.
 
-Finally, the Ground Segment decrypts the received telemetry data and confirms its integrity. It then fuses the observations to calculate the definitive trajectory and estimated impact zone. The system generates an alert, which is then sent to the appropriate national authority body.
+The Ground Station Network receives and forwards the observations securely; central Data Processing functions fuse the available data and calculate a refined trajectory and probabilistic impact-area estimate. Only after the two selected \abbr{LEO} observations have been assessed does the Early Warning System automatically send the first preliminary warning to appropriate authorized national authorities. The Mission Control Center presents the event for subsequent operator confirmation, updating or cancellation, and the Data Archiving System stores all relevant event and warning records. The intended end-to-end 60-second limit starts at initial \abbr{GEO} detection and ends at delivery to the external authority interface. Meeting the limit is subject to verification.
 
 
 \begin{figure}[htbp]
@@ -30,16 +30,16 @@ Finally, the Ground Segment decrypts the received telemetry data and confirms it
 
 \subsection{Data Management and Continuous Improvement Flow}
 
-This flow operates asynchronously to the primary warning flow, fulfilling the mission's objective to use historical data for system refinement and national resilience.
+This flow operates asynchronously to the warning path and uses historical data solely for the technical purposes authorized by R-004.
 
 \begin{itemize}
-    \item Archive all raw sensor readings, onboard processing logs, telemetry records, and final generated warning outputs in encrypted system storage.
+    \item Archive the applicable raw sensor readings, onboard processing logs, received telemetry, processing outputs, preliminary and updated warning products, delivery acknowledgements and review records in encrypted Ground Segment storage.
     \item Retrieve historical event data for authorized post-event technical analysis, lessons-learned review, and missile characterization.
     \item Use archived data to refine detection, classification, denoising, tracking, and impact-area estimation algorithms.
     \item Reduce false alarm rates by comparing confirmed missile events with non-threat thermal signatures such as solar bursts and Earth background noise.
     \item Prepare validated software and algorithm updates for the space segment and ground processing center.
     \item Securely uplink approved updates to satellites and deploy them to the ground segment during planned operation and maintenance windows.
-    \item Share sanitized historical event data with partner governments and international crisis-response mechanisms when authorized.
+    \item Share authorized operational warning products with national authority recipients; do not assume general external dissemination of historical archive contents beyond the purposes permitted by R-004.
 \end{itemize}
 
 \subsection{System Maintenance and Support Flow}

@@ -1,0 +1,31 @@
+The following preliminary data dictionary defines the principal exchanged and retained information products under the revised two-segment EWAS concept. It is a design baseline for forthcoming Ground Segment TRS/DDF work rather than a completed interface definition. Field-level schemas, protocols, security classifications, throughput, and storage budgets remain to be established. The Data Archiving System within the Ground Segment owns the mission archive; access and use are subject to R-004, R-034--R-037.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.16}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.23\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
+\caption{Preliminary Ground Segment data dictionary}\label{tab:ewas-data-dictionary}\\
+\toprule
+\textbf{Data product} & \textbf{Principal content} & \textbf{Origin / destination} & \textbf{Handling and archival note} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename~\thetable\ continued}\\
+\toprule
+\textbf{Data product} & \textbf{Principal content} & \textbf{Origin / destination} & \textbf{Handling and archival note} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+GEO event report & Detection timestamp, approximate event location, preliminary event classification and quality metadata. & GEO payload/OBDH to Ground Station Network and Ground Segment command/processing services. & Record securely; establishes the starting timestamp for R-011. \\
+LEO tracking request & Event identifier, pointing target, observation priority, selected LEO identifiers and command status. & Ground Segment Command and Control to two selected LEO satellites. & Log dispatch, routing, status and acknowledgements; route may use ground links or supported ISL relay. \\
+LEO observation package & Timestamped sensor observations, geometry, quality/uncertainty indicators and associated spacecraft metadata. & Selected LEO satellites to Ground Station Network, then Data Processing. & Preserve relevant inputs and provenance for later verification and replay. \\
+Onboard preliminary trajectory & Preliminary estimate and associated assumptions or uncertainty, derived from LEO tracking observations. & Two selected LEO units to Ground Segment Data Processing. & Intermediate technical product; not a public-warning command. \\
+Ground refined trajectory & Fused trajectory estimate and uncertainty/covariance representation with version and timestamp. & Ground Segment Data Processing to MCC, EWS and archive. & Update when additional reliable observations arrive; avoid implying a mathematically definitive result. \\
+Impact-area assessment & Probabilistic impact region, confidence representation, validity time and region-of-interest assessment. & Data Processing to Early Warning System and MCC. & Triggers preliminary warning only after two-LEO processing; associated uncertainty must remain visible. \\
+Warning and status update & Preliminary warning identifier, estimate, intended recipients, issue time, confidence, later confirmation/update/cancellation status. & Early Warning System to authorized external national authority interfaces; MCC for review. & Dispatch is automatic after LEO-based assessment; archive all versions and delivery evidence. \\
+Operational and audit record & Satellite telemetry, operator actions, system processing records, message delivery acknowledgements and security logs. & Space/Ground services to Data Archiving System. & Maintain controlled, encrypted records with retention governed by R-036 and purposes constrained by R-004. \\
+\end{longtable}
+\endgroup
+
+\textbf{Open design items:} The storage volumes of raw imagery and telemetry, classification of mission data, end-to-end cryptographic boundary, recipient interface contract, time synchronization and exact compliance evidence for the five-year minimum retention period remain to be specified. No unrestricted external archive-distribution function is assumed.
