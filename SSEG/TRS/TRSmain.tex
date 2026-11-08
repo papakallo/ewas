@@ -24,8 +24,8 @@
 \newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Space Segment - Technical Requirements Specification}  % <-- Put document title here
 \newcommand{\DocNumber}{EWAS-HSB-SSEG-TRS-03}         % <-- Put document number here (DOC-NO)
-\newcommand{\DocIssue}{1.0}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{07.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
+\newcommand{\DocIssue}{0.6}           % <-- Put issue/version number here (e.g., 1.0)
+\newcommand{\DocDate}{08.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
 \newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
 
 % =============================================================================
@@ -168,11 +168,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Jan Krajewski}              & {Author}                 & {Krajewski 07.11.2026} \\[1.2em] \hline
+    {Jan Krajewski}              & {Author}                 & {Krajewski 08.11.2026} \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 07.11.2026} \\[1.2em] \hline
+    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 08.11.2026} \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Project CCB}                & {Approver}               & {CCB 07.11.2026} \\[1.2em] \hline
+    {Project CCB}                & {Approver}               & {CCB 08.11.2026} \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -186,17 +186,21 @@
 % Each row has 4 columns separated by &:
 % \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
 % To add a new row, copy the last line before \end{tabularx}.
-{\renewcommand{\arraystretch}{1.25}%
+{\footnotesize\renewcommand{\arraystretch}{1.18}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.6cm}|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.4cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1}      & {04.11.2026}    & Initial Issue              & Initial Draft                 \\ \hline
-    \textbf{1.0}      & {07.11.2026}    & Complete ECSS-E-ST-10-06C Space Segment TRS baseline aligned with 1,000~km LEO / 35,786~km GEO hybrid architecture and mandatory ISL & All \\ \hline
+    \textbf{0.1}      & {04.11.2026}    & Initial document template setup and CI-03 configuration baseline identification. & Document Info \\ \hline
+    \textbf{0.2}      & {05.11.2026}    & Added Applicable/Reference Documents (AD-01 to AD-14, RD-01 to RD-06), Abbreviations, Scope, Specification Tree hierarchy, and Section 1 Introduction. & References, Scope, Intro \\ \hline
+    \textbf{0.3}      & {06.11.2026}    & Added Section 3 User's Need Presentation, 60~s warning-chain latency allocation (Table 3), and external interface boundaries (Table 4). & Section 3 \\ \hline
+    \textbf{0.4}      & {06.11.2026}    & Added Section 4 Selected Concept / Product Presentation (1,000~km LEO Walker Delta 72/8/1, 6 GEO, mandatory ISL mesh, Careful COTS bus, WBS alignment). & Section 4 \\ \hline
+    \textbf{0.5}      & {07.11.2026}    & Added Section 5 Life Profile Description (ECSS-E-ST-10-03C model philosophy, plane-batch launch, LEOP, nominal modes N1--N5, FDIR, EOL disposal). & Section 5 \\ \hline
+    \textbf{0.6}      & {08.11.2026}    & Modularized LaTeX source into section subfiles and added Section 6 Environment and Constraints Description per ECSS-E-ST-10-04C. & Section 6, All \\ \hline
 \end{tabularx}}
 
 \newpage
@@ -214,389 +218,21 @@
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
-% -----------------------------------------------------------------------------
-\section{References}
-
-In accordance with Clause \texttt{<2>} (\emph{Applicable and reference documents}) of \textbf{ECSS-E-ST-10-06C Annex A (Technical Requirements Specification DRD)}, this section lists the normative Applicable Documents (\abbr{AD}) that impose binding provisions on the \abbr{EWAS} Space Segment (\abbr{SSEG}, Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}) and the informative Reference Documents (\abbr{RD}) supporting its derivation, followed by project-specific terms, definitions, and abbreviations.
-
-\subsection{Applicable Documents (AD)}
-
-The following Applicable Documents contain normative provisions that, through explicit reference in this Technical Requirements Specification, constitute binding requirements on the design, development, verification, operation, and end-of-life disposal of the \abbr{EWAS} Space Segment.
-
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.11\textwidth}|>{\raggedright\arraybackslash}p{0.26\textwidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.11\textwidth}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{AD-01}     & {EWAS-HSB-SYS-SRD-01}     & {EWAS Final Report: Mission Definition, CONOPS, and Overall System Requirements Baseline (R-001 to R-049)} & {Rev.\ 1.0}  \\ \hline
-    \textbf{AD-02}     & {ECSS-E-ST-10C}           & {Space engineering --- System engineering general requirements} & {Rev.\ 1}  \\ \hline
-    \textbf{AD-03}     & {ECSS-E-ST-10-06C}        & {Space engineering --- Technical requirements specification} & {Issue 1}  \\ \hline
-    \textbf{AD-04}     & {ECSS-E-ST-10-02C}        & {Space engineering --- Verification} & {Rev.\ 1}  \\ \hline
-    \textbf{AD-05}     & {ECSS-E-ST-10-03C}        & {Space engineering --- Testing} & {Issue 1}  \\ \hline
-    \textbf{AD-06}     & {ECSS-E-ST-10-04C}        & {Space engineering --- Space environment} & {Rev.\ 1}  \\ \hline
-    \textbf{AD-07}     & {ECSS-E-ST-20C}           & {Space engineering --- Electrical and electronic} & {Rev.\ 2}  \\ \hline
-    \textbf{AD-08}     & {ECSS-E-ST-31C}           & {Space engineering --- Thermal control general requirements} & {Issue 1}  \\ \hline
-    \textbf{AD-09}     & {ECSS-E-ST-32C}           & {Space engineering --- Structural general requirements} & {Rev.\ 1}  \\ \hline
-    \textbf{AD-10}     & {ECSS-E-ST-50C}           & {Space engineering --- Communications} & {Issue 1}  \\ \hline
-    \textbf{AD-11}     & {ECSS-Q-ST-30C / 40C}     & {Space product assurance --- Dependability and Safety} & {Rev.\ 1}  \\ \hline
-    \textbf{AD-12}     & {ECSS-U-AS-10C}           & {Space sustainability --- Adoption Notice of ISO 24113 (Space debris mitigation requirements)} & {Rev.\ 1}  \\ \hline
-\end{tabularx}}
-
-\clearpage
-\subsection{Reference Documents (RD)}
-
-The following Reference Documents provide contextual engineering benchmarks, regulatory frameworks, and architectural guidelines consulted during the formulation of the \abbr{EWAS} Space Segment Technical Requirements Specification.
-
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.11\textwidth}|>{\raggedright\arraybackslash}p{0.26\textwidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.11\textwidth}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{RD-01}     & {ESA-ADMIN-IPOL-2023}     & {ESA Space Debris Mitigation Policy and Zero Debris Charter} & {2023}  \\ \hline
-    \textbf{RD-02}     & {CCSDS 131.0-B / 141.0-B} & {CCSDS Space Data System Standards for TM/TC and Optical Communications} & {Blue Book}  \\ \hline
-    \textbf{RD-03}     & {ITU-RR-2024}             & {ITU Radio Regulations (Space Research, Earth Exploration-Satellite, and Inter-Satellite Services)} & {2024}  \\ \hline
-    \textbf{RD-04}     & {EDA-ODINS-EYE-II}        & {European Defence Agency ODIN'S EYE II / TWISTER Early Warning Architecture Benchmarks} & {Ref.}  \\ \hline
-    \textbf{RD-05}     & {SDA-PWSA-TRK}            & {Space Development Agency (SDA) Proliferated Warfighter Space Architecture --- Tracking Layer Tranche 1/2 Specifications} & {Ref.}  \\ \hline
-\end{tabularx}}
-
-\vspace{1.0em}
-\subsection{Terms, Definitions and Abbreviations}
-
-For the purposes of this specification, the terms and definitions given in \textbf{ECSS-S-ST-00-01C} and \textbf{ECSS-E-ST-10-06C} (\textbf{AD-03}) apply, together with the project-specific abbreviations listed below.
-
-{\renewcommand{\arraystretch}{1.20}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
-    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
-    \textbf{ADCS}                     & Attitude Determination and Control Subsystem      \\ \hline
-    \textbf{AIT}                      & Assembly, Integration, and Testing                \\ \hline
-    \textbf{AKE}                      & Attitude Knowledge Error                          \\ \hline
-    \textbf{APE}                      & Absolute Pointing Error                           \\ \hline
-    \textbf{BOL}                      & Beginning of Life                                 \\ \hline
-    \textbf{C\&DH}                    & Command and Data Handling                         \\ \hline
-    \textbf{CCSDS}                    & Consultative Committee for Space Data Systems     \\ \hline
-    \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{COMSEC}                   & Communications Security                           \\ \hline
-    \textbf{CONOPS}                   & Concept of Operations                             \\ \hline
-    \textbf{COTS}                     & Commercial Off-The-Shelf                          \\ \hline
-    \textbf{CVCM}                     & Collected Volatile Condensable Material           \\ \hline
-    \textbf{DD}                       & Displacement Damage                               \\ \hline
-    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{EDAC}                     & Error Detection and Correction                    \\ \hline
-    \textbf{EOL}                      & End of Life                                       \\ \hline
-    \textbf{EPS}                      & Electrical Power Subsystem                        \\ \hline
-    \textbf{EWAS}                     & Early Warning Alarm System                        \\ \hline
-    \textbf{FDIR}                     & Fault Detection, Isolation, and Recovery          \\ \hline
-    \textbf{FOR}                      & Field of Regard                                   \\ \hline
-\end{tabularx}}
-
-\newpage
-
-{\renewcommand{\arraystretch}{1.20}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Abbreviation}              & \thead{Meaning (Continued)}                       \\ \hline
-    \textbf{FOV}                      & Field of View                                     \\ \hline
-    \textbf{FPA}                      & Focal Plane Array                                 \\ \hline
-    \textbf{FSM}                      & Fast Steering Mirror                              \\ \hline
-    \textbf{GEO}                      & Geostationary Earth Orbit (35,786~km)             \\ \hline
-    \textbf{GSD}                      & Ground Sampling Distance                          \\ \hline
-    \textbf{HIL}                      & Hardware-in-the-Loop                              \\ \hline
-    \textbf{IIP}                      & Instantaneous Impact Point                        \\ \hline
-    \textbf{IR}                       & Infrared                                          \\ \hline
-    \textbf{ISL}                      & Inter-Satellite Link                              \\ \hline
-    \textbf{LEO}                      & Low Earth Orbit (1,000~km)                        \\ \hline
-    \textbf{LEOP}                     & Launch and Early Orbit Phase                      \\ \hline
-    \textbf{LOS}                      & Line of Sight                                     \\ \hline
-    \textbf{MCT}                      & Mercury Cadmium Telluride (\textrm{HgCdTe})       \\ \hline
-    \textbf{MLI}                      & Multi-Layer Insulation                            \\ \hline
-    \textbf{MMOD}                     & Micrometeoroids and Orbital Debris                \\ \hline
-    \textbf{MWIR}                     & Medium-Wave Infrared ($3.0\text{--}5.0~\mu\text{m}$) \\ \hline
-    \textbf{NETD}                     & Noise Equivalent Temperature Difference           \\ \hline
-    \textbf{NFOV}                     & Narrow Field of View                              \\ \hline
-    \textbf{OBDH}                     & On-Board Data Handling Subsystem                  \\ \hline
-    \textbf{OISL}                     & Optical Inter-Satellite Link                      \\ \hline
-    \textbf{PLD}                      & Mission Payload                                   \\ \hline
-    \textbf{PROP}                     & Propulsion Subsystem                              \\ \hline
-    \textbf{RPE}                      & Relative Pointing Error                           \\ \hline
-    \textbf{SAA}                      & South Atlantic Anomaly                            \\ \hline
-    \textbf{SATG}                     & GEO Satellite Configuration Item (\abbr{WBS} \texttt{123456.03.02}) \\ \hline
-    \textbf{SATL}                     & LEO Satellite Configuration Item (\abbr{WBS} \texttt{123456.03.01}) \\ \hline
-    \textbf{SEE}                      & Single-Event Effects                              \\ \hline
-    \textbf{SEU}                      & Single-Event Upset                                \\ \hline
-    \textbf{SSEG}                     & Space Segment Configuration Item (\abbr{WBS} \texttt{123456.03}) \\ \hline
-    \textbf{STR/MEC}                  & Structures and Mechanisms Subsystem               \\ \hline
-    \textbf{SWIR}                     & Short-Wave Infrared ($1.0\text{--}3.0~\mu\text{m}$) \\ \hline
-    \textbf{TCS}                      & Thermal Control Subsystem                         \\ \hline
-    \textbf{TID}                      & Total Ionizing Dose                               \\ \hline
-    \textbf{TML}                      & Total Mass Loss                                   \\ \hline
-    \textbf{TRS}                      & Technical Requirements Specification              \\ \hline
-    \textbf{TT\&C}                    & Telemetry, Tracking, and Command                  \\ \hline
-    \textbf{VCD}                      & Verification Control Document                     \\ \hline
-    \textbf{WBS}                      & Work Breakdown Structure                          \\ \hline
-    \textbf{WFOV}                     & Wide Field of View                                \\ \hline
-\end{tabularx}}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 5: SCOPE (ECSS-E-ST-10-06C ANNEX A SECTION <1>: INTRODUCTION / SCOPE)
-% -----------------------------------------------------------------------------
-\section{Scope}
-
-This document (\texttt{EWAS-HSB-SSEG-TRS-03}) is the Level-2 \textbf{Technical Requirements Specification (\abbr{TRS})} governing Configuration Item \textbf{\texttt{CI-03}: Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03})} of the \textbf{Early Warning Alarm System (\abbr{EWAS})}. Prepared in strict conformance with \textbf{ECSS-E-ST-10C} (\textbf{AD-02}) and \textbf{ECSS-E-ST-10-06C Annex A} (\textbf{AD-03}), this specification establishes the complete, frozen set of technical requirements necessary to design, manufacture, integrate, verify, launch, commission, operate, and dispose of the \abbr{EWAS} Space Segment as an integrated system element.
-
-The scope of this \abbr{TRS} encompasses all space-borne elements of the two-segment \abbr{EWAS} architecture, specifically:
-\begin{enumerate}
-    \item \textbf{Hybrid Orbital Constellation Architecture:} The coordinated astrodynamic configuration, orbital slot allocation, multi-plane phasing, and coverage availability of the dual-tier constellation comprising \textbf{six (6) Geostationary Earth Orbit (\abbr{GEO}) detection satellites (\texttt{SATG})} operating at 35,786~km altitude (spaced uniformly at $60^\circ$ longitude intervals) and \textbf{seventy-two (72) Low Earth Orbit (\abbr{LEO}) tracking satellites (\texttt{SATL})} deployed at 1,000~km circular altitude in a high-inclination ($78^\circ\text{--}82^\circ$) Walker Delta $72/8/1$ pattern (8 orbital planes with 9 satellites per plane), satisfying top-level constellation requirements \texttt{R-005} through \texttt{R-008} of \textbf{AD-01}.
-    \item \textbf{Space Segment Mission Chain and Latency Allocations:} The functional and performance allocations governing boost-phase Short-Wave/Medium-Wave Infrared (\abbr{SWIR}/\abbr{MWIR}) plume detection, real-time onboard proton-despiking and false-alarm filtering (\texttt{R-009}, \texttt{R-010}, \texttt{R-019}--\texttt{R-022}), immediate candidate-event reporting from \abbr{GEO} to the Ground Segment (\texttt{R-042}), reception of Ground Segment tracking commands (\texttt{R-043}, \texttt{R-044}), agile payload optical Line-of-Sight (\abbr{LOS}) acquisition within $< 5\text{ s}$ and pointing stabilization $< 2\text{ arcsec/s}$ by two selected \abbr{LEO} spacecraft (\texttt{R-024}), synchronized stereoscopic tracking, inter-satellite exchange of timestamped \abbr{LOS} vectors to compute an onboard preliminary 3D trajectory estimate (\texttt{R-023}), and encrypted downlink of both the timestamped stereoscopic \abbr{LOS} observation packages (with covariance metadata) and onboard preliminary trajectory estimate to the Ground Segment Data Processing System for authoritative multi-sensor fusion (\texttt{R-012}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045}) within the Space Segment's allocated share of the $\le 60\text{ s}$ end-to-end warning latency budget (\texttt{R-011}).
-    \item \textbf{Mandatory Space Segment Inter-Satellite Link (\abbr{ISL}) Network:} The optical and radio-frequency (\abbr{OISL}/\abbr{RF} \abbr{ISL}) mesh across the 72 \abbr{LEO} nodes and the cross-layer \abbr{GEO}--\abbr{LEO} relay links connecting \texttt{SATL} and \texttt{SATG}, together with cryptographic security (\texttt{R-031}), anti-jamming resilience (\texttt{R-032}), and near-real-time telemetry/command transport (\texttt{R-033}, \texttt{R-044}).
-    \item \textbf{Standardized Platform Envelopes, Environment, and Sustainability:} Common platform and subsystem boundaries under the project's \textbf{``Careful \abbr{COTS}'' / Radiation-Tolerant \abbr{COTS}} philosophy, explicitly covering the \emph{Structures and Mechanisms Subsystem (\abbr{STR/MEC})} (including stray-light baffles per \texttt{R-025}, micro-vibration isolation, rideshare dispenser interfaces, and localized \textrm{Al}/\textrm{Ta} radiation spot shielding), \emph{Thermal Control Subsystem (\abbr{TCS})}, \emph{Attitude Determination and Control Subsystem (\abbr{ADCS})}, \emph{Electrical Power Subsystem (\abbr{EPS})}, \emph{Propulsion Subsystem (\abbr{PROP})}, and the architecturally separated \emph{On-Board Data Handling (\abbr{OBDH})} and \emph{Communications (\abbr{TT\&C}/\abbr{ISL})} subsystems, designed for operational lifetimes of 7~years (\abbr{LEO}) and 15~years (\abbr{GEO}) (\texttt{R-016}) and mandatory active end-of-life disposal (\texttt{R-018}, \textbf{AD-12}).
-\end{enumerate}
-
-\subsection{Position in the EWAS Specification Tree and Hierarchy}
-
-Per \textbf{ECSS-E-ST-10C} Clause 5.2 (\textbf{AD-02}), the \abbr{EWAS} technical documentation is organized into a hierarchical specification tree aligned with the project Work Breakdown Structure (\abbr{WBS}, Chapter 10 of \textbf{AD-01}):
-\begin{itemize}
-    \item \textbf{Upper-Tier Parent Baseline (Level 1 --- System Level):} This \abbr{TRS} flows down directly from the \emph{EWAS Overall System Requirements} (\texttt{R-001} through \texttt{R-049}, Chapter 5 of \textbf{AD-01}), the \emph{Concept of Operations} (Chapter 3 of \textbf{AD-01}), and the \emph{Functional Analysis} (Chapter 6 of \textbf{AD-01}). Every technical requirement specified in Section 7 of this document maintains explicit backward traceability to one or more system-level requirements in \textbf{AD-01}.
-    \item \textbf{Peer Segment Specifications (Level 2 --- Segment Level):} This document operates at the same hierarchical tier as the \emph{Ground Segment Technical Requirements Specification} (\abbr{WBS} Element \texttt{123456.02}) and is complemented by the \emph{Space Segment Design Definition File} (\texttt{EWAS-HSB-SSEG-DDF-03}), the \emph{Space Segment Design Justification File} (\texttt{EWAS-HSB-SSEG-DDJF-03}), and the segment-level \emph{Interface Control Documents} (\abbr{WBS} Elements \texttt{123456.05.02.01} through \texttt{123456.05.02.04}).
-    \item \textbf{Subordinate Lower-Tier Specifications (Level 3 --- Spacecraft \& Subsystem Level):} This \abbr{TRS} defines requirements at the integrated Space Segment boundary (\texttt{123456.03 SSEG}) and establishes the top-level allocation envelopes for its two subordinate flight system Configuration Items: \textbf{Satellite \abbr{LEO} (\texttt{SATL}, \abbr{WBS} \texttt{123456.03.01})} and \textbf{Satellite \abbr{GEO} (\texttt{SATG}, \abbr{WBS} \texttt{123456.03.02})}. Detailed equipment-level and component-level procurement specifications for individual \texttt{SATL} and \texttt{SATG} hardware/software units are allocated to lower-tier subsystem specifications and are not duplicated herein unless required to guarantee cross-layer interoperability, constellation-level performance, or common environmental/product-assurance compliance.
-\end{itemize}
-
-\begin{table}[H]
-\centering
-\caption{EWAS Space Segment (\texttt{CI-03}) WBS Hierarchy and Specification Scope Boundary}
-\label{tab:sseg_wbs_scope}
-{\renewcommand{\arraystretch}{1.22}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{3.9cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{WBS Code} & \thead{Level / CI} & \thead{Element Title} & \thead{Allocation within \texttt{EWAS-HSB-SSEG-TRS-03}} \\ \hline
-    \textbf{123456.00} & Level 1 & EWAS System & Parent system baseline (\texttt{R-001}--\texttt{R-049}, \textbf{AD-01}); source of top-level requirement flow-down. \\ \hline
-    \textbf{123456.02} & Level 2 & Ground Systems & External peer segment; interacts with \abbr{SSEG} across the Space-to-Ground \abbr{TT\&C} and mission data interface. \\ \hline
-    \textbf{123456.03} & Level 2 (\texttt{CI-03}) & \textbf{Space Segment (\abbr{SSEG})} & \textbf{Primary subject of this TRS:} hybrid constellation geometry, cross-layer \abbr{ISL}, latency budgets, and segment envelopes. \\ \hline
-    \textbf{123456.03.01} & Level 3 (\texttt{SATL}) & Satellite \abbr{LEO} (72~nodes) & Subordinate flight segment at 1,000~km (Walker Delta $72/8/1$); platform and \abbr{NFOV} tracking payload envelopes defined herein. \\ \hline
-    \textbf{123456.03.02} & Level 3 (\texttt{SATG}) & Satellite \abbr{GEO} (6~nodes) & Subordinate flight segment at 35,786~km ($60^\circ$ spacing); platform and \abbr{WFOV} detection payload envelopes defined herein. \\ \hline
-\end{tabularx}}
-\end{table}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 6: INTRODUCTION (ECSS-E-ST-10-06C ANNEX A SECTION <1>: INTRODUCTION)
-% -----------------------------------------------------------------------------
-\section{Introduction}
-
-\subsection{Purpose and Background}
-
-The \textbf{Early Warning Alarm System (\abbr{EWAS})} is an interdisciplinary space systems engineering project developed jointly at \textbf{Hochschule Bremen (HSB)} and \textbf{Gdańsk University of Technology (Politechnika Gdańska --- PG)}. The mission is motivated by the acute security challenges facing the Baltic Sea region ($53^\circ\text{N}\text{--}66^\circ\text{N}$, $10^\circ\text{E}\text{--}32^\circ\text{E}$), where short flight times of short- and medium-range ballistic missiles (as well as longer-range threats originating outside the region, \texttt{R-049}) leave terrestrial radar networks with severely compressed reaction windows due to Earth-curvature horizon masking and terrain obstruction.
-
-To overcome these physical limitations, \abbr{EWAS} establishes a sovereign, high-availability ($> 99.9\%$, \texttt{R-015}) space-based infrared observation and tracking architecture dedicated strictly to \textbf{civil protection, national crisis management, and emergency preparedness}. In accordance with \texttt{R-001} and \texttt{R-002}, \abbr{EWAS} is strictly a non-offensive early warning system: it does not provide weapon-guidance data, fire-control solutions, or interceptor command-and-control, nor is it required to perform final warhead yield characterization or post-impact damage assessment. Its core operational mandate is to detect ballistic missile launches during the high-radiance boost phase from Geostationary Earth Orbit (\abbr{GEO}), cue two suitable Low Earth Orbit (\abbr{LEO}) satellites via direct ground links or a \textbf{mandatory Space Segment Inter-Satellite Link (\abbr{ISL}) network} (\texttt{R-043}, \texttt{R-044}), execute rapid ($< 5\text{ s}$) optical Line-of-Sight (\abbr{LOS}) acquisition and synchronized stereoscopic tracking (\texttt{R-024}), compute an onboard preliminary 3D trajectory estimate via inter-satellite \abbr{LOS} vector exchange (\texttt{R-023}), and downlink both the timestamped stereoscopic \abbr{LOS} observation packages and preliminary trajectory estimate to the Ground Segment Data Processing System for authoritative multi-sensor fusion (\texttt{R-012}, \texttt{R-026}, \texttt{R-027}). Immediately following this authoritative two-\abbr{LEO} ground assessment, the Ground Segment Early Warning System automatically dispatches a preliminary warning to authorized national authority interfaces within a total end-to-end latency of $\le 60\text{ seconds}$ from initial \abbr{GEO} detection (\texttt{R-011}, \texttt{R-045}).
-
-In compliance with Clause \texttt{<1>a} of \textbf{ECSS-E-ST-10-06C Annex A} (\textbf{AD-03}), the purpose and objective of this Technical Requirements Specification are:
-\begin{itemize}
-    \item To translate the system-level mission needs, operational scenarios, and requirements (\texttt{R-001} through \texttt{R-049} in \textbf{AD-01}) into unambiguous, quantifiable, attainable, and verifiable technical requirements for the \abbr{EWAS} Space Segment (\texttt{CI-03}, \abbr{WBS} \texttt{123456.03});
-    \item To establish the technical reference baseline for the qualification of the Space Segment design (\texttt{EWAS-HSB-SSEG-DDF-03} and \texttt{EWAS-HSB-SSEG-DDJF-03}) and for formal verification and acceptance testing (\textbf{AD-04}, \textbf{AD-05}); and
-    \item To define the permissible functional, physical, environmental, operational, and sustainability boundaries governing the 6 \abbr{GEO} (\texttt{SATG}) and 72 \abbr{LEO} (\texttt{SATL}) spacecraft throughout their complete life profile, from on-ground cleanroom integration through 7-year (\abbr{LEO}) and 15-year (\abbr{GEO}) nominal operations to active end-of-life disposal (\texttt{R-016}, \texttt{R-018}).
-\end{itemize}
-
-\subsection{Document Structure and Tailoring to ECSS-E-ST-10-06C Annex A}
-
-This specification preserves the standardized HSB/PG project document layout while implementing every normative clause of the \textbf{ECSS-E-ST-10-06C Annex A Technical Requirements Specification Document Requirements Definition (DRD)} (\textbf{AD-03}). Table~\ref{tab:ecss_drd_mapping} defines the exact correspondence between the sections of this document and the mandatory clauses \texttt{<1>} through \texttt{<7>} of \textbf{ECSS-E-ST-10-06C Annex A}.
-
-\begin{table}[H]
-\centering
-\caption{Mapping between HSB/PG Template Sections and ECSS-E-ST-10-06C Annex A DRD Clauses}
-\label{tab:ecss_drd_mapping}
-{\renewcommand{\arraystretch}{1.22}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{ECSS-E-ST-10-06C} & \thead{HSB/PG TRS Section} & \thead{Normative Content Summary} \\ \hline
-    \textbf{Clause \texttt{<1>}} \newline Introductions & \textbf{Scope} \& \textbf{Introduction} & Purpose, objective, specification tree hierarchy (\texttt{CI-03}), ECSS DRD mapping, and normative requirement conventions. \\ \hline
-    \textbf{Clause \texttt{<2>}} \newline Applicable \& Ref.\ Docs & \textbf{References} (\abbr{AD}, \abbr{RD}, \& Abbreviations) & Normative Applicable Documents (\texttt{AD-01}--\texttt{AD-12}), informative Reference Documents (\texttt{RD-01}--\texttt{RD-05}), and abbreviations. \\ \hline
-    \textbf{Clause \texttt{<3>}} \newline User's need presentation & \textbf{Main Content --- Sec.\ 3} \newline User's Need Presentation & Baltic security context, non-offensive boundaries, role of \abbr{SSEG} in the two-segment architecture, and external interfaces. \\ \hline
-    \textbf{Clause \texttt{<4>}} \newline Selected concept / product & \textbf{Main Content --- Sec.\ 4} \newline Selected Concept Presentation & 6~\abbr{GEO} + 72~\abbr{LEO} (1,000~km Walker Delta) hybrid architecture, mandatory \abbr{ISL} mesh, ``Careful \abbr{COTS}'' bus, and \abbr{WBS} allocation. \\ \hline
-    \textbf{Clause \texttt{<5>}} \newline Life profile description & \textbf{Main Content --- Sec.\ 5} \newline Life Profile Description & Chronological lifecycle situations: on-ground \abbr{AIT}, launch, \abbr{LEOP}, commissioning, nominal modes, safe mode, and \abbr{EOL} disposal. \\ \hline
-    \textbf{Clause \texttt{<6>}} \newline Environment \& constraints & \textbf{Main Content --- Sec.\ 6} \newline Environment \& Constraints & Space radiation (1,000~km vs.\ \abbr{GEO}), eclipse/cryogenic thermal regime, vacuum/outgassing, \abbr{MMOD}, mechanical loads, and regulations. \\ \hline
-    \textbf{Clause \texttt{<7>}} \newline Requirements & \textbf{Main Content --- Sec.\ 7} \newline Technical Requirements & Formal verifiable requirements (\texttt{SSEG-REQ-...}) with performance tolerances, plus Traceability (\textbf{Annex A}) and Verification (\textbf{Annex B}). \\ \hline
-\end{tabularx}}
-\end{table}
-
-\subsection{Normative Requirement Conventions and Identification Scheme}
-
-In accordance with \textbf{ECSS-S-ST-00C} and \textbf{ECSS-E-ST-10-06C} Clauses 7.2.7 and 8.3 (\textbf{AD-03}), strict distinction is maintained between descriptive/informative text (Sections 1 through 6) and normative binding provisions (Section 7):
-\begin{itemize}
-    \item \textbf{\texttt{shall}:} Expresses a mandatory technical requirement that is contractually and technically binding on the Space Segment design and subject to formal verification per \textbf{ECSS-E-ST-10-02C} (\textbf{AD-04}).
-    \item \textbf{\texttt{should}:} Expresses a non-mandatory recommendation or engineering design target where alternative solutions may be justified in the Design Justification File (\texttt{EWAS-HSB-SSEG-DDJF-03}).
-    \item \textbf{\texttt{may}:} Expresses a permissible practice or optional allowance within the specified boundaries.
-    \item \textbf{\texttt{can}:} Expresses a physical possibility or inherent capability of an element.
-    \item \textbf{\texttt{will}} (or indicative present tense): Expresses a descriptive statement of fact, background context, or external interface condition not subject to Space Segment verification.
-\end{itemize}
-
-Furthermore, in compliance with \textbf{ECSS-E-ST-10-06C} Clause 8.3.3, ambiguous, unverifiable, or open-ended terms (such as \emph{``and/or''}, \emph{``etc.''}, \emph{``optimize''}, \emph{``minimize''}, \emph{``maximize''}, \emph{``rapid''}, \emph{``sufficient''}, \emph{``adequate''}, or \emph{``state of the art''}) are strictly excluded from the normative requirement statements in Section 7. Every technical requirement in Section 7 is assigned a unique, persistent identifier following the taxonomy:
-\[
-\texttt{SSEG-REQ-<CAT>-<NNN>}
-\]
-where \texttt{SSEG} denotes Configuration Item \texttt{CI-03} (Space Segment), \texttt{REQ} denotes a normative technical requirement, \texttt{<NNN>} is a sequential three-digit number (\texttt{001}, \texttt{002}, \dots), and \texttt{<CAT>} identifies the functional or ECSS requirement category summarized below:
-\begin{itemize}
-    \item \textbf{\texttt{FUN} / \texttt{MIS} / \texttt{PERF}:} Functional (\texttt{FUN}), Mission \& Constellation Geometry (\texttt{MIS}), and System Performance \& Latency (\texttt{PERF}) requirements.
-    \item \textbf{\texttt{PLD} / \texttt{ISL} / \texttt{ADCS} / \texttt{OBDH}:} Infrared Sensor Payload (\texttt{PLD}), Communications \& Mandatory Inter-Satellite Links (\texttt{ISL}), Attitude \& Agile \abbr{LOS} Steering (\texttt{ADCS}), and On-Board Data Handling (\texttt{OBDH}) requirements.
-    \item \textbf{\texttt{STR} / \texttt{TCS} / \texttt{EPS} / \texttt{PROP}:} Structures \& Mechanisms (\texttt{STR}), Thermal Control (\texttt{TCS}), Electrical Power (\texttt{EPS}), and Propulsion \& End-of-Life Disposal (\texttt{PROP}) requirements.
-    \item \textbf{\texttt{IF} / \texttt{ENV} / \texttt{OPS} / \texttt{PA} / \texttt{VER}:} External Interfaces (\texttt{IF}), Space \& Launch Environment (\texttt{ENV}), Operational Modes \& Autonomy (\texttt{OPS}), Product Assurance \& ``Careful \abbr{COTS}'' (\texttt{PA}), and Verification (\texttt{VER}) requirements.
-\end{itemize}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 7: MAIN CONTENT (ECSS-E-ST-10-06C ANNEX A SECTIONS <3> TO <7>)
-% -----------------------------------------------------------------------------
-\section{Main Content}
-
 % =============================================================================
-% ECSS-E-ST-10-06C SECTION <3>: USER'S NEED PRESENTATION
+% MODULAR SECTIONS (INCLUDED FROM sections/)
 % =============================================================================
-\subsection{3. User's Need Presentation}
-
-In accordance with Clause \texttt{<3>} (\emph{User's need presentation}) of \textbf{ECSS-E-ST-10-06C Annex A} (\textbf{AD-03}), this section characterizes the operational security environment, end-user civil-protection needs, architectural allocation, and external interfaces that govern the \abbr{EWAS} Space Segment (\texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}) as a primary sensing and space-relay component of the overall \abbr{EWAS} system (\textbf{AD-01}).
-
-\subsubsection{3.1 Operational Context, Threat Landscape, and Mission Need}
-
-The \textbf{Baltic Sea region} (encompassing the sovereign territories, maritime exclusive economic zones, and critical population centers bounded approximately by latitudes $53^\circ\text{N}\text{--}66^\circ\text{N}$ and longitudes $10^\circ\text{E}\text{--}32^\circ\text{E}$) faces an increasingly volatile strategic security environment. A critical vulnerability of the region is its geographic proximity to potential launch corridors for Short-Range Ballistic Missiles (\abbr{SRBM}, range $< 1,000\text{ km}$, total flight times of 3--7~minutes) and Medium-Range Ballistic Missiles (\abbr{MRBM}, range 1,000--3,000~km, total flight times of 7--15~minutes), alongside Intermediate-Range and Intercontinental Ballistic Missiles (\abbr{IRBM}/\abbr{ICBM}) launched from outside the immediate Baltic theatre whose trajectories may threaten Baltic states (\texttt{R-049}).
-
-Conventional early warning postures relying exclusively on ground-based radar installations suffer from fundamental physical and geometric limitations in this theatre:
-\begin{itemize}
-    \item \textbf{Earth-Curvature Horizon Masking:} Due to the curvature of the Earth, a terrestrial radar with an antenna height of $h_r \approx 30\text{ m}$ cannot achieve line-of-sight visibility to an ascending missile until the vehicle clears the local radar horizon $d_h \approx 4.12\bigl(\sqrt{h_r} + \sqrt{h_t}\bigr)$ (in km, for altitudes in meters). At typical regional stand-off distances of 400--800~km, an ascending threat missile remains masked below the radar horizon throughout its initial boost phase (altitudes below 15--45~km), delaying initial detection by 60--150~seconds after rocket motor ignition.
-    \item \textbf{Terrain Obstruction, Atmospheric Clutter, and Depressed Trajectories:} Forested topography, maritime ducting, and quasi-ballistic depressed trajectories further degrade low-elevation ground radar acquisition, leaving national civil-protection authorities with insufficient lead time to execute public sheltering and infrastructure protection protocols.
-\end{itemize}
-
-To eliminate this horizon-masking blind spot, end users---specifically \textbf{Authorized National Crisis-Management Authorities, Ministries of the Interior, and Emergency Warning Centers} across the Baltic partner states (Chapter 8 of \textbf{AD-01})---require a persistent, space-based early warning capability that detects ballistic missile launches at the earliest physically observable stage: \textbf{rocket motor ignition and boost-phase ascent} (\texttt{R-007}, \texttt{R-009}). During the boost phase (typically lasting 45--180~seconds depending on missile class), propellant combustion releases megawatts of radiant intensity in the Short-Wave Infrared (\abbr{SWIR}) and Medium-Wave Infrared (\abbr{MWIR}) spectral bands, providing a high-contrast radiometric signature observable from orbit above cloud tops.
-
-To translate space-based boost-phase detection into actionable civil-protection lead time, the user need imposes three overarching system drivers on \abbr{EWAS}:
-\begin{enumerate}
-    \item \textbf{Automated Preliminary Warning within $\le 60\text{ Seconds}$ (\texttt{R-011}, \texttt{R-045}):} The elapsed time from the first Geostationary Earth Orbit (\abbr{GEO}) detection of a candidate launch event to the automated delivery of a preliminary warning product at the authorized national authority interface must not exceed \textbf{60~seconds}. Within this 60-second window, the system cannot rely solely on coarse single-tier \abbr{GEO} coordinates; the warning may be issued \textbf{only after} two selected Low Earth Orbit (\abbr{LEO}) satellites have acquired follow-on stereoscopic observations and the Ground Segment has fused those observations into a refined 3D trajectory and probabilistic impact-area (\textbf{Instantaneous Impact Point --- \abbr{IIP}}) estimate with explicit confidence ellipses (\texttt{R-012}, \texttt{R-013}, \texttt{R-045}).
-    \item \textbf{Continuous 24/7 Surveillance and $> 99.9\%$ Availability (\texttt{R-006}, \texttt{R-008}, \texttt{R-010}, \texttt{R-015}):} The Space Segment must maintain uninterrupted temporal and spatial surveillance without coverage gaps over the protected region and surrounding launch corridors, achieving a launch detection probability $> 95\%$ (\texttt{R-010}) and contributing to an overall system operational availability $> 99.9\%$ (\texttt{R-015}) across 7-year (\abbr{LEO}) and 15-year (\abbr{GEO}) operational design lifetimes (\texttt{R-016}).
-    \item \textbf{Strict Compliance with Non-Offensive Civil-Protection and Data Sovereignty Boundaries (\texttt{R-001}--\texttt{R-004}, \texttt{R-048}):} \abbr{EWAS} is conceived exclusively as a defensive civil-protection decision-support asset:
-    \begin{itemize}
-        \item \emph{Non-Offensive Mandate (\texttt{R-001}):} The system is strictly prohibited from providing weapon targeting coordinates, fire-control solutions, interceptor mid-course guidance, or direct command of military kinetic response assets.
-        \item \emph{Scope Limitation (\texttt{R-002}):} The system is not required to perform definitive missile-variant identification, warhead nuclear/conventional yield estimation, or post-impact battle damage assessment.
-        \item \emph{Authorized Institutional Access \& Sovereign Archival (\texttt{R-003}, \texttt{R-004}, \texttt{R-034}--\texttt{R-037}, \texttt{R-047}, \texttt{R-048}):} Warning outputs are delivered exclusively to authorized governmental crisis-management interfaces (\texttt{R-003}), which form the external boundary of \abbr{EWAS} (downstream public siren/cell-broadcast activation remains the responsibility of national authorities per \texttt{R-048}). All archived telemetry and observation records are retained for at least 5~years (\texttt{R-036}) and restricted strictly to algorithm refinement, radiometric/geometric calibration, performance verification, operator training, and post-event technical analysis (\texttt{R-004}).
-    \end{itemize}
-\end{enumerate}
-
-\subsubsection{3.2 Role of the Space Segment in the Two-Segment EWAS Warning Chain}
-
-Per Clause \texttt{<3>b--d} of \textbf{ECSS-E-ST-10-06C Annex A}, the Space Segment (\abbr{SSEG}, \abbr{WBS} \texttt{123456.03}) is not a standalone, self-contained product; it operates as one of the \textbf{two integrated system segments} that constitute the \abbr{EWAS} baseline (\textbf{AD-01}, Chapters 3 and 4):
-\begin{enumerate}
-    \item \textbf{Space Segment (\abbr{SSEG}, \abbr{WBS} \texttt{123456.03}, \texttt{CI-03}):} The space-borne sensing, onboard processing, and inter-satellite relay infrastructure comprising the 6 \abbr{GEO} detection satellites (\texttt{SATG}, \abbr{WBS} \texttt{123456.03.02}) at 35,786~km and the 72 \abbr{LEO} tracking satellites (\texttt{SATL}, \abbr{WBS} \texttt{123456.03.01}) at 1,000~km, interconnected by a \textbf{mandatory Space Segment Inter-Satellite Link (\abbr{ISL}) network} (optical/\abbr{RF} \abbr{ISL} mesh across \abbr{LEO} and cross-layer \abbr{GEO}--\abbr{LEO} relay links).
-    \item \textbf{Ground Segment (\abbr{WBS} \texttt{123456.02}):} The terrestrial infrastructure comprising the \emph{Data Archiving System} (\texttt{123456.02.01}), \emph{Command \& Control System} (\texttt{123456.02.02}), \emph{Mission Control Center} (\texttt{123456.02.03}), \emph{Data Processing System} (\texttt{123456.02.04}), \emph{Ground Station Network} (\texttt{123456.02.05}), and \emph{Early Warning System} (\texttt{123456.02.06}). External national crisis-management authorities are warning recipients connected to the Early Warning System interface, not a third system segment (\texttt{R-048}).
-\end{enumerate}
-
-To satisfy the $\le 60\text{-second}$ end-to-end latency requirement (\texttt{R-011}) from initial \abbr{GEO} detection to external national authority warning dispatch, the operational warning chain is partitioned into four deterministic steps across the Space and Ground Segments. Table~\ref{tab:warning_chain_latency} defines the functional sequence, segment responsibilities, exchanged data products (aligned with the Ground Segment Data Dictionary in Chapter 12 of \textbf{AD-01}), and binding latency budget allocations.
-
-\begin{table}[H]
-\centering
-\caption{EWAS End-to-End Warning Chain and Space Segment Latency Allocation (\texttt{R-011})}
-\label{tab:warning_chain_latency}
-{\renewcommand{\arraystretch}{1.22}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.9cm}|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{1.9cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Chain Step} & \thead{Active Element} & \thead{Required Operational Functions} & \thead{Output Product \& Req.\ Ref.} & \thead{Latency Allocation} \\ \hline
-    \textbf{Step 1:} \newline Boost-Phase Detection \& Reporting & \textbf{SSEG (\texttt{SATG})} \newline 6~\abbr{GEO} nodes at 35,786~km & Persistent \abbr{WFOV} \abbr{SWIR}/\abbr{MWIR} staring surveillance; real-time onboard proton despiking, background clutter suppression, and plume event classification; immediate encrypted downlink to Ground Station Network. & \emph{GEO Event Report} \newline (\texttt{R-009}, \texttt{R-019}, \texttt{R-022}, \texttt{R-042}) & \textbf{$\le 10.0\text{ s}$} \newline (from $T_0$ plume threshold) \\ \hline
-    \textbf{Step 2:} \newline LEO Selection \& \abbr{ISL} Cueing & \textbf{Ground C2} + \textbf{SSEG \abbr{ISL}} \newline (\abbr{GEO}/\abbr{LEO} relay) & Ground Segment validates \abbr{GEO} report, evaluates 1,000~km Walker Delta geometry, selects two optimal \abbr{LEO} satellites, and uplinks tracking requests via direct ground stations or \textbf{mandatory \abbr{SSEG} \abbr{ISL} relay paths}. & \emph{LEO Tracking Request} \newline (\texttt{R-030}, \texttt{R-043}, \texttt{R-044}) & \textbf{$\le 5.0\text{ s}$} \newline (C2 selection $\le 2\text{ s}$; \abbr{ISL} routing $\le 3\text{ s}$) \\ \hline
-    \textbf{Step 3:} \newline Agile \abbr{LOS} Lock, Stereo Tracking \& Downlink & \textbf{SSEG (\texttt{SATL})} \newline 2 cued \abbr{LEO} nodes at 1,000~km + \textbf{\abbr{ISL} Mesh} & Agile optical \abbr{LOS} slewing via two-axis gimbal + \abbr{FSM} to achieve target lock-on in $< 5.0\text{ s}$ with $< 2\text{ arcsec/s}$ stability; synchronized stereoscopic \abbr{NFOV} tracking; \abbr{ISL} exchange of timestamped \abbr{LOS} vectors to compute onboard preliminary 3D trajectory; encrypted downlink of \abbr{LOS} packages + preliminary trajectory via direct link or \abbr{ISL}. & \emph{LEO Observation Package} \& \emph{Onboard Preliminary Trajectory} \newline (\texttt{R-023}, \texttt{R-024}, \texttt{R-033}) & \textbf{$\le 25.0\text{--}30.0\text{ s}$} \newline ($< 5\text{ s}$ lock-on; $15\text{--}18\text{ s}$ stereo dwell/3D fit; $\le 5\text{--}7\text{ s}$ downlink) \\ \hline
-    \textbf{Step 4:} \newline Authoritative Ground Fusion \& Warning & \textbf{Ground Segment} \newline (\texttt{123456.02.04} \& \texttt{123456.02.06}) & Central Data Processing System performs authoritative multi-sensor fusion of downlinked stereoscopic \abbr{LOS} vectors (with covariance metadata) and onboard preliminary trajectory to compute refined 3D trajectory, probabilistic \abbr{IIP} ellipse, and Baltic threat priority; Early Warning System automatically dispatches preliminary warning to national authorities prior to operator review. & \emph{Ground Refined Trajectory}, \emph{IIP Assessment} \& \emph{Preliminary Warning} \newline (\texttt{R-012}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045}, \texttt{R-049}) & \textbf{$\le 10.0\text{--}15.0\text{ s}$} \newline (Ground fusion + automated dispatch) \\ \hline
-    \textbf{Total Chain} & \textbf{EWAS System} & \textbf{End-to-End Elapsed Time from Initial \abbr{GEO} Detection ($T_0$) to Authority Interface Delivery} & \textbf{Compliant with \texttt{R-011} \& \texttt{R-045}} & \textbf{$\le 60.0\text{ s}$ Total} \newline (\textbf{$\le 40\text{--}45\text{ s}$ \abbr{SSEG}}) \\ \hline
-\end{tabularx}}
-\end{table}
-
-As shown in Table~\ref{tab:warning_chain_latency}, the Space Segment is directly responsible for \textbf{Steps 1 and 3} and provides the mandatory space-relay transport backbone for \textbf{Step 2}, representing a combined Space Segment latency allocation of $\le 40\text{--}45\text{ seconds}$. Two architectural mechanisms within \abbr{SSEG} are indispensable to closing this timing budget:
-\begin{itemize}
-    \item \textbf{Mandatory Space Segment \abbr{ISL} Routing (\texttt{R-023}, \texttt{R-044}):} Because the two best-positioned \abbr{LEO} satellites over a launch corridor outside the Baltic region may not be in simultaneous line-of-sight of a European ground station at the instant of launch, relying solely on direct ground-station passes would introduce multi-minute store-and-forward delays, violating \texttt{R-011}. The mandatory \abbr{SSEG} \abbr{ISL} network (combining intra-/inter-plane optical/\abbr{RF} \abbr{ISL} mesh links across the 72 \abbr{LEO} satellites and cross-layer \abbr{GEO}--\abbr{LEO} trunks) guarantees continuous, sub-3-second command delivery (\texttt{R-044}), sub-second inter-satellite \abbr{LOS} vector exchange for onboard preliminary 3D trajectory computation (\texttt{R-023}), and immediate telemetry/observation return.
-    \item \textbf{Agile Payload Optical \abbr{LOS} Steering without Full-Bus Slews (\texttt{R-024}):} Slewing an entire 1,000~km \abbr{LEO} spacecraft bus through $20^\circ\text{--}45^\circ$ using reaction wheels alone would require 15--30~seconds of settling time to reach arcsecond-class stability. By combining 3-axis spacecraft attitude control with a two-axis payload gimbal and high-bandwidth Fast Steering Mirror (\abbr{FSM}), each cued \texttt{SATL} node acquires and locks onto the target plume within $< 5\text{ seconds}$ while maintaining $< 2\text{ arcsec/s}$ \abbr{LOS} stability (\texttt{R-024}).
-\end{itemize}
-
-\subsubsection{3.3 Space Segment System Boundaries and External Interfaces}
-
-In accordance with Clause \texttt{<3>d} of \textbf{ECSS-E-ST-10-06C Annex A}, the boundary of Configuration Item \texttt{CI-03} (\abbr{SSEG}) is defined by four external interface categories connecting the flight constellation to the Ground Segment, the Launch Segment, the observable target/background environment, and regulatory/space-traffic entities. (Internal space-to-space \abbr{ISL} interfaces between \texttt{SATL} and \texttt{SATG} are internal to \abbr{SSEG} and are specified in Section 4 and Section 7.) Table~\ref{tab:sseg_external_interfaces} summarizes the external interfaces of the Space Segment.
-
-\begin{table}[H]
-\centering
-\caption{Summary of Space Segment (\texttt{CI-03}) External Interfaces}
-\label{tab:sseg_external_interfaces}
-{\renewcommand{\arraystretch}{1.22}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Interface ID} & \thead{Interface Name} & \thead{External Counterpart} & \thead{Principal Functional, Physical \& Protocol Characteristics} \\ \hline
-    \textbf{IF-EXT-01} & Space-to-Ground \abbr{RF} \abbr{TT\&C} \& Mission Data Interface & Ground Station Network (\abbr{WBS} \texttt{123456.02.05}) \& Ground C2 (\texttt{123456.02.02}) & Bidirectional S-band/X-band \abbr{TT\&C} and high-rate X-band/Ka-band mission data downlinks; \abbr{CCSDS} packet/frame compliant (\textbf{RD-02}); NSA/EU-grade \abbr{COMSEC} encryption (\texttt{R-031}) and spread-spectrum anti-jamming/anti-spoofing protection (\texttt{R-032}, \texttt{R-033}). \\ \hline
-    \textbf{IF-EXT-02} & Launch Vehicle \& Dispenser Interface & Launch Service Providers (Heavy-Lift \abbr{GEO} \& Medium/Heavy \abbr{LEO}) & Standard mechanical separation rings for \texttt{SATG}; multi-satellite rideshare dispenser mechanisms deploying 9~\texttt{SATL} spacecraft per plane; umbilical power/data/purge lines; launch fairing acoustic, vibrational, and quasi-static envelopes. \\ \hline
-    \textbf{IF-EXT-03} & Target Plume \& Background Optical Interface & Boost/Post-Boost Missile Plumes \& Earth/Solar Background & Radiometric entrance aperture interface in \abbr{SWIR} ($\sim 2.7~\mu\text{m}$ $\text{H}_2\text{O}/\text{CO}_2$ band) and \abbr{MWIR} ($\sim 4.2\text{--}4.4~\mu\text{m}$ $\text{CO}_2$ red/blue spike bands); solar glint, Earth albedo, cloud-top thermal clutter, and stray-light rejection (\texttt{R-009}, \texttt{R-020}, \texttt{R-025}). \\ \hline
-    \textbf{IF-EXT-04} & Space Traffic Management \& Regulatory Interface & Space Surveillance Networks \& \abbr{ITU} Radiocommunication Sector & Reception of Conjunction Data Messages (CDMs) via Ground C2 for collision avoidance at 1,000~km \abbr{LEO} and 35,786~km \abbr{GEO}; compliance with \abbr{ITU} frequency allocations (\textbf{RD-03}) and \textbf{ECSS-U-AS-10C} disposal (\texttt{R-018}, \textbf{AD-12}). \\ \hline
-\end{tabularx}}
-\end{table}
-
-\begin{enumerate}
-    \item \textbf{Space-to-Ground Interface (\texttt{IF-EXT-01}: \abbr{SSEG} $\leftrightarrow$ Ground Segment \texttt{123456.02}):} Governs all radio-frequency (and future optical ground station) links between the 6 \texttt{SATG} and 72 \texttt{SATL} spacecraft and the Ground Station Network (\texttt{123456.02.05}), managed under the \emph{Space Segment Interface Control Document} (\abbr{WBS} \texttt{123456.05.02.04}) and \emph{Data Exchange ICD} (\texttt{123456.05.02.01}). The uplink carries authenticated telecommands, cryptographic key updates, ephemeris uploads, software patches, and \emph{LEO Tracking Requests} (\texttt{R-043}, \texttt{R-044}). The downlink carries spacecraft housekeeping telemetry, \emph{GEO Event Reports} (\texttt{R-042}), \emph{LEO Observation Packages} (timestamped stereoscopic \abbr{LOS} vectors with attitude/ephemeris covariance matrices), and \emph{Onboard Preliminary Trajectory} estimates (\texttt{R-023}). All links enforce end-to-end encryption (\texttt{R-031}), command authentication, and anti-jamming resilience (\texttt{R-032}).
-    \item \textbf{Launch Segment Interface (\texttt{IF-EXT-02}: \abbr{SSEG} $\leftrightarrow$ Launch Vehicles):} Defines the mechanical, electrical, thermal, cleanliness, and dynamic load boundaries between the spacecraft Structures and Mechanisms Subsystem (\abbr{STR/MEC}) and commercial launch vehicles. For \texttt{SATG}, the interface supports single or dual-manifest geostationary transfer or direct \abbr{GEO} injection. For \texttt{SATL}, the interface is specifically engineered around modular multi-satellite dispenser rings capable of batch-injecting a complete orbital plane of 9 \abbr{LEO} satellites per launch into the 1,000~km, $78^\circ\text{--}82^\circ$ inclination orbit across 8 dedicated plane launches.
-    \item \textbf{Target Plume and Background Optical Interface (\texttt{IF-EXT-03}: \abbr{SSEG} Payload $\leftrightarrow$ Radiometric Scene):} Defines the uncooperative optical boundary between the \abbr{SWIR}/\abbr{MWIR} telescope entrance pupils and the observed scene. The payload must discriminate high-temperature booster exhaust plumes (characterized by strong $\text{H}_2\text{O}$ and $\text{CO}_2$ vibrational-rotational emission around $2.7~\mu\text{m}$ in \abbr{SWIR} and $4.2\text{--}4.4~\mu\text{m}$ in \abbr{MWIR}) against complex terrestrial and space backgrounds, including high-altitude solar reflections off cirrus clouds, sunlit limb scatter, industrial/wildfire thermal sources, and South Atlantic Anomaly (\abbr{SAA}) or polar proton transients (\texttt{R-019}--\texttt{R-022}, \texttt{R-025}).
-    \item \textbf{Space Traffic Management and Regulatory Interface (\texttt{IF-EXT-04}):} Governs the operational interaction with international space situational awareness providers (via the Ground Segment Mission Control Center) for processing Conjunction Data Messages (CDMs) and executing collision-avoidance manoeuvres in the congested 1,000~km \abbr{LEO} regime, as well as adherence to International Telecommunication Union (\abbr{ITU}) spectral masks (\textbf{RD-03}), laser eye-safety/aviation-safety exclusions for optical links, and \textbf{ECSS-U-AS-10C} / \textbf{ESA Zero Debris} end-of-life disposal mandates (\texttt{R-018}, \textbf{AD-12}, \textbf{RD-01}).
-\end{enumerate}
-
-% ---> PLACEHOLDER FOR STEPS 3 TO 5 (ECSS-E-ST-10-06C SECTIONS 4 TO 7) <---
-\vspace{1.0em}
-\noindent\textit{[Placeholder for ECSS-E-ST-10-06C Annex A Sections 4 through 7 --- to be populated in subsequent steps.]}
-
+\input{sections/01_references_abbr}
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 8: ANNEX A
-% -----------------------------------------------------------------------------
-\section{Annex A}
-
-% ---> PLACEHOLDER FOR STEP 6 (REQUIREMENTS TRACEABILITY MATRIX) <---
-{Placeholder for Annex A: Requirements Traceability Matrix (to be populated in Step 6).}
-
+\input{sections/02_scope_intro}
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 9: ANNEX B
-% -----------------------------------------------------------------------------
-\section{Annex B}
-
-% ---> PLACEHOLDER FOR STEP 6 (VERIFICATION CONTROL MATRIX) <---
-{Placeholder for Annex B: Verification Control and Compliance Matrix (to be populated in Step 6).}
+\input{sections/03_users_need}
+\input{sections/04_selected_concept}
+\input{sections/05_life_profile}
+\input{sections/06_environment_constraints}
+\input{sections/07_requirements}
+\newpage
+\input{sections/08_annex_a_rtm}
+\newpage
+\input{sections/09_annex_b_vcd}
 
 \end{document}
