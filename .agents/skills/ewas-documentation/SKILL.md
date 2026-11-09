@@ -11,7 +11,6 @@ Our mission is called EWAS (Early Warning Alarm System).
 # Source of Truth
 Folders:
 `main` contains our documentation from the previous semester. Use it as a reference.
-`hsb_docs` contains teachers' instructions, tasks, notes etc.
 `reports` place, where you can submit your notes
 Use them as a reference. If you find inconsistencies between them or they are confusing, inform the user. 
 
