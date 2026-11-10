@@ -3,11 +3,11 @@
 % -----------------------------------------------------------------------------
 \section{References}
 
-In accordance with Clause \texttt{<2>} (\emph{Applicable and reference documents}) of \textbf{ECSS-E-ST-10-06C Annex A (Technical Requirements Specification DRD)}, this section lists the normative Applicable Documents (\abbr{AD}) that impose binding provisions on the \abbr{EWAS} Space Segment (\abbr{SSEG}, Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}) and the informative Reference Documents (\abbr{RD}) supporting its derivation, followed by project-specific terms, definitions, and abbreviations.
+This section lists the normative Applicable Documents (\abbr{AD}) and informative Reference Documents (\abbr{RD}) governing the \abbr{EWAS} Space Segment (\abbr{SSEG}, Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}). It also defines key project-specific technical terms and abbreviations used throughout this specification.
 
 \subsection{Applicable Documents (AD)}
 
-The following Applicable Documents contain normative provisions that, through explicit reference in this Technical Requirements Specification, constitute binding requirements on the design, development, verification, operation, and end-of-life disposal of the \abbr{EWAS} Space Segment.
+The following Applicable Documents contain normative provisions for the \abbr{EWAS} Space Segment. Through explicit reference in this specification, these documents establish binding requirements for system design, verification, operation, and disposal.
 
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
@@ -37,7 +37,7 @@ The following Applicable Documents contain normative provisions that, through ex
 \clearpage
 \subsection{Reference Documents (RD)}
 
-The following Reference Documents provide contextual engineering benchmarks, regulatory frameworks, and architectural guidelines consulted during the formulation of the \abbr{EWAS} Space Segment Technical Requirements Specification.
+The following Reference Documents provide contextual engineering benchmarks, regulatory frameworks, and architectural guidelines consulted during the formulation of this specification.
 
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
@@ -59,7 +59,12 @@ The following Reference Documents provide contextual engineering benchmarks, reg
 \vspace{1.0em}
 \subsection{Terms, Definitions and Abbreviations}
 
-For the purposes of this specification, the terms and definitions given in \textbf{ECSS-S-ST-00-01C} and \textbf{ECSS-E-ST-10-06C} (\textbf{AD-03}) apply, together with the project-specific abbreviations listed below.
+For the purposes of this specification, the terms and definitions given in \textbf{ECSS-S-ST-00-01C} and \textbf{ECSS-E-ST-10-06C} (\textbf{AD-03}) apply. In addition, the following key project-specific technical terms and abbreviations are defined:
+\begin{itemize}
+    \item \textbf{Proton Despiking:} Real-time onboard filtering that deletes artificial bright pixel spots (transient ionization spikes) on the infrared detector caused by energetic protons in the space radiation environment.
+    \item \textbf{South Atlantic Anomaly (\abbr{SAA}):} Geographic region over South America and the South Atlantic Ocean ($15^\circ\text{S}\text{--}45^\circ\text{S}$, $90^\circ\text{W}\text{--}0^\circ\text{E}$) where Earth's tilted ($\sim 11^\circ$) and offset ($\sim 500\text{ km}$) geomagnetic dipole causes the inner Van Allen proton belt to dip down to altitudes of $200\text{--}1{,}000\text{ km}$.
+    \item \textbf{Careful \abbr{COTS}:} Parts-selection and radiation-assurance philosophy combining lot-screened, radiation-tolerant commercial/industrial electronics with localized graded-Z Aluminium/Tantalum ($\mathrm{Al}/\mathrm{Ta}$) spot shielding and fault-tolerant avionics (\abbr{EDAC}, \abbr{TMR}, and fast-trip latch-up current limiters).
+\end{itemize}
 
 {\renewcommand{\arraystretch}{1.20}%
 \arrayrulecolor{TableBorderBlue}%
@@ -84,17 +89,11 @@ For the purposes of this specification, the terms and definitions given in \text
     \textbf{CVCM}                     & Collected Volatile Condensable Material           \\ \hline
     \textbf{DD}                       & Displacement Damage                               \\ \hline
     \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{EDAC}                     & Error Detection and Correction                    \\ \hline
-    \textbf{EOL}                      & End of Life                                       \\ \hline
-    \textbf{EPS}                      & Electrical Power Subsystem                        \\ \hline
-    \textbf{EWAS}                     & Early Warning Alarm System                        \\ \hline
-    \textbf{FDIR}                     & Fault Detection, Isolation, and Recovery          \\ \hline
-    \textbf{FOR}                      & Field of Regard                                   \\ \hline
 \end{tabularx}}
 
 \newpage
 
-{\renewcommand{\arraystretch}{1.20}%
+{\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
@@ -102,6 +101,12 @@ For the purposes of this specification, the terms and definitions given in \text
     \hline
     \rowcolor{TableHeaderBlue}
     \thead{Abbreviation}              & \thead{Meaning (Continued)}                       \\ \hline
+    \textbf{EDAC}                     & Error Detection and Correction                    \\ \hline
+    \textbf{EOL}                      & End of Life                                       \\ \hline
+    \textbf{EPS}                      & Electrical Power Subsystem                        \\ \hline
+    \textbf{EWAS}                     & Early Warning Alarm System                        \\ \hline
+    \textbf{FDIR}                     & Fault Detection, Isolation, and Recovery          \\ \hline
+    \textbf{FOR}                      & Field of Regard                                   \\ \hline
     \textbf{FOV}                      & Field of View                                     \\ \hline
     \textbf{FPA}                      & Focal Plane Array                                 \\ \hline
     \textbf{FSM}                      & Fast Steering Mirror                              \\ \hline

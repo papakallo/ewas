@@ -3,7 +3,7 @@
 % -----------------------------------------------------------------------------
 \section{Annex B: Verification Control and Compliance Matrix}
 
-In accordance with \textbf{ECSS-E-ST-10-02C Rev.\ 1} (\emph{Space engineering --- Verification}, \textbf{AD-04}), \textbf{ECSS-E-ST-10-03C} (\emph{Space engineering --- Testing}, \textbf{AD-05}), and \textbf{ECSS-E-HB-10-02A} (\emph{Verification guidelines}, \textbf{RD-06}), this annex defines the formal verification methodology, verification levels, model philosophy, milestone review stages, and Master Verification Control Matrix (Table~\ref{tab:annex_b_vcd}) governing all 77 normative technical requirements of Configuration Item \textbf{\texttt{CI-03}: Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03})}.
+This annex defines the formal verification methodology, verification levels, model philosophy, milestone review stages, and Master Verification Control Matrix (Table~\ref{tab:annex_b_vcd}) governing all 77 normative technical requirements of Configuration Item \textbf{\texttt{CI-03}: Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03})} (\textbf{ECSS-E-ST-10-02C}, \textbf{AD-04}; \textbf{ECSS-E-ST-10-03C}, \textbf{AD-05}; \textbf{ECSS-E-HB-10-02A}, \textbf{RD-06}).
 
 \subsection{B.1 Space Segment Verification Methodology, Levels, Models, and Stages}
 
@@ -53,7 +53,7 @@ In accordance with \textbf{ECSS-E-ST-10-02C Rev.\ 1} (\emph{Space engineering --
 \textbf{\texttt{SSEG-REQ-FUN-006}} & \texttt{R, T} & \texttt{L2-SSEG} (\texttt{EM/HIL}) & \texttt{CDR, QR} & \texttt{RRPT/TRPT}: Telemetry Packet Schema \& 5-Yr Archive Test \\ \hline
 \textbf{\texttt{SSEG-REQ-MIS-001}} & \texttt{A, R} & \texttt{L2-SSEG} (\texttt{SIM/DDF}) & \texttt{PDR, CDR} & \texttt{ARPT/RRPT}: Hybrid 6-GEO / 72-LEO Baseline Design Report \\ \hline
 \textbf{\texttt{SSEG-REQ-MIS-002}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{CDR, CR} & \texttt{ARPT}: GEO $60^\circ$ Slot Station-Keeping \& Deadband Analysis \\ \hline
-\textbf{\texttt{SSEG-REQ-MIS-003}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{CDR, CR} & \texttt{ARPT}: Walker Delta $72/8/1$ Ephemeris \& RAAN Phasing Report \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-003}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{CDR, CR} & \texttt{ARPT}: Walker Delta $72/8/1$ ($\Delta u_{\text{inter}} = 22.5^\circ$) Ephemeris Report \\ \hline
 \textbf{\texttt{SSEG-REQ-MIS-004}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{PDR, CDR} & \texttt{ARPT}: GMAT/VTS 24/7 Zero-Gap Coverage Analysis Report \\ \hline
 \textbf{\texttt{SSEG-REQ-MIS-005}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{CDR, QR} & \texttt{ARPT}: High-Latitude Stereo Baseline ($30^\circ\text{--}120^\circ$) Report \\ \hline
 \textbf{\texttt{SSEG-REQ-MIS-006}} & \texttt{A} & \texttt{L2-SSEG} (\texttt{SIM}) & \texttt{PDR, CDR} & \texttt{ARPT}: Dual-GEO Mid-Latitude Overlap Visibility Analysis \\ \hline
@@ -83,21 +83,21 @@ In accordance with \textbf{ECSS-E-ST-10-02C Rev.\ 1} (\emph{Space engineering --
 \textbf{\texttt{SSEG-REQ-OBDH-004}} & \texttt{T, R} & \texttt{L4-SUB} (\texttt{EM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/RRPT}: EDAC Scrubbing, TMR Fault-Injection \& Watchdog \\ \hline
 \textbf{\texttt{SSEG-REQ-OBDH-005}} & \texttt{T, R} & \texttt{L4-SUB} (\texttt{EM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/RRPT}: 72-Hr Non-Volatile Encrypted Ring Buffer Test \\ \hline
 \textbf{\texttt{SSEG-REQ-OBDH-006}} & \texttt{T} & \texttt{L4-SUB} (\texttt{EM/HIL}) & \texttt{QR, AR} & \texttt{TRPT}: Dual-Bank OTA Software Patch \& Rollback Verification \\ \hline
-\textbf{\texttt{SSEG-REQ-ISL-001}} & \texttt{T, A} & \texttt{L4-SUB} (\texttt{QM/FM}) & \texttt{QR, AR, CR} & \texttt{TRPT/ARPT}: 1,550~nm OISL ($\ge 1$~Gbps, $\text{BER} \le 10^{-9}$) Link Test \\ \hline
-\textbf{\texttt{SSEG-REQ-ISL-002}} & \texttt{T, A} & \texttt{L2-SSEG} (\texttt{QM/SIM}) & \texttt{CDR, QR, CR} & \texttt{TRPT/ARPT}: Cross-Layer GEO--LEO Ka/Optical Trunk Budget \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-001}} & \texttt{T, A} & \texttt{L4-SUB} (\texttt{QM/FM}) & \texttt{QR, AR, CR} & \texttt{TRPT/ARPT}: 1,550~nm OISL ($\ge 500$~Mbps, $\ge 6{,}500$~km) Link Test \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-002}} & \texttt{T, A} & \texttt{L2-SSEG} (\texttt{QM/SIM}) & \texttt{CDR, QR, CR} & \texttt{TRPT/ARPT}: Cross-Layer GEO--LEO Optical Trunk ($\ge 1.5\text{--}2.0$~Gbps) Test \\ \hline
 \textbf{\texttt{SSEG-REQ-ISL-003}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{QR, AR} & \texttt{TRPT/ARPT}: CCSDS S/X/Ka Compatibility \& Link Margin Test \\ \hline
 \textbf{\texttt{SSEG-REQ-ISL-004}} & \texttt{T, R} & \texttt{L4-SUB} (\texttt{EM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/RRPT}: AES-256-GCM \& CCSDS 355.0-B SDLS Security Test \\ \hline
 \textbf{\texttt{SSEG-REQ-ISL-005}} & \texttt{T, A} & \texttt{L4-SUB} (\texttt{EM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: DSSS Jamming Excision ($\ge 20$~dB) \& OISL Test \\ \hline
 \textbf{\texttt{SSEG-REQ-ISL-006}} & \texttt{T, A} & \texttt{L2-SSEG} (\texttt{HIL/SIM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: Priority-0 Preemption \& $< 200$~ms Failover Test \\ \hline
 \textbf{\texttt{SSEG-REQ-ISL-007}} & \texttt{R, T} & \texttt{L4-SUB} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{RRPT/TRPT}: ITU Spectral Mask \& Laser Shutter Interlock Test \\ \hline
-\textbf{\texttt{SSEG-REQ-PLAT-001}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/FM}) & \texttt{QR, AR} & \texttt{TRPT/ARPT}: Mass Properties Weighing ($\le 280$~kg / $\le 2{,}800$~kg) \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-001}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/FM}) & \texttt{QR, AR} & \texttt{TRPT/ARPT}: Mass Properties Weighing ($\le 290$~kg / $\le 3{,}100$~kg) \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-002}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: Sine Survey Modal Test ($f_{\text{ax}} \ge 35$~Hz, $f_{\text{lat}} \ge 20$~Hz) \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-003}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/QM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: Isolator Transmissibility ($\ge 25$~dB $> 40$~Hz) Test \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-004}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/QM}) & \texttt{CDR, QR, AR} & \texttt{TRPT/ARPT}: ESATAN Thermal Balance \& TVAC Qualification \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-005}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{CDR, QR, AR} & \texttt{TRPT/ARPT}: Solar Array Flash Test \& EOL Power Budget ($\ge 15\%$) \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-006}} & \texttt{T, A} & \texttt{L4-SUB} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: Li-Ion Eclipse Cycling \& DoD ($\le 30\%$ / $\le 65\%$) \\ \hline
-\textbf{\texttt{SSEG-REQ-PLAT-007}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: SATL Propulsion $\Delta v \ge 320$~m/s \& Tank Budget \\ \hline
-\textbf{\texttt{SSEG-REQ-PLAT-008}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: SATG Propulsion $\Delta v \ge 810$~m/s \& Graveyard Budget \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-007}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: SATL Propulsion $\Delta v \ge 380$~m/s (incl.\ Insertion) Budget \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-008}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{QM/FM}) & \texttt{CDR, QR} & \texttt{TRPT/ARPT}: SATG Transfer ($\ge 1{,}800$~m/s) \& On-Station ($\ge 810$~m/s) Budget \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-009}} & \texttt{T, A} & \texttt{L3-SC} (\texttt{STM/QM}) & \texttt{QR, AR} & \texttt{TRPT/ARPT}: NEA Hold-Down Release \& $\ge 100\%$ Torque Margin \\ \hline
 \textbf{\texttt{SSEG-REQ-PLAT-010}} & \texttt{A, I} & \texttt{L3-SC} (\texttt{DDF/QM}) & \texttt{CDR, QR} & \texttt{ARPT/IRPT}: Thruster Plume Flowfield \& $15^\circ$ Baffle Clearance \\ \hline
 \textbf{\texttt{SSEG-REQ-ENV-001}} & \texttt{T, A} & \texttt{L4-SUB} (\texttt{EM/QM}) & \texttt{CDR, QR} & \texttt{ARPT/TRPT}: FASTRAD 3D Shielding \& $\mathrm{Co\text{-}60}$ TID Lot Test \\ \hline
