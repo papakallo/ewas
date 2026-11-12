@@ -24,10 +24,12 @@
 \newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
 \newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Ground Segment - Technical Requirements Specification}  % <-- Put document title here
-\newcommand{\DocNumber}{EWAS-HSB-GSEG-TRS-03}         % <-- Put document number here (DOC-NO)
-\newcommand{\DocIssue}{1.1}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{10.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
-\newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
+% Provisional document/CI identifiers follow Ground Systems WBS 123456.02.
+% No explicit naming rule was found; GSEG DDF/DDJF still carry copied suffix 03.
+\newcommand{\DocNumber}{EWAS-HSB-GSEG-TRS-02}
+\newcommand{\DocIssue}{0.1}                       % Initial draft; no GS approval recorded.
+\newcommand{\DocDate}{12.11.2026}                 % Draft preparation date, not an approval date.
+\newcommand{\CINumber}{02}                        % Provisional CI-02.
 
 % =============================================================================
 % 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
@@ -107,7 +109,7 @@
     \raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}
 }
 \fancyhead[C]{
-    {\small\textbf{EWAS-HSB-SSEG-TRS-03}}
+    {\small\textbf{\DocNumber}}
 }
 \fancyhead[R]{
     \raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}
@@ -159,7 +161,7 @@
 \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
     \hline
     Document Number & \DocNumber \\ \hline
-    Issue           & \DocIssue  \\ \hline
+    Issue           & \DocIssue{} (Draft) \\ \hline
     Issue Date      & \DocDate   \\ \hline
     CI Number       & \CINumber  \\
 \end{tabularx}\par\nointerlineskip
@@ -169,11 +171,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Maciej Raciniewski}              & {Author}                 & {Raciniewski 10.11.2026} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 10.11.2026} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Project CCB}                & {Approver}               & {CCB 10.11.2026} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -196,15 +198,7 @@
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1}      & {04.11.2026}    & Initial document template setup and CI-03 configuration baseline identification. & Document Info \\ \hline
-    \textbf{0.2}      & {05.11.2026}    & Added Applicable/Reference Documents (AD-01 to AD-14, RD-01 to RD-06), Abbreviations, Scope, Specification Tree hierarchy, and Section 1 Introduction. & References, Scope, Intro \\ \hline
-    \textbf{0.3}      & {06.11.2026}    & Added Section 3 User's Need Presentation, 60~s warning-chain latency allocation (Table 3), and external interface boundaries (Table 4). & Section 3 \\ \hline
-    \textbf{0.4}      & {06.11.2026}    & Added Section 4 Selected Concept / Product Presentation (1,000~km LEO Walker Delta 72/8/1, 6 GEO, mandatory ISL mesh, Careful COTS bus, WBS alignment). & Section 4 \\ \hline
-    \textbf{0.5}      & {07.11.2026}    & Added Section 5 Life Profile Description (ECSS-E-ST-10-03C model philosophy, plane-batch launch, LEOP, nominal modes N1--N5, FDIR, EOL disposal). & Section 5 \\ \hline
-    \textbf{0.6}      & {08.11.2026}    & Modularized LaTeX source into section subfiles and added Section 6 Environment and Constraints Description per ECSS-E-ST-10-04C. & Section 6, All \\ \hline
-    \textbf{0.7}      & {08.11.2026}    & Added Section 7 Technical Requirements (normative Space Segment requirements \texttt{SSEG-REQ-<CAT>-<NNN>} per ECSS-E-ST-10-06C Clause \texttt{<7>}). & Section 7 \\ \hline
-    \textbf{1.0}      & {09.11.2026}    & Added Annex A (Requirements Traceability Matrix per ECSS-E-ST-10C Annex N) and Annex B (Master Verification Control Matrix per ECSS-E-ST-10-02C). First complete Space Segment TRS baseline release. & Annex A, Annex B, All \\ \hline
-    \textbf{1.1}      & {10.11.2026}    & Incorporated 16 peer-review revisions: streamlined sentence readability and ECSS openings; updated Walker Delta inter-plane offset ($\Delta u_{\text{inter}} = 22.5^\circ$); unified 1,550~nm \abbr{OISL} rates ($\ge 500$~Mbps \abbr{LEO}, $\ge 1.5\text{--}2.0$~Gbps \abbr{GEO}) and link ranges ($\ge 6{,}500$~km / $45{,}000$~km); added orbit insertion propellant budgets, 35.0~min eclipse equation, \abbr{SAA}/proton despiking definitions, independent payload \abbr{LOS} steering, and $\le 2\text{--}3^\circ/\text{s}$ bus tip-off rate. & All Sections, Annex B \\ \hline
+    \textbf{\DocIssue} & \DocDate & Initial Ground Segment TRS draft template; added nine section placeholders. & Document information; all placeholders \\ \hline
 \end{tabularx}}
 
 \newpage
@@ -225,6 +219,18 @@
 % =============================================================================
 % MODULAR SECTIONS (INCLUDED FROM sections/)
 % =============================================================================
-
+\input{sections/01_references_abbr}
+\newpage
+\input{sections/02_scope_intro}
+\newpage
+\input{sections/03_users_need}
+\input{sections/04_selected_concept}
+\input{sections/05_life_profile}
+\input{sections/06_environment_constraints}
+\input{sections/07_requirements}
+\newpage
+\input{sections/08_annex_a_rtm}
+\newpage
+\input{sections/09_annex_b_vcd}
 
 \end{document}
