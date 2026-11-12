@@ -1,7 +1,118 @@
 % -----------------------------------------------------------------------------
-% ANNEX A: REQUIREMENTS TRACEABILITY MATRIX
+% ANNEX A: REQUIREMENTS TRACEABILITY MATRIX (ECSS-E-ST-10C ANNEX N)
 % -----------------------------------------------------------------------------
-\section{Annex A}
+\section{Annex A: Requirements Traceability Matrix (RTM)}
 
-% ---> PLACEHOLDER FOR REQUIREMENTS TRACEABILITY MATRIX <---
-{Placeholder for Annex A: Requirements Traceability Matrix (to be populated in subsequent step).}
+This annex establishes bidirectional traceability for Configuration Item \textbf{\texttt{CI-03}: Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03})} (\textbf{ECSS-E-ST-10C Annex N}, \textbf{AD-02}; \textbf{ECSS-E-ST-10-06C}, \textbf{AD-03}):
+\begin{enumerate}
+    \item \textbf{Backward Traceability (Subsection A.1, Table~\ref{tab:annex_a_backward_rtm}):} Maps all forty-nine (49) top-level system requirements (\texttt{R-001} through \texttt{R-049} defined in Chapter~5, Table~5.1 of \textbf{AD-01}) to the derived Space Segment technical requirements (\texttt{SSEG-REQ-<CAT>-<NNN>}) specified in Section~7 of this \abbr{TRS}. System requirements allocated exclusively to the peer Ground Segment (\abbr{WBS} \texttt{123456.02}) are explicitly identified along with the supporting Space Segment data products and interfaces that enable their execution.
+    \item \textbf{Forward Allocation to Subordinate WBS Elements (Subsection A.2, Table~\ref{tab:annex_a_forward_wbs}):} Maps each of the twelve (12) \abbr{SSEG} requirement categories (77 normative requirements in total) down to the subordinate Level-3 flight system Configuration Items---\textbf{Satellite \abbr{LEO} (\texttt{SATL}, \abbr{WBS} \texttt{123456.03.01})} and \textbf{Satellite \abbr{GEO} (\texttt{SATG}, \abbr{WBS} \texttt{123456.03.02})}---and their constituent Level-4 subsystem WBS branches (\texttt{.01} through \texttt{.08}, aligned with Chapter~10 and Section~7.1 of \textbf{AD-01}).
+\end{enumerate}
+
+\subsection{A.1 Backward Traceability Matrix: System Requirements (\texttt{AD-01}) to Space Segment TRS (\texttt{CI-03})}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.10\textwidth}|>{\raggedright\arraybackslash}p{0.32\textwidth}|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.34\textwidth}|}
+\caption{Backward Traceability Matrix from EWAS System Requirements (\texttt{R-001} to \texttt{R-049}) to Space Segment TRS Requirements}\label{tab:annex_a_backward_rtm}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Sys.\ ID} & \thead{System Requirement Title (\texttt{AD-01})} & \thead{Segment Alloc.} & \thead{Allocated / Supporting \abbr{SSEG} Requirement IDs} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Backward Traceability Matrix from EWAS System Requirements (\texttt{R-001} to \texttt{R-049})}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Sys.\ ID} & \thead{System Requirement Title (\texttt{AD-01})} & \thead{Segment Alloc.} & \thead{Allocated / Supporting \abbr{SSEG} Requirement IDs} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{R-001}} & Non-offensive civil-protection early warning scope (no weapon guidance or interceptor control) & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-001}, \texttt{SSEG-REQ-ISL-007} \\ \hline
+\textbf{\texttt{R-002}} & Exclusion of warhead yield estimation and post-impact damage assessment & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-002} \\ \hline
+\textbf{\texttt{R-003}} & Sovereign security boundary and authorized warning distribution governance & \textbf{SSEG + GND} & \texttt{SSEG-REQ-ISL-004}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-004}} & 5-year mission data retention for calibration, training, verification, and algorithm refinement & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-006}, \texttt{SSEG-REQ-PLD-007}, \texttt{SSEG-REQ-OBDH-005}, \texttt{SSEG-REQ-OBDH-006}, \texttt{SSEG-REQ-VER-005} \\ \hline
+\textbf{\texttt{R-005}} & Hybrid constellation composition (6~\abbr{GEO} detection + 72~\abbr{LEO} tracking satellites) & \textbf{SSEG} & \texttt{SSEG-REQ-MIS-001}--\texttt{003}, \texttt{SSEG-REQ-PLAT-001}, \texttt{SSEG-REQ-PLAT-007}, \texttt{SSEG-REQ-PLAT-008}, \texttt{SSEG-REQ-IF-002} \\ \hline
+\textbf{\texttt{R-006}} & Continuous 24/7 spatial and temporal surveillance of the Baltic Sea region & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-004}, \texttt{SSEG-REQ-MIS-002}--\texttt{004}, \texttt{SSEG-REQ-MIS-006}, \texttt{SSEG-REQ-VER-001} \\ \hline
+\textbf{\texttt{R-007}} & Dual-tier \abbr{GEO} boost-phase detection and \abbr{LEO} stereoscopic tracking architecture & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-003}, \texttt{SSEG-REQ-MIS-005}, \texttt{SSEG-REQ-MIS-006}, \texttt{SSEG-REQ-PLD-002}, \texttt{SSEG-REQ-VER-001} \\ \hline
+\textbf{\texttt{R-008}} & Uninterrupted constellation coverage geometry with zero operational blind windows & \textbf{SSEG} & \texttt{SSEG-REQ-MIS-004}, \texttt{SSEG-REQ-MIS-005}, \texttt{SSEG-REQ-MIS-007}, \texttt{SSEG-REQ-VER-001} \\ \hline
+\textbf{\texttt{R-009}} & Boost-phase rocket exhaust plume infrared detection in \abbr{SWIR}/\abbr{MWIR} bands & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-003}, \texttt{SSEG-REQ-PERF-005}, \texttt{SSEG-REQ-PLD-001}, \texttt{SSEG-REQ-IF-003} \\ \hline
+\textbf{\texttt{R-010}} & Boost-phase launch probability of detection $P_d > 95\%$ & \textbf{SSEG + GND} & \texttt{SSEG-REQ-PERF-005}, \texttt{SSEG-REQ-PERF-006}, \texttt{SSEG-REQ-VER-001}, \texttt{SSEG-REQ-VER-004} \\ \hline
+\textbf{\texttt{R-011}} & End-to-end preliminary warning latency $\le 60.0$~s from initial \abbr{GEO} detection & \textbf{SSEG + GND} & \texttt{SSEG-REQ-PERF-001}--\texttt{004}, \texttt{SSEG-REQ-VER-001}, \texttt{SSEG-REQ-VER-004} \\ \hline
+\textbf{\texttt{R-012}} & High-precision 3D trajectory state estimation from stereoscopic \abbr{LEO} observations & \textbf{SSEG + GND} & \texttt{SSEG-REQ-ADCS-003}, \texttt{SSEG-REQ-ADCS-004}, \texttt{SSEG-REQ-OBDH-003} \\ \hline
+\textbf{\texttt{R-013}} & Instantaneous Impact Point (\abbr{IIP}) and confidence ellipse calculation & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-OBDH-002}, \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-014}} & Continuous trajectory and impact-area refinement during flight tracking & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-OBDH-002}, \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-015}} & Overall operational system availability $> 99.9\%$ & \textbf{SSEG + GND} & \texttt{SSEG-REQ-MIS-007}, \texttt{SSEG-REQ-PERF-007}, \texttt{SSEG-REQ-PLAT-004}--\texttt{006}, \texttt{PLAT-009}, \texttt{ENV-002}, \texttt{ENV-003}, \texttt{ENV-005}, \texttt{OPS-002}--\texttt{004}, \texttt{OPS-006}, \texttt{VER-003}, \texttt{VER-004} \\ \hline
+\textbf{\texttt{R-016}} & Spacecraft operational design lifetimes ($\ge 7$~yr \abbr{LEO}, $\ge 15$~yr \abbr{GEO}) & \textbf{SSEG} & \texttt{SSEG-REQ-OPS-001}, \texttt{SSEG-REQ-ENV-001}, \texttt{SSEG-REQ-PLAT-004}--\texttt{008}, \texttt{SSEG-REQ-VER-003} \\ \hline
+\textbf{\texttt{R-017}} & Redundant subsystem chains and fault tolerance (no single-point failure) & \textbf{SSEG + GND} & \texttt{SSEG-REQ-PERF-007}, \texttt{SSEG-REQ-OBDH-004}, \texttt{SSEG-REQ-ISL-006}, \texttt{SSEG-REQ-PLAT-009}, \texttt{SSEG-REQ-ENV-002}, \texttt{SSEG-REQ-OPS-002}, \texttt{SSEG-REQ-OPS-003} \\ \hline
+\textbf{\texttt{R-018}} & Mandatory active End-of-Life space debris disposal and passivation & \textbf{SSEG} & \texttt{SSEG-REQ-ENV-006}, \texttt{SSEG-REQ-ENV-007}, \texttt{SSEG-REQ-PLAT-007}, \texttt{SSEG-REQ-PLAT-008}, \texttt{SSEG-REQ-IF-004} \\ \hline
+\textbf{\texttt{R-019}} & False-alarm suppression against solar glint, cloud reflections, and non-threat fires & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-005}, \texttt{SSEG-REQ-PERF-006}, \texttt{SSEG-REQ-OBDH-001}, \texttt{SSEG-REQ-IF-003} \\ \hline
+\textbf{\texttt{R-020}} & Dual-band \abbr{SWIR}/\abbr{MWIR} detector spectral selectivity and cryogenic sensitivity & \textbf{SSEG} & \texttt{SSEG-REQ-PLD-001}--\texttt{003}, \texttt{SSEG-REQ-PLD-006}, \texttt{SSEG-REQ-PLD-007}, \texttt{SSEG-REQ-PLAT-010}, \texttt{SSEG-REQ-ENV-004}, \texttt{SSEG-REQ-IF-003} \\ \hline
+\textbf{\texttt{R-021}} & Optical spatial resolution, frame rate, and radiometric dynamic range & \textbf{SSEG} & \texttt{SSEG-REQ-PLD-002}, \texttt{SSEG-REQ-PLD-003}, \texttt{SSEG-REQ-PLD-006}, \texttt{SSEG-REQ-IF-003} \\ \hline
+\textbf{\texttt{R-022}} & Real-time onboard proton despiking, clutter filtering, and plume classification & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-005}, \texttt{SSEG-REQ-PERF-002}, \texttt{SSEG-REQ-PERF-006}, \texttt{SSEG-REQ-OBDH-001}, \texttt{SSEG-REQ-IF-003}, \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-023}} & Inter-satellite \abbr{LOS} vector exchange and onboard preliminary 3D trajectory estimation & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-003}, \texttt{SSEG-REQ-MIS-005}, \texttt{SSEG-REQ-PERF-004}, \texttt{SSEG-REQ-PLD-003}, \texttt{SSEG-REQ-ADCS-003}, \texttt{SSEG-REQ-ADCS-004}, \texttt{SSEG-REQ-OBDH-002}, \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-ISL-001}, \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-024}} & Agile optical \abbr{LOS} target lock-on ($< 5.0$~s) and pointing stability ($< 2.0$~arcsec/s) & \textbf{SSEG} & \texttt{SSEG-REQ-PERF-004}, \texttt{SSEG-REQ-PLD-004}, \texttt{SSEG-REQ-ADCS-001}--\texttt{003}, \texttt{SSEG-REQ-ADCS-005}, \texttt{SSEG-REQ-PLAT-003}, \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-025}} & Multi-vane optical baffle stray-light attenuation and solar/limb exclusion & \textbf{SSEG} & \texttt{SSEG-REQ-PLD-005}, \texttt{SSEG-REQ-PLAT-010}, \texttt{SSEG-REQ-ENV-004}, \texttt{SSEG-REQ-IF-003} \\ \hline
+\textbf{\texttt{R-026}} & Authoritative Ground Segment multi-sensor observation fusion & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-027}} & Ground Segment trajectory state propagation and threat-corridor assessment & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-028}} & Automated formatting and generation of civil-protection warning messages & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-FUN-001}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-029}} & Human-in-the-loop supervisory monitoring and anomaly override at MCC & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-OPS-006}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-030}} & Space-to-Ground \abbr{TT\&C} monitoring, constellation control, and autonomy & \textbf{SSEG + GND} & \texttt{SSEG-REQ-ISL-003}, \texttt{SSEG-REQ-OPS-004}, \texttt{SSEG-REQ-OPS-006} \\ \hline
+\textbf{\texttt{R-031}} & End-to-end cryptographic bulk encryption and telecommand authentication & \textbf{SSEG + GND} & \texttt{SSEG-REQ-ISL-004}, \texttt{SSEG-REQ-IF-001}, \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-032}} & Anti-jamming and anti-spoofing resilience across \abbr{RF} and optical links & \textbf{SSEG + GND} & \texttt{SSEG-REQ-ISL-005} \\ \hline
+\textbf{\texttt{R-033}} & High-priority low-latency mission data and command transport across \abbr{ISL} & \textbf{SSEG + GND} & \texttt{SSEG-REQ-PERF-001}, \texttt{SSEG-REQ-PERF-003}, \texttt{SSEG-REQ-PERF-004}, \texttt{SSEG-REQ-ISL-001}--\texttt{003}, \texttt{SSEG-REQ-ISL-006}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-034}} & Ground Segment network cybersecurity, segmentation, and intrusion defense & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-ISL-004}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-035}} & Data integrity, non-repudiation, and zero data loss during transport/buffering & \textbf{SSEG + GND} & \texttt{SSEG-REQ-OBDH-005}, \texttt{SSEG-REQ-ISL-004} \\ \hline
+\textbf{\texttt{R-036}} & 5-year sovereign mission archive storage capacity and record schemas & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-006} \\ \hline
+\textbf{\texttt{R-037}} & Controlled archive query and retrieval interface for post-event analysis & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-FUN-006}, \texttt{SSEG-REQ-VER-005} \\ \hline
+\textbf{\texttt{R-038}} & Multi-scenario astrodynamic and radiometric simulation verification campaign & \textbf{SSEG + GND} & \texttt{SSEG-REQ-VER-001} \\ \hline
+\textbf{\texttt{R-039}} & Hardware-in-the-Loop (\abbr{HIL}) verification of sensing, steering, and \abbr{OBDH}/\abbr{ISL} & \textbf{SSEG + GND} & \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-040}} & End-to-end operational validation trials and latency demonstration & \textbf{SSEG + GND} & \texttt{SSEG-REQ-VER-004} \\ \hline
+\textbf{\texttt{R-041}} & Post-event archive replay and continuous onboard algorithm calibration & \textbf{SSEG + GND} & \texttt{SSEG-REQ-PLD-007}, \texttt{SSEG-REQ-OBDH-006}, \texttt{SSEG-REQ-VER-005} \\ \hline
+\textbf{\texttt{R-042}} & Immediate \abbr{GEO} candidate launch event reporting to the Ground Segment & \textbf{SSEG} & \texttt{SSEG-REQ-FUN-003}, \texttt{SSEG-REQ-PERF-002}, \texttt{SSEG-REQ-ISL-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-043}} & Ground Segment selection of optimal \abbr{LEO} satellite pair for follow-on tracking & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-MIS-005}, \texttt{SSEG-REQ-OPS-006}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-044}} & Mandatory \abbr{ISL} and ground routing of \abbr{LEO} tracking commands & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-003}, \texttt{SSEG-REQ-PERF-003}, \texttt{SSEG-REQ-ISL-001}, \texttt{SSEG-REQ-ISL-002}, \texttt{SSEG-REQ-ISL-006}, \texttt{SSEG-REQ-IF-001}, \texttt{SSEG-REQ-VER-002} \\ \hline
+\textbf{\texttt{R-045}} & Automated preliminary warning dispatch after authoritative two-\abbr{LEO} ground fusion & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-PERF-001}, \texttt{SSEG-REQ-OBDH-003}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-046}} & Standardized warning delivery interface to authorized national authorities & \textit{GND Only (Supported by SSEG data/IF)} & Supported by \texttt{SSEG-REQ-FUN-001}, \texttt{SSEG-REQ-IF-001} \\ \hline
+\textbf{\texttt{R-047}} & Complete telemetry, provenance, and audit logging across the warning chain & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-006}, \texttt{SSEG-REQ-OBDH-005}, \texttt{SSEG-REQ-OPS-006} \\ \hline
+\textbf{\texttt{R-048}} & Two-segment system boundary (external authorities as warning recipients) & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-001} \\ \hline
+\textbf{\texttt{R-049}} & Global and extra-regional threat surveillance for trajectories threatening the Baltic & \textbf{SSEG + GND} & \texttt{SSEG-REQ-FUN-004} \\ \hline
+\end{longtable}}
+
+\subsection{A.2 Forward Allocation Matrix: Space Segment TRS to Subordinate Flight Systems (\texttt{SATL}, \texttt{SATG}) and WBS Subsystems (\texttt{.01}--\texttt{.08})}
+
+Table~\ref{tab:annex_a_forward_wbs} summarizes the forward allocation of all 77 Space Segment technical requirements across the subordinate WBS elements of \texttt{123456.03.01} (\texttt{SATL}) and \texttt{123456.03.02} (\texttt{SATG}).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.21\textwidth}|>{\raggedright\arraybackslash}p{0.07\textwidth}|>{\raggedright\arraybackslash}p{0.24\textwidth}|>{\raggedright\arraybackslash}p{0.42\textwidth}|}
+\caption{Forward Allocation of Space Segment Requirement Categories to Lower-Tier WBS Elements}\label{tab:annex_a_forward_wbs}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{TRS Category \& Range} & \thead{Count} & \thead{Primary Lower-Tier WBS Code (\texttt{SATL} / \texttt{SATG})} & \thead{Allocated Flight System \& Subsystem Responsibility} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Forward Allocation of Space Segment Requirement Categories to Lower-Tier WBS Elements}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{TRS Category \& Range} & \thead{Count} & \thead{Primary Lower-Tier WBS Code (\texttt{SATL} / \texttt{SATG})} & \thead{Allocated Flight System \& Subsystem Responsibility} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-FUN}} \newline (\texttt{FUN-001}--\texttt{006}) & 6 & \texttt{123456.03} (\abbr{SSEG}) \newline \texttt{.03.01} / \texttt{.03.02} (\texttt{.04}, \texttt{.06}) & Integrated Space Segment level, Mission Payloads (\texttt{.04}), On-Board Data Handling (\texttt{.06.01}/\texttt{.06.03}), and Comms/\abbr{ISL} (\texttt{.06.02}). \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS}} \newline (\texttt{MIS-001}--\texttt{007}) & 7 & \texttt{123456.03.01.07} \newline \texttt{123456.03.02.07} (\texttt{CONF}) & Constellation Configuration (\texttt{.07.01} \emph{Phasing Plan}, \texttt{.07.02} \emph{Orbit Definition}), supported by \abbr{PROP} (\texttt{.05}) and \abbr{ADCS} (\texttt{.02}). \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF}} \newline (\texttt{PERF-001}--\texttt{007}) & 7 & \texttt{123456.03} (\abbr{SSEG}) \newline \texttt{.04}, \texttt{.02}, \texttt{.06.01}--\texttt{.06.03} & Segment-level warning latency chain allocated across \abbr{PLD} (\texttt{.04}), \abbr{ADCS} (\texttt{.02}), \abbr{OBDH}/\abbr{FSW} (\texttt{.06.01}/\texttt{.06.03}), and \abbr{ISL} (\texttt{.06.02}). \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD}} \newline (\texttt{PLD-001}--\texttt{007}) & 7 & \texttt{123456.03.01.04} \newline \texttt{123456.03.02.04} (\abbr{PLD}) & Mission Payload (\texttt{.04}: \abbr{SWIR}/\abbr{MWIR} $\mathrm{HgCdTe}$ optics, coarse gimbal + fine \abbr{FSM}), Active \abbr{TCS} (\texttt{.01.02} cryocoolers), and \abbr{STR/MEC} (\texttt{.08} baffles). \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS}} \newline (\texttt{ADCS-001}--\texttt{005}) & 5 & \texttt{123456.03.01.02} \newline \texttt{123456.03.02.02} (\abbr{ADCS}) & Attitude Determination \& Control (\texttt{.02}: star trackers, \abbr{FOG} IMU, \abbr{GNSS}, reaction wheels), coupled with \abbr{PLD} \abbr{FSM} (\texttt{.04}). \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH}} \newline (\texttt{OBDH-001}--\texttt{006}) & 6 & \texttt{123456.03.01.06} \newline \texttt{123456.03.02.06} (\texttt{.06.01}, \texttt{.06.03}) & Avionics --- Command \& Data Handling (\texttt{.06.01}: \abbr{EDAC}/\abbr{TMR} processors, mass memory) and Flight Software (\texttt{.06.03}: despiking, stereo 3D). \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL}} \newline (\texttt{ISL-001}--\texttt{007}) & 7 & \texttt{123456.03.01.06.02} \newline \texttt{123456.03.02.06.02} & Avionics --- Communications \& Mandatory \abbr{OISL} (\texttt{.06.02}: 4~laser \abbr{OISL} terminals/\texttt{SATL}, 1,550~nm optical \abbr{GEO}--\abbr{LEO} trunks, \abbr{RF} \abbr{TT\&C}, \abbr{COMSEC}). \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT}} \newline (\texttt{PLAT-001}--\texttt{010}) & 10 & \texttt{.01} (\abbr{TCS}), \texttt{.03} (\abbr{EPS}), \newline \texttt{.05} (\abbr{PROP}), \texttt{.08} (\abbr{STR/MEC}) & Platform Subsystems across \texttt{SATL} and \texttt{SATG}: Thermal Control (\texttt{.01}), Power (\texttt{.03}), Propulsion (\texttt{.05}), and Structures \& Mechanisms (\texttt{.08}). \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV}} \newline (\texttt{ENV-001}--\texttt{007}) & 7 & \texttt{.08} (\abbr{STR/MEC}), \texttt{.01} (\abbr{TCS}), \newline \texttt{.05} (\abbr{PROP}), \texttt{.03}/\texttt{.06} & Graded-Z $\mathrm{Al}/\mathrm{Ta}$ spot \& Whipple shielding (\texttt{.08}), \abbr{SEL}/\abbr{ESD} protection (\texttt{.03}/\texttt{.06}), bake-out (\texttt{.01}), and active \abbr{EOL} deorbit/graveyard (\texttt{.05}). \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS}} \newline (\texttt{OPS-001}--\texttt{006}) & 6 & \texttt{123456.03.01} / \texttt{.03.02} \newline All Subsystems (\texttt{.01}--\texttt{.08}) & Spacecraft-level lifetime qualification, A/B chain block redundancy, autonomous \abbr{FDIR} (\texttt{.06.03}), safety inhibits, and 1~Hz health telemetry. \\ \hline
+\textbf{\texttt{SSEG-REQ-IF}} \newline (\texttt{IF-001}--\texttt{004}) & 4 & \texttt{123456.05.02.04} (\abbr{ICD}) \newline \texttt{.04}, \texttt{.05}, \texttt{.06.02}, \texttt{.08} & External Interfaces: Space-to-Ground (\texttt{.06.02}), Launch Dispenser (\texttt{.08}), Plume Radiometry (\texttt{.04}), and Space Traffic Management (\texttt{.05}/\texttt{.07}). \\ \hline
+\textbf{\texttt{SSEG-REQ-VER}} \newline (\texttt{VER-001}--\texttt{005}) & 5 & \texttt{123456.04.02} \newline (\emph{Verification Systems}) & System \& Space Segment Verification (\texttt{123456.04.02.01} \emph{Test Plans/Procedures}, \texttt{123456.04.02.02} \emph{Test Equipment/EM/QM/PFM/FM}). \\ \hline
+\textbf{Total Normative Requirements} & \textbf{77} & \textbf{\texttt{CI-03} (\texttt{123456.03})} & \textbf{100\% Traceable to \texttt{AD-01} (\texttt{R-001}--\texttt{R-049}) and Lower-Tier WBS (\texttt{.01}--\texttt{.08})} \\ \hline
+\end{longtable}}
