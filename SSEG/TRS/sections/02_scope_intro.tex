@@ -1,5 +1,5 @@
 % -----------------------------------------------------------------------------
-% SECTION: SCOPE & INTRODUCTION (ECSS-E-ST-10-06C ANNEX A SECTION <1>)
+% SECTION: SCOPE & INTRODUCTION
 % -----------------------------------------------------------------------------
 \section{Scope}
 
@@ -10,7 +10,7 @@ The scope of this \abbr{TRS} encompasses all space-borne elements of the two-seg
     \item \textbf{Hybrid Orbital Constellation Architecture:} This specification defines the astrodynamic configuration, orbital slot allocation, multi-plane phasing, and coverage availability of the dual-tier constellation (\texttt{R-005}--\texttt{R-008}). The high-altitude tier comprises \textbf{six (6) Geostationary Earth Orbit (\abbr{GEO}) detection satellites (\texttt{SATG})} operating at 35,786~km altitude and spaced uniformly at $60^\circ$ longitude intervals. The low-altitude tier comprises \textbf{seventy-two (72) Low Earth Orbit (\abbr{LEO}) tracking satellites (\texttt{SATL})} deployed at 1,000~km circular altitude in a high-inclination ($78^\circ\text{--}82^\circ$) Walker Delta $72/8/1$ pattern consisting of 8 orbital planes with 9 satellites per plane.
     \item \textbf{Space Segment Mission Chain and Latency Allocations:} This specification establishes the functional and performance allocations for boost-phase Short-Wave/Medium-Wave Infrared (\abbr{SWIR}/\abbr{MWIR}) plume detection, real-time onboard proton despiking, and false-alarm filtering (\texttt{R-009}, \texttt{R-010}, \texttt{R-019}--\texttt{R-022}). It covers immediate candidate-event reporting from \abbr{GEO} to the Ground Segment (\texttt{R-042}) and the reception of Ground Segment tracking commands (\texttt{R-043}, \texttt{R-044}). Two selected \abbr{LEO} spacecraft then execute independent optical Line-of-Sight (\abbr{LOS}) acquisition within $< 5\text{ s}$ and maintain pointing stability below $< 2\text{ arcsec/s}$ (\texttt{R-024}) for synchronized stereoscopic tracking. Through inter-satellite exchange of timestamped \abbr{LOS} vectors, the \abbr{LEO} pair computes an onboard preliminary 3D trajectory estimate (\texttt{R-023}) and downlinks both the stereoscopic \abbr{LOS} observation packages and the preliminary trajectory to the Ground Segment Data Processing System for authoritative multi-sensor fusion (\texttt{R-012}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045}) within the Space Segment's allocated share of the $\le 60\text{ s}$ end-to-end warning latency budget (\texttt{R-011}).
     \item \textbf{Mandatory Space Segment Optical Inter-Satellite Link (\abbr{OISL}) Network:} This specification governs the laser Optical Inter-Satellite Link (\abbr{OISL}, 1,550~nm) mesh across the 72 \abbr{LEO} nodes and the cross-layer \abbr{GEO}--\abbr{LEO} optical relay trunks connecting \texttt{SATL} and \texttt{SATG}. It also defines requirements for cryptographic security (\texttt{R-031}), anti-jamming resilience (\texttt{R-032}), and near-real-time telemetry and command transport (\texttt{R-033}, \texttt{R-044}).
-    \item \textbf{Standardized Platform Envelopes, Environment, and Sustainability:} This specification establishes common platform and subsystem boundaries under the project's \textbf{``Careful \abbr{COTS}''} philosophy. It covers the \emph{Structures and Mechanisms Subsystem (\abbr{STR/MEC})}, which provides stray-light baffles (\texttt{R-025}), rideshare dispenser interfaces, localized $\mathrm{Al}/\mathrm{Ta}$ radiation spot shielding, and structural micro-vibration isolation against mechanical disturbances from reaction wheels, cryocoolers, and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals/mirrors, directional \abbr{RF} antennas, and agile \abbr{OISL} terminals. It further specifies the \emph{Thermal Control (\abbr{TCS})}, \emph{Attitude Determination and Control (\abbr{ADCS})}, \emph{Electrical Power (\abbr{EPS})}, and \emph{Propulsion (\abbr{PROP})} subsystems, alongside the architecturally separated \emph{On-Board Data Handling (\abbr{OBDH})} and \emph{Communications (\abbr{TT\&C}/\abbr{OISL})} subsystems, qualified for operational lifetimes of 7~years in \abbr{LEO} and 15~years in \abbr{GEO} (\texttt{R-016}) and mandatory active end-of-life disposal (\texttt{R-018}, \textbf{AD-12}).
+    \item \textbf{Standardized Platform Envelopes, Environment, and Sustainability:} This specification establishes common platform and subsystem boundaries under the project's \textbf{``Careful \abbr{COTS}''} philosophy. It covers the \emph{Structures and Mechanisms Subsystem (\abbr{STR/MEC})}, which provides stray-light baffles (\texttt{R-025}), rideshare dispenser interfaces, localized $\mathrm{Al}/\mathrm{Ta}$ radiation spot shielding, and structural micro-vibration isolation against mechanical disturbances from reaction wheels, cryocoolers, and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals/mirrors, directional \abbr{RF} antennas, and agile \abbr{OISL} terminals. It further specifies the \emph{Thermal Control (\abbr{TCS})}, \emph{Attitude Determination and Control (\abbr{ADCS})}, \emph{Electrical Power (\abbr{EPS})}, and \emph{Propulsion (\abbr{PROP})} subsystems, alongside the architecturally separated \emph{On-Board Data Handling (\abbr{OBDH})} and \emph{Communications (\abbr{TT\&C}/\abbr{OISL})} subsystems, qualified for operational lifetimes of 7~years in \abbr{LEO} and 15~years in \abbr{GEO} (\texttt{R-016}) and mandatory active end-of-life disposal (\texttt{R-018}).
 \end{enumerate}
 
 \subsection{Position in the EWAS Specification Tree and Hierarchy}
@@ -45,7 +45,7 @@ The \abbr{EWAS} technical documentation is organized into a hierarchical specifi
 \newpage
 
 % -----------------------------------------------------------------------------
-% INTRODUCTION (ECSS-E-ST-10-06C ANNEX A SECTION <1>: INTRODUCTION)
+% INTRODUCTION
 % -----------------------------------------------------------------------------
 \section{Introduction}
 
@@ -58,18 +58,18 @@ To overcome these physical limitations, \abbr{EWAS} establishes a sovereign, hig
 The primary objectives of this Technical Requirements Specification are:
 \begin{itemize}
     \item To translate the system-level mission needs, operational scenarios, and requirements (\texttt{R-001} through \texttt{R-049} in \textbf{AD-01}) into unambiguous, quantifiable, attainable, and verifiable technical requirements for the \abbr{EWAS} Space Segment (\texttt{CI-03}, \abbr{WBS} \texttt{123456.03});
-    \item To establish the technical reference baseline for the qualification of the Space Segment design (\texttt{EWAS-HSB-SSEG-DDF-03} and \texttt{EWAS-HSB-SSEG-DDJF-03}) and for formal verification and acceptance testing (\textbf{AD-04}, \textbf{AD-05}); and
+    \item To establish the technical reference baseline for the qualification of the Space Segment design (\texttt{EWAS-HSB-SSEG-DDF-03} and \texttt{EWAS-HSB-SSEG-DDJF-03}) and for formal verification and acceptance testing (\textbf{AD-02}); and
     \item To define the permissible functional, physical, environmental, operational, and sustainability boundaries governing the 6 \abbr{GEO} (\texttt{SATG}) and 72 \abbr{LEO} (\texttt{SATL}) spacecraft throughout their complete life profile, from on-ground cleanroom integration through 7-year (\abbr{LEO}) and 15-year (\abbr{GEO}) nominal operations to active end-of-life disposal (\texttt{R-016}, \texttt{R-018}).
 \end{itemize}
 
 \subsection{Document Structure}
 
-This specification follows the standardized HSB/PG project document layout while implementing the clauses of \textbf{ECSS-E-ST-10-06C Annex A} (\textbf{AD-03}). Table~\ref{tab:ecss_drd_mapping} defines the correspondence between the sections of this document and the clauses of \textbf{ECSS-E-ST-10-06C Annex A}.
+This specification follows the standardized HSB/PG project document layout. Table~\ref{tab:trs_structure} defines the correspondence between the sections of this document and the normative content of a Space Segment technical requirements specification.
 
 \begin{table}[H]
 \centering
-\caption{Mapping between HSB/PG Template Sections and ECSS-E-ST-10-06C Annex A DRD Clauses}
-\label{tab:ecss_drd_mapping}
+\caption{Document Structure and Normative Content}
+\label{tab:trs_structure}
 {\renewcommand{\arraystretch}{1.22}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -77,14 +77,14 @@ This specification follows the standardized HSB/PG project document layout while
 \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}X|}
     \hline
     \rowcolor{TableHeaderBlue}
-    \thead{ECSS-E-ST-10-06C} & \thead{HSB/PG TRS Section} & \thead{Normative Content Summary} \\ \hline
-    \textbf{Clause \texttt{<1>}} \newline Introductions & \textbf{Scope} \& \textbf{Introduction} & Purpose, objective, specification tree hierarchy (\texttt{CI-03}), ECSS DRD mapping, and normative requirement conventions. \\ \hline
-    \textbf{Clause \texttt{<2>}} \newline Applicable \& Ref.\ Docs & \textbf{References} (\abbr{AD}, \abbr{RD}, \& Abbreviations) & Normative Applicable Documents (\texttt{AD-01}--\texttt{AD-14}), informative Reference Documents (\texttt{RD-01}--\texttt{RD-06}), and abbreviations. \\ \hline
-    \textbf{Clause \texttt{<3>}} \newline User's need presentation & \textbf{Main Content --- Sec.\ 3} \newline User's Need Presentation & Baltic security context, non-offensive boundaries, role of \abbr{SSEG} in the two-segment architecture, and external interfaces. \\ \hline
-    \textbf{Clause \texttt{<4>}} \newline Selected concept / product & \textbf{Main Content --- Sec.\ 4} \newline Selected Concept Presentation & 6~\abbr{GEO} + 72~\abbr{LEO} (1,000~km Walker Delta) hybrid architecture, mandatory \abbr{ISL} mesh, ``Careful \abbr{COTS}'' bus, and \abbr{WBS} allocation. \\ \hline
-    \textbf{Clause \texttt{<5>}} \newline Life profile description & \textbf{Main Content --- Sec.\ 5} \newline Life Profile Description & Chronological lifecycle situations: on-ground \abbr{AIT}, launch, \abbr{LEOP}, commissioning, nominal modes, safe mode, and \abbr{EOL} disposal. \\ \hline
-    \textbf{Clause \texttt{<6>}} \newline Environment \& constraints & \textbf{Main Content --- Sec.\ 6} \newline Environment \& Constraints & Space radiation (1,000~km vs.\ \abbr{GEO}), eclipse/cryogenic thermal regime, vacuum/outgassing, \abbr{MMOD}, mechanical loads, and regulations. \\ \hline
-    \textbf{Clause \texttt{<7>}} \newline Requirements & \textbf{Main Content --- Sec.\ 7} \newline Technical Requirements & Formal verifiable requirements (\texttt{SSEG-REQ-...}) with performance tolerances, plus Traceability (\textbf{Annex A}) and Verification (\textbf{Annex B}). \\ \hline
+    \thead{Section Group} & \thead{HSB/PG TRS Section} & \thead{Normative Content Summary} \\ \hline
+    \textbf{1} \newline Scope and Introduction & \textbf{Scope} \& \textbf{Introduction} & Purpose, objective, specification tree hierarchy (\texttt{CI-03}), document-structure mapping, and normative requirement conventions. \\ \hline
+    \textbf{2} \newline References & \textbf{References} (\abbr{AD}, \abbr{RD}, \& Abbreviations) & Applicable Documents (\texttt{AD-01}--\texttt{AD-03}), Reference Documents (\texttt{RD-01}--\texttt{RD-02}), and abbreviations. \\ \hline
+    \textbf{3} \newline User's need presentation & \textbf{Main Content --- Sec.\ 3} \newline User's Need Presentation & Baltic security context, non-offensive boundaries, role of \abbr{SSEG} in the two-segment architecture, and external interfaces. \\ \hline
+    \textbf{4} \newline Selected concept / product & \textbf{Main Content --- Sec.\ 4} \newline Selected Concept Presentation & 6~\abbr{GEO} + 72~\abbr{LEO} (1,000~km Walker Delta) hybrid architecture, mandatory \abbr{ISL} mesh, ``Careful \abbr{COTS}'' bus, and \abbr{WBS} allocation. \\ \hline
+    \textbf{5} \newline Life profile description & \textbf{Main Content --- Sec.\ 5} \newline Life Profile Description & Chronological lifecycle situations: on-ground \abbr{AIT}, launch, \abbr{LEOP}, commissioning, nominal modes, safe mode, and \abbr{EOL} disposal. \\ \hline
+    \textbf{6} \newline Environment \& constraints & \textbf{Main Content --- Sec.\ 6} \newline Environment \& Constraints & Space radiation (1,000~km vs.\ \abbr{GEO}), eclipse/cryogenic thermal regime, vacuum/outgassing, \abbr{MMOD}, mechanical loads, and regulations. \\ \hline
+    \textbf{7} \newline Requirements & \textbf{Main Content --- Sec.\ 7} \newline Technical Requirements & Formal verifiable requirements (\texttt{SSEG-REQ-...}) with performance tolerances, plus Traceability (\textbf{Annex A}) and Verification (\texttt{EWAS-HSB-VCD-01}). \\ \hline
 \end{tabularx}}
 \end{table}
 
@@ -92,7 +92,7 @@ This specification follows the standardized HSB/PG project document layout while
 
 Strict distinction is maintained throughout this specification between descriptive text (Sections 1 through 6) and normative binding provisions (Section 7):
 \begin{itemize}
-    \item \textbf{\texttt{shall}:} Expresses a mandatory technical requirement that is contractually and technically binding on the Space Segment design and subject to formal verification per \textbf{ECSS-E-ST-10-02C} (\textbf{AD-04}).
+    \item \textbf{\texttt{shall}:} Expresses a mandatory technical requirement that is contractually and technically binding on the Space Segment design and subject to formal verification per the Verification Plan (\textbf{AD-02}).
     \item \textbf{\texttt{should}:} Expresses a non-mandatory recommendation or engineering design target where alternative solutions may be justified in the Design Justification File (\texttt{EWAS-HSB-SSEG-DDJF-03}).
     \item \textbf{\texttt{may}:} Expresses a permissible practice or optional allowance within the specified boundaries.
     \item \textbf{\texttt{can}:} Expresses a physical possibility or inherent capability of an element.
@@ -103,7 +103,7 @@ Ambiguous, unverifiable, or open-ended terms (such as \emph{``and/or''}, \emph{`
 \[
 \texttt{SSEG-REQ-<CAT>-<NNN>}
 \]
-where \texttt{SSEG} denotes Configuration Item \texttt{CI-03} (Space Segment), \texttt{REQ} denotes a normative technical requirement, \texttt{<NNN>} is a sequential three-digit number (\texttt{001}, \texttt{002}, \dots), and \texttt{<CAT>} identifies the functional or ECSS requirement category summarized below:
+where \texttt{SSEG} denotes Configuration Item \texttt{CI-03} (Space Segment), \texttt{REQ} denotes a normative technical requirement, \texttt{<NNN>} is a sequential three-digit number (\texttt{001}, \texttt{002}, \dots), and \texttt{<CAT>} identifies the functional requirement category summarized below:
 \begin{itemize}
     \item \textbf{\texttt{FUN} / \texttt{MIS} / \texttt{PERF}:} Functional (\texttt{FUN}), Mission \& Constellation Geometry (\texttt{MIS}), and System Performance \& Latency (\texttt{PERF}) requirements.
     \item \textbf{\texttt{PLD} / \texttt{ISL} / \texttt{ADCS} / \texttt{OBDH}:} Infrared Sensor Payload (\texttt{PLD}), Communications \& Mandatory Inter-Satellite Links (\texttt{ISL}), Attitude \& Agile \abbr{LOS} Steering (\texttt{ADCS}), and On-Board Data Handling (\texttt{OBDH}) requirements.

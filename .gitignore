@@ -331,3 +331,7 @@ TSWLatexianTemp*
 #*Notes.bib
 
 *.pdf
+
+temp/
+
+PROMPT.MD

@@ -1,0 +1,457 @@
+% =============================================================================
+% VERIFICATION CONTROL DOCUMENT (VCD)
+% =============================================================================
+\sloppy
+\setlength{\emergencystretch}{2em}
+
+\section{References}
+
+This section lists the Applicable Documents (AD) and Reference Documents (RD) governing the verification of the EWAS Space Segment (\abbr{SSEG}, Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}). It also defines the terms, definitions and abbreviations used throughout this document. Only project-internal documents are listed.
+
+\subsection{Applicable Documents (AD)}
+
+The applicable documents listed in Table~\ref{tab:vcd_ad} impose binding provisions on the verification activities recorded in this VCD.
+
+\begin{table}[htbp]
+\centering
+\caption{Applicable Documents (AD)}\label{tab:vcd_ad}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.9cm}|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{AD No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+\textbf{AD-01} & \texttt{EWAS-HSB-SYS-SRD-01} & EWAS Final Report: Mission Definition, CONOPS, and Overall System Requirements Baseline (R-001 to R-049) & Rev. 1.0 \\ \hline
+\textbf{AD-02} & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment --- Technical Requirements Specification; Section 7 defines the requirement baseline for \texttt{CI-03} & Issue 1.1 \\ \hline
+\textbf{AD-03} & \texttt{EWAS-HSB-VP-01} & Programme Verification Plan; verification approach, model philosophy, methods, evidence rules, requirement-level execution specifications and governance & Issue 0.2 \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Reference Documents (RD)}
+
+The reference documents listed in Table~\ref{tab:vcd_rd} provide design and justification context. They are informative and do not impose verification provisions beyond those stated in the applicable documents.
+
+\begin{table}[htbp]
+\centering
+\caption{Reference Documents (RD)}\label{tab:vcd_rd}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.9cm}|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{RD No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+\textbf{RD-01} & \texttt{EWAS-HSB-SSEG-DDF-03} & Space Segment --- Design Definition File; design baseline and product-tree definition & Issue 0.1 \\ \hline
+\textbf{RD-02} & \texttt{EWAS-HSB-SSEG-DDJF-03} & Space Segment --- Design Justification File; design rationale and trade-off record & Issue 0.1 \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Terms, Definitions and Abbreviations}
+
+For the purposes of this document, the following terms, definitions and abbreviations apply. The definitions are project-specific and are consistent with the EWAS system baseline and the Space Segment Technical Requirements Specification. No external glossary is invoked.
+
+\textbf{Verification:} Confirmation, by objective evidence, that a requirement has been satisfied. \textbf{Validation:} Confirmation that the as-designed or as-built system fulfils its intended use in the operational environment. \textbf{Compliance:} The recorded status of a requirement whose accepted evidence demonstrates that it is met. \textbf{Close-out:} The formal closure of a verification control record after the evidence has been accepted, related non-conformances and waivers have been closed, and the Verification Control Board has approved the closure. \textbf{Non-conformance:} A condition in which a product, process or document does not meet a specified requirement or procedure. \textbf{Deviation:} A planned departure from a requirement, specification or procedure before execution. \textbf{Waiver:} The acceptance of a non-compliance after execution.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.04}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{12.2cm}|}
+\caption{Terms, Definitions and Abbreviations}\label{tab:tda}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Abbreviation} & \thead{Meaning / Definition} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Abbreviation} & \thead{Meaning / Definition} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{2}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{A} & Analysis (verification method). \\ \hline
+\textbf{AD} & Applicable Document. \\ \hline
+\textbf{ADCS} & Attitude Determination and Control Subsystem. \\ \hline
+\textbf{AIT} & Assembly, Integration and Testing. \\ \hline
+\textbf{AIV} & Assembly, Integration and Verification. \\ \hline
+\textbf{AKE} & Attitude Knowledge Error. \\ \hline
+\textbf{AR} & Acceptance Review; when used as a document prefix (\texttt{AR-}), an Analysis Plan or Analysis Activity. \\ \hline
+\textbf{ARPT} & Analysis Report. \\ \hline
+\textbf{BER} & Bit Error Rate. \\ \hline
+\textbf{CAM} & Collision Avoidance Manoeuvre. \\ \hline
+\textbf{space data link} & Consultative Committee for Space Data Systems; used only as the name of the space data link protocol family. \\ \hline
+\textbf{CDM} & Conjunction Data Message. \\ \hline
+\textbf{CDR} & Critical Design Review. \\ \hline
+\textbf{CI} & Configuration Item. \\ \hline
+\textbf{COMSEC} & Communications Security. \\ \hline
+\textbf{CONOPS} & Concept of Operations. \\ \hline
+\textbf{COTS} & Commercial Off-The-Shelf. \\ \hline
+\textbf{DoD} & Depth of Discharge (battery state of charge). \\ \hline
+\textbf{DSSS} & Direct-Sequence Spread Spectrum. \\ \hline
+\textbf{EDAC} & Error Detection and Correction. \\ \hline
+\textbf{EGSE} & Electrical Ground Support Equipment. \\ \hline
+\textbf{EM} & Engineering Model. \\ \hline
+\textbf{EMC} & Electromagnetic Compatibility. \\ \hline
+\textbf{EOL} & End of Life. \\ \hline
+\textbf{EPS} & Electrical Power Subsystem. \\ \hline
+\textbf{EWAS} & Early Warning Alarm System. \\ \hline
+\textbf{FDIR} & Fault Detection, Isolation and Recovery. \\ \hline
+\textbf{FM} & Flight Model. \\ \hline
+\textbf{FOG} & Fibre-Optic Gyroscope. \\ \hline
+\textbf{FOR} & Field of Regard. \\ \hline
+\textbf{FOV} & Field of View. \\ \hline
+\textbf{FPA} & Focal Plane Array. \\ \hline
+\textbf{FSM} & Fast Steering Mirror. \\ \hline
+\textbf{GEO} & Geostationary Earth Orbit (35,786~km altitude). \\ \hline
+\textbf{GNSS} & Global Navigation Satellite System. \\ \hline
+\textbf{GSD} & Ground Sampling Distance. \\ \hline
+\textbf{GSE} & Ground Support Equipment, comprising EGSE, MGSE and OGSE. \\ \hline
+\textbf{HIL} & Hardware-in-the-Loop. \\ \hline
+\textbf{I} & Inspection (verification method). \\ \hline
+\textbf{ICBM} & Intercontinental Ballistic Missile. \\ \hline
+\textbf{ICD} & Interface Control Document. \\ \hline
+\textbf{IIP} & Instantaneous Impact Point. \\ \hline
+\textbf{IR} & Infrared. \\ \hline
+\textbf{IRBM} & Intermediate-Range Ballistic Missile. \\ \hline
+\textbf{IRPT} & Inspection Report. \\ \hline
+\textbf{ISL} & Inter-Satellite Link. \\ \hline
+\textbf{LEO} & Low Earth Orbit (1,000~km altitude for the EWAS tracking layer). \\ \hline
+\textbf{LEOP} & Launch and Early Orbit Phase. \\ \hline
+\textbf{LOS} & Line of Sight. \\ \hline
+\textbf{LP} & Life-Profile Stage (1 to 6) of the EWAS mission life profile. \\ \hline
+\textbf{MGSE} & Mechanical Ground Support Equipment. \\ \hline
+\textbf{MMOD} & Micrometeoroids and Orbital Debris. \\ \hline
+\textbf{MRBM} & Medium-Range Ballistic Missile. \\ \hline
+\textbf{MWIR} & Medium-Wave Infrared. \\ \hline
+\textbf{NCR} & Non-Conformance Report. \\ \hline
+\textbf{NDIU} & Network Data Interface Unit. \\ \hline
+\textbf{NEA} & Non-Explosive Actuator. \\ \hline
+\textbf{NEI} & Noise Equivalent Irradiance. \\ \hline
+\textbf{NETD} & Noise Equivalent Temperature Difference. \\ \hline
+\textbf{NFOV} & Narrow Field of View. \\ \hline
+\textbf{OBDH} & On-Board Data Handling. \\ \hline
+\textbf{OGSE} & Optical and Payload Ground Support Equipment. \\ \hline
+\textbf{OISL} & Optical Inter-Satellite Link. \\ \hline
+\textbf{ORR} & Operational Readiness Review. \\ \hline
+\textbf{OTA} & Over-The-Air. \\ \hline
+\textbf{PDR} & Preliminary Design Review. \\ \hline
+\textbf{PFM} & Proto-Flight Model. \\ \hline
+\textbf{PLD} & Payload. \\ \hline
+\textbf{PST} & Point-Source Transmittance. \\ \hline
+\textbf{PTR} & Post-Test Review. \\ \hline
+\textbf{QM} & Qualification Model. \\ \hline
+\textbf{QoS} & Quality of Service. \\ \hline
+\textbf{QR} & Qualification Review. \\ \hline
+\textbf{R} & Review of Design (verification method). \\ \hline
+\textbf{RAAN} & Right Ascension of the Ascending Node. \\ \hline
+\textbf{RDM} & Radiation Design Margin. \\ \hline
+\textbf{RD} & Reference Document. \\ \hline
+\textbf{RF} & Radio Frequency. \\ \hline
+\textbf{RFW} & Request for Waiver. \\ \hline
+\textbf{ROD} & Review of Design. \\ \hline
+\textbf{RRPT} & Review-of-Design Report. \\ \hline
+\textbf{RV} & Design-Review Plan or Review Record (document prefix). \\ \hline
+\textbf{SAA} & South Atlantic Anomaly. \\ \hline
+\textbf{SATG} & GEO Detection Satellite Configuration Item (\abbr{WBS} \texttt{123456.03.02}). \\ \hline
+\textbf{SATL} & LEO Tracking Satellite Configuration Item (\abbr{WBS} \texttt{123456.03.01}). \\ \hline
+\textbf{SEL} & Single-Event Latch-up. \\ \hline
+\textbf{SRBM} & Short-Range Ballistic Missile. \\ \hline
+\textbf{SSEG} & Space Segment Configuration Item (\abbr{WBS} \texttt{123456.03}). \\ \hline
+\textbf{STM} & Structural-Thermal Model. \\ \hline
+\textbf{SVF} & Software Validation Facility. \\ \hline
+\textbf{SWIR} & Short-Wave Infrared. \\ \hline
+\textbf{T} & Test (verification method). \\ \hline
+\textbf{TCS} & Thermal Control Subsystem. \\ \hline
+\textbf{TMR} & Triple Modular Redundancy. \\ \hline
+\textbf{TM/TC} & Telemetry and Telecommand. \\ \hline
+\textbf{TP} & Test Procedure (document prefix). \\ \hline
+\textbf{TPRO} & Test Procedure. \\ \hline
+\textbf{TRPT} & Test Report. \\ \hline
+\textbf{TRR} & Test Readiness Review. \\ \hline
+\textbf{TRS} & Technical Requirements Specification. \\ \hline
+\textbf{TSPE} & Test Specification. \\ \hline
+\textbf{TT\&C} & Telemetry, Tracking and Command. \\ \hline
+\textbf{TVAC} & Thermal Vacuum. \\ \hline
+\textbf{VC} & Verification Certificate (document prefix). \\ \hline
+\textbf{VCB} & Verification Control Board. \\ \hline
+\textbf{VCD} & Verification Control Document. \\ \hline
+\textbf{VP} & Verification Plan. \\ \hline
+\textbf{VRPT} & Verification Report. \\ \hline
+\textbf{WBS} & Work Breakdown Structure. \\ \hline
+\textbf{WFOV} & Wide Field of View. \\ \hline
+\end{longtable}}
+
+\section{Scope}
+
+This document is the programme-level \textbf{Verification Control Document (VCD)} for the \abbr{EWAS} programme. It applies to Configuration Item \texttt{CI-03}, the \abbr{EWAS} Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03}), and covers the verification control of the \textbf{77} technical requirements specified in Section~7 of the Space Segment Technical Requirements Specification (\texttt{EWAS-HSB-SSEG-TRS-03}).
+
+The VCD covers project \textbf{Phases B, C, D and E}. For every requirement it records the verification method or method set, the verification level or model, the applicable life-profile stage, the project phase and review stage, the planned execution document and the corresponding requirement-level execution specification in the Verification Plan (\texttt{EWAS-HSB-VP-01}), the verification report or evidence document, the compliance status, the close-out status, and any remarks, waivers or Verification Control Board references. The VCD is the controlled status record used at phase gates and verification reviews.
+
+The VCD does not define the verification approach, the model philosophy, the verification methods, the evidence rules, the ground support equipment catalogue or the detailed execution plans. These are defined in \texttt{EWAS-HSB-VP-01}. In particular, the requirement-level execution specifications for all \textbf{75} Test (T) and Analysis (A) requirements are contained in \textbf{Section 7} of the VP and are cited requirement by requirement in the matrix of this VCD. The VCD also does not reproduce the normative requirement statements of the TRS; the requirement header and a short statement are included for traceability, and \texttt{EWAS-HSB-SSEG-TRS-03} remains normative in the event of a conflict.
+
+This issue of the VCD does not claim verification credit. Every requirement is recorded as \textbf{Open} for compliance and \textbf{Open} for close-out; no evidence has yet been accepted and no requirement has been closed.
+
+\section{Introduction}
+
+This document constitutes the programme-level Verification Control Document for the EWAS programme and is the companion of the Programme Verification Plan (\texttt{EWAS-HSB-VP-01}). The VP defines the verification approach, the verification levels and models, the formal methods and evidence rules, the phasing across Phases B to E, the tools and verification database, the non-conformance and waiver process, the review and close-out governance, and the requirement-level execution specifications. The VCD records the resulting control status of each requirement and provides the traceability from the requirement baseline to the planned execution specification, the evidence document and the close-out decision.
+
+The document is structured as follows. Section~1 contains the applicable and reference documents, terms, definitions and abbreviations. Section~2 defines the scope. Section~3 provides this introduction. Section~4 defines the verification control approach, the control record structure, the status model, the phase-by-phase control rules, the document identifiers and the close-out criteria. Section~5 contains the requirement-by-requirement Verification Control Matrix for all 77 requirements. Section~6 contains the overall verification summary status. The detailed execution plans are not repeated in this document; each Test or Analysis requirement in the matrix cross-references its execution specification subsection in Section~7 of the VP.
+
+The requirement baseline for \texttt{CI-03} contains 77 technical requirements. Of these, 75 carry a Test (T) or Analysis (A) verification method and therefore have a requirement-level execution specification in VP Section~7: 24 are Test-based (T, with or without supporting R/I), 14 are Analysis-based (A, with or without supporting R/I), and 37 are combined Test and Analysis requirements. Across the baseline, 17 requirements carry Review of Design (R) and 7 carry Inspection (I), either alone or as a supporting method. The two R-only requirements (\texttt{SSEG-REQ-FUN-001} and \texttt{SSEG-REQ-FUN-002}) remain in the matrix for completeness but do not require a T/A execution specification.
+
+The VCD is maintained in the verification control database defined in the VP and is updated at each project phase gate and each verification review. A requirement is only marked \textbf{Compliant} after accepted objective evidence demonstrates that it is met, and only marked \textbf{Closed} after the close-out conditions of Section~4.3 and the governance of the VP have been satisfied. The document identifiers used in the matrix follow the conventions of the VP; the matrix uses the document-type prefix followed by the requirement suffix, for example \texttt{TP-FUN-003} for \texttt{TP-SSEG-FUN-003}.
+
+Issue 0.3 of this VCD relocates the detailed verification execution plans to Section~7 of the VP, restores the EWAS project template structure with a dedicated Terms, Definitions and Abbreviations section and distinct Scope and Introduction sections, adds the Verification Plan subsection reference and the remarks, waivers and VCB field to every matrix row, and corrects residual typographical artefacts. The VCD therefore remains a lean traceability and status-control document across Phases B, C, D and E.
+
+\section{Verification Control Approach}
+
+\subsection{Control Record Structure and Status Model}
+
+The VCD is maintained in the verification control database defined in the Verification Plan, Section~4.5. Each row of the matrix in Section~5 and each execution specification in Section~7 of the Verification Plan is a control record with the fields listed in Table~\ref{tab:vcd_record}. The matrix provides the requirement-by-requirement control overview; the execution description for every T/A requirement is provided in the corresponding subsection of Section~7 of the Verification Plan.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Control Record Fields}\label{tab:vcd_record}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Field} & \thead{Content} \\ \hline
+Requirement ID & Unique identifier from \texttt{EWAS-HSB-SSEG-TRS-03}, Section~7. \\ \hline
+Requirement header and text & Short header and a short requirement statement; the normative requirement text is in \texttt{EWAS-HSB-SSEG-TRS-03}. \\ \hline
+Verification method & \texttt{T}, \texttt{A}, \texttt{R}, \texttt{I}, or a defined combination. \\ \hline
+Verification level / model & \texttt{L2-SSEG}, \texttt{L3-SC} or \texttt{L4-SUB}, and the article or model used (\texttt{EM}, \texttt{STM}, \texttt{QM/PFM}, \texttt{FM}, \texttt{Analysis}). \\ \hline
+Project phase & Phase B, C, D and/or E in which the evidence is produced and reviewed. \\ \hline
+Life-profile stage & Stage 1 to 6 of the mission life profile in \texttt{EWAS-HSB-SSEG-TRS-03}, Section~5. \\ \hline
+Planned execution document / VP section & Procedure, analysis plan, inspection plan or design-review plan used to generate the evidence, and the corresponding execution-specification subsection in Section~7 of \texttt{EWAS-HSB-VP-01}. \\ \hline
+Verification report / evidence document & Report, certificate or review record that contains the objective evidence. \\ \hline
+Compliance status & \textbf{Open}, \textbf{Compliant}, \textbf{Partially Compliant} or \textbf{Non-Compliant}. \\ \hline
+Close-out status & \textbf{Open} or \textbf{Closed}. \\ \hline
+Remarks / waivers / review references & Non-conformance, deviation, waiver, review record or other control remark. \\ \hline
+\end{tabularx}}
+\end{table}
+
+The compliance and close-out status values are defined in Table~\ref{tab:vcd_status}. A requirement is never marked Compliant on the basis of a plan; Compliant requires accepted evidence. Closed additionally requires the close-out conditions of the Verification Plan, Section~4.7.
+
+\begin{table}[htbp]
+\centering
+\caption{Compliance and Close-Out Status Values}\label{tab:vcd_status}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Status} & \thead{Field} & \thead{Definition} \\ \hline
+\textbf{Open} & Compliance & No accepted evidence yet; verification is planned or in progress. \\ \hline
+\textbf{Compliant} & Compliance & Accepted evidence demonstrates that the requirement is met. \\ \hline
+\textbf{Partially Compliant} & Compliance & Accepted evidence covers part of the requirement; the remaining aspects are open and identified in the remarks. \\ \hline
+\textbf{Non-Compliant} & Compliance & Evidence shows that the requirement is not met; a corrective action, deviation or waiver is required. \\ \hline
+\textbf{Open} & Close-out & The control record is not yet closed. \\ \hline
+\textbf{Closed} & Close-out & Evidence accepted, related non-conformances and waivers closed, and Verification Control Board approval recorded. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Phase-by-Phase Control and Traceability Rules}
+
+The VCD is updated at each project phase and each verification review as shown in Table~\ref{tab:vcd_phasing}. The project phase and life-profile stage recorded against each requirement are the basis for the phase-gate review; a phase gate is not passed while a requirement assigned to that phase lacks the corresponding control record.
+
+\begin{table}[htbp]
+\centering
+\caption{VCD Updates Across Project Phases}\label{tab:vcd_phasing}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.8cm}|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Phase} & \thead{VCD Control Action} & \thead{Control Gate} \\ \hline
+\textbf{B} & Establish the control record for every requirement; assign method, level or model, life-profile stage and project phase; identify the planned execution and evidence documents; issue the VCD planning baseline. & PDR \\ \hline
+\textbf{C} & Baseline the planned execution and evidence document identifiers; record the approved procedures, analysis plans and inspection plans; confirm the verification level and model. & CDR \\ \hline
+\textbf{D} & Record the executed tests, analyses and inspections; enter the report identifiers and measured or analysed results; set the compliance status; link non-conformances, deviations and waivers. & PTR, QR, AR \\ \hline
+\textbf{E} & Record in-orbit and operational evidence, archive analysis, disposal evidence and final compliance; close the records approved by the Verification Control Board. & ORR, final VCB \\ \hline
+\end{tabularx}}
+\end{table}
+
+A change to a requirement, verification method, level or model, project phase, life-profile stage, planned execution document or evidence document requires Verification Control Board approval and a new issue of the VCD. The affected entries are re-opened until the new evidence is accepted.
+
+\subsection{Close-Out Criteria and Verification Control Board Approval}
+
+A verification control record reaches the close-out status \textbf{Closed} only when all of the following conditions are met:
+\begin{enumerate}
+    \item the planned verification activity has been executed at the level and on the article or model stated in the matrix;
+    \item the evidence document has been released, placed under configuration control and accepted by the reviewers;
+    \item the measured or analysed result meets the pass/fail criterion of the corresponding execution specification in Section~7 of the Verification Plan within the stated tolerance and statistical confidence;
+    \item all related non-conformances, deviations and waivers are closed or approved and recorded in the remarks field of the matrix;
+    \item the Verification Control Board has approved the compliance statement and the close-out.
+\end{enumerate}
+
+The full review sequence, responsibilities and close-out governance are defined in the Verification Plan, Section~4.7. The VCD is updated with the evidence identifier, the review record, the compliance status and the close-out date. A design change that affects a verified parameter, the verification article or the applicable environment re-opens the affected record until the new evidence is accepted.
+
+\subsection{Document Identifiers and Cross-References}
+
+Document identifiers in the matrix follow the conventions defined in the Verification Plan, Section~6.2: \texttt{TP-SSEG-<REQ>}, \texttt{AR-SSEG-<REQ>}, \texttt{IP-SSEG-<REQ>} and \texttt{RV-SSEG-<REQ>} for planned execution; \texttt{TRPT-}, \texttt{ARPT-}, \texttt{IRPT-} and \texttt{RRPT-} for evidence documents; and \texttt{VC-} for verification certificates. The execution specifications in Section~7 of the Verification Plan show the full identifier. The matrix uses the document-type prefix followed by the requirement suffix, for example \texttt{TP-FUN-003} for \texttt{TP-SSEG-FUN-003}.
+
+Ground support equipment identifiers (\texttt{EGSE-}, \texttt{MGSE-}, \texttt{OGSE-}) refer to the catalogue in Annex~A of the Verification Plan. Article and model definitions (\texttt{EM}, \texttt{STM}, \texttt{QM/PFM}, \texttt{FM}, \texttt{Analysis}) refer to the Verification Plan, Section~4.2.
+
+\section{Verification Control Matrix}
+
+Table~\ref{tab:vcd_matrix} is the verification control matrix for the complete Space Segment requirement baseline. It lists every requirement of Section~7 of the TRS and records the requirement header, the assigned method set, the verification level or model, the project phase and life-profile stage, the planned execution document and the corresponding execution-specification subsection in Section~7 of \texttt{EWAS-HSB-VP-01}, the evidence document, the compliance status, the close-out status, and the remarks, waivers or Verification Control Board references. The VP subsection numbers refer to issue 0.2 of the Verification Plan. R-only requirements are closed by design review and have no T/A execution specification; all other requirements cross-reference their execution specification in the VP. The document-identifier conventions are given in Section~4.4 and the life-profile stages in Section~5 of the TRS.
+
+{\scriptsize\setlength{\tabcolsep}{1.2pt}\renewcommand{\arraystretch}{1.06}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.158\textwidth}|>{\raggedright\arraybackslash}p{0.065\textwidth}|>{\raggedright\arraybackslash}p{0.165\textwidth}|>{\raggedright\arraybackslash}p{0.082\textwidth}|>{\raggedright\arraybackslash}p{0.150\textwidth}|>{\raggedright\arraybackslash}p{0.100\textwidth}|>{\raggedright\arraybackslash}p{0.093\textwidth}|>{\raggedright\arraybackslash}p{0.055\textwidth}|>{\raggedright\arraybackslash}p{0.069\textwidth}|}
+\caption{Verification Control Matrix for the EWAS Space Segment}\label{tab:vcd_matrix}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Requirement} & \thead{Method} & \thead{Level / Model} & \thead{Phase / Stage (B--E; LP)} & \thead{Planned Execution / VP Section} & \thead{Evidence} & \thead{Compliance} & \thead{Close-Out} & \thead{Remarks / Waivers / VCB} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{9}{l}{\footnotesize\textit{Table \thetable\ (continued): Verification Control Matrix}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Requirement} & \thead{Method} & \thead{Level / Model} & \thead{Phase / Stage (B--E; LP)} & \thead{Planned Execution / VP Section} & \thead{Evidence} & \thead{Compliance} & \thead{Close-Out} & \thead{Remarks / Waivers / VCB} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{9}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-FUN-001}} \newline \emph{Non-Offensive Civil-Protection Operation} & \texttt{R} & Design review & B, C; LP 1 & \texttt{RV-}\allowbreak\texttt{FUN-001} \newline R-only; no VP execution entry & \texttt{RRPT-}\allowbreak\texttt{FUN-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-002}} \newline \emph{Scope Exclusion of Yield and Damage Assessment} & \texttt{R} & Design review & B, C; LP 1 & \texttt{RV-}\allowbreak\texttt{FUN-002} \newline R-only; no VP execution entry & \texttt{RRPT-}\allowbreak\texttt{FUN-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-003}} \newline \emph{Dual-Tier Detection and Stereoscopic Tracking Chain} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{FUN-003}; \texttt{AR-}\allowbreak\texttt{FUN-003} \newline VP~\S7.1.1 & \texttt{TRPT-}\allowbreak\texttt{FUN-003}; \texttt{ARPT-}\allowbreak\texttt{FUN-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-004}} \newline \emph{Baltic Region and Extra-Regional Threat Surveillance} & \texttt{A} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{FUN-004} \newline VP~\S7.1.2 & \texttt{ARPT-}\allowbreak\texttt{FUN-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-005}} \newline \emph{Onboard Event Filtering and Plume Discrimination} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{FUN-005}; \texttt{AR-}\allowbreak\texttt{FUN-005} \newline VP~\S7.1.3 & \texttt{TRPT-}\allowbreak\texttt{FUN-005}; \texttt{ARPT-}\allowbreak\texttt{FUN-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-006}} \newline \emph{Archival Telemetry and Provenance Formatting} & \texttt{R, T} & EM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{FUN-006}; \texttt{RV-}\allowbreak\texttt{FUN-006} \newline VP~\S7.1.4 & \texttt{TRPT-}\allowbreak\texttt{FUN-006}; \texttt{RRPT-}\allowbreak\texttt{FUN-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-001}} \newline \emph{Hybrid Constellation Composition} & \texttt{A, R} & Analysis & B, C, E; LP 2, 3, 4 & \texttt{AR-}\allowbreak\texttt{MIS-001}; \texttt{RV-}\allowbreak\texttt{MIS-001} \newline VP~\S7.2.1 & \texttt{ARPT-}\allowbreak\texttt{MIS-001}; \texttt{RRPT-}\allowbreak\texttt{MIS-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-002}} \newline \emph{GEO Longitudinal Slot Allocation} & \texttt{A} & Analysis & B, C, E; LP 3, 4 & \texttt{AR-}\allowbreak\texttt{MIS-002} \newline VP~\S7.2.2 & \texttt{ARPT-}\allowbreak\texttt{MIS-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-003}} \newline \emph{LEO Walker Delta 72/8/1 Topology} & \texttt{A} & Analysis & B, C, E; LP 3, 4 & \texttt{AR-}\allowbreak\texttt{MIS-003} \newline VP~\S7.2.3 & \texttt{ARPT-}\allowbreak\texttt{MIS-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-004}} \newline \emph{24/7 Uninterrupted Temporal and Spatial Coverage} & \texttt{A} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{MIS-004} \newline VP~\S7.2.4 & \texttt{ARPT-}\allowbreak\texttt{MIS-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-005}} \newline \emph{Multi-Satellite Stereoscopic Viewing Geometry} & \texttt{A} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{MIS-005} \newline VP~\S7.2.5 & \texttt{ARPT-}\allowbreak\texttt{MIS-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-006}} \newline \emph{Dual-GEO Overlapping Mid-Latitude Coverage} & \texttt{A} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{MIS-006} \newline VP~\S7.2.6 & \texttt{ARPT-}\allowbreak\texttt{MIS-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-007}} \newline \emph{Constellation Phasing Maintenance Coordination} & \texttt{A, R} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{MIS-007}; \texttt{RV-}\allowbreak\texttt{MIS-007} \newline VP~\S7.2.7 & \texttt{ARPT-}\allowbreak\texttt{MIS-007}; \texttt{RRPT-}\allowbreak\texttt{MIS-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-001}} \newline \emph{Space Segment Total Latency Allocation} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-001}; \texttt{AR-}\allowbreak\texttt{PERF-001} \newline VP~\S7.3.1 & \texttt{TRPT-}\allowbreak\texttt{PERF-001}; \texttt{ARPT-}\allowbreak\texttt{PERF-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-002}} \newline \emph{Step 1 GEO Detection and Reporting Latency} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-002}; \texttt{AR-}\allowbreak\texttt{PERF-002} \newline VP~\S7.3.2 & \texttt{TRPT-}\allowbreak\texttt{PERF-002}; \texttt{ARPT-}\allowbreak\texttt{PERF-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-003}} \newline \emph{Step 2 Mandatory ISL Command Routing Latency} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-003}; \texttt{AR-}\allowbreak\texttt{PERF-003} \newline VP~\S7.3.3 & \texttt{TRPT-}\allowbreak\texttt{PERF-003}; \texttt{ARPT-}\allowbreak\texttt{PERF-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-004}} \newline \emph{Step 3 LEO Lock-On, Stereo Tracking, and Downlink Latency} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-004}; \texttt{AR-}\allowbreak\texttt{PERF-004} \newline VP~\S7.3.4 & \texttt{TRPT-}\allowbreak\texttt{PERF-004}; \texttt{ARPT-}\allowbreak\texttt{PERF-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-005}} \newline \emph{Boost-Phase Launch Detection Probability} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-005}; \texttt{AR-}\allowbreak\texttt{PERF-005} \newline VP~\S7.3.5 & \texttt{TRPT-}\allowbreak\texttt{PERF-005}; \texttt{ARPT-}\allowbreak\texttt{PERF-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-006}} \newline \emph{Space Segment False-Alarm Rate Rejection} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PERF-006}; \texttt{AR-}\allowbreak\texttt{PERF-006} \newline VP~\S7.3.6 & \texttt{TRPT-}\allowbreak\texttt{PERF-006}; \texttt{ARPT-}\allowbreak\texttt{PERF-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-007}} \newline \emph{Space Segment Operational Availability} & \texttt{A} & Analysis & B, C, E; LP 4 & \texttt{AR-}\allowbreak\texttt{PERF-007} \newline VP~\S7.3.7 & \texttt{ARPT-}\allowbreak\texttt{PERF-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-001}} \newline \emph{Dual-Band SWIR/MWIR Spectral Coverage} & \texttt{T, R} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-001}; \texttt{RV-}\allowbreak\texttt{PLD-001} \newline VP~\S7.4.1 & \texttt{TRPT-}\allowbreak\texttt{PLD-001}; \texttt{RRPT-}\allowbreak\texttt{PLD-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-002}} \newline \emph{SATG Wide-Field Detection Optics Performance} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-002}; \texttt{AR-}\allowbreak\texttt{PLD-002} \newline VP~\S7.4.2 & \texttt{TRPT-}\allowbreak\texttt{PLD-002}; \texttt{ARPT-}\allowbreak\texttt{PLD-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-003}} \newline \emph{SATL Narrow-Field Tracking Optics Performance} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-003}; \texttt{AR-}\allowbreak\texttt{PLD-003} \newline VP~\S7.4.3 & \texttt{TRPT-}\allowbreak\texttt{PLD-003}; \texttt{ARPT-}\allowbreak\texttt{PLD-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-004}} \newline \emph{Dual-Stage Agile Optical LOS Steering Mechanism} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-004} \newline VP~\S7.4.4 & \texttt{TRPT-}\allowbreak\texttt{PLD-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-005}} \newline \emph{Stray-Light Attenuation and Exclusion Angles} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-005}; \texttt{AR-}\allowbreak\texttt{PLD-005} \newline VP~\S7.4.5 & \texttt{TRPT-}\allowbreak\texttt{PLD-005}; \texttt{ARPT-}\allowbreak\texttt{PLD-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-006}} \newline \emph{Focal Plane Cryogenic Operating Temperature} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-006} \newline VP~\S7.4.6 & \texttt{TRPT-}\allowbreak\texttt{PLD-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-007}} \newline \emph{Motorized Fail-Safe Aperture Shutter and Calibration Source} & \texttt{T, I} & EM/QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLD-007}; \texttt{IP-}\allowbreak\texttt{PLD-007} \newline VP~\S7.4.7 & \texttt{TRPT-}\allowbreak\texttt{PLD-007}; \texttt{IRPT-}\allowbreak\texttt{PLD-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-001}} \newline \emph{3-Axis Stabilization and Agile LOS Lock-On} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ADCS-001}; \texttt{AR-}\allowbreak\texttt{ADCS-001} \newline VP~\S7.5.1 & \texttt{TRPT-}\allowbreak\texttt{ADCS-001}; \texttt{ARPT-}\allowbreak\texttt{ADCS-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-002}} \newline \emph{Optical Line-of-Sight Pointing Stability and Jitter} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ADCS-002}; \texttt{AR-}\allowbreak\texttt{ADCS-002} \newline VP~\S7.5.2 & \texttt{TRPT-}\allowbreak\texttt{ADCS-002}; \texttt{ARPT-}\allowbreak\texttt{ADCS-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-003}} \newline \emph{Attitude and Line-of-Sight Knowledge Accuracy} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ADCS-003}; \texttt{AR-}\allowbreak\texttt{ADCS-003} \newline VP~\S7.5.3 & \texttt{TRPT-}\allowbreak\texttt{ADCS-003}; \texttt{ARPT-}\allowbreak\texttt{ADCS-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-004}} \newline \emph{Onboard Orbit Position and Time Synchronization} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ADCS-004}; \texttt{AR-}\allowbreak\texttt{ADCS-004} \newline VP~\S7.5.4 & \texttt{TRPT-}\allowbreak\texttt{ADCS-004}; \texttt{ARPT-}\allowbreak\texttt{ADCS-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-005}} \newline \emph{Momentum Feed-Forward and Autonomous Detumbling} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ADCS-005}; \texttt{AR-}\allowbreak\texttt{ADCS-005} \newline VP~\S7.5.5 & \texttt{TRPT-}\allowbreak\texttt{ADCS-005}; \texttt{ARPT-}\allowbreak\texttt{ADCS-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-001}} \newline \emph{Real-Time Onboard Proton Despiking and Plume Filtering} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{OBDH-001} \newline VP~\S7.6.1 & \texttt{TRPT-}\allowbreak\texttt{OBDH-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-002}} \newline \emph{Inter-Satellite Stereoscopic LOS Exchange and Onboard 3D Trajectory} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OBDH-002}; \texttt{AR-}\allowbreak\texttt{OBDH-002} \newline VP~\S7.6.2 & \texttt{TRPT-}\allowbreak\texttt{OBDH-002}; \texttt{ARPT-}\allowbreak\texttt{OBDH-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-003}} \newline \emph{Dual-Product Formatting and Downlink Generation} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OBDH-003} \newline VP~\S7.6.3 & \texttt{TRPT-}\allowbreak\texttt{OBDH-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-004}} \newline \emph{EDAC Memory Protection and TMR Fault Tolerance} & \texttt{T, R} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{OBDH-004}; \texttt{RV-}\allowbreak\texttt{OBDH-004} \newline VP~\S7.6.4 & \texttt{TRPT-}\allowbreak\texttt{OBDH-004}; \texttt{RRPT-}\allowbreak\texttt{OBDH-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-005}} \newline \emph{Encrypted Temporary Onboard Event Buffering} & \texttt{T, R} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OBDH-005}; \texttt{RV-}\allowbreak\texttt{OBDH-005} \newline VP~\S7.6.5 & \texttt{TRPT-}\allowbreak\texttt{OBDH-005}; \texttt{RRPT-}\allowbreak\texttt{OBDH-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-006}} \newline \emph{In-Orbit Flight Software and Algorithm Reprogrammability} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OBDH-006} \newline VP~\S7.6.6 & \texttt{TRPT-}\allowbreak\texttt{OBDH-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-001}} \newline \emph{Mandatory LEO Optical Inter-Satellite Link Mesh} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-001}; \texttt{AR-}\allowbreak\texttt{ISL-001} \newline VP~\S7.7.1 & \texttt{TRPT-}\allowbreak\texttt{ISL-001}; \texttt{ARPT-}\allowbreak\texttt{ISL-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-002}} \newline \emph{Mandatory Cross-Layer GEO-LEO Relay Links} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-002}; \texttt{AR-}\allowbreak\texttt{ISL-002} \newline VP~\S7.7.2 & \texttt{TRPT-}\allowbreak\texttt{ISL-002}; \texttt{ARPT-}\allowbreak\texttt{ISL-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-003}} \newline \emph{Space-to-Ground TT\&C and High-Rate Mission Links} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-003}; \texttt{AR-}\allowbreak\texttt{ISL-003} \newline VP~\S7.7.3 & \texttt{TRPT-}\allowbreak\texttt{ISL-003}; \texttt{ARPT-}\allowbreak\texttt{ISL-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-004}} \newline \emph{End-to-End Cryptographic Security and Authentication} & \texttt{T, R} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-004}; \texttt{RV-}\allowbreak\texttt{ISL-004} \newline VP~\S7.7.4 & \texttt{TRPT-}\allowbreak\texttt{ISL-004}; \texttt{RRPT-}\allowbreak\texttt{ISL-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-005}} \newline \emph{Anti-Jamming and Anti-Spoofing Protection} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-005}; \texttt{AR-}\allowbreak\texttt{ISL-005} \newline VP~\S7.7.5 & \texttt{TRPT-}\allowbreak\texttt{ISL-005}; \texttt{ARPT-}\allowbreak\texttt{ISL-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-006}} \newline \emph{Autonomous QoS Mesh Routing and Failover} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{ISL-006}; \texttt{AR-}\allowbreak\texttt{ISL-006} \newline VP~\S7.7.6 & \texttt{TRPT-}\allowbreak\texttt{ISL-006}; \texttt{ARPT-}\allowbreak\texttt{ISL-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-007}} \newline \emph{Spectral Regulatory Compliance and Laser Safety Interlocks} & \texttt{R, T} & EM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{ISL-007}; \texttt{RV-}\allowbreak\texttt{ISL-007} \newline VP~\S7.7.7 & \texttt{TRPT-}\allowbreak\texttt{ISL-007}; \texttt{RRPT-}\allowbreak\texttt{ISL-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-001}} \newline \emph{Spacecraft Mass Envelopes and Dispenser Compatibility} & \texttt{T, A} & STM/\allowbreak QM/\allowbreak PFM/\allowbreak FM & B, C, D; LP 1, 2 & \texttt{TP-}\allowbreak\texttt{PLAT-001}; \texttt{AR-}\allowbreak\texttt{PLAT-001} \newline VP~\S7.8.1 & \texttt{TRPT-}\allowbreak\texttt{PLAT-001}; \texttt{ARPT-}\allowbreak\texttt{PLAT-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-002}} \newline \emph{Stowed Structural Fundamental Frequencies} & \texttt{T, A} & STM/\allowbreak QM/\allowbreak PFM/\allowbreak FM & B, C, D; LP 1 & \texttt{TP-}\allowbreak\texttt{PLAT-002}; \texttt{AR-}\allowbreak\texttt{PLAT-002} \newline VP~\S7.8.2 & \texttt{TRPT-}\allowbreak\texttt{PLAT-002}; \texttt{ARPT-}\allowbreak\texttt{PLAT-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-003}} \newline \emph{Micro-Vibration Isolation of Optical Bench} & \texttt{T, A} & STM/\allowbreak QM/\allowbreak PFM/\allowbreak FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLAT-003}; \texttt{AR-}\allowbreak\texttt{PLAT-003} \newline VP~\S7.8.3 & \texttt{TRPT-}\allowbreak\texttt{PLAT-003}; \texttt{ARPT-}\allowbreak\texttt{PLAT-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-004}} \newline \emph{Thermal Control Operating Limits} & \texttt{T, A} & STM/\allowbreak QM/\allowbreak PFM/\allowbreak FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLAT-004}; \texttt{AR-}\allowbreak\texttt{PLAT-004} \newline VP~\S7.8.4 & \texttt{TRPT-}\allowbreak\texttt{PLAT-004}; \texttt{ARPT-}\allowbreak\texttt{PLAT-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-005}} \newline \emph{End-of-Life Electrical Power Generation} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PLAT-005}; \texttt{AR-}\allowbreak\texttt{PLAT-005} \newline VP~\S7.8.5 & \texttt{TRPT-}\allowbreak\texttt{PLAT-005}; \texttt{ARPT-}\allowbreak\texttt{PLAT-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-006}} \newline \emph{Eclipse Battery Storage and DoD Limits} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PLAT-006}; \texttt{AR-}\allowbreak\texttt{PLAT-006} \newline VP~\S7.8.6 & \texttt{TRPT-}\allowbreak\texttt{PLAT-006}; \texttt{ARPT-}\allowbreak\texttt{PLAT-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-007}} \newline \emph{Propulsion Delta-v Capacity for SATL} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PLAT-007}; \texttt{AR-}\allowbreak\texttt{PLAT-007} \newline VP~\S7.8.7 & \texttt{TRPT-}\allowbreak\texttt{PLAT-007}; \texttt{ARPT-}\allowbreak\texttt{PLAT-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-008}} \newline \emph{Propulsion Delta-v Capacity for SATG} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{PLAT-008}; \texttt{AR-}\allowbreak\texttt{PLAT-008} \newline VP~\S7.8.8 & \texttt{TRPT-}\allowbreak\texttt{PLAT-008}; \texttt{ARPT-}\allowbreak\texttt{PLAT-008} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-009}} \newline \emph{Deployment Mechanisms and Hold-Down Reliability} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{PLAT-009}; \texttt{AR-}\allowbreak\texttt{PLAT-009} \newline VP~\S7.8.9 & \texttt{TRPT-}\allowbreak\texttt{PLAT-009}; \texttt{ARPT-}\allowbreak\texttt{PLAT-009} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-010}} \newline \emph{Propulsion Plume and Optical Impingement Avoidance} & \texttt{A, I} & Analysis & B, C, D; LP 1 & \texttt{AR-}\allowbreak\texttt{PLAT-010}; \texttt{IP-}\allowbreak\texttt{PLAT-010} \newline VP~\S7.8.10 & \texttt{ARPT-}\allowbreak\texttt{PLAT-010}; \texttt{IRPT-}\allowbreak\texttt{PLAT-010} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-001}} \newline \emph{Total Ionizing Dose and Careful COTS Shielding} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{ENV-001}; \texttt{AR-}\allowbreak\texttt{ENV-001} \newline VP~\S7.9.1 & \texttt{TRPT-}\allowbreak\texttt{ENV-001}; \texttt{ARPT-}\allowbreak\texttt{ENV-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-002}} \newline \emph{Single-Event Latch-Up Immunity and Current Limiting} & \texttt{T, R} & QM/PFM/FM & B, C, D; LP 1 & \texttt{TP-}\allowbreak\texttt{ENV-002}; \texttt{RV-}\allowbreak\texttt{ENV-002} \newline VP~\S7.9.2 & \texttt{TRPT-}\allowbreak\texttt{ENV-002}; \texttt{RRPT-}\allowbreak\texttt{ENV-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-003}} \newline \emph{Electrostatic Discharge and Charging Mitigation} & \texttt{T, I} & QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{ENV-003}; \texttt{IP-}\allowbreak\texttt{ENV-003} \newline VP~\S7.9.3 & \texttt{TRPT-}\allowbreak\texttt{ENV-003}; \texttt{IRPT-}\allowbreak\texttt{ENV-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-004}} \newline \emph{Outgassing and Molecular Contamination Control} & \texttt{T, I} & QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{ENV-004}; \texttt{IP-}\allowbreak\texttt{ENV-004} \newline VP~\S7.9.4 & \texttt{TRPT-}\allowbreak\texttt{ENV-004}; \texttt{IRPT-}\allowbreak\texttt{ENV-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-005}} \newline \emph{MMOD Protection and Collision Avoidance} & \texttt{A, T} & QM/PFM/FM & B, C, D, E; LP 1, 4 & \texttt{TP-}\allowbreak\texttt{ENV-005}; \texttt{AR-}\allowbreak\texttt{ENV-005} \newline VP~\S7.9.5 & \texttt{TRPT-}\allowbreak\texttt{ENV-005}; \texttt{ARPT-}\allowbreak\texttt{ENV-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-006}} \newline \emph{Mandatory End-of-Life Disposal for LEO and GEO} & \texttt{A, R} & Analysis & B, C, E; LP 6 & \texttt{AR-}\allowbreak\texttt{ENV-006}; \texttt{RV-}\allowbreak\texttt{ENV-006} \newline VP~\S7.9.6 & \texttt{ARPT-}\allowbreak\texttt{ENV-006}; \texttt{RRPT-}\allowbreak\texttt{ENV-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-007}} \newline \emph{End-of-Life Spacecraft Passivation} & \texttt{R, T} & QM/PFM/FM & B, C, D, E; LP 3, 6 & \texttt{TP-}\allowbreak\texttt{ENV-007}; \texttt{RV-}\allowbreak\texttt{ENV-007} \newline VP~\S7.9.7 & \texttt{TRPT-}\allowbreak\texttt{ENV-007}; \texttt{RRPT-}\allowbreak\texttt{ENV-007} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-001}} \newline \emph{Operational Design Lifetimes} & \texttt{A, R} & Analysis & B, C, E; LP 1, 4 & \texttt{AR-}\allowbreak\texttt{OPS-001}; \texttt{RV-}\allowbreak\texttt{OPS-001} \newline VP~\S7.10.1 & \texttt{ARPT-}\allowbreak\texttt{OPS-001}; \texttt{RRPT-}\allowbreak\texttt{OPS-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-002}} \newline \emph{No Single-Point Failure Redundancy Architecture} & \texttt{A, R} & FM & B, C, E; LP 1, 4 & \texttt{AR-}\allowbreak\texttt{OPS-002}; \texttt{RV-}\allowbreak\texttt{OPS-002} \newline VP~\S7.10.2 & \texttt{ARPT-}\allowbreak\texttt{OPS-002}; \texttt{RRPT-}\allowbreak\texttt{OPS-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-003}} \newline \emph{Autonomous FDIR Failover and Safe Mode Recovery} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OPS-003}; \texttt{AR-}\allowbreak\texttt{OPS-003} \newline VP~\S7.10.3 & \texttt{TRPT-}\allowbreak\texttt{OPS-003}; \texttt{ARPT-}\allowbreak\texttt{OPS-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-004}} \newline \emph{72-Hour Autonomous Constellation Operation} & \texttt{T, A} & QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OPS-004}; \texttt{AR-}\allowbreak\texttt{OPS-004} \newline VP~\S7.10.4 & \texttt{TRPT-}\allowbreak\texttt{OPS-004}; \texttt{ARPT-}\allowbreak\texttt{OPS-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-005}} \newline \emph{Launch Safety Inhibits} & \texttt{I, T} & QM/PFM/FM & C, D; LP 1, 2 & \texttt{TP-}\allowbreak\texttt{OPS-005}; \texttt{IP-}\allowbreak\texttt{OPS-005} \newline VP~\S7.10.5 & \texttt{TRPT-}\allowbreak\texttt{OPS-005}; \texttt{IRPT-}\allowbreak\texttt{OPS-005} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-006}} \newline \emph{Health Housekeeping Telemetry and Anomaly Logging} & \texttt{T, R} & EM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{OPS-006}; \texttt{RV-}\allowbreak\texttt{OPS-006} \newline VP~\S7.10.6 & \texttt{TRPT-}\allowbreak\texttt{OPS-006}; \texttt{RRPT-}\allowbreak\texttt{OPS-006} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-001}} \newline \emph{Space-to-Ground ICD Compliance (\texttt{IF-EXT-01})} & \texttt{T, I} & EM/FM & C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{IF-001}; \texttt{IP-}\allowbreak\texttt{IF-001} \newline VP~\S7.10.7 & \texttt{TRPT-}\allowbreak\texttt{IF-001}; \texttt{IRPT-}\allowbreak\texttt{IF-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-002}} \newline \emph{Dispenser and Launch Vehicle Interface Compliance (\texttt{IF-EXT-02})} & \texttt{I, T} & QM/PFM/FM & C, D; LP 1, 2 & \texttt{TP-}\allowbreak\texttt{IF-002}; \texttt{IP-}\allowbreak\texttt{IF-002} \newline VP~\S7.10.8 & \texttt{TRPT-}\allowbreak\texttt{IF-002}; \texttt{IRPT-}\allowbreak\texttt{IF-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-003}} \newline \emph{Target Plume Radiometric Interface Compliance (\texttt{IF-EXT-03})} & \texttt{T, A} & EM/QM/PFM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{IF-003}; \texttt{AR-}\allowbreak\texttt{IF-003} \newline VP~\S7.10.9 & \texttt{TRPT-}\allowbreak\texttt{IF-003}; \texttt{ARPT-}\allowbreak\texttt{IF-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-004}} \newline \emph{Space Traffic Management and Regulatory Interface (\texttt{IF-EXT-04})} & \texttt{T, R} & EM/STM/FM & B, C, D, E; LP 1, 3, 4 & \texttt{TP-}\allowbreak\texttt{IF-004}; \texttt{RV-}\allowbreak\texttt{IF-004} \newline VP~\S7.10.10 & \texttt{TRPT-}\allowbreak\texttt{IF-004}; \texttt{RRPT-}\allowbreak\texttt{IF-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-001}} \newline \emph{Multi-Scenario Constellation and Radiometric Simulation} & \texttt{A} & Analysis & B, C, E; LP 1, 4 & \texttt{AR-}\allowbreak\texttt{VER-001} \newline VP~\S7.11.1 & \texttt{ARPT-}\allowbreak\texttt{VER-001} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-002}} \newline \emph{Hardware-in-the-Loop Testing of Sensing, LOS, and OBDH/ISL} & \texttt{T} & EM/QM/PFM/FM & C, D, E; LP 1, 3 & \texttt{TP-}\allowbreak\texttt{VER-002} \newline VP~\S7.11.2 & \texttt{TRPT-}\allowbreak\texttt{VER-002} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-003}} \newline \emph{Environmental Qualification and Batch Acceptance Testing} & \texttt{T} & QM/PFM/FM & C, D; LP 1, 2 & \texttt{TP-}\allowbreak\texttt{VER-003} \newline VP~\S7.11.3 & \texttt{TRPT-}\allowbreak\texttt{VER-003} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-004}} \newline \emph{End-to-End Operational Validation Exercises} & \texttt{T} & FM & D, E; LP 3, 4 & \texttt{TP-}\allowbreak\texttt{VER-004} \newline VP~\S7.11.4 & \texttt{TRPT-}\allowbreak\texttt{VER-004} & Open & Open & No waiver; VCB \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-005}} \newline \emph{Post-Event Archive Analysis and Algorithm Calibration} & \texttt{A, T} & FM & B, C, D, E; LP 4 & \texttt{TP-}\allowbreak\texttt{VER-005}; \texttt{AR-}\allowbreak\texttt{VER-005} \newline VP~\S7.11.5 & \texttt{TRPT-}\allowbreak\texttt{VER-005}; \texttt{ARPT-}\allowbreak\texttt{VER-005} & Open & Open & No waiver; VCB \\ \hline
+\end{longtable}}
+
+
+
+\section{Overall Verification Summary Status}
+
+Table~\ref{tab:vcd_summary} summarises the verification method allocation across the requirement baseline. Table~\ref{tab:vcd_status_summary} summarises the control status at this issue. All entries remain \textbf{Open} and \textbf{Open} at this issue; no verification credit is claimed. Closure requires the evidence defined in Section~7 of the Verification Plan to be produced and accepted, the related non-conformances and waivers to be closed, and the Verification Control Board to approve the close-out. The close-out governance is defined in the Verification Plan, Section~4.7.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Method Allocation and Evidence Routes}\label{tab:vcd_summary}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Verification Method Set} & \thead{Requirement Count} & \thead{Evidence Route} \\ \hline
+Test only (T) & 8 & Test report and verification certificate. \\ \hline
+Test with supporting R or I & 16 & Test report plus design or inspection evidence. \\ \hline
+Analysis only (A) & 8 & Analysis report, validated model and correlation record. \\ \hline
+Analysis with supporting R or I & 6 & Analysis report plus design or inspection evidence. \\ \hline
+Combined Test and Analysis (T, A) & 37 & Test report plus correlated analysis report; both pass/fail criteria met. \\ \hline
+Review of Design only (R) & 2 & Design-review record and compliance statement. \\ \hline
+\textbf{Total} & \textbf{77} & \\ \hline
+\end{tabularx}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Control Status Summary}\label{tab:vcd_status_summary}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{7.0cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Status Item} & \thead{Count} & \thead{Remark} \\ \hline
+Technical requirements in the VCD & 77 & Complete Space Segment requirement baseline. \\ \hline
+Requirements with a baselined method and level/model & 77 & Methods and levels assigned for all requirements. \\ \hline
+Requirements with a planned execution reference & 77 & Procedure, analysis, inspection or review identified and, for T/A requirements, the VP execution subsection cross-referenced. \\ \hline
+Requirements with an evidence-document reference & 77 & Report or review record identified. \\ \hline
+Evidence documents accepted & 0 & No verification evidence accepted at this issue. \\ \hline
+Compliance status Compliant & 0 & No compliance claimed at this issue. \\ \hline
+Compliance status Partially Compliant or Non-Compliant & 0 & No partial or negative compliance recorded. \\ \hline
+Close-out status Closed & 0 & No requirement closed at this issue. \\ \hline
+Open non-conformances affecting verification & 0 & None recorded at this issue. \\ \hline
+Open deviations or waivers & 0 & None recorded at this issue. \\ \hline
+\end{tabularx}}
+\end{table}
+
+The VCD will be re-issued at each project phase gate and at each verification review. The Verification Control Board records the evidence identifier, the article serial number or model, the report or certificate number, the review reference, the compliance status and the close-out date against each requirement. A requirement is only marked \textbf{Closed} after the conditions of the Verification Plan, Section~4.7, are satisfied.
