@@ -1,5 +1,136 @@
-% Ground Segment TRS placeholder. Awaiting supplied document content.
+% =============================================================================
+% MAIN CONTENT — GROUND SEGMENT USER'S NEED PRESENTATION
+% ECSS-E-ST-10-06C Annex A, clause <3>
+% =============================================================================
 \section{Main Content}
 
 \subsection{3. User's Need Presentation}
-\textit{Content pending.}
+
+This section presents the operational needs of EWAS users and the Ground Segment capabilities required to support the mission. It addresses the user context, the Ground Segment's contribution to the warning chain, and the principal external information interfaces. The needs are derived from the system requirements, Concept of Operations and stakeholder analysis in \textbf{AD-01}.
+
+\subsubsection{3.1 Operational Context, Mission Needs, and User Expectations}
+
+\abbr{EWAS} supports the early detection of ballistic missile launches, estimation of potential impact regions and communication of timely warning products to authorized national crisis-management and civil-protection authorities. External warning recipients require an assessed event location, refined trajectory, predicted impact region and clearly identified uncertainty to support their own response procedures.
+
+Internal Ground Segment users include mission-control operators, spacecraft controllers and authorized technical personnel. Their operational needs encompass mission-status visibility, controlled spacecraft command execution, reliable event assessment, traceable warning delivery and access to authorized historical records.
+
+The EWAS mission includes \textbf{global detection and tracking}, with warning priority for events that may threaten the \textbf{Baltic region}, including launches originating outside that region (\texttt{R-049}). The system is non-offensive and its output is restricted to authorized users (\texttt{R-001}--\texttt{R-004}).
+
+\begin{table}[H]
+\centering
+\caption{EWAS User Needs Relevant to the Ground Segment}
+\label{tab:gseg_user_needs}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.22\textwidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.19\textwidth}|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{User Need} & \thead{Required System Capability} & \thead{System Req.} \\ \hline
+Timely warning & Deliver the first warning within 60~s of initial \abbr{GEO} event detection after the required two-\abbr{LEO} assessment. & \texttt{R-011}, \texttt{R-045} \\ \hline
+Reliable event assessment & Fuse observations from two selected \abbr{LEO} spacecraft with the onboard preliminary trajectory to obtain the refined trajectory and impact-area estimate. & \texttt{R-012}, \texttt{R-026}, \texttt{R-027} \\ \hline
+Explicit uncertainty & Communicate predicted impact regions with confidence levels and uncertainty boundaries. & \texttt{R-013}, \texttt{R-028} \\ \hline
+Updated assessments & Revise trajectory and impact-area estimates as additional observations become available. & \texttt{R-014} \\ \hline
+Operational continuity & Support continuous mission operation, overall system availability $>99.9\%$ and appropriate redundancy. & \texttt{R-015}, \texttt{R-017}, \texttt{R-030} \\ \hline
+Operator supervision & Provide readable event information and post-dispatch confirmation, revision and cancellation. & \texttt{R-028}, \texttt{R-029}, \texttt{R-046} \\ \hline
+Controlled information & Restrict access to authorized users and protect communications and stored data. & \texttt{R-003}, \texttt{R-031}--\texttt{R-035} \\ \hline
+Traceable records & Retain relevant mission data, warning versions, acknowledgements and audit logs for the required period and purposes. & \texttt{R-004}, \texttt{R-036}, \texttt{R-037}, \texttt{R-047} \\ \hline
+Geographical threat priority & Assess events worldwide for possible threats to the Baltic region and prioritize related warnings. & \texttt{R-049} \\ \hline
+\end{tabularx}}
+\end{table}
+
+The system-level availability objective of $>99.9\%$ (\texttt{R-015}) does not itself constitute a separately verified Ground Segment availability allocation. The Ground Segment contribution and measurable segment-level characteristics are specified in Section~7.
+
+Authorized external institutions receive warning products rather than operating the satellite constellation. Ground Segment operators require current mission status, event assessments and warning-delivery information, including during high-stress operations. Historical records are retained for at least five years (\texttt{R-036}) and used only for the purposes specified in \texttt{R-004}.
+
+\subsubsection{3.2 Role of the Ground Segment in the EWAS Warning Chain}
+
+The Ground Segment (\abbr{WBS} \texttt{123456.02}) supports the warning chain by receiving a candidate-event report, selecting two suitable \abbr{LEO} spacecraft, issuing tracking requests, receiving observation products, performing authoritative ground assessment and delivering the resulting warning. The first preliminary warning is automatic and follows completion of the required two-\abbr{LEO} ground assessment; operator review is subsequent (\texttt{R-043}--\texttt{R-046}).
+
+\begin{enumerate}
+  \item \textbf{Event reception:} The Ground Segment receives the \emph{GEO Event Report} containing the detection time, estimated event location and available quality information.
+  \item \textbf{Tracking coordination:} Ground Segment functions select two \abbr{LEO} spacecraft with suitable observation geometry, readiness and communication availability, then prepare and forward tracking requests.
+  \item \textbf{Authoritative ground assessment:} The Ground Segment receives stereoscopic observations, their uncertainty metadata and the onboard preliminary trajectory, and generates a refined trajectory and probabilistic impact-area assessment.
+  \item \textbf{Warning delivery and follow-up:} The Ground Segment automatically delivers a preliminary warning to the appropriate authorized interface, supports subsequent operator actions and retains the related operational records.
+\end{enumerate}
+
+\paragraph{Warning-chain latency allocation.}
+The end-to-end requirement \texttt{R-011} is measured from the first \abbr{GEO} candidate-event detection to \textbf{delivery at the authorized national authority interface}. Table~\ref{tab:gseg_warning_chain_latency} reproduces the established system/Space Segment timing allocations while identifying the Ground Segment contributions. These are \textbf{allocated limits}, not results of an executed performance verification.
+
+{\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.13\textwidth}|>{\raggedright\arraybackslash}p{0.22\textwidth}|>{\raggedright\arraybackslash}p{0.43\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|}
+\caption{EWAS End-to-End Warning Chain and Allocated Latency (\texttt{R-011})}\label{tab:gseg_warning_chain_latency}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Step} & \thead{Responsible Element} & \thead{Function and Timing Boundary} & \thead{Limit} \\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{Step} & \thead{Responsible Element} & \thead{Function and Timing Boundary (continued)} & \thead{Limit} \\ \hline
+\endhead
+\textbf{1} GEO detection and report & \abbr{SSEG}: detecting \abbr{GEO} & From initial GEO candidate-event detection to reception of the event report at the Ground Station Network. & $\le 10$~s \\ \hline
+\textbf{2a} Ground selection & \abbr{GSEG}: command and coordination services & From GEO report reception at the Ground Station Network, including forwarding and validation, to Ground Segment handoff of tracking requests for the two selected LEO spacecraft. & $\le 2$~s \\ \hline
+\textbf{2b} Command delivery & \abbr{SSEG}: communication and \abbr{ISL} services & From Ground Segment handoff to delivery of authenticated tracking requests to both selected LEO spacecraft. & $\le 3$~s \\ \hline
+\textbf{3} LEO acquisition and return & \abbr{SSEG}: selected \abbr{LEO} and relays & From receipt of tracking requests by the selected LEO spacecraft to arrival of both required observation packages and the onboard preliminary trajectory at the Ground Station Network. & $\le 30$~s \\ \hline
+\textbf{4} Ground assessment and warning & \abbr{GSEG}: integrated processing and warning functions & From availability of the required LEO products at the Ground Station Network, including ground reception/validation and processing, to warning \textbf{delivery} at the authorized authority interface. & $\le 15$~s \\ \hline
+\textbf{Total} & \abbr{EWAS} system & Initial GEO detection to delivery of the first preliminary warning at the authority interface. & $\le 60$~s \\ \hline
+\end{longtable}}
+
+The Step~2 total is $\le 5$~s, combining ground selection and command preparation ($\le 2$~s) with Space Segment delivery ($\le 3$~s). Step~3 retains the $\le 30$~s Space Segment allocation; Step~4 retains the $\le 15$~s ground assessment and warning-delivery allocation. The sum of the allocated maxima is 60~s. The Space Segment also specifies a combined execution and transport allocation of $\le 45$~s at the 99th percentile (\texttt{SSEG-REQ-PERF-001}). These timing boundaries are consistent with \texttt{SSEG-REQ-PERF-002} through \texttt{SSEG-REQ-PERF-004} and the system warning chain.
+
+The allocation of these timings is not evidence that the Ground Segment has achieved them. Detailed requirements and their verification methods are defined at the appropriate requirement level. For requirement verification, the event epoch $T_0$ must be defined consistently across the system and segment documents; \texttt{R-011} specifies the first GEO detection as the system-level starting point.
+
+\paragraph{Mission information products.}
+The warning chain exchanges the products identified in the preliminary Ground Segment data dictionary (\textbf{RD-06}). The table describes products at the segment boundary without specifying lower-level protocols or packet schemas.
+
+\begin{table}[H]
+\centering
+\caption{Principal Ground Segment Mission Data Products}
+\label{tab:gseg_data_products}
+{\footnotesize\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.14}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.38\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{Data Product} & \thead{Role / Exchange} \\ \hline
+GEO Event Report & Initial event report from GEO to the Ground Segment. \\ \hline
+LEO Tracking Request & Ground-generated tracking command addressed to the selected LEO spacecraft. \\ \hline
+LEO Observation Package & Timestamped stereoscopic observations, geometry and uncertainty information returned to the Ground Segment. \\ \hline
+Onboard Preliminary Trajectory & Initial 3D trajectory estimate derived onboard and returned for ground processing. \\ \hline
+Ground Refined Trajectory & Authoritative refined ground trajectory with associated uncertainty and version information. \\ \hline
+Impact Area Assessment & Probabilistic impact region, confidence information and assessment validity. \\ \hline
+Warning and Status Update & First warning and subsequent confirmation, revision or cancellation statuses. \\ \hline
+Operational and Audit Record & Mission status, operator activity, delivery acknowledgements and security/event records. \\ \hline
+\end{tabularx}}
+\end{table}
+
+After the automatic first dispatch, authorized operators may confirm, revise or cancel the warning (\texttt{R-046}). Relevant source data, assessments, warning versions, acknowledgements and audit records are retained irrespective of subsequent cancellation (\texttt{R-047}).
+
+\subsubsection{3.3 Ground Segment Boundaries and External Interfaces}
+
+The principal \textbf{external} Ground Segment interfaces connect it to the Space Segment, authorized national warning recipients and, where applicable to mission operations, external providers of orbital or conjunction information. Operator access is treated separately as a human--system interface within the operational Ground Segment, not as a third EWAS segment.
+
+\begin{table}[H]
+\centering
+\caption{Ground Segment External Interface Categories}
+\label{tab:gseg_external_interfaces}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.17}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.26\textwidth}|>{\raggedright\arraybackslash}p{0.26\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{Interface} & \thead{External Counterpart} & \thead{Principal Information / Functions} \\ \hline
+Space-to-Ground & \abbr{SSEG}: \abbr{GEO}/\abbr{LEO} spacecraft & Telecommands, telemetry, event reports, observation packages, onboard trajectory and spacecraft-status data. \\ \hline
+Warning Delivery & Authorized national authorities and crisis-management systems & Delivery of preliminary warnings, updates, confidence/uncertainty information, message status and delivery evidence. \\ \hline
+Operational Data Exchange & Authorized external orbital-data or conjunction-information providers & Receipt and handling of conjunction/space-traffic information required for coordinated spacecraft operations, where applicable. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Space-to-Ground Interface.}
+The bidirectional space-to-ground boundary supports spacecraft commands and operational telemetry as well as GEO event reports, LEO observation packages and preliminary trajectory products. Its technical characteristics must be coordinated with the Space Segment interface definitions (\textbf{AD-10}) and the project interface-control documentation. Detailed radio-frequency characteristics, protocols and data schemas are defined outside this segment-level user-needs presentation.
+
+\paragraph{Warning Delivery Interface.}
+The Ground Segment delivers assessed event information to authorized national authority interfaces, including event identification, trajectory and impact-area estimates, confidence information and the warning status. Delivery at this interface is the endpoint of the system latency measurement specified by \texttt{R-011}; onward public warning and national response actions remain outside \abbr{EWAS} (\texttt{R-048}).
+
+\paragraph{Operational Data Exchange Interface.}
+Ground mission operations may receive authorized external conjunction or orbital-awareness products for appropriate spacecraft operational coordination. The corresponding external data handling is distinct from onboard collision-avoidance implementation, which belongs to the Space Segment. Applicable interface data definitions will be recorded in the relevant interface documentation.
+
+\paragraph{Operational User Interface.}
+Authorized mission operators access Ground Segment functions through controlled human--system interfaces that display constellation and Ground Segment status, active events, ground assessment results and warning-delivery status. Post-dispatch operator actions and access to historical records are subject to authorization, auditability and human-factors requirements (\texttt{R-028}, \texttt{R-029}, \texttt{R-034}, \texttt{R-037}, \texttt{R-046}).
+
+The Ground Segment's external exchanges must preserve event identity, information integrity, controlled access and correspondence between received observations, derived assessments and warning versions. Detailed interface specifications are assigned to the appropriate \abbr{ICD} and lower-level technical documentation.

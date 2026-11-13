@@ -1,7 +1,167 @@
-% Ground Segment TRS placeholder. Awaiting supplied document content.
-% Documentation scope includes all WBS elements under 123456.02.
+% =============================================================================
+% GROUND SEGMENT TRS — SCOPE & INTRODUCTION
+% ECSS-E-ST-10-06C Annex A, clause <1>
+% =============================================================================
 \section{Scope}
-\textit{Content pending.}
+
+This document (\texttt{EWAS-HSB-GSEG-TRS-02}) is the Level-2 Technical Requirements Specification (\abbr{TRS}) for the \textbf{Ground Segment (\abbr{GSEG})} of the Early Warning Alarm System (\abbr{EWAS}), corresponding to Work Breakdown Structure (\abbr{WBS}) element \texttt{123456.02} and provisional Configuration Item \texttt{CI-02}.
+
+The specification establishes functional, performance, interface, operational, security and dependability requirements for the integrated terrestrial element of \abbr{EWAS}. The Ground Segment supports constellation operations, mission-data acquisition and processing, warning delivery and management of operational records. It comprises the six subsystems described below.
+
+\begin{enumerate}
+  \item \textbf{Data Archiving System (\abbr{DAS}), \texttt{123456.02.01}:} Stores, manages and provides controlled retrieval of raw and processed mission data, analysis products, warning versions and operational records. Its functions include data integrity, protection, availability and retention.
+  \item \textbf{Command \& Control System (C\&C), \texttt{123456.02.02}:} Manages spacecraft commands and their execution status. It supports constellation operations, selection of suitable \abbr{LEO} spacecraft following a reported event, and preparation of tracking requests.
+  \item \textbf{Mission Control Center (\abbr{MCC}), \texttt{123456.02.03}:} Provides the operational environment for mission supervision, system-status monitoring and operator coordination. It presents event and warning information and supports operator confirmation, revision or cancellation after the first automatic warning has been dispatched.
+  \item \textbf{Data Processing System (\abbr{DPS}), \texttt{123456.02.04}:} Ingests and processes observation data, correlates events, performs authoritative ground multi-sensor fusion and determines refined trajectories and probabilistic impact areas with associated uncertainty.
+  \item \textbf{Ground Station Network (\abbr{GSN}), \texttt{123456.02.05}:} Provides the terrestrial communication facilities and services for spacecraft telemetry and mission-data reception, command transmission and transfer of received information to Ground Segment services.
+  \item \textbf{Early Warning System (\abbr{EWS}), \texttt{123456.02.06}:} Produces and distributes warning messages to authorized external recipients based on assessed mission products. It supports automatic first-warning delivery, subsequent updates, recipient routing and delivery-status management.
+\end{enumerate}
+
+This \abbr{TRS} specifies requirements for the \textbf{Ground Segment as an integrated product}, including segment-level capabilities, external boundaries, performance and interfaces. Detailed internal design and technical requirements of individual subsystems will be addressed in their respective lower-level specifications.
+
+\subsection{Operational and Geographical Scope}
+
+\abbr{EWAS} has a \textbf{global launch-detection and tracking mission scope} while prioritizing the assessment and warning of events that may threaten the Baltic region, in accordance with system requirement \texttt{R-049}. The Ground Segment is planned as an operational installation at \textbf{one geographical location}; its final site and equipment configuration will be documented at the design stage.
+
+The Ground Segment contributes to the system-level availability and warning-latency objectives. System requirement \texttt{R-011} limits the elapsed time from the first \abbr{GEO} detection of a candidate launch event to delivery of the preliminary warning at an authorized national authority interface to \textbf{60 seconds}. Segment-level requirements must remain consistent with the allocated functions and timing of the complete warning chain.
+
+\subsection{Segment Boundaries}
+
+The Ground Segment includes terrestrial communication and computing facilities, mission processing software, operational services and operator interfaces. Spacecraft design, onboard payloads and processing, constellation orbital configuration and inter-satellite-link implementation belong to the peer Space Segment (\abbr{SSEG}, \abbr{WBS} \texttt{123456.03}).
+
+The space-to-ground boundary encompasses commands, telemetry, event reports, observation packages, preliminary trajectory products and spacecraft-status information. The external warning-delivery boundary terminates at interfaces of authorized national authorities. Subsequent public alert activation and the authorities' response actions are outside \abbr{EWAS} (\texttt{R-048}). Weapon targeting, guidance, fire control and interceptor control are excluded under \texttt{R-001} and \texttt{R-002}.
+
+\subsection{Position in the EWAS Specification Tree and Hierarchy}
+
+EWAS technical documentation is organized according to the project \abbr{WBS} and the system-engineering hierarchy of \textbf{AD-02}.
+
+\begin{itemize}
+  \item \textbf{System level:} The EWAS mission definition, operational concept, functional analysis and system requirements \texttt{R-001}--\texttt{R-049} establish the parent baseline for segment-level allocation (\textbf{AD-01}).
+  \item \textbf{Segment level:} The Ground Segment (\texttt{123456.02}) and Space Segment (\texttt{123456.03}) are peer system elements with separate technical requirements specifications. Cross-segment interfaces are subject to coordinated interface management.
+  \item \textbf{Subsystem level:} The six Ground Segment subsystems and their subordinate \abbr{WBS} elements receive allocated segment requirements. Detailed internal requirements, product definitions and design justifications belong to lower-level documentation.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{EWAS Ground Segment WBS Hierarchy and Specification Scope}
+\label{tab:gseg_wbs_scope}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.14}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.22\textwidth}|>{\raggedright\arraybackslash}p{0.34\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{WBS Code} & \thead{Element} & \thead{Primary Function} \\ \hline
+\texttt{123456.02} & \textbf{Ground Systems} & Integrated Ground Segment \\ \hline
+\texttt{123456.02.01} & Data Archiving System & Mission data archive and retrieval \\ \hline
+\texttt{123456.02.01.01} & Raw Data Archive & Raw-data storage \\ \hline
+\texttt{123456.02.01.02} & Processed Data Archive & Processed-data storage \\ \hline
+\texttt{123456.02.02} & Command \& Control System & Constellation command management \\ \hline
+\texttt{123456.02.03} & Mission Control Center & Operational supervision and coordination \\ \hline
+\texttt{123456.02.04} & Data Processing System & Mission-data processing and assessment \\ \hline
+\texttt{123456.02.04.01} & Data Processing Software & Data preparation and processing \\ \hline
+\texttt{123456.02.04.02} & Event Detection Module & Ground event identification and assessment \\ \hline
+\texttt{123456.02.04.03} & Trajectory Estimation Module & Trajectory and impact-area estimation \\ \hline
+\texttt{123456.02.05} & Ground Station Network & Space-to-ground communications \\ \hline
+\texttt{123456.02.06} & Early Warning System & Warning generation and delivery \\ \hline
+\end{tabularx}}
+\end{table}
+
+The \abbr{WBS} establishes the decomposition of the Ground Segment. Segment requirements may be allocated to one or more subsystems when their implementation depends on coordinated functions. Such allocation is identified in the requirements traceability matrix (\abbr{RTM}); detailed subsystem requirements are not specified in this document.
 
 \section{Introduction}
-\textit{Content pending.}
+
+\subsection{Purpose and Background}
+
+The Early Warning Alarm System (\abbr{EWAS}) is a space systems engineering project undertaken in cooperation between Hochschule Bremen (HSB) and Gda\'nsk University of Technology (PG). It addresses the early detection of ballistic missile launches, estimation of their trajectories and delivery of warning information to authorized crisis-management and civil-protection authorities.
+
+\abbr{EWAS} consists of a Space Segment and a Ground Segment. The Space Segment provides infrared detection and stereoscopic tracking through six \abbr{GEO} detection satellites and 72 \abbr{LEO} tracking satellites. The Ground Segment provides mission operations, receives and processes observations and distributes assessed warning products.
+
+\subsubsection*{Nominal Event-Response Sequence}
+
+A \abbr{GEO} satellite detects a candidate launch event and transfers an event report to the Ground Segment. Ground Segment functions select two suitable \abbr{LEO} tracking satellites based on observation geometry, readiness and communication-path availability, and issue tracking requests through the available communication paths.
+
+The selected \abbr{LEO} spacecraft collect stereoscopic observations and generate an onboard preliminary trajectory. Observation packages, covariance information and the preliminary trajectory are returned to the Ground Segment, where authoritative multi-sensor fusion produces a refined trajectory and probabilistic impact-area estimate.
+
+After the required two-\abbr{LEO} ground assessment, a preliminary warning is \textbf{automatically delivered} to the appropriate authorized national authority interface without prior operator approval. Operator review, updates, confirmation or cancellation follow the first dispatch. Event data and operational records are retained for the authorized purposes defined by \texttt{R-004} and \texttt{R-047}. The complete sequence is subject to the \textbf{$\le 60$~s} system latency limit (\texttt{R-011}).
+
+\subsubsection*{Objectives of the Specification}
+
+The objectives of this \abbr{TRS} are:
+\begin{enumerate}
+  \item To derive verifiable requirements for the integrated Ground Segment from the EWAS system baseline.
+  \item To specify segment-level functions, external boundaries, operating constraints and performance characteristics.
+  \item To identify interfaces with the Space Segment, authorized recipients and principal Ground Segment functions.
+  \item To establish the technical requirement basis for availability, security, processing and mission operations.
+  \item To support allocation to subordinate \abbr{WBS} elements and subsequent verification.
+\end{enumerate}
+
+The Ground Segment \abbr{TRS} defines the required product capabilities and constraints. The Ground Segment Design Definition File (\abbr{DDF}) records the design definition, while the Ground Segment Design Justification File (\abbr{DDJF}) documents the analyses and rationale for design choices. Corresponding lower-level documents will address individual subsystems.
+
+\subsection{Document Structure}
+
+This specification follows the structure of \textbf{ECSS-E-ST-10-06C Annex A} (\textbf{AD-03}), adapted to the EWAS document template.
+
+\begin{table}[H]
+\centering
+\caption{Ground Segment TRS Structure and ECSS-E-ST-10-06C Annex A Mapping}
+\label{tab:gseg_drd_mapping}
+{\footnotesize\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.22\textwidth}|>{\raggedright\arraybackslash}p{0.37\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{ECSS DRD Clause} & \thead{TRS Section} & \thead{Content} \\ \hline
+\texttt{<1>} Introductions & Scope and Introduction & Purpose, scope and specification hierarchy \\ \hline
+\texttt{<2>} Applicable and reference documents & References & Document baseline, definitions and abbreviations \\ \hline
+\texttt{<3>} User's need presentation & Section 3 & Mission needs and Ground Segment operational role \\ \hline
+\texttt{<4>} Selected concept / product presentation & Section 4 & Integrated segment concept and principal functions \\ \hline
+\texttt{<5>} Life profile description & Section 5 & Ground Segment life-cycle phases \\ \hline
+\texttt{<6>} Environment and constraints description & Section 6 & Ground operating conditions and constraints \\ \hline
+\texttt{<7>} Requirements & Section 7 & Normative Ground Segment technical requirements \\ \hline
+\end{tabularx}}
+\end{table}
+
+\textbf{Annex A --- Requirements Traceability Matrix (RTM)} provides backward traceability to system requirements and forward allocation to relevant \abbr{WBS} elements. Verification planning, execution and control are maintained separately in the programme Verification Plan (\textbf{AD-11}) and Verification Control Document (\textbf{AD-12}); they are not an annex of this TRS.
+
+\subsection{Normative Requirement Conventions and Identification Scheme}
+
+Descriptive context is provided in the preceding sections; mandatory segment-level technical requirements will be stated in Section~7 and assigned persistent identifiers.
+
+\begin{itemize}
+  \item \textbf{shall} --- mandatory, verifiable technical requirement;
+  \item \textbf{should} --- non-mandatory recommendation;
+  \item \textbf{may} --- permitted action or solution;
+  \item \textbf{can} --- technical possibility;
+  \item \textbf{will} --- descriptive or prospective statement, not a new technical requirement.
+\end{itemize}
+
+Normative statements shall be unambiguous, traceable and verifiable. Unqualified terms such as ``adequate'', ``rapid'', ``optimal'' or ``as far as possible'' are avoided in Section~7.
+
+The Ground Segment requirement identification scheme is:
+\[
+\texttt{GSEG-REQ-<CAT>-<NNN>}
+\]
+where \texttt{CAT} is a requirement category and \texttt{NNN} is a persistent three-digit sequence number within that category.
+
+\begin{table}[H]
+\centering
+\caption{Ground Segment-Level Requirement Categories}
+\label{tab:gseg_req_categories}
+{\footnotesize\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.17\textwidth}|>{\raggedright\arraybackslash}X|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{Category} & \thead{Scope} \\ \hline
+FUN & Integrated segment mission functions \\ \hline
+ARC & Segment architecture and configuration constraints \\ \hline
+PERF & Segment performance and latency \\ \hline
+IF & External and integrated internal interfaces \\ \hline
+DATA & Segment data exchange, processing and retention \\ \hline
+SEC & Information and access security \\ \hline
+REL & Dependability, availability and fault tolerance \\ \hline
+OPS & Segment operations and maintenance \\ \hline
+VER & Verification-related technical requirements \\ \hline
+\end{tabularx}}
+\end{table}
+
+These categories refer to the \textbf{integrated Ground Segment}, not separate subsystem requirement specifications. Each requirement will be traceable to a parent system requirement or a documented interface constraint and, as applicable, allocated to lower-level \abbr{WBS} elements through the \abbr{RTM}.
+
+Verification planning uses the four methods of \textbf{AD-04}: Test (T), Analysis (A), Review of Design (R) and Inspection (I). Detailed verification planning, evidence and compliance status are maintained in \textbf{AD-11} and \textbf{AD-12}. A planned verification method is not evidence of requirement compliance.

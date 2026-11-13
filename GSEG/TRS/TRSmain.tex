@@ -24,11 +24,10 @@
 \newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
 \newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Ground Segment - Technical Requirements Specification}  % <-- Put document title here
-% Provisional document/CI identifiers follow Ground Systems WBS 123456.02.
-% No explicit naming rule was found; GSEG DDF/DDJF still carry copied suffix 03.
+% Ground Segment document identifier; CI-02 remains provisional in the scope text.
 \newcommand{\DocNumber}{EWAS-HSB-GSEG-TRS-02}
-\newcommand{\DocIssue}{0.1}                       % Initial draft; no GS approval recorded.
-\newcommand{\DocDate}{12.11.2026}                 % Draft preparation date, not an approval date.
+\newcommand{\DocIssue}{0.3}                       % Draft; no GS approval recorded.
+\newcommand{\DocDate}{13.11.2026}                 % Draft issue date, not an approval date.
 \newcommand{\CINumber}{02}                        % Provisional CI-02.
 
 % =============================================================================
@@ -171,7 +170,7 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-                                 &                          &                                  \\[1.2em] \hline
+    Grzegorz Macioch              & Author                   &                                  \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
                                  &                          &                                  \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
@@ -198,7 +197,9 @@
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{\DocIssue} & \DocDate & Initial Ground Segment TRS draft template; added nine section placeholders. & Document information; all placeholders \\ \hline
+    \textbf{0.1} & 11.11.2026 & Initial Ground Segment TRS LaTeX template, document metadata and modular section placeholders. & Document information; template \\ \hline
+    \textbf{0.2} & 12.11.2026 & Added References, Scope and Introduction, including the project document baseline, Ground Segment scope, WBS hierarchy and requirement conventions. & References; Scope; Introduction \\ \hline
+    \textbf{0.3} & 13.11.2026 & Added Section 3: User's Need Presentation, warning-chain latency allocations, mission data products and external interfaces; aligned verification references and removed the obsolete verification annex. & Section 3; References; document structure \\ \hline
 \end{tabularx}}
 
 \newpage
@@ -230,7 +231,5 @@
 \input{sections/07_requirements}
 \newpage
 \input{sections/08_annex_a_rtm}
-\newpage
-\input{sections/09_annex_b_vcd}
 
 \end{document}
