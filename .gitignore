@@ -333,3 +333,5 @@ TSWLatexianTemp*
 *.pdf
 
 temp/
+
+PROMPT.MD
