@@ -1,0 +1,429 @@
+% =============================================================================
+% VERIFICATION PLAN (VP)
+% =============================================================================
+\sloppy
+\setlength{\emergencystretch}{2em}
+
+\section{Purpose, Scope, and Applicable Documents}
+
+\subsection{Purpose and Scope}
+
+This document constitutes the programme-level \textbf{Verification Plan (VP)} for the \abbr{EWAS} programme. It is the master plan for the project verification process and demonstrates how the technical requirements of Configuration Item \texttt{CI-03}: the \abbr{EWAS} Space Segment (\abbr{SSEG}, \abbr{WBS} Element \texttt{123456.03}), specified in Section 7 of the Space Segment Technical Requirements Specification (\texttt{EWAS-HSB-SSEG-TRS-03}), are verified through a coherent implementation approach.
+
+The VP defines the verification levels and model philosophy, the applicable life-profile stages and project phases, the phasing of verification planning, execution, reporting and close-out across Phases B, C, D and E, the formal verification methods and evidence rules, the verification tools and database, the monitoring and control methodology, the non-conformance and waiver process, and the review and close-out governance.
+
+The requirement-by-requirement verification control record is maintained separately in the \textbf{Verification Control Document (VCD)} (\texttt{EWAS-HSB-VCD-01}). The VCD records, for every requirement, the assigned verification method, the verification level or model, the project phase and life-profile stage, the planned execution document or activity, the verification report or evidence document, the compliance status, the close-out status, and any remarks, waivers or review references. The VP does not duplicate the VCD matrix or the detailed Test and Analysis entries.
+
+The requirement statements reproduced in the VCD are extracted from \texttt{EWAS-HSB-SSEG-TRS-03} and remain normative in that document; in the event of a conflict, the TRS prevails. This issue applies to \texttt{CI-03} and to the verification activities performed by the Space Segment team. Subsequent issues will extend the plan to additional configuration items and lower-level documents as they are established.
+
+\subsection{Applicable and Reference Documents}
+
+The Applicable Documents (AD) and Reference Documents (RD) cited in this VP are listed in Table~\ref{tab:vp_refs}. Only project-internal documents are listed. The applicable documents impose binding provisions on the verification activities; the reference documents provide design and justification context. The VP and the VCD are companion documents: the VP defines the verification approach, while the VCD records the verification status of each requirement.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.15cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{8.9cm}|>{\raggedright\arraybackslash}p{1.25cm}|}
+\caption{Applicable and Reference Documents for the Verification Plan}\label{tab:vp_refs}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+\endhead
+\rowcolor{TableRowLightBlue}\multicolumn{4}{l}{\textbf{Applicable Documents (AD)}} \\ \hline
+\textbf{AD-01} & \texttt{EWAS-HSB-SYS-SRD-01} & EWAS Final Report: Mission Definition, CONOPS, and Overall System Requirements Baseline (R-001 to R-049) & Rev. 1.0 \\ \hline
+\textbf{AD-02} & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment --- Technical Requirements Specification; Section 7 defines the requirement baseline for \texttt{CI-03} & Issue 1.1 \\ \hline
+\textbf{AD-03} & \texttt{EWAS-HSB-VCD-01} & Programme Verification Control Document; requirement-by-requirement verification control record & Issue 0.2 \\ \hline
+\rowcolor{TableRowLightBlue}\multicolumn{4}{l}{\textbf{Reference Documents (RD)}} \\ \hline
+\textbf{RD-01} & \texttt{EWAS-HSB-SSEG-DDF-03} & Space Segment --- Design Definition File; design baseline and product-tree definition & Issue 0.1 \\ \hline
+\textbf{RD-02} & \texttt{EWAS-HSB-SSEG-DDJF-03} & Space Segment --- Design Justification File; design rationale and trade-off record & Issue 0.1 \\ \hline
+\end{longtable}}
+
+\section{Verification Approach and Implementation Strategy}
+
+\subsection{Verification Principles and Levels}
+
+Verification demonstrates, with objective evidence, that each technical requirement of \texttt{EWAS-HSB-SSEG-TRS-03} is met by the as-designed, as-built or as-operated Space Segment. The following principles apply throughout the programme:
+\begin{itemize}
+    \item every requirement is assigned at least one formal verification method and a verification level or model before the verification baseline is baselined;
+    \item verification is performed against defined pass/fail criteria, at the worst-case condition, operational mode and life-profile stage stated in the verification control record;
+    \item evidence is traceable to the requirement identifier, the verification article or model, the procedure or analysis report, the date and the responsible operator or reviewer;
+    \item verification is performed on a representative article or validated model; extrapolation from a non-representative article is not accepted unless the correlation is demonstrated and approved;
+    \item verification evidence is placed under configuration control and accepted by the Verification Control Board before a requirement is closed;
+    \item a design change that affects a verified parameter, article or environment re-opens the affected verification record.
+\end{itemize}
+
+The verification levels used in the programme are defined in Table~\ref{tab:vp_levels}. The level assigned to each requirement is recorded in the VCD. Verification credit is claimed at the level stated in the VCD; lower-level evidence may support a higher-level verification but does not replace it unless the Verification Control Board approves the substitution.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Levels and Associated Verification Environments}\label{tab:vp_levels}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.35cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Level} & \thead{Scope} & \thead{Verification Environment and Evidence} \\ \hline
+\textbf{L1 --- System / Programme} & Complete \abbr{EWAS} system, including the Ground Segment and external interfaces & End-to-end mission-level exercises, interface verification and operational validation. Within this VP, L1 evidence is used only for Space Segment interfaces and end-to-end chains. \\ \hline
+\textbf{L2 --- Space Segment / Constellation} & Integrated 6 \abbr{GEO} + 72 \abbr{LEO} architecture (\texttt{SATG}/\texttt{SATL}) & End-to-end mission simulator (\texttt{SIM}), avionics and \abbr{ISL} hardware-in-the-loop testbed (\texttt{HIL}), and in-orbit commissioning (\texttt{IOC}) trials. \\ \hline
+\textbf{L3 --- Spacecraft} & \texttt{SATL} and \texttt{SATG} spacecraft & Structural-Thermal Model (\texttt{STM}), Qualification / Proto-Flight Models (\texttt{QM}/\texttt{PFM}), and recurring Flight Models (\texttt{FM}). \\ \hline
+\textbf{L4 --- Subsystem / Equipment} & Payload optical bench, \abbr{ADCS} sensors and actuators, \abbr{OBDH} units, \abbr{OISL} terminals and other units & Engineering Models (\texttt{EM}), qualification units and flight units tested at unit or subsystem level. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Model Philosophy and Verification Articles}
+
+The verification programme follows a qualification and proto-flight model philosophy. The lead \texttt{SATL} and \texttt{SATG} spacecraft are qualified on the \texttt{QM}/\texttt{PFM} articles; recurring spacecraft undergo acceptance testing. The \texttt{EM} is used for functional, interface, software and hardware-in-the-loop verification, and the \texttt{STM} is used for structural, mechanical and thermal verification. Analysis models are validated against test data before they are used to support a compliance statement. The articles used in the programme are defined in Table~\ref{tab:vp_articles}.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Articles and Model Philosophy}\label{tab:vp_articles}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Article / Model} & \thead{Definition and Use in the Verification Programme} \\ \hline
+\textbf{EM} (\abbr{WBS} \texttt{123456.04.02.02}) & Engineering Model: avionics flat-sat, payload optical bench and flight-software prototype used for Hardware-in-the-Loop (HIL), software validation, interface and functional verification. The EM is not flight-qualified. \\ \hline
+\textbf{STM} & Structural-Thermal Model: representative structure, dispenser interface, thermal hardware and radiator/loop-heat-pipe layout used for modal survey, vibration, thermal-balance and TVAC envelope verification. \\ \hline
+\textbf{QM/PFM} (\abbr{WBS} \texttt{123456.04.02.01}) & Qualification / Proto-Flight Model: the lead \texttt{SATL} and \texttt{SATG} spacecraft, subjected to full qualification and proto-flight environmental testing. \\ \hline
+\textbf{FM} (\abbr{WBS} \texttt{123456.04.02.03}) & Flight Model: the recurring flight spacecraft. \texttt{SATL} is produced in eight plane-lots of nine spacecraft (\texttt{FM-01} to \texttt{FM-72}); \texttt{SATG} comprises six flight spacecraft (\texttt{FM-01} to \texttt{FM-06}). FM units undergo acceptance testing and, where specified, in-orbit commissioning checks. \\ \hline
+\textbf{Analysis} & Validated analytical or numerical model (orbital, radiometric, thermal, structural, RF/optical, reliability or disposal) used where direct test of the complete flight configuration is not practicable. Analysis models shall be correlated with test data as specified in the individual verification entries. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Life-Profile Stages and Project Phases}
+
+Verification is planned against the mission life profile of Section 5 of \texttt{EWAS-HSB-SSEG-TRS-03} and against the project phases B, C, D and E. The life-profile stages define \emph{where in the mission} the requirement applies; the project phases define \emph{when in the programme} the evidence is produced and reviewed. The mapping is given in Table~\ref{tab:vp_phases}.
+
+\begin{table}[htbp]
+\centering
+\caption{Life-Profile Stages and Project-Phase Mapping}\label{tab:vp_phases}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.55cm}|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}p{2.1cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Life-Profile Stage} & \thead{Mission Segment} & \thead{Project Phase} & \thead{Verification Focus} \\ \hline
+\textbf{1} & On-ground AIT, storage and transport & C, D & Integration, functional, performance, environmental qualification and acceptance testing. \\ \hline
+\textbf{2} & Pre-launch and launch ascent & D & Launch campaign, launch-vehicle and dispenser interfaces, safety inhibits, separation and early flight. \\ \hline
+\textbf{3} & \abbr{LEOP} and in-orbit commissioning & D, E & Orbit determination, commissioning, end-to-end trials and initial performance verification. \\ \hline
+\textbf{4} & Nominal operations (Modes N1--N5) & E & Operational performance, coverage, latency, availability, archive replay and algorithm calibration. \\ \hline
+\textbf{5} & Contingency and \abbr{FDIR}/Safe Mode & E & Fault detection, isolation and recovery, autonomous operation and safe-mode recovery. \\ \hline
+\textbf{6} & Decommissioning, passivation and \abbr{EOL} disposal & E & Disposal, passivation, deorbit or graveyard performance and end-of-life reporting. \\ \hline
+\end{tabularx}}
+\end{table}
+
+The project phases used in the verification control record are:
+\begin{itemize}
+    \item \textbf{Phase B --- Preliminary Design:} verification planning baseline; methods, levels and models are assigned; preliminary analyses are performed; the verification control record is established and reviewed at the Preliminary Design Review (PDR).
+    \item \textbf{Phase C --- Detailed Design:} verification procedures, analysis plans and test plans are prepared; analysis models are validated; test readiness is established; the verification control record is baselined at the Critical Design Review (CDR).
+    \item \textbf{Phase D --- Qualification and Production:} qualification and acceptance testing, inspections, and evidence generation; Qualification Review (QR) and Acceptance Review (AR) confirm the evidence; the verification control record is updated with results.
+    \item \textbf{Phase E --- Operations:} launch, commissioning, nominal operations, contingency operations and disposal; in-orbit verification, operational validation and final close-out; the verification control record is updated and closed.
+\end{itemize}
+
+\subsection{Phasing of Verification Planning, Execution, Reporting, and Close-Out}
+
+Verification is phased with the project life cycle as shown in Table~\ref{tab:vp_phasing}. The VCD is the controlled record of the status achieved at each phase gate. A phase gate is not passed while a verification activity assigned to that phase is missing a baselined plan, an accepted report or an approved waiver.
+
+{\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.25cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.9cm}|}
+\caption{Phasing of Verification Planning, Execution, Reporting and Close-Out}\label{tab:vp_phasing}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Phase} & \thead{Planning} & \thead{Execution} & \thead{Reporting} & \thead{Close-Out} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Phase} & \thead{Planning} & \thead{Execution} & \thead{Reporting} & \thead{Close-Out} \\ \hline
+\endhead
+\textbf{B} & Assign verification methods, levels and models; establish the VCD; identify analyses and long-lead tests; PDR. & Preliminary analyses and design studies. & Preliminary analysis notes and design-review data. & PDR action closure; VCD issued as a planning baseline. \\ \hline
+\textbf{C} & Prepare verification procedures, analysis plans, test plans and inspection plans; define evidence documents; TRR for critical tests; CDR. & Analysis campaigns, model validation, procedure dry runs and test-readiness checks. & Analysis reports, validated models and procedure readiness records. & CDR action closure; VCD planned-execution and evidence references baselined. \\ \hline
+\textbf{D} & Final test procedures, GSE readiness, calibration and configuration audit. & Qualification and acceptance tests, inspections and environment campaigns. & Test reports, inspection reports, non-conformance records and evidence packages. & PTR, QR and AR; evidence accepted or waived; VCD compliance and close-out updated. \\ \hline
+\textbf{E} & In-orbit verification plan, commissioning procedures and disposal plan; ORR. & Commissioning tests, operational validation, archive analysis and disposal operations. & In-orbit test reports, analysis reports, operational performance records and disposal reports. & Final evidence review; VCD close-out; verification certificate signed. \\ \hline
+\end{longtable}}
+
+\subsection{Verification Tools, Database, and Monitoring and Control}
+
+The verification control record is maintained in the project \textbf{Verification Control Database (VCDB)}. The VCDB is the single source of truth for verification status and contains, for each requirement, the fields printed in the VCD matrix and detailed entries: requirement identifier, requirement header, verification method, verification level or model, project phase, life-profile stage, planned execution document or activity, evidence document, compliance status, close-out status, and remarks, waivers or review references.
+
+The verification tool chain comprises:
+\begin{itemize}
+    \item the requirements management system, which holds the controlled requirement baseline of \texttt{EWAS-HSB-SSEG-TRS-03};
+    \item the VCDB, which holds the verification control records and generates the VCD tables;
+    \item the document management system, which holds procedures, analysis plans, test reports, inspection reports, review records and verification certificates under configuration control;
+    \item the non-conformance system, which records, tracks and closes non-conformances, deviations and waivers;
+    \item the configuration management system, which controls changes to requirements, designs, procedures, models and evidence.
+\end{itemize}
+
+Verification status is monitored through a monthly verification status report and the Verification Control Board. The report presents the indicators in Table~\ref{tab:vp_kpi}. A red indicator requires a recovery action approved by the Verification Control Board.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Monitoring Indicators}\label{tab:vp_kpi}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.0cm}|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Indicator} & \thead{Definition} & \thead{Target} \\ \hline
+Requirements with baselined method and level & Requirements in the VCD with an assigned method, level or model and phase & 100\% \\ \hline
+Planned execution documents baselined & Requirements with a baselined procedure, analysis plan or inspection plan & 100\% at CDR \\ \hline
+Evidence documents accepted & Requirements with an accepted report or certificate & 100\% at AR or ORR \\ \hline
+Open non-conformances & Non-conformances affecting verification evidence & 0 at close-out \\ \hline
+Open waivers and deviations & Waivers or deviations without Verification Control Board approval & 0 \\ \hline
+Requirement close-out rate & Requirements marked Closed in the VCD & 100\% at final close-out \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Non-Conformance, Deviation, and Waiver Handling}
+
+A \textbf{non-conformance} is a condition in which a product, process or document does not meet a specified requirement or procedure. Non-conformances are recorded in the project non-conformance system, contained to prevent further impact, dispositioned (use-as-is, rework, repair, scrap or return), and closed after the corrective action is verified. A non-conformance that affects verification evidence prevents the affected requirement from being marked Compliant until it is closed or an approved waiver is recorded.
+
+A \textbf{deviation} is a planned departure from a requirement, specification or procedure before execution. A \textbf{waiver} is the acceptance of a non-compliance after execution. Both require a written justification, an impact assessment covering performance, safety, interfaces and the verification baseline, and approval by the Verification Control Board. Waivers affecting launch safety, regulatory compliance or a mission-critical performance threshold are not permitted without the approval of the project safety authority and the customer. Every approved deviation or waiver is recorded in the remarks field of the affected VCD entry and linked to the non-conformance system record.
+
+Re-verification is required after a design change, a procedure change or a corrective action that affects the verified parameter, the verification article or the applicable environment. The affected VCD entry is re-opened and the new evidence is reviewed before close-out is restored.
+
+\subsection{Verification Reviews and Close-Out Governance}
+
+Verification reviews are the formal decision points at which the verification baseline and the evidence are accepted. The reviews used in the programme are listed in Table~\ref{tab:vp_reviews}.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Reviews and Governance}\label{tab:vp_reviews}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.35cm}|>{\raggedright\arraybackslash}p{2.1cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Review} & \thead{Timing} & \thead{Purpose and Output} \\ \hline
+\textbf{PDR} & Phase B & Confirms the verification planning baseline: methods, levels, models, analyses and long-lead tests. Output: PDR action record and VCD planning baseline. \\ \hline
+\textbf{CDR} & Phase C & Confirms the detailed verification baseline: procedures, analysis plans, test plans, inspection plans and evidence documents. Output: CDR action record and baselined VCD references. \\ \hline
+\textbf{TRR} & Before test execution & Confirms test readiness: approved procedure, calibrated GSE, representative article, trained personnel, safety clearance and configuration control. Output: TRR record and test authorization. \\ \hline
+\textbf{PTR} & After test execution & Reviews test data quality, anomalies, non-conformances and preliminary compliance against the pass/fail criteria. Output: PTR record and test report release. \\ \hline
+\textbf{QR} & Phase D & Confirms that qualification evidence demonstrates compliance for the qualified design. Output: qualification review record and qualification certificate. \\ \hline
+\textbf{AR} & Phase D & Confirms that acceptance evidence demonstrates compliance for the flight units. Output: acceptance review record and acceptance certificate. \\ \hline
+\textbf{ORR} & Phase E & Confirms operational readiness, in-orbit verification plan and disposal readiness. Output: operational readiness record and authorization to proceed. \\ \hline
+\textbf{VCB} & Throughout & Verification Control Board: approves methods, levels, evidence, deviations, waivers, status changes and close-out. Output: VCB minutes and VCD change authorization. \\ \hline
+\end{tabularx}}
+\end{table}
+
+A requirement is \textbf{Closed} only when all of the following conditions are met:
+\begin{enumerate}
+    \item the planned verification activity has been executed at the level and on the article or model stated in the VCD;
+    \item the evidence document has been released, placed under configuration control and accepted by the reviewers;
+    \item the measured or analysed result meets the pass/fail criterion within the stated tolerance and statistical confidence;
+    \item all related non-conformances, deviations and waivers are closed or approved and recorded;
+    \item the Verification Control Board has approved the compliance statement and close-out.
+\end{enumerate}
+
+The verification certificate for each requirement is signed by the verification responsible, reviewed by quality assurance and approved by the Verification Control Board. The VCD is updated with the evidence identifier, the review record, the compliance status and the close-out date.
+
+\subsection{Facilities, Cleanliness, and Environmental Controls}
+
+All payload, telescope and laser-\abbr{OISL} integration and test activities are performed in \textbf{ISO Class 5} cleanrooms with continuous dry-nitrogen purging and sealed aperture covers. Spacecraft bus integration and mechanical tests are performed in \textbf{ISO Class 8} facilities. Thermal-vacuum testing is performed at a chamber pressure of $\le 1\times10^{-5}$~mbar with hot and cold plateaus covering the qualification temperature range plus the required margin. Vibration testing is performed in three orthogonal axes; acoustic testing in a reverberation chamber at 138--142~dB OASPL; shock testing with a shock response spectrum up to 2,000~g above 1,000~Hz; and EMC testing in a shielded enclosure under the project environmental test rules. Facility calibration, cleanliness records and test-configuration records are retained with the verification evidence.
+
+\section{Verification Methods, Conventions, and Evidence Rules}
+
+The four formal verification methods used throughout the programme are \textbf{Test (T)}, \textbf{Analysis (A)}, \textbf{Review of Design (R)} and \textbf{Inspection (I)}. Their definitions, typical applications and evidence documents are summarised in Table~\ref{tab:vp_methods} and detailed in the following subsections. The method assigned to each requirement is recorded in the VCD; the VCD does not redefine the methods.
+
+\begin{table}[htbp]
+\centering
+\caption{Formal Verification Methods and Evidence}\label{tab:vp_methods}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.75cm}|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Method} & \thead{Definition} & \thead{Typical Application} & \thead{Primary Evidence} \\ \hline
+\textbf{Test (T)} & Measurement of the performance of the flight article or a representative model under a controlled, representative environment. & Functional, performance, environmental, electromagnetic-compatibility, life and end-to-end operational tests. & Test procedure, TRR record, test log, test report (\texttt{TRPT}) and data pack. \\ \hline
+\textbf{Analysis (A)} & Theoretical or numerical evaluation using validated models, simulations, budgets or analytical methods. & Orbital and coverage simulations, radiometric and link budgets, finite-element and thermal models, reliability and availability models, Monte Carlo campaigns, re-entry and disposal analyses. & Analysis plan, validated model, input data, analysis report (\texttt{ARPT}) and correlation record. \\ \hline
+\textbf{Review of Design (R)} & Examination of design documentation, drawings, ICDs, procedures, analyses, certificates and qualification records to establish compliance without additional measurement. & Architecture reviews, interface reviews, design justification, safety and regulatory compliance. & Review record, review-of-design report (\texttt{RRPT}) and referenced design documents. \\ \hline
+\textbf{Inspection (I)} & Visual, dimensional, mechanical or workmanship examination of hardware, software configuration records or installation records. & Bonding, grounding, clearances, connector and bolt layouts, material certificates and safety inhibits. & Inspection procedure, inspection record and inspection report (\texttt{IRPT}). \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Test (T)}
+
+A Test is a quantitative measurement performed on the flight article or a representative model under controlled conditions. Tests include functional, performance, environmental, electromagnetic-compatibility, life and end-to-end operational tests. A test is only credited when the article is at the model level stated in the VCD, the test procedure is approved, the GSE is calibrated, the test readiness review is complete, and the test environment represents the worst case specified in the requirement.
+
+Test evidence comprises the approved test procedure, the TRR record, the as-run test log, the calibrated GSE records, the raw and processed data, the test report and any non-conformance records. The test report identifies the requirement identifier, the article serial number or model, the test configuration, the measured values, the pass/fail criterion and the compliance statement.
+
+\subsection{Analysis (A)}
+
+An Analysis is a theoretical or numerical evaluation performed with a validated model, simulation, budget or analytical method. Analyses include orbital and coverage simulations, radiometric and link budgets, finite-element and thermal models, reliability and availability models, Monte Carlo campaigns, and re-entry and disposal analyses.
+
+Analysis evidence comprises the analysis plan, the model description and version, the input data and assumptions, the validation and correlation record, the analysis report and the peer-review record. A model used to extrapolate a test result shall be correlated with the test data before the compliance statement is signed. The analysis report identifies the requirement identifier, the model version, the worst-case inputs, the result, the pass/fail criterion and the compliance statement.
+
+\subsection{Review of Design (R)}
+
+A Review of Design is the examination of design documentation, drawings, ICDs, procedures, analyses, certificates and qualification records to establish compliance without additional measurement. R is used for requirements that are demonstrably satisfied by the design definition, by a controlled interface document or by a qualification record.
+
+R evidence comprises the review record, the review-of-design report, the referenced design documents and the review action closure record. The review record identifies the requirement identifier, the documents reviewed, the reviewers, the findings, the actions and the compliance statement.
+
+\subsection{Inspection (I)}
+
+An Inspection is a visual, dimensional, mechanical or workmanship examination of hardware, software configuration records or installation records. I is used for properties that are directly observable or measurable without a performance test, such as bonding and grounding, clearances, connector and bolt layouts, material certificates and safety inhibits.
+
+Inspection evidence comprises the approved inspection procedure, the inspection record, the inspection report, the as-built configuration record and any supporting certificates. The inspection report identifies the requirement identifier, the article serial number, the inspection points, the observed condition, the pass/fail criterion and the compliance statement.
+
+\subsection{Combined Methods and Method Selection}
+
+Where a requirement carries more than one method, the VCD identifies the \textbf{primary} method and records the supporting method or methods separately. The pass/fail criteria of a combined entry apply to the primary activity; the supporting evidence must close any residual design, workmanship or interface aspect that cannot be measured directly. A requirement is not credited twice for the same evidence. The method selection follows these rules:
+\begin{itemize}
+    \item use Test when the performance can be measured on a representative article under representative conditions;
+    \item use Analysis when a validated model is the only practicable way to cover the complete configuration, the full life profile or a statistically large campaign;
+    \item use Review of Design when compliance is established by the design definition, an interface document or a qualification record;
+    \item use Inspection when compliance is established by direct examination of the as-built hardware or records;
+    \item use a combination when a single method cannot cover all aspects of the requirement, or when test and analysis results must be shown to be mutually consistent.
+\end{itemize}
+
+\subsection{Evidence, Traceability, and Acceptance}
+
+Objective evidence shall be traceable to the requirement identifier, the verification article serial number or model level, the test procedure or analysis report number, the date and the operator or reviewer. Evidence shall be unique, legible, reproducible and protected against alteration. The following rules apply to every entry:
+\begin{enumerate}
+    \item the verification article must be at the model level stated in the VCD and must be under configuration control;
+    \item the test or analysis must cover the worst-case conditions, operational mode and life-profile stage stated in the VCD; any deviation requires an approved verification deviation;
+    \item the measured or analysed value must meet the stated pass/fail criterion with the specified tolerance and statistical confidence; a result that meets the requirement only after extrapolation is not sufficient unless the extrapolation model is correlated with test data;
+    \item supporting R or I evidence must be identified and accepted before the requirement is marked Compliant;
+    \item non-conformances shall be recorded and closed through the project non-conformance system before a requirement is marked Verified;
+    \item the Verification Control Board shall confirm that the evidence covers the specified worst case, the applicable operational mode and the full life-profile stage;
+    \item re-verification is required after any design change that affects the verified parameter, the verification article or the applicable environment; the VCD shall be updated and the affected entries re-opened.
+\end{enumerate}
+
+Test and analysis results shall be mutually consistent. Where a model is used to extrapolate a test result, the model shall be correlated with the test data before the compliance statement is signed. Where a test is used to anchor an analysis, the test report shall identify the analysis model and the correlation data set.
+
+\section{Verification Documentation and Interfaces}
+
+\subsection{Document Hierarchy}
+
+The verification documentation hierarchy is summarised in Table~\ref{tab:vp_docs}. The Technical Requirements Specification is the requirement baseline; the Verification Plan defines the approach; the Verification Control Document records the status; procedures and reports provide the evidence.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Documentation Hierarchy}\label{tab:vp_docs}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Document} & \thead{Identifier} & \thead{Role in Verification} \\ \hline
+Technical Requirements Specification & \texttt{EWAS-HSB-SSEG-TRS-03} & Normative requirement baseline; Section 7 defines the requirements verified by this programme. \\ \hline
+Verification Plan & \texttt{EWAS-HSB-VP-01} & Master verification approach, methods, evidence rules, phasing and governance. \\ \hline
+Verification Control Document & \texttt{EWAS-HSB-VCD-01} & Requirement-by-requirement control record: method, level, phase, planned execution, evidence, compliance and close-out status. \\ \hline
+Verification procedures and plans & \texttt{TP-}, \texttt{AR-}, \texttt{IP-}, \texttt{RV-} identifiers & Approved test procedures, analysis plans, inspection procedures and design-review plans. \\ \hline
+Verification reports and certificates & \texttt{TRPT-}, \texttt{ARPT-}, \texttt{IRPT-}, \texttt{RRPT-}, \texttt{VC-} identifiers & Objective evidence and verification certificates used to close the VCD entries. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Document Numbering and Evidence Identifiers}
+
+Verification documents use the identifiers defined in Table~\ref{tab:vp_ids}. The identifier contains the requirement suffix so that every procedure, report and certificate is traceable to exactly one requirement or to a defined group of requirements. A document that covers several requirements lists all affected requirement identifiers on its cover sheet.
+
+\begin{table}[htbp]
+\centering
+\caption{Verification Document Identifiers}\label{tab:vp_ids}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.55cm}|>{\raggedright\arraybackslash}p{3.35cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Prefix} & \thead{Document Type} & \thead{Example} \\ \hline
+\texttt{TP-} & Test procedure & \texttt{TP-SSEG-FUN-003} \\ \hline
+\texttt{AR-} & Analysis plan or analysis activity & \texttt{AR-SSEG-MIS-001} \\ \hline
+\texttt{IP-} & Inspection procedure & \texttt{IP-SSEG-ENV-003} \\ \hline
+\texttt{RV-} & Design-review plan or review record & \texttt{RV-SSEG-FUN-001} \\ \hline
+\texttt{TRPT-} & Test report & \texttt{TRPT-SSEG-PERF-001} \\ \hline
+\texttt{ARPT-} & Analysis report & \texttt{ARPT-SSEG-MIS-004} \\ \hline
+\texttt{IRPT-} & Inspection report & \texttt{IRPT-SSEG-OPS-005} \\ \hline
+\texttt{RRPT-} & Review-of-design report & \texttt{RRPT-SSEG-OPS-002} \\ \hline
+\texttt{VC-} & Verification certificate & \texttt{VC-SSEG-FUN-003} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{VCD Interface and Maintenance}
+
+The VCD is the controlled record of verification status and is maintained by the verification manager under the authority of the Verification Control Board. The VCD is updated:
+\begin{itemize}
+    \item when a requirement, method, level, model, phase or evidence reference is baselined or changed;
+    \item when a procedure, analysis plan or inspection plan is released;
+    \item when a verification report or certificate is accepted;
+    \item when a non-conformance, deviation or waiver is opened, changed or closed;
+    \item at each project phase gate and each verification review.
+\end{itemize}
+
+A change to the VP that affects the verification approach, methods, evidence rules or governance is evaluated for its impact on the VCD. The VCD is re-issued when the change affects a control record. The VP and VCD issues are kept consistent; the applicable-document table in each document identifies the current issue of the companion document.
+
+\section*{Appendix A: Ground Support Equipment Catalogue}
+\addcontentsline{toc}{section}{Appendix A: Ground Support Equipment Catalogue}
+
+The ground support equipment referenced by the verification entries in the VCD is listed in Table~\ref{tab:vp_gse}. Entry identifiers are used in the VCD detailed entries to avoid ambiguity between the two spacecraft configurations.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{longtable}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{13.2cm}|}
+\caption{Ground Support Equipment Catalogue}\label{tab:vp_gse}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Equipment Description and Function} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Equipment Description and Function} \\ \hline
+\endhead
+\rowcolor{TableRowLightBlue}\multicolumn{2}{l}{\textbf{Electrical Ground Support Equipment (EGSE)}} \\ \hline
+\textbf{EGSE-01} & spacecraft power/umbilical simulator \\ \hline
+\textbf{EGSE-02} & CCSDS TM/TC front-end and recorder \\ \hline
+\textbf{EGSE-03} & network data interface unit (NDIU) \\ \hline
+\textbf{EGSE-04} & software validation facility (SVF) / HIL test bench \\ \hline
+\textbf{EGSE-05} & spacecraft Suitcase Model / dynamics simulator \\ \hline
+\textbf{EGSE-06} & multi-constellation GNSS RF simulator \\ \hline
+\textbf{EGSE-07} & OISL terminal emulator with optical channel attenuator/delay line \\ \hline
+\textbf{EGSE-08} & RF link emulator, channel simulator and spectrum analyser \\ \hline
+\textbf{EGSE-09} & pyrotechnic/NEA safe-and-arm test plug set \\ \hline
+\textbf{EGSE-10} & solar-array simulator and Li-ion battery simulator \\ \hline
+\rowcolor{TableRowLightBlue}\multicolumn{2}{l}{\textbf{Mechanical Ground Support Equipment (MGSE)}} \\ \hline
+\textbf{MGSE-01} & lifting/handling rig, clamp band and spacecraft stand \\ \hline
+\textbf{MGSE-02} & mass-properties measurement fixture \\ \hline
+\textbf{MGSE-03} & three-axis shaker table with slip table and accelerometer array \\ \hline
+\textbf{MGSE-04} & acoustic reverberation chamber \\ \hline
+\textbf{MGSE-05} & thermal-vacuum (TVAC) chamber with solar simulator and shrouds \\ \hline
+\textbf{MGSE-06} & modal-survey fixture and suspension system \\ \hline
+\textbf{MGSE-07} & zero-gravity/air-bearing gravity-compensation fixture \\ \hline
+\textbf{MGSE-08} & 9-satellite dispenser ring and 1,194/1,666 mm launch-vehicle adapter simulator \\ \hline
+\textbf{MGSE-09} & optical alignment theodolite and autocollimator set \\ \hline
+\rowcolor{TableRowLightBlue}\multicolumn{2}{l}{\textbf{Optical and Payload Ground Support Equipment (OGSE)}} \\ \hline
+\textbf{OGSE-01} & calibrated blackbody source (280-1,200 K) \\ \hline
+\textbf{OGSE-02} & IR collimator \\ \hline
+\textbf{OGSE-03} & integrating sphere \\ \hline
+\textbf{OGSE-04} & IR target/scene projector \\ \hline
+\textbf{OGSE-05} & star simulator \\ \hline
+\textbf{OGSE-06} & laser power meter and optical spectrum analyser \\ \hline
+\textbf{OGSE-07} & point-source-transmittance (PST) measurement facility \\ \hline
+\textbf{OGSE-08} & wavefront sensor, autocollimator and optical alignment targets \\ \hline
+\end{longtable}}

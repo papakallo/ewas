@@ -25,8 +25,8 @@
 \newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Space Segment - Technical Requirements Specification}  % <-- Put document title here
 \newcommand{\DocNumber}{EWAS-HSB-SSEG-TRS-03}         % <-- Put document number here (DOC-NO)
-\newcommand{\DocIssue}{1.1}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{10.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
+\newcommand{\DocIssue}{1.2}           % <-- Put issue/version number here (e.g., 1.0)
+\newcommand{\DocDate}{12.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
 \newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
 
 % =============================================================================
@@ -169,11 +169,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Jan Krajewski}              & {Author}                 & {Krajewski 10.11.2026} \\[1.2em] \hline
+    {Jan Krajewski}              & {Author}                 & {Krajewski 12.11.2026} \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 10.11.2026} \\[1.2em] \hline
+    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 12.11.2026} \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Project CCB}                & {Approver}               & {CCB 10.11.2026} \\[1.2em] \hline
+    {Project CCB}                & {Approver}               & {CCB 12.11.2026} \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -197,14 +197,15 @@
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
     \textbf{0.1}      & {04.11.2026}    & Initial document template setup and CI-03 configuration baseline identification. & Document Info \\ \hline
-    \textbf{0.2}      & {05.11.2026}    & Added Applicable/Reference Documents (AD-01 to AD-14, RD-01 to RD-06), Abbreviations, Scope, Specification Tree hierarchy, and Section 1 Introduction. & References, Scope, Intro \\ \hline
+    \textbf{0.2}      & {05.11.2026}    & Added Applicable/Reference Documents, Abbreviations, Scope, Specification Tree hierarchy, and Section 1 Introduction. & References, Scope, Intro \\ \hline
     \textbf{0.3}      & {06.11.2026}    & Added Section 3 User's Need Presentation, 60~s warning-chain latency allocation (Table 3), and external interface boundaries (Table 4). & Section 3 \\ \hline
     \textbf{0.4}      & {06.11.2026}    & Added Section 4 Selected Concept / Product Presentation (1,000~km LEO Walker Delta 72/8/1, 6 GEO, mandatory ISL mesh, Careful COTS bus, WBS alignment). & Section 4 \\ \hline
-    \textbf{0.5}      & {07.11.2026}    & Added Section 5 Life Profile Description (ECSS-E-ST-10-03C model philosophy, plane-batch launch, LEOP, nominal modes N1--N5, FDIR, EOL disposal). & Section 5 \\ \hline
-    \textbf{0.6}      & {08.11.2026}    & Modularized LaTeX source into section subfiles and added Section 6 Environment and Constraints Description per ECSS-E-ST-10-04C. & Section 6, All \\ \hline
-    \textbf{0.7}      & {08.11.2026}    & Added Section 7 Technical Requirements (normative Space Segment requirements \texttt{SSEG-REQ-<CAT>-<NNN>} per ECSS-E-ST-10-06C Clause \texttt{<7>}). & Section 7 \\ \hline
-    \textbf{1.0}      & {09.11.2026}    & Added Annex A (Requirements Traceability Matrix per ECSS-E-ST-10C Annex N) and Annex B (Master Verification Control Matrix per ECSS-E-ST-10-02C). First complete Space Segment TRS baseline release. & Annex A, Annex B, All \\ \hline
-    \textbf{1.1}      & {10.11.2026}    & Incorporated 16 peer-review revisions: streamlined sentence readability and ECSS openings; updated Walker Delta inter-plane offset ($\Delta u_{\text{inter}} = 22.5^\circ$); unified 1,550~nm \abbr{OISL} rates ($\ge 500$~Mbps \abbr{LEO}, $\ge 1.5\text{--}2.0$~Gbps \abbr{GEO}) and link ranges ($\ge 6{,}500$~km / $45{,}000$~km); added orbit insertion propellant budgets, 35.0~min eclipse equation, \abbr{SAA}/proton despiking definitions, independent payload \abbr{LOS} steering, and $\le 2\text{--}3^\circ/\text{s}$ bus tip-off rate. & All Sections, Annex B \\ \hline
+    \textbf{0.5}      & {07.11.2026}    & Added Section 5 Life Profile Description (project model philosophy, plane-batch launch, LEOP, nominal modes N1--N5, FDIR, EOL disposal). & Section 5 \\ \hline
+    \textbf{0.6}      & {08.11.2026}    & Modularized LaTeX source into section subfiles and added Section 6 Environment and Constraints Description under the project space-environment baseline. & Section 6, All \\ \hline
+    \textbf{0.7}      & {08.11.2026}    & Added Section 7 Technical Requirements (normative Space Segment requirements \texttt{SSEG-REQ-<CAT>-<NNN>} in the project requirement format). & Section 7 \\ \hline
+    \textbf{1.0}      & {09.11.2026}    & Added Annex A (Requirements Traceability Matrix). First complete Space Segment TRS baseline release. & Annex A, All \\ \hline
+    \textbf{1.1}      & {10.11.2026}    & Incorporated 16 peer-review revisions: streamlined sentence readability and opening statements; updated Walker Delta inter-plane offset ($\Delta u_{\text{inter}} = 22.5^\circ$); unified 1,550~nm \abbr{OISL} rates ($\ge 500$~Mbps \abbr{LEO}, $\ge 1.5\text{--}2.0$~Gbps \abbr{GEO}) and link ranges ($\ge 6{,}500$~km / $45{,}000$~km); added orbit insertion propellant budgets, 35.0~min eclipse equation, \abbr{SAA}/proton despiking definitions, independent payload \abbr{LOS} steering, and $\le 2\text{--}3^\circ/\text{s}$ bus tip-off rate. & All Sections \\ \hline
+    \textbf{1.2}      & {12.11.2026}    & Removed the obsolete verification-control annex and aligned the reference baseline with the Verification Plan (\texttt{EWAS-HSB-VP-01}) and Verification Control Document (\texttt{EWAS-HSB-VCD-01}); replaced external-standard citations with project-internal requirements and renumbered the AD/RD tables. & All Sections, Annex A, References \\ \hline
 \end{tabularx}}
 
 \newpage
