@@ -1,0 +1,302 @@
+% =============================================================================
+% STAGING EXTRACTION FOR SPACE SEGMENT DESIGN JUSTIFICATION FILE (DDJF)
+% Target Document : EWAS-HSB-SSEG-DDJF-03 (ECSS-E-ST-10C Annex K & Annex O)
+% Source Document : EWAS-HSB-SSEG-TRS-03 (sections/04_selected_concept.tex,
+%                   sections/05_life_profile.tex, sections/06_environment_constraints.tex)
+% Extracted Scope : Astrodynamic & Radiation Trade-Offs (1,000 km LEO vs. MEO),
+%                   Geometric Coverage & GMAT Staggering / OISL Chord Derivations,
+%                   SWIR/MWIR Two-Colour Ratioing & Careful COTS vs. QML-V Trade-Offs,
+%                   Lifecycle Justifications (Section 5), and Cylindrical Eclipse /
+%                   Outgassing / Perturbation Derivations (Section 6).
+% Status          : Staging file only; verbatim analytical derivations and
+%                   trade-off rationales preserved prior to streamlining TRS.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{longtable}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{TitleBlue}{HTML}{1F497D}
+\definecolor{HeadingBlue}{HTML}{365F91}
+\definecolor{SubHeadingBlue}{HTML}{4F81BD}
+\definecolor{TableHeaderBlue}{HTML}{4F81BD}
+\definecolor{TableRowLightBlue}{HTML}{DBE5F1}
+\definecolor{TableBorderBlue}{HTML}{95B3D7}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setcounter{secnumdepth}{-1}
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-3.0ex \@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\Large\bfseries\sffamily\color{HeadingBlue}}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-2.5ex \@plus -1ex \@minus -.2ex}%
+    {1.0ex \@plus .2ex}%
+    {\normalfont\large\bfseries\sffamily\color{SubHeadingBlue}}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-2.0ex \@plus -1ex \@minus -.2ex}%
+    {0.8ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries\sffamily\color{SubHeadingBlue}}}
+\makeatother
+
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
+\providecommand{\abbr}[1]{#1}
+
+\begin{document}
+
+\section{EWAS-HSB-SSEG-DDJF-03 Staging Extraction (from EWAS-HSB-SSEG-TRS-03)}
+
+This standalone staging file preserves all analytical derivations, astrodynamic and radiometric trade-off rationales, electronics qualification trade-offs, and lifecycle justifications extracted verbatim from Sections~4, 5, and 6 of \texttt{EWAS-HSB-SSEG-TRS-03} for incorporation into the Space Segment Design Justification File (\texttt{EWAS-HSB-SSEG-DDJF-03}, ECSS-E-ST-10C Annex~K \& Annex~O).
+
+% =============================================================================
+% 1. ASTRODYNAMIC TRADE-OFF, RADIATION JUSTIFICATION & COVERAGE DERIVATION
+%    (Extracted from TRS Section 4.1 & Section 6.1)
+% =============================================================================
+\subsection{Part 1: Astrodynamic Trade-Off, Radiation Justification, and Geometric Coverage Derivation}
+
+\subsubsection{4.1 Hybrid Constellation Architecture and Astrodynamic Concept}
+
+To reconcile the competing physical requirements of persistent boost-phase detection and high-precision 3D trajectory estimation (\texttt{R-005}--\texttt{R-008}), the \abbr{EWAS} Space Segment implements a \textbf{dual-tier hybrid orbital architecture}. This architecture combines a Geostationary Earth Orbit (\abbr{GEO}) detection layer with a high-inclination Low Earth Orbit (\abbr{LEO}) stereoscopic tracking layer:
+\begin{enumerate}
+    \item \textbf{High-Altitude Detection Layer (\texttt{SATG}, 6~\abbr{GEO} Satellites at 35,786~km, \abbr{WBS} \texttt{123456.03.02}):} Six geostationary spacecraft operate in a circular equatorial orbit ($i = 0^\circ$, semi-major axis $a = 42{,}164.14$~km, sidereal orbital period $T =$ 23~h 56~min 4~s) spaced uniformly at $60^\circ$ longitude intervals. From geostationary altitude, each \texttt{SATG} node views an Earth central half-angle of $\lambda_{\text{GEO}} \approx 76.3^\circ$ at a minimum observation elevation angle of $\varepsilon_{\min} = 5^\circ$. This geometry provides continuous 24/7 boost-phase surveillance across all low- and mid-latitude launch regions up to $\sim 70^\circ$ latitude. The uniform $60^\circ$ longitudinal spacing guarantees at least dual-satellite overlapping \abbr{GEO} coverage across European, Mediterranean, Middle Eastern, and mid-latitude Eurasian launch corridors, eliminating single-point coverage failures and enabling immediate cross-layer data trunking to European Ground Stations (\abbr{WBS} \texttt{123456.02.05}).
+    \item \textbf{Low-Altitude Stereoscopic Tracking Layer (\texttt{SATL}, 72~\abbr{LEO} Satellites at 1,000~km, \abbr{WBS} \texttt{123456.03.01}):} Seventy-two tracking spacecraft operate in a circular Low Earth Orbit at 1,000~km altitude (semi-major axis $a = 7{,}378.14$~km, orbital period $T = 105.12$~min, mean orbital velocity $v = 7.35$~km/s) arranged in a high-inclination ($i = 80^\circ$ nominal within the $78^\circ\text{--}82^\circ$ window) \textbf{Walker Delta $72/8/1$ constellation}. The fleet is partitioned into $P = 8$ orbital planes spaced uniformly by $\Delta\Omega = 45^\circ$ in Right Ascension of the Ascending Node (RAAN), with $S = 9$ satellites per plane spaced uniformly by $\Delta u = 40^\circ$ in in-plane argument of latitude (intra-plane arc separation of 5,151~km and chord distance of 5,047~km). Based on GMAT coverage and collision-avoidance simulations ($15.0^\circ$ and $22.5^\circ$ phasing runs documented in the Space Segment \texttt{DDJF}), adjacent orbital planes are staggered by a nominal inter-plane phase offset of \textbf{$\Delta u_{\text{inter}} = 22.5^\circ$} (within the $15.0^\circ\text{--}22.5^\circ$ GMAT-optimized staggering window). Staggering adjacent planes by $22.5^\circ$---approximately half of the $40^\circ$ intra-plane spacing---creates a uniform interleaved coverage grid over the Baltic region and maximizes inter-satellite miss distances at the $\pm 80^\circ$ polar plane intersections.
+\end{enumerate}
+
+The selection of the \textbf{1,000~km circular \abbr{LEO} altitude} results from a system-level trade-off balancing space radiation survivability, radiometric signal-to-noise ratio (\abbr{SNR}), geometric horizon access, and launch deployment economics:
+\begin{itemize}
+    \item \textbf{Inner Van Allen Radiation Belt Avoidance and South Atlantic Anomaly (\abbr{SAA}) Mitigation:} In near-Earth space, the trapped proton flux of the inner Van Allen radiation belt ($E_p > 10\text{--}100\text{ MeV}$) increases sharply above 1,150--1,200~km and peaks between 1,500~km and 3,000~km. Because Earth's geomagnetic dipole is tilted ($\sim 11^\circ$) and offset ($\sim 500\text{ km}$) from the planet's center of mass, the inner Van Allen proton belt dips down to altitudes of $200\text{--}1{,}000\text{ km}$ over South America and the South Atlantic Ocean ($15^\circ\text{S}\text{--}45^\circ\text{S}$, $90^\circ\text{W}\text{--}0^\circ\text{E}$), forming the \textbf{South Atlantic Anomaly (\abbr{SAA})}. Consequently, operating at 1,000~km avoids continuous immersion in the main proton belt and restricts high-energy proton exposure to brief transient passes through the \abbr{SAA}. Compared to 1,200--1,400~km or Medium Earth Orbit (\abbr{MEO}) alternatives, the 1,000~km baseline reduces cumulative Total Ionizing Dose (\abbr{TID}), Displacement Damage (\abbr{DD}) dark-current growth in the infrared Focal Plane Arrays (\abbr{FPA}s), and proton-induced single-event transients by more than a factor of three. This directly enables a 7-year operational lifetime (\texttt{R-016}) under the project's ``Careful \abbr{COTS}'' electronics philosophy.
+    \item \textbf{Geometric Coverage and Multi-Satellite Stereoscopic Baseline over the Baltic Theatre:} At $h = 1{,}000\text{ km}$ and a minimum grazing elevation angle of $\varepsilon_{\min} = 5^\circ$ (chosen to stay above dense lower-tropospheric water-vapour attenuation and horizon limb clutter), the Earth central half-cone angle is:
+    \[
+        \lambda = \arccos\!\left(\frac{R_E \cos\varepsilon_{\min}}{R_E + h}\right) - \varepsilon_{\min} = \arccos\!\left(\frac{6378.14 \cos 5^\circ}{7378.14}\right) - 5^\circ = 25.55^\circ
+    \]
+    This yields a slant range to the $5^\circ$-elevation horizon of $D_{\max} \approx 3{,}290\text{ km}$ and a single-satellite instantaneous footprint area of $A_{\text{fp}} = 2\pi R_E^2(1 - \cos\lambda) \approx 24.94 \times 10^6\text{ km}^2$, or \textbf{$4.89\%$ of the Earth's surface}. Across all 72 \texttt{SATL} nodes, cumulative global coverage reaches \textbf{$352\%$}. Because orbital ground tracks converge toward the high-inclination turn-around latitudes ($53^\circ\text{N}\text{--}80^\circ\text{N}$), the Walker Delta geometry maintains \textbf{5 to 7 \abbr{LEO} satellites simultaneously in view} at all times over the Baltic Sea region ($53^\circ\text{N}\text{--}66^\circ\text{N}$) and northern Eurasian/Arctic launch corridors ($> 60^\circ\text{N}$). Whenever the Ground Segment selects a pair of \abbr{LEO} satellites for follow-on tracking (\texttt{R-043}), it is guaranteed to find at least two spacecraft with an optimal stereoscopic convergence angle ($\beta \in [30^\circ, 120^\circ]$) and short slant ranges (1,000--2,400~km). This improves angular-to-spatial triangulation accuracy by more than an order of magnitude relative to \abbr{GEO}.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Baseline Orbital and Astrodynamic Parameters of the EWAS Hybrid Space Segment}
+\label{tab:sseg_orbital_params}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Astrodynamic Parameter} & \thead{SATG --- GEO Detection Layer (123456.03.02)} & \thead{SATL --- LEO Tracking Layer (123456.03.01)} \\ \hline
+    \textbf{Primary Operational Role} & Persistent 24/7 boost-phase plume detection (\texttt{R-009}), coarse localization, and cross-layer \abbr{OISL} trunk relay (\texttt{R-042}, \texttt{R-044}). & Agile cued \abbr{NFOV} lock-on ($< 5\text{ s}$, \texttt{R-024}), synchronized stereo tracking, onboard preliminary 3D trajectory (\texttt{R-023}), and \abbr{LOS} package downlink. \\ \hline
+    \textbf{Number of Active Satellites} & $N_{\text{GEO}} = 6$ spacecraft (\texttt{R-005}) & $N_{\text{LEO}} = 72$ spacecraft (\texttt{R-005}) \\ \hline
+    \textbf{Constellation Topology} & Equatorial ring; uniform $\Delta\lambda = 60^\circ$ longitude slot spacing & Walker Delta $72/8/1$: $P = 8$ planes ($\Delta\Omega = 45^\circ$ RAAN), $S = 9$ sats/plane ($\Delta u = 40^\circ$), $\Delta u_{\text{inter}} = 22.5^\circ$ ($15^\circ\text{--}22.5^\circ$ window) \\ \hline
+    \textbf{Nominal Altitude ($h$)} & 35,786~km (Geostationary) & 1,000~km (Circular Low Earth Orbit) \\ \hline
+    \textbf{Semi-Major Axis ($a$) \& Eccentricity} & a = 42,164.14~km; $e \le 0.0005$ & a = 7,378.14~km; $e \le 0.001$ \\ \hline
+    \textbf{Orbital Inclination ($i$)} & $0.0^\circ \pm 0.05^\circ$ (N--S/E--W station-kept) & $80.0^\circ$ nominal ($78^\circ\text{--}82^\circ$ design window) \\ \hline
+    \textbf{Sidereal Orbital Period ($T$)} & $23\text{ h }56\text{ min }4.1\text{ s}$ ($1{,}436.07\text{ min}$) & $105.12\text{ min}$ ($6{,}307.2\text{ s}$; $\sim 13.7\text{ orbits/day}$) \\ \hline
+    \textbf{Mean Orbital Velocity ($v$)} & $3.075\text{ km/s}$ & $7.350\text{ km/s}$ \\ \hline
+    \textbf{Earth Central Half-Angle ($\varepsilon_{\min}=5^\circ$)} & $\lambda_{\text{GEO}} = 76.30^\circ$ (slant range $\le 41{,}120\text{ km}$) & $\lambda_{\text{LEO}} = 25.55^\circ$ (slant range $\le 3{,}290\text{ km}$) \\ \hline
+    \textbf{Single-Satellite Earth Coverage} & $38.15\%$ of Earth surface ($\sim 194.6 \times 10^6\text{ km}^2$) & $4.89\%$ of Earth surface ($\sim 24.94 \times 10^6\text{ km}^2$) \\ \hline
+    \textbf{Simultaneous Visibility (Baltic $53^\circ\text{--}66^\circ\text{N}$)} & 2--3 \texttt{SATG} nodes continuously visible & 5--7 \texttt{SATL} nodes simultaneously visible 24/7 \\ \hline
+    \textbf{Nominal Design Lifetime (\texttt{R-016})} & $\ge 15\text{ years}$ (\abbr{EOL} graveyard $\Delta h \ge +300\text{ km}$) & $\ge 7\text{ years}$ (active controlled/accelerated deorbit) \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{6.1 Space Radiation and Plasma Environment (1,000~km LEO vs.\ 35,786~km GEO)}
+
+Because the \abbr{EWAS} Space Segment operates simultaneously in circular Low Earth Orbit (1,000~km, $80^\circ$ inclination for \texttt{SATL}) and equatorial Geostationary Earth Orbit (35,786~km, $0^\circ$ inclination for \texttt{SATG}), its two flight layers encounter distinct ionizing radiation, non-ionizing particle, and plasma charging environments (evaluated using AP-8/AE-8, IRENE AE9/AP9, and SAPPHIRE solar particle models at a $95\%$ confidence level):
+\begin{enumerate}
+    \item \textbf{1,000~km, $80^\circ$ Inclination \abbr{LEO} Regime (\texttt{SATL}, 7-Year Design Lifetime \texttt{R-016}):}
+    \begin{itemize}
+        \item \emph{Trapped Protons and South Atlantic Anomaly (\abbr{SAA}) Transits:} At 1,000~km altitude, the constellation orbits below the main proton peak of the inner Van Allen belt (which rises steeply above 1,150--1,200~km). However, over the South Atlantic Anomaly (\abbr{SAA}, $15^\circ\text{S}\text{--}45^\circ\text{S}$, $90^\circ\text{W}\text{--}0^\circ\text{E}$), each \texttt{SATL} node traverses intense trapped proton fluxes ($E_p > 10\text{--}100\text{ MeV}$, peak omnidirectional flux $\sim 10^3\text{--}10^4\text{ protons}/(\text{cm}^2\cdot\text{s})$) during 4--6 orbits per day ($\sim 8\text{--}12\text{ min}$ per transit). In addition, the $80^\circ$ orbital inclination exposes the spacecraft during polar cap crossings ($> 60^\circ\text{N/S}$, where geomagnetic cutoff rigidity approaches zero) to unshielded Solar Energetic Particles (\abbr{SEP}) and Galactic Cosmic Rays (\abbr{GCR}).
+        \item \emph{Total Ionizing Dose (\abbr{TID}) and Displacement Damage (\abbr{DD}) Envelope:} Over the 7-year mission lifetime (\texttt{R-016}), including a mandatory Radiation Design Margin (\abbr{RDM}) of $2\times$ per the project space-environment and radiation-assurance rules, the cumulative dose behind a reference 4~mm aluminium boundary is $\sim 18\text{--}30\text{ krad}(\mathrm{Si})$, constraining internal shielded electronics locations to $\le 10\text{--}15\text{ krad}(\mathrm{Si})$. Cumulative Non-Ionizing Energy Loss (\abbr{NIEL} / Displacement Damage equivalent fluence of $\sim 2 \times 10^{10}\text{ protons}/\text{cm}^2$ at $10\text{ MeV}$) imposes dark-current stability constraints on the $\mathrm{HgCdTe}$ \abbr{SWIR}/\abbr{MWIR} Focal Plane Arrays (\abbr{FPA}s) and star-tracker CMOS detectors.
+        \item \emph{Single-Event Effects (\abbr{SEE}) and Focal-Plane Proton Flux:} High-energy protons in the \abbr{SAA} and heavy cosmic-ray ions at high latitudes induce Single-Event Upsets (\abbr{SEU}), Single-Event Functional Interrupts (\abbr{SEFI}), Single-Event Latch-ups (\abbr{SEL}, requiring immunity or protection up to $\text{LET}_{\text{th}} \ge 37\text{ MeV}\cdot\text{cm}^2/\text{mg}$), and transient proton ionization spikes on the infrared detector pixels (\texttt{R-019}, \texttt{R-022}).
+    \end{itemize}
+    \item \textbf{35,786~km Equatorial \abbr{GEO} Regime (\texttt{SATG}, 15-Year Design Lifetime \texttt{R-016}):}
+    \begin{itemize}
+        \item \emph{Outer-Belt Relativistic Electrons and Solar Proton Events:} At geostationary altitude, trapped proton flux is negligible above $1\text{ MeV}$, and the radiation environment is dominated by outer Van Allen belt relativistic electrons ($E_e > 0.5\text{--}5.0\text{ MeV}$), bremsstrahlung X-rays, unattenuated Solar Proton Events (\abbr{SPE}), and cosmic-ray heavy ions. Over the 15-year operational lifetime (\texttt{R-016}, including a $2\times$ \abbr{RDM}), the cumulative \abbr{TID} behind a 4~mm aluminium reference boundary reaches $\sim 60\text{--}100\text{ krad}(\mathrm{Si})$, constraining internal vault-shielded locations to $\le 20\text{--}25\text{ krad}(\mathrm{Si})$.
+        \item \emph{Surface and Internal Dielectric Charging Environment:} During geomagnetic substorms in the Earth's magnetotail, \texttt{SATG} is immersed in hot, tenuous magnetospheric plasma ($k_B T_e \approx 1\text{--}20\text{ keV}$) while energetic electrons ($> 100\text{ keV}$) penetrate into dielectrics, imposing strict surface and internal electrostatic discharge (\abbr{ESD}) limits ($< 100\text{ V}$ differential potential) per the project electrostatic-discharge control rules.
+    \end{itemize}
+\end{enumerate}
+
+% =============================================================================
+% 2. GMAT INTER-PLANE STAGGERING & CROSS-PLANE OISL CHORD JUSTIFICATION
+%    (Extracted from TRS Section 4.2)
+% =============================================================================
+\subsection{Part 2: GMAT Phase Staggering and Cross-Plane OISL Geometry Justification (from Section 4.2)}
+
+\begin{itemize}
+    \item \emph{Two Permanent Intra-Plane Terminals (Fore and Aft):} Maintain continuous optical lock with the immediately preceding and trailing satellites within the same orbital plane ($\Delta u = 40^\circ$, constant chord distance of 5,047~km, zero relative azimuth rate). This forms 8 resilient longitudinal rings around the Earth.
+    \item \emph{Two Agile Cross-Plane Terminals (Left and Right):} Use coarse-pointing hemispherical periscopes and fine-steering mirrors to maintain optical links across adjacent orbital planes ($\Delta\Omega = 45^\circ$). At the equator ($a = 7{,}378.14\text{ km}$ with $\Delta u_{\text{inter}} = 22.5^\circ$), the cross-plane chord distance reaches 5,647--6,144~km while keeping the optical line of sight $> 245\text{ km}$ above Earth's surface (well clear of atmospheric refraction and cloud layers). Specifying a maximum \abbr{OISL} operating range of $\ge 6{,}500\text{ km}$ guarantees continuous cross-plane connectivity from the equator to high latitudes, dynamically re-handshaking only across the narrow $\pm 80^\circ$ polar cross-seam.
+    \item \emph{Cross-Layer \abbr{GEO}--\abbr{LEO} Optical Relay Range Rationale:} Because the maximum geometric line-of-sight distance between a \abbr{GEO} satellite ($a = 42{,}164\text{ km}$) and a 1,000~km \abbr{LEO} satellite near the Earth limb reaches $\sim 45{,}195\text{ km}$, the cross-layer \abbr{OISL} terminals are qualified across an operating link range of \textbf{$34{,}800\text{ km}$ to $45{,}000\text{ km}$}, bridging the \abbr{LEO} tracking layer directly to European ground gateways.
+\end{itemize}
+
+% =============================================================================
+% 3. RADIOMETRIC TWO-COLOUR RATIOING & CAREFUL COTS VS. QML-V RATIONALE
+%    (Extracted from TRS Sections 4.3 & 4.4)
+% =============================================================================
+\subsection{Part 3: Radiometric Two-Colour Ratioing and ``Careful COTS'' vs.\ QML-V Trade-Off Rationale (from Sections 4.3 \& 4.4)}
+
+\begin{itemize}
+    \item \textbf{Dual-Band \abbr{SWIR}/\abbr{MWIR} Spectral Architecture (\texttt{R-009}, \texttt{R-020}):} Solid- and liquid-propellant rocket plumes emit intense thermal and vibrational-rotational radiation dominated by hot water vapour ($\mathrm{H_2O}$) and carbon dioxide ($\mathrm{CO_2}$). Both payloads employ dichroic beam-splitters feeding cooled 2D Mercury Cadmium Telluride ($\mathrm{HgCdTe}$ / \abbr{MCT}) Focal Plane Arrays (\abbr{FPA}s) operating simultaneously in two spectral bands:
+    \begin{enumerate}
+        \item \emph{Short-Wave Infrared (\abbr{SWIR}, $2.65\text{--}2.85~\mu\mathrm{m}$):} Centered on the strong $\mathrm{H_2O}$ and $\mathrm{CO_2}$ emission band, providing high contrast against solar-reflected cloud backgrounds during lower- and mid-atmospheric boost combustion.
+        \item \emph{Medium-Wave Infrared (\abbr{MWIR}, $4.15\text{--}4.45~\mu\mathrm{m}$):} Centered on the $\mathrm{CO_2}$ ``red/blue spike'' wing bands, enabling high-sensitivity detection and tracking as the missile ascends into the upper stratosphere and exosphere against cold space and low-temperature cloud tops.
+    \end{enumerate}
+    Simultaneous dual-band pixel co-registration allows the onboard processor to perform real-time two-colour spectral ratioing ($I_{\text{SWIR}}/I_{\text{MWIR}}$). This discriminates genuine rocket exhaust plumes ($T_{\text{eff}} \approx 1{,}800\text{--}3{,}000\text{ K}$) from solar specular glint ($T_{\text{eff}} \approx 5{,}800\text{ K}$) and ambient terrestrial fires ($T_{\text{eff}} \approx 800\text{--}1{,}100\text{ K}$, \texttt{R-019}, \texttt{R-022}).
+\end{itemize}
+
+To manufacture 72 \texttt{SATL} spacecraft and 6 \texttt{SATG} spacecraft within European programmatic and schedule envelopes while achieving $> 99.9\%$ system availability (\texttt{R-015}) over 7-year (\abbr{LEO}) and 15-year (\abbr{GEO}) lifetimes (\texttt{R-016}), the Space Segment adopts the \textbf{``Careful \abbr{COTS}''} platform philosophy (\textbf{AD-01}, Section 7.2):
+\begin{itemize}
+    \item \textbf{Selective Radiation Hardening and Spot Shielding:} Rather than procuring expensive, low-throughput QML-V rad-hard components for every board across 72 \abbr{LEO} satellites, \texttt{SATL} uses automotive/industrial-grade high-performance processors and FPGAs up-screened via lot-acceptance radiation testing under the project radiation-assurance rules. These are protected by graded-Z $\mathrm{Al}/\mathrm{Ta}$ spot shielding ($4\text{--}8\text{ mm}$ equivalent $\mathrm{Al}$) and the benign 1,000~km orbit selection. By contrast, the 6 long-life ($15\text{-year}$) \texttt{SATG} geostationary platforms utilize space-grade radiation-hardened avionics for critical bus functions alongside radiation-tolerant high-speed payload processors.
+    \item \textbf{Fault-Tolerant Avionics and Redundancy (\texttt{R-017}):} All critical platform chains implement dual cold/warm block redundancy with cross-strapping (\texttt{R-017}), Error Detection and Correction (\abbr{EDAC}) with memory scrubbing, Triple Modular Redundancy (\abbr{TMR}) in FPGA logic, fast-acting Single-Event Latch-up (\abbr{SEL}) current limiters, and autonomous hardware watchdog timers.
+\end{itemize}
+
+% =============================================================================
+% 4. LIFECYCLE JUSTIFICATIONS (SECTION 5) & ENVIRONMENTAL DERIVATIONS (SECTION 6)
+% =============================================================================
+\subsection{Part 4: Detailed Lifecycle Justifications (Section 5) and Eclipse / Environmental Derivations (Section 6)}
+
+\subsubsection{5.1 On-Ground Assembly, Integration, Testing (AIT), Storage, and Transportation Profile}
+
+To verify functional, performance, and environmental compliance across 6 geostationary spacecraft (\texttt{SATG}) and a serial production run of 72 Low Earth Orbit spacecraft (\texttt{SATL}), the Space Segment Assembly, Integration, and Testing (\abbr{AIT}) programme follows the model philosophy of the Verification Plan (\textbf{AD-02}) and \abbr{WBS} Element \texttt{123456.04.02} (\emph{Verification Systems}, Chapter 10 of \textbf{AD-01}):
+\begin{enumerate}
+    \item \textbf{Engineering Model (\texttt{EM}, \abbr{WBS} \texttt{123456.04.02.02}) and Structural-Thermal Model (\texttt{STM}):} Dedicated avionics flat-sat and optical bench Engineering Models are integrated with Ground Segment interface emulators. They execute Hardware-in-the-Loop (\abbr{HIL}) functional verification of the \abbr{OBDH} flight software, independent gimbal/\abbr{FSM} control loops, cryptographic \abbr{COMSEC} modules, and optical \abbr{OISL} routing protocols (\texttt{R-039}). In parallel, the \texttt{STM} validates primary load paths, 9-satellite dispenser interfaces, and cryogenic radiator and loop-heat-pipe thermal balance.
+    \item \textbf{Qualification / Proto-Flight Model (\texttt{QM}/\texttt{PFM}, \abbr{WBS} \texttt{123456.04.02.01}):} The lead spacecraft of each tier undergoes full qualification or proto-flight environmental testing per the Verification Plan (\textbf{AD-02}). This campaign covers sine and random vibration, acoustic noise, dispenser/launcher pyro-shock, multi-cycle thermal-vacuum (\abbr{TVAC}) testing across hot and cold operational plateaus, Electromagnetic Compatibility (\abbr{EMC}), and pre-/post-test optical boresight stability verification.
+    \item \textbf{Recurring Flight Models (\texttt{FM}, \abbr{WBS} \texttt{123456.04.02.03}):} The 6 \texttt{SATG} flight units undergo full individual acceptance testing. For the 72 \texttt{SATL} spacecraft, serial production is organized into 8 plane-lots of 9 spacecraft each. Every \texttt{SATL} Flight Model undergoes workmanship random vibration, shortened \abbr{TVAC} acceptance screening, and radiometric/geometric payload calibration per the recurring-production acceptance rules of the Verification Plan (\textbf{AD-02}).
+\end{enumerate}
+
+Throughout on-ground \abbr{AIT}, cleanroom storage (up to 24~months for spare flight units), and surface/air transportation to the launch site, strict environmental and contamination controls are enforced:
+\begin{itemize}
+    \item \textbf{Particulate and Molecular Cleanliness:} All cooled \abbr{SWIR}/\abbr{MWIR} telescope assemblies (\texttt{.04}) and 1,550~nm laser \abbr{OISL} optical heads (\texttt{.06.02}) are integrated and maintained under \textbf{ISO Class 5 (Class 100)} cleanroom conditions. Continuous high-purity dry gaseous nitrogen ($\mathrm{GN_2}$) purging and sealed aperture covers prevent moisture or volatile hydrocarbon condensation on cryogenic optics ($\mathrm{CVCM} < 0.01\%$, $\mathrm{TML} < 1.0\%$). Spacecraft platform integration is conducted in \textbf{ISO Class 8 (Class 100,000)} facilities.
+    \item \textbf{Containerized Transportation and Storage:} Spacecraft are transported in hermetically sealed, climate-controlled ($20^\circ\mathrm{C} \pm 3^\circ\mathrm{C}$, relative humidity $< 40\%$), nitrogen-purged shipping containers. Damped shock-isolation frames limit quasi-static and dynamic transport loads to $\le 3.0\,g$ along all axes (monitored by continuous triaxial shock/temperature data loggers), while battery state-of-charge is maintained at $40\text{--}50\%$ storage charge.
+\end{itemize}
+
+\subsubsection{5.2 Pre-Launch and Launch Campaign Profile}
+
+At the launch site Hazardous Processing Facility, each spacecraft undergoes final post-transport functional checkout, propellant loading, battery top-off charging, and mechanical mating to its launch vehicle adapter:
+\begin{itemize}
+    \item \textbf{\abbr{LEO} Constellation Plane-Batch Launch Profile (\texttt{SATL}):} The 72 \texttt{SATL} spacecraft are deployed across \textbf{8 dedicated medium/heavy-lift launch campaigns}, with one launch per orbital plane of the Walker Delta $72/8/1$ constellation. In each launch, 9 \texttt{SATL} spacecraft (wet mass $230\text{--}290\text{ kg}$ each, including orbit insertion/phasing propellant) are mounted on a common cylindrical multi-satellite dispenser ring stack (total launch payload mass $\sim 2{,}300\text{--}2{,}800\text{ kg}$ including dispenser hardware) and injected into the circular 1,000~km, $80^\circ$ inclination orbit.
+    \item \textbf{\abbr{GEO} Constellation Launch Profile (\texttt{SATG}):} The 6 \texttt{SATG} spacecraft (wet mass $2{,}400\text{--}3{,}100\text{ kg}$ each, including orbit-raising transfer propellant) are launched via single- or dual-manifest heavy-lift vehicles into Geostationary Transfer Orbit (\abbr{GTO}) or direct geostationary injection toward 35,786~km altitude, $0^\circ$ inclination.
+    \item \textbf{Launch Configuration and Safety Inhibits:} During fairing encapsulation, pad umbilical stand-by, liftoff, and ascent, all Hold-Down and Release Mechanisms (\abbr{HDRM}s) and optical aperture covers remain mechanically locked. In compliance with the project launch-safety rules, propulsion valves, high-power \abbr{RF} transmitters, laser \abbr{OISL} diodes, and pulse-tube cryocoolers are held under at least three independent electrical or mechanical safety inhibits. Meanwhile, the \abbr{OBDH} operates in a low-power launch-monitor state with redundant separation micro-switches armed.
+\end{itemize}
+
+\subsubsection{5.3 Launch and Early Orbit Phase (LEOP) and In-Orbit Commissioning Profile}
+
+Following upper-stage separation, the Launch and Early Orbit Phase (\abbr{LEOP}) and In-Orbit Commissioning (\texttt{R-040}) transition each spacecraft from physical separation to certified operational readiness through five sequential steps:
+\begin{enumerate}
+    \item \textbf{Dispenser Separation and Autonomous Detumbling ($T_{\text{sep}} + 0\text{ to }30\text{ min}$):} For \texttt{SATL}, the upper-stage dispenser sequentially ejects the 9 spacecraft at staggered intervals using calibrated low-shock spring actuators ($\Delta v_{\text{sep}} \approx 0.5\text{--}1.5\text{ m/s}$) with differential velocity vectors to prevent re-contact. Upon separation switch actuation and expiration of a mandatory safety inhibit timer, the \abbr{ADCS} activates its fibre-optic rate sensors and executes autonomous B-dot magnetorquer and reaction-wheel rate damping. This reduces initial post-separation spacecraft bus tip-off rates from $\le 2.0\text{--}3.0^\circ/\text{s}$ (typical for a $230\text{--}290\text{ kg}$ dispenser-deployed bus, whereas high angular slew rates of $\ge 15^\circ/\text{s}$ apply strictly to the lightweight payload gimbal and \abbr{FSM} steering instruments) down to $< 0.1^\circ/\text{s}$.
+    \item \textbf{Solar Array Deployment and Sun-Safe / Nadir Acquisition ($T_{\text{sep}} + 30\text{ min to }3\text{ h}$):} Non-Explosive Actuators (\abbr{NEA}s) release the stowed solar array wings and omni/high-gain \abbr{TT\&C} antennas. The spacecraft transitions to a power-positive 3-axis Sun/nadir-pointed attitude, establishes encrypted S-band \abbr{TT\&C} lock with the Ground Station Network (\abbr{WBS} \texttt{123456.02.05}), and downlinks initial \abbr{LEOP} health telemetry.
+    \item \textbf{Outgassing Decontamination and Cryocooler Cooldown (Days 2--7):} Prior to exposing or cooling the infrared optics, the Thermal Control Subsystem (\abbr{TCS}) executes an active decontamination bake-out cycle. It maintains the optical bench and \abbr{FPA} cold finger at $310\text{--}320\text{ K}$ for 72--96~hours to vent residual moisture and outgassing volatiles into vacuum. Once telemetry confirms molecular cleanliness, the pulse-tube cryocoolers ramp up to cool the $\mathrm{HgCdTe}$ \abbr{SWIR}/\abbr{MWIR} focal planes to their $65\text{--}95\text{ K}$ operating window, and the motorized payload aperture cover opens.
+    \item \textbf{Orbit Insertion, Walker Delta Phasing, and Station Acquisition (Weeks 1--6 for \texttt{SATL}; Weeks 1--12 for \texttt{SATG}):} Each \texttt{SATL} spacecraft executes upper-stage dispersion correction, orbit insertion, and differential semi-major axis phasing burns using its onboard propulsion subsystem (\texttt{.05}) to enter its assigned $40^\circ$ in-plane phase slot within its 1,000~km orbital plane, establishing the nominal $\Delta u_{\text{inter}} = 22.5^\circ$ inter-plane phase offset (within the $15.0^\circ\text{--}22.5^\circ$ GMAT-optimized staggering window). Concurrently, each \texttt{SATG} spacecraft executes apogee or electric orbit-raising (\abbr{EOR}) transfer and station-acquisition burns to settle into its assigned $60^\circ$ geostationary longitude slot at 35,786~km.
+    \item \textbf{In-Orbit Payload Calibration, \abbr{OISL} Mesh Lock, and End-to-End Validation (\texttt{R-040}):} Each spacecraft performs star-tracker-to-telescope thermo-elastic boresight alignment calibration against reference star fields, verifying an Attitude/\abbr{LOS} Knowledge Error of $\text{AKE} \le 10\text{--}15~\mu\mathrm{rad}$. It then completes radiometric flat-fielding and dark-current characterization across the \abbr{SWIR} ($2.65\text{--}2.85~\mu\mathrm{m}$) and \abbr{MWIR} ($4.15\text{--}4.45~\mu\mathrm{m}$) channels, optical acquisition and bit-error-rate validation of all 4 intra-/cross-plane laser \abbr{OISL} terminals and cross-layer \abbr{GEO}--\abbr{LEO} optical trunks, and end-to-end simulated cueing and stereoscopic tracking exercises with the Ground Segment (\texttt{R-040}) before entering active Early Warning duty.
+\end{enumerate}
+
+\subsubsection{5.4 Nominal Operational Phase and Mode Transitions (7 Years LEO / 15 Years GEO, \texttt{R-016})}
+
+Throughout its nominal operational lifetime---at least \textbf{7~years for \texttt{SATL}} in 1,000~km \abbr{LEO} and at least \textbf{15~years for \texttt{SATG}} in 35,786~km \abbr{GEO} (\texttt{R-016})---the Space Segment operates continuously to sustain an overall system operational availability of $> 99.9\%$ (\texttt{R-015}). Individual spacecraft transition autonomously or via authenticated Ground Segment command among five nominal operational modes:
+\begin{enumerate}
+    \item \textbf{Mode N1 --- Continuous Boost-Phase Surveillance Mode (\texttt{SATG} Primary / \texttt{SATL} High-Latitude Supplemental):} The default 24/7 operational state of all 6 \texttt{SATG} geostationary nodes, supplemented by un-cued \texttt{SATL} nodes traversing high-latitude zones ($> 60^\circ\text{N}$). The \abbr{WFOV} \abbr{SWIR}/\abbr{MWIR} payload stares continuously at the Earth disk at $\ge 10\text{ Hz}$ (\texttt{R-006}--\texttt{R-009}), while the onboard processor executes real-time proton despiking, two-colour spectral ratioing, and spatio-temporal clutter rejection (\texttt{R-019}, \texttt{R-022}). Upon detecting a boost-phase plume exceeding the radiometric threshold ($P_d > 95\%$, \texttt{R-010}), the spacecraft immediately formats and downlinks an encrypted \emph{GEO Event Report} to the Ground Segment within the $\le 10.0\text{ s}$ Step~1 latency allocation (\texttt{R-042}).
+    \item \textbf{Mode N2 --- Cued Agile Stereoscopic Tracking Mode (\texttt{SATL} Active Warning Mode):} Triggered immediately upon reception of an authenticated \emph{LEO Tracking Request} from the Ground Segment Command \& Control System via direct ground uplink or the mandatory \abbr{SSEG} \abbr{OISL} relay network ($\le 5.0\text{ s}$ Step~2 selection and cueing allocation, \texttt{R-043}, \texttt{R-044}). The two selected \texttt{SATL} spacecraft automatically preempt background calibration or housekeeping tasks and execute the Step~3 tracking sequence ($\le 25.0\text{--}30.0\text{ s}$ total allocation):
+    \begin{itemize}
+        \item \emph{Independent Optical Payload \abbr{LOS} Lock-On ($< 5.0\text{ s}$, \texttt{R-024}):} The coarse two-axis payload gimbal ($\ge 15^\circ/\text{s}$) and fine piezo Fast Steering Mirror ($\ge 200\text{ Hz}$ bandwidth) slew the $1.5^\circ \times 1.5^\circ$ \abbr{NFOV} to acquire and lock onto the target plume within $< 5.0\text{ s}$ while maintaining optical \abbr{LOS} pointing stability below $< 2\text{ arcsec/s}$ (RMS) without slewing the spacecraft bus or disturbing the pointing lock of the \abbr{OISL} terminals and antennas.
+        \item \emph{Synchronized Stereoscopic Tracking and Onboard Preliminary 3D Trajectory Computation (\texttt{R-023}):} Both \texttt{SATL} spacecraft track the ascending boost/post-boost vehicle at $20\text{--}50\text{ Hz}$ and exchange GNSS-synchronized timestamped \abbr{LOS} unit vectors and attitude/position covariance matrices over the $1,550\text{ nm}$ laser \abbr{OISL} mesh. This enables the primary \texttt{SATL} node to compute a real-time \emph{Onboard Preliminary Trajectory} estimate via dual-satellite stereoscopic triangulation (\texttt{R-023}).
+        \item \emph{Encrypted Dual-Product Downlink (\texttt{R-012}, \texttt{R-023}, \texttt{R-033}):} Both cued \texttt{SATL} nodes stream their timestamped \emph{LEO Observation Packages} together with the \emph{Onboard Preliminary Trajectory} estimate via direct ground downlink or cross-layer \abbr{OISL} relay to the Ground Segment Data Processing System (\texttt{123456.02.04}) for authoritative multi-sensor ground fusion and automated preliminary warning dispatch within $\le 60\text{ s}$ end-to-end (\texttt{R-011}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045}).
+    \end{itemize}
+    \item \textbf{Mode N3 --- Mandatory \abbr{OISL} Mesh Relay and Backbone Mode (\texttt{SATG} \& \texttt{SATL} Continuous):} Runs concurrently across all 78 constellation nodes. It maintains optical lock on intra-plane/cross-plane laser \abbr{OISL} terminals ($\ge 500\text{ Mbps}$, $\ge 6{,}500\text{ km}$) and cross-layer \abbr{GEO}--\abbr{LEO} optical trunks ($\ge 1.5\text{--}2.0\text{ Gbps}$, $34{,}800\text{--}45{,}000\text{ km}$), executes autonomous quality-of-service (\abbr{QoS}) packet routing, rotates \abbr{COMSEC} cryptographic keys (\texttt{R-031}), and monitors link margins (\texttt{R-032}, \texttt{R-033}).
+    \item \textbf{Mode N4 --- Constellation Maintenance, Station-Keeping, and Collision Avoidance Mode:} Executed periodically to preserve constellation geometry and orbital safety:
+    \begin{itemize}
+        \item \emph{Routine Station-Keeping:} In-plane phase maintenance for \texttt{SATL} within $\pm 0.5^\circ$ argument of latitude at 1,000~km, and N--S/E--W station-keeping for \texttt{SATG} within a $\pm 0.05^\circ$ longitude/latitude window at 35,786~km, accompanied by reaction-wheel momentum desaturation.
+        \item \emph{Collision Avoidance Manoeuvres (\abbr{CAM}):} Triggered via Ground Segment Conjunction Data Messages (\texttt{IF-EXT-04}) whenever a predicted conjunction in the 1,000~km \abbr{LEO} or \abbr{GEO} regime exceeds a collision probability threshold of $P_c > 10^{-4}$. Maintenance burns are staggered across the Walker Delta $72/8/1$ fleet so that at most one \texttt{SATL} node per coverage region is in manoeuvre mode at any time, preserving uninterrupted 24/7 stereoscopic coverage over the Baltic theatre (\texttt{R-008}, \texttt{R-015}).
+    \end{itemize}
+    \item \textbf{Mode N5 --- In-Orbit Calibration and Software Maintenance Mode:} Periodic radiometric internal-blackbody and deep-space calibration, star-tracker-to-payload alignment updates, and authenticated over-the-air uplink of refined plume-detection filters and onboard flight software patches derived from the 5-year Ground Segment operational archive (\texttt{R-004}, \texttt{R-036}, \texttt{R-041}).
+\end{enumerate}
+
+\subsubsection{5.5 Contingency, Fault Management (FDIR), and Safe Mode Profile}
+
+To sustain $> 99.9\%$ operational availability (\texttt{R-015}) and survive single-point hardware failures or radiation-induced upsets (\texttt{R-017}) without immediate ground operator intervention, each \texttt{SATL} and \texttt{SATG} spacecraft implements a three-level autonomous Fault Detection, Isolation, and Recovery (\abbr{FDIR}) hierarchy:
+\begin{itemize}
+    \item \textbf{FDIR Level 1 --- Local Component / Frame-Level Recovery ($< 100\text{ ms}$):} Transparent hardware and firmware correction of transient space-environment effects. This includes hardware \abbr{EDAC} single-bit memory correction, FPGA Triple Modular Redundancy (\abbr{TMR}) logic voting, real-time \textbf{proton despiking} during South Atlantic Anomaly (\abbr{SAA}) and polar transits, and fast-acting Single-Event Latch-up (\abbr{SEL}) current limiters that cycle affected non-critical electronics rails within milliseconds without interrupting active tracking.
+    \item \textbf{FDIR Level 2 --- Autonomous Redundant Unit Failover ($< 2.0\text{ s}$, \texttt{R-017}):} If a primary subsystem unit (e.g., A-side \abbr{OBDH} processor, star tracker head, reaction wheel, cryocooler drive electronics, or \abbr{OISL} transceiver) exhibits persistent telemetry out-of-limits or watchdog timeout, the onboard \abbr{FDIR} supervisor autonomously isolates the faulted unit and switches to the hot/warm redundant B-side unit (\texttt{R-017}). It then broadcasts a health-status update across the \abbr{OISL} mesh so the Ground Segment C2 selector (\texttt{R-043}) immediately updates constellation availability tables.
+    \item \textbf{FDIR Level 3 --- Spacecraft Safe Mode:} Triggered only by severe spacecraft-level anomalies, such as main power bus under-voltage exceeding depth-of-discharge limits, loss of 3-axis attitude determination, or cryocooler thermal runaway. Upon Safe Mode entry, the spacecraft immediately closes the motorized payload aperture shutter to protect the \abbr{SWIR}/\abbr{MWIR} focal planes from accidental direct solar exposure, inhibits all propulsion thrusters, commands the \abbr{ADCS} into a robust Sun-pointing attitude that maximizes solar array illumination, and configures S-band \abbr{TT\&C} and emergency omni beacons for continuous telemetry access while the remaining 5--6 visible \texttt{SATL} satellites over the Baltic region maintain full stereoscopic tracking coverage.
+\end{itemize}
+
+\subsubsection{5.6 Decommissioning, Passivation, and End-of-Life (EOL) Disposal Profile (\texttt{R-018})}
+
+Upon reaching the end of its operational life ($\ge 7\text{ years}$ for \texttt{SATL}; $\ge 15\text{ years}$ for \texttt{SATG}, \texttt{R-016}) or upon exhaustion of redundant critical bus chains, each spacecraft executes mandatory end-of-life disposal and passivation in compliance with \textbf{\texttt{R-018}}, the project space-debris mitigation policy, and the \textbf{ESA Zero Debris Policy}:
+\begin{enumerate}
+    \item \textbf{\abbr{LEO} Constellation Active Deorbitation (\texttt{SATL} from 1,000~km):} Because natural atmospheric drag decay from a circular 1,000~km orbit would require $> 500\text{--}1{,}000\text{ years}$, every \texttt{SATL} spacecraft reserves a protected End-of-Life propellant allocation ($\Delta v_{\text{EOL}} \ge 230.0\text{ m/s}$ within the total $\Delta v \ge 380.0\text{ m/s}$ budget) monitored continuously throughout the mission. At decommissioning, the spacecraft executes retrograde perigee-lowering burns to either perform a direct controlled destructive atmospheric re-entry over an uninhabited oceanic area or lower its perigee below $300\text{--}380\text{ km}$. This guarantees complete atmospheric demise within $< 5\text{ years}$ of mission completion with a post-mission disposal success probability of $\ge 99\%$. \texttt{SATL} structural and internal components follow Design-for-Demise (\abbr{D4D}) principles so that ground casualty risk remains $< 10^{-4}$.
+    \item \textbf{\abbr{GEO} Constellation Super-Synchronous Graveyard Re-Orbitation (\texttt{SATG} from 35,786~km):} Prior to propellant depletion, each \texttt{SATG} spacecraft executes a multi-burn Hohmann-type orbit-raising sequence ($\Delta v_{\text{EOL}} \ge 15.0\text{ m/s}$) to inject the vehicle into a circular super-synchronous graveyard orbit at least $\Delta H \ge +300\text{ km}$ above the geostationary operational altitude ($h_{\text{graveyard}} \ge 36{,}086\text{ km}$). This exceeds the minimum IADC perigee increase $\Delta H_{\min} = 235\text{ km} + (1{,}000 \cdot C_R \cdot A/m)$ with margin and clears the protected \abbr{GEO} zone permanently.
+    \item \textbf{End-of-Life Spacecraft Passivation:} Immediately upon achieving the final disposal orbit, the spacecraft executes irreversible passivation per the project disposal and passivation rules. All residual liquid or gaseous propellants and pressurant tanks are vented or depleted to zero differential pressure, $\mathrm{Li\text{-}ion}$ battery charge switches are permanently opened and cells are drained into resistive loads, reaction wheels and cryocooler compressors are spun down to zero momentum, and all \abbr{RF} and laser \abbr{OISL} transmitters are permanently disabled.
+\end{enumerate}
+
+Table~\ref{tab:sseg_life_profile} summarizes the chronological life-profile phases, operational modes, duration envelopes, and key Space Segment configurations across the complete product lifecycle.
+
+\begin{table}[H]
+\centering
+\caption{Summary of EWAS Space Segment Life Profile Phases, Operational Modes, and Key Constraints}
+\label{tab:sseg_life_profile}
+{\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.04}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Lifecycle Phase / Mode} & \thead{Duration / Timing} & \thead{Applicable CI \& Orbit} & \thead{Space Segment Configuration, Key Activities \& Governing Requirements} \\ \hline
+    \textbf{Phase 1: On-Ground \abbr{AIT}, Storage \& Transport} & 18--36~months ($\le 24$~mo storage) & \texttt{EM}, \texttt{STM}, \texttt{QM/PFM}, \texttt{FM} (\texttt{SATL} 72x, \texttt{SATG} 6x) & ISO~5 ($\mathrm{GN_2}$ purge) for \abbr{PLD}/\abbr{OISL} optics; ISO~8 for bus; \abbr{HIL} testing (\texttt{R-039}); \abbr{TVAC}, vibration, shock, and EMC; transport loads $\le 3.0\,g$. \\ \hline
+    \textbf{Phase 2: Pre-Launch \& Launch Ascent} & Launch campaign + ascent ($\sim 1\text{--}6\text{ h}$) & 8 plane-launches (9~\texttt{SATL}/launch); \texttt{SATG} \abbr{GTO}/\abbr{GEO} & 9-sat dispenser stack ($\sim 2{,}300\text{--}2{,}800\text{ kg}$); \texttt{SATG} ($2{,}400\text{--}3{,}100\text{ kg}$); \abbr{HDRM}s \& aperture covers locked; $\ge 3$ safety inhibits. \\ \hline
+    \textbf{Phase 3: \abbr{LEOP} \& In-Orbit Commissioning} & Weeks 1--6 (\texttt{SATL}) \newline Weeks 1--12 (\texttt{SATG}) & Insertion to 1,000~km ($80^\circ$) \& 35,786~km ($0^\circ$) & Bus detumbling ($\le 2\text{--}3^\circ/\text{s}$ to $< 0.1^\circ/\text{s}$); array deployment; 72--96~h bake-out ($310\text{--}320\text{ K}$); cooler cooldown ($65\text{--}95\text{ K}$); orbit insertion \& Walker Delta phasing ($\Delta u_{\text{inter}} = 22.5^\circ$); \abbr{OISL} mesh validation (\texttt{R-040}). \\ \hline
+    \textbf{Phase 4 --- Mode N1: Boost Surveillance} & Continuous 24/7 ($\ge 7\text{ yr}$ \abbr{LEO} / $\ge 15\text{ yr}$ \abbr{GEO}) & \texttt{SATG} primary (6x); \texttt{SATL} high-lat.\ suppl. & Persistent $\ge 10\text{ Hz}$ \abbr{WFOV} \abbr{SWIR}/\abbr{MWIR} staring ($P_d > 95\%$, \texttt{R-009}, \texttt{R-010}); onboard proton despiking \& clutter filtering (\texttt{R-019}, \texttt{R-022}); encrypted \emph{GEO Event Report} downlink in $\le 10.0\text{ s}$ (\texttt{R-042}). \\ \hline
+    \textbf{Phase 4 --- Mode N2: Agile Stereo Tracking} & Event-driven ($\le 25\text{--}30\text{ s}$ active window) & 2 cued \texttt{SATL} nodes at 1,000~km + \abbr{OISL} & Triggered by Ground \emph{LEO Tracking Request} ($\le 5\text{ s}$ selection/\abbr{OISL} cueing, \texttt{R-043}, \texttt{R-044}); independent gimbal+\abbr{FSM} lock in $< 5.0\text{ s}$ with $< 2\text{ arcsec/s}$ stability (\texttt{R-024}); \abbr{OISL} \abbr{LOS} vector exchange for \emph{Onboard Preliminary Trajectory} (\texttt{R-023}); dual-product downlink (\texttt{R-011}, \texttt{R-012}, \texttt{R-045}). \\ \hline
+    \textbf{Phase 4 --- Mode N3: Mandatory \abbr{OISL} Relay} & Continuous 24/7 background mesh & All 72~\texttt{SATL} \& 6~\texttt{SATG} nodes & 4~laser \abbr{OISL} links/\texttt{SATL} (1,550~nm, $\ge 500$~Mbps, $\ge 6,500$~km) + \abbr{GEO}--\abbr{LEO} optical trunks ($\ge 1.5\text{--}2.0$~Gbps, 45,000~km); \abbr{QoS} routing; \abbr{COMSEC} (\texttt{R-031}) \& anti-jamming (\texttt{R-032}, \texttt{R-033}). \\ \hline
+    \textbf{Phase 4 --- Mode N4: Station-Keeping \& \abbr{CAM}} & Periodic burns (staggered, 1 node at a time) & 1,000~km \abbr{LEO} ($\pm 0.5^\circ$) \& \abbr{GEO} ($\pm 0.05^\circ$) & Orbit maintenance, momentum dumping, and debris Collision Avoidance Manoeuvres ($P_c > 10^{-4}$, \texttt{IF-EXT-04}); staggered to preserve 24/7 Baltic coverage (\texttt{R-008}, \texttt{R-015}). \\ \hline
+    \textbf{Phase 4 --- Mode N5: In-Orbit Calibration} & Scheduled maintenance windows & \texttt{SATL} \& \texttt{SATG} fleet & Radiometric blackbody/deep-space calibration, thermo-elastic boresight updates, and secure uplink of archive-refined algorithms (\texttt{R-004}, \texttt{R-041}). \\ \hline
+    \textbf{Phase 5: Contingency (\abbr{FDIR} \& Safe Mode)} & L1 $< 100\text{ ms}$; L2 $< 2\text{ s}$; L3 until ground recovery & Any faulted \texttt{SATL} or \texttt{SATG} node & L1 \abbr{EDAC}/\abbr{TMR}/proton despiking/\abbr{SEL} reset; L2 autonomous A/B redundant unit failover (\texttt{R-017}); L3 Safe Mode closes payload shutter, points arrays to Sun, and activates S-band beacon. \\ \hline
+    \textbf{Phase 6: \abbr{EOL} Disposal \& Passivation} & Post-mission ($\le 5\text{ yr}$ decay / immediate \abbr{GEO}) & \texttt{SATL} deorbit; \texttt{SATG} $+300\text{ km}$ graveyard & Active \texttt{SATL} retrograde deorbit ($\Delta v_{\text{EOL}} \ge 230\text{ m/s}$, $\ge 99\%$ reliability); \texttt{SATG} graveyard ($\Delta H \ge +300\text{ km}$); full fluid/battery/RF passivation (\texttt{R-018}). \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{6.2 Thermal, Solar Illumination, and Eclipse Environment (Cylindrical Eclipse Duration Derivation)}
+
+The space thermal environment subjects the two constellation tiers to distinct radiative heat flux extremes and orbital eclipse regimes:
+\begin{itemize}
+    \item \textbf{External Radiative Heat Fluxes:} Both constellations are exposed to direct solar irradiance varying seasonally from $S_{\min} = 1{,}322\text{ W/m}^2$ (aphelion) to $S_{\max} = 1{,}414\text{ W/m}^2$ (perihelion), with a nominal solar constant of $S_0 = 1{,}361\text{ W/m}^2$. At 1,000~km \abbr{LEO}, \texttt{SATL} additionally receives Earth-reflected solar albedo ($a = 0.25\text{--}0.38$, corresponding to $150\text{--}380\text{ W/m}^2$ depending on cloud and ice cover over the Baltic and Arctic) and Earth outgoing longwave infrared radiation ($q_{\text{EIR}} = 210\text{--}260\text{ W/m}^2$). At 35,786~km \abbr{GEO}, Earth albedo and planetary infrared fluxes on \texttt{SATG} are $< 7\text{ W/m}^2$.
+    \item \textbf{Eclipse Regimes and Thermal Cycling Constraints:}
+    \begin{enumerate}
+        \item \emph{\texttt{SATL} (1,000~km, $80^\circ$ \abbr{LEO}):} Completes $\sim 13.7$ orbits per day ($a = 7{,}378.14\text{ km}$, period $T = 105.12\text{ min}$). When the solar beta angle approaches $\beta_{\odot} \approx 0^\circ$, the maximum cylindrical Earth-shadow eclipse duration per orbit is given by:
+        \[
+            \Delta t_{\text{ecl,max}} = \frac{T}{\pi}\arcsin\!\left(\frac{R_E}{a}\right) = \frac{105.12\text{ min}}{180^\circ} \times 59.82^\circ = 34.93\text{ min} \approx 35.0\text{ min}
+        \]
+        Over its 7-year lifetime, each \texttt{SATL} node experiences \textbf{25,000 to 35,000 sunlit-to-eclipse thermal cycles}, imposing severe thermo-mechanical fatigue constraints on solar array interconnects, $\mathrm{Li\text{-}ion}$ battery depth of discharge ($\text{DoD} \le 30\%$), and star-tracker-to-telescope thermo-elastic alignment stability ($\le 10\text{--}15~\mu\mathrm{rad}$ \abbr{AKE}).
+        \item \emph{\texttt{SATG} (35,786~km \abbr{GEO}):} Remains in continuous sunlight throughout most of the year, interrupted by two 45-day eclipse seasons centered on the vernal and autumnal equinoxes ($\sim 90$ eclipses/year; $\sim 1{,}350$ eclipses over 15~years) with a maximum daily eclipse duration of \textbf{71.5~minutes} ($\text{DoD} \le 65\%$).
+    \end{enumerate}
+    \item \textbf{Dual-Regime Temperature Boundary Constraints:} Each spacecraft must simultaneously sustain two widely separated temperature zones: (1)~the warm electronics bus ($263\text{--}323\text{ K}$) and $\mathrm{Li\text{-}ion}$ batteries ($273\text{--}303\text{ K}$), and (2)~the cryogenic telescope optics ($180\text{--}210\text{ K}$) and $\mathrm{HgCdTe}$ \abbr{SWIR}/\abbr{MWIR} focal plane arrays held at \textbf{$65\text{ K}\text{--}95\text{ K}$} within $\pm 0.1\text{ K}$.
+\end{itemize}
+
+\subsubsection{6.3 Vacuum, Residual Atmosphere, Outgassing, and Contamination Constraints}
+
+\begin{itemize}
+    \item \textbf{Hard Vacuum and Cryogenic Molecular Contamination:} Ambient pressure is $< 10^{-9}\text{ hPa}$ at 1,000~km \abbr{LEO} and $< 10^{-11}\text{ hPa}$ at 35,786~km \abbr{GEO}. In hard vacuum, cryogenic focal planes ($65\text{--}95\text{ K}$) and cold optical mirrors ($180\text{--}210\text{ K}$) act as molecular cold traps where condensing water ice ($\mathrm{H_2O}$) or hydrocarbon films of $10\text{--}50\text{ nm}$ thickness absorb strongly in the $2.7~\mu\mathrm{m}$ (\abbr{SWIR}) and $4.2\text{--}4.4~\mu\mathrm{m}$ (\abbr{MWIR}) bands and degrade stray-light rejection (\texttt{R-009}, \texttt{R-025}). All non-metallic materials are therefore constrained to Total Mass Loss $\mathrm{TML} < 1.0\%$ and Collected Volatile Condensable Material $\mathrm{CVCM} < 0.01\%$, and propulsion plumes must remain clear of optical apertures.
+    \item \textbf{Exospheric Drag and Atomic Oxygen (\abbr{AO}) at 1,000~km:} At 1,000~km altitude, the residual exosphere ($\rho \approx 10^{-15}\text{ to }10^{-14}\text{ kg/m}^3$ across the 11-year solar cycle) produces low aerodynamic drag (semi-major axis decay of $\sim 1\text{--}5\text{ m/year}$) and low Atomic Oxygen fluence ($< 10^{18}\text{ atoms/cm}^2\text{/year}$). While differential drag requires periodic station-keeping burns (Mode N4), the negligible natural decay rate strictly mandates active retrograde deorbit propulsion at End of Life (\texttt{R-018}).
+\end{itemize}
+
+\subsubsection{6.4 Micrometeoroids and Orbital Debris (MMOD) and Gravitational Perturbations}
+
+\begin{itemize}
+    \item \textbf{MMOD Spatial Density and Collision Risk Constraint:} The $800\text{--}1{,}050\text{ km}$ high-inclination \abbr{LEO} band exhibits a high spatial density of catalogued and uncatalogued orbital debris (modeled via ESA \texttt{MASTER-8} at hypervelocity impact speeds averaging $v_{\text{rel}} \approx 11\text{--}14.5\text{ km/s}$). This environment imposes a binding spacecraft-level Probability of No Penetration constraint of $\text{PNP} \ge 0.99$ over the design lifetime against untrackable particles ($< 1.0\text{ cm}$) and mandates active Collision Avoidance Manoeuvres (\abbr{CAM}) whenever Ground Segment Conjunction Data Messages (\texttt{IF-EXT-04}) indicate a collision probability $P_c > 10^{-4}$.
+    \item \textbf{Gravitational, Geopotential, and Solar Radiation Pressure Perturbations:} At 1,000~km, $80^\circ$ inclination, Earth's oblateness ($J_2 = 1.08263 \times 10^{-3}$) induces a secular nodal precession of $\dot{\Omega} \approx -1.04^\circ/\text{day}$ and apsidal rotation of $\dot{\omega} \approx +2.85^\circ/\text{day}$ ($\Delta v_{\text{SK}} \le 4\text{--}6\text{ m/s/year}$ for differential phase maintenance). At 35,786~km \abbr{GEO}, lunisolar gravitational attraction ($\sim 45\text{--}51\text{ m/s/year}$ N--S inclination drift), Earth triaxiality ($J_{22}$ E--W drift $\sim 2\text{ m/s/year}$), and solar radiation pressure govern the \texttt{SATG} station-keeping constraint.
+\end{itemize}
+
+\end{document}

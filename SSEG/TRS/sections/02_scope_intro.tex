@@ -37,8 +37,8 @@ The \abbr{EWAS} technical documentation is organized into a hierarchical specifi
     \textbf{123456.00} & Level 1 & EWAS System & Parent system baseline (\texttt{R-001}--\texttt{R-049}, \textbf{AD-01}); source of top-level requirement flow-down. \\ \hline
     \textbf{123456.02} & Level 2 & Ground Systems & External peer segment; interacts with \abbr{SSEG} across the Space-to-Ground \abbr{TT\&C} and mission data interface. \\ \hline
     \textbf{123456.03} & Level 2 (\texttt{CI-03}) & \textbf{Space Segment (\abbr{SSEG})} & \textbf{Primary subject of this TRS:} hybrid constellation geometry, cross-layer \abbr{ISL}, latency budgets, and segment envelopes. \\ \hline
-    \textbf{123456.03.01} & Level 3 (\texttt{SATL}) & Satellite \abbr{LEO} (72~nodes) & Subordinate flight segment at 1,000~km (Walker Delta $72/8/1$); platform and \abbr{NFOV} tracking payload envelopes defined herein. \\ \hline
-    \textbf{123456.03.02} & Level 3 (\texttt{SATG}) & Satellite \abbr{GEO} (6~nodes) & Subordinate flight segment at 35,786~km ($60^\circ$ spacing); platform and \abbr{WFOV} detection payload envelopes defined herein. \\ \hline
+    \textbf{123456.03.01} & Level 3 (\texttt{SATL}) & Satellite \abbr{LEO} (72~nodes) & Subordinate flight system at 1,000~km (Walker Delta $72/8/1$); black-box flight-system allocations (\texttt{SSEG-REQ-ALLOC}) defined herein, with internal spacecraft and subsystem requirements governed by \texttt{EWAS-HSB-SATL-TRS-03.01} (\textbf{RD-03}). \\ \hline
+    \textbf{123456.03.02} & Level 3 (\texttt{SATG}) & Satellite \abbr{GEO} (6~nodes) & Subordinate flight system at 35,786~km ($60^\circ$ spacing); black-box flight-system allocations (\texttt{SSEG-REQ-ALLOC}) defined herein, with internal spacecraft and subsystem requirements governed by \texttt{EWAS-HSB-SATG-TRS-03.02} (\textbf{RD-04}). \\ \hline
 \end{tabularx}}
 \end{table}
 
@@ -79,7 +79,7 @@ This specification follows the standardized HSB/PG project document layout. Tabl
     \rowcolor{TableHeaderBlue}
     \thead{Section Group} & \thead{HSB/PG TRS Section} & \thead{Normative Content Summary} \\ \hline
     \textbf{1} \newline Scope and Introduction & \textbf{Scope} \& \textbf{Introduction} & Purpose, objective, specification tree hierarchy (\texttt{CI-03}), document-structure mapping, and normative requirement conventions. \\ \hline
-    \textbf{2} \newline References & \textbf{References} (\abbr{AD}, \abbr{RD}, \& Abbreviations) & Applicable Documents (\texttt{AD-01}--\texttt{AD-03}), Reference Documents (\texttt{RD-01}--\texttt{RD-02}), and abbreviations. \\ \hline
+    \textbf{2} \newline References & \textbf{References} (\abbr{AD}, \abbr{RD}, \& Abbreviations) & Applicable Documents (\texttt{AD-01}--\texttt{AD-03}), Reference Documents (\texttt{RD-01}--\texttt{RD-04}), and abbreviations. \\ \hline
     \textbf{3} \newline User's need presentation & \textbf{Main Content --- Sec.\ 3} \newline User's Need Presentation & Baltic security context, non-offensive boundaries, role of \abbr{SSEG} in the two-segment architecture, and external interfaces. \\ \hline
     \textbf{4} \newline Selected concept / product & \textbf{Main Content --- Sec.\ 4} \newline Selected Concept Presentation & 6~\abbr{GEO} + 72~\abbr{LEO} (1,000~km Walker Delta) hybrid architecture, mandatory \abbr{ISL} mesh, ``Careful \abbr{COTS}'' bus, and \abbr{WBS} allocation. \\ \hline
     \textbf{5} \newline Life profile description & \textbf{Main Content --- Sec.\ 5} \newline Life Profile Description & Chronological lifecycle situations: on-ground \abbr{AIT}, launch, \abbr{LEOP}, commissioning, nominal modes, safe mode, and \abbr{EOL} disposal. \\ \hline
@@ -105,8 +105,8 @@ Ambiguous, unverifiable, or open-ended terms (such as \emph{``and/or''}, \emph{`
 \]
 where \texttt{SSEG} denotes Configuration Item \texttt{CI-03} (Space Segment), \texttt{REQ} denotes a normative technical requirement, \texttt{<NNN>} is a sequential three-digit number (\texttt{001}, \texttt{002}, \dots), and \texttt{<CAT>} identifies the functional requirement category summarized below:
 \begin{itemize}
-    \item \textbf{\texttt{FUN} / \texttt{MIS} / \texttt{PERF}:} Functional (\texttt{FUN}), Mission \& Constellation Geometry (\texttt{MIS}), and System Performance \& Latency (\texttt{PERF}) requirements.
-    \item \textbf{\texttt{PLD} / \texttt{ISL} / \texttt{ADCS} / \texttt{OBDH}:} Infrared Sensor Payload (\texttt{PLD}), Communications \& Mandatory Inter-Satellite Links (\texttt{ISL}), Attitude \& Agile \abbr{LOS} Steering (\texttt{ADCS}), and On-Board Data Handling (\texttt{OBDH}) requirements.
-    \item \textbf{\texttt{PLAT} (\texttt{STR} / \texttt{TCS} / \texttt{EPS} / \texttt{PROP}):} Integrated Platform Subsystem requirements encompassing Structures \& Mechanisms (\texttt{STR/MEC}), Thermal Control (\texttt{TCS}), Electrical Power (\texttt{EPS}), and Propulsion (\texttt{PROP}).
-    \item \textbf{\texttt{IF} / \texttt{ENV} / \texttt{OPS} / \texttt{PA} / \texttt{VER}:} External Interfaces (\texttt{IF}), Space \& Launch Environment (\texttt{ENV}), Operational Modes \& Autonomy (\texttt{OPS}), Product Assurance \& ``Careful \abbr{COTS}'' (\texttt{PA}), and Verification (\texttt{VER}) requirements.
+    \item \textbf{\texttt{FUN} / \texttt{MIS} / \texttt{PERF}:} Functional and Mission Scope (\texttt{FUN}, Subsection~7.1), Constellation Architecture and Astrodynamics (\texttt{MIS}, Subsection~7.2), and Mission Performance and Latency Budget (\texttt{PERF}, Subsection~7.3) requirements.
+    \item \textbf{\texttt{ALLOC}:} Subordinate Flight System Allocation (\texttt{ALLOC}, Subsection~7.4) requirements defining the black-box functional, performance, and physical envelopes allocated to \texttt{SATL} (\textbf{RD-03}) and \texttt{SATG} (\textbf{RD-04}).
+    \item \textbf{\texttt{ISL}:} Space Segment Communications and Mandatory Optical Inter-Satellite Link (\texttt{ISL}, Subsection~7.5) network requirements.
+    \item \textbf{\texttt{ENV} / \texttt{OPS} / \texttt{IF} / \texttt{VER}:} Space Environment, Survivability, and Sustainability (\texttt{ENV}, Subsection~7.6), Constellation Operations and Autonomy (\texttt{OPS}, Subsection~7.7), External Interfaces (\texttt{IF}, Subsection~7.7), and Space Segment Verification (\texttt{VER}, Subsection~7.8) requirements.
 \end{itemize}

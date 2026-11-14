@@ -1,0 +1,154 @@
+% =============================================================================
+% STAGING EXTRACTION FOR SPACE SEGMENT DESIGN DEFINITION FILE (DDF)
+% Target Document : EWAS-HSB-SSEG-DDF-03 (ECSS-E-ST-10C Annex G)
+% Source Document : EWAS-HSB-SSEG-TRS-03 (sections/04_selected_concept.tex)
+% Extracted Scope : Section 4.2 (OISL Terminal Hardware & Routing),
+%                   Section 4.3 (Optical Payload & LOS Steering Design),
+%                   Section 4.4 (Product Breakdown, WBS, Careful COTS Bus, Table 6)
+% Status          : Staging file only; verbatim design definitions preserved
+%                   prior to streamlining the Level-2 Space Segment TRS.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{longtable}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{TitleBlue}{HTML}{1F497D}
+\definecolor{HeadingBlue}{HTML}{365F91}
+\definecolor{SubHeadingBlue}{HTML}{4F81BD}
+\definecolor{TableHeaderBlue}{HTML}{4F81BD}
+\definecolor{TableRowLightBlue}{HTML}{DBE5F1}
+\definecolor{TableBorderBlue}{HTML}{95B3D7}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setcounter{secnumdepth}{-1}
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-3.0ex \@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\Large\bfseries\sffamily\color{HeadingBlue}}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-2.5ex \@plus -1ex \@minus -.2ex}%
+    {1.0ex \@plus .2ex}%
+    {\normalfont\large\bfseries\sffamily\color{SubHeadingBlue}}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-2.0ex \@plus -1ex \@minus -.2ex}%
+    {0.8ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries\sffamily\color{SubHeadingBlue}}}
+\makeatother
+
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
+\providecommand{\abbr}[1]{#1}
+
+\begin{document}
+
+\section{EWAS-HSB-SSEG-DDF-03 Staging Extraction (from EWAS-HSB-SSEG-TRS-03)}
+
+This standalone staging file preserves all detailed hardware, optical, mechanical, communications, and product-tree design definitions extracted verbatim from Section~4 of \texttt{EWAS-HSB-SSEG-TRS-03} (\texttt{sections/04\_selected\_concept.tex}) for incorporation into the Space Segment Design Definition File (\texttt{EWAS-HSB-SSEG-DDF-03}, ECSS-E-ST-10C Annex~G).
+
+% =============================================================================
+% EXTRACTED FROM TRS SECTION 4.2: OISL TERMINAL HARDWARE AND ROUTING
+% =============================================================================
+\subsubsection{4.2 Mandatory Space Segment Optical Inter-Satellite Link (OISL) Network and Routing Concept}
+
+A core architectural pillar of the \abbr{EWAS} Space Segment is its \textbf{mandatory laser Optical Inter-Satellite Link (\abbr{OISL}) backbone} (\texttt{R-023}, \texttt{R-031}--\texttt{R-033}, \texttt{R-044}). In an extra-regional launch scenario (\texttt{R-049}), the two \abbr{LEO} satellites best positioned to observe a boost or post-boost missile plume may be located over continental Eurasia, the Arctic, or oceanic regions outside the direct radio-frequency line-of-sight of the European Ground Station Network (\abbr{WBS} \texttt{123456.02.05}). Whereas Space-to-Ground links (\texttt{IF-EXT-01}) use Radio Frequency (\abbr{RF}: S/X/Ka-band) for all-weather cloud penetration, all Space-to-Space links operate above the atmosphere and use 1,550~nm laser \abbr{OISL} terminals (backed up only by an emergency low-rate S-band omni beacon in Safe Mode):
+\begin{enumerate}
+    \item \textbf{Intra-Layer \abbr{LEO} Optical Inter-Satellite Link (\abbr{OISL}) Mesh:} Each of the 72 \texttt{SATL} spacecraft carries \textbf{four (4) laser \abbr{OISL} terminals} operating in the 1,550~nm (C-band) optical window. Each terminal delivers a full-duplex user data rate of \textbf{$\ge 500.0\text{ Mbps}$} (sized to transport the uncompressed stream of two $512 \times 512$ \abbr{SWIR}/\abbr{MWIR} sensors at 30~Hz multi-bit depth plus $25\%$ framing and relay overhead) over inter-satellite link distances up to \textbf{$\ge 6{,}500\text{ km}$}:
+    \begin{itemize}
+        \item \emph{Two Permanent Intra-Plane Terminals (Fore and Aft):} Maintain continuous optical lock with the immediately preceding and trailing satellites within the same orbital plane ($\Delta u = 40^\circ$, constant chord distance of 5,047~km, zero relative azimuth rate). This forms 8 resilient longitudinal rings around the Earth.
+        \item \emph{Two Agile Cross-Plane Terminals (Left and Right):} Use coarse-pointing hemispherical periscopes and fine-steering mirrors to maintain optical links across adjacent orbital planes ($\Delta\Omega = 45^\circ$). At the equator ($a = 7{,}378.14\text{ km}$ with $\Delta u_{\text{inter}} = 22.5^\circ$), the cross-plane chord distance reaches 5,647--6,144~km while keeping the optical line of sight $> 245\text{ km}$ above Earth's surface (well clear of atmospheric refraction and cloud layers). Specifying a maximum \abbr{OISL} operating range of $\ge 6{,}500\text{ km}$ guarantees continuous cross-plane connectivity from the equator to high latitudes, dynamically re-handshaking only across the narrow $\pm 80^\circ$ polar cross-seam.
+    \end{itemize}
+    \item \textbf{Cross-Layer \abbr{GEO}--\abbr{LEO} Optical Relay Trunks:} To avoid multi-hop routing delays across multiple \abbr{LEO} planes, each \texttt{SATG} geostationary satellite carries agile 1,550~nm laser \abbr{OISL} relay terminals providing an aggregate data rate of \textbf{$\ge 1.5\text{--}2.0\text{ Gbps}$} (accommodating $3\text{--}4$ simultaneous \texttt{SATL} sensor streams plus command and relay overhead). Because the maximum geometric line-of-sight distance between a \abbr{GEO} satellite ($a = 42{,}164\text{ km}$) and a 1,000~km \abbr{LEO} satellite near the Earth limb reaches $\sim 45{,}195\text{ km}$, the cross-layer \abbr{OISL} terminals are qualified across an operating link range of \textbf{$34{,}800\text{ km}$ to $45{,}000\text{ km}$}, bridging the \abbr{LEO} tracking layer directly to European ground gateways.
+    \item \textbf{Autonomous Software-Defined Mesh Routing and Stereoscopic Vector Exchange:} All \abbr{OISL} packets are encapsulated in \abbr{CCSDS}-compliant frames protected by hardware bulk encryption (\texttt{R-031}) and narrow-beam Low Probability of Intercept and Anti-Jamming (\abbr{LPI}/\abbr{AJ}) safeguards (\texttt{R-032}). During an active warning sequence (Table~\ref{tab:warning_chain_latency}), the \abbr{OISL} network executes three time-critical functions:
+    \begin{itemize}
+        \item \emph{Sub-3-Second Cueing Delivery (\texttt{R-044}):} Routes the Ground Segment's \emph{LEO Tracking Request} from the nearest ground gateway or via \texttt{SATG} cross-layer optical relay to the two selected \texttt{SATL} spacecraft within $\le 3.0\text{ s}$.
+        \item \emph{Inter-Satellite Stereoscopic \abbr{LOS} Exchange (\texttt{R-023}):} Once both cued \texttt{SATL} satellites lock onto the target ($< 5\text{ s}$), they exchange GNSS-synchronized ($< 50~\mu\mathrm{s}$ epoch precision) timestamped \abbr{LOS} unit vectors and spacecraft position/attitude covariance matrices directly across the \abbr{OISL} mesh at $10\text{--}20\text{ Hz}$. This enables the primary \texttt{SATL} node's On-Board Data Handling (\abbr{OBDH}) processor to compute a real-time \emph{Onboard Preliminary Trajectory} estimate via dual-satellite stereoscopic triangulation (\texttt{R-023}).
+        \item \emph{Immediate Dual-Product Downlink (\texttt{R-012}, \texttt{R-023}, \texttt{R-033}):} Simultaneously streams both the \emph{LEO Observation Packages} (from both \abbr{LEO} satellites) and the \emph{Onboard Preliminary Trajectory} estimate back to the Ground Segment Data Processing System (\texttt{123456.02.04}) within $\le 5\text{--}7\text{ s}$ for authoritative multi-sensor ground fusion (\texttt{R-026}, \texttt{R-027}, \texttt{R-045}).
+    \end{itemize}
+\end{enumerate}
+
+% =============================================================================
+% EXTRACTED FROM TRS SECTION 4.3: MISSION PAYLOAD & OPTICAL LOS STEERING
+% =============================================================================
+\subsubsection{4.3 Mission Payload Architecture and Independent Optical Payload LOS Steering Concept}
+
+Both the \texttt{SATG} detection payload and the \texttt{SATL} tracking payload are built around cooled dual-band infrared telescopes engineered to exploit the radiometric signature of rocket exhaust plumes (\texttt{R-009}, \texttt{R-010}, \texttt{R-020}--\texttt{R-025}):
+\begin{itemize}
+    \item \textbf{Dual-Band \abbr{SWIR}/\abbr{MWIR} Spectral Architecture (\texttt{R-009}, \texttt{R-020}):} Solid- and liquid-propellant rocket plumes emit intense thermal and vibrational-rotational radiation dominated by hot water vapour ($\mathrm{H_2O}$) and carbon dioxide ($\mathrm{CO_2}$). Both payloads employ dichroic beam-splitters feeding cooled 2D Mercury Cadmium Telluride ($\mathrm{HgCdTe}$ / \abbr{MCT}) Focal Plane Arrays (\abbr{FPA}s) operating simultaneously in two spectral bands:
+    \begin{enumerate}
+        \item \emph{Short-Wave Infrared (\abbr{SWIR}, $2.65\text{--}2.85~\mu\mathrm{m}$):} Centered on the strong $\mathrm{H_2O}$ and $\mathrm{CO_2}$ emission band, providing high contrast against solar-reflected cloud backgrounds during lower- and mid-atmospheric boost combustion.
+        \item \emph{Medium-Wave Infrared (\abbr{MWIR}, $4.15\text{--}4.45~\mu\mathrm{m}$):} Centered on the $\mathrm{CO_2}$ ``red/blue spike'' wing bands, enabling high-sensitivity detection and tracking as the missile ascends into the upper stratosphere and exosphere against cold space and low-temperature cloud tops.
+    \end{enumerate}
+    Simultaneous dual-band pixel co-registration allows the onboard processor to perform real-time two-colour spectral ratioing ($I_{\text{SWIR}}/I_{\text{MWIR}}$). This discriminates genuine rocket exhaust plumes ($T_{\text{eff}} \approx 1{,}800\text{--}3{,}000\text{ K}$) from solar specular glint ($T_{\text{eff}} \approx 5{,}800\text{ K}$) and ambient terrestrial fires ($T_{\text{eff}} \approx 800\text{--}1{,}100\text{ K}$, \texttt{R-019}, \texttt{R-022}).
+    \item \textbf{\texttt{SATG} Wide-Field Staring/Step-Stare Detection Payload (\texttt{SATG-PLD}):} Uses a three-mirror anastigmat (TMA) telescope ($D_{\text{ap}} \approx 350\text{--}450\text{ mm}$) providing a Wide Field of View (\abbr{WFOV}) covering the full Earth disk ($\sim 17.4^\circ \times 17.4^\circ$) or high-cadence regional step-stare sectors at a frame rate of $\ge 10\text{ Hz}$ and a nadir Ground Sampling Distance (\abbr{GSD}) of $1.0\text{--}2.0\text{ km}$. This achieves a boost-phase launch detection probability of $P_d > 95\%$ (\texttt{R-010}) at a false-alarm rate compatible with $> 99.9\%$ system availability (\texttt{R-015}).
+    \item \textbf{\texttt{SATL} Narrow-Field Tracking Payload (\texttt{SATL-PLD}) and Independent Optical Payload \abbr{LOS} Steering Without Affecting Spacecraft Bus Attitude or Other Instrument Pointing Stability (\texttt{R-024}):} Each \texttt{SATL} spacecraft carries a compact Ritchey--Chr\'{e}tien / TMA telescope ($D_{\text{ap}} \approx 200\text{--}250\text{ mm}$, $512 \times 512$ dual-band \abbr{FPA}s) providing a Narrow Field of View (\abbr{NFOV}) of $1.5^\circ \times 1.5^\circ$ (nadir \abbr{GSD} of $25\text{--}50\text{ m}$ at 1,000~km, frame rate $20\text{--}50\text{ Hz}$) steerable across a $\pm 55^\circ$ Field of Regard (\abbr{FOR}). To acquire and lock onto a cued target within \textbf{$< 5.0\text{ seconds}$} while stabilizing the optical Line of Sight (\abbr{LOS}) to \textbf{$< 2\text{ arcsec/s}$ (RMS)} (\texttt{R-024}), \texttt{SATL} steers its payload optical \abbr{LOS} independently via a dual-stage mechanism without slewing the spacecraft bus. Avoiding full-bus slews preserves uninterrupted attitude stability for the platform and maintains continuous pointing lock for the four laser \abbr{OISL} terminals and space-to-ground antennas:
+    \begin{enumerate}
+        \item \emph{Coarse Stage --- Two-Axis Payload Gimbal / Pointing Mirror Assembly:} A direct-drive brushless DC gimballing mechanism slews the payload optical line of sight at angular rates of $\ge 15^\circ/\text{s}$ and accelerations of $\ge 10^\circ/\text{s}^2$ across the $\pm 55^\circ$ \abbr{FOR}. This brings the target within the $1.5^\circ$ \abbr{NFOV} in $\le 3.0\text{--}3.5\text{ s}$, while spacecraft reaction wheels provide real-time momentum feed-forward compensation so the bus remains stationary ($< 0.05^\circ$ excursion).
+        \item \emph{Fine Stage --- Piezo-Actuated Fast Steering Mirror (\abbr{FSM}):} A closed-loop two-axis fine steering mirror at an internal optical pupil image operates with a control bandwidth of $\ge 200\text{ Hz}$ and sub-microradian resolution. Once the coarse gimbal settles, the \abbr{FSM} locks onto the plume centroid within $\le 1.0\text{--}1.5\text{ s}$ (total acquisition $< 5.0\text{ s}$) and actively suppresses micro-vibrations generated by reaction wheels, cryocoolers, and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals, directional \abbr{RF} antennas, and agile \abbr{OISL} terminals to hold \abbr{LOS} jitter below $< 2\text{ arcsec/s}$ ($\le 9.7~\mu\mathrm{rad/s}$ RMS). Paired with an optical-bench dual star tracker and fibre-optic gyroscope (\abbr{FOG}) inertial reference unit, each \texttt{SATL} achieves an Attitude/\abbr{LOS} Knowledge Error (\abbr{AKE}) of $\le 10\text{--}15~\mu\mathrm{rad}$ ($\le 2\text{--}3\text{ arcsec}$, $1\sigma$), corresponding to a cross-range target position error of $< 15\text{--}30\text{ m}$ at 1,000--2,000~km slant range.
+    \end{enumerate}
+    \item \textbf{Stray-Light Rejection, Cryogenic Cooling, and Onboard Proton Despiking (\texttt{R-019}--\texttt{R-023}, \texttt{R-025}):} Both payloads incorporate extended multi-vane blackened optical baffles with knife-edge vanes (\texttt{R-025}) providing $> 10^{-10}$ Point Source Transmittance (PST) attenuation outside a $15^\circ$ solar exclusion angle and $3^\circ$ sunlit Earth-limb exclusion angle. Low-vibration pulse-tube cryocoolers maintain the \abbr{SWIR}/\abbr{MWIR} \abbr{MCT} focal planes at $65\text{ K}\text{--}95\text{ K}$ to suppress dark current. The front-end radiation-tolerant FPGA/SoC signal processing pipeline executes real-time \textbf{proton despiking}---onboard filtering that deletes artificial bright pixel spots (transient ionization spikes) on the infrared detector caused by energetic protons in the space radiation environment---followed by adaptive spatio-temporal background subtraction, track-before-detect filtering (\texttt{R-019}, \texttt{R-022}), and onboard dual-satellite stereoscopic triangulation (\texttt{R-023}).
+\end{itemize}
+
+% =============================================================================
+% EXTRACTED FROM TRS SECTION 4.4: PRODUCT BREAKDOWN, WBS, SUBSYSTEMS & TABLE 6
+% =============================================================================
+\subsubsection{4.4 Space Segment Product Breakdown, WBS Alignment, and ``Careful COTS'' Platform Concept}
+
+The physical and functional Product Tree of Configuration Item \texttt{CI-03} (\abbr{SSEG}, \abbr{WBS} \texttt{123456.03}) is aligned with the project Work Breakdown Structure established in Chapter 10 and Section 7.1 of \textbf{AD-01}. Under \textbf{\texttt{123456.03.01} Satellite \abbr{LEO} (\texttt{SATL})} and \textbf{\texttt{123456.03.02} Satellite \abbr{GEO} (\texttt{SATG})}, Chapter 10 of \textbf{AD-01} defines the core WBS branches as \texttt{.01} \emph{Thermal Control} (\texttt{.01.01} Passive, \texttt{.01.02} Active), \texttt{.02} \emph{Attitude Determination and Control System (\abbr{ADCS})}, \texttt{.03} \emph{Power Subsystem (\abbr{EPS})}, \texttt{.04} \emph{Payload (\abbr{PLD})}, \texttt{.05} \emph{Propulsion (\abbr{PROP})}, \texttt{.06} \emph{Avionics} (\texttt{.06.01} Command \& Data Handling, \texttt{.06.02} Communications, \texttt{.06.03} Flight Software), and \texttt{.07} \emph{Constellation Configuration (\texttt{CONF})} (\texttt{.07.01} Phasing Plan, \texttt{.07.02} Orbit Definition). This hierarchy is complemented by two explicit systems-engineering refinements established in Section 7.1 of \textbf{AD-01}:
+\begin{enumerate}
+    \item \textbf{Explicit Inclusion of the Structures and Mechanisms Subsystem (\abbr{STR/MEC}, \texttt{.08}):} To ensure complete physical accounting alongside WBS elements \texttt{.01} through \texttt{.07}, both \texttt{SATL} and \texttt{SATG} incorporate a dedicated \textbf{Structures and Mechanisms Subsystem (\abbr{STR/MEC}, designated \texttt{123456.03.01.08} and \texttt{123456.03.02.08})} as a primary physical subsystem. \abbr{STR/MEC} encompasses the primary load-bearing CFRP/aluminium-honeycomb bus structure, launch vehicle separation and multi-satellite dispenser rings (supporting 9-satellite-per-plane batch launches for \texttt{SATL}), and solar array and antenna deployment/hold-down release mechanisms. It also includes tuned viscoelastic/fluid micro-vibration isolators that damp mechanical disturbances from reaction wheels, cryocoolers, and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals/mirrors, directional \abbr{RF} antennas, and agile \abbr{OISL} terminals (enforcing $< 2\text{ arcsec/s}$ stability per \texttt{R-024}), together with localized Aluminium/Tantalum ($\mathrm{Al}/\mathrm{Ta}$) graded-Z radiation spot-shielding enclosures and external stray-light optical baffles (\texttt{R-025}).
+    \item \textbf{Architectural Separation of \abbr{OBDH}, Communications/\abbr{OISL}, and Constellation Configuration (\texttt{CONF}):} Within the \emph{Avionics} (\texttt{.06}) and \emph{Constellation Configuration} (\texttt{.07}) branches of \textbf{AD-01}, this \abbr{TRS} enforces clear functional and hardware subsystem boundaries:
+    \begin{itemize}
+        \item \textbf{On-Board Data Handling \& Flight Software (\abbr{OBDH}, \texttt{.06.01} \& \texttt{.06.03}):} Encompasses the central Command and Data Handling (\abbr{C\&DH}) flight computers (\texttt{.06.01}), radiation-tolerant FPGA/SoC payload data processors, solid-state mass memory, and onboard Flight Software (\texttt{.06.03}, including \abbr{FDIR}, autonomous mode management, proton despiking, and \texttt{R-023} stereoscopic triangulation).
+        \item \textbf{Communications and Mandatory \abbr{OISL} Subsystem (\abbr{TT\&C} \& \abbr{OISL}, \texttt{.06.02}):} Separated as a distinct hardware subsystem encompassing the S/X/Ka-band Space-to-Ground \abbr{RF} transponders, high-gain/omni antennas, cryptographic security modules (\abbr{COMSEC}, \texttt{R-031}), anti-jamming processors (\texttt{R-032}), and the mandatory 1,550~nm laser Optical Inter-Satellite Link (\abbr{OISL}) terminals (\texttt{R-023}, \texttt{R-044}).
+        \item \textbf{Constellation Configuration (\texttt{CONF}, \texttt{123456.03.01.07} \& \texttt{123456.03.02.07}):} Treated as a segment-level astrodynamic and mission-design discipline covering the \emph{Phasing Plan} (\texttt{.07.01}) and \emph{Orbit Definition} (\texttt{.07.02}) across the entire \abbr{SSEG} fleet.
+    \end{itemize}
+\end{enumerate}
+
+To manufacture 72 \texttt{SATL} spacecraft and 6 \texttt{SATG} spacecraft within European programmatic and schedule envelopes while achieving $> 99.9\%$ system availability (\texttt{R-015}) over 7-year (\abbr{LEO}) and 15-year (\abbr{GEO}) lifetimes (\texttt{R-016}), the Space Segment adopts the \textbf{``Careful \abbr{COTS}''} platform philosophy (\textbf{AD-01}, Section 7.2):
+\begin{itemize}
+    \item \textbf{Selective Radiation Hardening and Spot Shielding:} Rather than procuring expensive, low-throughput QML-V rad-hard components for every board across 72 \abbr{LEO} satellites, \texttt{SATL} uses automotive/industrial-grade high-performance processors and FPGAs up-screened via lot-acceptance radiation testing under the project radiation-assurance rules. These are protected by graded-Z $\mathrm{Al}/\mathrm{Ta}$ spot shielding ($4\text{--}8\text{ mm}$ equivalent $\mathrm{Al}$) and the benign 1,000~km orbit selection. By contrast, the 6 long-life ($15\text{-year}$) \texttt{SATG} geostationary platforms utilize space-grade radiation-hardened avionics for critical bus functions alongside radiation-tolerant high-speed payload processors.
+    \item \textbf{Fault-Tolerant Avionics and Redundancy (\texttt{R-017}):} All critical platform chains implement dual cold/warm block redundancy with cross-strapping (\texttt{R-017}), Error Detection and Correction (\abbr{EDAC}) with memory scrubbing, Triple Modular Redundancy (\abbr{TMR}) in FPGA logic, fast-acting Single-Event Latch-up (\abbr{SEL}) current limiters, and autonomous hardware watchdog timers.
+\end{itemize}
+
+Table~\ref{tab:sseg_wbs_subsystems} defines the complete Space Segment subsystem breakdown, WBS mapping (matching Chapter 10 of \textbf{AD-01}), functional allocations, and baseline mass and power budgets (explicitly including orbit insertion / transfer propulsion and propellant) for both \texttt{SATL} and \texttt{SATG}.
+
+\begin{table}[H]
+\centering
+\caption{Space Segment Subsystem Breakdown, WBS Mapping, and Mass/Power Envelopes for \texttt{SATL} and \texttt{SATG}}
+\label{tab:sseg_wbs_subsystems}
+{\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.04}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{2.3cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Subsystem} & \thead{WBS Code (\texttt{SATL} / \texttt{SATG})} & \thead{Primary Functional \& Hardware Allocation} & \thead{\texttt{SATL} Envelope (1,000~km LEO)} & \thead{\texttt{SATG} Envelope (35,786~km GEO)} \\ \hline
+    \textbf{1. Thermal Control (\abbr{TCS})} & \texttt{123456.03.01.01} \newline \texttt{123456.03.02.01} & Passive (\texttt{.01.01}: \abbr{MLI}, radiators) \& Active (\texttt{.01.02}: pulse-tube cryocoolers at 65--95~K, loop heat pipes, heaters). & 16--22~kg \newline 85--125~W & 130--175~kg \newline 550--800~W \\ \hline
+    \textbf{2. Attitude Control (\abbr{ADCS})} & \texttt{123456.03.01.02} \newline \texttt{123456.03.02.02} & Dual optical-bench star trackers + \abbr{FOG} IMU ($\text{AKE} \le 10\text{--}15~\mu\mathrm{rad}$); GNSS; 4-wheel skewed reaction wheels; magnetorquers (\texttt{R-024}). & 18--24~kg \newline 45--75~W & 95--130~kg \newline 180--260~W \\ \hline
+    \textbf{3. Power Subsystem (\abbr{EPS})} & \texttt{123456.03.01.03} \newline \texttt{123456.03.02.03} & Triple-junction $\mathrm{GaAs}$ deployable solar arrays; $\mathrm{Li\text{-}ion}$ battery pack (35~min \abbr{LEO} / 72~min \abbr{GEO} eclipse); PCDU with \abbr{SEL} limiters. & 32--40~kg \newline 450--650~W (\abbr{EOL}) & 290--370~kg \newline 3.5--5.0~kW (\abbr{EOL}) \\ \hline
+    \textbf{4. Mission Payload (\abbr{PLD})} & \texttt{123456.03.01.04} \newline \texttt{123456.03.02.04} & Cooled dual-band \abbr{SWIR}/\abbr{MWIR} $\mathrm{HgCdTe}$ telescope; independent 2-axis gimbal + fine \abbr{FSM} (\texttt{SATL}, $< 5\text{ s}$ lock, $< 2\text{ arcsec/s}$, \texttt{R-009}, \texttt{R-024}). & 48--60~kg \newline 140--190~W & 380--480~kg \newline 950--1,350~W \\ \hline
+    \textbf{5. Propulsion (\abbr{PROP})} & \texttt{123456.03.01.05} \newline \texttt{123456.03.02.05} & Orbit insertion/transfer, station-keeping, \abbr{CAM}, \& active \abbr{EOL} disposal (\texttt{SATL}: $\Delta v \ge 380$~m/s; \texttt{SATG}: apogee/\abbr{EOR} transfer to \abbr{GEO} + 15-yr SK + $+300$~km graveyard, \texttt{R-018}). & 14--18~kg (dry) \newline 28--40~kg (prop.) \newline 60--180~W & 140--180~kg (dry) \newline 850--1,150~kg (prop.) \newline 400--1,200~W \\ \hline
+    \textbf{6a. Avionics --- \abbr{OBDH} \& \abbr{FSW}} & \texttt{123456.03.01.06} \newline \texttt{123456.03.02.06} \newline (\texttt{.06.01} \& \texttt{.06.03}) & Redundant ``Careful \abbr{COTS}'' / rad-hard \abbr{C\&DH} computers (\texttt{.06.01}, \abbr{TMR}/\abbr{EDAC}) \& Flight Software (\texttt{.06.03}: \abbr{FDIR}, proton despiking \texttt{R-019}, stereo 3D \texttt{R-023}). & 10--14~kg \newline 45--70~W & 45--65~kg \newline 140--210~W \\ \hline
+    \textbf{6b. Avionics --- Comms \& \abbr{OISL}} & \texttt{123456.03.01.06} \newline \texttt{123456.03.02.06} \newline (\texttt{.06.02}) & 4~laser \abbr{OISL} terminals/\texttt{SATL} (1,550~nm, $\ge 500$~Mbps, $\ge 6,500$~km); optical \abbr{GEO}--\abbr{LEO} trunks ($\ge 1.5\text{--}2.0$~Gbps, 45,000~km); S/X/Ka \abbr{RF} \abbr{TT\&C} + \abbr{COMSEC} (\texttt{R-031}--\texttt{R-033}, \texttt{R-044}). & 20--25~kg \newline 75--115~W & 130--170~kg \newline 450--700~W \\ \hline
+    \textbf{7. Constellation Config.\ (\texttt{CONF})} & \texttt{123456.03.01.07} \newline \texttt{123456.03.02.07} & Phasing Plan (\texttt{.07.01}: Walker Delta $72/8/1$, $\Delta u_{\text{inter}} = 22.5^\circ$ \& $60^\circ$ \abbr{GEO} slots) and Orbit Definition (\texttt{.07.02}: 1,000~km \abbr{LEO} \& 35,786~km \abbr{GEO}, \texttt{R-005}--\texttt{R-008}). & \multicolumn{2}{>{\raggedright\arraybackslash}p{4.6cm}|}{Segment-level astrodynamic design governing all 78 spacecraft.} \\ \hline
+    \textbf{8. Structures \& Mech.\ (\abbr{STR/MEC})} & \texttt{123456.03.01.08} \newline \texttt{123456.03.02.08} & Primary CFRP/Al-honeycomb bus; 9-sat dispenser rings (\texttt{SATL}); micro-vibration isolators (wheels, coolers, slewing sensors/antennas/\abbr{OISL}); $\mathrm{Al}/\mathrm{Ta}$ shielding; baffles (\texttt{R-025}). & 42--52~kg \newline 0--15~W & 340--430~kg \newline 0--40~W \\ \hline
+    \textbf{Total Spacecraft Envelope} & \textbf{\texttt{SATL} (72x) / \texttt{SATG} (6x)} & \textbf{Complete Flight Unit Mass (incl.\ insertion/transfer propellant \& margin) \& Power Envelope} & \textbf{200--250~kg Dry} \newline \textbf{230--290~kg Wet} \newline \textbf{450--650~W} & \textbf{1,550--1,950~kg Dry} \newline \textbf{2,400--3,100~kg Wet} \newline \textbf{3.5--5.0~kW} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\end{document}

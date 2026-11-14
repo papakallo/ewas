@@ -1,0 +1,234 @@
+% =============================================================================
+% SUBSYSTEM & SPACECRAFT LEVEL-3/LEVEL-4 REQUIREMENTS BANK
+% Target Documents : EWAS-HSB-SATL-TRS-03.01 (LEO Spacecraft TRS)
+%                    EWAS-HSB-SATG-TRS-03.02 (GEO Spacecraft TRS)
+% Source Document  : EWAS-HSB-SSEG-TRS-03 (sections/07_requirements.tex)
+% Extracted Scope  : Verbatim Table 12 (SSEG-REQ-PLD-001 to 007),
+%                    Verbatim Table 13 (SSEG-REQ-ADCS-001 to 005),
+%                    Verbatim Table 14 (SSEG-REQ-OBDH-001 to 006),
+%                    Verbatim Table 16 (SSEG-REQ-PLAT-001 to 010),
+%                    Equipment-Level Requirements (SSEG-REQ-ENV-002,
+%                    SSEG-REQ-ENV-003, SSEG-REQ-ENV-004, SSEG-REQ-OPS-005).
+% Status           : Staging file only; verbatim requirements preserved prior
+%                    to streamlining the Level-2 Space Segment TRS.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{longtable}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{TitleBlue}{HTML}{1F497D}
+\definecolor{HeadingBlue}{HTML}{365F91}
+\definecolor{SubHeadingBlue}{HTML}{4F81BD}
+\definecolor{TableHeaderBlue}{HTML}{4F81BD}
+\definecolor{TableRowLightBlue}{HTML}{DBE5F1}
+\definecolor{TableBorderBlue}{HTML}{95B3D7}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setcounter{secnumdepth}{-1}
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-3.0ex \@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\Large\bfseries\sffamily\color{HeadingBlue}}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-2.5ex \@plus -1ex \@minus -.2ex}%
+    {1.0ex \@plus .2ex}%
+    {\normalfont\large\bfseries\sffamily\color{SubHeadingBlue}}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-2.0ex \@plus -1ex \@minus -.2ex}%
+    {0.8ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries\sffamily\color{SubHeadingBlue}}}
+\makeatother
+
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
+\providecommand{\abbr}[1]{#1}
+
+\begin{document}
+
+\section{SATL / SATG Level-3 and Level-4 Subsystem Requirements Bank}
+
+This standalone staging file preserves the complete verbatim LaTeX requirement tables and equipment-level requirements extracted from Section~7 of \texttt{EWAS-HSB-SSEG-TRS-03} (\texttt{sections/07\_requirements.tex}) for allocation to the subordinate Level-3 Spacecraft Technical Requirements Specifications (\texttt{EWAS-HSB-SATL-TRS-03.01} and \texttt{EWAS-HSB-SATG-TRS-03.02}) and Level-4 Subsystem Specifications.
+
+% -----------------------------------------------------------------------------
+% 7.4 INFRARED SENSOR PAYLOAD REQUIREMENTS (ORIGINAL TRS TABLE 12)
+% -----------------------------------------------------------------------------
+\subsubsection{7.4 Infrared Sensor Payload Requirements (\texttt{SSEG-REQ-PLD})}
+
+Table~\ref{tab:req_pld} specifies the electro-optical, radiometric, agile beam-steering, stray-light rejection, and cryogenic cooling requirements for the Mission Payloads (\abbr{PLD}, \abbr{WBS} \texttt{123456.03.01.04} and \texttt{123456.03.02.04}).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Infrared Sensor Payload Technical Requirements (\texttt{SSEG-REQ-PLD})}\label{tab:req_pld}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Infrared Sensor Payload Technical Requirements (\texttt{SSEG-REQ-PLD})}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-PLD-001}} \newline \emph{Dual-Band SWIR/MWIR Spectral Coverage} & Each \texttt{SATG} and \texttt{SATL} infrared payload (\abbr{WBS} \texttt{.04}) \textbf{shall} simultaneously image in two co-registered spectral bands using cooled 2D Mercury Cadmium Telluride ($\mathrm{HgCdTe}$) Focal Plane Arrays (\abbr{FPA}s): a Short-Wave Infrared (\abbr{SWIR}) band covering $2.65\text{--}2.85~\mu\mathrm{m}$ ($\mathrm{H_2O}/\mathrm{CO_2}$ boost emission) and a Medium-Wave Infrared (\abbr{MWIR}) band covering $4.15\text{--}4.45~\mu\mathrm{m}$ ($\mathrm{CO_2}$ plume spike). & \texttt{R-009}, \newline \texttt{R-020} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-002}} \newline \emph{SATG Wide-Field Detection Optics Performance} & The \texttt{SATG} Wide-Field-of-View (\abbr{WFOV}) payload (\texttt{123456.03.02.04}) \textbf{shall} provide a full-Earth-disk or regional step-stare Field of Regard of $\ge 17.4^\circ \times 17.4^\circ$, a nadir Ground Sampling Distance (\abbr{GSD}) of $\le 1.5\text{ km}$ ($\le 2.0\text{ km}$ at $60.0^\circ$ off-nadir), a frame rate of $\ge 10.0\text{ Hz}$, and a Noise Equivalent Irradiance (\abbr{NEI}) $\le 1.5 \times 10^{-13}\text{ W/cm}^2$ ($\text{NETD} \le 35.0\text{ mK}$). & \texttt{R-007}, \texttt{R-020}, \texttt{R-021} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-003}} \newline \emph{SATL Narrow-Field Tracking Optics Performance} & The \texttt{SATL} Narrow-Field-of-View (\abbr{NFOV}) tracking payload (\texttt{123456.03.01.04}) \textbf{shall} provide an instantaneous Field of View (\abbr{FOV}) of $\ge 1.5^\circ \times 1.5^\circ$ steerable across a $\pm 55.0^\circ$ Field of Regard (\abbr{FOR}), a nadir \abbr{GSD} of $\le 35.0\text{ m}$ at 1,000~km altitude, a frame rate of $\ge 30.0\text{ Hz}$ ($20.0\text{--}50.0\text{ Hz}$ programmable), and a Noise Equivalent Temperature Difference $\text{NETD} \le 25.0\text{ mK}$. & \texttt{R-020}, \texttt{R-021}, \texttt{R-023} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-004}} \newline \emph{Independent Optical Payload LOS Steering} & Each \texttt{SATL} payload \textbf{shall} integrate a two-axis coarse gimballing mechanism (slew rate $\ge 15.0^\circ/\text{s}$, angular acceleration $\ge 10.0^\circ/\text{s}^2$) and a closed-loop piezo-actuated Fast Steering Mirror (\abbr{FSM}, control bandwidth $\ge 200.0\text{ Hz}$, angular resolution $\le 0.5~\mu\mathrm{rad}$) capable of acquiring and locking onto any cued target within the $\pm 55.0^\circ$ \abbr{FOR} in $< 5.0\text{ seconds}$ without slewing the spacecraft bus or disturbing the pointing stability of the four laser \abbr{OISL} terminals and space-to-ground antennas. & \texttt{R-024} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-005}} \newline \emph{Stray-Light Attenuation and Exclusion Angles} & Both \texttt{SATG} and \texttt{SATL} optical assemblies \textbf{shall} incorporate blackened multi-vane stray-light baffles (\abbr{WBS} \texttt{.08}/\texttt{.04}) achieving a Point Source Transmittance (\abbr{PST}) $\le 10^{-10}$ for solar angles $\ge 15.0^\circ$ off the optical axis and $\le 10^{-8}$ for sunlit Earth-limb angles $\ge 3.0^\circ$ off-axis. & \texttt{R-025} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-006}} \newline \emph{Focal Plane Cryogenic Operating Temperature} & Active pulse-tube cryocoolers integrated with the payload cold finger (\abbr{WBS} \texttt{.01.02}/\texttt{.04}) \textbf{shall} maintain the $\mathrm{HgCdTe}$ \abbr{SWIR}/\abbr{MWIR} focal plane arrays at an operating temperature between $65.0\text{ K}$ and $95.0\text{ K}$ with a temporal stability within $\pm 0.10\text{ K}$ across all sunlit and eclipse orbital phases. & \texttt{R-020}, \newline \texttt{R-021} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLD-007}} \newline \emph{Motorized Fail-Safe Aperture Shutter and Calibration Source} & Each payload \textbf{shall} include a fail-safe motorized aperture cover protecting the optics during launch, outgassing bake-out, and Safe Mode, and an internal blackbody calibration source ($280.0\text{--}350.0\text{ K}$, radiometric accuracy $\le \pm 0.25\text{ K}$) for periodic in-orbit flat-field and radiometric calibration. & \texttt{R-004}, \texttt{R-020}, \texttt{R-041} & \texttt{T, I} \\ \hline
+\end{longtable}}
+
+% -----------------------------------------------------------------------------
+% 7.5 ATTITUDE DETERMINATION, CONTROL, AND LOS POINTING REQUIREMENTS (ORIGINAL TRS TABLE 13)
+% -----------------------------------------------------------------------------
+\subsubsection{7.5 Attitude Determination, Control, and LOS Pointing Requirements (\texttt{SSEG-REQ-ADCS})}
+
+Table~\ref{tab:req_adcs} defines the attitude determination, inertial knowledge, time synchronization, and coupled optical Line-of-Sight (\abbr{LOS}) stabilization requirements for the Attitude Determination and Control System (\abbr{ADCS}, \abbr{WBS} \texttt{123456.03.01.02} and \texttt{123456.03.02.02}).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Attitude Determination, Control, and LOS Pointing Requirements (\texttt{SSEG-REQ-ADCS})}\label{tab:req_adcs}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Attitude Determination, Control, and LOS Pointing Requirements (\texttt{SSEG-REQ-ADCS})}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-ADCS-001}} \newline \emph{3-Axis Stabilization and Agile LOS Lock-On} & The 3-axis stabilized \abbr{ADCS} (\abbr{WBS} \texttt{.02}) coupled with the payload coarse gimbal and Fast Steering Mirror (\abbr{FSM}) control loop \textbf{shall} acquire and lock the optical Line of Sight (\abbr{LOS}) onto any cued target within $< 5.0\text{ seconds}$ of tracking command reception. & \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-002}} \newline \emph{Optical Line-of-Sight Pointing Stability and Jitter} & During active surveillance and stereoscopic tracking, the coupled \abbr{ADCS}, structural micro-vibration isolators, and \abbr{FSM} control loop \textbf{shall} maintain optical \abbr{LOS} pointing stability (Relative Pointing Error drift and jitter rate) strictly below $< 2.0\text{ arcsec/s}$ ($< 9.7~\mu\mathrm{rad/s}$ RMS, $3\sigma$ over any $1.0\text{ s}$ integration window). & \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-003}} \newline \emph{Attitude and Line-of-Sight Knowledge Accuracy} & Using optical-bench-mounted dual star trackers and fibre-optic gyroscopes (\abbr{FOG}), each \texttt{SATL} spacecraft \textbf{shall} achieve an inertial Attitude and \abbr{LOS} Knowledge Error (\abbr{AKE}) of $\le 12.0~\mu\mathrm{rad}$ ($\le 2.5\text{ arcsec}$, $1\sigma$ per axis), and each \texttt{SATG} spacecraft \textbf{shall} achieve an $\text{AKE} \le 20.0~\mu\mathrm{rad}$ ($\le 4.1\text{ arcsec}$, $1\sigma$ per axis). & \texttt{R-012}, \texttt{R-023}, \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-004}} \newline \emph{Onboard Orbit Position and Time Synchronization} & Each spacecraft \textbf{shall} incorporate multi-constellation \abbr{GNSS} (Galileo/GPS) receivers and ultra-stable oscillators providing real-time onboard position knowledge $\le 3.0\text{ m}$ ($1\sigma$ for \texttt{SATL}) and $\le 15.0\text{ m}$ ($1\sigma$ for \texttt{SATG}), and UTC epoch timestamp synchronization within $\le 50.0~\mu\mathrm{s}$ across all 78 constellation nodes to support stereoscopic triangulation. & \texttt{R-012}, \newline \texttt{R-023} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ADCS-005}} \newline \emph{Momentum Feed-Forward and Autonomous Detumbling} & The \abbr{ADCS} reaction wheel assembly (4 skewed wheels) \textbf{shall} provide real-time torque feed-forward compensation during payload gimbal slews to maintain spacecraft bus attitude excursions $< 0.05^\circ$, and \textbf{shall} damp post-separation spacecraft bus tip-off rates from $\le 2.0\text{--}3.0^\circ/\text{s}$ down to $< 0.1^\circ/\text{s}$ within $\le 30.0\text{ minutes}$ (whereas high angular slew rates of $\ge 15.0^\circ/\text{s}$ apply strictly to the lightweight payload optical steering instruments). & \texttt{R-024} & \texttt{T, A} \\ \hline
+\end{longtable}}
+
+% -----------------------------------------------------------------------------
+% 7.6 ON-BOARD DATA HANDLING AND STEREOSCOPIC PROCESSING REQUIREMENTS (ORIGINAL TRS TABLE 14)
+% -----------------------------------------------------------------------------
+\subsubsection{7.6 On-Board Data Handling and Stereoscopic Processing Requirements (\texttt{SSEG-REQ-OBDH})}
+
+Table~\ref{tab:req_obdh} specifies the requirements for the On-Board Data Handling (\abbr{OBDH}) hardware (\abbr{WBS} \texttt{123456.03.01.06.01} / \texttt{123456.03.02.06.01}) and Flight Software (\abbr{FSW}, \abbr{WBS} \texttt{123456.03.01.06.03} / \texttt{123456.03.02.06.03}), including onboard stereoscopic 3D trajectory estimation (\texttt{R-023}).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{On-Board Data Handling and Stereoscopic Processing Requirements (\texttt{SSEG-REQ-OBDH})}\label{tab:req_obdh}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): On-Board Data Handling and Stereoscopic Processing Requirements (\texttt{SSEG-REQ-OBDH})}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-OBDH-001}} \newline \emph{Real-Time Onboard Proton Despiking and Plume Filtering} & The \abbr{OBDH} payload processor (\abbr{WBS} \texttt{.06.01}/\texttt{.06.03}) \textbf{shall} execute real-time single-frame spatial/temporal proton despiking (rejecting South Atlantic Anomaly and polar proton spikes) and dual-band (\abbr{SWIR}/\abbr{MWIR}) background clutter rejection with a deterministic per-frame processing latency $\le 50.0\text{ ms}$. & \texttt{R-019}, \newline \texttt{R-022} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-002}} \newline \emph{Inter-Satellite Stereoscopic LOS Exchange and Onboard 3D Trajectory} & During Mode~N2, the \abbr{OBDH} subsystems of the two cued \texttt{SATL} spacecraft \textbf{shall} exchange timestamped \abbr{LOS} unit observation vectors and $6 \times 6$ spacecraft position/attitude covariance matrices over the mandatory \abbr{ISL} network at $\ge 10.0\text{ Hz}$ to compute an onboard preliminary 3D target state vector (position and velocity with covariance) within $\le 18.0\text{ seconds}$ of target lock-on. & \texttt{R-023} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-003}} \newline \emph{Dual-Product Formatting and Downlink Generation} & Both cued \texttt{SATL} spacecraft \textbf{shall} format and transmit to the Ground Segment both (1) their timestamped stereoscopic \emph{LEO Observation Packages} (containing \abbr{LOS} unit vectors, viewing geometry, and attitude/ephemeris covariance metadata) and (2) the \emph{Onboard Preliminary Trajectory} estimate, enabling the Ground Segment Data Processing System (\texttt{123456.02.04}) to perform authoritative multi-sensor fusion and Instantaneous Impact Point (\abbr{IIP}) estimation. & \texttt{R-012}, \texttt{R-023}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-004}} \newline \emph{EDAC Memory Protection and TMR Fault Tolerance} & All \abbr{OBDH} flight computers and non-volatile mass memories ($\ge 128.0\text{ GB}$ NAND/MRAM per \texttt{SATL}; $\ge 512.0\text{ GB}$ per \texttt{SATG}) \textbf{shall} implement hardware Error Detection and Correction (\abbr{EDAC} correcting all single-bit upsets and detecting all double-bit upsets with full memory scrubbing every $\le 10.0\text{ min}$), FPGA Triple Modular Redundancy (\abbr{TMR}), and independent hardware watchdog timers. & \texttt{R-017} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-005}} \newline \emph{Encrypted Temporary Onboard Event Buffering} & Each spacecraft \textbf{shall} maintain an encrypted circular non-volatile event buffer retaining at least $72.0\text{ hours}$ of raw and processed event observations, housekeeping telemetry, and security audit logs to guarantee zero data loss prior to Ground Segment downlink and 5-year archival. & \texttt{R-004}, \texttt{R-035}, \texttt{R-047} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-OBDH-006}} \newline \emph{In-Orbit Flight Software and Algorithm Reprogrammability} & The \abbr{OBDH} Flight Software (\abbr{WBS} \texttt{.06.03}) \textbf{shall} support authenticated, encrypted over-the-air (\abbr{OTA}) updating of plume-classification filters, radiometric look-up tables, and tracking algorithms in redundant dual-image non-volatile boot banks with automatic rollback within $\le 5.0\text{ s}$ upon checksum or watchdog failure. & \texttt{R-004}, \newline \texttt{R-041} & \texttt{T} \\ \hline
+\end{longtable}}
+
+% -----------------------------------------------------------------------------
+% 7.8 PLATFORM SUBSYSTEM REQUIREMENTS (STR/MEC, TCS, EPS, PROP — ORIGINAL TRS TABLE 16)
+% -----------------------------------------------------------------------------
+\subsubsection{7.8 Platform Subsystems: Structures (\texttt{STR/MEC}), Thermal (\texttt{TCS}), Power (\texttt{EPS}), and Propulsion (\texttt{PROP}) (\texttt{SSEG-REQ-PLAT})}
+
+Table~\ref{tab:req_plat} defines the physical, structural, thermal, electrical power, and propulsion (including orbit insertion/transfer and active disposal) requirements for \texttt{SATL} and \texttt{SATG} (\abbr{WBS} Elements \texttt{.01}, \texttt{.03}, \texttt{.05}, and \texttt{.08}).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption[Platform Subsystems Technical Requirements (SSEG-REQ-PLAT)]{Platform Subsystems Technical Requirements (\texttt{STR/MEC}, \texttt{TCS}, \texttt{EPS}, \texttt{PROP} --- \texttt{SSEG-REQ-PLAT})}\label{tab:req_plat}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Platform Subsystems Technical Requirements (\texttt{SSEG-REQ-PLAT})}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-PLAT-001}} \newline \emph{Spacecraft Mass Envelopes and Dispenser Compatibility} & The wet launch mass (including system mass margin and orbit insertion/transfer propellant) of each \texttt{SATL} spacecraft (\abbr{WBS} \texttt{.08}) \textbf{shall} not exceed 290.0~kg (enabling 9 \texttt{SATL} spacecraft to be launched on a single multi-satellite dispenser stack $\le$ 2,800.0~kg), and the wet launch mass of each \texttt{SATG} spacecraft \textbf{shall} not exceed 3,100.0~kg. & \texttt{R-005}, \newline \texttt{IF-EXT-02} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-002}} \newline \emph{Stowed Structural Fundamental Frequencies} & In the stowed launch configuration, the fundamental structural resonance frequencies (\abbr{WBS} \texttt{.08}) \textbf{shall} satisfy $f_{\text{axial}} \ge 35.0\text{ Hz}$ and $f_{\text{lateral}} \ge 20.0\text{ Hz}$ for \texttt{SATL}, and $f_{\text{axial}} \ge 31.0\text{ Hz}$ and $f_{\text{lateral}} \ge 15.0\text{ Hz}$ for \texttt{SATG} per the project structural requirements. & \texttt{IF-EXT-02} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-003}} \newline \emph{Micro-Vibration Isolation of Optical Bench} & The \abbr{STR/MEC} subsystem (\abbr{WBS} \texttt{.08}) \textbf{shall} incorporate tuned viscoelastic/fluid damping mounts isolating the optical bench from mechanical disturbances caused by reaction wheels, cryocooler compressors, and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals/mirrors, directional \abbr{RF} antennas, and agile \abbr{OISL} terminals, providing $\ge 25.0\text{ dB}$ transmissibility attenuation above $40.0\text{ Hz}$ to support $< 2.0\text{ arcsec/s}$ \abbr{LOS} stability. & \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-004}} \newline \emph{Thermal Control Operating Limits} & The \abbr{TCS} (\abbr{WBS} \texttt{.01}) \textbf{shall} maintain all internal platform electronics within $-10.0^\circ\text{C}$ to $+50.0^\circ\text{C}$ ($0.0^\circ\text{C}$ to $+30.0^\circ\text{C}$ for $\mathrm{Li\text{-}ion}$ batteries) with at least $\pm 10.0\text{ K}$ qualification margin per the project thermal-control requirements across all sunlit and eclipse phases. & \texttt{R-015}, \texttt{R-016} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-005}} \newline \emph{End-of-Life} \newline \emph{Electrical Power Generation} & The \abbr{EPS} (\abbr{WBS} \texttt{.03}) triple-junction $\mathrm{GaAs}$ solar arrays \textbf{shall} deliver an End-of-Life (\abbr{EOL}) orbital average power of $\ge 550.0$~W ($\ge 650.0$~W peak tracking load) for \texttt{SATL} at 7~years, and $\ge 4{,}200.0$~W ($\ge 5{,}000.0$~W peak) for \texttt{SATG} at 15~years, maintaining a positive power margin $\ge 15.0\%$ in all nominal modes. & \texttt{R-015}, \texttt{R-016} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-006}} \newline \emph{Eclipse Battery Storage and DoD Limits} & The \abbr{EPS} $\mathrm{Li\text{-}ion}$ battery packs \textbf{shall} support full payload, \abbr{OBDH}, and \abbr{OISL} operation throughout maximum orbital eclipses ($\le 35.0$~min per orbit for \texttt{SATL} over $\ge 35{,}000$ cycles; $\le 71.5$~min equinox eclipses for \texttt{SATG} over $\ge 1{,}350$ cycles) without exceeding a maximum Depth of Discharge (\abbr{DoD}) of $30.0\%$ for \texttt{SATL} and $65.0\%$ for \texttt{SATG}. & \texttt{R-015}, \texttt{R-016} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-007}} \newline \emph{Propulsion Delta-v Capacity for SATL} & Each \texttt{SATL} propulsion subsystem (\abbr{WBS} \texttt{.05}) \textbf{shall} provide a total deliverable $\Delta v \ge 380.0$~m/s over 7~years, allocated to upper-stage dispersion correction and orbit insertion/phasing into the 1,000~km operational slot ($\ge 95.0$~m/s), routine station-keeping ($\ge 35.0$~m/s), collision avoidance ($\ge 20.0$~m/s), and protected active End-of-Life deorbitation from 1,000~km ($\ge 230.0$~m/s). & \texttt{R-005}, \texttt{R-016}, \texttt{R-018} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-008}} \newline \emph{Propulsion Delta-v Capacity for SATG} & Each \texttt{SATG} propulsion subsystem (\abbr{WBS} \texttt{.05}) \textbf{shall} provide orbit-raising transfer propulsion from launch injection into the 35,786~km geostationary slot (total $\Delta v \ge 1{,}800.0$~m/s including transfer) and a post-insertion on-station and disposal $\Delta v \ge 810.0$~m/s over 15~years, allocated to north--south and east--west station-keeping ($\ge 780.0$~m/s), momentum wheel desaturation ($\ge 15.0$~m/s), and mandatory End-of-Life graveyard re-orbitation ($\Delta v_{\text{EOL}} \ge 15.0$~m/s for $\Delta H \ge +300.0$~km). & \texttt{R-005}, \texttt{R-016}, \texttt{R-018} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-009}} \newline \emph{Deployment Mechanisms and Hold-Down Reliability} & All solar array, antenna, and payload aperture cover hold-down and release mechanisms (\abbr{WBS} \texttt{.08}) \textbf{shall} employ non-explosive actuators (\abbr{NEA}s) with redundant initiation circuits achieving a deployment reliability $\ge 0.9995$ and a positive torque/force margin $\ge 100\%$ per the project mechanisms and deployment requirements. & \texttt{R-015}, \texttt{R-017} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PLAT-010}} \newline \emph{Propulsion Plume and Optical Impingement Avoidance} & All propulsion thrusters (\abbr{WBS} \texttt{.05}) and internal outgassing vents \textbf{shall} be positioned and canted such that exhaust plume half-cone angles ($99.9\%$ mass flux contour) maintain at least $15.0^\circ$ angular clearance from the \abbr{SWIR}/\abbr{MWIR} stray-light baffles and the 1,550~nm \abbr{OISL} optical terminals. & \texttt{R-020}, \newline \texttt{R-025} & \texttt{A, I} \\ \hline
+\end{longtable}}
+
+% -----------------------------------------------------------------------------
+% EQUIPMENT-LEVEL ENVIRONMENTAL AND OPERATIONAL REQUIREMENTS
+% (EXTRACTED FROM TRS SUBSECTIONS 7.9 & 7.10)
+% -----------------------------------------------------------------------------
+\subsubsection{Equipment-Level Environmental and Operational Requirements (\texttt{SSEG-REQ-ENV-002}--\texttt{004} \& \texttt{SSEG-REQ-OPS-005})}
+
+The following equipment-level environmental, contamination, and launch-safety requirements are extracted verbatim from Subsections~7.9 and 7.10 of \texttt{EWAS-HSB-SSEG-TRS-03} for allocation into the Level-3 \texttt{SATL}/\texttt{SATG} and Level-4 subsystem specifications.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Equipment-Level Environmental and Operational Requirements (\texttt{SSEG-REQ-ENV} \& \texttt{SSEG-REQ-OPS})}\label{tab:req_equip_env_ops}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Table \thetable\ (continued): Equipment-Level Environmental and Operational Requirements}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-ENV-002}} \newline \emph{Single-Event Latch-Up Immunity and Current Limiting} & All electronic components aboard \texttt{SATL} and \texttt{SATG} \textbf{shall} either be immune to destructive Single-Event Latch-up (\abbr{SEL}) up to a Linear Energy Transfer threshold $\text{LET}_{\text{th}} \ge 37.0\text{ MeV}\cdot\text{cm}^2/\text{mg}$ or be protected by autonomous fast-trip ($< 1.0\text{ ms}$) current limiters with automatic power-rail recovery. & \texttt{R-015}, \texttt{R-017} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-003}} \newline \emph{Electrostatic Discharge and Charging Mitigation} & All external spacecraft surfaces, optical windows (Indium Tin Oxide coated), and \abbr{MLI} blankets \textbf{shall} be electrically conductive and grounded to the primary structure (maintaining surface potential differentials $< 100.0\text{ V}$) in compliance with the project electrostatic-discharge control rules. & \texttt{R-015} & \texttt{T, I} \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-004}} \newline \emph{Outgassing and Molecular Contamination Control} & All non-metallic materials used in \texttt{SATL} and \texttt{SATG} \textbf{shall} satisfy Total Mass Loss $\mathrm{TML} < 1.0\%$ and Collected Volatile Condensable Material $\mathrm{CVCM} < 0.01\%$ per the project contamination-control rules, and the \abbr{TCS} \textbf{shall} execute a $72.0\text{--}96.0\text{ h}$ in-orbit decontamination bake-out at $310.0\text{--}320.0\text{ K}$ prior to cryocooler cooldown. & \texttt{R-020}, \newline \texttt{R-025} & \texttt{T, I} \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-005}} \newline \emph{Launch Safety Inhibits} & All hazardous spacecraft systems (propulsion valves, non-explosive release actuators, high-power \abbr{RF} amplifiers, and Class~3B/4 laser \abbr{OISL} diodes) \textbf{shall} incorporate at least three (3) independent mechanical or electrical safety inhibits during on-ground \abbr{AIT} and launch ascent per the project launch-safety rules. & \texttt{IF-EXT-02} & \texttt{I, T} \\ \hline
+\end{longtable}}
+
+\end{document}
