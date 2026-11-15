@@ -231,4 +231,225 @@ The following equipment-level environmental, contamination, and launch-safety re
 \textbf{\texttt{SSEG-REQ-OPS-005}} \newline \emph{Launch Safety Inhibits} & All hazardous spacecraft systems (propulsion valves, non-explosive release actuators, high-power \abbr{RF} amplifiers, and Class~3B/4 laser \abbr{OISL} diodes) \textbf{shall} incorporate at least three (3) independent mechanical or electrical safety inhibits during on-ground \abbr{AIT} and launch ascent per the project launch-safety rules. & \texttt{IF-EXT-02} & \texttt{I, T} \\ \hline
 \end{longtable}}
 
+% =============================================================================
+% ARCHIVED QUANTITATIVE TABLES FROM TRS ISSUE 1.4 (TABLES 8 TO 15)
+% =============================================================================
+\newpage
+\section{Archived Quantitative Requirement Tables from Space Segment TRS Issue 1.4 (Subsections 7.1 to 7.8)}
+
+The following verbatim tables preserve all 53 quantitative normative requirement statements from \texttt{EWAS-HSB-SSEG-TRS-03} (Issue~1.4) prior to the Issue~1.5 Level-2 refactoring, for direct flow-down into \texttt{EWAS-HSB-SATL-TRS-03.01} (\textbf{RD-03}), \texttt{EWAS-HSB-SATG-TRS-03.02} (\textbf{RD-04}), \texttt{EWAS-HSB-SSEG-DDF-03} (\textbf{RD-01}), and \texttt{EWAS-HSB-SSEG-DDJF-03} (\textbf{RD-02}).
+
+\subsection{7.1 Functional and Mission Scope Requirements (\texttt{SSEG-REQ-FUN}, Issue 1.4 Table 8)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Functional and Mission Scope Technical Requirements (\texttt{SSEG-REQ-FUN}, Issue 1.4)}\label{tab:req_fun_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-FUN-001}} \newline \emph{Non-Offensive Civil-Protection Operation} & The \abbr{SSEG} hardware, flight software, and downlinked data products \textbf{shall} exclusively support ballistic missile launch detection, stereoscopic trajectory tracking, and impact-area warning generation for civil protection, and \textbf{shall} exclude any weapon-guidance, fire-control, or kinetic-interceptor command capabilities. & \texttt{R-001}, \newline \texttt{R-048} & \texttt{R} \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-002}} \newline \emph{Scope Exclusion of Yield and Damage Assessment} & The \abbr{SSEG} \textbf{shall} not be required to perform warhead nuclear or conventional yield estimation, definitive missile-variant identification, or post-impact terrestrial damage assessment. & \texttt{R-002} & \texttt{R} \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-003}} \newline \emph{Dual-Tier Detection and Stereoscopic Tracking Chain} & The \abbr{SSEG} \textbf{shall} execute continuous boost-phase infrared detection via the \abbr{GEO} layer (\texttt{SATG}), route tracking commands via the mandatory \abbr{OISL} network, execute cued dual-satellite stereoscopic tracking via the \abbr{LEO} layer (\texttt{SATL}), compute an onboard preliminary 3D trajectory estimate, and downlink both timestamped \abbr{LOS} observation packages and the preliminary trajectory estimate to the Ground Segment (\abbr{WBS} \texttt{123456.02}). & \texttt{R-007}, \texttt{R-009}, \texttt{R-023}, \texttt{R-042}, \texttt{R-044} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-004}} \newline \emph{Baltic Region and Extra-Regional Threat Surveillance} & The \abbr{SSEG} \textbf{shall} monitor both the primary Baltic Sea operational theatre ($53.0^\circ\text{N}\text{--}66.0^\circ\text{N}$, $10.0^\circ\text{E}\text{--}32.0^\circ\text{E}$) and extra-regional launch corridors across Eurasia, the Arctic, and adjacent maritime theatres capable of launching ballistic threats toward the Baltic region. & \texttt{R-006}, \newline \texttt{R-049} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-005}} \newline \emph{Onboard Proton Despiking and Plume Discrimination} & Both \texttt{SATG} and \texttt{SATL} \textbf{shall} perform real-time onboard proton despiking, background clutter suppression, and dual-band spectral/kinematic discrimination to distinguish rocket exhaust plumes from solar specular glints, terrestrial fires, aurorae, and radiation-induced detector transients. & \texttt{R-019}, \newline \texttt{R-022} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-FUN-006}} \newline \emph{Archival Telemetry and Provenance Formatting} & All downlinked \abbr{SSEG} event reports, \abbr{LOS} observation packages, preliminary trajectory estimates, and housekeeping records \textbf{shall} include GNSS-synchronized UTC timestamps, spacecraft ephemeris and attitude covariance metadata, and data-quality flags formatted for 5-year sovereign archival in the Ground Segment Data Archiving System (\texttt{123456.02.01}) exclusively for calibration, training, verification, and algorithm refinement. & \texttt{R-004}, \texttt{R-036}, \texttt{R-047} & \texttt{R, T} \\ \hline
+\end{longtable}}
+
+\subsection{7.2 Constellation Architecture and Astrodynamic Requirements (\texttt{SSEG-REQ-MIS}, Issue 1.4 Table 9)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Constellation Architecture and Astrodynamic Requirements (\texttt{SSEG-REQ-MIS}, Issue 1.4)}\label{tab:req_mis_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-MIS-001}} \newline \emph{Hybrid Constellation Composition} & The \abbr{SSEG} \textbf{shall} consist of six (6) active \abbr{GEO} detection satellites (\texttt{SATG}) operating at a nominal altitude of 35,786~km ($a = 42{,}164.14\text{ km}$, $i = 0.0^\circ \pm 0.05^\circ$, $e \le 0.0005$) and seventy-two (72) active \abbr{LEO} tracking satellites (\texttt{SATL}) operating at a circular altitude of $1{,}000\text{ km} \pm 10\text{ km}$ ($a = 7{,}378.14\text{ km}$, $e \le 0.001$). & \texttt{R-005} & \texttt{A, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-002}} \newline \emph{GEO Longitudinal Slot Allocation} & The 6 \texttt{SATG} spacecraft \textbf{shall} be distributed uniformly along the equatorial geostationary belt at $60.0^\circ$ nominal longitudinal intervals and maintained within a station-keeping deadband box of $\pm 0.05^\circ$ in both geographic longitude and latitude. & \texttt{R-005}, \newline \texttt{R-006} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-003}} \newline \emph{LEO Walker Delta 72/8/1 Topology} & The 72 \texttt{SATL} spacecraft \textbf{shall} be arranged in a Walker Delta $72/8/1$ constellation at an orbital inclination of $80.0^\circ \pm 0.2^\circ$ across 8 orbital planes spaced uniformly by $\Delta\Omega = 45.0^\circ \pm 0.5^\circ$ in Right Ascension of the Ascending Node (RAAN), with 9 satellites per plane spaced by $\Delta u = 40.0^\circ \pm 0.5^\circ$ in argument of latitude and a nominal inter-plane phase offset of $\Delta u_{\text{inter}} = 22.5^\circ$ (within the $15.0^\circ\text{--}22.5^\circ$ GMAT-optimized staggering window). & \texttt{R-005}, \newline \texttt{R-006} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-004}} \newline \emph{24/7 Uninterrupted Temporal and Spatial Coverage} & The combined \abbr{SSEG} constellation \textbf{shall} provide $100\%$ continuous 24/7 temporal and spatial surveillance of the Baltic Sea monitoring region ($53.0^\circ\text{N}\text{--}66.0^\circ\text{N}$, $10.0^\circ\text{E}\text{--}32.0^\circ\text{E}$) and designated extra-regional launch corridors with zero operational blind windows at local target elevation angles $\varepsilon \ge 5.0^\circ$. & \texttt{R-006}, \newline \texttt{R-008} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-005}} \newline \emph{Multi-Satellite Stereoscopic Viewing Geometry} & Over the northern latitude band from $50.0^\circ\text{N}$ to $80.0^\circ\text{N}$, the 1,000~km \abbr{LEO} constellation \textbf{shall} maintain at least 5 \texttt{SATL} spacecraft simultaneously above $\varepsilon_{\min} = 5.0^\circ$ local elevation at all times, ensuring that at least one pair of \texttt{SATL} spacecraft achieves a stereoscopic baseline convergence angle within $30.0^\circ \le \beta \le 120.0^\circ$ for any boost- or post-boost-phase target. & \texttt{R-007}, \texttt{R-008}, \texttt{R-023} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-006}} \newline \emph{Dual-GEO Overlapping Mid-Latitude Coverage} & The 6-satellite \abbr{GEO} ring \textbf{shall} provide simultaneous dual-satellite observation ($\ge 2$ \texttt{SATG} nodes at local elevation $\varepsilon \ge 5.0^\circ$) across all geographic longitudes between latitudes $55.0^\circ\text{S}$ and $55.0^\circ\text{N}$. & \texttt{R-006}, \newline \texttt{R-007} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-MIS-007}} \newline \emph{Constellation Phasing Maintenance Coordination} & Orbit maintenance and station-keeping manoeuvres across the 78 spacecraft \textbf{shall} be scheduled such that no more than one (1) \texttt{SATL} spacecraft within any mutual visibility zone is off-pointing or thrusting simultaneously, preserving $100\%$ stereoscopic tracking availability. & \texttt{R-008}, \newline \texttt{R-015} & \texttt{A, R} \\ \hline
+\end{longtable}}
+
+\subsection{7.3 Mission Performance and Latency Budget Requirements (\texttt{SSEG-REQ-PERF}, Issue 1.4 Table 10)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Mission Performance and Latency Budget Requirements (\texttt{SSEG-REQ-PERF}, Issue 1.4)}\label{tab:req_perf_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-PERF-001}} \newline \emph{Space Segment Total Latency Allocation} & Within the $\le 60.0\text{ s}$ system end-to-end warning latency budget (measured from initial \abbr{GEO} detection epoch $T_0$ to external national authority warning delivery), the combined Space Segment execution and transport time (encompassing Step~1 \abbr{GEO} detection/reporting, Step~2 \abbr{ISL} command routing, and Step~3 \abbr{LEO} lock-on, stereoscopic tracking, onboard preliminary 3D trajectory estimation, and downlink to the Ground Station Network) \textbf{shall} not exceed $45.0\text{ seconds}$ ($99\%$ confidence). & \texttt{R-011}, \texttt{R-033}, \texttt{R-045} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-002}} \newline \emph{Step 1 GEO Detection and Reporting Latency} & Upon a missile plume reaching the boost-phase radiometric detection threshold above cloud tops ($T_0$), the detecting \texttt{SATG} spacecraft \textbf{shall} complete onboard proton despiking, clutter filtering, preliminary classification, and transmission of the encrypted \emph{GEO Event Report} to the Ground Station Network within $\le 10.0\text{ seconds}$. & \texttt{R-011}, \texttt{R-022}, \texttt{R-042} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-003}} \newline \emph{Step 2 Mandatory ISL Command Routing Latency} & Following Ground Segment transmission of a \emph{LEO Tracking Request}, the \abbr{SSEG} communication and mandatory \abbr{ISL} network \textbf{shall} deliver the authenticated tracking command to the two selected \texttt{SATL} spacecraft within $\le 3.0\text{ seconds}$ anywhere in orbit (within the $\le 5.0\text{ s}$ combined Step~2 ground selection and cueing allocation). & \texttt{R-011}, \texttt{R-033}, \texttt{R-044} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-004}} \newline \emph{Step 3 LEO Lock-On, Stereo Tracking, and Downlink Latency} & From receipt of the \emph{LEO Tracking Request} at the two cued \texttt{SATL} spacecraft to reception of both their encrypted timestamped \emph{LEO Observation Packages} and the \emph{Onboard Preliminary Trajectory} at the Ground Station Network, the elapsed time \textbf{shall} not exceed $30.0\text{ seconds}$ (comprising $< 5.0\text{ s}$ optical \abbr{LOS} lock-on, $18.0\text{--}20.0\text{ s}$ stereoscopic tracking and onboard 3D trajectory convergence, and $\le 5.0\text{ s}$ \abbr{ISL}/ground downlink). & \texttt{R-011}, \texttt{R-023}, \texttt{R-024}, \texttt{R-033} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-005}} \newline \emph{Boost-Phase Launch Detection Probability} & The \abbr{SSEG} \textbf{shall} achieve a boost-phase missile launch probability of detection of $P_d > 95.0\%$ ($\ge 98.0\%$ design target) for all theatre and strategic ballistic missile classes (\abbr{SRBM}, \abbr{MRBM}, \abbr{IRBM}, and \abbr{ICBM}) exhibiting a plume radiant intensity $\ge 50.0\text{ kW/sr}$ in the \abbr{SWIR}/\abbr{MWIR} bands above cloud tops. & \texttt{R-009}, \newline \texttt{R-010} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-006}} \newline \emph{Space Segment False-Alarm Rate Rejection} & Onboard proton despiking and dual-band spatio-temporal clutter filtering \textbf{shall} limit false candidate event reports transmitted to the Ground Segment to $\le 1$ false event per constellation-day across all 78 spacecraft while maintaining $P_d > 95.0\%$. & \texttt{R-010}, \texttt{R-019}, \texttt{R-022} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-PERF-007}} \newline \emph{Space Segment Operational Availability} & The integrated \abbr{SSEG} constellation \textbf{shall} achieve an operational availability of $A_{\text{SSEG}} \ge 99.95\%$ over its operational lifetime to support the overall \abbr{EWAS} system availability requirement of $> 99.9\%$. & \texttt{R-015}, \newline \texttt{R-017} & \texttt{A} \\ \hline
+\end{longtable}}
+
+\subsection{7.4 Subordinate Flight System Allocation Requirements (\texttt{SSEG-REQ-ALLOC}, Issue 1.4 Table 11)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Subordinate Flight System Allocation Requirements (\texttt{SSEG-REQ-ALLOC}, Issue 1.4)}\label{tab:req_alloc_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-ALLOC-001}} \newline \emph{SATG Boost-Phase Detection Capability Allocation} & Each \texttt{SATG} flight system (\texttt{123456.03.02}) \textbf{shall} provide persistent full-Earth-disk or regional step-stare dual-band \abbr{SWIR} ($2.65\text{--}2.85~\mu\mathrm{m}$) and \abbr{MWIR} ($4.15\text{--}4.45~\mu\mathrm{m}$) observation at $\ge 10.0\text{ Hz}$ with a nadir \abbr{GSD} $\le 1.5\text{ km}$ and radiometric sensitivity ($\text{NEI} \le 1.5 \times 10^{-13}\text{ W/cm}^2$) enabling detection of boost-phase plumes ($\ge 50.0\text{ kW/sr}$) within the Step~1 latency budget. & \texttt{R-007}, \texttt{R-009}, \texttt{R-020}, \texttt{R-021} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-002}} \newline \emph{SATL Stereoscopic Tracking Capability Allocation} & Each \texttt{SATL} flight system (\texttt{123456.03.01}) \textbf{shall} provide steerable narrow-field ($\ge 1.5^\circ \times 1.5^\circ$ \abbr{FOV} across a $\pm 55.0^\circ$ Field of Regard) dual-band \abbr{SWIR}/\abbr{MWIR} observation at $\ge 30.0\text{ Hz}$ with a nadir \abbr{GSD} $\le 35.0\text{ m}$ at 1,000~km altitude to resolve ascending boost and post-boost targets. & \texttt{R-009}, \texttt{R-020}, \texttt{R-021}, \texttt{R-023} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-003}} \newline \emph{SATL Independent Optical LOS Acquisition and Stability Allocation} & Upon receipt of a tracking cue, each \texttt{SATL} flight system \textbf{shall} independently steer and lock its payload optical Line of Sight (\abbr{LOS}) onto the target within $< 5.0\text{ seconds}$ and maintain optical \abbr{LOS} pointing stability strictly below $< 2.0\text{ arcsec/s}$ ($\le 9.7~\mu\mathrm{rad/s}$ RMS, $3\sigma$) without slewing the spacecraft bus or disturbing the pointing stability of its \abbr{OISL} terminals and space-to-ground antennas. & \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-004}} \newline \emph{Spacecraft Inertial LOS Knowledge, Ephemeris, and Time Synchronization Allocation} & To support stereoscopic triangulation, each flight system \textbf{shall} maintain real-time inertial Attitude/\abbr{LOS} Knowledge Error (\abbr{AKE}) $\le 12.0~\mu\mathrm{rad}$ ($1\sigma$ for \texttt{SATL}) and $\le 20.0~\mu\mathrm{rad}$ ($1\sigma$ for \texttt{SATG}), onboard \abbr{GNSS} orbit position knowledge $\le 3.0\text{ m}$ (\texttt{SATL}) and $\le 15.0\text{ m}$ (\texttt{SATG}), and UTC epoch synchronization within $\le 50.0~\mu\mathrm{s}$ across all 78 constellation nodes. & \texttt{R-012}, \texttt{R-023}, \texttt{R-024} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-005}} \newline \emph{Onboard Clutter Rejection and Stereoscopic 3D Trajectory Computation Allocation} & Each flight system \textbf{shall} execute real-time onboard proton despiking and background clutter filtering ($\le 50.0\text{ ms}$ frame latency), and during Mode~N2, the two cued \texttt{SATL} flight systems \textbf{shall} exchange timestamped \abbr{LOS} unit vectors and $6 \times 6$ covariance matrices over the \abbr{OISL} network at $\ge 10.0\text{ Hz}$ to compute an \emph{Onboard Preliminary Trajectory} within $\le 18.0\text{ s}$ of lock-on and downlink both the \emph{LEO Observation Packages} and \emph{Onboard Preliminary Trajectory} to the Ground Segment. & \texttt{R-012}, \texttt{R-019}, \texttt{R-022}, \texttt{R-023}, \texttt{R-045} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-006}} \newline \emph{Stray-Light Rejection and Plume Clearance Allocation} & Both \texttt{SATL} and \texttt{SATG} flight systems \textbf{shall} provide optical stray-light attenuation ($\text{PST} \le 10^{-10}$ for solar angles $\ge 15.0^\circ$ and $\le 10^{-8}$ for sunlit Earth-limb angles $\ge 3.0^\circ$) and maintain $\ge 15.0^\circ$ clearance between thruster exhaust plumes/outgassing vents and all optical apertures. & \texttt{R-020}, \newline \texttt{R-025} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-007}} \newline \emph{Flight System Mass, Power, and Stowed Frequency Envelopes} & Each \texttt{SATL} flight system \textbf{shall} not exceed a wet launch mass of 290.0~kg (compatible with 9-satellite plane-batch dispenser stacks $\le 2{,}800.0\text{ kg}$), fundamental stowed frequencies $f_{\text{axial}} \ge 35.0\text{ Hz}$ / $f_{\text{lateral}} \ge 20.0\text{ Hz}$, and \abbr{EOL} average power $\ge 550.0\text{ W}$; each \texttt{SATG} flight system \textbf{shall} not exceed 3,100.0~kg wet mass, $f_{\text{axial}} \ge 31.0\text{ Hz}$ / $f_{\text{lateral}} \ge 15.0\text{ Hz}$, and \abbr{EOL} power $\ge 4{,}200.0\text{ W}$ with $\ge 15.0\%$ positive power margin across all eclipse seasons. & \texttt{R-005}, \texttt{R-015}, \texttt{R-016}, \texttt{IF-EXT-02} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ALLOC-008}} \newline \emph{Flight System Propulsion Delta-v Allocation} & Each \texttt{SATL} flight system \textbf{shall} provide a total deliverable $\Delta v \ge 380.0\text{ m/s}$ covering orbit insertion/phasing ($\ge 95.0\text{ m/s}$), 7-year station-keeping and collision avoidance ($\ge 55.0\text{ m/s}$), and protected active \abbr{EOL} deorbitation ($\ge 230.0\text{ m/s}$); each \texttt{SATG} flight system \textbf{shall} provide \abbr{GEO} transfer/insertion propulsion plus $\ge 810.0\text{ m/s}$ post-insertion $\Delta v$ for 15-year station-keeping and $\Delta H \ge +300.0\text{ km}$ graveyard disposal. & \texttt{R-005}, \texttt{R-016}, \texttt{R-018} & \texttt{T, A} \\ \hline
+\end{longtable}}
+
+\subsection{7.5 Space Segment Communications and Mandatory OISL Network Requirements (\texttt{SSEG-REQ-ISL}, Issue 1.4 Table 12)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Communications and Mandatory OISL Network Requirements (\texttt{SSEG-REQ-ISL}, Issue 1.4)}\label{tab:req_isl_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-ISL-001}} \newline \emph{Mandatory LEO Optical Inter-Satellite Link Mesh} & Each of the 72 \texttt{SATL} spacecraft (\abbr{WBS} \texttt{.06.02}) \textbf{shall} carry four (4) 1,550~nm laser Optical Inter-Satellite Link (\abbr{OISL}) terminals (2 permanent intra-plane fore/aft terminals and 2 agile cross-plane left/right terminals), each providing a full-duplex user data rate of $\ge 500.0$~Mbps at a Bit Error Rate ($\text{BER}$) $\le 10^{-9}$ over inter-satellite link ranges up to $\ge 6{,}500$~km (maintaining equatorial cross-plane lock with optical line of sight $> 245$~km above Earth's surface). & \texttt{R-023}, \texttt{R-033}, \texttt{R-044} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-002}} \newline \emph{Mandatory Cross-Layer GEO-LEO Optical Relay Trunks} & The 6 \texttt{SATG} and 72 \texttt{SATL} spacecraft \textbf{shall} incorporate 1,550~nm laser \abbr{OISL} cross-layer relay terminals providing an aggregate data rate of $\ge 1.5\text{--}2.0$~Gbps ($\text{BER} \le 10^{-9}$) across operating link ranges from 34,800~km to 45,000~km, ensuring continuous bidirectional command and observation trunking between the \abbr{LEO} tracking layer and European ground gateways. & \texttt{R-033}, \newline \texttt{R-044} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-003}} \newline \emph{Space-to-Ground} \newline \emph{RF TT\&C and Mission Links} & Each spacecraft \textbf{shall} provide all-weather redundant S-band/X-band \abbr{RF} \abbr{TT\&C} links (uplink $\ge 256.0$~kbps, downlink $\ge 2.0$~Mbps, $\text{BER} \le 10^{-7}$) and high-rate X-band/Ka-band \abbr{RF} mission data downlinks ($\ge 150.0$~Mbps for \texttt{SATL}; $\ge 300.0$~Mbps for \texttt{SATG}, $\text{BER} \le 10^{-9}$) compliant with \textbf{CCSDS 131.0-B} and \texttt{IF-EXT-01}. & \texttt{R-030}, \texttt{R-033}, \texttt{R-042} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-004}} \newline \emph{End-to-End} \newline \emph{Cryptographic Security} & All space-to-ground and inter-satellite communication links \textbf{shall} implement hardware-based \texttt{AES-256-GCM} (or EU/NATO sovereign Level-1 equivalent) bulk data encryption and cryptographic telecommand authentication (\textbf{CCSDS 355.0-B} Space Data Link Security) with over-the-air key rotation and tamper-triggered zero-ization capability. & \texttt{R-003}, \texttt{R-031}, \texttt{R-034}, \texttt{R-035} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-005}} \newline \emph{Anti-Jamming and Anti-Spoofing Protection} & All Space-to-Ground \abbr{RF} links (\texttt{IF-EXT-01}) \textbf{shall} employ Direct-Sequence Spread Spectrum (\abbr{DSSS}) or frequency-hopping modulation and null-steering antenna processing providing a jamming resistance processing gain $\ge 20.0\text{ dB}$, while narrow-beam ($< 20.0~\mu\mathrm{rad}$ divergence) 1,550~nm Space-to-Space \abbr{OISL} links \textbf{shall} provide physical immunity to terrestrial \abbr{RF} jamming and interception. & \texttt{R-032} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-006}} \newline \emph{Autonomous QoS Mesh Routing and Failover} & The \abbr{SSEG} \abbr{OISL} network \textbf{shall} implement autonomous Quality-of-Service (\abbr{QoS}) packet routing that immediately preempts routine housekeeping traffic for Priority-0 warning-chain messages (\emph{GEO Event Reports}, \emph{LEO Tracking Requests}, \emph{LOS Vectors}, and \emph{Preliminary Trajectories}) and automatically reroutes packets around any failed node or degraded link within $< 200.0\text{ ms}$. & \texttt{R-017}, \texttt{R-033}, \texttt{R-044} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ISL-007}} \newline \emph{ITU Spectral Compliance and Laser Safety Interlocks} & All Space-to-Ground \abbr{RF} transmitters \textbf{shall} comply with \textbf{ITU Radio Regulations} spectral masks and power-flux-density limits, and all 1,550~nm laser \abbr{OISL} terminals \textbf{shall} incorporate automatic beam-shutter interlocks preventing illumination of sub-orbital aviation airspace ($< 20.0\text{ km}$ altitude) or non-cooperative satellites. & \texttt{R-001}, \newline \texttt{IF-EXT-04} & \texttt{R, T} \\ \hline
+\end{longtable}}
+
+\subsection{7.6 Space Environment, Survivability, and Sustainability Requirements (\texttt{SSEG-REQ-ENV}, Issue 1.4 Table 13)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Space Environment, Survivability, and Sustainability Requirements (\texttt{SSEG-REQ-ENV}, Issue 1.4)}\label{tab:req_env_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-ENV-001}} \newline \emph{Orbital Radiation Environment Survivability} & Incorporating a $2\times$ Radiation Design Margin (\abbr{RDM}) per the project space-environment and radiation-assurance rules, the \texttt{SATL} constellation \textbf{shall} survive the 7-year 1,000~km, $80^\circ$ inclination radiation environment ($\ge 30.0\text{ krad}(\mathrm{Si})$ behind $4.0\text{ mm}$ $\mathrm{Al}$; $\le 15.0\text{ krad}(\mathrm{Si})$ inside spot-shielded enclosures), the \texttt{SATG} constellation \textbf{shall} survive the 15-year 35,786~km \abbr{GEO} environment ($\ge 100.0\text{ krad}(\mathrm{Si})$ behind $4.0\text{ mm}$ $\mathrm{Al}$; $\le 25.0\text{ krad}(\mathrm{Si})$ inside vault shielding), and all flight electronics \textbf{shall} maintain destructive Single-Event Latch-up (\abbr{SEL}) immunity or fast-trip current-limiting protection up to $\text{LET}_{\text{th}} \ge 37.0\text{ MeV}\cdot\text{cm}^2/\text{mg}$. & \texttt{R-015}, \texttt{R-016}, \texttt{R-017} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-002}} \newline \emph{MMOD Survivability and Collision Avoidance Execution} & Structural shielding (\abbr{WBS} \texttt{.08}) of pressurized tanks, batteries, and redundant harnesses \textbf{shall} achieve a Probability of No Penetration $\text{PNP} \ge 0.99$ per spacecraft over its design lifetime against untrackable debris ($< 1.0\text{ cm}$), and each spacecraft \textbf{shall} execute a ground-commanded or autonomous Collision Avoidance Manoeuvre (\abbr{CAM}) within $\le 12.0\text{ hours}$ whenever a Conjunction Data Message indicates collision probability $P_c > 10^{-4}$. & \texttt{R-015}, \texttt{IF-EXT-04} & \texttt{A, T} \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-003}} \newline \emph{Mandatory Active End-of-Life Disposal for LEO and GEO} & In compliance with \texttt{R-018}, the project space-debris mitigation policy, and the \textbf{ESA Zero Debris Charter}, every \texttt{SATL} spacecraft \textbf{shall} execute active retrograde deorbitation from 1,000~km at End of Life to guarantee complete atmospheric demise within $< 5.0\text{ years}$ ($\ge 99.0\%$ disposal reliability and ground casualty risk $< 10^{-4}$), and every \texttt{SATG} spacecraft \textbf{shall} re-orbit to a super-synchronous graveyard orbit at least $\Delta H \ge +300.0\text{ km}$ above 35,786~km ($\Delta e \le 0.0005$). & \texttt{R-018} & \texttt{A, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-ENV-004}} \newline \emph{End-of-Life Constellation Passivation} & Upon completion of End-of-Life disposal manoeuvres, each \texttt{SATL} and \texttt{SATG} spacecraft \textbf{shall} permanently vent or deplete all residual propellants and pressurants, open battery charging relays, spin down reaction wheels and cryocoolers, and disable all \abbr{RF} and optical transmitters. & \texttt{R-018} & \texttt{R, T} \\ \hline
+\end{longtable}}
+
+\subsection{7.7 Constellation Operations, Autonomy, and External Interface Requirements (\texttt{SSEG-REQ-OPS} \& \texttt{SSEG-REQ-IF}, Issue 1.4 Table 14)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Constellation Operations, Autonomy, and External Interface Requirements (\texttt{SSEG-REQ-OPS} \& \texttt{SSEG-REQ-IF}, Issue 1.4)}\label{tab:req_ops_if_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-OPS-001}} \newline \emph{Operational Design Lifetimes} & Each \texttt{SATL} spacecraft \textbf{shall} be designed and qualified for an in-orbit operational lifetime of $\ge 7.0$~years at 1,000~km \abbr{LEO}, and each \texttt{SATG} spacecraft \textbf{shall} be designed and qualified for an in-orbit operational lifetime of $\ge 15.0$~years at 35,786~km \abbr{GEO}. & \texttt{R-016} & \texttt{A, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-002}} \newline \emph{No Single-Point Failure Redundancy Architecture} & Critical spacecraft and constellation functional chains (\abbr{OBDH}, \abbr{TT\&C}/\abbr{OISL}, \abbr{EPS}/PCDU, \abbr{ADCS} sensors/actuators, and cryocooler drive electronics) \textbf{shall} implement block or cross-strapped redundancy (A/B chains) per the project product-assurance and redundancy rules such that no single component failure degrades constellation detection or stereoscopic tracking performance. & \texttt{R-015}, \texttt{R-017} & \texttt{A, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-003}} \newline \emph{Autonomous FDIR Failover and Safe Mode Recovery} & Onboard \abbr{FDIR} logic \textbf{shall} detect and isolate unit-level faults and switch to redundant hardware within $\le 2.0\text{ seconds}$ (Level~2), and upon a severe bus anomaly (Level~3), \textbf{shall} automatically close the payload aperture shutter and acquire a power-safe Sun-pointing attitude within $\le 60.0\text{ seconds}$ without ground intervention. & \texttt{R-015}, \newline \texttt{R-017} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-004}} \newline \emph{72-Hour Autonomous Constellation Operation} & The \abbr{SSEG} constellation \textbf{shall} maintain full Mode~N1 boost-phase surveillance and Mode~N3 \abbr{OISL} mesh routing autonomously for at least $72.0\text{ hours}$ without ground station contact. & \texttt{R-015}, \newline \texttt{R-030} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-OPS-005}} \newline \emph{Constellation Health Telemetry, Event Buffering, and OTA Calibration} & Each spacecraft \textbf{shall} generate continuous health and status housekeeping telemetry packets at $\ge 1.0\text{ Hz}$ (including subsystem temperatures, bus voltages, \abbr{FDIR} status counters, and \abbr{OISL} link margins), maintain an encrypted circular non-volatile event buffer retaining at least $72.0\text{ hours}$ of raw and processed event observations, housekeeping telemetry, and security audit logs, and support authenticated over-the-air (\abbr{OTA}) updating of plume-classification filters and tracking algorithms with automatic dual-bank rollback within $\le 5.0\text{ s}$ upon checksum or watchdog failure. & \texttt{R-004}, \texttt{R-015}, \texttt{R-030}, \texttt{R-035}, \texttt{R-041}, \texttt{R-047} & \texttt{T, R} \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-001}} \newline \emph{Space-to-Ground} \newline \emph{ICD Compliance (\texttt{IF-EXT-01})} & All \abbr{SSEG} housekeeping telemetry, tracking commands, \emph{GEO Event Reports}, \emph{LEO Observation Packages}, and \emph{Onboard Preliminary Trajectories} exchanged across \texttt{IF-EXT-01} \textbf{shall} conform strictly to the packet schemas, timing, and cryptographic boundaries defined in the Space Segment \abbr{ICD} (\texttt{123456.05.02.04}) and Ground Segment Data Dictionary (Chapter~12 of \textbf{AD-01}). & \texttt{R-003}, \texttt{R-031}, \texttt{R-033}, \texttt{R-042}--\texttt{R-045} & \texttt{T, I} \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-002}} \newline \emph{Dispenser and Launch Vehicle Interface Compliance (\texttt{IF-EXT-02})} & \texttt{SATL} mechanical bolt patterns, separation springs ($\Delta v_{\text{sep}} = 0.5\text{--}1.5\text{ m/s}$, bus tip-off $\le 2.0\text{--}3.0^\circ/\text{s}$), center-of-gravity offsets, and umbilical connectors across \texttt{IF-EXT-02} \textbf{shall} comply with 9-satellite-per-plane cylindrical rideshare dispenser rings, and \texttt{SATG} adapters \textbf{shall} comply with standard 1,194~mm or 1,666~mm heavy-lift launch vehicle interface rings per the project interface-management rules. & \texttt{R-005} & \texttt{I, T} \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-003}} \newline \emph{Target Plume Radiometric Interface Compliance (\texttt{IF-EXT-03})} & The \abbr{SSEG} optical payloads and onboard discrimination algorithms across \texttt{IF-EXT-03} \textbf{shall} operate without pixel saturation across plume radiant intensities from $50.0\text{ kW/sr}$ to $10.0\text{ MW/sr}$ against sunlit cloud tops, Earth-limb airglow, and industrial thermal clutter backgrounds. & \texttt{R-009}, \texttt{R-019}--\texttt{R-022}, \texttt{R-025} & \texttt{T, A} \\ \hline
+\textbf{\texttt{SSEG-REQ-IF-004}} \newline \emph{Space Traffic Management and Regulatory Interface (\texttt{IF-EXT-04})} & The \abbr{SSEG} \textbf{shall} ingest standardized CCSDS Conjunction Data Messages (\abbr{CDM}s) relayed from the Ground Segment Mission Control Center across \texttt{IF-EXT-04} and execute collision-avoidance trajectories, \abbr{ITU} spectral compliance, and the project space-debris disposal requirements. & \texttt{R-018} & \texttt{T, R} \\ \hline
+\end{longtable}}
+
+\subsection{7.8 Space Segment Verification Requirements (\texttt{SSEG-REQ-VER}, Issue 1.4 Table 15)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\setlength{\LTcapwidth}{\textwidth}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.18\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.06\textwidth}|}
+\caption{Space Segment Verification Technical Requirements (\texttt{SSEG-REQ-VER}, Issue 1.4)}\label{tab:req_ver_i14}\\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Req.\ ID \& Title} & \thead{Normative Requirement Statement (\texttt{shall})} & \thead{Parent Req.} & \thead{Verif.} \\ \hline
+\endhead
+\endfoot
+\endlastfoot
+\textbf{\texttt{SSEG-REQ-VER-001}} \newline \emph{Multi-Scenario Constellation and Radiometric Simulation} & \abbr{SSEG} compliance with 24/7 Baltic and extra-regional coverage (\texttt{R-006}--\texttt{R-008}), boost-phase detection probability ($P_d > 95.0\%$, \texttt{R-010}), stereoscopic viewing geometry ($30.0^\circ \le \beta \le 120.0^\circ$), and the $\le 45.0\text{ s}$ Space Segment latency allocation (\texttt{R-011}) \textbf{shall} be verified via astrodynamic and radiometric Monte Carlo simulation campaigns encompassing $\ge$ 1,000 representative launch trajectories across \abbr{SRBM}, \abbr{MRBM}, \abbr{IRBM}, and \abbr{ICBM} threat profiles. & \texttt{R-038}, \newline \texttt{AD-02} & \texttt{A} \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-002}} \newline \emph{Hardware-in-the-Loop Testing of Sensing, LOS, and OBDH/OISL} & Prior to flight deployment, the \abbr{SWIR}/\abbr{MWIR} focal plane readout, \abbr{OBDH} proton-despiking and stereoscopic 3D triangulation pipeline (\texttt{R-022}, \texttt{R-023}), independent gimbal + \abbr{FSM} $< 5.0\text{ s}$ lock-on and $< 2.0\text{ arcsec/s}$ stabilization loop (\texttt{R-024}), and encrypted \abbr{OISL} routing protocols (\texttt{R-031}, \texttt{R-044}) \textbf{shall} undergo closed-loop Hardware-in-the-Loop (\abbr{HIL}) testing on the Engineering and Qualification Models (\abbr{WBS} \texttt{123456.04.02.02}). & \texttt{R-039}, \newline \texttt{AD-02} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-003}} \newline \emph{Environmental Qualification and Batch Acceptance Testing} & The lead \texttt{SATL} and \texttt{SATG} Qualification / Proto-Flight Models (\texttt{QM}/\texttt{PFM}) and all recurring Flight Models (\texttt{FM-01} to \texttt{FM-72} for \texttt{SATL}; \texttt{FM-01} to \texttt{FM-06} for \texttt{SATG}) \textbf{shall} undergo mechanical vibration, shock, acoustic, thermal-vacuum (\abbr{TVAC}), and electromagnetic compatibility (\abbr{EMC}) testing in accordance with the project environmental qualification and acceptance rules (\textbf{AD-02}). & \texttt{R-015}, \texttt{R-016}, \texttt{AD-02} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-004}} \newline \emph{End-to-End} \newline \emph{Operational Validation} & During In-Orbit Commissioning and periodic operational readiness exercises, \abbr{SSEG} and the Ground Segment \textbf{shall} execute end-to-end validation trials using cooperative calibration targets and injected or live rocket-launch signatures to demonstrate compliance with the $\le 60.0$~s total warning latency (\texttt{R-011}), $P_d > 95.0\%$ (\texttt{R-010}), and $> 99.9\%$ availability (\texttt{R-015}). & \texttt{R-040}, \newline \texttt{AD-02} & \texttt{T} \\ \hline
+\textbf{\texttt{SSEG-REQ-VER-005}} \newline \emph{Post-Event Archive Analysis and Algorithm Calibration} & The \abbr{SSEG} flight software and Ground Segment support tools \textbf{shall} support periodic ingestion and replay of archived mission event data (under \texttt{R-004}) to verify false-alarm reduction and update onboard plume-classification coefficients via authenticated over-the-air patches. & \texttt{R-004}, \newline \texttt{R-041} & \texttt{A, T} \\ \hline
+\end{longtable}}
+
 \end{document}

@@ -299,4 +299,96 @@ The space thermal environment subjects the two constellation tiers to distinct r
     \item \textbf{Gravitational, Geopotential, and Solar Radiation Pressure Perturbations:} At 1,000~km, $80^\circ$ inclination, Earth's oblateness ($J_2 = 1.08263 \times 10^{-3}$) induces a secular nodal precession of $\dot{\Omega} \approx -1.04^\circ/\text{day}$ and apsidal rotation of $\dot{\omega} \approx +2.85^\circ/\text{day}$ ($\Delta v_{\text{SK}} \le 4\text{--}6\text{ m/s/year}$ for differential phase maintenance). At 35,786~km \abbr{GEO}, lunisolar gravitational attraction ($\sim 45\text{--}51\text{ m/s/year}$ N--S inclination drift), Earth triaxiality ($J_{22}$ E--W drift $\sim 2\text{ m/s/year}$), and solar radiation pressure govern the \texttt{SATG} station-keeping constraint.
 \end{itemize}
 
+% =============================================================================
+% ARCHIVED FROM TRS ISSUE 1.4 PRIOR TO ISSUE 1.5 REFACTORING
+% =============================================================================
+\newpage
+\section{Archived Radar Horizon Analysis, Warning-Chain Latency Budget, Environmental Envelopes, and Mass/Power/\texorpdfstring{$\Delta v$}{Delta-v} Technical Budgets (Extracted from TRS Issue 1.4)}
+
+\subsection{B.1 Earth-Curvature Radar Horizon Masking Analysis (from TRS Section 3.1)}
+
+The \textbf{Baltic Sea region} ($53^\circ\text{N}\text{--}66^\circ\text{N}$, $10^\circ\text{E}\text{--}32^\circ\text{E}$) faces close geographic proximity to potential launch corridors for Short-Range Ballistic Missiles (\abbr{SRBM}, range $< 1{,}000\text{ km}$, flight time 3--7~min) and Medium-Range Ballistic Missiles (\abbr{MRBM}, range 1,000--3,000~km, flight time 7--15~min), as well as Intermediate-Range and Intercontinental Ballistic Missiles (\abbr{IRBM}/\abbr{ICBM}, \texttt{R-049}).
+\begin{itemize}
+    \item \textbf{Earth-Curvature Horizon Masking Derivation:} Due to Earth's curvature, a terrestrial radar with an antenna height of $h_r \approx 30\text{ m}$ cannot achieve line-of-sight visibility to an ascending missile until the vehicle clears the local radar horizon:
+    \[
+        d_h \approx 4.12\bigl(\sqrt{h_r} + \sqrt{h_t}\bigr) \quad (\text{in km, for altitudes } h_r, h_t \text{ in meters})
+    \]
+    At typical regional stand-off distances of 400--800~km, an ascending missile remains masked below the radar horizon throughout its initial boost phase (altitudes below 15--45~km). This delays initial detection by 60--150~seconds after rocket motor ignition (whereas the boost phase typically lasts 45--180~seconds).
+\end{itemize}
+
+\subsection{B.2 End-to-End Warning Chain and Space Segment Latency Budget Allocation (from TRS Section 3.2 and Section 7.3)}
+
+To satisfy the $\le 60\text{-second}$ end-to-end latency requirement (\texttt{R-011}) from initial \abbr{GEO} detection ($T_0$) to external national authority warning dispatch, the operational warning chain is partitioned into four deterministic steps across the Space and Ground Segments with a combined Space Segment latency allocation of $\le 40\text{--}45\text{ seconds}$ ($\le 45.0\text{ s}$ at $99\%$ confidence):
+\begin{itemize}
+    \item \textbf{Step 1 (\abbr{GEO} Detection and Reporting Latency --- $\le 10.0\text{ s}$):} Upon a missile plume reaching the boost-phase radiometric detection threshold above cloud tops ($T_0$), the detecting \texttt{SATG} spacecraft completes onboard proton despiking, clutter filtering, preliminary classification, and transmission of the encrypted \emph{GEO Event Report} to the Ground Station Network within $\le 10.0\text{ seconds}$ (\texttt{R-011}, \texttt{R-022}, \texttt{R-042}).
+    \item \textbf{Step 2 (Ground Selection \& Mandatory \abbr{ISL} Command Routing Latency --- $\le 5.0\text{ s}$ total; $\le 2.0\text{ s}$ Ground C2 selection + $\le 3.0\text{ s}$ \abbr{SSEG} \abbr{ISL} routing):} Following Ground Segment transmission of a \emph{LEO Tracking Request}, the \abbr{SSEG} communication and mandatory 1,550~nm \abbr{OISL} network delivers the authenticated tracking command to the two selected \texttt{SATL} spacecraft within $\le 3.0\text{ seconds}$ anywhere in orbit (\texttt{R-011}, \texttt{R-033}, \texttt{R-044}).
+    \item \textbf{Step 3 (\abbr{LEO} Lock-On, Stereo Tracking, and Downlink Latency --- $\le 25.0\text{--}30.0\text{ s}$):} From receipt of the \emph{LEO Tracking Request} at the two cued \texttt{SATL} spacecraft to reception of both their encrypted timestamped \emph{LEO Observation Packages} and the \emph{Onboard Preliminary Trajectory} at the Ground Station Network, the elapsed time does not exceed $30.0\text{ seconds}$ (comprising $< 5.0\text{ s}$ optical \abbr{LOS} lock-on, $15.0\text{--}20.0\text{ s}$ stereoscopic tracking and onboard 3D trajectory convergence [$\le 18.0\text{ s}$ convergence], and $\le 5.0\text{--}7.0\text{ s}$ \abbr{ISL}/ground downlink) (\texttt{R-011}, \texttt{R-023}, \texttt{R-024}, \texttt{R-033}). Specifically, slewing an entire 1,000~km \abbr{LEO} spacecraft bus through $20^\circ\text{--}45^\circ$ using reaction wheels alone would require 15--30~seconds of settling time and break \abbr{OISL} lock; independent two-axis payload gimbal + \abbr{FSM} steering achieves lock-on within $< 5.0\text{ s}$.
+    \item \textbf{Step 4 (Ground Multi-Sensor Fusion and Automated Warning Dispatch --- $\le 10.0\text{--}15.0\text{ s}$):} Authoritative multi-sensor fusion of downlinked stereoscopic \abbr{LOS} vectors and onboard preliminary trajectory by the Central Data Processing System (\texttt{123456.02.04}) and automated preliminary warning dispatch by the Early Warning System (\texttt{123456.02.06}).
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{EWAS End-to-End Warning Chain and Space Segment Latency Allocation (\texttt{R-011}, Extracted from TRS Issue 1.4 Table 3)}
+\label{tab:warning_chain_latency_archived}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.1cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{1.9cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Chain Step} & \thead{Active Element} & \thead{Required Operational Functions} & \thead{Output Product \& Req.\ Ref.} & \thead{Latency Allocation} \\ \hline
+    \textbf{Step 1:} \newline Boost-Phase Detection \& Reporting & \textbf{SSEG (\texttt{SATG})} \newline 6~\abbr{GEO} nodes at 35,786~km & Persistent \abbr{WFOV} \abbr{SWIR}/\abbr{MWIR} staring surveillance; real-time onboard proton despiking, background clutter suppression, and plume event classification; immediate encrypted downlink to Ground Station Network. & \emph{GEO Event Report} \newline (\texttt{R-009}, \texttt{R-019}, \texttt{R-022}, \texttt{R-042}) & \textbf{$\le 10.0\text{ s}$} \newline (from $T_0$ plume threshold) \\ \hline
+    \textbf{Step 2:} \newline LEO Selection \& \abbr{ISL} Cueing & \textbf{Ground C2} + \textbf{SSEG \abbr{ISL}} \newline (\abbr{GEO}/\abbr{LEO} relay) & Ground Segment validates \abbr{GEO} report, evaluates 1,000~km Walker Delta geometry, selects two optimal \abbr{LEO} satellites, and uplinks tracking requests via direct ground stations or \textbf{mandatory \abbr{SSEG} \abbr{ISL} relay paths}. & \emph{LEO Tracking Request} \newline (\texttt{R-030}, \texttt{R-043}, \texttt{R-044}) & \textbf{$\le 5.0\text{ s}$} \newline (C2 selection $\le 2\text{ s}$; \abbr{ISL} routing $\le 3\text{ s}$) \\ \hline
+    \textbf{Step 3:} \newline Agile \abbr{LOS} Lock, Stereo Tracking \& Downlink & \textbf{SSEG (\texttt{SATL})} \newline 2 cued \abbr{LEO} nodes at 1,000~km + \textbf{\abbr{ISL} Mesh} & Agile optical \abbr{LOS} slewing via two-axis gimbal + \abbr{FSM} to achieve target lock-on in $< 5.0\text{ s}$ with $< 2\text{ arcsec/s}$ stability; synchronized stereoscopic \abbr{NFOV} tracking; \abbr{ISL} exchange of timestamped \abbr{LOS} vectors to compute onboard preliminary 3D trajectory; encrypted downlink of \abbr{LOS} packages + preliminary trajectory via direct link or \abbr{ISL}. & \emph{LEO Observation Package} \& \emph{Onboard Preliminary Trajectory} \newline (\texttt{R-023}, \texttt{R-024}, \texttt{R-033}) & \textbf{$\le 25.0\text{--}30.0\text{ s}$} \newline ($< 5\text{ s}$ lock-on; $15\text{--}18\text{ s}$ stereo dwell/3D fit; $\le 5\text{--}7\text{ s}$ downlink) \\ \hline
+    \textbf{Step 4:} \newline Ground Fusion \& Warning & \textbf{Ground Segment} \newline (\texttt{123456.02.04} \& \texttt{123456.02.06}) & Central Data Processing System performs authoritative multi-sensor fusion of downlinked stereoscopic \abbr{LOS} vectors (with covariance metadata) and onboard preliminary trajectory to compute refined 3D trajectory, probabilistic \abbr{IIP} ellipse, and Baltic threat priority; Early Warning System automatically dispatches preliminary warning to national authorities prior to operator review. & \emph{Ground Refined Trajectory}, \emph{IIP Assessment} \& \emph{Preliminary Warning} \newline (\texttt{R-012}, \texttt{R-026}, \texttt{R-027}, \texttt{R-045}, \texttt{R-049}) & \textbf{$\le 10.0\text{--}15.0\text{ s}$} \newline (Ground fusion + automated dispatch) \\ \hline
+    \textbf{Total Chain} & \textbf{EWAS System} & \textbf{End-to-End Elapsed Time from Initial \abbr{GEO} Detection ($T_0$) to Authority Interface Delivery} & \textbf{Compliant with \texttt{R-011} \& \texttt{R-045}} & \textbf{$\le 60.0\text{ s}$ Total} \newline (\textbf{$\le 40\text{--}45\text{ s}$ \abbr{SSEG}}) \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{B.3 Mechanical, Vibro-Acoustic, Micro-Vibration, and Complete Environmental Summary Table (from TRS Section 6.5, 6.6, and Table 7)}
+
+\begin{itemize}
+    \item \textbf{Launch Quasi-Static, Vibration, Acoustic, and Shock Envelope:} During launch ascent (\texttt{IF-EXT-02}), both \texttt{SATL} (mounted 9-per-stack on a cylindrical multi-satellite dispenser) and \texttt{SATG} must withstand quasi-static axial accelerations up to $6.0\,g$ and lateral accelerations up to $3.0\,g$, sinusoidal vibrations ($5\text{--}100\text{ Hz}$, up to $1.5\,g$), random vibro-acoustic loads ($20\text{--}2{,}000\text{ Hz}$, $7\text{--}11\,g_{\text{rms}}$; acoustic $138\text{--}142\text{ dB}$ OASPL), and separation shock ($1{,}500\text{--}2{,}000\,g$ SRS above $1{,}000\text{ Hz}$). Stowed fundamental structural frequencies are constrained to $f_{\text{axial}} \ge 35\text{ Hz}$ and $f_{\text{lateral}} \ge 20\text{ Hz}$ for \texttt{SATL} ($f_{\text{axial}} \ge 31\text{ Hz}$, $f_{\text{lateral}} \ge 15\text{ Hz}$ for \texttt{SATG}).
+    \item \textbf{In-Orbit Micro-Vibration (Jitter) Constraint (\texttt{R-024}):} During nominal operations, internal mechanical disturbances are generated by reaction-wheel imbalances ($10\text{--}300\text{ Hz}$), pulse-tube cryocooler compressor strokes ($45\text{--}85\text{ Hz}$), and dynamic slewing of the \abbr{SWIR}/\abbr{MWIR} sensor gimbals/mirrors ($\ge 15^\circ/\text{s}$), directional \abbr{RF} antennas, and agile laser \abbr{OISL} terminals. These combined disturbances are constrained by the requirement to maintain optical Line-of-Sight (\abbr{LOS}) pointing stability strictly below $< 2.0\text{ arcsec/s}$ ($\le 9.7~\mu\mathrm{rad/s}$ RMS, \texttt{R-024}) and laser \abbr{OISL} beam pointing below $< 1.5~\mu\mathrm{rad}$.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Summary of EWAS Space Segment Environmental Regimes and Governing Constraints (Extracted from TRS Issue 1.4 Table 7)}
+\label{tab:sseg_env_constraints_archived}
+{\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Environment / Constraint} & \thead{\texttt{SATL} Envelope (1,000~km, $80^\circ$ LEO)} & \thead{\texttt{SATG} Envelope (35,786~km, $0^\circ$ GEO)} & \thead{Governing Environmental Constraint} \\ \hline
+    \textbf{1. Ionizing Radiation (\abbr{TID}, $2\times$ RDM)} & 18--30~krad($\mathrm{Si}$) (4~mm Al); $\le 10\text{--}15$~krad($\mathrm{Si}$) internal (7~yr, \texttt{R-016}) & 60--100~krad($\mathrm{Si}$) (4~mm Al); $\le 20\text{--}25$~krad($\mathrm{Si}$) internal (15~yr, \texttt{R-016}) & Cumulative ionizing dose and displacement damage survival over $\ge 7$~yr (\abbr{LEO}) and $\ge 15$~yr (\abbr{GEO}) with $2\times$ \abbr{RDM} (\texttt{R-016}, project radiation-assurance rules). \\ \hline
+    \textbf{2. Protons, \abbr{SEE} \& Plasma Charging} & \abbr{SAA} protons ($10^3\text{--}10^4\text{ p/cm}^2\text{/s}$); polar \abbr{SEP}/\abbr{GCR}; \abbr{FPA} proton spikes & Outer-belt relativistic $e^-$ ($> 0.5\text{--}5\text{ MeV}$); substorm charging ($1\text{--}20\text{ keV}$) & Destructive latch-up immunity ($\text{LET}_{\text{th}} \ge 37\text{ MeV}\cdot\text{cm}^2\text{/mg}$); single-frame \abbr{FPA} proton despiking (\texttt{R-019}, \texttt{R-022}); surface potential $< 100\text{ V}$ (project electrostatic-discharge control rules). \\ \hline
+    \textbf{3. Thermal, Solar \& Eclipse Cycling} & $S_0 = 1{,}361\text{ W/m}^2$; albedo $0.25\text{--}0.38$; $\le 35.0\text{ min}$ eclipse/orbit ($\sim 30{,}000$ cycles/7~yr) & $S_0 = 1{,}361\text{ W/m}^2$; two 45-day equinox seasons/yr ($\le 71.5\text{ min}$ max eclipse) & Cryogenic \abbr{FPA} stability at $65\text{--}95\text{ K} \pm 0.1\text{ K}$; bus electronics $-10^\circ\text{C}$ to $+50^\circ\text{C}$; thermo-elastic $\text{AKE} \le 10\text{--}15~\mu\mathrm{rad}$ (project thermal-control requirements). \\ \hline
+    \textbf{4. Vacuum, Outgassing \& Drag} & $< 10^{-9}\text{ hPa}$; low drag ($\rho \sim 10^{-15}\text{--}10^{-14}\text{ kg/m}^3$) & $< 10^{-11}\text{ hPa}$; hard interplanetary-class vacuum & Material outgassing limits $\mathrm{TML} < 1.0\%$, $\mathrm{CVCM} < 0.01\%$ (project contamination-control rules); zero plume impingement on \texttt{R-025} baffles and \abbr{OISL} optics. \\ \hline
+    \textbf{5. Micrometeoroids \& Debris (\abbr{MMOD})} & High spatial density in 800--1,050~km polar band ($v_{\text{rel}} \approx 11\text{--}14.5\text{ km/s}$) & Low spatial density; low relative velocity ($\sim 0.5\text{--}1.5\text{ km/s}$) & Spacecraft Probability of No Penetration $\text{PNP} \ge 0.99$ over design life; mandatory Collision Avoidance Manoeuvre for $P_c > 10^{-4}$ (\texttt{IF-EXT-04}, project space-environment rules). \\ \hline
+    \textbf{6. Launch Dynamic \& Vibro-Acoustic Loads} & Quasi-static $\le 6.0\,g$ axial, $\le 3.0\,g$ lat.; $7\text{--}11\,g_{\text{rms}}$ random; 9-sat dispenser stack & Quasi-static $\le 6.0\,g$ axial, $\le 2.5\,g$ lat.; acoustic $138\text{--}142\text{ dB}$; shock $\le 2{,}000\,g$ & Stowed structural stiffness $f_{\text{ax}} \ge 35\text{ Hz}$, $f_{\text{lat}} \ge 20\text{ Hz}$ (\texttt{SATL}) and $f_{\text{ax}} \ge 31\text{ Hz}$, $f_{\text{lat}} \ge 15\text{ Hz}$ (\texttt{SATG}) per the project launch-environment and structural requirements. \\ \hline
+    \textbf{7. In-Orbit Micro-Vibration (Jitter)} & Wheels ($10\text{--}300\text{ Hz}$), cooler ($45\text{--}85\text{ Hz}$), slewing sensors, antennas \& \abbr{OISL} & Wheels, dual coolers, \& cross-layer antenna/\abbr{OISL} tracking mechanisms & Coupled optical \abbr{LOS} jitter/drift strictly $< 2.0\text{ arcsec/s}$ ($\le 9.7~\mu\mathrm{rad/s}$ RMS, \texttt{R-024}) and $< 1.5~\mu\mathrm{rad}$ \abbr{OISL} beam pointing stability. \\ \hline
+    \textbf{8. Security, Scope \& Sustainability} & Non-offensive civil protection (\texttt{R-001}); contested EW environment; $< 5\text{ yr}$ \abbr{EOL} demise & Non-offensive (\texttt{R-001}); contested EW environment; $\Delta H \ge +300\text{ km}$ graveyard & Hardware \abbr{COMSEC} (\texttt{R-031}); anti-jamming (\texttt{R-032}); exclusion of weapon guidance (\texttt{R-001}); active \abbr{EOL} disposal \& passivation (\texttt{R-018}). \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{B.4 Flight System Mass, Electrical Power, Structural Stiffness, and Propulsion \texorpdfstring{$\Delta v$}{Delta-v} Technical Budgets (from TRS Issue 1.4 \texttt{SSEG-REQ-ALLOC-007} and \texttt{ALLOC-008})}
+
+\begin{itemize}
+    \item \textbf{Flight System Mass, Power, and Stowed Frequency Envelopes (\texttt{SSEG-REQ-ALLOC-007}):}
+    \begin{itemize}
+        \item \textbf{\texttt{SATL} (\abbr{WBS} \texttt{123456.03.01}):} Wet launch mass $\le 290.0\text{ kg}$ (200--250~kg dry, 230--290~kg wet; compatible with 9-satellite plane-batch dispenser stacks $\le 2{,}800.0\text{ kg}$), fundamental stowed structural frequencies $f_{\text{axial}} \ge 35.0\text{ Hz}$ and $f_{\text{lateral}} \ge 20.0\text{ Hz}$, and End-of-Life (\abbr{EOL}) average electrical power $\ge 550.0\text{ W}$ (450--650~W envelope) with $\ge 15.0\%$ positive power margin across $\le 35.0\text{ min}$ eclipses ($\text{DoD} \le 30\%$).
+        \item \textbf{\texttt{SATG} (\abbr{WBS} \texttt{123456.03.02}):} Wet launch mass $\le 3{,}100.0\text{ kg}$ (1,550--1,950~kg dry, 2,400--3,100~kg wet), fundamental stowed structural frequencies $f_{\text{axial}} \ge 31.0\text{ Hz}$ and $f_{\text{lateral}} \ge 15.0\text{ Hz}$, and \abbr{EOL} average electrical power $\ge 4{,}200.0\text{ W}$ (3.5--5.0~kW envelope) with $\ge 15.0\%$ positive power margin across 71.5~min equinox eclipses ($\text{DoD} \le 65\%$).
+    \end{itemize}
+    \item \textbf{Flight System Propulsion $\Delta v$ Technical Budgets (\texttt{SSEG-REQ-ALLOC-008}):}
+    \begin{itemize}
+        \item \textbf{\texttt{SATL} Total Deliverable $\Delta v \ge 380.0\text{ m/s}$:} Comprising $\ge 95.0\text{ m/s}$ for post-dispenser orbit insertion and Walker Delta $72/8/1$ plane phasing, $\ge 55.0\text{ m/s}$ for 7-year station-keeping ($\pm 0.5^\circ$ along-track slot, $\Delta v_{\text{SK}} \le 4\text{--}6\text{ m/s/yr}$) and debris Collision Avoidance Manoeuvres ($P_c > 10^{-4}$), and a protected propellant reserve of $\Delta v_{\text{EOL}} \ge 230.0\text{ m/s}$ for active retrograde perigee-lowering deorbitation from 1,000~km to guarantee atmospheric demise within $< 5.0\text{ years}$ ($\ge 99.0\%$ reliability, casualty risk $< 10^{-4}$, \texttt{R-018}).
+        \item \textbf{\texttt{SATG} Total Deliverable $\Delta v$:} Comprising $\ge 1{,}800.0\text{ m/s}$ for \abbr{GTO}-to-\abbr{GEO} apogee transfer / electric orbit raising (\abbr{EOR}) plus $\ge 810.0\text{ m/s}$ post-insertion $\Delta v$ covering 15-year North--South and East--West station-keeping ($\pm 0.05^\circ$ box, $\sim 780.0\text{ m/s}$), momentum dumping and collision avoidance ($\sim 15.0\text{ m/s}$), and $\Delta v_{\text{EOL}} \ge 15.0\text{ m/s}$ for super-synchronous graveyard re-orbitation ($\Delta H \ge +300.0\text{ km}$ above 35,786~km, $\Delta e \le 0.0005$, \texttt{R-018}).
+    \end{itemize}
+\end{itemize}
+
 \end{document}

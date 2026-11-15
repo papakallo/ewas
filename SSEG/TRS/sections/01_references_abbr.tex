@@ -48,9 +48,9 @@ The following Reference Documents provide the Space Segment design baseline, pro
 
 For the purposes of this specification, the terms and definitions of the parent system baseline (\textbf{AD-01}) and the EWAS project glossary apply. In addition, the following key project-specific technical terms and abbreviations are defined:
 \begin{itemize}
-    \item \textbf{Proton Despiking:} Real-time onboard filtering that deletes artificial bright pixel spots (transient ionization spikes) on the infrared detector caused by energetic protons in the space radiation environment.
-    \item \textbf{South Atlantic Anomaly (\abbr{SAA}):} Geographic region over South America and the South Atlantic Ocean ($15^\circ\text{S}\text{--}45^\circ\text{S}$, $90^\circ\text{W}\text{--}0^\circ\text{E}$) where Earth's tilted ($\sim 11^\circ$) and offset ($\sim 500\text{ km}$) geomagnetic dipole causes the inner Van Allen proton belt to dip down to altitudes of $200\text{--}1{,}000\text{ km}$.
-    \item \textbf{Careful \abbr{COTS}:} Parts-selection and radiation-assurance philosophy combining lot-screened, radiation-tolerant commercial/industrial electronics with localized graded-Z Aluminium/Tantalum ($\mathrm{Al}/\mathrm{Ta}$) spot shielding and fault-tolerant avionics (\abbr{EDAC}, \abbr{TMR}, and fast-trip latch-up current limiters).
+    \item \textbf{Proton Despiking:} Real-time onboard filtering that removes transient bright-pixel ionization spikes on the infrared focal plane caused by energetic protons in the space radiation environment.
+    \item \textbf{South Atlantic Anomaly (\abbr{SAA}):} Geographic region over the South Atlantic where the offset and tilt of Earth's geomagnetic dipole allow the inner Van Allen proton belt to dip into Low Earth Orbit altitudes, elevating local trapped-proton flux.
+    \item \textbf{Careful \abbr{COTS}:} Parts-selection and radiation-assurance philosophy combining lot-screened, radiation-tolerant commercial/industrial electronics with localized radiation spot shielding and fault-tolerant avionics (\abbr{EDAC}, \abbr{TMR}, and latch-up current protection).
 \end{itemize}
 
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}%
@@ -101,10 +101,10 @@ For the purposes of this specification, the terms and definitions of the parent 
     \textbf{LEO}                      & Low Earth Orbit (1,000~km)                        \\ \hline
     \textbf{LEOP}                     & Launch and Early Orbit Phase                      \\ \hline
     \textbf{LOS}                      & Line of Sight                                     \\ \hline
-    \textbf{MCT}                      & Mercury Cadmium Telluride ($\mathrm{HgCdTe}$)     \\ \hline
+    \textbf{MCT}                      & Mercury Cadmium Telluride                         \\ \hline
     \textbf{MLI}                      & Multi-Layer Insulation                            \\ \hline
     \textbf{MMOD}                     & Micrometeoroids and Orbital Debris                \\ \hline
-    \textbf{MWIR}                     & Medium-Wave Infrared ($3.0\text{--}5.0~\mu\mathrm{m}$) \\ \hline
+    \textbf{MWIR}                     & Medium-Wave Infrared                              \\ \hline
     \textbf{NETD}                     & Noise Equivalent Temperature Difference           \\ \hline
     \textbf{NFOV}                     & Narrow Field of View                              \\ \hline
     \textbf{OBDH}                     & On-Board Data Handling Subsystem                  \\ \hline
@@ -119,7 +119,7 @@ For the purposes of this specification, the terms and definitions of the parent 
     \textbf{SEU}                      & Single-Event Upset                                \\ \hline
     \textbf{SSEG}                     & Space Segment Configuration Item (\abbr{WBS} \texttt{123456.03}) \\ \hline
     \textbf{STR/MEC}                  & Structures and Mechanisms Subsystem               \\ \hline
-    \textbf{SWIR}                     & Short-Wave Infrared ($1.0\text{--}3.0~\mu\mathrm{m}$) \\ \hline
+    \textbf{SWIR}                     & Short-Wave Infrared                               \\ \hline
     \textbf{TCS}                      & Thermal Control Subsystem                         \\ \hline
     \textbf{TID}                      & Total Ionizing Dose                               \\ \hline
     \textbf{TML}                      & Total Mass Loss                                   \\ \hline
