@@ -171,9 +171,9 @@
     Prepared by                  &                          &                                  \\ \hline
     {Jan Krajewski}              & {Author}                 & {Krajewski 14.11.2026} \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}        & {Reviewer}               & {Pyskowacki 14.11.2026} \\[1.2em] \hline
+    {Krzysztof Pankiewicz}        & {Reviewer}               & {} \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Project CCB}                & {Approver}               & {CCB 14.11.2026} \\[1.2em] \hline
+    {}                & {Approver}               & {} \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -186,16 +186,25 @@
 % --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
 % Each row has 4 columns separated by &:
 % \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
-% To add a new row, copy the last line before \end{tabularx}.
-{\footnotesize\renewcommand{\arraystretch}{1.18}%
+% To add a new row, copy the last line before \end{longtable}.
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.05}%
+\setlength{\LTpre}{4pt}\setlength{\LTpost}{4pt}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.4cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{8.6cm}|>{\raggedright\arraybackslash}p{3.0cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
+\endfirsthead
+    \rowcolor{white}\multicolumn{4}{l}{\footnotesize\textit{Document Change Record (continued)}} \\[0.3ex]
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
+\endhead
+    \rowcolor{white}\multicolumn{4}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
     \textbf{0.1}      & {04.11.2026}    & Initial document template setup and CI-03 configuration baseline identification. & Document Info \\ \hline
     \textbf{0.2}      & {05.11.2026}    & Added Applicable/Reference Documents, Abbreviations, Scope, Specification Tree hierarchy, and Section 1 Introduction. & References, Scope, Intro \\ \hline
     \textbf{0.3}      & {06.11.2026}    & Added Section 3 User's Need Presentation, 60~s warning-chain latency allocation (Table 3), and external interface boundaries (Table 4). & Section 3 \\ \hline
@@ -208,7 +217,7 @@
     \textbf{1.2}      & {12.11.2026}    & Removed the obsolete verification-control annex and aligned the reference baseline with the Verification Plan (\texttt{EWAS-HSB-VP-01}) and Verification Control Document (\texttt{EWAS-HSB-VCD-01}); replaced external-standard citations with project-internal requirements and renumbered the AD/RD tables. & All Sections, Annex A, References \\ \hline
     \textbf{1.3}      & {13.11.2026}    & Aligned the applicable-document issues with VP Issue 0.2 and VCD Issue 0.3, and redirected the requirement-level verification execution reference from the obsolete annex to Section~7 of the Verification Plan. & References, Section 7 \\ \hline
     \textbf{1.4}      & {14.11.2026}    & Refactored TRS to strict Level-2 Space Segment scope per instructor review: moved detailed subsystem design and trade-off justifications from Sections 4 \& 5 to DDF (\texttt{RD-01}) and DDJF (\texttt{RD-02}), and consolidated internal spacecraft/subsystem requirements into Level-2 Flight System Allocations (\texttt{SSEG-REQ-ALLOC-001} to \texttt{008}) referencing subordinate \texttt{SATL} (\texttt{RD-03}) and \texttt{SATG} (\texttt{RD-04}) specifications. & Sections 4, 5, 7, Annex A \\ \hline
-\end{tabularx}}
+\end{longtable}\addtocounter{table}{-1}}
 
 \newpage
 

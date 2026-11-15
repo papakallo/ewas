@@ -28,7 +28,7 @@ The following Applicable Documents contain normative provisions for the \abbr{EW
 
 The following Reference Documents provide the Space Segment design baseline, product-tree definition, design rationale, and trade-off record consulted during the formulation of this specification.
 
-{\renewcommand{\arraystretch}{1.25}%
+{\renewcommand{\arraystretch}{1.18}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
@@ -53,15 +53,23 @@ For the purposes of this specification, the terms and definitions of the parent 
     \item \textbf{Careful \abbr{COTS}:} Parts-selection and radiation-assurance philosophy combining lot-screened, radiation-tolerant commercial/industrial electronics with localized graded-Z Aluminium/Tantalum ($\mathrm{Al}/\mathrm{Ta}$) spot shielding and fault-tolerant avionics (\abbr{EDAC}, \abbr{TMR}, and fast-trip latch-up current limiters).
 \end{itemize}
 
-{\renewcommand{\arraystretch}{1.20}%
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}%
+\setlength{\LTpre}{4pt}\setlength{\LTpost}{4pt}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{12.1cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
     \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
+\endfirsthead
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Abbreviation}              & \thead{Meaning (Continued)}                       \\ \hline
+\endhead
+    \rowcolor{white}\multicolumn{2}{r}{\footnotesize\textit{Continued on next page}} \\
+\endfoot
+\endlastfoot
     \textbf{ADCS}                     & Attitude Determination and Control Subsystem      \\ \hline
     \textbf{AIT}                      & Assembly, Integration, and Testing                \\ \hline
     \textbf{AKE}                      & Attitude Knowledge Error                          \\ \hline
@@ -75,18 +83,6 @@ For the purposes of this specification, the terms and definitions of the parent 
     \textbf{COTS}                     & Commercial Off-The-Shelf                          \\ \hline
     \textbf{CVCM}                     & Collected Volatile Condensable Material           \\ \hline
     \textbf{DD}                       & Displacement Damage                               \\ \hline
-\end{tabularx}}
-
-\newpage
-
-{\renewcommand{\arraystretch}{1.12}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Abbreviation}              & \thead{Meaning (Continued)}                       \\ \hline
     \textbf{EDAC}                     & Error Detection and Correction                    \\ \hline
     \textbf{EOL}                      & End of Life                                       \\ \hline
     \textbf{EPS}                      & Electrical Power Subsystem                        \\ \hline
@@ -133,4 +129,4 @@ For the purposes of this specification, the terms and definitions of the parent 
     \textbf{VP}                       & Verification Plan                                 \\ \hline
     \textbf{WBS}                      & Work Breakdown Structure                          \\ \hline
     \textbf{WFOV}                     & Wide Field of View                                \\ \hline
-\end{tabularx}}
+\end{longtable}\addtocounter{table}{-1}}
