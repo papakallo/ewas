@@ -1,0 +1,141 @@
+% =============================================================================
+% SECTION 9: JUSTIFICATION OF TECHNICAL BUDGETS AND MARGINS
+% =============================================================================
+\section{Justification of Technical Budgets and Margins}
+\label{sec:budgets_margins}
+
+\subsection{Flight System Mass Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Mass Parameter} & \thead{SATL (\abbr{WBS} \texttt{123456.03.01})} & \thead{SATG (\abbr{WBS} \texttt{123456.03.02})} \\ \hline
+    \textbf{Dry Mass Range} & 200--250~kg & 1,550--1,950~kg \\ \hline
+    \textbf{Wet Launch Mass (Max)} & $\le 290.0$~kg & $\le 3{,}100.0$~kg \\ \hline
+    \textbf{Dispenser Stack Constraint} & 9-satellite plane-batch $\le 2{,}800.0$~kg (incl.\ dispenser) & Single-/dual-manifest \\ \hline
+    \textbf{System Margin} & Per ECSS margin policy at current maturity & Per ECSS margin policy at current maturity \\ \hline
+\end{tabularx}}
+
+\subsection{Electrical Power Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Power Parameter} & \thead{SATL} & \thead{SATG} \\ \hline
+    \textbf{EOL Average Power (Min)} & $\ge 550.0$~W & $\ge 4{,}200.0$~W \\ \hline
+    \textbf{Power Envelope} & 450--650~W & 3.5--5.0~kW \\ \hline
+    \textbf{Positive Power Margin} & $\ge 15.0\%$ & $\ge 15.0\%$ \\ \hline
+    \textbf{Max Eclipse Duration} & $\le 35.0$~min/orbit & 71.5~min (equinox) \\ \hline
+    \textbf{Battery DoD Limit} & $\le 30\%$ & $\le 65\%$ \\ \hline
+\end{tabularx}}
+
+\subsection{Structural Stiffness Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Stiffness Parameter} & \thead{SATL} & \thead{SATG} \\ \hline
+    \textbf{Stowed Axial Freq.\ (Min)} & $f_{\text{axial}} \ge 35.0$~Hz & $f_{\text{axial}} \ge 31.0$~Hz \\ \hline
+    \textbf{Stowed Lateral Freq.\ (Min)} & $f_{\text{lateral}} \ge 20.0$~Hz & $f_{\text{lateral}} \ge 15.0$~Hz \\ \hline
+    \textbf{Verification Method} & Structural FEM + sine survey (QM/PFM) & Structural FEM + sine survey (QM/PFM) \\ \hline
+\end{tabularx}}
+
+\subsection{Propulsion $\Delta v$ Budget}
+
+\subsubsection{SATL Total $\Delta v \ge 380.0$~m/s}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{$\Delta v$ Component} & \thead{Allocation} & \thead{Rationale} \\ \hline
+    \textbf{Post-dispenser orbit insertion \& Walker Delta phasing} & $\ge 95.0$~m/s & Dispersion correction and differential semi-major axis phasing to assigned $40^\circ$ slot \\ \hline
+    \textbf{7-year station-keeping \& CAM} & $\ge 55.0$~m/s & Along-track $\pm 0.5^\circ$ slot maintenance ($4$--$6$~m/s/yr); debris CAM ($P_c > 10^{-4}$, \texttt{IF-EXT-04}) \\ \hline
+    \textbf{EOL active deorbit (protected reserve)} & $\ge 230.0$~m/s & Retrograde perigee-lowering from 1,000~km; atmospheric demise $< 5$~yr; $\ge 99\%$ reliability; casualty risk $< 10^{-4}$ (\texttt{R-018}) \\ \hline
+    \textbf{Total} & $\ge 380.0$~m/s & \\ \hline
+\end{tabularx}}
+
+\subsubsection{SATG $\Delta v$ Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{$\Delta v$ Component} & \thead{Allocation} & \thead{Rationale} \\ \hline
+    \textbf{GTO-to-GEO orbit raising (EOR)} & $\ge 1{,}800.0$~m/s & Apogee transfer / electric orbit raising to 35,786~km \\ \hline
+    \textbf{15-year N--S / E--W station-keeping} & ${\sim}780.0$~m/s & $\pm 0.05^\circ$ box; lunisolar N--S drift ${\sim}45$--$51$~m/s/yr; $J_{22}$ E--W drift ${\sim}2$~m/s/yr \\ \hline
+    \textbf{Momentum dumping \& CAM} & ${\sim}15.0$~m/s & Reaction wheel desaturation; debris/conjunction avoidance \\ \hline
+    \textbf{EOL graveyard re-orbitation} & $\ge 15.0$~m/s & Super-synchronous $\Delta H \ge +300$~km above 35,786~km; $\Delta e \le 0.0005$ (\texttt{R-018}) \\ \hline
+    \textbf{Total post-insertion} & $\ge 810.0$~m/s & \\ \hline
+\end{tabularx}}
+
+\subsection{Radiation Dose Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Radiation Parameter} & \thead{SATL (1,000~km, $80^\circ$, 7~yr)} & \thead{SATG (35,786~km, $0^\circ$, 15~yr)} \\ \hline
+    \textbf{TID behind 4~mm Al ($2\times$ RDM)} & ${\sim}18$--$30$~krad(Si) & ${\sim}60$--$100$~krad(Si) \\ \hline
+    \textbf{TID at internal shielded locations} & $\le 10$--$15$~krad(Si) & $\le 20$--$25$~krad(Si) \\ \hline
+    \textbf{NIEL Displacement Damage} & ${\sim}2 \times 10^{10}$~p/cm$^2$ (10~MeV eq.) & Dominated by electrons; lower proton DD \\ \hline
+    \textbf{SEL LET Threshold} & $\ge 37$~MeV$\cdot$cm$^2$/mg & $\ge 37$~MeV$\cdot$cm$^2$/mg \\ \hline
+    \textbf{Electronics Strategy} & Careful COTS + graded-Z spot shielding ($4$--$8$~mm eq.\ Al) & QML-V rad-hard bus; rad-tolerant payload processors \\ \hline
+    \textbf{Dose Models} & AP-8/AE-8, IRENE AE9/AP9, SAPPHIRE ($95\%$ CL) & AP-8/AE-8, IRENE AE9/AP9, SAPPHIRE ($95\%$ CL) \\ \hline
+\end{tabularx}}
+
+\subsection{Latency Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.0cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Chain Step} & \thead{Active Element} & \thead{Function} & \thead{Allocation} \\ \hline
+    \textbf{Step 1} & SSEG (SATG) & GEO boost-phase detection, despiking, clutter filtering, encrypted report downlink & $\le 10.0$~s \\ \hline
+    \textbf{Step 2} & Ground C2 + SSEG ISL & Ground selection ($\le 2$~s) + OISL command routing ($\le 3$~s) & $\le 5.0$~s \\ \hline
+    \textbf{Step 3} & SSEG (SATL) + ISL & Gimbal/FSM lock-on ($< 5$~s), stereo track/3D fit ($15$--$18$~s), downlink ($\le 5$--$7$~s) & $\le 25.0$--$30.0$~s \\ \hline
+    \textbf{Step 4} & Ground Segment & Multi-sensor fusion \& automated warning dispatch & $\le 10.0$--$15.0$~s \\ \hline
+    \textbf{Total} & EWAS System & End-to-end $T_0$ to authority delivery (\texttt{R-011}) & $\le 60.0$~s \\ \hline
+    & \textbf{SSEG Sub-Total} & Steps 1--3 & $\le 40$--$45$~s \\ \hline
+\end{tabularx}}
+
+\subsection{Orbital Perturbation Budget}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Perturbation} & \thead{SATL (1,000~km, $80^\circ$)} & \thead{SATG (35,786~km, $0^\circ$)} \\ \hline
+    \textbf{$J_2$ Nodal Precession ($\dot{\Omega}$)} & $\approx -1.04^\circ$/day & N/A (equatorial) \\ \hline
+    \textbf{$J_2$ Apsidal Rotation ($\dot{\omega}$)} & $\approx +2.85^\circ$/day & N/A \\ \hline
+    \textbf{Station-Keeping $\Delta v$} & $\le 4$--$6$~m/s/yr (along-track $\pm 0.5^\circ$) & ${\sim}47$--$53$~m/s/yr (N--S + E--W $\pm 0.05^\circ$) \\ \hline
+    \textbf{Atmospheric Drag (Semi-Major Axis Decay)} & ${\sim}1$--$5$~m/yr & Negligible \\ \hline
+    \textbf{Solar Radiation Pressure} & Minor correction included in SK budget & Included in E--W SK budget \\ \hline
+\end{tabularx}}

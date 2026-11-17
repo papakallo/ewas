@@ -1,0 +1,155 @@
+% =============================================================================
+% SECTION 8: VERIFICATION ACTIVITIES AND SYNTHESIS OF RESULTS
+% =============================================================================
+\section{Verification Activities and Synthesis of Results}
+\label{sec:verification}
+
+\subsection{Verification Plan}
+\label{sec:verification_plan}
+
+The Space Segment verification strategy is governed by the Programme Verification Plan (\textbf{AD-02}) and tracked via the Verification Control Document (\textbf{AD-03}). Four formal verification methods are employed, assigned per requirement in the TRS (\textbf{RD-02}):
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Code} & \thead{Method} & \thead{Application at SSEG Level} \\ \hline
+    \textbf{T} & Test & Environmental qualification (vibration, acoustic, TVAC, shock, EMC); functional end-to-end chain tests; radiometric calibration; OISL BER validation. \\ \hline
+    \textbf{A} & Analysis & Orbital coverage (GMAT), radiation dose (AP-8/AE-8, IRENE AE9/AP9), thermal modelling, structural FEM, link budgets, $\Delta v$ budgets, mass/power budgets. \\ \hline
+    \textbf{R} & Review of Design & Non-offensive scope (\texttt{R-001}), data-format compliance, design-for-demise compliance, COMSEC architecture review. \\ \hline
+    \textbf{I} & Inspection & Physical configuration audit, harness routing, cleanroom contamination logs, material outgassing certificates. \\ \hline
+\end{tabularx}}
+
+The verification programme is structured into three campaigns:
+\begin{enumerate}
+    \item \textbf{EM/STM Campaign:} Functional HIL testing and structural/thermal model correlation.
+    \item \textbf{QM/PFM Campaign:} Full environmental qualification of lead SATL and SATG.
+    \item \textbf{FM Acceptance Campaign:} Workmanship screening and payload calibration of all 72 SATL and 6 SATG flight units.
+\end{enumerate}
+
+\subsection{Qualification Verification and Synthesis of Results}
+
+\subsubsection{Qualification Evidence}
+\label{sec:qual_evidence}
+
+The following table maps key SSEG-level requirements to their qualification verification method and evidence status:
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Requirement} & \thead{Parameter} & \thead{Method} & \thead{Evidence Description} & \thead{Status} \\ \hline
+    \texttt{SSEG-REQ-FUN-001} & Non-offensive scope & R & Design review: exclusion of weapon-guidance capabilities & TBD \\ \hline
+    \texttt{SSEG-REQ-FUN-003} & Dual-tier chain execution & T, A & End-to-end HIL test with OISL loop; GMAT coverage analysis & TBD \\ \hline
+    \texttt{SSEG-REQ-FUN-005} & Proton despiking \& discrimination & T, A & SAA-simulated FPA irradiation test; algorithm validation on injected signals & TBD \\ \hline
+    \texttt{SSEG-REQ-MIS-001} & Constellation architecture (6+72) & A, R & GMAT simulation; design documentation review & TBD \\ \hline
+    \texttt{SSEG-REQ-MIS-004} & Stereoscopic geometry & A & Walker Delta coverage analysis; $\beta \in [30^\circ, 120^\circ]$ verification & TBD \\ \hline
+    \texttt{SSEG-REQ-PERF} & Detection $P_d > 95\%$, latency $\le 45$~s & T, A & Radiometric SNR analysis; end-to-end timing test & TBD \\ \hline
+    \texttt{SSEG-REQ-ALLOC-007} & Mass, power, stiffness & A, T & Mass budget; power budget; structural FEM + sine survey & TBD \\ \hline
+    \texttt{SSEG-REQ-ALLOC-008} & $\Delta v$ budgets & A & Propulsion sizing analysis; orbit-raising/deorbit trajectory analysis & TBD \\ \hline
+\end{tabularx}}
+
+\subsubsection{Implementation of Qualification Plan}
+\label{sec:qual_plan_impl}
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Qualification Test} & \thead{Applicable Model} & \thead{Test Description} & \thead{Status} \\ \hline
+    \textbf{Sine Vibration} & QM/PFM (SATL, SATG) & 5--100~Hz swept sine; notching per structural FEM predictions; $\le 1.5\,g$ & TBD \\ \hline
+    \textbf{Random Vibration} & QM/PFM (SATL, SATG) & 20--2,000~Hz; $7$--$11\,g_{\text{rms}}$; 2~min/axis & TBD \\ \hline
+    \textbf{Acoustic Noise} & QM/PFM (SATL, SATG) & Reverberant chamber; $138$--$142$~dB OASPL & TBD \\ \hline
+    \textbf{Pyro-Shock} & QM/PFM (SATL) & Dispenser separation; $1{,}500$--$2{,}000\,g$ SRS $> 1{,}000$~Hz & TBD \\ \hline
+    \textbf{TVAC Qualification} & QM/PFM (SATL, SATG) & Multi-cycle hot/cold plateaus; cryocooler cooldown to $65$--$95$~K; 72--96~h bake-out at $310$--$320$~K & TBD \\ \hline
+    \textbf{EMC} & QM/PFM (SATL, SATG) & RE/CE emission and susceptibility; self-compatibility with OISL and TT\&C & TBD \\ \hline
+    \textbf{Boresight Stability} & QM/PFM & Pre-/post-environmental optical alignment verification; AKE $\le 10$--$15~\mu$rad & TBD \\ \hline
+    \textbf{Radiometric Calibration} & QM/PFM & SWIR/MWIR flat-fielding; dark-current characterization at $65$--$95$~K & TBD \\ \hline
+\end{tabularx}}
+
+\subsubsection{Validation of Models}
+\label{sec:model_validation}
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Analytical Model} & \thead{Validation Approach} & \thead{Status} \\ \hline
+    \textbf{GMAT Coverage Model} & Correlation of simulated Baltic visibility ($5$--$7$ SATL nodes) against Walker Delta analytical predictions & TBD \\ \hline
+    \textbf{Structural FEM} & Correlation with QM/PFM sine survey; natural frequency vs.\ prediction (target $\le 5\%$ deviation) & TBD \\ \hline
+    \textbf{Thermal Model} & Correlation with STM/QM TVAC thermal balance test data; FPA temperature stability $\pm 0.1$~K & TBD \\ \hline
+    \textbf{Radiation Dose Model} & AP-8/AE-8, IRENE AE9/AP9 at $95\%$ CL; correlation with dosimeter flight data (post-LEOP) & TBD \\ \hline
+    \textbf{Link Budget Model} & Correlation with OISL BER ground test and in-orbit commissioning results & TBD \\ \hline
+\end{tabularx}}
+
+\subsubsection{Requirements Status Log}
+\label{sec:req_status_log}
+
+Detailed requirement-by-requirement verification status is maintained in the Verification Control Document (\textbf{AD-03}). The summary status at this document issue:
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Requirement Category} & \thead{Total Count} & \thead{Verified} & \thead{Open / TBD} \\ \hline
+    \textbf{SSEG-REQ-FUN} & 6 & TBD & TBD \\ \hline
+    \textbf{SSEG-REQ-MIS} & 5 & TBD & TBD \\ \hline
+    \textbf{SSEG-REQ-PERF} & TBD & TBD & TBD \\ \hline
+    \textbf{SSEG-REQ-ALLOC} & TBD & TBD & TBD \\ \hline
+    \textbf{Total} & TBD & TBD & TBD \\ \hline
+\end{tabularx}}
+
+\subsubsection{Manufacturing Process Status Log}
+\label{sec:mfg_status_log}
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Manufacturing Process} & \thead{Applicable Hardware} & \thead{Qualification Evidence} & \thead{Status} \\ \hline
+    \textbf{HgCdTe FPA fabrication} & SWIR/MWIR FPAs & Detector lot acceptance; dark-current uniformity at $65$--$95$~K & TBD \\ \hline
+    \textbf{OISL terminal assembly} & 1,550~nm laser transceivers & Optical alignment; BER ground test & TBD \\ \hline
+    \textbf{Cryocooler integration} & Pulse-tube cryocoolers & Vibration export measurement; cooldown performance & TBD \\ \hline
+    \textbf{Solar array bonding} & GaAs/InGaP MJ cells & Pull-test; thermal cycling; BOL/EOL power verification & TBD \\ \hline
+    \textbf{Propellant tank welding} & Propulsion tanks & Proof pressure test; leak test; radiographic inspection & TBD \\ \hline
+    \textbf{PCB/FPGA population} & Avionics boards & Lot-acceptance radiation test (SATL); X-ray inspection & TBD \\ \hline
+\end{tabularx}}
+
+\subsection{Acceptance Verification}
+\label{sec:acceptance_verification}
+
+Acceptance testing of recurring Flight Models follows the rules defined in \textbf{AD-02}:
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Acceptance Test} & \thead{Applicable Hardware} & \thead{Test Description} & \thead{Status} \\ \hline
+    \textbf{Workmanship Vibration} & All 72 SATL FM + 6 SATG FM & Reduced-level random vibration per acceptance spectrum & TBD \\ \hline
+    \textbf{TVAC Acceptance} & All 72 SATL FM + 6 SATG FM & Shortened thermal cycling; functional verification at temperature extremes & TBD \\ \hline
+    \textbf{Payload Calibration} & All FM & Radiometric flat-fielding; geometric distortion mapping; dark-current baseline & TBD \\ \hline
+    \textbf{OISL Link Validation} & All FM & Optical acquisition and BER test per terminal & TBD \\ \hline
+    \textbf{Functional Chain Test} & All FM & End-to-end avionics chain test with flight software; FDIR injection & TBD \\ \hline
+    \textbf{Mass Properties} & All FM & Weigh and CG measurement; comparison against mass budget & TBD \\ \hline
+\end{tabularx}}

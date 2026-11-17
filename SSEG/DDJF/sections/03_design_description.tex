@@ -1,0 +1,71 @@
+% =============================================================================
+% SECTION 3: DESIGN DESCRIPTION
+% =============================================================================
+\section{Design Description}
+\label{sec:design_description}
+
+The \abbr{EWAS} Space Segment (\texttt{CI-03}, \abbr{WBS} \texttt{123456.03}) implements a \textbf{dual-tier hybrid orbital architecture} combining persistent geostationary boost-phase detection with agile low-orbit stereoscopic tracking. Table~\ref{tab:ddjf_orbital_params} summarises the baseline astrodynamic parameters.
+
+\subsection{Constellation Architecture Overview}
+
+\begin{itemize}
+    \item \textbf{GEO Detection Layer (\texttt{SATG}, \abbr{WBS} \texttt{123456.03.02}):} Six geostationary spacecraft at 35,786~km ($a = 42{,}164.14$~km, $e \le 0.0005$, $i = 0.0^\circ \pm 0.05^\circ$, $T = 23$~h~56~min~4~s), spaced uniformly at $60^\circ$ longitude intervals. Each node views an Earth central half-angle of $\lambda_{\text{GEO}} \approx 76.3^\circ$ ($\varepsilon_{\min} = 5^\circ$), providing continuous 24/7 boost-phase surveillance up to ${\sim}70^\circ$ latitude. Dual-satellite overlapping coverage is guaranteed across European, Mediterranean, and Mid-Latitude Eurasian launch corridors. Design lifetime $\ge 15$~years (\texttt{R-016}).
+    \item \textbf{LEO Stereoscopic Tracking Layer (\texttt{SATL}, \abbr{WBS} \texttt{123456.03.01}):} Seventy-two tracking spacecraft at 1,000~km circular altitude ($a = 7{,}378.14$~km, $e \le 0.001$, $v = 7.35$~km/s, $T = 105.12$~min) in a Walker Delta $72/8/1$ constellation: $P = 8$ planes at $\Delta\Omega = 45^\circ$ \abbr{RAAN} spacing, $S = 9$ satellites per plane at $\Delta u = 40^\circ$ in-plane spacing (intra-plane arc 5,151~km, chord 5,047~km). Adjacent planes are staggered by a nominal inter-plane phase offset of $\Delta u_{\text{inter}} = 22.5^\circ$ (within the $15.0^\circ$--$22.5^\circ$ GMAT-optimized window). Orbital inclination $i = 80^\circ$ ($78^\circ$--$82^\circ$ design window). Design lifetime $\ge 7$~years (\texttt{R-016}).
+\end{itemize}
+
+\subsection{Payload Concept}
+
+Both \texttt{SATG} and \texttt{SATL} payloads employ \textbf{dual-band \abbr{SWIR}/\abbr{MWIR} spectral architecture} (\texttt{R-009}, \texttt{R-020}) with dichroic beam-splitters feeding cooled 2D Mercury Cadmium Telluride ($\mathrm{HgCdTe}$) Focal Plane Arrays (\abbr{FPA}s):
+\begin{enumerate}
+    \item \textbf{\abbr{SWIR} ($2.65$--$2.85~\mu\mathrm{m}$):} Centered on the strong $\mathrm{H_2O}$/$\mathrm{CO_2}$ emission band for high-contrast boost-phase detection against solar-reflected cloud backgrounds.
+    \item \textbf{\abbr{MWIR} ($4.15$--$4.45~\mu\mathrm{m}$):} Centered on the $\mathrm{CO_2}$ wing bands for high-sensitivity upper-atmosphere and exo-atmospheric tracking against cold space.
+\end{enumerate}
+Simultaneous dual-band pixel co-registration enables real-time two-colour spectral ratioing ($I_{\text{SWIR}}/I_{\text{MWIR}}$), discriminating rocket exhaust ($T_{\text{eff}} \approx 1{,}800$--$3{,}000$~K) from solar glint (${\sim}5{,}800$~K) and terrestrial fires (${\sim}800$--$1{,}100$~K) (\texttt{R-019}, \texttt{R-022}).
+
+\subsection{Inter-Satellite Link Mesh Architecture}
+
+Each \texttt{SATL} node carries four 1,550~nm laser \abbr{OISL} terminals:
+\begin{itemize}
+    \item \textbf{Two Intra-Plane Terminals (Fore/Aft):} Continuous optical lock with adjacent in-plane satellites at a constant chord distance of 5,047~km (zero relative azimuth rate), forming 8 longitudinal rings.
+    \item \textbf{Two Agile Cross-Plane Terminals (Left/Right):} Hemispherical periscopes with fine-steering mirrors linking adjacent planes ($\Delta\Omega = 45^\circ$), cross-plane chord 5,647--6,144~km at equator, \abbr{LOS} clearance $> 245$~km above Earth surface. Max operating range specified at $\ge 6{,}500$~km (\texttt{R-033}).
+    \item \textbf{Cross-Layer \abbr{GEO}--\abbr{LEO} Optical Trunks:} Operating range $34{,}800$--$45{,}000$~km, data rate $\ge 1.5$--$2.0$~Gbps (\texttt{R-033}).
+\end{itemize}
+
+\subsection{Baseline Orbital Parameters}
+
+\begin{table}[H]
+\centering
+\caption{Baseline Orbital and Astrodynamic Parameters of the EWAS Hybrid Space Segment}
+\label{tab:ddjf_orbital_params}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Parameter} & \thead{SATG --- GEO Layer} & \thead{SATL --- LEO Layer} \\ \hline
+    \textbf{Primary Role} & Persistent 24/7 boost-phase plume detection (\texttt{R-009}), coarse localization, \abbr{OISL} trunk relay (\texttt{R-042}, \texttt{R-044}). & Agile cued \abbr{NFOV} lock-on ($< 5$~s, \texttt{R-024}), stereo tracking, onboard preliminary 3D trajectory (\texttt{R-023}), \abbr{LOS} package downlink. \\ \hline
+    \textbf{Active Satellites} & $N_{\text{GEO}} = 6$ (\texttt{R-005}) & $N_{\text{LEO}} = 72$ (\texttt{R-005}) \\ \hline
+    \textbf{Topology} & Equatorial ring; $\Delta\lambda = 60^\circ$ & Walker Delta $72/8/1$: $P{=}8$, $S{=}9$, $\Delta\Omega{=}45^\circ$, $\Delta u{=}40^\circ$, $\Delta u_{\text{inter}}{=}22.5^\circ$ \\ \hline
+    \textbf{Altitude ($h$)} & 35,786~km & 1,000~km \\ \hline
+    \textbf{Semi-Major Axis / Eccentricity} & $a = 42{,}164.14$~km; $e \le 0.0005$ & $a = 7{,}378.14$~km; $e \le 0.001$ \\ \hline
+    \textbf{Inclination ($i$)} & $0.0^\circ \pm 0.05^\circ$ & $80.0^\circ$ ($78^\circ$--$82^\circ$) \\ \hline
+    \textbf{Orbital Period ($T$)} & 23~h 56~min 4~s (1,436.07~min) & 105.12~min (${\sim}13.7$~orbits/day) \\ \hline
+    \textbf{Mean Velocity ($v$)} & 3.075~km/s & 7.350~km/s \\ \hline
+    \textbf{Earth Central Half-Angle} & $76.30^\circ$ (slant $\le 41{,}120$~km) & $25.55^\circ$ (slant $\le 3{,}290$~km) \\ \hline
+    \textbf{Single-Sat Coverage} & $38.15\%$ (${\sim}194.6 \times 10^6$~km$^2$) & $4.89\%$ (${\sim}24.94 \times 10^6$~km$^2$) \\ \hline
+    \textbf{Baltic Visibility ($53^\circ$--$66^\circ$N)} & 2--3 nodes continuous & 5--7 nodes simultaneous 24/7 \\ \hline
+    \textbf{Design Lifetime (\texttt{R-016})} & $\ge 15$~years (graveyard $\Delta h \ge +300$~km) & $\ge 7$~years (active deorbit) \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{Warning Chain Latency Allocation}
+
+The Space Segment latency contribution within the $\le 60$~s end-to-end system budget (\texttt{R-011}) is:
+\begin{itemize}
+    \item \textbf{Step 1} (GEO Detection \& Reporting): $\le 10.0$~s --- \texttt{SATG} \abbr{WFOV} staring at $\ge 10$~Hz, onboard proton despiking, clutter filtering, encrypted \emph{GEO Event Report} downlink (\texttt{R-042}).
+    \item \textbf{Step 2} (Ground Selection \& \abbr{ISL} Cueing): $\le 5.0$~s total ($\le 2.0$~s Ground C2 selection + $\le 3.0$~s \abbr{SSEG} \abbr{OISL} routing to selected \texttt{SATL} pair, \texttt{R-043}, \texttt{R-044}).
+    \item \textbf{Step 3} (LEO Lock-On, Stereo Track, \& Downlink): $\le 25.0$--$30.0$~s --- independent gimbal+\abbr{FSM} lock-on ($< 5.0$~s), 15--18~s stereoscopic dwell/3D fit convergence, $\le 5$--$7$~s downlink (\texttt{R-023}, \texttt{R-024}).
+    \item \textbf{Combined SSEG allocation}: $\le 40$--$45$~s ($\le 45.0$~s at $99\%$ confidence).
+\end{itemize}

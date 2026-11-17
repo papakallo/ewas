@@ -1,0 +1,39 @@
+% =============================================================================
+% SECTION 4: DESIGN JUSTIFICATION FILE SYNTHESIS
+% =============================================================================
+\section{Design Justification File Synthesis}
+\label{sec:ddjf_synthesis}
+
+This section summarises the key design trade-offs and architectural decisions made at the Space Segment level, with cross-references to detailed justifications in subsequent sections.
+
+\subsection{Critical Trade-Off Register}
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.0cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Trade-Off ID} & \thead{Design Decision} & \thead{Rationale Summary} & \thead{DDJF Ref.} \\ \hline
+    \textbf{TO-01} \newline \emph{Orbital Altitude} & 1,000~km LEO selected over 1,200--1,400~km and MEO & Inner Van Allen belt avoidance; $>3\times$ TID/DD reduction vs.\ MEO; enables 7-year ``Careful COTS'' lifetime; restricts SAA exposure to 4--6 brief transits/day. & Sec.~\ref{sec:functional_arch} \\ \hline
+    \textbf{TO-02} \newline \emph{Constellation Topology} & Walker Delta $72/8/1$ with $22.5^\circ$ inter-plane stagger & GMAT-verified 5--7 simultaneous LEO nodes over Baltic $53^\circ$--$66^\circ$N; maximises inter-satellite miss distance at $\pm 80^\circ$ polar crossings; guarantees stereoscopic convergence $\beta \in [30^\circ, 120^\circ]$. & Sec.~\ref{sec:functional_arch} \\ \hline
+    \textbf{TO-03} \newline \emph{Detection Spectral Bands} & Dual-band SWIR (2.65--2.85~$\mu$m) + MWIR (4.15--4.45~$\mu$m) & Two-colour ratioing discriminates rocket plumes ($1{,}800$--$3{,}000$~K) from glint ($5{,}800$~K) and fires ($800$--$1{,}100$~K); $P_d > 95\%$ (\texttt{R-010}). & Sec.~\ref{sec:functional_arch} \\ \hline
+    \textbf{TO-04} \newline \emph{Electronics Philosophy} & ``Careful COTS'' for SATL; QML-V rad-hard for SATG critical bus & Enables serial production of 72 SATL within European schedule/cost; graded-Z Al/Ta spot shielding ($4$--$8$~mm eq.\ Al) + benign 1,000~km orbit keeps TID $\le 10$--$15$~krad(Si). SATG 15-year GEO TID ($60$--$100$~krad) mandates space-grade bus avionics. & Sec.~\ref{sec:functional_arch} \\ \hline
+    \textbf{TO-05} \newline \emph{Payload Pointing} & Independent gimbal + FSM (not bus slewing) & Bus slew ($20^\circ$--$45^\circ$) requires 15--30~s and breaks OISL lock; gimbal ($\ge 15^\circ$/s) + FSM ($\ge 200$~Hz) achieves lock-on in $< 5.0$~s (\texttt{R-024}) without disturbing ISL or TT\&C. & Sec.~\ref{sec:physical_arch} \\ \hline
+    \textbf{TO-06} \newline \emph{EOL Disposal} & Active retrograde deorbit (SATL) / super-synchronous graveyard (SATG) & Natural drag decay from 1,000~km $> 500$--$1{,}000$~yr; active deorbit ($\Delta v_{\text{EOL}} \ge 230$~m/s) achieves $< 5$~yr demise, $\ge 99\%$ reliability, casualty risk $< 10^{-4}$; SATG $\Delta H \ge +300$~km graveyard exceeds IADC minimum. & Sec.~\ref{sec:constraints} \\ \hline
+\end{tabularx}}
+
+\subsection{Design-Driving Requirements}
+
+The following parent system requirements most strongly drive the Space Segment architecture:
+\begin{itemize}
+    \item \texttt{R-005}: Constellation size (6 GEO + 72 LEO) $\rightarrow$ Walker Delta $72/8/1$ + equatorial ring.
+    \item \texttt{R-009}, \texttt{R-010}: Boost-phase detection ($P_d > 95\%$) $\rightarrow$ dual-band SWIR/MWIR staring payload.
+    \item \texttt{R-011}: End-to-end latency $\le 60$~s $\rightarrow$ SSEG allocation $\le 45$~s; mandatory OISL relay.
+    \item \texttt{R-015}: System availability $> 99.9\%$ $\rightarrow$ dual redundancy (\texttt{R-017}), 3-level FDIR.
+    \item \texttt{R-016}: Lifetime ($\ge 7$~yr LEO, $\ge 15$~yr GEO) $\rightarrow$ altitude selection, Careful COTS, $\Delta v$ budgets.
+    \item \texttt{R-018}: Space debris compliance $\rightarrow$ active deorbit propellant reserve, D4D, passivation.
+    \item \texttt{R-023}, \texttt{R-024}: Onboard 3D trajectory and $< 5$~s lock-on $\rightarrow$ independent gimbal/FSM, OISL LOS exchange.
+    \item \texttt{R-031}--\texttt{R-033}: COMSEC, anti-jamming, link margins $\rightarrow$ hardware encryption, laser OISL mesh.
+\end{itemize}

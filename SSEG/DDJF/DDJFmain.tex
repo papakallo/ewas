@@ -7,9 +7,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
+\usepackage{longtable}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{array}
+\usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -167,21 +169,20 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Jan Krajewski}              & {Author}     & {Krajewski 04.11.2026} \\[1.2em] \hline
+    {Krzysztof Pankiewicz}              & {Author}     & {Pankiewicz 15.11.2026} \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
     {Sergiusz Pyskowacki}              & {Reviewer}     & {Pyskowacki 04.11.2026} \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Maciej Wójcik}              & {Approver}     & {Wójcik 04.11.2026} \\[1.2em] \hline
-    {Put Name here}              & {Put Role Name here}     & {Put Date/Signature or leave empty} \\[1.2em] \hline
+    {}              & {Approver}     & {} \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 2: DOCUMENT CHANGE RECORD
-% -----------------------------------------------------------------------------
-\section{Document Change Record}
-
+%% -----------------------------------------------------------------------------
+%% PAGE 2: DOCUMENT CHANGE RECORD
+%% -----------------------------------------------------------------------------
+%\section{Document Change Record}
+%
 % --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
 % Each row has 4 columns separated by &:
 % \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
@@ -215,109 +216,122 @@
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
-% -----------------------------------------------------------------------------
-\section{References}
-
-\subsection{Applicable Documents (AD)}
-
-% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
-% Columns are separated by &:
-% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Reference Documents (RD)}
-
-% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
-% Columns are separated by &:
-% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Terms, Definitions and Abbreviations}
-
-% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
-% Columns are separated by &:
-% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|X|X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
-    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
-    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
-\end{tabularx}}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 5: SCOPE
-% -----------------------------------------------------------------------------
-\section{Scope}
-
-% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
-{Put Scope content here.}
-
-\newpage
+%% -----------------------------------------------------------------------------
+%% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
+%% -----------------------------------------------------------------------------
+%\section{References}
+%
+%\subsection{Applicable Documents (AD)}
+%
+%% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
+%% Columns are separated by &:
+%% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
+%{\renewcommand{\arraystretch}{1.25}%
+%\arrayrulecolor{TableBorderBlue}%
+%\rowcolors{2}{white}{TableRowLightBlue}%
+%\noindent
+%\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
+%    \hline
+%    \rowcolor{TableHeaderBlue}
+%    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
+%    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
+%    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%\end{tabularx}}
+%
+%\vspace{0.8em}
+%\subsection{Reference Documents (RD)}
+%
+%% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
+%% Columns are separated by &:
+%% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
+%{\renewcommand{\arraystretch}{1.25}%
+%\arrayrulecolor{TableBorderBlue}%
+%\rowcolors{2}{white}{TableRowLightBlue}%
+%\noindent
+%\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
+%    \hline
+%    \rowcolor{TableHeaderBlue}
+%    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
+%    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
+%    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
+%\end{tabularx}}
+%
+%\vspace{0.8em}
+%\subsection{Terms, Definitions and Abbreviations}
+%
+%% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
+%% Columns are separated by &:
+%% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
+%{\renewcommand{\arraystretch}{1.25}%
+%\arrayrulecolor{TableBorderBlue}%
+%\rowcolors{2}{white}{TableRowLightBlue}%
+%\noindent
+%\begin{tabularx}{\textwidth}{|X|X|}
+%    \hline
+%    \rowcolor{TableHeaderBlue}
+%    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
+%    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
+%    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
+%    \textbf{CI}                       & Configuration Item                                \\ \hline
+%    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
+%\end{tabularx}}
+%
+%\newpage
+%
+%% -----------------------------------------------------------------------------
+%% PAGE 5: SCOPE
+%% -----------------------------------------------------------------------------
+%\section{Scope}
+%
+%% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
+%{Put Scope content here.}
+%
+%\newpage
 
 % -----------------------------------------------------------------------------
 % PAGE 6: INTRODUCTION
 % -----------------------------------------------------------------------------
-\section{Introduction}
+%\section{Introduction}
+\input{sections/01_introduction.tex}
+\newpage
+
+\input{sections/02_applicable_reference_docs.tex}
+\newpage
+
+\input{sections/03_design_description.tex}
+\input{sections/04_ddjf_synthesis.tex}
+\input{sections/05_functional_architecture.tex}
+\input{sections/06_physical_architecture.tex}
+\input{sections/07_development_activities.tex}
+\input{sections/08_verification.tex}
+\input{sections/09_budgets_margins.tex}
 
 % ---> PUT DATA HERE (INTRODUCTION SECTION CONTENT) <---
-{Put Introduction content here.}
+%{Put Introduction content here.}
 
-\newpage
+%\newpage
 
 % -----------------------------------------------------------------------------
 % PAGE 7: MAIN CONTENT
 % -----------------------------------------------------------------------------
-\section{Main Content}
+%\section{Main Content}
 
 % ---> PUT DATA HERE (MAIN CONTENT OF THE DOCUMENT) <---
-{Put Main Content here.}
+%{Put Main Content here.}
 
 % EXAMPLE OF ADDING A SUBSECTION (uncomment if needed):
 % \subsection{Put Subsection Title here}
 % {Put subsection content here.}
 
-\newpage
+%\newpage
 
 % -----------------------------------------------------------------------------
 % PAGE 8: ANNEX A

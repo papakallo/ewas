@@ -1,0 +1,76 @@
+% =============================================================================
+% SECTION 6: JUSTIFICATION OF PHYSICAL ARCHITECTURE
+% =============================================================================
+\section{Justification of Physical Architecture}
+\label{sec:physical_arch}
+
+\subsection{Space Segment Product Tree}
+
+The Space Segment physical decomposition follows the \abbr{WBS} structure:
+\begin{itemize}
+    \item \textbf{\texttt{123456.03}} --- Space Segment (\abbr{SSEG}, \texttt{CI-03})
+    \begin{itemize}
+        \item \textbf{\texttt{123456.03.01}} --- LEO Tracking Satellite (\texttt{SATL}, 72 units)
+        \item \textbf{\texttt{123456.03.02}} --- GEO Detection Satellite (\texttt{SATG}, 6 units)
+    \end{itemize}
+\end{itemize}
+
+Each satellite CI integrates the following subsystem-level physical elements (detailed design definitions in \textbf{RD-01}):
+\begin{itemize}
+    \item \texttt{.04} --- Mission Payload (\abbr{PLD}): SWIR/MWIR telescope, dichroic beam-splitter, cooled HgCdTe FPAs, two-axis gimbal, Fast Steering Mirror (\abbr{FSM})
+    \item \texttt{.05} --- Propulsion Subsystem (\abbr{PROP})
+    \item \texttt{.06} --- Communication Subsystem: S-band TT\&C (\texttt{.06.01}), 1,550~nm laser OISL terminals (\texttt{.06.02})
+    \item \texttt{.07} --- ADCS: fibre-optic rate sensors, star trackers, reaction wheels, magnetorquers
+    \item \texttt{.08} --- On-Board Data Handling (\abbr{OBDH}): dual-redundant processor, FPGA payload co-processor
+    \item \texttt{.09} --- Electrical Power Subsystem (\abbr{EPS}): solar arrays, Li-ion batteries, PCDU
+    \item \texttt{.10} --- Thermal Control Subsystem (\abbr{TCS}): MLI, radiators, loop heat pipes, pulse-tube cryocoolers
+    \item \texttt{.11} --- Structures and Mechanisms (\abbr{STR/MEC}): primary structure, HDRM, deployment mechanisms, NEAs
+\end{itemize}
+
+\subsection{Independent Payload Pointing Architecture}
+
+The choice of \textbf{independent two-axis payload gimbal + piezo FSM} (rather than whole-bus slewing) is driven by:
+\begin{itemize}
+    \item \textbf{Latency constraint (\texttt{R-024}):} Slewing a 230--290~kg LEO bus through $20^\circ$--$45^\circ$ using reaction wheels requires 15--30~s settling time. The gimbal ($\ge 15^\circ$/s) + FSM ($\ge 200$~Hz bandwidth) achieves NFOV ($1.5^\circ \times 1.5^\circ$) lock-on within $< 5.0$~s.
+    \item \textbf{LOS stability:} Optical LOS jitter maintained below $< 2$~arcsec/s ($\le 9.7~\mu$rad/s RMS, \texttt{R-024}); laser OISL beam pointing below $< 1.5~\mu$rad.
+    \item \textbf{Non-perturbation:} Bus attitude, OISL terminal tracking, and TT\&C antenna pointing remain undisturbed during payload slewing.
+\end{itemize}
+
+\subsection{Cryogenic Thermal Architecture}
+
+Each spacecraft sustains two widely separated temperature zones:
+\begin{itemize}
+    \item \textbf{Warm zone:} Electronics bus ($263$--$323$~K, i.e.\ $-10^\circ$C to $+50^\circ$C), Li-ion batteries ($273$--$303$~K).
+    \item \textbf{Cold zone:} Telescope optics ($180$--$210$~K), HgCdTe SWIR/MWIR FPAs held at $65$--$95$~K within $\pm 0.1$~K by pulse-tube cryocoolers. Cryocooler compressor strokes generate micro-vibration at $45$--$85$~Hz, constrained by LOS jitter requirement.
+\end{itemize}
+
+\subsection{OISL Terminal Physical Configuration}
+
+Each \texttt{SATL} accommodates 4 laser OISL terminals:
+\begin{itemize}
+    \item 2 intra-plane (fore/aft): fixed-axis terminals pointing along the velocity/anti-velocity vector, constant 5,047~km chord.
+    \item 2 cross-plane (left/right): coarse-pointing hemispherical periscopes with fine-steering mirrors, dynamically re-pointing across $\Delta\Omega = 45^\circ$ orbital-plane separations.
+\end{itemize}
+Cross-layer GEO--LEO terminals are qualified for $34{,}800$--$45{,}000$~km range (maximum geometric LOS ${\sim}45{,}195$~km between GEO at $a = 42{,}164$~km and LEO near the Earth limb).
+
+\subsection{Structural Design Justification}
+
+Stowed structural stiffness constraints are driven by the launch dynamic environment (\texttt{IF-EXT-02}):
+\begin{itemize}
+    \item \textbf{SATL:} $f_{\text{axial}} \ge 35$~Hz, $f_{\text{lateral}} \ge 20$~Hz. The 9-satellite dispenser stack constrains individual satellite envelope and interface.
+    \item \textbf{SATG:} $f_{\text{axial}} \ge 31$~Hz, $f_{\text{lateral}} \ge 15$~Hz.
+\end{itemize}
+
+Launch load envelope:
+\begin{itemize}
+    \item Quasi-static: axial $\le 6.0\,g$, lateral $\le 3.0\,g$ (SATL); axial $\le 6.0\,g$, lateral $\le 2.5\,g$ (SATG).
+    \item Random vibro-acoustic: $20$--$2{,}000$~Hz, $7$--$11\,g_{\text{rms}}$; acoustic $138$--$142$~dB OASPL.
+    \item Separation shock: $1{,}500$--$2{,}000\,g$ SRS above 1,000~Hz.
+\end{itemize}
+
+\subsection{Dispenser and Launch Configuration}
+
+\begin{itemize}
+    \item \textbf{SATL plane-batch deployment:} 9 spacecraft per dedicated medium/heavy-lift launch, mounted on a cylindrical multi-satellite dispenser ring stack (total ${\sim}2{,}300$--$2{,}800$~kg including dispenser hardware). 8 launches total for the full Walker Delta $72/8/1$ constellation.
+    \item \textbf{SATG deployment:} Single- or dual-manifest heavy-lift vehicles into GTO or direct GEO injection. Wet mass $2{,}400$--$3{,}100$~kg per spacecraft.
+\end{itemize}

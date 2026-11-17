@@ -1,0 +1,92 @@
+% =============================================================================
+% SECTION 5: JUSTIFICATION OF FUNCTIONAL ARCHITECTURE
+% =============================================================================
+\section{Justification of Functional Architecture}
+\label{sec:functional_arch}
+
+\subsection{Dual-Tier Hybrid Orbital Architecture Rationale}
+
+The \abbr{EWAS} Space Segment implements a dual-tier architecture to reconcile the competing requirements of \emph{persistent wide-area boost-phase detection} (\texttt{R-005}--\texttt{R-009}) and \emph{high-precision close-range stereoscopic tracking} (\texttt{R-023}, \texttt{R-024}):
+
+\begin{itemize}
+    \item The \textbf{GEO layer} (6$\times$ \texttt{SATG} at 35,786~km) provides continuous hemispheric staring coverage---each node views $38.15\%$ of Earth's surface ($\lambda_{\text{GEO}} = 76.3^\circ$). Uniform $60^\circ$ spacing ensures $\ge 2$ GEO nodes see any low-/mid-latitude launch point simultaneously, eliminating single-point coverage failures. The GEO vantage delivers immediate plume detection and coarse localization but insufficient angular resolution for 3D trajectory reconstruction.
+    \item The \textbf{LEO layer} (72$\times$ \texttt{SATL} at 1,000~km) provides short-range, high-angular-resolution stereoscopic tracking. Slant ranges of 1,000--2,400~km improve angular-to-spatial triangulation accuracy by $> 10\times$ relative to GEO. The Walker Delta $72/8/1$ geometry at $80^\circ$ inclination concentrates ground-track convergence at $53^\circ$N--$80^\circ$N, sustaining \textbf{5--7 simultaneous LEO nodes over the Baltic} ($53^\circ$--$66^\circ$N) at all times.
+\end{itemize}
+
+\subsection{1,000~km LEO Altitude Selection Justification}
+
+The selection of 1,000~km (over 1,200--1,400~km or MEO alternatives) results from a system-level trade-off:
+
+\subsubsection{Radiation Environment}
+\begin{itemize}
+    \item The inner Van Allen trapped proton flux ($E_p > 10$--$100$~MeV) increases sharply above 1,150--1,200~km and peaks between 1,500--3,000~km. At 1,000~km, the constellation orbits \emph{below} the main proton peak.
+    \item SAA transit exposure is restricted to 4--6 orbits/day (${\sim}8$--$12$~min per transit, peak omnidirectional flux ${\sim}10^3$--$10^4$~protons/(cm$^2 \cdot$s)), compared to continuous belt immersion at higher altitudes.
+    \item Cumulative TID over 7~years (with $2\times$ RDM) behind 4~mm Al: ${\sim}18$--$30$~krad(Si), constraining internal shielded locations to $\le 10$--$15$~krad(Si). This is $> 3\times$ lower than 1,200--1,400~km or MEO, directly enabling the ``Careful COTS'' electronics philosophy.
+    \item Displacement Damage (NIEL equivalent fluence ${\sim}2 \times 10^{10}$~protons/cm$^2$ at 10~MeV) constrains HgCdTe FPA dark-current growth but remains within manageable bounds.
+    \item At $80^\circ$ inclination, polar cap crossings ($> 60^\circ$N/S, geomagnetic cutoff rigidity $\rightarrow 0$) expose SATL to unshielded SEP and GCR, requiring SEL immunity to $\text{LET}_{\text{th}} \ge 37$~MeV$\cdot$cm$^2$/mg.
+\end{itemize}
+
+\subsubsection{Geometric Coverage}
+At $h = 1{,}000$~km, $\varepsilon_{\min} = 5^\circ$:
+\[
+    \lambda = \arccos\!\left(\frac{R_E \cos\varepsilon_{\min}}{R_E + h}\right) - \varepsilon_{\min} = \arccos\!\left(\frac{6378.14 \cos 5^\circ}{7378.14}\right) - 5^\circ = 25.55^\circ
+\]
+Slant range to horizon: $D_{\max} \approx 3{,}290$~km. Single-satellite footprint area: $A_{\text{fp}} = 2\pi R_E^2(1 - \cos\lambda) \approx 24.94 \times 10^6$~km$^2$ ($4.89\%$ of Earth surface). Cumulative 72-satellite coverage: $352\%$. The Ground Segment is guaranteed to find $\ge 2$ SATL spacecraft with convergence angle $\beta \in [30^\circ, 120^\circ]$ over the Baltic at all times (\texttt{R-043}).
+
+\subsection{GEO Radiation Regime (35,786~km)}
+
+Over the \texttt{SATG} 15-year lifetime (with $2\times$ RDM):
+\begin{itemize}
+    \item Radiation environment dominated by outer Van Allen belt relativistic electrons ($E_e > 0.5$--$5.0$~MeV), bremsstrahlung X-rays, unattenuated SPE, and cosmic-ray heavy ions.
+    \item Cumulative TID behind 4~mm Al: ${\sim}60$--$100$~krad(Si); internal vault-shielded: $\le 20$--$25$~krad(Si).
+    \item Surface and internal dielectric charging during magnetotail substorms ($k_B T_e \approx 1$--$20$~keV), constrained to $< 100$~V differential potential per project ESD control rules.
+    \item These dose levels mandate \textbf{QML-V radiation-hardened avionics} for critical SATG bus functions, alongside radiation-tolerant high-speed payload processors.
+\end{itemize}
+
+\subsection{GMAT Phase Staggering Justification}
+
+GMAT coverage and collision-avoidance simulations evaluated $15.0^\circ$ and $22.5^\circ$ inter-plane phase offsets:
+\begin{itemize}
+    \item The selected $\Delta u_{\text{inter}} = 22.5^\circ$ (${\approx}$half of $40^\circ$ intra-plane spacing) creates a \textbf{uniform interleaved coverage grid} over the Baltic region.
+    \item Maximises inter-satellite miss distances at the $\pm 80^\circ$ polar plane intersections.
+    \item At the equator, cross-plane chord distances of 5,647--6,144~km keep the OISL line-of-sight $> 245$~km above Earth surface (clear of atmospheric refraction/clouds).
+    \item Specifying max OISL range $\ge 6{,}500$~km guarantees continuous cross-plane connectivity from equator to high latitudes, requiring dynamic re-handshaking only at the narrow $\pm 80^\circ$ polar cross-seam.
+\end{itemize}
+
+\subsection{Dual-Band SWIR/MWIR Ratioing Justification}
+
+Solid- and liquid-propellant plumes emit intense $\mathrm{H_2O}$ and $\mathrm{CO_2}$ vibrational-rotational radiation. The two-colour architecture provides:
+\begin{itemize}
+    \item \textbf{SWIR ($2.65$--$2.85~\mu$m)}: High contrast during lower-/mid-atmospheric boost against solar-reflected backgrounds.
+    \item \textbf{MWIR ($4.15$--$4.45~\mu$m)}: High sensitivity as the missile ascends against cold space and cloud tops.
+    \item \textbf{Spectral ratioing}: $I_{\text{SWIR}}/I_{\text{MWIR}}$ separates rocket exhaust ($T_{\text{eff}} \approx 1{,}800$--$3{,}000$~K) from solar glint (${\sim}5{,}800$~K) and fires (${\sim}800$--$1{,}100$~K), satisfying \texttt{R-019} and \texttt{R-022}.
+\end{itemize}
+
+\subsection{``Careful COTS'' vs.\ QML-V Electronics Philosophy Justification}
+
+To manufacture 72 \texttt{SATL} and 6 \texttt{SATG} within European programmatic envelopes while achieving $> 99.9\%$ system availability (\texttt{R-015}):
+\begin{itemize}
+    \item \textbf{SATL (Careful COTS)}: Automotive/industrial-grade processors and FPGAs, lot-acceptance radiation tested per project radiation-assurance rules, protected by graded-Z Al/Ta spot shielding ($4$--$8$~mm eq.\ Al). The benign 1,000~km orbit keeps shielded TID $\le 10$--$15$~krad(Si), compatible with screened COTS.
+    \item \textbf{SATG (Space-Grade)}: QML-V rad-hard avionics for critical bus functions to withstand 15-year GEO TID of $20$--$25$~krad(Si) internal; radiation-tolerant high-speed payload processors.
+    \item \textbf{Fault Tolerance (\texttt{R-017})}: All critical chains implement dual cold/warm block redundancy with cross-strapping, EDAC with memory scrubbing, TMR in FPGA logic, fast-acting SEL current limiters, and autonomous hardware watchdog timers.
+\end{itemize}
+
+\subsection{Operational Mode Architecture Justification}
+
+The five nominal operational modes (N1--N5) map directly to the warning chain steps and constellation maintenance requirements:
+\begin{itemize}
+    \item \textbf{N1 (Boost Surveillance):} Default 24/7 staring at $\ge 10$~Hz (\texttt{R-006}--\texttt{R-009}). WFOV SWIR/MWIR with onboard proton despiking and clutter rejection. GEO Event Report within $\le 10.0$~s (\texttt{R-042}).
+    \item \textbf{N2 (Agile Stereo Tracking):} Event-driven $\le 25$--$30$~s active window. Gimbal+FSM lock-on $< 5.0$~s (\texttt{R-024}), LOS stability $< 2$~arcsec/s, OISL-exchanged LOS vectors for onboard 3D trajectory (\texttt{R-023}).
+    \item \textbf{N3 (Mandatory OISL Relay):} Continuous mesh across all 78 nodes. Intra-/cross-plane $\ge 500$~Mbps, GEO--LEO trunks $\ge 1.5$--$2.0$~Gbps, QoS routing, COMSEC key rotation (\texttt{R-031}--\texttt{R-033}).
+    \item \textbf{N4 (Station-Keeping \& CAM):} Staggered burns---at most one SATL per coverage region in manoeuvre mode at a time, preserving 24/7 Baltic stereoscopic coverage (\texttt{R-008}, \texttt{R-015}).
+    \item \textbf{N5 (Calibration \& Maintenance):} Periodic radiometric blackbody/deep-space calibration, boresight updates, and secure uplink of refined algorithms (\texttt{R-004}, \texttt{R-041}).
+\end{itemize}
+
+\subsection{FDIR and Safe Mode Justification}
+
+Three-level autonomous FDIR sustains $> 99.9\%$ availability (\texttt{R-015}):
+\begin{itemize}
+    \item \textbf{Level 1 ($< 100$~ms):} EDAC single-bit correction, TMR voting, real-time proton despiking during SAA/polar transits, fast SEL current limiters.
+    \item \textbf{Level 2 ($< 2.0$~s, \texttt{R-017}):} Autonomous A/B redundant unit failover. Health-status broadcast via OISL mesh updates Ground C2 constellation availability tables.
+    \item \textbf{Level 3 (Safe Mode):} Triggered by severe bus anomalies (under-voltage, attitude loss, cryocooler runaway). Payload shutter closes to protect FPAs from solar exposure; ADCS enters Sun-pointing; S-band TT\&C beacon activated. Remaining 5--6 visible SATL over the Baltic maintain full tracking coverage.
+\end{itemize}

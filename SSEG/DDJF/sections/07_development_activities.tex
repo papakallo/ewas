@@ -1,0 +1,71 @@
+% =============================================================================
+% SECTION 7: DEVELOPMENT ACTIVITIES AND SYNTHESIS OF RESULTS
+% =============================================================================
+\section{Development Activities and Synthesis of Results}
+\label{sec:development_activities}
+
+\subsection{Model Philosophy}
+
+The Space Segment AIT programme follows the model philosophy of the Verification Plan (\textbf{AD-02}) and \abbr{WBS} Element \texttt{123456.04.02} (\emph{Verification Systems}, Chapter~10 of \textbf{AD-01}):
+
+\subsubsection{Engineering Model (EM) and Structural-Thermal Model (STM)}
+\abbr{WBS} \texttt{123456.04.02.02}.
+\begin{itemize}
+    \item Dedicated avionics flat-sat and optical bench Engineering Models integrated with Ground Segment interface emulators.
+    \item Hardware-in-the-Loop (HIL) functional verification of:
+    \begin{itemize}
+        \item OBDH flight software
+        \item Independent gimbal/FSM control loops
+        \item Cryptographic COMSEC modules
+        \item Optical OISL routing protocols (\texttt{R-039})
+    \end{itemize}
+    \item STM validates primary load paths, 9-satellite dispenser interfaces, and cryogenic radiator/loop-heat-pipe thermal balance.
+\end{itemize}
+
+\subsubsection{Qualification / Proto-Flight Model (QM/PFM)}
+\abbr{WBS} \texttt{123456.04.02.01}. The lead spacecraft of each tier undergoes full qualification or proto-flight environmental testing per the Verification Plan (\textbf{AD-02}):
+\begin{itemize}
+    \item Sine and random vibration
+    \item Acoustic noise
+    \item Dispenser/launcher pyro-shock
+    \item Multi-cycle thermal-vacuum (TVAC): hot and cold operational plateaus
+    \item Electromagnetic Compatibility (EMC)
+    \item Pre-/post-test optical boresight stability verification
+\end{itemize}
+
+\subsubsection{Recurring Flight Models (FM)}
+\abbr{WBS} \texttt{123456.04.02.03}.
+\begin{itemize}
+    \item \textbf{SATG} (6 units): Full individual acceptance testing per unit.
+    \item \textbf{SATL} (72 units): Serial production in 8 plane-lots of 9 spacecraft each. Each FM undergoes:
+    \begin{itemize}
+        \item Workmanship random vibration
+        \item Shortened TVAC acceptance screening
+        \item Radiometric/geometric payload calibration per the recurring-production acceptance rules (\textbf{AD-02})
+    \end{itemize}
+\end{itemize}
+
+\subsection{AIT Facility Requirements}
+
+\begin{itemize}
+    \item \textbf{Payload and OISL optics:} ISO Class~5 (Class 100) cleanroom, continuous $\mathrm{GN_2}$ purge ($\mathrm{CVCM} < 0.01\%$, $\mathrm{TML} < 1.0\%$), sealed aperture covers.
+    \item \textbf{Platform integration:} ISO Class~8 (Class 100,000) facilities.
+    \item \textbf{Cryogenic optical testing:} TVAC chamber with optical port for radiometric calibration at $65$--$95$~K FPA operating temperature.
+\end{itemize}
+
+\subsection{Development Status Summary}
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Model / Activity} & \thead{Status} & \thead{Key Outcomes / Notes} \\ \hline
+    \textbf{EM / Flat-Sat} & TBD & HIL functional verification of OBDH, ADCS, OISL routing, COMSEC. \\ \hline
+    \textbf{STM} & TBD & Load-path and dispenser interface validation; cryogenic thermal balance. \\ \hline
+    \textbf{QM/PFM (SATL Lead)} & TBD & Full qualification environmental campaign. \\ \hline
+    \textbf{QM/PFM (SATG Lead)} & TBD & Full qualification environmental campaign. \\ \hline
+    \textbf{FM Serial Production} & TBD & 8 plane-lots $\times$ 9 SATL + 6 SATG individual acceptance. \\ \hline
+\end{tabularx}}
