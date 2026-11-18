@@ -1,3 +1,91 @@
-% Ground Segment TRS placeholder. Awaiting supplied document content.
+% =============================================================================
+% SECTION <6>: GROUND SEGMENT ENVIRONMENT AND CONSTRAINTS DESCRIPTION
+% Approved English translation for EWAS Ground Segment TRS
+% =============================================================================
 \subsection{6. Environment and Constraints Description}
-\textit{Content pending.}
+
+This section identifies the environmental, infrastructure, communications, operational, and regulatory constraints affecting the design and operation of the Ground Segment (\abbr{GSEG}, \texttt{CI-02}). These constraints apply to the terrestrial installation and the external services on which its operation depends.
+
+\subsubsection{6.1 Ground Site and Physical Environment}
+
+The Ground Segment is planned as an operational installation at a single geographical location. Local environmental conditions affect the availability and reliability of communication facilities, electronic equipment, and mission-support infrastructure.
+
+Relevant factors include:
+\begin{itemize}
+  \item Ambient temperature and humidity, and the operating conditions of electronic equipment.
+  \item Precipitation, wind loading, and other weather effects on external installations.
+  \item Lightning exposure and electromagnetic interference.
+  \item Site hazards, including flooding, fire, and events affecting facility availability.
+  \item Terrain and space constraints affecting antenna placement and radio visibility.
+\end{itemize}
+
+Site-specific environmental conditions will be established for the selected location and applicable equipment.
+
+\subsubsection{6.2 Radio-Frequency and Communication Environment}
+
+The Ground Segment uses radio-frequency links to exchange commands, telemetry, and mission data with spacecraft. Link conditions depend on the ground station characteristics, spacecraft geometry, and the propagation environment.
+
+The main communication constraints include:
+\begin{itemize}
+  \item Radio visibility of \abbr{GEO} and \abbr{LEO} spacecraft from the ground site.
+  \item Atmospheric attenuation and propagation variability, particularly at higher frequencies.
+  \item Radio-frequency interference from other users of the relevant bands.
+  \item Frequency-allocation, antenna-performance, and link-parameter restrictions.
+  \item Changes in available communication paths during constellation operations.
+\end{itemize}
+
+The Space Segment provides direct communication capabilities and a mandatory Inter-Satellite Link (\abbr{ISL}) network for command and data relay. The Ground Segment interfaces with these capabilities through the established Space Segment communications architecture. Site conditions and the availability of communication paths constrain the achievable link performance.
+
+\subsubsection{6.3 Infrastructure and Service Availability Constraints}
+
+Ground Segment operation depends on the availability of electrical power, cooling, computing and network infrastructure, and external communication services. Power interruptions, equipment failures, or communication outages can affect constellation control, mission-data reception, and warning delivery.
+
+The terrestrial infrastructure is subject to the system redundancy and fault-tolerance requirements (\texttt{R-015}, \texttt{R-017}, and \texttt{R-030}). Because facilities are concentrated at one geographical site, common-cause events may affect multiple Ground Segment functions simultaneously, notably through loss of facility power, shared infrastructure services, or local communications.
+
+Ground Segment service availability contributes to the overall \abbr{EWAS} operational availability requirement of greater than 99.9\% (\texttt{R-015}).
+
+\subsubsection{6.4 Information Security and Data Protection Constraints}
+
+The Ground Segment handles spacecraft operational information, observation data, and warning products intended for authorized recipients. Their protection encompasses confidentiality, integrity, availability, and accountability.
+
+The governing constraints include:
+\begin{itemize}
+  \item Access to functions and data restricted to authorized users (\texttt{R-003}, \texttt{R-034}).
+  \item Protection of communications against unauthorized access, spoofing, and interference (\texttt{R-031}, \texttt{R-032}).
+  \item Encryption of archived mission data (\texttt{R-035}).
+  \item Retention of historical mission data for at least five years (\texttt{R-036}).
+  \item Audit records of user actions, system events, and warning activities (\texttt{R-037}).
+\end{itemize}
+
+Use of retained data is limited to the purposes defined by \texttt{R-004}. Information classification, applicable protection requirements, and arrangements with authorized institutions are addressed in the relevant security and interface documentation.
+
+\subsubsection{6.5 Operational and Mission Constraints}
+
+The Ground Segment operates under a continuous-readiness requirement and depends on coordinated exchanges with the satellite constellation and authorized warning recipients.
+
+The principal operational constraints include:
+\begin{itemize}
+  \item The 60-second end-to-end first-warning deadline (\texttt{R-011}).
+  \item Receipt and assessment of observations from two selected \abbr{LEO} spacecraft before the first warning (\texttt{R-045}).
+  \item Variable spacecraft connectivity and availability of mission data.
+  \item Consistent time references and event identification across data products from different sources.
+  \item Potentially incomplete, delayed, or inconsistent observation data.
+  \item Operator availability and the execution of authorized actions under time-critical conditions.
+\end{itemize}
+
+Operator information presentation and protection against misinterpretation are governed by \texttt{R-028} and \texttt{R-029}. The first warning is dispatched automatically; subsequent operator confirmation, revision, or cancellation is governed by \texttt{R-046}.
+
+\subsubsection{6.6 Regulatory and External Constraints}
+
+Ground Segment facilities and services are subject to the applicable legal and regulatory conditions of the installation location and relevant communications operations.
+
+The principal areas include:
+\begin{itemize}
+  \item Radio-frequency allocation and coordination of satellite communications links.
+  \item Installation and operation of antenna facilities.
+  \item Facility safety and access to operational premises.
+  \item Information protection and disclosure to authorized entities.
+  \item Agreements and conditions governing external operational-data providers and warning recipients.
+\end{itemize}
+
+The applicable obligations depend on the final Ground Segment location, the services provided, and the arrangements with external organizations. With respect to warning dissemination, the \abbr{EWAS} system boundary terminates at delivery to the authorized recipient interface (\texttt{R-048}).
