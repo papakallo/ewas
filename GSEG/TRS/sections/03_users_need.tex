@@ -28,7 +28,7 @@ Accountability & Retain event data, warning versions, acknowledgements, and audi
 Threat prioritization & Assess worldwide events for potential threats to the Baltic region. & \texttt{R-049} \\ \hline
 \end{longtable}}
 
-The availability requirement of \texttt{>99.9\%} applies to EWAS as a system (\texttt{R-015}). GSEG-allocated availability requirements are specified in Section 7.
+The availability requirement of \texttt{>99.9\%} applies to EWAS as a system (\texttt{R-015}). Section 7 defines GSEG-level redundancy and service-unavailability indication requirements; no separate numerical GSEG availability allocation has been established.
 
 \subsubsection{3.2 Warning-Chain Performance Allocation}
 
@@ -52,7 +52,7 @@ GSEG contributes to the chain from event detection to warning delivery. The tabl
 \textbf{Total --- EWAS} & \textbf{From GEO detection to warning delivery} (\texttt{R-011}). & \textbf{\(\le\)60 s} \\ \hline
 \end{longtable}}
 
-The total allocation for Stage 2 is \textbf{5 s} (2 s GSEG and 3 s SSEG). The values are consistent with \texttt{SSEG-REQ-PERF-002}--\texttt{004} and the combined execution and transport allocation specified in \texttt{SSEG-REQ-PERF-001}. The starting epoch for \texttt{R-011} is the first GEO detection of the event.
+The total allocation for Stage 2 is \textbf{5 s} (2 s GSEG and 3 s SSEG). The stage allocations are defined in the EWAS system warning-chain budget and coordinated at the GSEG/SSEG interface. The starting epoch for \texttt{R-011} is the first GEO detection of the event.
 
 Requirement \texttt{R-045} specifies automatic delivery of the first warning after assessment of observations from two selected LEO spacecraft. Subsequent operator actions are addressed by \texttt{R-046}.
 
