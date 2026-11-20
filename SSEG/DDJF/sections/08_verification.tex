@@ -9,6 +9,8 @@
 
 The Space Segment verification strategy is governed by the Programme Verification Plan (\textbf{AD-02}) and tracked via the Verification Control Document (\textbf{AD-03}). Four formal verification methods are employed, assigned per requirement in the TRS (\textbf{RD-02}):
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -22,6 +24,8 @@ The Space Segment verification strategy is governed by the Programme Verificatio
     \textbf{R} & Review of Design & Non-offensive scope (\texttt{R-001}), data-format compliance, design-for-demise compliance, COMSEC architecture review. \\ \hline
     \textbf{I} & Inspection & Physical configuration audit, harness routing, cleanroom contamination logs, material outgassing certificates. \\ \hline
 \end{tabularx}}
+\caption{Space Segment Verification Methods and Level-2 Application}
+\end{table}
 
 The verification programme is structured into three campaigns:
 \begin{enumerate}
@@ -37,6 +41,8 @@ The verification programme is structured into three campaigns:
 
 The following table maps key SSEG-level requirements to their qualification verification method and evidence status:
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -54,10 +60,14 @@ The following table maps key SSEG-level requirements to their qualification veri
     \texttt{SSEG-REQ-ALLOC-007} & Mass, power, stiffness & A, T & Mass budget; power budget; structural FEM + sine survey & TBD \\ \hline
     \texttt{SSEG-REQ-ALLOC-008} & $\Delta v$ budgets & A & Propulsion sizing analysis; orbit-raising/deorbit trajectory analysis & TBD \\ \hline
 \end{tabularx}}
+\caption{Key Space Segment Requirements Qualification Verification and Evidence Status}
+\end{table}
 
 \subsubsection{Implementation of Qualification Plan}
 \label{sec:qual_plan_impl}
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -75,10 +85,14 @@ The following table maps key SSEG-level requirements to their qualification veri
     \textbf{Boresight Stability} & QM/PFM & Pre-/post-environmental optical alignment verification; AKE $\le 10$--$15~\mu$rad & TBD \\ \hline
     \textbf{Radiometric Calibration} & QM/PFM & SWIR/MWIR flat-fielding; dark-current characterization at $65$--$95$~K & TBD \\ \hline
 \end{tabularx}}
+\caption{Space Segment Qualification Test Plan Implementation and Status}
+\end{table}
 
 \subsubsection{Validation of Models}
 \label{sec:model_validation}
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -93,12 +107,16 @@ The following table maps key SSEG-level requirements to their qualification veri
     \textbf{Radiation Dose Model} & AP-8/AE-8, IRENE AE9/AP9 at $95\%$ CL; correlation with dosimeter flight data (post-LEOP) & TBD \\ \hline
     \textbf{Link Budget Model} & Correlation with OISL BER ground test and in-orbit commissioning results & TBD \\ \hline
 \end{tabularx}}
+\caption{Space Segment Analytical Model Validation Matrix}
+\end{table}
 
 \subsubsection{Requirements Status Log}
 \label{sec:req_status_log}
 
 Detailed requirement-by-requirement verification status is maintained in the Verification Control Document (\textbf{AD-03}). The summary status at this document issue:
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -113,10 +131,14 @@ Detailed requirement-by-requirement verification status is maintained in the Ver
     \textbf{SSEG-REQ-ALLOC} & TBD & TBD & TBD \\ \hline
     \textbf{Total} & TBD & TBD & TBD \\ \hline
 \end{tabularx}}
+\caption{Space Segment Requirements Verification Status Summary Log}
+\end{table}
 
 \subsubsection{Manufacturing Process Status Log}
 \label{sec:mfg_status_log}
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -132,12 +154,16 @@ Detailed requirement-by-requirement verification status is maintained in the Ver
     \textbf{Propellant tank welding} & Propulsion tanks & Proof pressure test; leak test; radiographic inspection & TBD \\ \hline
     \textbf{PCB/FPGA population} & Avionics boards & Lot-acceptance radiation test (SATL); X-ray inspection & TBD \\ \hline
 \end{tabularx}}
+\caption{Critical Space Segment Manufacturing Processes and Qualification Status Log}
+\end{table}
 
 \subsection{Acceptance Verification}
 \label{sec:acceptance_verification}
 
 Acceptance testing of recurring Flight Models follows the rules defined in \textbf{AD-02}:
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -153,3 +179,5 @@ Acceptance testing of recurring Flight Models follows the rules defined in \text
     \textbf{Functional Chain Test} & All FM & End-to-end avionics chain test with flight software; FDIR injection & TBD \\ \hline
     \textbf{Mass Properties} & All FM & Weigh and CG measurement; comparison against mass budget & TBD \\ \hline
 \end{tabularx}}
+\caption{Recurring Flight Model Acceptance Verification Programme}
+\end{table}

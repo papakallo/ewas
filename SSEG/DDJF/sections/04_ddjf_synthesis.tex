@@ -8,6 +8,8 @@ This section summarises the key design trade-offs and architectural decisions ma
 
 \subsection{Critical Trade-Off Register}
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -23,6 +25,8 @@ This section summarises the key design trade-offs and architectural decisions ma
     \textbf{TO-05} \newline \emph{Payload Pointing} & Independent gimbal + FSM (not bus slewing) & Bus slew ($20^\circ$--$45^\circ$) requires 15--30~s and breaks OISL lock; gimbal ($\ge 15^\circ$/s) + FSM ($\ge 200$~Hz) achieves lock-on in $< 5.0$~s (\texttt{R-024}) without disturbing ISL or TT\&C. & Sec.~\ref{sec:physical_arch} \\ \hline
     \textbf{TO-06} \newline \emph{EOL Disposal} & Active retrograde deorbit (SATL) / super-synchronous graveyard (SATG) & Natural drag decay from 1,000~km $> 500$--$1{,}000$~yr; active deorbit ($\Delta v_{\text{EOL}} \ge 230$~m/s) achieves $< 5$~yr demise, $\ge 99\%$ reliability, casualty risk $< 10^{-4}$; SATG $\Delta H \ge +300$~km graveyard exceeds IADC minimum. & Sec.~\ref{sec:constraints} \\ \hline
 \end{tabularx}}
+\caption{Space Segment Critical Design Trade-Off Register}
+\end{table}
 
 \subsection{Design-Driving Requirements}
 

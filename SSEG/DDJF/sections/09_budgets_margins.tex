@@ -6,6 +6,8 @@
 
 \subsection{Flight System Mass Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -19,9 +21,13 @@
     \textbf{Dispenser Stack Constraint} & 9-satellite plane-batch $\le 2{,}800.0$~kg (incl.\ dispenser) & Single-/dual-manifest \\ \hline
     \textbf{System Margin} & Per ECSS margin policy at current maturity & Per ECSS margin policy at current maturity \\ \hline
 \end{tabularx}}
+\caption{Flight System Mass Budget and Margins for SATL and SATG}
+\end{table}
 
 \subsection{Electrical Power Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -36,9 +42,13 @@
     \textbf{Max Eclipse Duration} & $\le 35.0$~min/orbit & 71.5~min (equinox) \\ \hline
     \textbf{Battery DoD Limit} & $\le 30\%$ & $\le 65\%$ \\ \hline
 \end{tabularx}}
+\caption{Electrical Power, Eclipse Duration, and Battery Depth-of-Discharge Budget}
+\end{table}
 
 \subsection{Structural Stiffness Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -51,11 +61,15 @@
     \textbf{Stowed Lateral Freq.\ (Min)} & $f_{\text{lateral}} \ge 20.0$~Hz & $f_{\text{lateral}} \ge 15.0$~Hz \\ \hline
     \textbf{Verification Method} & Structural FEM + sine survey (QM/PFM) & Structural FEM + sine survey (QM/PFM) \\ \hline
 \end{tabularx}}
+\caption{Flight System Stowed Structural Stiffness Budget for SATL and SATG}
+\end{table}
 
 \subsection{Propulsion $\Delta v$ Budget}
 
 \subsubsection{SATL Total $\Delta v \ge 380.0$~m/s}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -69,9 +83,13 @@
     \textbf{EOL active deorbit (protected reserve)} & $\ge 230.0$~m/s & Retrograde perigee-lowering from 1,000~km; atmospheric demise $< 5$~yr; $\ge 99\%$ reliability; casualty risk $< 10^{-4}$ (\texttt{R-018}) \\ \hline
     \textbf{Total} & $\ge 380.0$~m/s & \\ \hline
 \end{tabularx}}
+\caption{LEO Satellite (SATL) Propulsion $\Delta v$ Technical Budget Breakdown}
+\end{table}
 
 \subsubsection{SATG $\Delta v$ Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -86,9 +104,13 @@
     \textbf{EOL graveyard re-orbitation} & $\ge 15.0$~m/s & Super-synchronous $\Delta H \ge +300$~km above 35,786~km; $\Delta e \le 0.0005$ (\texttt{R-018}) \\ \hline
     \textbf{Total post-insertion} & $\ge 810.0$~m/s & \\ \hline
 \end{tabularx}}
+\caption{GEO Satellite (SATG) Propulsion $\Delta v$ Technical Budget Breakdown}
+\end{table}
 
 \subsection{Radiation Dose Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -104,9 +126,13 @@
     \textbf{Electronics Strategy} & Careful COTS + graded-Z spot shielding ($4$--$8$~mm eq.\ Al) & QML-V rad-hard bus; rad-tolerant payload processors \\ \hline
     \textbf{Dose Models} & AP-8/AE-8, IRENE AE9/AP9, SAPPHIRE ($95\%$ CL) & AP-8/AE-8, IRENE AE9/AP9, SAPPHIRE ($95\%$ CL) \\ \hline
 \end{tabularx}}
+\caption{Space Segment Radiation Environment and Total Ionizing Dose Budget}
+\end{table}
 
 \subsection{Latency Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -122,9 +148,13 @@
     \textbf{Total} & EWAS System & End-to-end $T_0$ to authority delivery (\texttt{R-011}) & $\le 60.0$~s \\ \hline
     & \textbf{SSEG Sub-Total} & Steps 1--3 & $\le 40$--$45$~s \\ \hline
 \end{tabularx}}
+\caption{End-to-End Warning Chain Latency Allocation and Space Segment Budget}
+\end{table}
 
 \subsection{Orbital Perturbation Budget}
 
+\begin{table}[H]
+\centering
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -139,6 +169,8 @@
     \textbf{Atmospheric Drag (Semi-Major Axis Decay)} & ${\sim}1$--$5$~m/yr & Negligible \\ \hline
     \textbf{Solar Radiation Pressure} & Minor correction included in SK budget & Included in E--W SK budget \\ \hline
 \end{tabularx}}
+\caption{Space Segment Orbital Perturbation and Station-Keeping $\Delta v$ Budget}
+\end{table}
 
 
 \subsection{Communication and Bandwidth Budget}
@@ -156,6 +188,8 @@ where $N_{\text{sensors}} = 2$ (\abbr{SWIR} + \abbr{MWIR}), $N_x = N_y = 640$~pi
 
 With a $1.25\times$ encapsulation factor ($25\%$ overhead for CCSDS packet headers, COMSEC encryption framing (\texttt{R-031}), GNSS timestamps, attitude/ephemeris covariance metadata, and FEC coding), the encapsulated rate is $R_{\text{enc}} = 1.25 \times R_{\text{raw}}$:
 
+\begin{table}[H]
+\centering
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -168,6 +202,8 @@ With a $1.25\times$ encapsulation factor ($25\%$ overhead for CCSDS packet heade
     \textbf{Raw Data Rate ($R_{\text{raw}}$)} & 196.608~Mbps & 393.216~Mbps \\ \hline
     \textbf{Encapsulated ($\times 1.25$)} & 245.76~Mbps & 491.52~Mbps \\ \hline
 \end{tabularx}}
+\caption{Infrared Sensor Payload Raw and Encapsulated Data Rates for 8-bit and 16-bit Modes}
+\end{table}
 
 The \textbf{8-bit mode} is the nominal operational mode for real-time event tracking where dynamic range is sufficient for two-colour ratioing. The \textbf{16-bit mode} is used during radiometric calibration passes (Mode~N5) and for high-dynamic-range science data dumps, representing the worst-case link sizing.
 
@@ -179,21 +215,13 @@ Table~\ref{tab:bandwidth_budget} presents the five inter-satellite and space-to-
 
 \begin{table}[H]
 \centering
-\caption{EWAS Space Segment Communication and Bandwidth Budget Summary}
 \label{tab:bandwidth_budget}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.15}
 \arrayrulecolor{TableBorderBlue}
 \rowcolors{2}{white}{TableRowLightBlue}
-\begin{tabularx}{\textwidth}{|
-  >{\raggedright\arraybackslash\hsize=0.95\hsize}X|
-  >{\raggedright\arraybackslash\hsize=0.80\hsize}X|
-  >{\raggedright\arraybackslash\hsize=1.65\hsize}X|
-  >{\raggedright\arraybackslash\hsize=0.90\hsize}X|
-  >{\raggedright\arraybackslash\hsize=0.90\hsize}X|
-  >{\raggedright\arraybackslash\hsize=0.95\hsize}X|
-  >{\raggedright\arraybackslash\hsize=0.85\hsize}X|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash\hsize=0.95\hsize}X|>{\raggedright\arraybackslash\hsize=0.80\hsize}X|>{\raggedright\arraybackslash\hsize=1.65\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=0.95\hsize}X|>{\raggedright\arraybackslash\hsize=0.85\hsize}X|}
     \hline
     \rowcolor{TableHeaderBlue}
     \textcolor{white}{\textbf{Link}} & 
@@ -244,6 +272,7 @@ Table~\ref{tab:bandwidth_budget} presents the five inter-satellite and space-to-
     TBD (Ka-band or optical ground terminal) & 
     TBD \\ \hline
 \end{tabularx}
+\caption{EWAS Space Segment Communication and Bandwidth Budget Summary}
 \end{table}
 
 \subsubsection{Link Sizing Rationale}
