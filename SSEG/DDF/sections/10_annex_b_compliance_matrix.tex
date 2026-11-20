@@ -1,0 +1,67 @@
+% =============================================================================
+% ANNEX B: DESIGN-TO-TRS REQUIREMENTS COMPLIANCE MATRIX
+% =============================================================================
+Table~\ref{tab:compliance_matrix} provides pure one-to-one \textbf{design-to-requirements traceability and Phase~A/B compliance status} for all 39 normative Level-2 requirements of \textbf{AD-01} (\texttt{EWAS-HSB-SSEG-TRS-03} Issue~1.5), mapping each requirement to its implementing Space Segment design elements and \abbr{DDF} sections. Formal verification methods, stages, and close-out tracking are governed separately by the Programme Verification Plan (\textbf{AD-03}) and Verification Control Document (\textbf{AD-04}). Where external bilateral freeze with System Interface Engineering (\texttt{123456.05.02}) or launch procurement remains pending, compliance is tracked as \texttt{Compliant (TBC)} or \texttt{Compliant (TBD)}.
+
+{\scriptsize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.06}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}p{6.2cm}|>{\raggedright\arraybackslash}p{1.7cm}|}
+\caption{Design-to-Requirements Compliance Matrix --- All 39 \textbf{AD-01} Space Segment Requirements}
+\label{tab:compliance_matrix} \\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{AD-01 Req. ID} & \thead{Requirement Title} & \thead{As-Designed Implementation \& DDF Ref.} & \thead{Status} \\ \hline
+\endfirsthead
+\multicolumn{4}{l}{\cellcolor{white}\footnotesize\textit{Table~\ref{tab:compliance_matrix} (continued)}} \\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{AD-01 Req. ID} & \thead{Requirement Title} & \thead{As-Designed Implementation \& DDF Ref.} & \thead{Status} \\ \hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+\texttt{SSEG-REQ-FUN-001} & Non-Offensive Civil-Protection Operation & Strictly civil-protection warning chain; excludes weapon guidance/fire control (Sec.~1.1, 4.3, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-FUN-002} & Scope Exclusion of Yield and Damage Assessment & Excludes warhead yield/\abbr{BDA} processing in \abbr{FSW} and data products (Sec.~4.2, 4.3) & Compliant \\ \hline
+\texttt{SSEG-REQ-FUN-003} & Dual-Tier Detection and Stereoscopic Tracking Chain & 6 \texttt{SATG} + 72 \texttt{SATL} + \abbr{OISL} 4-step warning chain \texttt{FC-1} (Sec.~4.1, 4.3, Table~5) & Compliant \\ \hline
+\texttt{SSEG-REQ-FUN-004} & Baltic Region and Extra-Regional Threat Surveillance & Equatorial \abbr{GEO} ring + $80^\circ$ \abbr{LEO} Walker Delta global/Baltic coverage (Sec.~5.1, Annex~A) & Compliant \\ \hline
+\texttt{SSEG-REQ-FUN-005} & Onboard Proton Despiking and Plume Discrimination & Dual-band \abbr{SWIR}/\abbr{MWIR} ratioing + real-time \abbr{FPGA} proton despiking (Sec.~4.2, 5.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-FUN-006} & Archival Telemetry and Provenance Formatting & $< 50~\mu\mathrm{s}$ \abbr{GNSS} \abbr{UTC} timestamps, covariance \& quality headers for 5-yr archive (Sec.~4.1, 5.5) & Compliant \\ \hline
+\texttt{SSEG-REQ-MIS-001} & Hybrid Constellation Architecture & 6 \texttt{SATG} ($35{,}786\text{ km}$) + 72 \texttt{SATL} ($1{,}000\text{ km}$, 8 planes, Walker \texttt{72/8/1}) (Sec.~5.1, Table~6, Annex~A) & Compliant \\ \hline
+\texttt{SSEG-REQ-MIS-002} & Continuous 24/7 Surveillance Coverage & 2--3 \abbr{GEO} + 5--7 \abbr{LEO} continuously visible over Baltic, zero blind windows (Sec.~5.1, Table~6) & Compliant \\ \hline
+\texttt{SSEG-REQ-MIS-003} & Boost-Phase Detection Coverage & 6 \texttt{SATG} $60^\circ$ ring + high-latitude \texttt{SATL} supplement (Sec.~4.2, 5.1, Annex~A) & Compliant \\ \hline
+\texttt{SSEG-REQ-MIS-004} & Multi-Satellite Stereoscopic Tracking Geometry & Walker \texttt{72/8/1} ($\Delta u_{\text{inter}}=22.5^\circ$) guarantees $\ge 2$ \texttt{SATL} with $\beta\in[30^\circ,120^\circ]$ (Sec.~5.1, Annex~A) & Compliant \\ \hline
+\texttt{SSEG-REQ-MIS-005} & Constellation Maintenance Deconfliction & Staggered Mode \texttt{N4} burns ($\le 1$ satellite offline per region) (Sec.~4.1, 4.3, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-PERF-001} & Boost-Phase Launch Detection Probability & Cooled \abbr{SWIR}/\abbr{MWIR} \abbr{WFOV} staring achieving $P_d > 95\%$ (Sec.~4.2, 5.4; proof in \textbf{RD-01}) & Compliant \\ \hline
+\texttt{SSEG-REQ-PERF-002} & End-to-End Warning Latency Contribution & \abbr{SSEG} Steps 1--3 $\le 40\text{--}45\text{ s}$ within $\le 60.0\text{ s}$ system limit (Sec.~4.3 Table~5, Sec.~6.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-PERF-003} & Onboard False-Alarm Suppression & Two-colour \abbr{SWIR}/\abbr{MWIR} filtering + proton despiking + temporal correlation (Sec.~4.2, 5.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-PERF-004} & Space Segment Operational Availability & 5--7 Baltic \texttt{SATL} overlap + A/B redundancy + 3-level \abbr{FDIR} supporting $>99.9\%$ (Sec.~4.3, 7.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ALLOC-001} & Infrared Sensing Payload Allocation & Co-registered \abbr{SWIR} ($2.65\text{--}2.85~\mu\mathrm{m}$) / \abbr{MWIR} ($4.15\text{--}4.45~\mu\mathrm{m}$) \abbr{HgCdTe} payloads (Sec.~5.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ALLOC-002} & Independent Optical Payload LOS Lock-On \& Stability & \texttt{SATL} 2-axis gimbal + \abbr{FSM} ($< 5.0\text{ s}$ lock, $< 2.0\text{ arcsec/s}$ \abbr{RMS}, $< 0.05^\circ$ bus excursion) (Sec.~5.4, 6.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ALLOC-003} & Onboard Event Filtering \& Stereo 3D Trajectory & Onboard despiking, \abbr{OISL} \abbr{LOS} vector exchange, dual-\texttt{SATL} 3D fit \& dual downlink (Sec.~4.1, 4.3, 5.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ALLOC-004} & Stray-Light Mitigation \& Contamination Clearance & Multi-vane baffles ($15^\circ$ Sun / $3^\circ$ limb), ISO~5, 72--96~h bake-out (Sec.~5.4, 7.1, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-ALLOC-005} & Flight System Technical Budget \& Dispenser Envelope & Mass, power, $\Delta v$, stiffness \& 9-sat stack ($2{,}750 \le 2{,}800\text{ kg}$) close with margin (Sec.~6.2, 6.3) & Compliant \\ \hline
+\texttt{SSEG-REQ-ISL-001} & Mandatory Optical Inter-Satellite Link Network & $4 \times 1{,}550\text{ nm}$ \abbr{OISL}/\texttt{SATL} ($\ge 500\text{ Mbps}$, $\ge 6{,}500\text{ km}$) + \abbr{GEO}--\abbr{LEO} trunks ($\ge 1.5\text{--}2\text{ Gbps}$) (Sec.~5.1, 5.5, 6.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ISL-002} & All-Weather Space-to-Ground RF Links & Redundant S/X/Ka \abbr{RF} links on \texttt{SATL} \& \texttt{SATG} with $\ge 3.0\text{ dB}$ rain margin (Sec.~5.1, 5.5, 6.4) & Compliant (\abbr{TBC}) \\ \hline
+\texttt{SSEG-REQ-ISL-003} & End-to-End Cryptographic Security \& Authentication & Hardware \abbr{COMSEC} bulk encryption \& command authentication on \abbr{RF} and \abbr{OISL} (Sec.~5.4, 5.5, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-ISL-004} & Anti-Jamming Protection \& Autonomous Mesh Failover & Anti-jam/spoofing + \abbr{QoS} warning preemption \& autonomous \abbr{OISL} rerouting (Sec.~4.3 \texttt{FC-2}, 5.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ENV-001} & Orbital Environment Survivability & $2\times$ \abbr{RDM} shielding (Careful \abbr{COTS} \abbr{LEO} / \abbr{QML-V} \abbr{GEO}), dual-zone \abbr{TCS}, \abbr{ESD} $<100\text{ V}$ (Sec.~5.4, 6.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-ENV-002} & Mandatory Active End-of-Life Disposal & Ring-fenced \abbr{EOL} $\Delta v$: \texttt{SATL} $\ge 230\text{ m/s}$ ($<5\text{ yr}$ demise); \texttt{SATG} $\ge 15\text{ m/s}$ ($+300\text{ km}$) (Sec.~6.3, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-ENV-003} & End-of-Life Constellation Passivation & Irreversible propellant venting, battery disconnect, wheel spin-down, \abbr{RF}/laser kill (Sec.~4.3, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-OPS-001} & Operational Design Lifetimes & Sized for $\ge 7\text{ yr}$ \texttt{SATL} and $\ge 15\text{ yr}$ \texttt{SATG} across radiation, battery \abbr{DoD} \& $\Delta v$ (Sec.~5.4, 6.2--6.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-OPS-002} & No Single-Point Failure \& Autonomous Safe Mode & Dual A/B redundancy + L1 ($<100\text{ ms}$), L2 ($\le 2\text{ s}$), L3 Safe Mode ($\le 60\text{ s}$) \abbr{FDIR} (Sec.~4.3 \texttt{FC-3}, 7.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-OPS-003} & Health Telemetry, Event Buffering \& OTA Calibration & Continuous \abbr{HK}, encrypted non-volatile event buffers, Mode \texttt{N5} \& signed \abbr{OTA} (Sec.~4.3 \texttt{FC-2}, 7.4) & Compliant \\ \hline
+\texttt{SSEG-REQ-IF-001} & Space-to-Ground Interface Compliance (\texttt{IF-EXT-01}) & Modular \abbr{RF}/\abbr{CCSDS}/\abbr{COMSEC} interface input to \texttt{123456.05.02} \& $<50~\mu\mathrm{s}$ sync (Sec.~5.5 Table~10, \texttt{OI-01}) & Compliant (\abbr{TBC}) \\ \hline
+\texttt{SSEG-REQ-IF-002} & Launch Vehicle \& Dispenser Interface (\texttt{IF-EXT-02}) & 9-\texttt{SATL} cylindrical dispenser ($\le 2{,}800\text{ kg}$), \texttt{SATG} adapter, $\ge 3$ inhibits, stiffness (Sec.~5.5, 6.3, \texttt{OI-02}) & Compliant (\abbr{TBD}) \\ \hline
+\texttt{SSEG-REQ-IF-003} & Target Plume Radiometric Interface (\texttt{IF-EXT-03}) & Co-registered \abbr{SWIR}/\abbr{MWIR} optics, two-colour discrimination, $15^\circ$/$3^\circ$ baffles (Sec.~5.4, 5.5) & Compliant \\ \hline
+\texttt{SSEG-REQ-IF-004} & Space Traffic Management \& Regulatory (\texttt{IF-EXT-04}) & \abbr{CDM} ingestion for \abbr{CAM}, \abbr{ITU} \abbr{RF} compliance, laser interlocks, \abbr{EOL} disposal (Sec.~4.3, 5.5, 7.2) & Compliant \\ \hline
+\texttt{SSEG-REQ-VER-001} & Multi-Scenario Constellation \& Radiometric Simulation & \texttt{GMAT} coverage/stereo models \& radiometric \abbr{SNR}/latency models in Eng.\ DB (Sec.~8 Table~17) & Compliant \\ \hline
+\texttt{SSEG-REQ-VER-002} & Hardware-in-the-Loop Testing of Sensing/LOS/OISL & \abbr{EM} flat-sat \& optical bench \abbr{HIL} campaign per \textbf{AD-03} (Sec.~7.1, 9 \texttt{OI-03}) & Compliant \\ \hline
+\texttt{SSEG-REQ-VER-003} & Environmental Qualification \& Batch Acceptance & \abbr{QM}/\abbr{PFM} qualification + $8\times 9$ \texttt{SATL} \& 6 \texttt{SATG} \abbr{FM} acceptance flow (Sec.~7.1 Table~16) & Compliant \\ \hline
+\texttt{SSEG-REQ-VER-004} & End-to-End Operational Validation & \abbr{LEOP}/Commissioning in-orbit checkout \& end-to-end validation prior to handover (Sec.~3.1, 4.1) & Compliant \\ \hline
+\texttt{SSEG-REQ-VER-005} & Post-Event Archive Analysis \& Algorithm Calibration & Provenance-tagged event logs, non-volatile buffering \& signed \abbr{OTA} updates (Sec.~4.3, 7.4) & Compliant \\ \hline
+\multicolumn{4}{|l|}{\cellcolor{TableRowLightBlue}\textbf{Total: 39 / 39 Requirements Compliant --- Zero Technical Deviations}} \\ \hline
+\end{longtable}}

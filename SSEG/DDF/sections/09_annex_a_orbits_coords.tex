@@ -1,0 +1,80 @@
+% =============================================================================
+% ANNEX A: REFERENCE COORDINATE SYSTEMS AND MASTER ORBITAL SLOT BASELINE
+% =============================================================================
+\subsection{A.1 Reference Coordinate Systems}
+
+All Space Segment orbital simulations, attitude control laws, optical line-of-sight (\abbr{LOS}) vectors, and Space-to-Ground data exchanges adhere to the five right-handed orthogonal reference frames defined in Table~\ref{tab:coord_systems} (aligned with \textbf{RD-06} / \abbr{ECSS-E-ST-10-09C}).
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Reference Coordinate Systems}
+\label{tab:coord_systems}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.06}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.0cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Frame ID} & \thead{Origin} & \thead{Axes Definition} & \thead{Primary SSEG Application} \\ \hline
+    \textbf{\texttt{ECI (J2000)}} & Earth centre of mass & $+X$ toward Mean Vernal Equinox at J2000.0; $+Z$ along Earth mean rotational axis (North); $+Y = Z \times X$. & Inertial orbit propagation, star-tracker attitude, and stereoscopic \abbr{LOS} unit vectors. \\ \hline
+    \textbf{\texttt{ECEF (WGS84)}} & Earth centre of mass & Co-rotating with Earth: $+X$ through Greenwich meridian/equator intersection; $+Z$ Earth rotation axis; $+Y = Z \times X$. & Baltic surveillance footprints, launch-site coordinates, 3D trajectory \& \abbr{IIP} handover to Ground. \\ \hline
+    \textbf{\texttt{LVLH (Orbital)}} & Spacecraft centre of mass & $+Z$ nadir (toward Earth centre); $+Y$ opposite orbit normal ($-\mathbf{h}$); $+X = Y \times Z$ (along velocity for circular orbits). & Nominal 3-axis nadir bus attitude, intra-/cross-plane \abbr{OISL} terminal pointing geometry. \\ \hline
+    \textbf{\texttt{SBF (Body)}} & Spacecraft mechanical datum (launcher interface) & Fixed to primary bus structure aligned with nominal \abbr{LVLH} in steady state; mechanical mounting axes of subsystems \texttt{.01}--\texttt{.08}. & Mass/\abbr{CoG}/inertia budgets, dispenser mounting, thruster alignment, structural \abbr{FEM}. \\ \hline
+    \textbf{\texttt{PLF (Payload LOS)}} & Optical aperture / pupil datum & $+Z_{\text{LOS}}$ along telescope optical boresight; $X_{\text{LOS}}, Y_{\text{LOS}}$ aligned with \abbr{FPA} detector rows/columns. & Dual-band \abbr{SWIR}/\abbr{MWIR} pixel mapping, gimbal/\abbr{FSM} steering, boresight calibration. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{A.2 Master Constellation Slot Allocation}
+
+Detailed orbital elements defined in Table~6 are instantiated across 6 uniform equatorial \abbr{GEO} slots and 8 phased \abbr{LEO} Walker Delta \texttt{72/8/1} orbital planes (\texttt{FM-01}--\texttt{FM-72}). Exact reference anchor longitude and epoch remain \abbr{TBC} pending launch-window freeze.
+
+\begin{table}[htbp]
+\centering
+\caption{GEO Detection Layer --- \texttt{SATG} Equatorial Slot Baseline ($h = 35{,}786\text{ km}$, $i = 0^\circ \pm 0.05^\circ$)}
+\label{tab:geo_slots}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.06}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Slot / Unit} & \thead{Nominal Longitude (\abbr{TBC} anchor)} & \thead{Station-Keeping Box} & \thead{Primary Surveillance Sector} \\ \hline
+    \texttt{G1 / SATG-FM-01} & $20^\circ\text{E}$ & $\pm 0.05^\circ$ E--W / N--S & Central Europe, Baltic Sea, Eastern Europe, Mediterranean \\ \hline
+    \texttt{G2 / SATG-FM-02} & $80^\circ\text{E}$ & $\pm 0.05^\circ$ E--W / N--S & Central/Northern Eurasia, Eastern Baltic threat corridors \\ \hline
+    \texttt{G3 / SATG-FM-03} & $140^\circ\text{E}$ & $\pm 0.05^\circ$ E--W / N--S & East Asia \& Western Pacific extra-regional corridors \\ \hline
+    \texttt{G4 / SATG-FM-04} & $160^\circ\text{W}$ & $\pm 0.05^\circ$ E--W / N--S & Central Pacific \& cross-polar relay coverage \\ \hline
+    \texttt{G5 / SATG-FM-05} & $100^\circ\text{W}$ & $\pm 0.05^\circ$ E--W / N--S & Americas \& North Atlantic corridors \\ \hline
+    \texttt{G6 / SATG-FM-06} & $40^\circ\text{W}$ & $\pm 0.05^\circ$ E--W / N--S & Atlantic, Western Europe \& Baltic dual-node overlap \\ \hline
+\end{tabularx}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{LEO Tracking Layer --- \texttt{SATL} Walker Delta \texttt{72/8/1} Plane Allocation ($h = 1{,}000\text{ km}$, $i = 80^\circ$)}
+\label{tab:leo_slots}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.06}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{1.9cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Plane} & \thead{Flight Models} & \thead{\abbr{RAAN} ($\Omega_p$)} & \thead{First-Slot Phase ($u_{p,1}$, $\Delta u_{\text{inter}}=22.5^\circ$)} & \thead{In-Plane Slots ($\Delta u = 40^\circ$)} \\ \hline
+    \texttt{P1} & \texttt{SATL-FM-01}--\texttt{09} & $0.0^\circ$ & $0.0^\circ$ & $u_{1,s} = (s-1)\cdot 40^\circ$ ($s=1\dots 9$) \\ \hline
+    \texttt{P2} & \texttt{SATL-FM-10}--\texttt{18} & $45.0^\circ$ & $22.5^\circ$ & $u_{2,s} = (22.5^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P3} & \texttt{SATL-FM-19}--\texttt{27} & $90.0^\circ$ & $45.0^\circ$ & $u_{3,s} = (45.0^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P4} & \texttt{SATL-FM-28}--\texttt{36} & $135.0^\circ$ & $67.5^\circ$ & $u_{4,s} = (67.5^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P5} & \texttt{SATL-FM-37}--\texttt{45} & $180.0^\circ$ & $90.0^\circ$ & $u_{5,s} = (90.0^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P6} & \texttt{SATL-FM-46}--\texttt{54} & $225.0^\circ$ & $112.5^\circ$ & $u_{6,s} = (112.5^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P7} & \texttt{SATL-FM-55}--\texttt{63} & $270.0^\circ$ & $135.0^\circ$ & $u_{7,s} = (135.0^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+    \texttt{P8} & \texttt{SATL-FM-64}--\texttt{72} & $315.0^\circ$ & $157.5^\circ$ & $u_{8,s} = (157.5^\circ + (s-1)\cdot 40^\circ) \bmod 360^\circ$ \\ \hline
+\end{tabularx}}
+\end{table}
