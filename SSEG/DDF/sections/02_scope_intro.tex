@@ -1,0 +1,74 @@
+% =============================================================================
+% SECTION: SCOPE & SECTION 1 INTRODUCTION (ECSS-E-ST-10C Annex G Clause <1>)
+% =============================================================================
+\section{Scope}
+
+This Design Definition File (\texttt{EWAS-HSB-SSEG-DDF-03}) establishes the Level-2 as-designed configuration baseline for Configuration Item \texttt{CI-03: Space Segment (SSEG, WBS 123456.03)} of the Early Warning Alarm System (\abbr{EWAS}). Prepared within the joint academic mission engineering framework of Hochschule Bremen (\abbr{HSB}) and Politechnika Gdańska (\abbr{PG}), this document defines the technical design solution that satisfies the 39 normative Level-2 requirements across the nine categories \texttt{SSEG-REQ-FUN} (6), \texttt{SSEG-REQ-MIS} (5), \texttt{SSEG-REQ-PERF} (4), \texttt{SSEG-REQ-ALLOC} (5), \texttt{SSEG-REQ-ISL} (4), \texttt{SSEG-REQ-ENV} (3), \texttt{SSEG-REQ-OPS} (3), \texttt{SSEG-REQ-IF} (4), and \texttt{SSEG-REQ-VER} (5) specified in the Space Segment Technical Requirements Specification (\textbf{AD-01}, \texttt{EWAS-HSB-SSEG-TRS-03} Issue~1.5).
+
+The technical scope of \texttt{EWAS-HSB-SSEG-DDF-03} spans four Level-2 architectural boundaries:
+\begin{enumerate}[leftmargin=1.8em, itemsep=0.2em, topsep=0.2em]
+    \item \textbf{Hybrid Constellation Architecture}: The two-tier orbital topology comprising 6 Geostationary Detection Satellites (\abbr{SATG}, \texttt{WBS 123456.03.02}) at $35{,}786\text{ km}$ equatorial ($60^\circ$ spacing) and 72 Low Earth Orbit Tracking Satellites (\abbr{SATL}, \texttt{WBS 123456.03.01}) at $1{,}000\text{ km}$ circular altitude in an 8-plane Walker Delta $72/8/1$ constellation ($i = 80^\circ$ nominal within $78^\circ\text{--}82^\circ$, $\Delta u_{\text{inter}} = 22.5^\circ$), guaranteeing 5--7 satellites simultaneously visible over the Baltic Sea, stereoscopic convergence angle $\beta \in [30^\circ, 120^\circ]$, station-keeping boxes, and end-of-life disposal orbits.
+    \item \textbf{Functional Architecture and $\le 60\text{ s}$ Warning Chain}: The space-borne functional architecture implementing the Space Segment portions of the deterministic 4-step end-to-end warning chain (\texttt{R-011}), covering the five nominal operational modes (\texttt{N1}--\texttt{N5}), autonomous \abbr{FDIR}/Safe Mode management, and active \abbr{EOL} disposal.
+    \item \textbf{Physical Product/Specification Trees, Flight Subsystems (\texttt{.01}--\texttt{.08}), and Interfaces}: The decomposition of \texttt{CI-03} into \abbr{SATL} (\texttt{WBS 123456.03.01}) and \abbr{SATG} (\texttt{WBS 123456.03.02}), the subsystem design baseline across the eight \abbr{WBS} flight-system categories (\texttt{.01} \abbr{TCS}, \texttt{.02} \abbr{ADCS}, \texttt{.03} \abbr{EPS}, \texttt{.04} \abbr{PLD}, \texttt{.05} \abbr{PROP}, \texttt{.06} Avionics [\texttt{.06.01} \abbr{OBDH}/\abbr{C\&DH}, \texttt{.06.02} Comms \& Mandatory \abbr{OISL}, \texttt{.06.03} \abbr{FSW}], \texttt{.07} \abbr{CONF}, and \texttt{.08} \abbr{STR/MEC}), internal Space-to-Space interfaces, and external interfaces (\texttt{IF-EXT-01} to \texttt{IF-EXT-04}), including the Ground Segment (\texttt{WBS 123456.02}).
+    \item \textbf{Level-2 Technical Budgets and Lifecycle Design Constraints}: The consolidated mass, power, $\Delta v$/propellant, link, pointing/\abbr{LOS}, data, and radiation/thermal budgets with Phase~A/B design margins, together with parts/materials procurement (\emph{Careful COTS} vs.\ full space-grade), production, operation, transportation/storage, and maintainability constraints.
+\end{enumerate}
+
+\textbf{Document Hierarchy and Separation of Concerns:} Within the \abbr{EWAS} \abbr{ECSS}-E-ST-10C engineering documentation tree, strict separation of concerns applies:
+\begin{itemize}[leftmargin=1.5em, itemsep=0.15em, topsep=0.15em]
+    \item \textbf{What \abbr{SSEG} Shall Achieve (\textbf{AD-01}, \texttt{EWAS-HSB-SSEG-TRS-03})}: Specifies the black-box functional, performance, interface, and constraint requirements allocated to \texttt{CI-03}.
+    \item \textbf{How \abbr{SSEG} Is Designed (This Document, \texttt{EWAS-HSB-SSEG-DDF-03})}: Defines the Level-2 physical, functional, and orbital architecture, subsystem allocations, technical budgets, and compliance traceability.
+    \item \textbf{Why the Design Is Selected and Proven (\textbf{RD-01}, \texttt{EWAS-HSB-SSEG-DDJF-03})}: Contains the trade-off studies, analytical derivations (radiometric SNR, Walker sizing, radiation shielding, link closure, latency sub-allocations), and verification justification.
+    \item \textbf{Unit-Level Spacecraft Specification and Design (\textbf{RD-02}--\textbf{RD-05})}: Subordinate Level-3 \abbr{TRS} and \abbr{DDF} documents for \abbr{SATL} (\texttt{WBS 123456.03.01}) and \abbr{SATG} (\texttt{WBS 123456.03.02}) govern equipment-level schematics, pinouts, mechanical drawings, and flight software unit specifications.
+\end{itemize}
+
+\newpage
+
+\section{Introduction}
+
+\subsection{1.1 Purpose, Programme Context, and Design Maturity}
+
+The Early Warning Alarm System (\abbr{EWAS}) is a space-based civil-protection infrastructure engineered to provide continuous, high-confidence early warning of ballistic missile launches threatening European civilian populations, with primary geographic emphasis on the Baltic Sea basin and extra-regional threat corridors (\textbf{AD-02}, \texttt{R-006}, \texttt{R-049}). In strict compliance with system directives \texttt{R-001} and \texttt{R-002}, \abbr{EWAS} serves an exclusively non-offensive civil-defence mission: its space and ground assets are architected solely to detect boost-phase exhaust plumes, track ascending trajectories stereoscopically in three dimensions, estimate Instantaneous Impact Points (\abbr{IIP}), and disseminate validated civil-protection alerts within an end-to-end mission latency of $\le 60\text{ s}$ (\texttt{R-011}). Within this end-to-end 4-step warning chain, the Space Segment executes its space-borne detection, cued tracking, and relay steps within the segment latency sub-allocation analytically justified in \textbf{RD-01} (\texttt{EWAS-HSB-SSEG-DDJF-03}).
+
+In accordance with \texttt{R-048}, \abbr{EWAS} is strictly a two-segment system comprising the \textbf{Ground Segment} (\texttt{WBS 123456.02}) and the \textbf{Space Segment} (\texttt{CI-03}, \texttt{WBS 123456.03}), with national civil-protection authorities acting as external warning recipients. Launch service providers are managed strictly as an external interface (\texttt{IF-EXT-02}). Because no single orbital regime can simultaneously deliver continuous wide-area surveillance and high-precision stereoscopic 3D trajectory estimation, \texttt{CI-03} implements a cooperative hybrid constellation (\texttt{R-005}):
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em, topsep=0.15em]
+    \item \textbf{High-Tier GEO Detection Layer (\abbr{SATG}, \texttt{WBS 123456.03.02})}: 6 geostationary satellites at $35{,}786\text{ km}$ equatorial ($60^\circ$ longitudinal spacing) providing continuous dual-band \abbr{SWIR}/\abbr{MWIR} staring surveillance ($P_d > 95\%$, \texttt{R-010}, \texttt{SSEG-REQ-PERF-001}) and transmitting an immediate GEO Event Report upon boost-phase plume detection (\texttt{R-042}).
+    \item \textbf{Low-Tier LEO Tracking Layer (\abbr{SATL}, \texttt{WBS 123456.03.01})}: 72 satellites at $1{,}000\text{ km}$ circular altitude arranged in an 8-plane Walker Delta $72/8/1$ constellation (9 satellites per plane, $i = 80^\circ$ nominal within $78^\circ\text{--}82^\circ$, $\Delta u_{\text{inter}} = 22.5^\circ$), guaranteeing simultaneous dual-satellite stereoscopic viewing (5--7 nodes visible over the Baltic Sea, convergence angle $\beta \in [30^\circ, 120^\circ]$, \texttt{SSEG-REQ-MIS-004}) with independent payload optical \abbr{LOS} steering ($< 5\text{ s}$ lock-on, $< 2\text{ arcsec/s}$ stability, \texttt{R-024}, \texttt{SSEG-REQ-ALLOC-002}).
+    \item \textbf{Mandatory OISL Optical Mesh and All-Weather RF Links}: Mandatory $1{,}550\text{ nm}$ laser \abbr{OISL} terminals ($\ge 500\text{ Mbps}$, $\ge 6{,}500\text{ km}$ \abbr{LEO}--\abbr{LEO} mesh; $\ge 1.5\text{--}2.0\text{ Gbps}$, $34{,}800\text{--}45{,}000\text{ km}$ \abbr{GEO}--\abbr{LEO} relay trunks, \texttt{SSEG-REQ-ISL-001}) complemented by redundant all-weather S/X/Ka-band \abbr{RF} Space-to-Ground links (\texttt{IF-EXT-01}, \texttt{SSEG-REQ-ISL-002}) to the Ground Station Network (\texttt{WBS 123456.02.05}).
+\end{itemize}
+
+\textbf{Design Maturity:} This document reflects the \textbf{Phase~A/B Preliminary Design Baseline} established to support the joint \abbr{HSB}/\abbr{PG} System Requirements Review (\abbr{SRR}) and Preliminary Design Review (\abbr{PDR}) milestone progression. All subsystem sizing, orbital configurations, and technical budgets incorporate explicit Phase~A/B maturity margins in accordance with \abbr{ECSS}-E-ST-10C and \textbf{AD-03} (\texttt{EWAS-HSB-VP-01}).
+
+\subsection{1.2 Document Structure and ECSS-E-ST-10C Annex G Mapping}
+
+To maintain full compatibility with the mandated \abbr{HSB}/\abbr{PG} document template while satisfying the content clauses of \textbf{RD-06} (\abbr{ECSS}-E-ST-10C Annex~G, \emph{Design Definition File DRD}), the body of this \abbr{DDF} is structured into nine numbered sub-clauses under \emph{Main Content}, complemented by two normative annexes. Table~\ref{tab:ecss_annex_g_mapping} defines the clause-by-clause mapping between \abbr{ECSS}-E-ST-10C Annex~G and \texttt{EWAS-HSB-SSEG-DDF-03}.
+
+\begin{table}[htbp]
+\centering
+\caption{Mapping of \abbr{ECSS}-E-ST-10C Annex~G DRD Clauses to \texttt{EWAS-HSB-SSEG-DDF-03} Sections}
+\label{tab:ecss_annex_g_mapping}
+\vspace{0.3em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ECSS Clause} & \thead{HSB/PG DDF Section} & \thead{Technical Content Summary} \\ \hline
+    Annex~G \textless1\textgreater & Scope \& Section~1: Introduction & \texttt{CI-03} architectural boundaries, document split (\abbr{TRS}/\abbr{DDF}/\abbr{DDJF}), two-segment civil-protection mission context, and \abbr{ECSS} DRD mapping. \\ \hline
+    Annex~G \textless2\textgreater & References (AD, RD, Terms \& Abbreviations) & Normative Applicable Documents (\textbf{AD-01}--\textbf{AD-04}), Reference Documents (\textbf{RD-01}--\textbf{RD-06}), project-specific definitions, and abbreviations glossary. \\ \hline
+    Annex~G \textless3\textgreater & Section~3: Summary of Project \& Technical Requirements & Synthesis of the 39 \textbf{AD-01} requirements across all 9 categories (\texttt{FUN}, \texttt{MIS}, \texttt{PERF}, \texttt{ALLOC}, \texttt{ISL}, \texttt{ENV}, \texttt{OPS}, \texttt{IF}, \texttt{VER}) and primary design drivers. \\ \hline
+    Annex~G \textless4\textgreater & Section~4: Functional Description & 4.1 Functional Architecture, 4.2 Function Tree, and 4.3 Functional Chains covering the 4-step $\le 60\text{ s}$ warning chain, nominal modes \texttt{N1}--\texttt{N5}, autonomous \abbr{FDIR}, and \abbr{EOL} disposal. \\ \hline
+    Annex~G \textless5.1\textgreater--\textless5.3\textgreater & Section~5.1--5.3: Physical Architecture, Product \& Specification Trees & Hybrid 6 \abbr{SATG} + 72 \abbr{SATL} Walker Delta $72/8/1$ topology, \abbr{WBS}/Product Tree (\texttt{123456.03}), and Level-2/3 Specification Tree. \\ \hline
+    Annex~G \textless5.4\textgreater & Section~5.4: Description of Physical Architecture Elements & Flight subsystem baselines (\texttt{.01} \abbr{TCS} through \texttt{.08} \abbr{STR/MEC}) for \abbr{SATL} (\texttt{WBS 123456.03.01}) and \abbr{SATG} (\texttt{WBS 123456.03.02}). \\ \hline
+    Annex~G \textless5.5\textgreater & Section~5.5: Description of Interfaces & External interfaces (\texttt{IF-EXT-01}--\texttt{IF-EXT-04}, including Ground Segment \texttt{WBS 123456.02} and launch provider interface) and internal Space-to-Space \abbr{OISL}/onboard interfaces. \\ \hline
+    Annex~G \textless6\textgreater & Section~6: System Technical Budgets, Margins \& Deviations & Consolidated mass, power, $\Delta v$, link, pointing/\abbr{LOS}, data, and radiation/thermal budgets with Phase~A/B margins and tracked deviations. \\ \hline
+    Annex~G \textless7\textgreater & Section~7: System Design Constraints & 7.1 Production (\emph{Careful COTS} vs.\ space-grade), 7.2 Operation, 7.3 Transportation \& Storage, and 7.4 Maintainability constraints. \\ \hline
+    Annex~G \textless8\textgreater--\textless9\textgreater & Section~8 \& Section~9: Engineering Database \& Conclusion & \abbr{GMAT}/CAD/radiometric simulation database baseline, open Phase~B items (\abbr{TBD}/\abbr{TBC}), and readiness for Level-3 spacecraft design. \\ \hline
+    Annex~G \textless2\textgreater b & Annex~A: Orbital Baseline \& Reference Coordinate Systems & Master orbital parameters for 6 \abbr{SATG} and 72 \abbr{SATL} Walker Delta $72/8/1$ and reference coordinate frames (\abbr{ECI} J2000, \abbr{ECEF}, \abbr{LVLH}, Body, Payload \abbr{LOS}). \\ \hline
+    Traceability & Annex~B: Design-to-TRS Requirements Compliance Matrix & Complete 39-requirement traceability matrix mapping all requirements of \textbf{AD-01} (\texttt{EWAS-HSB-SSEG-TRS-03}) to \abbr{DDF} design clauses and verification methods. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\newpage

@@ -9,10 +9,13 @@
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
+\usepackage{longtable}
 \usepackage{array}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 
 % =============================================================================
@@ -20,12 +23,12 @@
 % (Values entered here will automatically populate Page 1 and all page headers)
 % =============================================================================
 \newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
-\newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
+\newcommand{\ProjectName}{EWAS}                     % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Space Segment - Design Definition File}  % <-- Put document title here
-\newcommand{\DocNumber}{EWAS-HSB-SSEG-DDF-03 0.1}         % <-- Put document number here (DOC-NO)
-\newcommand{\DocIssue}{0.1}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{04.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
-\newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
+\newcommand{\DocNumber}{EWAS-HSB-SSEG-DDF-03}       % <-- Put document number here (DOC-NO)
+\newcommand{\DocIssue}{0.8}                         % <-- Put issue/version number here (e.g., 1.0)
+\newcommand{\DocDate}{20.11.2026}                   % <-- Put issue date here (e.g., 2026-11-04)
+\newcommand{\CINumber}{03}                          % <-- Put Configuration Item (CI) number here
 
 % =============================================================================
 % 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
@@ -105,7 +108,8 @@
     \raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}
 }
 \fancyhead[C]{
-    {\small\textbf{Early Warning Alarm System (\abbr{EWAS})}}
+    {\small\textbf{Early Warning Alarm System (\abbr{EWAS})}}\\
+    {\scriptsize\textsf{\DocNumber\ --- Issue \DocIssue}}
 }
 \fancyhead[R]{
     \raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}
@@ -129,7 +133,7 @@
 % -----------------------------------------------------------------------------
 % PAGE 1: TITLE PAGE & DOCUMENT INFORMATION
 % -----------------------------------------------------------------------------
-\thispagestyle{firstpage} % Use \thispagestyle{empty} if you do not want logos on Page 1
+\thispagestyle{firstpage}
 \phantomsection
 \addcontentsline{toc}{section}{Document Information}
 
@@ -147,10 +151,6 @@
 
 \vfill
 
-% --- HOW TO EDIT THE PAGE 1 TABLE ---
-% Part 1 (first 4 rows): automatically populated from Section 2 at the top of the file.
-% Part 2 (signatures & roles): enter data between the & symbols in the format:
-%     {Full Name} & {Role Name} & {Signature/Date (or leave blank)} \\[1.2em] \hline
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{black}%
 \noindent
@@ -167,12 +167,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Jan Krajewski}              & {Author}     & {} \\[1.2em] \hline
+    {Jan Krajewski}              & {Author}                 & {}                               \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {}              & {Reviewer}     & {} \\[1.2em] \hline
+    {Krzysztof Pankiewicz}       & {Reviewer}               & {}                               \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {}              & {Approver}     & {} \\[1.2em] \hline
-    {Put Name here}              & {Put Role Name here}     & {Put Date/Signature or leave empty} \\[1.2em] \hline
+    {}                           & {Approver}               & {}                               \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -182,22 +181,24 @@
 % -----------------------------------------------------------------------------
 \section{Document Change Record}
 
-% --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
-% Each row has 4 columns separated by &:
-% \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
-% To add a new row, copy the last line before \end{tabularx}.
-{\renewcommand{\arraystretch}{1.25}%
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
-\begin{tabularx}{\textwidth}{|p{2.0cm}|p{2.5cm}|X|p{4.5cm}|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.8cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
-    \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1}      & {Put Date here} & Initial Issue              & Initial Draft                 \\ \hline
-    \textbf{1.0}      & {Put Date here} & First Release              & All                           \\ \hline
-    % \textbf{1.1}    & {Put Date here} & {Put change description}   & {Put affected sections}       \\ \hline
+    \thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections Affected} \\ \hline
+    \textbf{0.1}  & 04.11.2026   & Initial document template setup and CI-03 configuration baseline identification. & Document Info \\ \hline
+    \textbf{0.2}  & 20.11.2026   & Modularized LaTeX source into \texttt{sections/} subfiles; added Applicable/Reference Documents, Abbreviations, Scope, and Section 1 Introduction aligned with ECSS-E-ST-10C Annex G. & References, Scope, Sec. 1 \\ \hline
+    \textbf{0.3}  & 20.11.2026   & Added Section 3 (Summary of Project and Technical Requirements) and Section 4 (Functional Description, Annex H Function Tree, operational modes, and functional chains FC-1 to FC-4). & Sec. 3, Sec. 4 \\ \hline
+    \textbf{0.4}  & 20.11.2026   & Added Sections 5.1--5.3 (Physical Architecture, Product Tree, and Specification Tree); cleaned up Section 4.2 heading and Table~4 header formatting. & Sec. 4.2, Sec. 5.1--5.3 \\ \hline
+    \textbf{0.5}  & 20.11.2026   & Added Section~5.4 (Description of Physical Architecture Elements across \texttt{SATL}, \texttt{SATG}, and subsystems \texttt{.01}--\texttt{.08}); refined Sections~5.1--5.2, Table~4, Table~7, and \textbf{RD-06} alignment. & References, Sec.~4.2, Sec.~5.1--5.4 \\ \hline
+    \textbf{0.6}  & 20.11.2026   & Condensed Section~5.4 to strict Level-2 scope (delegating unit details to Level-3 DDFs \textbf{RD-04}/\textbf{RD-05}) and added Section~5.5 (External and Internal Interfaces, Tables~10--11). & Sec.~5.4, Sec.~5.5 \\ \hline
+    \textbf{0.7}  & 20.11.2026   & Added Section~6 (System Technical Budgets, Margins and Deviations, Tables~12--15) aligned with \textbf{RD-01}; fixed minor formatting in Tables~4 and~10. & Sec.~4.2, Sec.~5.5, Sec.~6 \\ \hline
+    \textbf{0.8}  & 20.11.2026   & Added Section~7 (System Design Constraints, Table~16), Section~8 (Engineering Database, Table~17), and Section~9 (Conclusion \& Open Items, Table~18); fixed minor typos in Tables~10 and~15. & Sec.~5.5, Sec.~6, Sec.~7--9 \\ \hline
 \end{tabularx}}
 
 \newpage
@@ -216,125 +217,45 @@
 \newpage
 
 % -----------------------------------------------------------------------------
-% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
+% REFERENCES, ABBREVIATIONS, SCOPE & SECTION 1 INTRODUCTION
 % -----------------------------------------------------------------------------
-\section{References}
-
-\subsection{Applicable Documents (AD)}
-
-% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
-% Columns are separated by &:
-% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Reference Documents (RD)}
-
-% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
-% Columns are separated by &:
-% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Terms, Definitions and Abbreviations}
-
-% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
-% Columns are separated by &:
-% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|X|X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
-    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
-    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
-\end{tabularx}}
-
-\newpage
+\input{sections/01_references_abbr}
+\input{sections/02_scope_intro}
 
 % -----------------------------------------------------------------------------
-% PAGE 5: SCOPE
-% -----------------------------------------------------------------------------
-\section{Scope}
-
-% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
-{Put Scope content here.}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 6: INTRODUCTION
-% -----------------------------------------------------------------------------
-\section{Introduction}
-
-% ---> PUT DATA HERE (INTRODUCTION SECTION CONTENT) <---
-{Put Introduction content here.}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 7: MAIN CONTENT
+% MAIN CONTENT (SECTIONS 3–9)
 % -----------------------------------------------------------------------------
 \section{Main Content}
 
-% ---> PUT DATA HERE (MAIN CONTENT OF THE DOCUMENT) <---
-{Put Main Content here.}
-
-% EXAMPLE OF ADDING A SUBSECTION (uncomment if needed):
-% \subsection{Put Subsection Title here}
-% {Put subsection content here.}
+\input{sections/03_req_summary}
+\input{sections/04_functional_desc}
+\input{sections/05a_phys_arch_trees}
+\input{sections/05b_phys_elements}
+\input{sections/05c_interfaces}
+\input{sections/06_tech_budgets}
+\input{sections/07_design_constraints}
+\input{sections/08_eng_db_conclusion}
 
 \newpage
 
 % -----------------------------------------------------------------------------
-% PAGE 8: ANNEX A
+% ANNEX A
 % -----------------------------------------------------------------------------
 \section{Annex A}
 
-% ---> PUT DATA HERE (ANNEX A CONTENT) <---
-{Put Annex A content here.}
+\textit{Annex A (Reference Coordinate Systems and Orbital Parameters) will be populated in a subsequent issue.}
+
+% \input{sections/09_annex_a_orbits_coords}
 
 \newpage
 
 % -----------------------------------------------------------------------------
-% PAGE 9: ANNEX B
+% ANNEX B
 % -----------------------------------------------------------------------------
 \section{Annex B}
 
-% ---> PUT DATA HERE (ANNEX B CONTENT) <---
-{Put Annex B content here.}
+\textit{Annex B (Requirements-to-Design Traceability and Compliance Matrix) will be populated in a subsequent issue.}
+
+% \input{sections/10_annex_b_compliance_matrix}
 
 \end{document}

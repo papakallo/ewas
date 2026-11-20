@@ -1,0 +1,133 @@
+% =============================================================================
+% SECTION 4: FUNCTIONAL DESCRIPTION (ECSS-E-ST-10C Annex G <4> & Annex H)
+% =============================================================================
+\subsection{4. Functional Description}
+
+\subsubsection{4.1 Functional Architecture and Operational Modes}
+
+The Space Segment executes boost-phase early warning through a tightly coordinated two-tier sequence. The 6 geostationary satellites stare continuously across the Baltic Sea and extra-regional threat corridors in two infrared bands, filtering out radiation-induced proton spikes and solar or cloud clutter onboard. Upon detecting a confirmed missile exhaust plume, the observing geostationary satellite transmits a compact, encrypted \emph{GEO Event Report} to the Ground Segment via all-weather radio-frequency links. The Ground Segment immediately selects the two best-positioned low-orbit satellites and dispatches a \emph{LEO Tracking Request} through the laser inter-satellite network. Both cued satellites independently aim their narrow-field optical payloads using gimbal and fast-steering-mirror assemblies---avoiding slow whole-spacecraft slews---and exchange \emph{Timestamped LOS Vectors} directly over the laser link to compute an \emph{Onboard Preliminary Trajectory}. Both that preliminary trajectory and the full \emph{LEO Observation Package} are then downlinked to the Ground Segment for authoritative 3D impact-area estimation and civil-protection alert dissemination.
+
+All external interactions cross four controlled boundaries: all-weather radio-frequency links to the Ground Segment, mechanical and electrical launch-dispenser interfaces, the external target infrared plume scene, and space-traffic or regulatory interfaces (conjunction messages, frequency coordination, laser safety, and debris rules). Spacecraft behaviour across the mission is governed by the eight operational modes listed in Table~\ref{tab:op_modes}. Priority arbitration guarantees that active missile tracking (\texttt{N2}) immediately preempts routine calibration (\texttt{N5}) and bulk telemetry, while the laser relay mesh (\texttt{N3}) runs continuously in the background across all nominal modes.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Operational Modes and Priorities}
+\label{tab:op_modes}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Mode} & \thead{Active Elements} & \thead{Purpose, Trigger \& Priority} \\ \hline
+    \texttt{LEOP / Comm.} & \abbr{SATG}, \abbr{SATL} & Entered at launcher separation for detumbling, deployment, orbit phasing, and checkout; exits to \texttt{N1}/\texttt{N3} upon Ground commissioning sign-off. \\ \hline
+    \texttt{N1} Boost Surveillance & \abbr{SATG} (primary), \abbr{SATL} (standby) & Default 24/7 staring mode; generates \emph{GEO Event Reports} upon plume detection without interrupting wide-area surveillance. \\ \hline
+    \texttt{N2} Agile Stereo Tracking & Cued \abbr{SATL} pair + \abbr{OISL} & Triggered by Ground \emph{LEO Tracking Request}; \textbf{highest nominal priority}---preempts \texttt{N5}, bulk telemetry, and routine \texttt{N4} scheduling. \\ \hline
+    \texttt{N3} OISL Mesh Relay & All \abbr{SATL}, \abbr{SATG} \abbr{OISL} & \textbf{Always-on background service} running alongside all nominal modes; warning packets strictly preempt routine traffic with automatic rerouting. \\ \hline
+    \texttt{N4} Staggered SK \& CAM & Individual \abbr{SATL} / \abbr{SATG} & Scheduled station-keeping (staggered to $\le 1$ satellite offline per region) or conjunction-triggered collision avoidance (urgent \abbr{CAM} overrides \texttt{N2}). \\ \hline
+    \texttt{N5} Calibration \& OTA & Individual \abbr{SATL} / \abbr{SATG} & Scheduled radiometric/boresight calibration and authenticated software updates; lowest nominal priority, immediately preempted by \texttt{N2}. \\ \hline
+    \texttt{Safe Mode} & Faulted \abbr{SATL} / \abbr{SATG} & Automatic Level-3 fault entry ($\le 60\text{ s}$) or Ground emergency command; \textbf{overrides all nominal modes}, closes optical shutter, points to Sun, and activates S-band beacon. \\ \hline
+    \texttt{EOL Disposal} & Retiring \abbr{SATL} / \abbr{SATG} & Irreversible end-of-life command executing \abbr{LEO} deorbit ($<5\text{ yr}$ demise) or \abbr{GEO} graveyard boost ($+300\text{ km}$), followed by full passivation. \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{4.2 Function Tree}
+
+The top-level Space Segment function \texttt{F-SSEG-0} (\emph{Execute Space-Borne Civil-Protection Early Warning}) decomposes into six functional branches (\texttt{F-SSEG-1} to \texttt{F-SSEG-6}) and 17 sub-functions. Table~\ref{tab:function_tree} maps each sub-function to its implementing element and satisfied \textbf{AD-01} requirements (omitting the \texttt{SSEG-REQ-} prefix for brevity).
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Function Tree (\textbf{AD-01} codes omit the \texttt{SSEG-REQ-} prefix)}
+\label{tab:function_tree}
+\vspace{0.25em}
+{\scriptsize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.05}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.4cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ID} & \thead{Function} & \thead{Element} & \thead{AD-01 Ref.} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-1} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Detect Boost-Phase Launches \& Report Events}} \\ \hline
+    \texttt{F-SSEG-1.1} & Perform continuous dual-band \abbr{SWIR}/\abbr{MWIR} Earth surveillance & \abbr{SATG} & \texttt{FUN-003, 004, MIS-002, 003, PERF-001, ALLOC-001} \\ \hline
+    \texttt{F-SSEG-1.2} & Filter proton spikes and reject false-alarm clutter & \abbr{SATG} & \texttt{FUN-005, PERF-003, ALLOC-003, ENV-001} \\ \hline
+    \texttt{F-SSEG-1.3} & Generate and downlink encrypted \emph{GEO Event Reports} & \abbr{SATG} & \texttt{FUN-001--003, PERF-002, ISL-002, 003, IF-001} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-2} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Track Targets Stereoscopically \& Estimate 3D Trajectory}} \\ \hline
+    \texttt{F-SSEG-2.1} & Steer payload optical \abbr{LOS} independently ($<5\text{ s}$ lock, $<2\text{ arcsec/s}$) & \abbr{SATL} & \texttt{FUN-003, PERF-002, ALLOC-002, IF-003} \\ \hline
+    \texttt{F-SSEG-2.2} & Track target synchronously from two \abbr{LEO} nodes with \abbr{GNSS} timestamps & \abbr{SATL} & \texttt{MIS-003, 004, PERF-001, ALLOC-001, IF-003} \\ \hline
+    \texttt{F-SSEG-2.3} & Exchange \abbr{LOS} vectors over \abbr{OISL} and compute onboard 3D trajectory & \abbr{SATL}/\abbr{OISL} & \texttt{FUN-003, PERF-002, ALLOC-003, ISL-001} \\ \hline
+    \texttt{F-SSEG-2.4} & Format provenance metadata and downlink dual tracking products & \abbr{SATL} & \texttt{FUN-002, 006, PERF-002, ISL-002, OPS-003, IF-001, VER-005} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-3} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Relay Data Over OISL Mesh \& Space-to-Ground RF Links}} \\ \hline
+    \texttt{F-SSEG-3.1} & Route traffic across $1{,}550\text{ nm}$ \abbr{LEO} mesh and \abbr{GEO}--\abbr{LEO} optical trunks & All/\abbr{OISL} & \texttt{FUN-003, MIS-002, PERF-002, ISL-001, IF-004} \\ \hline
+    \texttt{F-SSEG-3.2} & Maintain redundant all-weather S/X/Ka \abbr{RF} links to Ground & All & \texttt{ISL-002, IF-001, IF-004} \\ \hline
+    \texttt{F-SSEG-3.3} & Enforce \abbr{COMSEC} encryption, anti-jamming, and priority QoS failover & All & \texttt{PERF-004, ISL-003, 004} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-4} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Control Constellation Orbits \& Execute EOL Disposal}} \\ \hline
+    \texttt{F-SSEG-4.1} & Perform orbit insertion, Walker Delta / \abbr{GEO} phasing, and staggered SK & All & \texttt{MIS-001, 002, 005, PERF-004, ALLOC-005, OPS-001, IF-002} \\ \hline
+    \texttt{F-SSEG-4.2} & Ingest conjunction messages and execute collision avoidance burns & All & \texttt{MIS-005, IF-004} \\ \hline
+    \texttt{F-SSEG-4.3} & Execute active \abbr{EOL} deorbit/graveyard burn and permanent passivation & All & \texttt{ENV-002, 003, IF-004} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-5} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Provide Platform Resources, Thermal Protection \& Calibration}} \\ \hline
+    \texttt{F-SSEG-5.1} & Maintain cryogenic \abbr{FPA} cooling, stray-light baffles, power, and rad protection & All & \texttt{ALLOC-004, 005, ENV-001, OPS-001} \\ \hline
+    \texttt{F-SSEG-5.2} & Execute in-orbit radiometric/boresight calibration and \abbr{OTA} updates & All & \texttt{OPS-003, VER-001--004} \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{F-SSEG-6} & \multicolumn{3}{>{\columncolor{TableRowLightBlue}\raggedright\arraybackslash}p{\dimexpr\textwidth-1.6cm-4\tabcolsep-3\arrayrulewidth\relax}|}{\textbf{Monitor Health \& Execute Autonomous FDIR}} \\ \hline
+    \texttt{F-SSEG-6.1} & Generate health telemetry and buffer event data for 5-yr archival & All & \texttt{FUN-006, OPS-003, VER-005} \\ \hline
+    \texttt{F-SSEG-6.2} & Execute 3-level \abbr{FDIR} recovery (L1 upsets, L2 unit failover, L3 Safe Mode) & All & \texttt{PERF-004, ALLOC-004, ENV-001, OPS-002} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{4.3 Description of Functional Chains}
+
+Four end-to-end functional chains connect the functions of Table~\ref{tab:function_tree} to their implementing flight and ground hardware.
+
+\paragraph{FC-1: End-to-End Civil-Protection Warning Chain ($\le 60\text{ s}$).}
+This primary mission chain delivers strictly non-offensive civil-protection warnings---excluding weapon cueing, warhead yield estimation, or battle damage assessment---within $60.0\text{ s}$ from launch detection. As broken down in Table~\ref{tab:fc1_latency}, the Space Segment completes Steps~1--3 within its $40.0\text{--}45.0\text{ s}$ allocation (justified in \textbf{RD-01}), preserving $10.0\text{--}15.0\text{ s}$ for Ground Segment fusion and automated alert dispatch prior to operator review.
+
+\begin{table}[htbp]
+\centering
+\caption{Functional Chain \texttt{FC-1} Execution Sequence, Hardware Allocation, and Latency Budget}
+\label{tab:fc1_latency}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.3cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Step} & \thead{Owner \& Physical Hardware} & \thead{Key Actions \& Data Products} & \thead{Latency} \\ \hline
+    Step~1 & \abbr{SATG} (\abbr{WFOV} \abbr{SWIR}/\abbr{MWIR} payload, \abbr{OBDH}, \abbr{RF} downlink) & Continuous staring ($\ge 10\text{ Hz}$), onboard proton despiking and clutter rejection, encrypted \emph{GEO Event Report} downlink. & $\le 10.0\text{ s}$ \\ \hline
+    Step~2 & Ground \abbr{C2} + \abbr{SSEG} $1{,}550\text{ nm}$ \abbr{OISL} mesh & Optimal stereo \abbr{SATL}-pair selection ($\le 2.0\text{ s}$) followed by mandatory laser-mesh cueing of \emph{LEO Tracking Request} ($\le 3.0\text{ s}$). & $\le 5.0\text{ s}$ \\ \hline
+    Step~3 & Cued \abbr{SATL} pair (gimbal+FSM \abbr{NFOV} payload, \abbr{GNSS}, \abbr{OISL}, \abbr{RF}) & Independent \abbr{LOS} lock-on ($<5.0\text{ s}$); $15\text{--}18\text{ s}$ synchronized stereo dwell ($\ge 30\text{ Hz}$) exchanging \emph{Timestamped LOS Vectors} ($10\text{--}20\text{ Hz}$, $<50~\mu\mathrm{s}$ sync) for \emph{Onboard Preliminary Trajectory}; encrypted dual-product downlink ($\le 5\text{--}7\text{ s}$). & $\le 25.0\text{--}30.0\text{ s}$ \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \multicolumn{3}{|r|}{\textbf{Space Segment (\texttt{CI-03}) Sub-Total (Steps 1--3)}} & $\le \mathbf{40.0\text{--}45.0\text{ s}}$ \\ \hline
+    Step~4 & Ground Data Processing \& Early Warning System & Authoritative multi-sensor fusion, refined 3D trajectory, impact-area ellipse, and automated preliminary civil-protection alert dispatch. & $\le 10.0\text{--}15.0\text{ s}$ \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \multicolumn{3}{|r|}{\textbf{End-to-End System Warning Chain Total}} & $\le \mathbf{60.0\text{ s}}$ \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{FC-2: Commanding, Priority OISL Routing \& OTA Updates.}
+Ground telecommands, cryptographic key rollovers, calibration tables, and signed over-the-air software patches enter the constellation over all-weather S/X/Ka-band ground stations and propagate across the 4-terminal \abbr{OISL} mesh to reach satellites outside direct ground-station view. Deterministic quality-of-service queues ensure that \texttt{FC-1} cueing and tracking packets always preempt routine housekeeping and software transfers, while autonomous rerouting bypasses jammed or degraded links. Encrypted non-volatile memory onboard each satellite buffers all observation frames and provenance metadata so temporary link outages never cause data loss for the 5-year Ground archive.
+
+\paragraph{FC-3: 3-Level Autonomous Fault Recovery (FDIR).}
+Redundant A/B avionics, communications, and attitude-control units enforce single-fault tolerance through three time-bounded autonomous recovery levels:
+\begin{itemize}[leftmargin=1.5em, itemsep=0.12em, topsep=0.12em]
+    \item \textbf{Level~1 ($< 100\text{ ms}$)}: Hardware error-correcting memory, triple-modular redundancy voting, focal-plane proton despiking, and latch-up current limiters clear transient radiation upsets without interrupting tracking.
+    \item \textbf{Level~2 ($\le 2.0\text{ s}$)}: Persistent unit faults trigger automatic switching to the redundant A/B unit and broadcast an updated health status over the laser mesh so Ground excludes any degraded node from pair selection.
+    \item \textbf{Level~3 ($\le 60.0\text{ s}$)}: Unrecoverable platform faults enter \texttt{Safe Mode}---closing the optical aperture shutter, slewing to Sun-pointing, inhibiting thrusters, and activating the S-band omnidirectional beacon---while the remaining 4--6 healthy low-orbit satellites visible over the Baltic preserve $>99.9\%$ availability.
+\end{itemize}
+
+\paragraph{FC-4: Staggered Orbit Control, Collision Avoidance \& EOL Disposal.}
+Onboard propulsion and attitude control execute routine station-keeping and momentum unloading on a staggered regional schedule so at most one satellite per coverage region is temporarily offline. High-risk Conjunction Data Messages trigger Ground-approved collision-avoidance burns that override routine scheduling while maintaining constellation phasing. At end of life ($\ge 7\text{ yr}$ in low orbit or $\ge 15\text{ yr}$ in geostationary orbit), reserved disposal propellant executes either a retrograde low-orbit perigee lowering ($\Delta v \ge 230\text{ m/s}$, guaranteeing atmospheric demise within 5 years) or a $+300\text{ km}$ geostationary graveyard boost, followed by irreversible propellant venting, battery disconnection, and transmitter shutdown.
+
+\newpage

@@ -1,0 +1,56 @@
+% =============================================================================
+% SECTION 5.5: DESCRIPTION OF INTERFACES
+% =============================================================================
+\subsubsection{5.5 Description of Interfaces}
+
+This subsection defines the Space Segment's external boundary expectations (\texttt{IF-EXT-01} to \texttt{IF-EXT-04}) and internal space-segment interfaces (\texttt{IF-INT-01} to \texttt{IF-INT-03}). Because cross-segment interfaces between the Space Segment (\texttt{123456.03}) and the Ground Segment (\texttt{123456.02}) are coordinated externally by System Interface Engineering (\abbr{WBS} \texttt{123456.05.02}), the external technical definitions below serve as the \textbf{Space Segment's baseline interface input}---structured as a modular baseline so specific link bands or protocol profiles can be updated cleanly once finalized across segments. Detailed spacecraft unit-level boundaries remain in the subordinate Level-3 files (\textbf{RD-04} and \textbf{RD-05}).
+
+\paragraph{External Interfaces (\texttt{IF-EXT-01} to \texttt{IF-EXT-04}).}
+To distinguish fixed mission drivers from adaptable implementation choices for System Interface Engineering (\texttt{123456.05.02}), external Space Segment definitions separate two aspects. \emph{Mission-driven Space Segment needs} require all-weather \abbr{RF} communication to Earth (avoiding weather-blocked optical downlinks), transport of core mission data products (telecommands, tracking cues, housekeeping, \emph{GEO Event Reports}, \emph{LEO Observation Packages}, and \emph{Onboard Preliminary Trajectories}), end-to-end encryption and authentication, and $< 50~\mu\mathrm{s}$ \abbr{UTC} timestamping. \emph{Modular baseline assumptions (\abbr{TBC})} cover specific Space-to-Ground \abbr{RF} band selections (proposed S/X/Ka-band) and packet/frame protocols (proposed \abbr{CCSDS}), which remain preliminary Space Segment inputs subject to bilateral alignment with the Ground Segment. Because \abbr{EWAS} comprises strictly the Ground and Space Segments, launch service providers and space-surveillance networks are managed exclusively as external interfaces rather than additional system segments. Table~\ref{tab:sseg_external_interfaces} summarizes these four external boundaries.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment External Interfaces --- \texttt{IF-EXT-01} to \texttt{IF-EXT-04}}
+\label{tab:sseg_external_interfaces}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.1cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ID \& Name} & \thead{External Counterpart} & \thead{Space Segment Needs \& Baseline Input} & \thead{Coordination \& Ref.} \\ \hline
+    \textbf{\texttt{IF-EXT-01}} \newline Space-to-Ground \abbr{RF} \abbr{TT\&C} \& Mission Data & Ground Station Network (\texttt{123456.02.05}) \& Ground C2 (\texttt{123456.02.02}) & \textbf{Needs:} All-weather bidirectional \abbr{RF} link, \abbr{COMSEC} encryption/authentication, anti-jamming, and transport of commands, tracking cues, housekeeping, \emph{GEO Event Reports}, \emph{LEO Observation Packages}, and \emph{Onboard Preliminary Trajectories}. \textbf{Proposed baseline (\abbr{TBC}):} S/X/Ka-band \abbr{RF} with \abbr{CCSDS} framing. & \texttt{123456.05.02} (\abbr{TBC}); \newline \texttt{IF-001}, \newline \texttt{ISL-002} \\ \hline
+    \textbf{\texttt{IF-EXT-02}} \newline Launch Vehicle \& Dispenser Interface & Launch Service Providers (\abbr{GEO} \& \abbr{LEO} plane-batch) & Standardized mechanical separation rings (\texttt{SATG} heavy-lift adapter; \texttt{SATL} 9-satellite cylindrical rideshare dispenser stack $\le 2{,}800\text{ kg}$), power/data/$\mathrm{GN_2}$ purge umbilicals, $\ge 3$ independent launch safety inhibits, and launch load/stiffness envelopes. & \textbf{RD-04/05}; \newline \texttt{IF-002}, \newline \texttt{ALLOC-005} \\ \hline
+    \textbf{\texttt{IF-EXT-03}} \newline Target Plume \& Background Optical Scene & Boost/Post-Boost Plumes \& Earth/Solar Background & Uncooperative optical entrance-aperture boundary in co-registered \abbr{SWIR} ($2.65\text{--}2.85~\mu\mathrm{m}$) and \abbr{MWIR} ($4.15\text{--}4.45~\mu\mathrm{m}$) bands; plume discrimination against sunlit clouds, Earth limb, and terrestrial fires; $15^\circ$ solar and $3^\circ$ limb exclusion angles. & \texttt{IF-003}, \newline \texttt{ALLOC-001}, \newline \texttt{ALLOC-004} \\ \hline
+    \textbf{\texttt{IF-EXT-04}} \newline Space Traffic Management \& Regulatory & Space Surveillance Networks (via Ground \abbr{MCC}) \& \abbr{ITU} & Ingestion of Conjunction Data Messages (\abbr{CDM}s) relayed via Ground \abbr{MCC} for collision-avoidance burns at 1,000~km \abbr{LEO} and 35,786~km \abbr{GEO}; \abbr{ITU} \abbr{RF} spectrum coordination, laser aviation/space safety interlocks, and active \abbr{EOL} debris disposal compliance. & \texttt{123456.05.02} (\abbr{CDM}); \newline \texttt{IF-004}, \newline \texttt{ENV-002} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Internal Space Segment Interfaces (\texttt{IF-INT-01} to \texttt{IF-INT-03}).}
+Unlike Earth-facing links, all space-to-space communications operate entirely above the atmosphere inside the Space Segment boundary, allowing high-capacity optical laser links without weather attenuation. Within each spacecraft, the mechanical, thermal, electrical, and data boundary between the bus platform and mission payload is standardized across both flight-system lines and controlled in detail at Level-3. Table~\ref{tab:sseg_internal_interfaces} summarizes the three internal interface classes.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Internal Interfaces --- \texttt{IF-INT-01} to \texttt{IF-INT-03}}
+\label{tab:sseg_internal_interfaces}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ID \& Name} & \thead{Connected Elements} & \thead{Physical \& Functional Characteristics} & \thead{Key Parameters} \\ \hline
+    \textbf{\texttt{IF-INT-01}} \newline Intra-Layer \abbr{LEO} Optical Mesh & \texttt{SATL} $\leftrightarrow$ \texttt{SATL} \newline (72 \abbr{LEO} nodes) & Four $1{,}550\text{ nm}$ laser terminals per satellite (2 fixed fore/aft links forming 8 orbital rings $+$ 2 agile cross-plane periscopes); routes tracking cues, $10\text{--}20\text{ Hz}$ \abbr{GNSS}-synced \abbr{LOS} vectors for 3D triangulation, and health telemetry. & $\ge 500\text{ Mbps}$ full-duplex; $\ge 6{,}500\text{ km}$ range; $> 245\text{ km}$ limb clearance; \abbr{COMSEC} \\ \hline
+    \textbf{\texttt{IF-INT-02}} \newline Cross-Layer \abbr{GEO}--\abbr{LEO} Optical Relay Trunk & \texttt{SATG} $\leftrightarrow$ \texttt{SATL} \newline (6 \abbr{GEO} to 72 \abbr{LEO}) & Long-range $1{,}550\text{ nm}$ agile laser trunks bridging the \abbr{LEO} mesh directly to \abbr{GEO} relay nodes to eliminate multi-hop latency across extra-regional launch corridors. & $\ge 1.5\text{--}2.0\text{ Gbps}$ aggregate; $34{,}800\text{--}45{,}000\text{ km}$ range; $< 1.5~\mu\mathrm{rad}$ pointing \\ \hline
+    \textbf{\texttt{IF-INT-03}} \newline Spacecraft Bus-to-Payload \& Avionics Boundary & Platform (\texttt{.01}--\texttt{.03}, \texttt{.05}--\texttt{.08}) $\leftrightarrow$ Payload (\texttt{.04}) & Mechanically isolated and thermally decoupled interface between warm bus ($263\text{--}323\text{ K}$) and cold optical bench ($180\text{--}210\text{ K}$), regulated \abbr{PCDU} power with latch-up limiters, and deterministic onboard data/timing bus (detailed in \textbf{RD-04}/\textbf{RD-05}). & $< 50~\mu\mathrm{s}$ \abbr{GNSS} \abbr{PPS} sync; \abbr{CCSDS} internal framing; micro-vibration isolated \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Interface Coordination and Modular Baseline Assumptions.}
+The Space Segment proposes \abbr{CCSDS} framing, S/X/Ka-band all-weather \abbr{RF} links, and hardware \abbr{COMSEC}/authentication across \texttt{IF-EXT-01} as a modular input (\abbr{TBC}) to System Interface Engineering (\abbr{WBS} \texttt{123456.05.02}), structured so that any bilateral change agreed with the Ground Segment requires updating only this interface block and the corresponding Level-3 transceiver parameters. Regardless of the finalized ground protocol, the Space Segment internally guarantees $< 50~\mu\mathrm{s}$ constellation-wide \abbr{UTC} synchronization via onboard \abbr{GNSS} and provenance-tagged data products to support stereoscopic 3D triangulation and the 5-year Ground archive.

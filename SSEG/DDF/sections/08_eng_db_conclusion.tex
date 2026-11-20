@@ -1,0 +1,56 @@
+% =============================================================================
+% SECTION 8: ENGINEERING DATABASE & SECTION 9: CONCLUSION
+% =============================================================================
+\subsection{8. Engineering Database}
+
+All Space Segment design baselines, orbital models, and technical budgets are maintained inside a version-controlled shared digital engineering repository across \abbr{HSB} and \abbr{PG}. This single-source structure guarantees configuration consistency between the Space Segment Technical Requirements Specification (\textbf{AD-01}), this Design Definition File, the Design Justification File (\textbf{RD-01}), and the subordinate Level-3 spacecraft documents (\textbf{RD-02}--\textbf{RD-05}). Table~\ref{tab:engineering_database} identifies the controlled data domains, artefacts, and responsible owners.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Engineering Database Repositories and Data Baselines}
+\label{tab:engineering_database}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.3cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Data Domain} & \thead{Stored Models \& Artefacts} & \thead{Tools / Format} & \thead{Owner / Control} \\ \hline
+    Astrodynamics \& Coverage & Walker Delta \texttt{72/8/1} and 6-\abbr{GEO} ephemeris scripts, Baltic visibility and stereo angle ($\beta$) coverage runs, and \abbr{EOL} deorbit profiles & \texttt{GMAT} scripts, \texttt{CSV} ephemerides & \abbr{SSEG} Team (\texttt{CONF .07}) \\ \hline
+    Mechanical \& Thermal Models & Level-2 spacecraft envelope layouts, 9-satellite dispenser stack geometry, structural \abbr{FEM} stiffness, and cryogenic thermal balance models & \texttt{CAD (STEP)}, \texttt{FEM}/Thermal & \abbr{SSEG} / Level-3 (\abbr{STR/MEC}, \abbr{TCS}) \\ \hline
+    Budgets \& Radiometry & Master mass, power, $\Delta v$, link, pointing, and radiation dose spreadsheets; \abbr{SWIR}/\abbr{MWIR} plume \abbr{SNR} and latency allocation models & Spreadsheets, Python, LaTeX & \abbr{SSEG} Team (\abbr{DDF} / \abbr{DDJF}) \\ \hline
+    Configuration \& Documentation & Modular LaTeX baselines (\abbr{TRS}, \abbr{DDF}, \abbr{DDJF}, Level-3 specs), Requirements Traceability Matrix, and Verification Control Document inputs & \texttt{Git} repository, \texttt{LaTeX / PDF} & \abbr{CI}-03 \abbr{CM} \& Programme \abbr{V\&V} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsection{9. Conclusion}
+
+\paragraph{Baseline Compliance Assessment.}
+The Level-2 Space Segment as-designed baseline defined in \texttt{EWAS-HSB-SSEG-DDF-03} satisfies all 39 normative requirements of \textbf{AD-01} (\texttt{EWAS-HSB-SSEG-TRS-03} Issue~1.5) with \textbf{zero technical deviations or waivers}. Every sizing and performance budget closes with positive Phase~A/B reserve across mass, electrical power, propulsion $\Delta v$, stowed structural stiffness, optical and radio-frequency link closure, pointing accuracy, radiation shielding, and the $\le 60\text{ s}$ civil-protection warning chain. Complete one-to-one traceability from requirements to design elements and verification methods is provided in Annex~B.
+
+\paragraph{Readiness for Level-3 Design and Open Items.}
+The Space Segment baseline is mature for Preliminary Design Review (\abbr{PDR}) progression and direct flow-down into the subordinate \texttt{SATL} (\textbf{RD-02}, \textbf{RD-04}) and \texttt{SATG} (\textbf{RD-03}, \textbf{RD-05}) spacecraft baselines. Four controlled Phase~B open items remain tracked ahead of design freeze and are summarized in Table~\ref{tab:open_items}.
+
+\begin{table}[htbp]
+\centering
+\caption{Open Phase~B Design Items --- \abbr{TBC}/\abbr{TBD} Register}
+\label{tab:open_items}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{4.6cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Item ID} & \thead{Open Parameter (\abbr{TBC}/\abbr{TBD})} & \thead{Target Resolution Milestone \& Owner} \\ \hline
+    \textbf{\texttt{OI-01}} & Final Space-to-Ground \abbr{RF} bands (S/X/Ka baseline) and \abbr{CCSDS} packet/frame profile across \texttt{IF-EXT-01} (\abbr{TBC}) & Bilateral freeze with Ground Segment via System Interface Engineering (\texttt{123456.05.02}) prior to \abbr{PDR} \\ \hline
+    \textbf{\texttt{OI-02}} & Selection of specific launch service providers and final mechanical/coupled-loads envelope for 9-\texttt{SATL} stacks and \texttt{SATG} (\abbr{TBD}) & Launch procurement \& Level-3 \texttt{SATL}/\texttt{SATG} \abbr{DDF}s (\textbf{RD-04}, \textbf{RD-05}) \\ \hline
+    \textbf{\texttt{OI-03}} & Detailed unit-level cryocooler thermal-rejection power and optical-bench micro-vibration test correlation (\abbr{TBC}) & \abbr{STM}/\abbr{EM} thermal-vacuum and \abbr{HIL} campaigns (\textbf{AD-03}) \\ \hline
+    \textbf{\texttt{OI-04}} & Final lot-acceptance radiation screening test matrix for \texttt{SATL} Careful \abbr{COTS} processor/\abbr{FPGA} selection (\abbr{TBD}) & Level-3 \texttt{SATL} \abbr{DDF} (\textbf{RD-04}) and Qualification campaign \\ \hline
+\end{tabularx}}
+\end{table}

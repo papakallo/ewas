@@ -1,0 +1,135 @@
+% =============================================================================
+% SECTION 6: SYSTEM TECHNICAL BUDGETS, MARGINS AND DEVIATIONS
+% =============================================================================
+\subsection{6. System Technical Budgets, Margins and Deviations}
+
+This section consolidates the Level-2 system technical budgets and design margins for the \texttt{SATL} low-orbit tracking fleet and \texttt{SATG} geostationary detection and relay constellation at Phase~A/B maturity. All allocations balance against the physical element envelopes established in Section~5.4 while preserving positive reserve ahead of Preliminary Design. Detailed analytical derivations, orbital trade studies, and numerical simulation proofs reside in the Design Justification File (\textbf{RD-01}, \texttt{EWAS-HSB-SSEG-DDJF-03}).
+
+\subsubsection{6.1 Margin Philosophy}
+
+In accordance with Phase~A/B system engineering practice, explicit maturity margins are carried across all sizing resources before checking compliance against launch and operational caps. Subsystem dry masses incorporate a $20\%$ system-level mass margin above current best estimates (\abbr{CBE}) prior to propellant and launcher-cap allocation. Electrical power budgets maintain at least a $15.0\%$ positive margin above nominal operational loads at End of Life (\abbr{EOL}). Ionizing radiation analyses enforce a $2\times$ Radiation Design Margin (\abbr{RDM}), and all optical and radio-frequency links preserve at least $3.0\text{ dB}$ of positive link margin.
+
+\subsubsection{6.2 Mass and Electrical Power Budgets}
+
+Both flight-system baselines close with positive launch mass and \abbr{EOL} power margins well inside the design envelopes summarized in Table~\ref{tab:subsystem_baseline}. Tables~\ref{tab:mass_budget} and~\ref{tab:power_budget} present the subsystem-by-subsystem mass breakdown and orbital power balance for \texttt{SATL} and \texttt{SATG}.
+
+\begin{table}[htbp]
+\centering
+\caption{Spacecraft Mass Budget with Phase~A/B Margins --- \texttt{SATL} and \texttt{SATG}}
+\label{tab:mass_budget}
+\vspace{0.25em}
+{\scriptsize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{1.35cm}|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Subsystem / Item} & \thead{WBS} & \thead{SATL CBE / Alloc.\ (kg)} & \thead{SATG CBE / Alloc.\ (kg)} & \thead{Notes} \\ \hline
+    Thermal Control (\abbr{TCS}) & \texttt{.01} & 16.0 & 130.0 & \abbr{MLI}, radiators, \abbr{LHP}, 65--95~K cryocoolers \\ \hline
+    Attitude Control (\abbr{ADCS}) & \texttt{.02} & 18.0 & 95.0 & Dual star trackers, \abbr{FOG} \abbr{IMU}, \abbr{GNSS}, 4 RWs \\ \hline
+    Electrical Power (\abbr{EPS}) & \texttt{.03} & 32.0 & 290.0 & $\mathrm{GaAs}$ arrays, $\mathrm{Li\text{-}ion}$ batteries, \abbr{PCDU} \\ \hline
+    Mission Payload (\abbr{PLD}) & \texttt{.04} & 48.0 & 380.0 & \abbr{SWIR}/\abbr{MWIR} optics ($+$ gimbal/\abbr{FSM} on \texttt{SATL}) \\ \hline
+    Propulsion (\abbr{PROP}, dry) & \texttt{.05} & 14.0 & 140.0 & Tanks, thrusters, feed system \\ \hline
+    Avionics --- \abbr{OBDH} \& \abbr{FSW} & \texttt{.06.01/.03} & 10.0 & 45.0 & Redundant \abbr{C\&DH}, FPGA processor, memory \\ \hline
+    Avionics --- Comms \& \abbr{OISL} & \texttt{.06.02} & 20.0 & 130.0 & $1{,}550\text{ nm}$ \abbr{OISL} terminals, S/X/Ka \abbr{RF}, \abbr{COMSEC} \\ \hline
+    Structures \& Mech.\ (\abbr{STR/MEC}) & \texttt{.08} & 42.0 & 340.0 & CFRP/Al bus, isolators, shielding, baffles \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Dry Mass Current Best Estimate (CBE)} & Subtotal & \textbf{200.0} & \textbf{1,550.0} & Sum of Level-4 subsystem CBEs \\ \hline
+    \rowcolor{white}
+    \textbf{System Dry Mass Margin (20\%)} & Phase~A/B & \textbf{$+$40.0} & \textbf{$+$310.0} & Standard Phase~A/B maturity reserve \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Total Dry Mass (incl.\ Margin)} & Dry MEV & \textbf{240.0} & \textbf{1,860.0} & Within 200--250~kg / 1,550--1,950~kg envelope \\ \hline
+    \rowcolor{white}
+    \textbf{Propellant (incl.\ residuals \& margin)} & \texttt{.05} & \textbf{40.0} & \textbf{1,100.0} & Insertion/transfer, SK, \abbr{CAM}, \abbr{EOL} reserve \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Total Wet Launch Mass} & Wet MEV & \textbf{280.0} & \textbf{2,960.0} & \texttt{SATL} 9-sat stack: $2{,}520 + 230$ disp.\ $= 2{,}750\text{ kg}$ \\ \hline
+    \rowcolor{white}
+    \textbf{Allocated Wet Mass Cap \& Margin} & Limit & \textbf{$\le 290.0$ ($+$10.0)} & \textbf{$\le 3{,}100.0$ ($+$140.0)} & Positive cap margin ($+$3.4\% / $+$4.5\%); stack $\le 2{,}800\text{ kg}$ \\ \hline
+\end{tabularx}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Electrical Power and Eclipse Energy Budget --- \texttt{SATL} and \texttt{SATG}}
+\label{tab:power_budget}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Power / Energy Parameter} & \thead{SATL (1,000~km LEO)} & \thead{SATG (35,786~km GEO)} \\ \hline
+    Nominal Operational Load (\abbr{CBE}) & 475~W (\texttt{N2} tracking $+$ \texttt{N3} \abbr{OISL} active) & 3,425~W (\texttt{N1} staring $+$ \texttt{N3} relay $+$ SK avg.) \\ \hline
+    System Power Margin ($\ge 15.0\%$) & $+$71~W ($\ge 15.0\%$ required; $+$75~W to min.\ \abbr{EOL}) & $+$514~W ($\ge 15.0\%$ required; $+$775~W to min.\ \abbr{EOL}) \\ \hline
+    \textbf{Required Power incl.\ Margin} & \textbf{546~W} & \textbf{3,939~W} \\ \hline
+    Minimum \abbr{EOL} Array Capability (Envelope) & $\ge 550.0\text{ W}$ (450--650~W design envelope) & $\ge 4{,}200.0\text{ W}$ (3.5--5.0~kW design envelope) \\ \hline
+    Worst-Case Eclipse Duration & $\le 35.0\text{ min} / \text{orbit}$ & $71.5\text{ min}$ (equinox peak) \\ \hline
+    $\mathrm{Li\text{-}Ion}$ Battery Maximum DoD & $\le 30\%$ (high cycle life over 7~yr) & $\le 65\%$ (semi-annual equinox seasons, 15~yr) \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{6.3 Propulsion $\Delta v$ and Structural Stiffness Budgets}
+
+End-of-life disposal propellant is strictly ring-fenced from routine orbit-maintenance budgets so active debris clearance remains guaranteed throughout mission life. Stowed fundamental structural frequencies in Table~\ref{tab:deltav_stiffness_budget} protect both the 9-satellite \texttt{SATL} rideshare stack and the heavy-lift \texttt{SATG} launch configuration.
+
+\begin{table}[htbp]
+\centering
+\caption{Propulsion $\Delta v$ and Stowed Structural Stiffness Budgets}
+\label{tab:deltav_stiffness_budget}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.2cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Budget Category} & \thead{SATL Allocation} & \thead{SATG Allocation} & \thead{Driving Requirement / Basis} \\ \hline
+    Orbit Insertion / Transfer \& Phasing & $\ge 95.0\text{ m/s}$ (Walker Delta slot phasing) & $\ge 1{,}800.0\text{ m/s}$ (GTO-to-GEO / EOR transfer) & Dispersion \& slot acquisition \\ \hline
+    Station-Keeping (SK) & $\ge 55.0\text{ m/s}$ (7~yr, 4--6~m/s/yr, $\pm 0.5^\circ$, incl.\ \abbr{CAM}) & $\sim 780.0\text{ m/s}$ (15~yr N-S/E-W, $\sim 47\text{--}53\text{ m/s/yr}$, $\pm 0.05^\circ$) & $J_2$ / drag (\abbr{LEO}); lunisolar / $J_{22}$ (\abbr{GEO}) \\ \hline
+    Momentum Dumping \& \abbr{CAM} & Included in SK/\abbr{CAM} line above ($P_c > 10^{-4}$) & $\sim 15.0\text{ m/s}$ (wheel desaturation \& \abbr{CAM}) & \texttt{IF-EXT-04} conjunction avoidance \\ \hline
+    Protected \abbr{EOL} Disposal Reserve & $\ge 230.0\text{ m/s}$ ($< 5\text{ yr}$ demise, $\ge 99\%$ rel., risk $< 10^{-4}$) & $\ge 15.0\text{ m/s}$ ($+300\text{ km}$ graveyard, $\Delta e \le 0.0005$) & Mandatory active disposal (\texttt{ENV-002}) \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Total Deliverable $\Delta v$} & \textbf{$\ge 380.0\text{ m/s}$} (total) & \textbf{$\ge 810.0\text{ m/s}$} (post-insertion; $+1{,}800\text{ m/s}$ EOR) & Verified in \textbf{RD-01} \\ \hline
+    Stowed Fundamental Frequencies & $f_{\text{axial}} \ge 35.0\text{ Hz}$; $f_{\text{lateral}} \ge 20.0\text{ Hz}$ & $f_{\text{axial}} \ge 31.0\text{ Hz}$; $f_{\text{lateral}} \ge 15.0\text{ Hz}$ & Launch envelope (\texttt{IF-EXT-02}) \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{6.4 Pointing, Link, Latency, Radiation, and Thermal Budgets}
+
+Table~\ref{tab:perf_env_budgets} consolidates the remaining mission-critical performance and environmental allocations across both spacecraft lines. Step-by-step warning-chain latency allocations are detailed in Table~\ref{tab:fc1_latency} and summarized below against the $60\text{ s}$ end-to-end civil-protection limit.
+
+\begin{table}[htbp]
+\centering
+\caption{Consolidated Pointing, Communications, Latency, Radiation, and Thermal Budgets}
+\label{tab:perf_env_budgets}
+\vspace{0.25em}
+{\scriptsize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{2.85cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Discipline} & \thead{Parameter} & \thead{SATL Baseline} & \thead{SATG Baseline} \\ \hline
+    Pointing \& Timing & \abbr{LOS} Lock-On \& Stability & $< 5.0\text{ s}$ lock; $< 2.0\text{ arcsec/s}$ RMS; $< 0.05^\circ$ bus excursion & \abbr{WFOV} staring ($\ge 10\text{ Hz}$); \abbr{OISL} $< 1.5~\mu\mathrm{rad}$ \\ \hline
+    Pointing \& Timing & Attitude Knowledge \& Sync & $\text{AKE} \le 10\text{--}15~\mu\mathrm{rad}$ ($1\sigma$); \abbr{GNSS} sync $< 50~\mu\mathrm{s}$ & $\text{AKE} \le 20~\mu\mathrm{rad}$ ($1\sigma$); \abbr{GNSS}/ground sync $< 50~\mu\mathrm{s}$ \\ \hline
+    Comms \& Links & $1{,}550\text{ nm}$ \abbr{OISL} & $\ge 500\text{ Mbps}$, $\ge 6{,}500\text{ km}$, $\ge 3.0\text{ dB}$ margin, $\text{BER} \le 10^{-9}$ & $\ge 1.5\text{--}2.0\text{ Gbps}$, $34{,}800\text{--}45{,}000\text{ km}$, $\ge 3.0\text{ dB}$ margin \\ \hline
+    Comms \& Links & All-Weather \abbr{RF} (\texttt{IF-EXT-01}) & S/X/Ka (\abbr{TBC}), $\ge 3.0\text{ dB}$ rain margin, \abbr{COMSEC} & S/X/Ka (\abbr{TBC}), $\ge 3.0\text{ dB}$ rain margin, \abbr{COMSEC} \\ \hline
+    Latency & Warning Chain (Table~\ref{tab:fc1_latency}) & Step~2 \abbr{OISL} $\le 3\text{ s}$; Step~3 $\le 25\text{--}30\text{ s}$ & Step~1 $\le 10\text{ s}$ (Combined \abbr{SSEG} $\le 40\text{--}45\text{ s}$ of $\le 60\text{ s}$) \\ \hline
+    Radiation ($2\times$ \abbr{RDM}) & \abbr{TID} (4~mm Al / Internal) & 18--30~krad / $\le 10\text{--}15\text{ krad(Si)}$ (7~yr, Careful \abbr{COTS}) & 60--100~krad / $< 20\text{--}25\text{ krad(Si)}$ (15~yr, QML-V bus) \\ \hline
+    Radiation \& ESD & DD, \abbr{SEL} \& Charging & NIEL $\sim 2\times 10^{10}\text{ p/cm}^2$ (10~MeV); \abbr{SEL} $\text{LET} \ge 37\text{ MeV}\cdot\text{cm}^2/\text{mg}$ & \abbr{SEL} $\text{LET} \ge 37\text{ MeV}\cdot\text{cm}^2/\text{mg}$; ESD $< 100\text{ V}$ differential \\ \hline
+    Thermal Zones & Bus / Optics / \abbr{FPA} & 263--323~K bus (273--303~K batt.) / 180--210~K optics / 65--95~K ($\pm 0.1\text{ K}$) \abbr{FPA} & 263--323~K bus (273--303~K batt.) / 180--210~K optics / 65--95~K ($\pm 0.1\text{ K}$) \abbr{FPA} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{6.5 Budget Deviations and Watch Items}
+
+At the current Phase~A/B baseline, \textbf{no technical budget deviations or waivers} are required against \textbf{AD-01} (\texttt{EWAS-HSB-SSEG-TRS-03} Issue~1.5); every resource and performance budget closes with positive margin. Two controlled watch items are tracked into Level-3 Preliminary Design: (1) final Space-to-Ground \abbr{RF} link-margin closure across \texttt{IF-EXT-01} once frequency bands and ground-station $G/T$ are frozen with System Interface Engineering (\abbr{WBS} \texttt{123456.05.02}), and (2) detailed cryocooler and thermal-rejection power refinement in the subordinate Level-3 spacecraft design files (\textbf{RD-04}, \textbf{RD-05}).
