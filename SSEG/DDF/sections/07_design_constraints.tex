@@ -1,0 +1,57 @@
+% =============================================================================
+% SECTION 7: SYSTEM DESIGN CONSTRAINTS
+% =============================================================================
+\subsection{7. System Design Constraints}
+
+This section defines the practical constraints imposed by the Space Segment design on manufacturing, in-orbit operations, transportation and storage, and lifecycle maintainability. These constraints govern how both the 72-satellite low-orbit fleet (\texttt{SATL}) and the 6-satellite geostationary layer (\texttt{SATG}) are built, shipped, operated, and sustained across their mission lifetimes.
+
+\subsubsection{7.1 Production}
+
+\begin{itemize}[leftmargin=*, itemsep=0.35em, topsep=0.25em]
+    \item \textbf{Serial Batch Manufacturing and Model Philosophy:} The 72 \texttt{SATL} spacecraft are designed for modular serial batch assembly in eight plane-lots of nine satellites using screened Careful \abbr{COTS} electronics to meet schedule and cost targets. By contrast, the six \texttt{SATG} spacecraft follow classical high-reliability space-grade assembly with QML-V bus avionics for a 15-year geostationary lifetime. Development follows the Programme Verification Plan (\textbf{AD-03}) model flow: Engineering and Structural-Thermal Models (\abbr{EM}/\abbr{STM}) validate hardware-in-the-loop timing, structural loads, and thermal balance; lead Qualification and Proto-Flight Models (\abbr{QM}/\abbr{PFM}) undergo full environmental qualification; and recurring Flight Models (\abbr{FM}) complete workmanship acceptance screening and radiometric calibration prior to shipment.
+    \item \textbf{Cleanroom and Contamination Control:} Cryogenic infrared optics and $1{,}550\text{ nm}$ optical inter-satellite link (\abbr{OISL}) assemblies are highly sensitive to molecular and particulate contamination. Their integration and alignment require ISO Class~5 cleanrooms under continuous dry gaseous nitrogen ($\mathrm{GN_2}$) purge, strict use of low-outgassing materials ($\text{CVCM} < 0.01\%$, $\text{TML} < 1.0\%$), and sealed protective aperture covers through launch preparation. General spacecraft bus assembly, harness routing, and structural integration are performed in ISO Class~8 cleanrooms.
+\end{itemize}
+
+\subsubsection{7.2 Operation}
+
+\begin{itemize}[leftmargin=*, itemsep=0.35em, topsep=0.25em]
+    \item \textbf{Optical Exclusion and Post-Launch Bake-Out:} Payload apertures must observe the $15^\circ$ solar exclusion cone and $3^\circ$ sunlit Earth-limb exclusion zone during routine operations, and remain closed behind protective shutters whenever a spacecraft enters Safe Mode. Immediately after orbital insertion, every satellite executes a controlled 72--96~h decontamination bake-out at $310\text{--}320\text{ K}$ to expel residual moisture before cooling the infrared focal planes to their operating temperature of $65\text{--}95\text{ K}$.
+    \item \textbf{Staggered Fleet Maintenance and Safety Interlocks:} Station-keeping burns (Mode~\texttt{N4}) are staggered across orbital slots so that at most one satellite per coverage region is temporarily offline at any time. All $1{,}550\text{ nm}$ laser terminals enforce aviation and space-safety interlocks to prevent unintended illumination. End-of-life (\abbr{EOL}) disposal propellant ($\ge 230\text{ m/s}$ on \texttt{SATL} and $\ge 15\text{ m/s}$ on \texttt{SATG}) is strictly ring-fenced from routine station-keeping budgets so active debris clearance remains guaranteed.
+    \item \textbf{Non-Offensive and Security Boundaries:} Flight hardware and software enforce end-to-end communications security (\abbr{COMSEC}) encryption and authenticated telecommanding on all external and inter-satellite links. Consistent with the civil-protection mission mandate, the Space Segment design strictly excludes any weapon-guidance or battle-damage-assessment functionality.
+\end{itemize}
+
+\subsubsection{7.3 Transportation and Storage}
+
+Completed spacecraft and dispenser assemblies are shipped in hermetically sealed, climate- and shock-controlled transport containers that limit dynamic handling loads to $\le 3.0\text{ g}$. Optical and \abbr{OISL} compartments remain under continuous dry $\mathrm{GN_2}$ purge with electrostatic discharge (\abbr{ESD}) protection maintained throughout packaging, transport, and launch-site processing. To support rapid replenishment launches, spare flight models are designed for controlled ground storage of up to 24~months with periodic battery conditioning and functional health checks, avoiding the need for full re-qualification prior to flight.
+
+\subsubsection{7.4 Maintainability}
+
+Space Segment maintainability is divided into two distinct regimes covering pre-launch ground processing and post-launch orbital service:
+
+\begin{itemize}[leftmargin=*, itemsep=0.35em, topsep=0.25em]
+    \item \textbf{On-Ground Maintainability (Pre-Launch):} Both spacecraft buses adopt a modular Line-Replaceable Unit (\abbr{LRU}) layout across avionics boxes, \abbr{OISL} terminal heads, and battery packs. This allows failed or degraded units to be swapped rapidly during serial integration, testing, and 24-month ground storage without disturbing the calibrated mechanical alignment of the cryogenic optical bench.
+    \item \textbf{In-Orbit Maintainability (Post-Launch):} Physical hardware servicing in orbit is not planned. Instead, constellation availability above $99.9\%$ is sustained through three-level autonomous Failure Detection, Isolation, and Recovery (\abbr{FDIR}) with A/B redundant unit failover, periodic in-orbit radiometric and boresight calibration (Mode~\texttt{N5}), authenticated Over-The-Air (\abbr{OTA}) flight-software and algorithm updates refined from the 5-year mission archive, and plane-level spare replenishment if a spacecraft enters end-of-life disposal early.
+\end{itemize}
+
+Table~\ref{tab:lifecycle_constraints} summarizes the design-induced constraints across all four lifecycle domains.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of Space Segment Lifecycle Design Constraints}
+\label{tab:lifecycle_constraints}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Lifecycle Domain} & \thead{Key Design-Induced Constraints} & \thead{Verification / Governance} \\ \hline
+    \textbf{7.1 Production} & Serial batch assembly for \texttt{SATL} (8 lots of 9, Careful \abbr{COTS}) vs.\ QML-V \texttt{SATG}; \abbr{EM}/\abbr{STM} $\rightarrow$ \abbr{QM}/\abbr{PFM} $\rightarrow$ \abbr{FM} flow; ISO Class~5 cleanrooms, $\mathrm{GN_2}$ purge, $\text{CVCM} < 0.01\%$, $\text{TML} < 1.0\%$ for optics/\abbr{OISL} (ISO~8 for bus). & Programme Verification Plan (\textbf{AD-03}); Level-3 AIT \& Contamination Control Plans \\ \hline
+    \textbf{7.2 Operation} & $15^\circ$ solar / $3^\circ$ limb exclusion and Safe Mode shutters; 72--96~h post-launch bake-out ($310\text{--}320\text{ K}$) prior to $65\text{--}95\text{ K}$ cooling; staggered Mode~\texttt{N4} burns; laser interlocks; ring-fenced \abbr{EOL} $\Delta v$; \abbr{COMSEC} and non-offensive boundary. & Flight Operations Plan, \abbr{FSW} interlock tests, and Ground \abbr{MCC} procedures \\ \hline
+    \textbf{7.3 Transport \& Storage} & Hermetic, climate- and shock-controlled containers ($\le 3.0\text{ g}$); continuous dry $\mathrm{GN_2}$ purge for optical/\abbr{OISL} volumes; \abbr{ESD} controls; up to 24-month controlled ground storage with periodic battery and health checks. & Transport qualification, container telemetry logs, and storage inspection plans \\ \hline
+    \textbf{7.4 Maintainability} & Pre-launch: modular \abbr{LRU} swap-out preserving optical-bench alignment. Post-launch: no physical servicing; $> 99.9\%$ availability via 3-level \abbr{FDIR} (A/B failover), Mode~\texttt{N5} calibration, authenticated \abbr{OTA} updates, and spare replenishment. & Maintainability analysis, \abbr{FDIR}/\abbr{OTA} \abbr{HIL} testing, and constellation replenishment plan \\ \hline
+\end{tabularx}}
+\end{table}
