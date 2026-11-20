@@ -139,3 +139,119 @@
     \textbf{Atmospheric Drag (Semi-Major Axis Decay)} & ${\sim}1$--$5$~m/yr & Negligible \\ \hline
     \textbf{Solar Radiation Pressure} & Minor correction included in SK budget & Included in E--W SK budget \\ \hline
 \end{tabularx}}
+
+
+\subsection{Communication and Bandwidth Budget}
+\label{sec:bandwidth_budget}
+
+This subsection derives the end-to-end data-rate requirements across all five inter-satellite and space-to-ground communication links of the \abbr{EWAS} Space Segment. Each link is sized to carry Mode~N2 (Agile Stereoscopic Tracking) peak traffic, which is the design-driving case.
+
+\subsubsection{Payload Raw Data Rate Derivation}
+
+Each \texttt{SATL} and \texttt{SATG} payload acquires imagery on two co-registered $\mathrm{HgCdTe}$ \abbr{FPA}s simultaneously. The raw uncompressed pixel data rate per satellite is:
+\[
+    R_{\text{raw}} = N_{\text{sensors}} \times N_x \times N_y \times f_{\text{frame}} \times b
+\]
+where $N_{\text{sensors}} = 2$ (\abbr{SWIR} + \abbr{MWIR}), $N_x = N_y = 640$~pixels, $f_{\text{frame}} = 30$~Hz (Mode~N2 tracking frame rate, consistent with the $20\text{--}50$~Hz tracking envelope of \texttt{R-023}), and $b$ is the digitisation depth per pixel.
+
+With a $1.25\times$ encapsulation factor ($25\%$ overhead for CCSDS packet headers, COMSEC encryption framing (\texttt{R-031}), GNSS timestamps, attitude/ephemeris covariance metadata, and FEC coding), the encapsulated rate is $R_{\text{enc}} = 1.25 \times R_{\text{raw}}$:
+
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Parameter} & \thead{8-bit Mode} & \thead{16-bit Mode} \\ \hline
+    \textbf{Formula} & $2 \times 640 \times 640 \times 30 \times 8$ & $2 \times 640 \times 640 \times 30 \times 16$ \\ \hline
+    \textbf{Raw Data Rate ($R_{\text{raw}}$)} & 196.608~Mbps & 393.216~Mbps \\ \hline
+    \textbf{Encapsulated ($\times 1.25$)} & 245.76~Mbps & 491.52~Mbps \\ \hline
+\end{tabularx}}
+
+The \textbf{8-bit mode} is the nominal operational mode for real-time event tracking where dynamic range is sufficient for two-colour ratioing. The \textbf{16-bit mode} is used during radiometric calibration passes (Mode~N5) and for high-dynamic-range science data dumps, representing the worst-case link sizing.
+
+Housekeeping telemetry (\abbr{HK}) from each satellite---ADCS state vectors, thermal sensor readings, EPS status, FDIR logs, OBDH health---is estimated at $\le 64$~kbps per node.
+
+\subsubsection{Link-by-Link Bandwidth Budget}
+
+Table~\ref{tab:bandwidth_budget} presents the five inter-satellite and space-to-ground links with their traffic composition, data rates, and margins against allocated link capacity from the baseline.
+
+\begin{table}[H]
+\centering
+\caption{EWAS Space Segment Communication and Bandwidth Budget Summary}
+\label{tab:bandwidth_budget}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\arrayrulecolor{TableBorderBlue}
+\rowcolors{2}{white}{TableRowLightBlue}
+\begin{tabularx}{\textwidth}{|
+  >{\raggedright\arraybackslash\hsize=0.95\hsize}X|
+  >{\raggedright\arraybackslash\hsize=0.80\hsize}X|
+  >{\raggedright\arraybackslash\hsize=1.65\hsize}X|
+  >{\raggedright\arraybackslash\hsize=0.90\hsize}X|
+  >{\raggedright\arraybackslash\hsize=0.90\hsize}X|
+  >{\raggedright\arraybackslash\hsize=0.95\hsize}X|
+  >{\raggedright\arraybackslash\hsize=0.85\hsize}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \textcolor{white}{\textbf{Link}} & 
+    \textcolor{white}{\textbf{Direction}} & 
+    \textcolor{white}{\textbf{Payload / Traffic Type}} & 
+    \textcolor{white}{\textbf{Raw Rate}} & 
+    \textcolor{white}{\textbf{Encaps. Rate ($\times 1.25$)}} & 
+    \textcolor{white}{\textbf{Allocated Capacity}} & 
+    \textcolor{white}{\textbf{Margin}} \\ \hline
+    
+    \textbf{LEO--LEO Intra-/Cross-Plane \abbr{OISL}} & 
+    \texttt{SATL} $\leftrightarrow$ \texttt{SATL} & 
+    TC relay, \abbr{LOS} vector exchange (Mode~N2), coordination \abbr{HK}, \abbr{QoS} routing & 
+    $\le 10$~Mbps & 
+    $\le 12.5$~Mbps & 
+    $\ge 500$~Mbps (\texttt{R-033}) & 
+    $\ge 3{,}900\%$ \\ \hline
+    
+    \textbf{LEO $\rightarrow$ GEO Optical Feeder} & 
+    \texttt{SATL} $\rightarrow$ \texttt{SATG} & 
+    Full dual-band imagery (1~\texttt{SATL}) + \abbr{HK} + preliminary trajectory & 
+    196.61~Mbps (8-bit)\newline 393.22~Mbps (16-bit) & 
+    245.76~Mbps (8-bit)\newline 491.52~Mbps (16-bit) & 
+    $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
+    $\ge 510\%$ (8-bit)\newline $\ge 205\%$ (16-bit) \\ \hline
+    
+    \textbf{GEO $\rightarrow$ LEO Forward Cmd.} & 
+    \texttt{SATG} $\rightarrow$ \texttt{SATL} & 
+    \emph{LEO Tracking Request} TC, ephemeris/sync updates, \abbr{COMSEC} key material & 
+    $\le 1$~Mbps & 
+    $\le 1.25$~Mbps & 
+    $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
+    $\ge 119{,}900\%$ \\ \hline
+    
+    \textbf{GEO--GEO Relay Cross-Link} & 
+    \texttt{SATG} $\leftrightarrow$ \texttt{SATG} & 
+    Aggregated relay: 2$\times$ \texttt{SATL} imagery streams + GEO--GEO coord.\ \abbr{HK} & 
+    393.22~Mbps (8-bit)\newline 786.43~Mbps (16-bit) & 
+    491.52~Mbps (8-bit)\newline 983.04~Mbps (16-bit) & 
+    $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
+    $\ge 205\%$ (8-bit)\newline $\ge 53\%$ (16-bit) \\ \hline
+    
+    \textbf{GEO $\rightarrow$ Ground Downlink} & 
+    \texttt{SATG} $\rightarrow$ Ground & 
+    2$\times$ \texttt{SATL} processed streams + \emph{Onboard Preliminary Trajectory} + \abbr{SSEG} TM/TC return & 
+    393.22~Mbps (8-bit raw)\newline 786.43~Mbps (16-bit raw) & 
+    491.52~Mbps (8-bit)\newline 983.04~Mbps (16-bit) & 
+    TBD (Ka-band or optical ground terminal) & 
+    TBD \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsubsection{Link Sizing Rationale}
+
+\begin{itemize}
+    \item \textbf{LEO--LEO \abbr{OISL} ($\ge 500$~Mbps, $\ge 6{,}500$~km):} The intra-/cross-plane links carry only lightweight traffic during Mode~N2: \abbr{GNSS}-synchronized timestamped \abbr{LOS} unit vectors (3 angular components + attitude quaternion + position + covariance matrix $\approx 200$~bytes/sample at $20\text{--}50$~Hz $= 32\text{--}80$~kbps per link) plus \abbr{QoS} routed TC relay and housekeeping telemetry. The $\ge 500$~Mbps baseline capacity provides a margin exceeding $3{,}900\%$, which absorbs multi-hop mesh routing overhead and enables future growth for onboard-processed image-chip relay if required.
+    \item \textbf{LEO $\rightarrow$ GEO Optical Feeder ($\ge 1.5\text{--}2.0$~Gbps, $34{,}800\text{--}45{,}000$~km):} This link carries the full uncompressed dual-band imagery from one cued \texttt{SATL} during Mode~N2. At nominal 8-bit depth, the encapsulated rate of 245.76~Mbps consumes $\le 16.4\%$ of the $\ge 1.5$~Gbps minimum capacity ($\ge 205\%$ margin). Even at worst-case 16-bit depth ($491.52$~Mbps), the link retains $\ge 105\%$ margin against the $\ge 1.5$~Gbps floor, or $\ge 307\%$ against the $2.0$~Gbps design point.
+    \item \textbf{GEO $\rightarrow$ LEO Forward Command ($\ge 1.5\text{--}2.0$~Gbps):} The forward command link carries only authenticated \emph{LEO Tracking Request} telecommands ($\le 1$~kbps burst), ephemeris and synchronization updates, and \abbr{COMSEC} key material (\texttt{R-031}). Total traffic $\le 1$~Mbps. The massive excess capacity is an inherent property of the symmetric bidirectional optical terminal; no separate low-rate terminal is required.
+    \item \textbf{GEO--GEO Relay Cross-Link ($\ge 1.5\text{--}2.0$~Gbps):} During a concurrent dual-\texttt{SATL} tracking event, one \texttt{SATG} node may need to relay the payload stream from a second \texttt{SATL} to an adjacent \texttt{SATG} that has a direct ground downlink path. The relay thus carries 2$\times$ encapsulated \texttt{SATL} imagery: at 8-bit depth $= 491.52$~Mbps ($\ge 205\%$ margin at $\ge 1.5$~Gbps); at 16-bit depth $= 983.04$~Mbps ($\ge 53\%$ margin at $\ge 1.5$~Gbps, or $\ge 103\%$ at $2.0$~Gbps). Coordination housekeeping adds $\le 128$~kbps.
+    \item \textbf{GEO $\rightarrow$ Ground Downlink:} The GEO-to-ground link must deliver the aggregated output of 2 cued \texttt{SATL} nodes plus the \emph{GEO Event Report} and \abbr{SSEG} housekeeping TM. The baseline does not specify an explicit GEO-to-ground capacity; this is allocated to the Ground Segment (\abbr{WBS} \texttt{123456.02.05}) via Ka-band or optical ground terminals. If onboard lossy/lossless compression is applied prior to downlink, the required throughput reduces proportionally; the compression ratio is TBD at current design maturity.
+\end{itemize}

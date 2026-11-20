@@ -1,0 +1,152 @@
+% =============================================================================
+% SECTION 10: JUSTIFICATION OF CONSTRAINTS IMPOSED BY THE DESIGN
+% =============================================================================
+\section{Justification of Constraints Imposed by the Design}
+\label{sec:constraints}
+
+This section identifies and justifies the constraints that the Space Segment design imposes on production, operation, transportation/storage, and maintainability.
+
+% -----------------------------------------------------------------------------
+\subsection{Production}
+\label{sec:constraints_production}
+
+\subsubsection{Serial Production Scale and Rate}
+
+The constellation design (72~\texttt{SATL} + 6~\texttt{SATG}) imposes a serial production constraint unprecedented for European spacecraft programmes:
+\begin{itemize}
+    \item \textbf{SATL production:} 72 flight units organised in 8 plane-lots of 9 spacecraft each. The production facility must sustain a throughput of $\ge 2$ completed \texttt{SATL} units per month to meet the launch manifest timeline, requiring parallel AIT stations and batch-tested component inventories.
+    \item \textbf{SATG production:} 6 flight units manufactured individually with full acceptance testing per unit.
+    \item \textbf{Component procurement:} The ``Careful COTS'' philosophy for \texttt{SATL} (\textbf{AD-01}, Section 7.2) mandates lot-acceptance radiation testing of every automotive/industrial-grade processor and FPGA lot under the project radiation-assurance rules \emph{prior to} board assembly. Lot rejection rates and lead-time variability must be absorbed by the procurement schedule with $\ge 10\%$ component over-procurement margin.
+\end{itemize}
+
+\subsubsection{Cleanroom and Contamination Control}
+
+\begin{itemize}
+    \item \textbf{Payload and OISL Optical Assemblies (\texttt{.04}, \texttt{.06.02}):} All cooled SWIR/MWIR telescope assemblies, dichroic beam-splitters, cryogenic HgCdTe FPA modules, and 1,550~nm laser OISL optical heads must be integrated and maintained under \textbf{ISO Class~5 (Class~100)} cleanroom conditions with continuous high-purity dry $\mathrm{GN_2}$ purging. Optical surfaces require sealed aperture covers whenever not in active test or calibration. Material selection is constrained to $\mathrm{CVCM} < 0.01\%$ and $\mathrm{TML} < 1.0\%$ to prevent molecular condensation on cryogenic optics ($65$--$95$~K FPA, $180$--$210$~K mirrors) that would absorb in the $2.7~\mu\mathrm{m}$ (SWIR) and $4.2$--$4.4~\mu\mathrm{m}$ (MWIR) science bands (\texttt{R-009}, \texttt{R-025}).
+    \item \textbf{Platform Bus Integration:} Conducted in \textbf{ISO Class~8 (Class~100,000)} facilities.
+    \item \textbf{Propulsion System:} Propellant loading and pressurant charging are performed in Hazardous Processing Facilities at the launch site, not at the AIT facility, to avoid contamination-hazard co-location.
+\end{itemize}
+
+\subsubsection{Calibration Constraints}
+
+\begin{itemize}
+    \item Every \texttt{SATL} and \texttt{SATG} flight unit requires individual radiometric calibration of both SWIR ($2.65$--$2.85~\mu\mathrm{m}$) and MWIR ($4.15$--$4.45~\mu\mathrm{m}$) FPA channels at their cryogenic operating temperature ($65$--$95$~K) inside a thermal-vacuum chamber with an optical port and calibrated blackbody sources. This constrains TVAC chamber scheduling.
+    \item Geometric distortion mapping of the NFOV ($1.5^\circ \times 1.5^\circ$) must achieve pixel-level co-registration between SWIR and MWIR channels to validate two-colour ratioing performance (\texttt{R-019}, \texttt{R-022}).
+    \item Each OISL terminal (\texttt{.06.02}) requires optical acquisition and bit-error-rate (BER) ground testing at representative free-space-equivalent distances using collimated beam simulators.
+\end{itemize}
+
+\subsubsection{Recurring Production Acceptance Constraints}
+
+Per the Verification Plan (\textbf{AD-02}), every recurring \texttt{SATL} FM undergoes:
+\begin{itemize}
+    \item Workmanship random vibration (acceptance spectrum, reduced from qualification levels).
+    \item Shortened TVAC acceptance screening (reduced cycle count relative to QM/PFM).
+    \item Radiometric and geometric payload calibration.
+    \item Functional chain test with flight software, including FDIR fault injection.
+    \item Mass properties measurement (weigh and CG) for comparison against the mass budget.
+\end{itemize}
+The 72-unit SATL fleet implies $> 500$ individual environmental test runs (vibration + TVAC + EMC), constraining test facility availability across the production timeline.
+
+% -----------------------------------------------------------------------------
+\subsection{Operation}
+\label{sec:constraints_operation}
+
+\subsubsection{Pointing, Acquisition, and Tracking (PAT) Constraints}
+
+\begin{itemize}
+    \item \textbf{LEO--GEO Cross-Layer OISL PAT:} The 1,550~nm laser OISL terminals must acquire and maintain optical lock over the full $34{,}800$--$45{,}000$~km range (\texttt{R-033}) despite relative orbital motion between the 7.350~km/s LEO node and the near-stationary GEO node. Beam pointing must be maintained below $< 1.5~\mu\mathrm{rad}$ while the \texttt{SATL} bus traverses ${\sim}13.7$~orbits/day. During Mode~N2 (Agile Stereo Tracking), the OISL terminals must sustain lock \emph{concurrently} with independent payload gimbal slewing ($\ge 15^\circ$/s), which induces structural micro-vibration coupling into the OISL fine-steering mirror control loop.
+    \item \textbf{GEO--GEO Relay Cross-Link PAT:} The \texttt{SATG}-to-\texttt{SATG} relay links operate at near-zero relative angular rates (both nodes are geostationary). PAT constraints are dominated by beam-width limitations at the ${\sim}72{,}000$~km inter-GEO chord (for $60^\circ$ longitudinal spacing at $a = 42{,}164$~km) and by spacecraft attitude perturbations during N--S/E--W station-keeping thruster firings.
+    \item \textbf{LEO--LEO Intra-Plane OISL:} Constant 5,047~km chord with zero relative azimuth rate---PAT is straightforward. Cross-plane links (5,647--6,144~km at equator, dynamically varying geometry toward $\pm 80^\circ$ latitude) require agile coarse-pointing periscopes with continuous handover logic at the polar cross-seam.
+\end{itemize}
+
+\subsubsection{Thermal and Power Constraints During Continuous Dual-Band Streaming}
+
+\begin{itemize}
+    \item \textbf{Cryocooler Duty Cycle:} The pulse-tube cryocoolers maintaining HgCdTe FPAs at $65$--$95$~K ($\pm 0.1$~K) operate \emph{continuously} during all modes (N1 through N5). Each cryocooler dissipates TBD~W of waste heat into dedicated cryocooler radiator panels, which must maintain cold-sink temperature below the cryocooler reject temperature at all orbital beta angles, including worst-case $\beta_\odot \approx 0^\circ$ with maximum Earth albedo ($0.38$) and IR ($260$~W/m$^2$) flux at 1,000~km.
+    \item \textbf{Mode~N2 Peak Power:} During the $\le 25$--$30$~s Mode~N2 active tracking window, all four OISL terminals, the payload processor, the gimbal/FSM drive electronics, and the SWIR/MWIR FPAs operate simultaneously at full rate ($30$~Hz, $640 \times 640$ pixels, dual-band). This imposes a transient peak power demand on the EPS that must remain within the $\ge 550$~W (SATL) / $\ge 4{,}200$~W (SATG) EOL average power budget with $\ge 15\%$ positive margin. Battery DoD during eclipsed Mode~N2 events must remain $\le 30\%$ (SATL) / $\le 65\%$ (SATG).
+    \item \textbf{Data Handling Throughput:} The OBDH payload co-processor (FPGA) must sustain real-time proton despiking, two-colour ratioing, and spatio-temporal clutter rejection on the full dual-band $640 \times 640 \times 30$~Hz data stream ($\ge 196.6$~Mbps raw at 8-bit) without frame drops. Simultaneously, it must format and encrypt CCSDS packets and route them to the OISL or S-band TT\&C transmitters within the Step~1 ($\le 10$~s, \texttt{R-042}) and Step~3 ($\le 25$--$30$~s) latency allocations.
+\end{itemize}
+
+\subsubsection{CONOPS and Coverage Constraints}
+
+\begin{itemize}
+    \item \textbf{Staggered Maintenance Burns:} Orbit maintenance and CAM are constrained to at most one \texttt{SATL} node per coverage region in manoeuvre mode at any time (\texttt{R-008}, \texttt{R-015}). The Ground Segment flight dynamics system must deconflict station-keeping windows across all 72 SATL nodes and 6 SATG nodes to preserve $\ge 5$ simultaneous LEO nodes visible over the Baltic ($53^\circ$--$66^\circ$N) at all times.
+    \item \textbf{TT\&C Contact Windows:} S-band TT\&C for \texttt{SATL} nodes is constrained by the 1,000~km orbit period ($T = 105.12$~min) and the geographic distribution of the Ground Station Network (\abbr{WBS} \texttt{123456.02.05}). Each \texttt{SATL} node has ${\sim}8$--$12$~min of direct S-band ground contact per pass. Outside direct contact windows, all TC must be routed via the OISL mesh relay network (Mode~N3, \texttt{R-044}). \texttt{SATG} nodes at 35,786~km have near-continuous S-band and Ka-band contact with European ground stations.
+    \item \textbf{SAA Operational Degradation:} During SAA transits (${\sim}8$--$12$~min, 4--6 times/day per SATL node), the infrared FPAs experience elevated proton-induced transient pixel spikes requiring real-time despiking (\texttt{R-019}). Detection sensitivity ($P_d$) may be temporarily reduced during SAA passage; the warning chain availability analysis accounts for this by ensuring $\ge 5$--$7$ non-SAA SATL nodes remain visible over the Baltic at all times.
+\end{itemize}
+
+\subsubsection{OISL Mesh Relay Constraints}
+
+\begin{itemize}
+    \item The mandatory OISL relay (Mode~N3) imposes a continuous $\ge 500$~Mbps per-link capacity reservation on all 4 SATL terminals and cross-layer GEO--LEO trunks, consuming electrical power and thermal dissipation budgets at all times (not only during events).
+    \item Polar cross-seam handover ($\pm 80^\circ$ latitude) requires dynamic re-acquisition of cross-plane OISL links within $< 3$~s to remain within the Step~2 latency allocation (\texttt{R-044}).
+    \item COMSEC hardware encryption modules (\texttt{R-031}) impose a fixed processing latency and power overhead on every OISL data packet, independent of link traffic volume.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Transportation and Storage}
+\label{sec:constraints_transport}
+
+\subsubsection{Containerized Transportation}
+
+\begin{itemize}
+    \item Spacecraft are transported in hermetically sealed, climate-controlled shipping containers: $20^\circ\mathrm{C} \pm 3^\circ\mathrm{C}$, relative humidity $< 40\%$, continuous $\mathrm{GN_2}$ purge of optical apertures.
+    \item Damped shock-isolation frames limit quasi-static and dynamic transport loads to $\le 3.0\,g$ along all axes, monitored by continuous triaxial shock/temperature data loggers.
+    \item Container dimensions must accommodate the stowed \texttt{SATL} envelope (including folded solar arrays and stowed antennas) and must interface with standard air-cargo (C-130, An-124) and road-transport platforms.
+    \item \texttt{SATG} spacecraft ($2{,}400$--$3{,}100$~kg wet) require heavy-lift transport and dedicated handling frames compatible with launch-site clean-room crane capacities.
+\end{itemize}
+
+\subsubsection{Launch Vehicle Interface Constraints}
+
+\begin{itemize}
+    \item \textbf{SATL:} The 9-satellite cylindrical multi-satellite dispenser ring stack (${\sim}2{,}300$--$2{,}800$~kg total) must fit within the launcher fairing usable dynamic envelope. Individual SATL structural interfaces are constrained by the dispenser adapter ring bolt pattern, separation spring force envelope ($\Delta v_{\text{sep}} \approx 0.5$--$1.5$~m/s), and stowed stiffness requirements ($f_{\text{axial}} \ge 35$~Hz, $f_{\text{lateral}} \ge 20$~Hz).
+    \item \textbf{SATG:} Single- or dual-manifest heavy-lift vehicle interface. The launch adapter and clamp-band interface must accommodate the $\le 3{,}100$~kg wet mass with stowed stiffness $f_{\text{axial}} \ge 31$~Hz, $f_{\text{lateral}} \ge 15$~Hz. Separation shock $1{,}500$--$2{,}000\,g$ SRS above 1,000~Hz.
+    \item \textbf{Launch Safety Inhibits:} During fairing encapsulation through ascent, all propulsion valves, high-power RF transmitters, 1,550~nm laser OISL diodes, and pulse-tube cryocoolers must remain under $\ge 3$ independent electrical or mechanical safety inhibits. HDRM and aperture covers remain mechanically locked.
+\end{itemize}
+
+\subsubsection{Pre-Launch Storage and Shelf-Life Constraints}
+
+\begin{itemize}
+    \item \textbf{Maximum Storage Duration:} Completed flight units may be stored for up to 24~months in controlled cleanroom conditions (ISO~8 for bus, ISO~5 for optics) with periodic powered health checks.
+    \item \textbf{Li-ion Battery Storage:} Battery state-of-charge maintained at $40$--$50\%$ storage charge to minimise calendar ageing and capacity fade. Periodic top-off/equalization cycles every 3--6~months.
+    \item \textbf{HgCdTe FPA Detector Shelf Life:} Cryogenic FPA modules stored at ambient temperature in sealed $\mathrm{GN_2}$-purged containers. No shelf-life degradation mechanism at room temperature; dark-current baseline must be re-verified if storage exceeds 18~months.
+    \item \textbf{Propellant Tanks:} Propulsion subsystem delivered dry to launch site. Propellant loading and pressurant charging performed at the Hazardous Processing Facility during the launch campaign. Tank proof-pressure and leak-test certificates are valid for TBD~months from acceptance.
+    \item \textbf{OISL Laser Diode Ageing:} 1,550~nm laser diodes stored unpowered at $20^\circ\mathrm{C} \pm 3^\circ\mathrm{C}$; no significant shelf-life degradation at room temperature. Pre-launch re-verification of output power and wavelength stability if storage exceeds 24~months.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Maintainability}
+\label{sec:constraints_maintainability}
+
+\subsubsection{On-Orbit Software and Firmware Maintainability}
+
+\begin{itemize}
+    \item \textbf{Flight Software Patching (Mode~N5, \texttt{R-004}, \texttt{R-041}):} The OBDH flight software and payload co-processor FPGA bitstreams are designed for authenticated over-the-air uplink of refined plume-detection algorithms, updated two-colour ratioing filter coefficients, and security patches derived from the 5-year Ground Segment operational archive. All uploads are protected by COMSEC hardware encryption (\texttt{R-031}) and require dual-authenticated Ground Segment operator authorization.
+    \item \textbf{FPGA Reconfiguration:} SATL payload co-processor FPGAs support partial reconfiguration to allow in-orbit updates to proton despiking, clutter rejection, and spectral ratioing kernels without full FPGA re-flash. SATG QML-V rad-hard FPGAs require full re-flash via protected configuration memory banks.
+    \item \textbf{COMSEC Key Rotation (\texttt{R-031}):} Cryptographic key material is rotated autonomously on schedule and can be emergency-rekeyed via authenticated uplink. Key storage is in tamper-resistant hardware security modules.
+\end{itemize}
+
+\subsubsection{FDIR and Redundancy Switching}
+
+\begin{itemize}
+    \item \textbf{Dual Cold/Warm Block Redundancy (\texttt{R-017}):} All critical bus chains (OBDH, ADCS, EPS, OISL transceivers, cryocooler drive electronics) implement A/B redundant unit pairs with autonomous Level~2 FDIR failover ($< 2.0$~s). After failover, the faulted A-side unit is electrically isolated; ground operators can command a reversion attempt during the next scheduled maintenance window.
+    \item \textbf{GEO Relay Chain Single-Point Failures:} The GEO--LEO optical relay chain is a critical path in the warning latency budget (Step~2, $\le 3.0$~s OISL routing, \texttt{R-044}). Loss of a single \texttt{SATG} OISL relay node is mitigated by the $60^\circ$-spaced 6-node GEO ring: routing tables dynamically re-converge within $< 3$~s to bypass the faulted GEO node and use an adjacent \texttt{SATG} as the relay gateway. Within each \texttt{SATG}, the cross-layer OISL terminal is backed by a redundant B-side transceiver (\texttt{R-017}).
+    \item \textbf{Cryocooler Redundancy:} Loss of a single pulse-tube cryocooler renders both SWIR and MWIR FPAs non-operational on the affected spacecraft (they share a common cold-finger thermal bus). Cryocooler drive electronics are dual-redundant; a second cryocooler compressor head is TBD at current design maturity. The constellation design tolerates the loss of individual SATL nodes (5--7 visible over Baltic at all times).
+\end{itemize}
+
+\subsubsection{Pre-Launch Ground Accessibility and LRU Replaceability}
+
+\begin{itemize}
+    \item \textbf{Line-Replaceable Unit (LRU) Access:} The SATL and SATG structural design provides panel-removable access to the following LRUs during AIT without disturbing adjacent subsystems:
+    \begin{itemize}
+        \item OBDH processor boards (dual A/B units)
+        \item ADCS reaction wheel assemblies and star tracker heads
+        \item EPS battery modules and PCDU
+        \item OISL transceiver modules (\texttt{.06.02})
+        \item S-band TT\&C transponder (\texttt{.06.01})
+        \item Cryocooler compressor and drive electronics
+    \end{itemize}
+    Any LRU replacement performed after spacecraft-level environmental testing requires a re-test at acceptance levels (workmanship vibration + abbreviated TVAC) on the affected subsystem interface per the Verification Plan (\textbf{AD-02}).
+    \item \textbf{Payload Non-Replaceability:} The integrated SWIR/MWIR telescope assembly with dichroic beam-splitter and cryogenic FPA cold finger is \emph{not} an LRU. It is permanently integrated during payload-level AIT and cannot be replaced at spacecraft level without full disassembly and optical re-alignment. Any payload-level failure after spacecraft integration requires return to the payload AIT facility.
+    \item \textbf{Propulsion Non-Replaceability:} Once propulsion tanks and feed lines are proof-tested and welded at subsystem level, they are permanently integrated. Post-integration propulsion anomalies require spacecraft-level disposition.
+\end{itemize}
