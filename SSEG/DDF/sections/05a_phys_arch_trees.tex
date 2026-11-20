@@ -1,0 +1,103 @@
+% =============================================================================
+% SECTION 5: PHYSICAL DESCRIPTION (SUBSECTIONS 5.1–5.3)
+% =============================================================================
+\subsection{5. Physical Description}
+
+This section defines the physical architecture of the \abbr{EWAS} Space Segment, establishing the dual-tier orbital constellation and inter-satellite communications backbone (Section~5.1), the hardware Product Tree (Section~5.2), and the governing Specification Tree (Section~5.3). Detailed flight-system element designs and the external and internal interface definitions follow in Sections~5.4 and~5.5, respectively.
+
+\subsubsection{5.1 Physical Architecture}
+
+\paragraph{Dual-Tier Orbital Constellation.}
+To combine persistent wide-area boost-phase surveillance with accurate stereoscopic tracking, the Space Segment is organized into two cooperative orbital layers. The upper detection and relay layer consists of 6 geostationary satellites (\texttt{SATG}) spaced evenly every $60^\circ$ along the equatorial belt at 35,786~km altitude, keeping 2--3 nodes continuously visible over the Baltic region while providing wide-area boost-phase surveillance up to $\sim 70^\circ$ latitude. Beneath it, the tracking layer comprises 72 low-orbit satellites (\texttt{SATL}) flying at 1,000~km circular altitude in an 8-plane Walker Delta $72/8/1$ constellation ($i = 80^\circ$ nominal within a $78^\circ\text{--}82^\circ$ design window, 9 satellites per plane, and $\Delta u_{\text{inter}} = 22.5^\circ$ inter-plane stagger). This high-inclination geometry keeps 5--7 low-orbit satellites simultaneously in view over the Baltic Sea ($53^\circ\text{--}66^\circ\text{N}$), ensuring that the Ground Segment can always select a tracking pair with a favorable stereoscopic convergence angle ($\beta \in [30^\circ, 120^\circ]$). Table~\ref{tab:orbital_constellation} summarizes the baseline orbital and physical parameters for both layers.
+
+\paragraph{Space-to-Space Optical Backbone and RF Ground Access.}
+All space-to-space data routing operates above the atmosphere over encrypted 1,550~nm laser optical inter-satellite links (\abbr{OISL}). Each \texttt{SATL} spacecraft carries four laser terminals: two fixed fore-and-aft terminals maintaining continuous intra-plane lock (5,047~km chord) to form 8 resilient orbital rings, and two agile cross-plane periscopes linking adjacent planes (5,647--6,144~km equatorial chord, keeping the optical path $> 245\text{ km}$ above Earth's surface and qualified to $\ge 6{,}500\text{ km}$ at $\ge 500\text{ Mbps}$). High-capacity cross-layer laser trunks ($34{,}800\text{--}45{,}000\text{ km}$, $\ge 1.5\text{--}2.0\text{ Gbps}$) connect the low-orbit mesh directly to the 6 geostationary relay nodes to avoid multi-hop latency across extra-regional threat corridors. For all-weather cloud penetration to Earth, both orbital layers connect directly to the Ground Station Network via redundant S-, X-, and Ka-band radio-frequency (\abbr{RF}) links. Maintaining direct \abbr{RF} access on both layers guarantees reliable commanding during \abbr{LEOP} and Safe Mode, provides all-weather downlink over ground stations without a single point of failure, and complements the \abbr{OISL} relay whenever tracking satellites are outside direct ground-station view.
+
+\begin{table}[htbp]
+\centering
+\caption{Baseline Orbital and Physical Constellation Parameters}
+\label{tab:orbital_constellation}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Parameter} & \thead{SATG (GEO Layer)} & \thead{SATL (LEO Layer)} \\ \hline
+    \textbf{Primary Role} & Persistent 24/7 boost-phase plume detection, coarse localization, and cross-layer \abbr{OISL} trunk relay. & Agile cued \abbr{NFOV} lock-on ($<5\text{ s}$), synchronized stereo tracking, onboard preliminary 3D trajectory, and \abbr{LOS} package downlink. \\ \hline
+    \textbf{Active Satellites} & 6 spacecraft (\texttt{123456.03.02}) & 72 spacecraft (\texttt{123456.03.01}) \\ \hline
+    \textbf{Topology} & $60^\circ$ equatorial ring (uniform longitude slot spacing) & Walker Delta $72/8/1$: 8 planes $\times$ 9 sats, $\Delta\Omega = 45^\circ$, $\Delta u = 40^\circ$, $\Delta u_{\text{inter}} = 22.5^\circ$ ($15^\circ\text{--}22.5^\circ$ window) \\ \hline
+    \textbf{Nominal Altitude} & 35,786~km (geostationary) & 1,000~km (circular \abbr{LEO}) \\ \hline
+    \textbf{Semi-Major Axis \& Eccentricity} & $a = 42{,}164.14\text{ km}$; $e \le 0.0005$ & $a = 7{,}378.14\text{ km}$; $e \le 0.001$ \\ \hline
+    \textbf{Inclination} & $0.0^\circ \pm 0.05^\circ$ (station-kept) & $80.0^\circ$ nominal ($78^\circ\text{--}82^\circ$ window) \\ \hline
+    \textbf{Orbital Period \& Velocity} & $23\text{ h } 56\text{ min } 4\text{ s}$; $3.075\text{ km/s}$ & $105.12\text{ min}$; $7.350\text{ km/s}$ \\ \hline
+    \textbf{Earth Central Half-Angle ($5^\circ$ elev.)} & $76.30^\circ$ (slant range $\le 41{,}120\text{ km}$) & $25.55^\circ$ (slant range $\le 3{,}290\text{ km}$) \\ \hline
+    \textbf{Baltic Visibility ($53^\circ\text{--}66^\circ\text{N}$)} & 2--3 nodes continuously visible & 5--7 nodes simultaneously visible 24/7 \\ \hline
+    \textbf{Design Lifetime \& EOL} & $\ge 15\text{ yr}$; $+300\text{ km}$ graveyard boost & $\ge 7\text{ yr}$; $<5\text{ yr}$ active deorbit \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{5.2 Product Tree}
+
+The Space Segment Configuration Item (\texttt{CI-03}) decomposes physically into two flight-system Configuration Items: \texttt{SATL} (72 low-orbit tracking units) and \texttt{SATG} (6 geostationary detection and relay units). Both spacecraft lines share a common eight-branch Level-4 subsystem structure aligned with the parent project Work Breakdown Structure, incorporating two structural refinements for complete physical accounting: Structures and Mechanisms (\texttt{.08}) is tracked explicitly as a dedicated physical subsystem, and Avionics (\texttt{.06}) is partitioned internally into On-Board Data Handling (\texttt{.06.01}), Communications and \abbr{OISL} (\texttt{.06.02}), and Flight Software (\texttt{.06.03}), while Constellation Configuration (\texttt{.07}) governs segment-level phasing and orbit definition across all 78 spacecraft. Table~\ref{tab:product_tree} presents the complete Space Segment Product Tree.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Product Tree --- \texttt{CI-03} / \abbr{WBS} \texttt{123456.03}}
+\label{tab:product_tree}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Level} & \thead{WBS / CI Code} & \thead{Product Element} & \thead{Scope \& Quantity} \\ \hline
+    Level~2 & \texttt{123456.03} (\texttt{CI-03}) & \textbf{Space Segment (\abbr{SSEG})} & Integrated hybrid constellation (78 flight units: 72~\texttt{SATL} + 6~\texttt{SATG}) \\ \hline
+    Level~3 & \texttt{123456.03.01} & \textbf{LEO Tracking Satellite (\texttt{SATL})} & 72 Flight Models (8 planes $\times$ 9 units, 1,000~km circular orbit) \\ \hline
+    Level~3 & \texttt{123456.03.02} & \textbf{GEO Detection Satellite (\texttt{SATG})} & 6 Flight Models ($60^\circ$ equatorial ring, 35,786~km altitude) \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \multicolumn{4}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\textbf{Level~4 --- Common Subsystem Breakdown under \texttt{123456.03.01} (\texttt{SATL}) \& \texttt{123456.03.02} (\texttt{SATG})}} \\ \hline
+    Level~4 & \texttt{.01} (\texttt{.01.01}/\texttt{.02}) & Thermal Control (\abbr{TCS}) & Passive (\texttt{.01.01}: \abbr{MLI}, radiators) and Active (\texttt{.01.02}: 65--95~K cryocoolers, heat pipes, heaters) \\ \hline
+    Level~4 & \texttt{.02} & Attitude Determination \& Control (\abbr{ADCS}) & Dual optical-bench star trackers, \abbr{FOG} \abbr{IMU}, \abbr{GNSS} receivers, reaction wheels, magnetorquers \\ \hline
+    Level~4 & \texttt{.03} & Electrical Power (\abbr{EPS}) & Deployable $\mathrm{GaAs}$ solar arrays, $\mathrm{Li\text{-}ion}$ eclipse battery pack, \abbr{PCDU} with latch-up limiters \\ \hline
+    Level~4 & \texttt{.04} & Mission Payload (\abbr{PLD}) & Cooled dual-band \abbr{SWIR}/\abbr{MWIR} optics; independent 2-axis gimbal and \abbr{FSM} on \texttt{SATL} \\ \hline
+    Level~4 & \texttt{.05} & Propulsion (\abbr{PROP}) & Orbit insertion/transfer, staggered station-keeping, \abbr{CAM}, and active \abbr{EOL} disposal propulsion \\ \hline
+    Level~4 & \texttt{.06} (\texttt{.06.01}--\texttt{.03}) & Avionics (\abbr{OBDH}, Comms/\abbr{OISL}, \abbr{FSW}) & \abbr{C\&DH}/\abbr{OBDH} computers (\texttt{.06.01}), S/X/Ka \abbr{RF} \& 1,550~nm \abbr{OISL} terminals (\texttt{.06.02}), Flight Software (\texttt{.06.03}) \\ \hline
+    Level~4 & \texttt{.07} (\texttt{.07.01}/\texttt{.02}) & Constellation Configuration (\texttt{CONF}) & Segment-level astrodynamic baseline: Phasing Plan (\texttt{.07.01}) and Orbit Definition (\texttt{.07.02}) \\ \hline
+    Level~4 & \texttt{.08} & Structures \& Mechanisms (\abbr{STR/MEC}) & Primary bus structure, 9-sat dispensers, micro-vibration isolators, $\mathrm{Al}/\mathrm{Ta}$ spot shielding, optical baffles \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{5.3 Specification Tree}
+
+Binding technical requirements flow strictly top-down from the System Level (Level~1) to the Space Segment Level (Level~2) and subordinate spacecraft specifications (Level~3), ensuring full traceability from mission objectives to flight hardware. At each tier, companion design, justification, and interface baselines sit alongside the requirements documents, while cross-cutting programme verification documents govern compliance closure across both the Ground (\texttt{123456.02}) and Space (\texttt{123456.03}) segments. Table~\ref{tab:spec_tree} lists the complete Space Segment Specification Tree hierarchy.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Specification Tree Hierarchy}
+\label{tab:spec_tree}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{3.9cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.7cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Tier} & \thead{Document Number} & \thead{Title \& Scope} & \thead{Role / Status} \\ \hline
+    Level~1 (System) & \texttt{EWAS-HSB-SYS-SRD-01} & Overall System Requirements (\texttt{R-001}--\texttt{R-049}) and mission \abbr{CONOPS} & Parent Baseline, Rev.~1.0 \\ \hline
+    Level~2 (Segment Req.) & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment \abbr{TRS} (39 requirements allocated to \texttt{CI-03}) & Applicable Baseline, Issue~1.5 \\ \hline
+    Level~2 (Segment Design) & \texttt{EWAS-HSB-SSEG-DDF-03} \newline \texttt{EWAS-HSB-SSEG-DDJF-03} & Space Segment \abbr{DDF} (this document) and Design Justification File (\abbr{DDJF}) & Companion Baseline \\ \hline
+    Level~2 (Interfaces) & \texttt{EWAS-HSB-SSEG-ICD-03} & Space Segment \abbr{ICD} (\texttt{123456.05.02}) & Interface Baseline, Planned \\ \hline
+    Level~3 (Spacecraft Req.) & \texttt{EWAS-HSB-SATL-TRS-03.01} \newline \texttt{EWAS-HSB-SATG-TRS-03.02} & Subordinate \texttt{SATL} (\abbr{LEO}) and \texttt{SATG} (\abbr{GEO}) Spacecraft \abbr{TRS}s & Subordinate Req., Issue~0.1 \\ \hline
+    Level~3 (Spacecraft Design) & \texttt{EWAS-HSB-SATL-DDF-03.01} \newline \texttt{EWAS-HSB-SATG-DDF-03.02} & Subordinate \texttt{SATL} and \texttt{SATG} Spacecraft Design Definition Files & Subordinate Design, Planned \\ \hline
+    Programme Verification & \texttt{EWAS-HSB-VP-01} \newline \texttt{EWAS-HSB-VCD-01} & Verification Plan (Issue~0.2) and Verification Control Document (Issue~0.3) & Cross-Cutting Applicable \\ \hline
+\end{tabularx}}
+\end{table}

@@ -1,0 +1,53 @@
+% =============================================================================
+% SECTION 5.4: DESCRIPTION OF PHYSICAL ARCHITECTURE ELEMENTS
+% =============================================================================
+\subsubsection{5.4 Description of Physical Architecture Elements}
+
+\paragraph{Element Identification and Platform Concepts.}
+To maintain configuration control across all 78 flight spacecraft from serial manufacturing through end-of-life disposal, every flight unit and subsystem assembly carries a unique hardware identifier. Low-orbit tracking spacecraft are designated \texttt{SATL-FM-01} through \texttt{SATL-FM-72}, mapped systematically to orbital planes \texttt{P1}--\texttt{P8} and in-plane slots \texttt{S1}--\texttt{S9}. Geostationary detection and relay spacecraft are designated \texttt{SATG-FM-01} through \texttt{SATG-FM-06}, corresponding to equatorial longitude slots \texttt{G1}--\texttt{G6}. Individual flight subsystem assemblies are tagged by appending their Level-4 \abbr{WBS} branch code (\texttt{.01} through \texttt{.08}) to the parent flight model identifier, enabling unambiguous part traceability during integration, in-orbit commissioning, and fleet-wide fault management.
+
+\textbf{\texttt{SATL} --- LEO Tracking Satellite (\abbr{WBS} \texttt{123456.03.01}, 72 units).}
+Each \texttt{SATL} spacecraft is a compact, three-axis stabilized tracking platform with a dry mass of 200--250~kg, a wet launch mass of 230--290~kg, an end-of-life average power envelope of 450--650~W, and a nominal operational lifetime of at least 7~years. Its mechanical footprint is tailored for serial batch production and plane-by-plane deployment on cylindrical 9-satellite rideshare dispensers ($\le 2{,}800\text{ kg}$ total stack mass per launch). Because the 1,000~km circular orbit remains below the core of the inner Van Allen proton belt, \texttt{SATL} adopts the \emph{Careful \abbr{COTS}} avionics philosophy rather than full space-grade radiation-hardened parts across all 72 buses. Industrial- and automotive-grade high-throughput processors and programmable logic devices are up-screened by radiation lot acceptance testing and safeguarded through localized graded-Z $\mathrm{Al}/\mathrm{Ta}$ spot shielding (4--8~mm equivalent aluminium), dual A/B block redundancy, error-correcting memory scrubbing, triple modular redundancy voting, and fast-acting latch-up current limiters.
+
+\textbf{\texttt{SATG} --- GEO Detection and Relay Satellite (\abbr{WBS} \texttt{123456.03.02}, 6 units).}
+Each \texttt{SATG} spacecraft is a high-reliability geostationary platform with a dry mass of 1,550--1,950~kg, a wet launch mass of 2,400--3,100~kg, an end-of-life power envelope of 3.5--5.0~kW, and a design lifetime of at least 15~years, sized for single- or dual-manifest heavy-lift launches to geostationary transfer or direct geostationary orbit. Operating continuously inside the outer Van Allen electron belt exposes \texttt{SATG} to high cumulative relativistic electron doses and magnetospheric spacecraft charging. Consequently, all critical bus computers, power controllers, and attitude avionics employ space-grade QML-V radiation-hardened electronics paired with radiation-tolerant high-speed payload processors, while all external thermal blankets, radiators, and structural panels are electrically bonded to a common conductive ground reference to prevent electrostatic discharge.
+
+\paragraph{Subsystem Design Baseline.}
+Both flight-system lines implement the eight-branch Level-4 subsystem structure defined in Section~5.2. Table~\ref{tab:subsystem_baseline} summarizes the core physical hardware, design allocations, and baseline mass and power envelopes for \texttt{SATL} and \texttt{SATG}.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Subsystem Design Baseline and Envelopes for \texttt{SATL} and \texttt{SATG}}
+\label{tab:subsystem_baseline}
+\vspace{0.25em}
+{\scriptsize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.3cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Subsystem} & \thead{WBS} & \thead{Core Physical Hardware \& Design Allocation} & \thead{SATL Envelope} & \thead{SATG Envelope} \\ \hline
+    \textbf{Thermal Control (\abbr{TCS})} & \texttt{.01} (\texttt{.01.01}/\texttt{.02}) & Passive \abbr{MLI} \& radiators; active loop heat pipes, heaters, and pulse-tube cryocoolers holding \abbr{FPA}s at 65--95~K ($\pm 0.1\text{ K}$). & 16--22~kg \newline 85--125~W & 130--175~kg \newline 550--800~W \\ \hline
+    \textbf{Attitude Control (\abbr{ADCS})} & \texttt{.02} & Optical-bench dual star trackers + \abbr{FOG} \abbr{IMU} ($\text{AKE} \le 10\text{--}15~\mu\mathrm{rad}$); \abbr{GNSS} ($< 50~\mu\mathrm{s}$ sync); 4 skewed reaction wheels; magnetorquers. & 18--24~kg \newline 45--75~W & 95--130~kg \newline 180--260~W \\ \hline
+    \textbf{Electrical Power (\abbr{EPS})} & \texttt{.03} & Deployable triple-junction $\mathrm{GaAs}$ solar arrays; $\mathrm{Li\text{-}ion}$ battery pack (35~min \abbr{LEO} / 71.5~min \abbr{GEO} eclipse); \abbr{PCDU} with \abbr{SEL} limiters. & 32--40~kg \newline 450--650~W (\abbr{EOL}) & 290--370~kg \newline 3.5--5.0~kW (\abbr{EOL}) \\ \hline
+    \textbf{Mission Payload (\abbr{PLD})} & \texttt{.04} & Cooled dual-band \abbr{SWIR}/\abbr{MWIR} $\mathrm{HgCdTe}$ telescope; dichroic splitter; independent 2-axis gimbal + piezo \abbr{FSM} on \texttt{SATL}. & 48--60~kg \newline 140--190~W & 380--480~kg \newline 950--1,350~W \\ \hline
+    \textbf{Propulsion (\abbr{PROP})} & \texttt{.05} & Orbit insertion/phasing, staggered SK, \abbr{CAM}, and protected \abbr{EOL} disposal reserve (\texttt{SATL} $\Delta v \ge 380\text{ m/s}$; \texttt{SATG} GTO/EOR + 15-yr SK + $+300\text{ km}$ graveyard). & 14--18~kg dry \newline 28--40~kg prop. \newline 60--180~W & 140--180~kg dry \newline 850--1,150~kg prop. \newline 400--1,200~W \\ \hline
+    \textbf{Avionics --- \abbr{OBDH} \& \abbr{FSW}} & \texttt{.06.01}, \texttt{.06.03} & Dual-redundant \abbr{C\&DH} computers (Careful \abbr{COTS} on \texttt{SATL}, QML-V on \texttt{SATG}), radiation-tolerant FPGA payload processor, encrypted mass memory, \abbr{FSW} (\abbr{FDIR}, proton despiking, stereo 3D fit). & 10--14~kg \newline 45--70~W & 45--65~kg \newline 140--210~W \\ \hline
+    \textbf{Avionics --- Comms \& \abbr{OISL}} & \texttt{.06.02} & $4 \times 1{,}550\text{ nm}$ \abbr{OISL} terminals (\texttt{SATL}, $\ge 500\text{ Mbps}$, $\ge 6{,}500\text{ km}$); \abbr{GEO}--\abbr{LEO} optical trunks ($\ge 1.5\text{--}2.0\text{ Gbps}$, 45,000~km); redundant S/X/Ka \abbr{RF} + \abbr{COMSEC}. & 20--25~kg \newline 75--115~W & 130--170~kg \newline 450--700~W \\ \hline
+    \textbf{Constellation Config.\ (\texttt{CONF})} & \texttt{.07} (\texttt{.07.01}/\texttt{.02}) & Segment-level astrodynamic definition: Walker Delta $72/8/1$ ($\Delta u_{\text{inter}} = 22.5^\circ$) \& $60^\circ$ \abbr{GEO} slot phasing plan. & \multicolumn{2}{>{\raggedright\arraybackslash}p{\dimexpr 4.5cm+2\tabcolsep+\arrayrulewidth\relax}|}{Segment-level astrodynamic design governing all 78 spacecraft.} \\ \hline
+    \textbf{Structures \& Mech.\ (\abbr{STR/MEC})} & \texttt{.08} & CFRP/Al-honeycomb primary bus, 9-sat dispenser rings (\texttt{SATL}), micro-vibration isolators, $\mathrm{Al}/\mathrm{Ta}$ spot shielding, multi-vane optical baffles. & 42--52~kg \newline 0--15~W & 340--430~kg \newline 0--40~W \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Total Flight Unit Envelope} & \textbf{\texttt{SATL} (72x) / \texttt{SATG} (6x)} & \textbf{Complete spacecraft envelope (incl.\ propellant \& margin)} & \textbf{200--250~kg Dry} \newline \textbf{230--290~kg Wet} \newline \textbf{450--650~W} & \textbf{1,550--1,950~kg Dry} \newline \textbf{2,400--3,100~kg Wet} \newline \textbf{3.5--5.0~kW} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Level-2 Cross-Subsystem Design Drivers and Delegation to Level-3.}
+Detailed equipment designs, optical prescriptions, thermal nodal models, and electrical schematics are delegated to the subordinate Level-3 design definition files (\textbf{RD-04} for \texttt{SATL} and \textbf{RD-05} for \texttt{SATG}). At Level-2 Space Segment scope, four cross-subsystem architectural features govern segment-wide integration:
+\begin{itemize}[leftmargin=1.4em, itemsep=0.3em, topsep=0.3em]
+    \item \emph{Dual-Band Sensing \& Independent \abbr{LOS} Steering (\texttt{.04} \abbr{PLD} / \texttt{.02} \abbr{ADCS}):} Both layers use co-registered \abbr{SWIR}/\abbr{MWIR} staring and tracking optics for two-colour plume discrimination against clutter; \texttt{SATL} steers its optical line of sight independently via a two-stage gimbal and fast-steering mirror ($< 5\text{ s}$ lock-on, $< 2\text{ arcsec/s}$ stability) so the spacecraft bus stays stationary and \abbr{OISL} locks are never broken.
+    \item \emph{Mandatory Laser Mesh \& All-Weather \abbr{RF} Access (\texttt{.06} Avionics):} Four $1{,}550\text{ nm}$ laser terminals per \texttt{SATL} and cross-layer \texttt{SATG} trunks provide low-latency space-to-space routing and stereoscopic \abbr{LOS} exchange, backed by redundant S/X/Ka-band \abbr{RF} links and fault-tolerant, \abbr{COMSEC}-encrypted avionics.
+    \item \emph{Dual-Zone Thermal Isolation \& Eclipse Continuity (\texttt{.01} \abbr{TCS} / \texttt{.03} \abbr{EPS}):} Each spacecraft thermally decouples its warm avionics and battery compartment from its cryogenically cooled infrared focal plane, while solar arrays and $\mathrm{Li\text{-}ion}$ batteries sustain continuous tracking and relay operations across all \abbr{LEO} and \abbr{GEO} eclipse seasons.
+    \item \emph{Micro-Vibration Damping, Dispenser Compatibility \& Active Disposal (\texttt{.05} \abbr{PROP} / \texttt{.08} \abbr{STR/MEC}):} High-stiffness bus structures isolate internal mechanical disturbances from the optical bench, interface with 9-satellite plane dispensers (\texttt{SATL}) or geostationary launchers (\texttt{SATG}), and reserve dedicated propulsion budgets for active end-of-life deorbit or graveyard disposal.
+\end{itemize}

@@ -1,0 +1,56 @@
+% =============================================================================
+% SECTION 5.5: DESCRIPTION OF INTERFACES
+% =============================================================================
+\subsubsection{5.5 Description of Interfaces}
+
+This subsection defines the functional and physical boundaries of the Space Segment across four external interfaces (\texttt{IF-EXT-01} to \texttt{IF-EXT-04}) and three internal space-segment interface classes (\texttt{IF-INT-01} to \texttt{IF-INT-03}). Detailed packet schemas, connector pinouts, and mechanical interface drawings are controlled at lower levels in the Space Segment Interface Control Document (\textbf{RD-06}, \abbr{WBS} \texttt{123456.05.02}) and the subordinate spacecraft design files (\textbf{RD-04} and \textbf{RD-05}).
+
+\paragraph{External Interfaces (\texttt{IF-EXT-01} to \texttt{IF-EXT-04}).}
+All direct communications between the Space Segment and Earth use all-weather radio frequencies rather than optical lasers, ensuring uninterrupted command and warning delivery through European cloud cover and precipitation. Because the \abbr{EWAS} architecture comprises strictly two system segments---the Ground Segment (\texttt{123456.02}) and the Space Segment (\texttt{123456.03})---launch service providers and space-surveillance networks are managed exclusively as external interfaces rather than additional segments. Table~\ref{tab:sseg_external_interfaces} summarizes the four external interfaces governing Space Segment boundaries.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment External Interfaces --- \texttt{IF-EXT-01} to \texttt{IF-EXT-04}}
+\label{tab:sseg_external_interfaces}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.9cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ID \& Name} & \thead{External Counterpart} & \thead{Physical \& Functional Characteristics} & \thead{Key Ref.} \\ \hline
+    \textbf{\texttt{IF-EXT-01}} \newline Space-to-Ground \abbr{RF} \abbr{TT\&C} \& Mission Data & Ground Station Network (\texttt{123456.02.05}) \& Ground C2 (\texttt{123456.02.02}) & All-weather bidirectional S/X/Ka-band \abbr{RF} links using \abbr{CCSDS} frames, hardware \abbr{COMSEC} encryption, and anti-jamming protection; carries telecommands, tracking cues, housekeeping, \emph{GEO Event Reports}, \emph{LEO Observation Packages}, and \emph{Onboard Preliminary Trajectories}. & \textbf{RD-06}, \newline \texttt{IF-001}, \newline \texttt{ISL-002} \\ \hline
+    \textbf{\texttt{IF-EXT-02}} \newline Launch Vehicle \& Dispenser Interface & Launch Service Providers (\abbr{GEO} \& \abbr{LEO} plane-batch) & Standardized mechanical separation rings (\texttt{SATG} heavy-lift adapter; \texttt{SATL} 9-satellite cylindrical rideshare dispenser stack $\le 2{,}800\text{ kg}$), power/data/$\mathrm{GN_2}$ purge umbilicals, $\ge 3$ independent launch safety inhibits, and launch load/stiffness envelopes. & \textbf{RD-04/05}, \newline \texttt{IF-002}, \newline \texttt{ALLOC-005} \\ \hline
+    \textbf{\texttt{IF-EXT-03}} \newline Target Plume \& Background Optical Scene & Boost/Post-Boost Plumes \& Earth/Solar Background & Uncooperative optical entrance-aperture boundary in co-registered \abbr{SWIR} ($2.65\text{--}2.85~\mu\mathrm{m}$) and \abbr{MWIR} ($4.15\text{--}4.45~\mu\mathrm{m}$) bands; plume discrimination against sunlit clouds, Earth limb, and terrestrial fires; $15^\circ$ solar and $3^\circ$ limb exclusion angles. & \texttt{IF-003}, \newline \texttt{ALLOC-001}, \newline \texttt{ALLOC-004} \\ \hline
+    \textbf{\texttt{IF-EXT-04}} \newline Space Traffic Management \& Regulatory & Space Surveillance Networks (via Ground \abbr{MCC}) \& \abbr{ITU} & Ingestion of Conjunction Data Messages (\abbr{CDM}s) via Ground \abbr{MCC} for collision-avoidance burns at 1,000~km \abbr{LEO} and 35,786~km \abbr{GEO}; \abbr{ITU} \abbr{RF} spectrum compliance, laser aviation/space safety interlocks, and active \abbr{EOL} debris disposal compliance. & \texttt{IF-004}, \newline \texttt{ENV-002}, \newline \texttt{MIS-005} \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Internal Space Segment Interfaces (\texttt{IF-INT-01} to \texttt{IF-INT-03}).}
+Unlike Earth-facing links, all space-to-space communications operate entirely above the atmosphere inside the Space Segment boundary, allowing high-capacity optical laser links without weather attenuation. Within each spacecraft, the mechanical, thermal, electrical, and data boundary between the bus platform and mission payload is standardized across both flight-system lines and controlled in detail at Level-3. Table~\ref{tab:sseg_internal_interfaces} summarizes the three internal interface classes.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Internal Interfaces --- \texttt{IF-INT-01} to \texttt{IF-INT-03}}
+\label{tab:sseg_internal_interfaces}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.5cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ID \& Name} & \thead{Connected Elements} & \thead{Physical \& Functional Characteristics} & \thead{Key Parameters} \\ \hline
+    \textbf{\texttt{IF-INT-01}} \newline Intra-Layer \abbr{LEO} Optical Mesh & \texttt{SATL} $\leftrightarrow$ \texttt{SATL} \newline (72 \abbr{LEO} nodes) & Four $1{,}550\text{ nm}$ laser terminals per satellite (2 fixed fore/aft links forming 8 orbital rings $+$ 2 agile cross-plane periscopes); routes tracking cues, $10\text{--}20\text{ Hz}$ \abbr{GNSS}-synced \abbr{LOS} vectors for 3D triangulation, and health telemetry. & $\ge 500\text{ Mbps}$ full-duplex; $\ge 6{,}500\text{ km}$ range; $> 245\text{ km}$ limb clearance; \abbr{COMSEC} \\ \hline
+    \textbf{\texttt{IF-INT-02}} \newline Cross-Layer \abbr{GEO}--\abbr{LEO} Optical Relay Trunk & \texttt{SATG} $\leftrightarrow$ \texttt{SATL} \newline (6 \abbr{GEO} to 72 \abbr{LEO}) & Long-range $1{,}550\text{ nm}$ agile laser trunks bridging the \abbr{LEO} mesh directly to \abbr{GEO} relay nodes to eliminate multi-hop latency across extra-regional launch corridors. & $\ge 1.5\text{--}2.0\text{ Gbps}$ aggregate; $34{,}800\text{--}45{,}000\text{ km}$ range; $< 1.5~\mu\mathrm{rad}$ pointing \\ \hline
+    \textbf{\texttt{IF-INT-03}} \newline Spacecraft Bus-to-Payload \& Avionics Boundary & Platform (\texttt{.01}--\texttt{.03}, \texttt{.05}--\texttt{.08}) $\leftrightarrow$ Payload (\texttt{.04}) & Mechanically isolated and thermally decoupled interface between warm bus ($263\text{--}323\text{ K}$) and cold optical bench ($180\text{--}210\text{ K}$), regulated \abbr{PCDU} power with latch-up limiters, and deterministic onboard data/timing bus (detailed in \textbf{RD-04}/\textbf{RD-05}). & $< 50~\mu\mathrm{s}$ \abbr{GNSS} \abbr{PPS} sync; \abbr{CCSDS} internal framing; micro-vibration isolated \\ \hline
+\end{tabularx}}
+\end{table}
+
+\paragraph{Interface Standards and Timing Governance.}
+All external \abbr{RF} links and internal \abbr{OISL} channels adhere to uniform \abbr{CCSDS} packet and frame formatting to ensure seamless end-to-end routing between the Ground and Space Segments. Constellation-wide time synchronization is maintained to better than $< 50~\mu\mathrm{s}$ relative to \abbr{UTC} via onboard \abbr{GNSS} receivers so that paired \texttt{SATL} observations remain temporally aligned for valid stereoscopic 3D triangulation. Hardware-enforced \abbr{COMSEC} bulk encryption and cryptographic command authentication protect every external and inter-satellite link against interception and spoofing. All Space Segment interface baselines, protocol profiles, and verification checkpoints are maintained under formal configuration control in the Space Segment Interface Control Document \textbf{RD-06} (\texttt{EWAS-HSB-SSEG-ICD-03}, \abbr{WBS} \texttt{123456.05.02}).

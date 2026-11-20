@@ -1,0 +1,54 @@
+% =============================================================================
+% SECTION 3: SUMMARY OF PROJECT AND TECHNICAL REQUIREMENTS (ECSS-E-ST-10C <3>)
+% =============================================================================
+\subsection{3. Summary of Project and Technical Requirements}
+
+\subsubsection{3.1 Mission Overview and Lifecycle Drivers}
+
+The Early Warning Alarm System (\abbr{EWAS}) is a strictly non-offensive, two-segment civil-protection system comprising the Ground Segment and the Space Segment (\texttt{CI-03}). The Space Segment combines 6 geostationary satellites at $35{,}786\text{ km}$ altitude that watch continuously for missile launches, 72 low-orbit satellites at $1{,}000\text{ km}$ across 8 orbital planes that track each ascending plume in three dimensions, and a mandatory $1{,}550\text{ nm}$ laser inter-satellite network connecting both tiers so validated warnings reach national civil-protection authorities within $60\text{ s}$.
+
+Key engineering requirements shape the Space Segment across all six lifecycle phases:
+\begin{enumerate}[leftmargin=1.6em, itemsep=0.15em, topsep=0.15em]
+    \item \textbf{On-Ground AIT, Storage \& Transport}: Qualification and acceptance testing of flight models, hardware-in-the-loop timing verification, cleanroom contamination protection for infrared optics, and standardized batch handling.
+    \item \textbf{Launch \& Ascent}: Structural stiffness, safety inhibits, and dispenser compatibility for 9-satellite low-orbit plane stacks and dedicated geostationary launches.
+    \item \textbf{LEOP \& Commissioning}: Autonomous detumbling, solar-array and baffle deployment, optical outgassing bake-out, orbit phasing, in-orbit radiometric calibration, and end-to-end warning validation.
+    \item \textbf{Nominal Operations (Modes N1--N5)}: Continuous 24/7 Baltic and extra-regional surveillance, $>95\%$ boost-phase detection, $\le 60\text{ s}$ end-to-end warning latency, $>99.9\%$ system availability, encrypted anti-jam links, and 5-year archival formatting.
+    \item \textbf{Fault Handling \& Safe Mode}: Single-fault-tolerant hardware paired with automatic three-level fault recovery that protects optical apertures and preserves constellation coverage.
+    \item \textbf{End-of-Life Disposal}: Operational lifetimes of at least 7 years in low orbit and 15 years in geostationary orbit, followed by active low-orbit deorbit within 5 years, a $+300\text{ km}$ geostationary graveyard boost, and full passivation.
+\end{enumerate}
+
+\subsubsection{3.2 Requirements-to-Design Summary}
+
+Table~\ref{tab:req_design_drivers} summarises how the Space Segment design satisfies all 39 normative requirements across the nine categories of the Space Segment Technical Requirements Specification (\textbf{AD-01}); complete requirement-by-requirement traceability is provided in Annex~B.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of \textbf{AD-01} Requirement Categories and Space Segment Design Solutions}
+\label{tab:req_design_drivers}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}p{5.1cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{TRS Category} & \thead{Core Requirement (\textbf{AD-01})} & \thead{As-Designed Solution \& DDF Ref.} \\ \hline
+    \texttt{FUN} (6) & Non-offensive warning (no yield/BDA); Baltic and extra-regional coverage; clutter rejection; 5-yr archival provenance. & Two-tier detection/tracking chain, onboard proton despiking and two-colour filtering, provenance-tagged packets (Sec.~4, 5.4). \\ \hline
+    \texttt{MIS} (5) & 24/7 zero-gap boost coverage; simultaneous stereo tracking ($\beta \in [30^\circ, 120^\circ]$); staggered maintenance. & 6 \abbr{SATG} ($60^\circ$ spacing) + 72 \abbr{SATL} Walker Delta $72/8/1$ ($i=80^\circ$, 5--7 Baltic nodes); $\le 1$ node offline/region (Sec.~5.1, Annex~A). \\ \hline
+    \texttt{PERF} (4) & Detection $P_d > 95\%$; warning latency $\le 60\text{ s}$; false-alarm suppression; $>99.9\%$ system availability. & Dual-band staring, $\le 40\text{--}45\text{ s}$ Space Segment budget, multi-stage filtering, multi-node constellation redundancy (Sec.~4.3, 6). \\ \hline
+    \texttt{ALLOC} (5) & Dual-band \abbr{SWIR}/\abbr{MWIR} sensing; fast independent \abbr{LOS} steering; onboard 3D fit; baffling; resource margins. & $2.65\text{--}2.85~\mu\mathrm{m}$ / $4.15\text{--}4.45~\mu\mathrm{m}$ payloads; \abbr{SATL} gimbal+FSM ($<5\text{ s}$ lock, $<2\text{ arcsec/s}$); cryogenic baffles (Sec.~5.4, 6). \\ \hline
+    \texttt{ISL} (4) & Mandatory laser \abbr{OISL} mesh and trunks; all-weather \abbr{RF} links; end-to-end \abbr{COMSEC}; anti-jamming and failover. & 4 terminals/\abbr{SATL} ($1{,}550\text{ nm}$, $\ge 500\text{ Mbps}$ mesh, $\ge 1.5\text{--}2.0\text{ Gbps}$ trunks); S/X/Ka \abbr{RF}; encrypted QoS rerouting (Sec.~5.4, 5.5). \\ \hline
+    \texttt{ENV} (3) & \abbr{LEO} proton and \abbr{GEO} electron survivability; mandatory active \abbr{EOL} disposal and permanent passivation. & Shielded/rad-hard avionics; \abbr{SATL} $\Delta v_{\text{EOL}} \ge 230\text{ m/s}$ ($<5\text{ yr}$ demise); \abbr{SATG} $\Delta H \ge +300\text{ km}$; full venting/cutoff (Sec.~5.4, 6). \\ \hline
+    \texttt{OPS} (3) & $\ge 7\text{ yr}$ \abbr{LEO} / $\ge 15\text{ yr}$ \abbr{GEO} life; no single-point failures; 3-level \abbr{FDIR}; telemetry, buffering, and \abbr{OTA} updates. & Redundant A/B avionics, autonomous L1/L2/L3 \abbr{FDIR} and Safe Mode, encrypted non-volatile buffers, signed \abbr{OTA} (Sec.~4.3, 7.2). \\ \hline
+    \texttt{IF} (4) & Controlled external interfaces for Ground \abbr{RF}, launch dispensers, target plume scene, and space traffic/regulations. & Formal interface control across \texttt{IF-EXT-01} to \texttt{IF-EXT-04}, including 9-sat dispensers and \abbr{CDM}/\abbr{ITU} rules (Sec.~5.5). \\ \hline
+    \texttt{VER} (5) & Simulation, \abbr{HIL} testing, \abbr{QM}/\abbr{PFM}/\abbr{FM} environmental campaigns, in-orbit validation, and archive replay. & Model-based orbital/radiometric verification, \abbr{HIL} timing tests, qualification campaigns, and replayable event logs (Sec.~7.1, 8). \\ \hline
+\end{tabularx}}
+\end{table}
+
+\subsubsection{3.3 Design Documentation Structure}
+
+This Level-2 Design Definition File anchors the Space Segment baseline between the parent technical requirements (\textbf{AD-01}) and the subordinate spacecraft-level engineering documents. Trade-off analyses, radiometric and orbital derivations, and latency justifications reside in the companion Design Justification File (\textbf{RD-01}). Aligned with the Product Tree and Specification Tree in Sections~5.2--5.3, the subsystem allocations defined in this document flow directly into the Level-3 technical specifications (\textbf{RD-02}, \textbf{RD-03}) and detailed design files (\textbf{RD-04}, \textbf{RD-05}) for the low-orbit (\abbr{SATL}) and geostationary (\abbr{SATG}) spacecraft.
+
+\newpage

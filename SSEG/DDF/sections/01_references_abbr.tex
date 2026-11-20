@@ -1,0 +1,169 @@
+% =============================================================================
+% SECTION: REFERENCES & ABBREVIATIONS (ECSS-E-ST-10C Annex G Clause <2>)
+% =============================================================================
+\section{References}
+
+\subsection{Applicable Documents (AD)}
+
+The following Applicable Documents (\abbr{AD}) form part of this Design Definition File (\abbr{DDF}) to the extent specified herein. For this joint HSB/PG Phase A/B academic baseline, programme-level system engineering, configuration management, and product assurance rules are governed jointly by \textbf{AD-02} and \textbf{AD-03}, while reference coordinate systems are defined in Annex~A of this \abbr{DDF}.
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.9cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.8cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{AD No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+    \textbf{AD-01} & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment Technical Requirements Specification (CI-03) & Issue 1.5 \\ \hline
+    \textbf{AD-02} & \texttt{EWAS-HSB-SYS-SRD-01}  & EWAS Final Report: Mission Definition, CONOPS, WBS, and Overall System Requirements Baseline (\texttt{R-001} to \texttt{R-049}) & Rev. 1.0 \\ \hline
+    \textbf{AD-03} & \texttt{EWAS-HSB-VP-01}       & Programme Verification Plan; verification approach, methods, model philosophy, and governance & Issue 0.2 \\ \hline
+    \textbf{AD-04} & \texttt{EWAS-HSB-VCD-01}      & Programme Verification Control Document; requirement-by-requirement verification control record & Issue 0.3 \\ \hline
+\end{tabularx}}
+
+\vspace{0.8em}
+\subsection{Reference Documents (RD)}
+
+The following Reference Documents (\abbr{RD}) provide supporting design justification, subordinate Level-3 technical specifications, interface control definitions, and engineering standards referenced in this \abbr{DDF} per \abbr{ECSS}-E-ST-10C Annex~G Clause~\textless2\textgreater c.
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.8cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{RD No.} & \thead{Document Number} & \thead{Title} & \thead{Issue} \\ \hline
+    \textbf{RD-01} & \texttt{EWAS-HSB-SSEG-DDJF-03}   & Space Segment Design Justification File; design rationale, trade-offs, and analytical derivations & Issue 0.1 \\ \hline
+    \textbf{RD-02} & \texttt{EWAS-HSB-SATL-TRS-03.01} & LEO Tracking Satellite (SATL) Level-3 Technical Requirements Specification & Issue 0.1 \\ \hline
+    \textbf{RD-03} & \texttt{EWAS-HSB-SATG-TRS-03.02} & GEO Detection Satellite (SATG) Level-3 Technical Requirements Specification & Issue 0.1 \\ \hline
+    \textbf{RD-04} & \texttt{EWAS-HSB-SATL-DDF-03.01} & LEO Tracking Satellite (SATL) Level-3 Design Definition File & Planned \\ \hline
+    \textbf{RD-05} & \texttt{EWAS-HSB-SATG-DDF-03.02} & GEO Detection Satellite (SATG) Level-3 Design Definition File & Planned \\ \hline
+    \textbf{RD-06} & \texttt{EWAS-HSB-SSEG-ICD-03}    & Space Segment Interface Control Document (WBS \texttt{123456.05.02}) & Planned \\ \hline
+    \textbf{RD-07} & \texttt{ECSS-E-ST-10C}           & Space Engineering --- System Engineering General Requirements (Annexes G, H, I, J) \& \texttt{ECSS-E-ST-10-09C} (Coordinate Systems) & Tailored \\ \hline
+\end{tabularx}}
+
+\vspace{0.8em}
+\subsection{Terms, Definitions and Abbreviations}
+
+\subsubsection{Project-Specific Terms and Definitions}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.25em, topsep=0.2em]
+    \item \textbf{As-Designed Baseline}: The technical configuration of Configuration Item \texttt{CI-03} established during Phase~A/B to satisfy the functional, performance, interface, and budget requirements of \textbf{AD-01}, prior to physical qualification and as-built verification.
+    \item \textbf{Careful COTS}: A parts selection and assurance philosophy for the 72-satellite \abbr{SATL} \abbr{LEO} layer that combines commercial/automotive-grade components with targeted radiation lot screening, localized \(\mathrm{Al}/\mathrm{Ta}\) spot shielding, \abbr{EDAC}/\abbr{TMR} protection, and hardware watchdog \abbr{SEL} current-limiting to balance 7-year reliability against constellation unit cost.
+    \item \textbf{Proton Despiking}: Real-time on-board temporal and spatial filtering applied within the \abbr{SATL}/\abbr{SATG} infrared focal plane read-out pipeline to reject transient high-energy proton charge-deposition spikes without triggering false boost-phase plume tracks.
+    \item \textbf{South Atlantic Anomaly (SAA)}: A geomagnetic dip region over the South Atlantic and South America where the inner Van Allen radiation belt approaches low Earth orbit (\(\sim 200\text{--}1000\text{ km}\)), exposing \abbr{SATL} platforms at \(1{,}000\text{ km}\) circular altitude to elevated trapped proton fluxes requiring heightened \abbr{SEU}/\abbr{SEL} mitigation and focal-plane despiking.
+\end{itemize}
+
+\subsubsection{Abbreviations}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{12.4cm}|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Abbreviation} & \thead{Meaning} \\ \hline
+    \endfirsthead
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Abbreviation} & \thead{Meaning (Continued)} \\ \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \textbf{ADCS}   & Attitude Determination and Control Subsystem \\ \hline
+    \textbf{AIT}    & Assembly, Integration, and Test \\ \hline
+    \textbf{AKE}    & Attitude Knowledge Error \\ \hline
+    \textbf{APE}    & Absolute Pointing Error \\ \hline
+    \textbf{BOL}    & Beginning of Life \\ \hline
+    \textbf{C\&DH}  & Command and Data Handling \\ \hline
+    \textbf{CAM}    & Collision Avoidance Manoeuvre \\ \hline
+    \textbf{CCSDS}  & Consultative Committee for Space Data Systems \\ \hline
+    \textbf{CDM}    & Conjunction Data Message \\ \hline
+    \textbf{CI}     & Configuration Item \\ \hline
+    \textbf{COMSEC} & Communications Security \\ \hline
+    \textbf{CONF}   & Constellation Configuration \\ \hline
+    \textbf{CONOPS} & Concept of Operations \\ \hline
+    \textbf{COTS}   & Commercial Off-The-Shelf \\ \hline
+    \textbf{CVCM}   & Collected Volatile Condensable Material \\ \hline
+    \textbf{DD}     & Displacement Damage \\ \hline
+    \textbf{DDF}    & Design Definition File \\ \hline
+    \textbf{DDJF}   & Design Justification File \\ \hline
+    \textbf{ECEF}   & Earth-Centered, Earth-Fixed \\ \hline
+    \textbf{ECI}    & Earth-Centered Inertial \\ \hline
+    \textbf{ECSS}   & European Cooperation for Space Standardization \\ \hline
+    \textbf{EDAC}   & Error Detection and Correction \\ \hline
+    \textbf{EM}     & Engineering Model \\ \hline
+    \textbf{EOL}    & End of Life \\ \hline
+    \textbf{EPS}    & Electrical Power Subsystem \\ \hline
+    \textbf{EWAS}   & Early Warning Alarm System \\ \hline
+    \textbf{FDIR}   & Fault Detection, Isolation, and Recovery \\ \hline
+    \textbf{FM}     & Flight Model \\ \hline
+    \textbf{FOG}    & Fibre-Optic Gyroscope \\ \hline
+    \textbf{FOR}    & Field of Regard \\ \hline
+    \textbf{FOV}    & Field of View \\ \hline
+    \textbf{FPA}    & Focal Plane Array \\ \hline
+    \textbf{FSM}    & Fast Steering Mirror \\ \hline
+    \textbf{FSW}    & Flight Software \\ \hline
+    \textbf{GEO}    & Geostationary Earth Orbit \\ \hline
+    \textbf{GMAT}   & General Mission Analysis Tool \\ \hline
+    \textbf{GSD}    & Ground Sample Distance \\ \hline
+    \textbf{HIL}    & Hardware-in-the-Loop \\ \hline
+    \textbf{ICD}    & Interface Control Document \\ \hline
+    \textbf{IIP}    & Instantaneous Impact Point \\ \hline
+    \textbf{IR}     & Infrared \\ \hline
+    \textbf{ISL}    & Inter-Satellite Link \\ \hline
+    \textbf{ITU}    & International Telecommunication Union \\ \hline
+    \textbf{LEO}    & Low Earth Orbit \\ \hline
+    \textbf{LEOP}   & Launch and Early Orbit Phase \\ \hline
+    \textbf{LOS}    & Line of Sight \\ \hline
+    \textbf{LRU}    & Line-Replaceable Unit \\ \hline
+    \textbf{LVLH}   & Local Vertical, Local Horizontal \\ \hline
+    \textbf{MCT}    & Mercury Cadmium Telluride (HgCdTe) \\ \hline
+    \textbf{MLI}    & Multi-Layer Insulation \\ \hline
+    \textbf{MMOD}   & Micrometeoroid and Orbital Debris \\ \hline
+    \textbf{MWIR}   & Mid-Wave Infrared (\(3\text{--}5\ \mu\text{m}\)) \\ \hline
+    \textbf{NFOV}   & Narrow Field of View \\ \hline
+    \textbf{OBDH}   & On-Board Data Handling \\ \hline
+    \textbf{OISL}   & Optical Inter-Satellite Link \\ \hline
+    \textbf{OTA}    & Over-The-Air \\ \hline
+    \textbf{PFM}    & Proto-Flight Model \\ \hline
+    \textbf{PLD}    & Electro-Optical Infrared Payload Subsystem \\ \hline
+    \textbf{PROP}   & Propulsion Subsystem \\ \hline
+    \textbf{QM}     & Qualification Model \\ \hline
+    \textbf{RF}     & Radio Frequency \\ \hline
+    \textbf{RPE}    & Relative Pointing Error \\ \hline
+    \textbf{SAA}    & South Atlantic Anomaly \\ \hline
+    \textbf{SATG}   & GEO Detection Satellite \\ \hline
+    \textbf{SATL}   & LEO Tracking Satellite \\ \hline
+    \textbf{SEE}    & Single-Event Effect \\ \hline
+    \textbf{SEL}    & Single-Event Latch-up \\ \hline
+    \textbf{SEU}    & Single-Event Upset \\ \hline
+    \textbf{SSEG}   & Space Segment \\ \hline
+    \textbf{STM}    & Structural and Thermal Model \\ \hline
+    \textbf{STR/MEC}& Structures and Mechanisms Subsystem \\ \hline
+    \textbf{SWIR}   & Short-Wave Infrared (\(1\text{--}3\ \mu\text{m}\)) \\ \hline
+    \textbf{TBC}    & To Be Confirmed \\ \hline
+    \textbf{TBD}    & To Be Determined \\ \hline
+    \textbf{TCS}    & Thermal Control Subsystem \\ \hline
+    \textbf{TID}    & Total Ionizing Dose \\ \hline
+    \textbf{TML}    & Total Mass Loss \\ \hline
+    \textbf{TMR}    & Triple Modular Redundancy \\ \hline
+    \textbf{TRS}    & Technical Requirements Specification \\ \hline
+    \textbf{TT\&C}  & Telemetry, Tracking, and Command \\ \hline
+    \textbf{TVAC}   & Thermal Vacuum \\ \hline
+    \textbf{VCD}    & Verification Control Document \\ \hline
+    \textbf{VP}     & Verification Plan \\ \hline
+    \textbf{WBS}    & Work Breakdown Structure \\ \hline
+    \textbf{WFOV}   & Wide Field of View \\ \hline
+\end{longtable}\addtocounter{table}{-1}}
+
+\newpage
