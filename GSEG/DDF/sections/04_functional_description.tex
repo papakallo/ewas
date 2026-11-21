@@ -1,0 +1,142 @@
+% GSEG DDF — Section 4, concise English working draft.
+% Content only. Required packages in DDFmain.tex: longtable, tikz, float.
+% TikZ libraries: arrows.meta, positioning, fit.
+% Manual section numbers match the existing GSEG TRS/DDF style (secnumdepth=-1).
+\section{4. Functional Description}
+
+\subsection{4.1 Functional Architecture}
+
+The Ground Segment (GSEG, CI-02) integrates six subsystems: Ground Station Network (GSN), Command \& Control (C\&C), Data Processing System (DPS), Early Warning System (EWS), Mission Control Center (MCC), and Data Archiving System (DAS). Its time-critical event-response chain uses GSN, C\&C, DPS and EWS. MCC supervises operations and supports authorized post-warning actions; DAS retains mission records. Neither operator review nor archive completion is a prerequisite for the first automatic warning (\texttt{GSEG-REQ-ARC-002}).
+
+GSN is the GSEG communications boundary with the Space Segment (SSEG); C\&C coordinates LEO observations; DPS owns automated ground event classification, authoritative observation fusion and impact assessment; EWS delivers warnings to authorized recipients. The functional allocation is defined in Section~4.2, while the interaction between these functions is defined in Section~4.3.
+
+\subsection{4.2 Function Tree}
+
+Figure~\ref{fig:gseg_function_tree} shows the first-level decomposition of GSEG functions. Function identifiers (F-xx) are provisional DDF design identifiers, not requirement identifiers.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,align=center,font=\bfseries\small,text width=7.2cm,minimum height=8mm},
+  group/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=center,font=\bfseries\small,text width=5.7cm,minimum height=7mm},
+  fn/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=center,font=\small,text width=5.7cm,minimum height=7mm},
+  edge/.style={-Stealth,draw=HeadingBlue,thin}
+]
+\node[root] (root) at (0,0) {F-00 Ground Segment mission support};
+\node[group] (critical) at (-3.15,-1.25) {Critical event-response functions};
+\node[group] (support) at (3.15,-1.25) {Supervision, retention and assurance};
+\node[fn] (f1) at (-3.15,-2.25) {F-01 SSEG data exchange (GSN)};
+\node[fn] (f2) at (-3.15,-3.20) {F-02 Observation coordination (C\&C)};
+\node[fn] (f3) at (-3.15,-4.15) {F-03 Event assessment (DPS)};
+\node[fn] (f4) at (-3.15,-5.10) {F-04 Warning delivery (EWS)};
+\node[fn] (f5) at (3.15,-2.25) {F-05 Mission supervision (MCC)};
+\node[fn] (f6) at (3.15,-3.20) {F-06 Mission record retention (DAS)};
+\node[fn] (f7) at (3.15,-4.15) {F-07 Cross-cutting assurance};
+\draw[edge] (root.south) -- (critical.north);
+\draw[edge] (root.south) -- (support.north);
+\draw[draw=TableBorderBlue,dashed] (-6.13,-1.76) rectangle (-0.17,-5.57);
+\draw[draw=TableBorderBlue,dashed] (0.17,-1.76) rectangle (6.13,-4.62);
+\end{tikzpicture}
+\caption{GSEG first-level function tree and functional groupings.}
+\label{fig:gseg_function_tree}
+\end{figure}
+
+The allocation below defines the responsible subsystem at GSEG level; internal decomposition remains subject to the corresponding subsystem DDFs.
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.13}
+\begin{longtable}{@{}p{0.14\linewidth}p{0.66\linewidth}p{0.14\linewidth}@{}}
+\caption{GSEG function allocation}\label{tab:gseg_function_allocation}\\
+\hline
+\textbf{ID} & \textbf{Function} & \textbf{Owner}\\\hline
+\endfirsthead
+\hline\textbf{ID} & \textbf{Function} & \textbf{Owner}\\\hline
+\endhead
+F-01.1 & Receive and route GEO Event Reports. & GSN\\
+F-01.2 & Transfer LEO Tracking Requests to the SSEG interface. & GSN\\
+F-01.3 & Receive and route LEO Observation Packages and the Onboard Preliminary Trajectory. & GSN\\
+F-01.4 & Exchange spacecraft telemetry and communications status. & GSN\\
+F-02.1 & Evaluate LEO observation opportunities and select two spacecraft. & C\&C\\
+F-02.2 & Generate tracking requests and coordinate their handover. & C\&C\\
+F-02.3 & Track command transmission and execution status. & C\&C\\
+F-03.1 & Associate and validate observation inputs against the event record. & DPS\\
+F-03.2 & Perform automated ground event classification. & DPS\\
+F-03.3 & Fuse the two selected LEO observation sets and onboard preliminary trajectory. & DPS\\
+F-03.4 & Produce refined trajectory, probabilistic impact area and uncertainty information. & DPS\\
+F-03.5 & Prioritize Baltic-region threats and update assessments as new data arrive. & DPS\\
+F-04.1 & Generate and automatically deliver the first preliminary warning. & EWS\\
+F-04.2 & Track warning delivery status and available acknowledgements. & EWS\\
+F-04.3 & Disseminate authorized post-warning confirmation, revision or cancellation. & EWS\\
+F-05.1 & Present spacecraft, service, event-assessment and warning status. & MCC\\
+F-05.2 & Support authorized operator actions after first-warning delivery. & MCC\\
+F-05.3 & Coordinate receipt and forwarding of orbital-conjunction information to mission supervision and SSEG. & MCC\\
+F-06.1 & Record mission products, commands, warning history and audit information. & DAS\\
+F-06.2 & Retain and provide authorized retrieval of mission history. & DAS\\
+F-07.1 & Enforce access control and command authenticity at relevant functions. & Shared\\
+F-07.2 & Protect information and preserve event/product traceability. & Shared\\
+F-07.3 & Detect loss of critical services and support redundant functional paths. & Shared\\
+\hline
+\end{longtable}}
+
+MCC owns the operational coordination of orbital-conjunction information (F-05.3). The physical ingress route and forwarding implementation are defined by the relevant interface design. Detailed allocation of cross-cutting assurance functions remains open. DPS classification does not gate the C\&C LEO-selection function.
+
+\subsection{4.3 Functional Chains and Operational States}
+
+\subsubsection{4.3.1 Critical Warning Chain}
+
+The critical chain consists of two GSEG processing intervals separated by SSEG tracking activities (Figure~\ref{fig:gseg_critical_chain}):
+
+\begin{itemize}
+\item \textbf{Observation tasking:} after GSN receives a GEO Event Report, C\&C selects two LEO spacecraft and prepares the tracking requests, which GSN hands over at the GSEG/SSEG boundary (\texttt{GSEG-REQ-PERF-001}; 2~s maximum).
+\item \textbf{Assessment and warning:} after GSN receives both required LEO Observation Packages and the Onboard Preliminary Trajectory, DPS validates and assesses the data; EWS delivers the first preliminary warning at the authorized recipient interface (\texttt{GSEG-REQ-PERF-002}; 15~s maximum).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Stealth,
+  stage/.style={draw=TableBorderBlue,fill=TableRowLightBlue,rounded corners=2pt,align=center,font=\scriptsize,text width=2.15cm,minimum height=12mm,inner sep=2pt},
+  external/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=center,font=\scriptsize,text width=2.15cm,minimum height=12mm,inner sep=2pt},
+  arrow/.style={-{Stealth[length=2mm]},draw=HeadingBlue,thick}
+]
+\node[external] (geo) at (-5.8,0) {SSEG GEO\\Event Report};
+\node[stage] (gsnup) at (-2.9,0) {GSN\\report reception};
+\node[stage] (cc) at (0,0) {C\&C\\two LEO selected};
+\node[stage] (handover) at (2.9,0) {GSN\\request handover};
+\node[external] (sseg) at (5.8,0) {SSEG\\LEO tracking};
+\node[stage] (gsndown) at (5.8,-2.7) {GSN\\LEO data reception};
+\node[stage] (dps) at (2.9,-2.7) {DPS\\validation, fusion, classification};
+\node[stage] (ews) at (0,-2.7) {EWS\\automatic warning};
+\node[external] (recipient) at (-2.9,-2.7) {Authorized recipient\\delivery interface};
+\draw[arrow] (geo) -- (gsnup);
+\draw[arrow] (gsnup) -- (cc);
+\draw[arrow] (cc) -- (handover);
+\draw[arrow] (handover) -- (sseg);
+\draw[arrow] (sseg) -- (gsndown);
+\draw[arrow] (gsndown) -- (dps);
+\draw[arrow] (dps) -- (ews);
+\draw[arrow] (ews) -- (recipient);
+\node[font=\scriptsize\bfseries,text=HeadingBlue] at (0,-0.83) {GSEG tasking interval: $\leq 2$ s};
+\node[font=\scriptsize\bfseries,text=HeadingBlue] at (1.4,-3.55) {GSEG assessment and delivery interval: $\leq 15$ s};
+\end{tikzpicture}
+\caption{Critical warning chain. Timing intervals start at the respective GSN reception points; SSEG tracking is outside both GSEG intervals.}
+\label{fig:gseg_critical_chain}
+\end{figure}
+
+The first warning is issued without prior operator approval and only after DPS has assessed the required data from both selected LEO spacecraft and produced the refined trajectory and impact-area assessment (\texttt{GSEG-REQ-FUN-005}). MCC review and DAS archival operations do not gate warning delivery.
+
+\subsubsection{4.3.2 Supporting and Update Chains}
+
+C\&C, GSN, DPS and EWS provide relevant operational and event status to MCC. DAS records applicable mission products, commands, warning versions and audit information in parallel with the critical chain. New observations trigger updated DPS assessments; an authorized operator may subsequently confirm, revise or cancel an issued warning through MCC and EWS.
+
+\subsubsection{4.3.3 Operational States and Degraded Operation}
+
+\begin{itemize}
+\item \textbf{Nominal monitoring:} constellation and ground-service supervision, with event-response functions ready.
+\item \textbf{Event response:} GEO report reception, LEO selection and tracking-request handover.
+\item \textbf{Event assessment:} receipt and validation of LEO products, classification and ground fusion.
+\item \textbf{Warning dissemination:} automatic delivery of the first preliminary warning.
+\item \textbf{Post-warning operations:} updated assessments, operator actions and warning updates.
+\end{itemize}
+
+These states describe the handling of an individual event, not mutually exclusive operating modes of the entire GSEG. Degraded operation may affect any state: loss of required input data prevents the first-warning condition from being satisfied; service loss is reported to supervision. Physical failover and recovery mechanisms are defined outside Section~4.

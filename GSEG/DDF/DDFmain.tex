@@ -7,6 +7,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{array}
@@ -16,16 +20,16 @@
 \usepackage[hidelinks]{hyperref}
 
 % =============================================================================
-% 2. DOCUMENT METADATA —>>> PUT PROJECT DATA HERE <<<—
+% 2. DOCUMENT METADATA
 % (Values entered here will automatically populate Page 1 and all page headers)
 % =============================================================================
-\newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
-\newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
-\newcommand{\DocTitle}{Ground Segment - Design Definition File}  % <-- Put document title here
-\newcommand{\DocNumber}{EWAS-HSB-GSEG-DDF-03 0.1}         % <-- Put document number here (DOC-NO)
-\newcommand{\DocIssue}{0.1}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{04.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
-\newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
+\newcommand{\Organization}{HSB}
+\newcommand{\ProjectName}{EWAS}
+\newcommand{\DocTitle}{Ground Segment - Design Definition File}
+\newcommand{\DocNumber}{EWAS-HSB-GSEG-DDF-03} % Suffix 03 retained pending owner confirmation.
+\newcommand{\DocIssue}{0.1}                  % Working draft; no approval recorded.
+\newcommand{\DocDate}{}                     % Issue date pending owner confirmation.
+\newcommand{\CINumber}{02}                  % Ground Segment CI-02.
 
 % =============================================================================
 % 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
@@ -157,7 +161,7 @@
 \begin{tabularx}{\textwidth}{|X|X|}
     \hline
     Document Number & \DocNumber \\ \hline
-    Issue           & \DocIssue  \\ \hline
+    Issue           & \DocIssue{} (Draft) \\ \hline
     Issue Date      & \DocDate   \\ \hline
     CI Number       & \CINumber  \\
 \end{tabularx}\par\nointerlineskip
@@ -167,12 +171,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Maciej Raciniewski}              & {Author}     & {Raciniewski 10.11.2026} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}              & {Reviewer}     & {Pyskowacki 10.11.2026} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Maciej Wójcik}              & {Approver}     & {Wójcik 10.11.2026} \\[1.2em] \hline
-    {Put Name here}              & {Put Role Name here}     & {Put Date/Signature or leave empty} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -190,14 +193,12 @@
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
-\begin{tabularx}{\textwidth}{|p{2.0cm}|p{2.5cm}|X|p{4.5cm}|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{4.5cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1}      & {Put Date here} & Initial Issue              & Initial Draft                 \\ \hline
-    \textbf{1.0}      & {Put Date here} & First Release              & All                           \\ \hline
-    % \textbf{1.1}    & {Put Date here} & {Put change description}   & {Put affected sections}       \\ \hline
+    \textbf{0.1} & & Working draft: template cleanup and addition of Section 4, Functional Description. & Document information; Section 4 \\ \hline
 \end{tabularx}}
 
 \newpage
@@ -234,11 +235,6 @@
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
     \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
 \end{tabularx}}
 
 \vspace{0.8em}
@@ -256,11 +252,6 @@
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
     \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
 \end{tabularx}}
 
 \vspace{0.8em}
@@ -280,61 +271,15 @@
     \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
     \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
     \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
 \end{tabularx}}
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 5: SCOPE
-% -----------------------------------------------------------------------------
-\section{Scope}
+% Sections 1--3 will be added after their content is supplied and reviewed.
 
-% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
-{Put Scope content here.}
+\input{sections/04_functional_description}
+\input{sections/05_physical_description}
 
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 6: INTRODUCTION
-% -----------------------------------------------------------------------------
-\section{Introduction}
-
-% ---> PUT DATA HERE (INTRODUCTION SECTION CONTENT) <---
-{Put Introduction content here.}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 7: MAIN CONTENT
-% -----------------------------------------------------------------------------
-\section{Main Content}
-
-% ---> PUT DATA HERE (MAIN CONTENT OF THE DOCUMENT) <---
-{Put Main Content here.}
-
-% EXAMPLE OF ADDING A SUBSECTION (uncomment if needed):
-% \subsection{Put Subsection Title here}
-% {Put subsection content here.}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 8: ANNEX A
-% -----------------------------------------------------------------------------
-\section{Annex A}
-
-% ---> PUT DATA HERE (ANNEX A CONTENT) <---
-{Put Annex A content here.}
-
-\newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 9: ANNEX B
-% -----------------------------------------------------------------------------
-\section{Annex B}
-
-% ---> PUT DATA HERE (ANNEX B CONTENT) <---
-{Put Annex B content here.}
+% Sections 6--9 will be added after their content is supplied and reviewed.
 
 \end{document}
