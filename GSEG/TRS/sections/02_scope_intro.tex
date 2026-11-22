@@ -20,24 +20,25 @@ Document \texttt{EWAS-HSB-GSEG-TRS-02} is the segment-level Technical Requiremen
 \texttt{123456.02.01} & \textbf{Data Archiving System (DAS)} & Storage, protection, and controlled retrieval of mission data, analysis products, warnings, and operational records. \\ \hline
 \texttt{123456.02.01.01} & Raw Data Archive & Raw data and received source products. \\ \hline
 \texttt{123456.02.01.02} & Processed Data Archive & Processing results and derived data. \\ \hline
-\texttt{123456.02.02} & \textbf{Command \& Control System (C\&C)} & Management of spacecraft commands, LEO selection, and monitoring of command execution. \\ \hline
-\texttt{123456.02.03} & \textbf{Mission Control Center (MCC)} & Operator supervision, mission monitoring, and post-warning operational actions. \\ \hline
+\texttt{123456.02.02} & \textbf{Command \& Control System (C\&C)} & Autonomous two-LEO selection using current orbital products, command preparation, validation, transmission coordination and execution monitoring. \\ \hline
+\texttt{123456.02.03} & \textbf{Mission Control Center (MCC)} & Operator supervision, flight dynamics and mission planning, orbital/conjunction assessment, and post-warning operational actions. \\ \hline
 \texttt{123456.02.04} & \textbf{Data Processing System (DPS)} & Observation correlation, data fusion, trajectory estimation, and impact-area assessment. \\ \hline
 \texttt{123456.02.04.01} & Data Processing Software & Preparation and processing of input data. \\ \hline
 \texttt{123456.02.04.02} & Event Detection Module & Ground-based event identification and assessment. \\ \hline
 \texttt{123456.02.04.03} & Trajectory Estimation Module & Trajectory and impact-area estimation. \\ \hline
 \texttt{123456.02.05} & \textbf{Ground Station Network (GSN)} & Satellite communications, telemetry and mission-data reception, and command transmission. \\ \hline
 \texttt{123456.02.06} & \textbf{Early Warning System (EWS)} & Warning generation and delivery, including message status and subsequent versions. \\ \hline
+\texttt{123456.02.07} & \textbf{Ground Infrastructure Subsystem (GIS)} & Shared computing and internal networks, common time services, electrical power, cooling and infrastructure monitoring. \\ \hline
 \end{longtable}}
 
-The functions of these elements are integrated at GSEG level; lower-level specifications define the detailed technical requirements of the subsystems.
+GSEG comprises seven subsystems. The seventh, GIS, is a supporting subsystem rather than a mission-processing step. The GSEG DDF provides the product tree; \texttt{123456.02.07} is the proposed new WBS identifier, pending alignment with the controlled WBS baseline. Subsystem specifications define detailed technical requirements.
 
 \subsection{Mission Scope and Segment Boundaries}
 
 EWAS provides \textbf{global launch detection and tracking}, with priority given to the assessment of threats to the Baltic region (\texttt{R-049}). The Ground Segment is planned as an operational installation at \textbf{one geographical location}; the final site and equipment configuration are defined in the DDF.
 
 \begin{sloppypar}
-GSEG encompasses terrestrial communication, computing, and operational infrastructure. Spacecraft, constellation, and onboard ISL design belong to the peer Space Segment (\texttt{123456.03}). EWAS responsibility for warning delivery terminates at the authorized authority interface; subsequent public alerting is outside the system boundary (\texttt{R-048}). The system does not provide weapon guidance or interceptor-control functions (\texttt{R-001}, \texttt{R-002}).
+GSEG encompasses terrestrial communication, computing, and operational infrastructure, including common services provided by GIS. Spacecraft, constellation, and onboard ISL design belong to the peer Space Segment (\texttt{123456.03}). EWAS responsibility for warning delivery terminates at the authorized authority interface; subsequent public alerting is outside the system boundary (\texttt{R-048}). The system does not provide weapon guidance or interceptor-control functions (\texttt{R-001}, \texttt{R-002}).
 \end{sloppypar}
 
 \section{Introduction}

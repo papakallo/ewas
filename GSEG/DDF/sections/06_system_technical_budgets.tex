@@ -1,0 +1,137 @@
+% GSEG DDF — Section 6, technical budgets and margins, review issue.
+% B = existing requirements baseline; P = proposed design-to allocation, NOT approved;
+% A = assessed by analysis; V = verified by test. No A/V claims are made here.
+% Detailed calculation evidence and trade studies belong to the segment DJF.
+\newpage
+\section{6. System Technical Budgets, Margins and Deviations}
+
+\subsection{6.1 Budget Status and Design Case}
+
+This section records segment-level technical allocations for seven GSEG subsystems, including the Ground Infrastructure Subsystem (GIS). \textbf{B} denotes an existing requirement baseline; \textbf{P} denotes a preliminary, unapproved design-to value. None of the P values has yet been validated by integrated analysis or test. The design basis is defined by the following controlled inputs; calculation methods and option comparisons belong to the Design Justification File (DJF).
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.46\linewidth}|>{\raggedright\arraybackslash}p{0.20\linewidth}|>{\raggedright\arraybackslash}p{0.22\linewidth}|}
+\caption{GSEG budget baseline and proposed sizing case}\label{tab:gseg6_design_inputs}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Design value} & \thead{Status / origin}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Design value} & \thead{Status / origin}\\\hline\endhead
+Constellation & 6 GEO + 72 LEO & B; system/SSEG definition\\\hline
+Spacecraft housekeeping generation & at least 1 sample/s per spacecraft & B; \texttt{SSEG-REQ-OPS-006}\\\hline
+GSEG LEO-tasking / warning intervals & 2 s / 15 s maximum & B; \texttt{GSEG-REQ-PERF-001/\allowbreak 002}\\\hline
+Mission-data retention & at least 5 years & B; \texttt{GSEG-REQ-DATA-005}\\\hline
+Simultaneously active events & 10 & P; peak-load scenario\\\hline
+Events for long-term storage model & 20 per day & P; volume scenario\\\hline
+GEO report / tracking request & 4 KiB / 4 KiB & P; maximum modelled sizes\\\hline
+LEO observation package / onboard preliminary trajectory & 2 MiB / 0.25 MiB & P; maximum modelled sizes\\\hline
+Warning message / addressed recipients & 64 KiB / 10 & P; dissemination case\\\hline
+Archived housekeeping record & 2 KiB per sample & P; stored-record estimate\\\hline
+Archive indexing, audit and metadata allowance & 40\% of source volume & P; planning factor\\\hline
+Hypothetical aggregate from 20 simultaneous LEO high-rate streams & 3 Gb/s at 150 Mb/s each & P; offered-load scenario, not a visibility claim\\\hline
+\end{longtable}}
+
+The 1 Hz SSEG figure specifies \emph{spacecraft production}, not a demonstrated continuous downlink to GSN. The archive model provisionally assumes receipt and retention of the equivalent full stream; this shall be checked through the SSEG/GSEG interface model. The proposed concurrent-event case is an evaluation load, not an accepted mission maximum.
+
+\newpage
+\subsection{6.2 End-to-End Timing Allocation}
+
+\subsubsection{6.2.1 System Boundary}
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.57\linewidth}|>{\raggedright\arraybackslash}p{0.16\linewidth}|>{\raggedright\arraybackslash}p{0.13\linewidth}|}
+\caption{EWAS warning-time allocations (baseline)}\label{tab:gseg6_system_time}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Stage} & \thead{Owner} & \thead{Limit}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Stage} & \thead{Owner} & \thead{Limit}\\\hline\endhead
+GEO detection and reporting & SSEG & $\leq 10$ s\\\hline
+LEO selection and tracking-request handover & \textbf{GSEG} & $\leq 2$ s\\\hline
+LEO command delivery & SSEG & $\leq 3$ s\\\hline
+LEO observations and return to GSN & SSEG & $\leq 30$ s\\\hline
+Ground assessment and first-warning delivery & \textbf{GSEG} & $\leq 15$ s\\\hline
+\textbf{Detection-to-delivery EWAS total} & \textbf{System} & $\leq 60$ s\\\hline
+\end{longtable}}
+
+The five upper allocations exhaust the 60 s system limit, leaving \textbf{0 s unallocated system-level time}. Segment integration reserves in Sections~6.2.2--6.2.3 are included \emph{within} the 2 s and 15 s limits. Their values are planned allowances, not measured execution margins. The warning endpoint is delivery at the authorized recipient interface, not later acknowledgement.
+
+\newpage
+\subsubsection{6.2.2 Preliminary 2 s Tasking Budget}
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.59\linewidth}|>{\raggedright\arraybackslash}p{0.16\linewidth}|>{\raggedleft\arraybackslash}p{0.12\linewidth}|}
+\caption{GSEG tasking design-to allocation (P)}\label{tab:gseg6_tasking}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endhead
+Report acceptance and forwarding & GSN & 0.20 s\\\hline
+GSN--C\&C transfer & GIS & 0.10 s\\\hline
+Two-LEO selection and request preparation & C\&C & 0.90 s\\\hline
+C\&C--GSN transfer & GIS & 0.10 s\\\hline
+Two-request handover to SSEG & GSN & 0.20 s\\\hline
+\textbf{Unallocated GSEG integration reserve} & GSEG & \textbf{0.50 s}\\\hline
+\textbf{Total allocated interval} & & \textbf{2.00 s}\\\hline
+\end{longtable}}
+
+This budget starts at GSN reception of the GEO Event Report and ends at the GSEG/SSEG boundary (\texttt{GSEG-REQ-PERF-001}). C\&C uses current orbital products prepared in advance by MCC; neither fresh flight-dynamics computation nor operator approval gates first-event tasking. GIS transfer allocations cover internal service transport, not spacecraft RF transmission.
+
+\subsubsection{6.2.3 Preliminary 15 s Assessment and Delivery Budget}
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.59\linewidth}|>{\raggedright\arraybackslash}p{0.16\linewidth}|>{\raggedleft\arraybackslash}p{0.12\linewidth}|}
+\caption{GSEG warning design-to allocation (P)}\label{tab:gseg6_warning}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endhead
+Complete product acceptance and handoff & GSN & 0.40 s\\\hline
+Inter-service transfer & GIS & 0.40 s\\\hline
+Observation input validation & DPS & 1.00 s\\\hline
+Classification, fusion and impact assessment & DPS & 7.20 s\\\hline
+Warning preparation and version assignment & EWS & 1.00 s\\\hline
+Delivery to authorized recipient interfaces & EWS & 2.00 s\\\hline
+Critical scheduling and queuing & GIS & 0.50 s\\\hline
+\textbf{Unallocated GSEG integration reserve} & GSEG & \textbf{2.50 s}\\\hline
+\textbf{Total allocated interval} & & \textbf{15.00 s}\\\hline
+\end{longtable}}
+
+This budget starts upon receipt by GSN of both required LEO Observation Packages and the onboard preliminary trajectory and ends with the first warning at the authorized interface (\texttt{GSEG-REQ-PERF-002}). Validation of both LEO products is mandatory. Proposed budgets apply to the 10-event peak case and to faults within the agreed redundancy coverage; failover delay does not extend the 15 s limit.
+
+\newpage
+\subsection{6.3 Technical Resource Allocations}
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.38\linewidth}|>{\raggedright\arraybackslash}p{0.23\linewidth}|}
+\caption{GSEG preliminary resource design-to budgets (P)}\label{tab:gseg6_resources}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Budget / owner} & \thead{Proposed allocation} & \thead{Boundary / status}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Budget / owner} & \thead{Proposed allocation} & \thead{Boundary / status}\\\hline\endhead
+Critical internal network (GIS) & $\geq 10$ Gb/s service capacity within each active critical failure domain & Excludes proof of GSN--SSEG RF accessibility\\\hline
+External warning delivery (EWS) & $\geq 100$ Mb/s effective aggregate egress for 10 recipient interfaces & Payload rate target; availability and protocol overhead not yet verified\\\hline
+Critical processing (GIS) & Two distinct on-site equipment-failure domains; $\geq 160$ vCPU and $\geq 320$ GiB RAM available to critical services \emph{per domain} & Each domain sized for full critical load following loss of the other\\\hline
+Critical-service sizing envelopes (C\&C, DPS, EWS) & C\&C 8 vCPU / 16 GiB; EWS 8 vCPU / 16 GiB; DPS 8 vCPU / 16 GiB \emph{per active event} & Demand model includes 10 concurrent events and GIS scheduling allowance\\\hline
+Mission archive (DAS) & $\geq 50$ TiB \emph{usable} space per copy; two independently maintained logical copies & Both copies on the single site; hardware and coding overhead excluded\\\hline
+Critical IT power (GIS) & 12 kW planning load for the combined critical compute/network platform & Does not cover GSN RF, DAS storage, MCC or whole-site facilities\\\hline
+Critical IT heat removal (GIS) & $\geq 15$ kW heat-removal capacity & Only for the above 12 kW critical IT load\\\hline
+Critical IT UPS (GIS) & $\geq 5$ kWh usable stored energy for a 15-minute bridging design case & Only critical IT load; full-site backup power remains to be sized\\\hline
+\end{longtable}}
+
+The proposed archive capacity applies to the 5-year retention requirement using the Section~6.1 sizing case. The critical compute and network allocations reserve capacity for both normal and single-covered-fault operation. The proposed critical-load reserve is excluded from the capacity assigned to MCC, DAS and other non-critical services. Specific server technology, physical equipment count, storage replication method and network topology belong to lower-level designs. RF contact windows and the full site electrical budget cannot be inferred from the above capacities.
+
+\newpage
+\subsection{6.4 Margins and Deviations}
+
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.32\linewidth}|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.31\linewidth}|}
+\caption{Current GSEG budget and margin status}\label{tab:gseg6_margins}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Proposed margin or reserve} & \thead{Evidence status}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Proposed margin or reserve} & \thead{Evidence status}\\\hline\endhead
+2 s GSEG tasking interval & 0.50 s (25\% of limit) & P: uncommitted integration reserve; not measured\\\hline
+15 s GSEG warning interval & 2.50 s (16.7\% of limit) & P: uncommitted integration reserve; not measured\\\hline
+60 s EWAS total & 0 s unallocated & B: sum of upper-stage allocations\\\hline
+GIS critical network & 70\% nominal free at modelled 3 Gb/s intake & P: theoretical; contact windows and protocol overhead unverified\\\hline
+GIS processing per surviving domain & 25\% spare of 160 vCPU / 320 GiB & P: allocation margin, not execution-time evidence\\\hline
+DAS five-year storage & approximately 35\% free of each 50 TiB copy & P: depends on modelled sample and event volume\\\hline
+GIS critical IT cooling & 20\% of installed 15 kW cooling capacity unused at 12 kW & P: critical IT only; not full-site margin\\\hline
+Verified GSEG performance margins & None currently available & No integrated test/qualified analysis results recorded\\\hline
+Confirmed deviations from GSEG TRS & None formally established & No claim of demonstrated conformity\\\hline
+\end{longtable}}
+
+The proposed allocation values are not approved requirements or verification results. Subsystem TRSs may adopt design-to allocations only after project review. Quantitative link visibility, integrated timing, failover capability, archival volume and site-wide power/availability require supporting analyses. Their assumptions, trade studies and validation evidence are managed in the DJF; this DDF records resulting limits and current status. Any confirmed negative margin or departure from GSEG TRS is subject to controlled corrective action rather than an automatic change of the parent requirement.

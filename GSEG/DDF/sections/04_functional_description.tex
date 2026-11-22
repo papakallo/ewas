@@ -6,9 +6,9 @@
 
 \subsection{4.1 Functional Architecture}
 
-The Ground Segment (GSEG, CI-02) integrates six subsystems: Ground Station Network (GSN), Command \& Control (C\&C), Data Processing System (DPS), Early Warning System (EWS), Mission Control Center (MCC), and Data Archiving System (DAS). Its time-critical event-response chain uses GSN, C\&C, DPS and EWS. MCC supervises operations and supports authorized post-warning actions; DAS retains mission records. Neither operator review nor archive completion is a prerequisite for the first automatic warning (\texttt{GSEG-REQ-ARC-002}).
+The Ground Segment (GSEG, CI-02) integrates seven subsystems: Ground Station Network (GSN), Command \& Control (C\&C), Data Processing System (DPS), Early Warning System (EWS), Mission Control Center (MCC), Data Archiving System (DAS), and Ground Infrastructure Subsystem (GIS). Its time-critical event-response chain uses GSN, C\&C, DPS and EWS. MCC supervises operations, owns flight dynamics and mission planning, and supports authorized post-warning actions; DAS retains mission records. GIS provides shared computing, networking, time and site infrastructure. Operator review and archive completion are not prerequisites for the first automatic warning (\texttt{GSEG-REQ-ARC-002}).
 
-GSN is the GSEG communications boundary with the Space Segment (SSEG); C\&C coordinates LEO observations; DPS owns automated ground event classification, authoritative observation fusion and impact assessment; EWS delivers warnings to authorized recipients. The functional allocation is defined in Section~4.2, while the interaction between these functions is defined in Section~4.3.
+GSN is the GSEG communications boundary with the Space Segment (SSEG); C\&C automatically selects two LEO spacecraft using available orbital data and coordinates command execution; DPS owns automated ground event classification, authoritative observation fusion and impact assessment; EWS delivers warnings to authorized recipients. The functional allocation is defined in Section~4.2, while the interaction between these functions is defined in Section~4.3.
 
 \subsection{4.2 Function Tree}
 
@@ -33,10 +33,11 @@ Figure~\ref{fig:gseg_function_tree} shows the first-level decomposition of GSEG 
 \node[fn] (f5) at (3.15,-2.25) {F-05 Mission supervision (MCC)};
 \node[fn] (f6) at (3.15,-3.20) {F-06 Mission record retention (DAS)};
 \node[fn] (f7) at (3.15,-4.15) {F-07 Cross-cutting assurance};
+\node[fn] (f8) at (3.15,-5.10) {F-08 Common infrastructure (GIS)};
 \draw[edge] (root.south) -- (critical.north);
 \draw[edge] (root.south) -- (support.north);
 \draw[draw=TableBorderBlue,dashed] (-6.13,-1.76) rectangle (-0.17,-5.57);
-\draw[draw=TableBorderBlue,dashed] (0.17,-1.76) rectangle (6.13,-4.62);
+\draw[draw=TableBorderBlue,dashed] (0.17,-1.76) rectangle (6.13,-5.57);
 \end{tikzpicture}
 \caption{GSEG first-level function tree and functional groupings.}
 \label{fig:gseg_function_tree}
@@ -69,17 +70,23 @@ F-04.2 & Track warning delivery status and available acknowledgements. & EWS\\
 F-04.3 & Disseminate authorized post-warning confirmation, revision or cancellation. & EWS\\
 F-05.1 & Present spacecraft, service, event-assessment and warning status. & MCC\\
 F-05.2 & Support authorized operator actions after first-warning delivery. & MCC\\
-F-05.3 & Coordinate receipt and forwarding of orbital-conjunction information to mission supervision and SSEG. & MCC\\
+F-05.3 & Coordinate orbital-conjunction information for mission supervision and SSEG. & MCC\\
+F-05.4 & Produce orbit predictions and mission plans for operational use, including current orbital products for C\&C. & MCC\\
 F-06.1 & Record mission products, commands, warning history and audit information. & DAS\\
 F-06.2 & Retain and provide authorized retrieval of mission history. & DAS\\
 F-07.1 & Enforce access control and command authenticity at relevant functions. & Shared\\
 F-07.2 & Protect information and preserve event/product traceability. & Shared\\
 F-07.3 & Detect loss of critical services and support redundant functional paths. & Shared\\
+F-08.1 & Provide shared compute and internal network infrastructure for GSEG services. & GIS\\
+F-08.2 & Provide site power, cooling and common time-reference services. & GIS\\
+F-08.3 & Monitor and maintain availability of common site infrastructure. & GIS\\
+F-08.4 & Maintain shared execution capacity for concurrent critical event workflows. & GIS\\
 \hline
 \end{longtable}}
 
-MCC owns the operational coordination of orbital-conjunction information (F-05.3). The physical ingress route and forwarding implementation are defined by the relevant interface design. Detailed allocation of cross-cutting assurance functions remains open. DPS classification does not gate the C\&C LEO-selection function.
+MCC owns the operational coordination of orbital-conjunction information (F-05.3). The physical ingress route and forwarding implementation are defined by the relevant interface design. Flight-dynamics products from MCC are made available for C\&C observation planning; their routine preparation and operator review do not gate automatic two-LEO selection after a GEO report. GIS provides enabling infrastructure, while security and mission-product traceability remain shared responsibilities across subsystems. DPS classification does not gate C\&C LEO selection.
 
+\newpage
 \subsection{4.3 Functional Chains and Operational States}
 
 \subsubsection{4.3.1 Critical Warning Chain}
@@ -87,7 +94,7 @@ MCC owns the operational coordination of orbital-conjunction information (F-05.3
 The critical chain consists of two GSEG processing intervals separated by SSEG tracking activities (Figure~\ref{fig:gseg_critical_chain}):
 
 \begin{itemize}
-\item \textbf{Observation tasking:} after GSN receives a GEO Event Report, C\&C selects two LEO spacecraft and prepares the tracking requests, which GSN hands over at the GSEG/SSEG boundary (\texttt{GSEG-REQ-PERF-001}; 2~s maximum).
+\item \textbf{Observation tasking:} GSN receives the GEO report; C\&C selects two LEO spacecraft and prepares tracking requests for GSN handover (2~s maximum; \texttt{GSEG-REQ-PERF-001}).
 \item \textbf{Assessment and warning:} after GSN receives both required LEO Observation Packages and the Onboard Preliminary Trajectory, DPS validates and assesses the data; EWS delivers the first preliminary warning at the authorized recipient interface (\texttt{GSEG-REQ-PERF-002}; 15~s maximum).
 \end{itemize}
 
@@ -123,7 +130,7 @@ The critical chain consists of two GSEG processing intervals separated by SSEG t
 \label{fig:gseg_critical_chain}
 \end{figure}
 
-The first warning is issued without prior operator approval and only after DPS has assessed the required data from both selected LEO spacecraft and produced the refined trajectory and impact-area assessment (\texttt{GSEG-REQ-FUN-005}). MCC review and DAS archival operations do not gate warning delivery.
+Under \texttt{GSEG-REQ-FUN-005}, the first warning is issued without prior operator approval and only after DPS has assessed data from both selected LEO spacecraft and produced the refined trajectory and impact-area assessment. MCC review and DAS archival operations do not gate warning delivery.
 
 \subsubsection{4.3.2 Supporting and Update Chains}
 
@@ -139,4 +146,4 @@ C\&C, GSN, DPS and EWS provide relevant operational and event status to MCC. DAS
 \item \textbf{Post-warning operations:} updated assessments, operator actions and warning updates.
 \end{itemize}
 
-These states describe the handling of an individual event, not mutually exclusive operating modes of the entire GSEG. Degraded operation may affect any state: loss of required input data prevents the first-warning condition from being satisfied; service loss is reported to supervision. Physical failover and recovery mechanisms are defined outside Section~4.
+These states describe the handling of an individual event, not mutually exclusive operating modes of the entire GSEG. Degraded operation may affect any state: loss of required input data prevents the first-warning condition from being satisfied; service loss is reported to supervision. The preliminary GSEG sizing case is ten concurrent active events (Section~6); this is a proposed design evaluation scenario, not an established mission occurrence limit. Available orbital predictions are prepared through MCC before an event, so automatic C\&C selection does not wait for an operator or a fresh MCC computation. Physical failover and recovery mechanisms are defined outside Section~4.

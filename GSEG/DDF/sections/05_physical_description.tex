@@ -6,101 +6,133 @@
 
 \subsection{5.1 Physical Architecture}
 
-The Ground Segment (GSEG, CI-02) occupies one geographical site. This is the baseline constraint (\texttt{GSEG-REQ-ARC-001}). It comprises a dedicated satellite-communications edge (GSN), a shared computing platform for C\&C, DPS, EWS and selected DAS services, an operator area (MCC), and site services. GSN radio-frequency equipment is physically distinct from the computing platform; MCC operator workstations are distinct from the computing equipment hosting mission services. Figure~\ref{fig:gseg_physical_architecture} identifies equipment groups and logical service placement, not buildings, racks, cabling or quantities.
+The Ground Segment (GSEG, CI-02) occupies a single geographical site (\texttt{GSEG-REQ-ARC-001}). Its seven subsystems include a dedicated satellite-communications edge (GSN); mission services C\&C, DPS and EWS; operations and flight-dynamics services (MCC); mission archives (DAS); and common computing, networking, time and facility infrastructure (GIS).
 
-The shared computing platform is divided into mission-critical and non-critical execution zones. Critical C\&C, DPS and EWS services run in redundant execution paths distributed across separate equipment failure domains within the site. Resources needed for first-warning delivery are isolated from archival and routine supervisory workloads; DAS writes and MCC review are not blocking dependencies of warning delivery. The platform remains a shared managed infrastructure, not a single computer or a single point of execution.
+The common platform managed by GIS supports logically separated mission-critical services and non-critical archival and operational workloads. As a preliminary design allocation, two distinct on-site equipment-failure domains are planned, each sized to host the full critical C\&C, DPS and EWS execution load after loss of the other domain (Section~6). This is a capacity target, not demonstrated failover performance. GSN radio-frequency equipment and MCC operator workstations remain physically distinct from the shared compute hosts. Shared infrastructure does not imply a single common server. Figure~\ref{fig:gseg_physical_architecture} shows equipment groups; it is not a cabling plan or proof of site-level availability.
 
 \begin{figure}[H]
 \centering
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
-  >=Stealth,
-  equip/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,text width=2.45cm,minimum height=0.95cm,align=center,font=\small},
-  mission/.style={equip,fill=TableRowLightBlue},
-  ext/.style={equip,draw=HeadingBlue,fill=white},
-  service/.style={equip,fill=white,text width=9.0cm},
-  flow/.style={-{Stealth[length=2mm]},draw=HeadingBlue,thick},
-  related/.style={draw=TableBorderBlue,densely dashed,thick},
-  frame/.style={draw=TableBorderBlue,rounded corners=4pt,inner sep=0.33cm},
-  labelbox/.style={font=\small\bfseries,text=HeadingBlue}
+ >=Stealth,
+ item/.style={draw=TableBorderBlue,fill=white,rounded corners=3pt,align=center,text width=2.5cm,minimum height=1.55cm,font=\small,inner sep=3pt},
+ critical/.style={item,fill=TableRowLightBlue},
+ ext/.style={item,draw=HeadingBlue,text width=3.2cm,minimum height=1.10cm},
+ support/.style={item,text width=3.0cm,minimum height=1.65cm},
+ gis/.style={draw=HeadingBlue,fill=TableRowLightBlue!55,rounded corners=3pt,align=center,text width=13.6cm,minimum height=1.15cm,font=\small,inner sep=4pt},
+ mainlink/.style={-{Stealth[length=2mm]},draw=HeadingBlue,line width=0.85pt,preaction={draw=white,arrows=-,line width=2.8pt}},
+ opsbus/.style={arrows=-,draw=HeadingBlue,dashed,line width=0.65pt,preaction={draw=white,arrows=-,solid,line width=2.5pt}},
+ ops/.style={opsbus,-{Stealth[length=1.8mm]}},
+ infrabus/.style={arrows=-,draw=HeadingBlue!75!white,dash dot,line width=0.55pt},
+ infra/.style={infrabus,-{Stealth[length=1.8mm]}},
+ buslabel/.style={font=\scriptsize\bfseries,text=HeadingBlue,fill=white,inner sep=2pt},
+ junction/.style={circle,fill=HeadingBlue,inner sep=1.15pt},
+ edge/.style={draw=TableBorderBlue,line width=0.55pt}
 ]
-\node[ext] (sseg) at (-6.7,6.0) {Space Segment\\(SSEG)};
-\node[equip] (gsn) at (-6.7,2.1) {GSN\\antenna, RF and\\ground gateway};
-\node[mission] (cc) at (-2.9,2.75) {C\&C\\mission service};
-\node[mission] (dps) at (0,2.75) {DPS\\processing service};
-\node[mission] (ews) at (2.9,2.75) {EWS\\warning service};
-\node[equip] (das) at (0,0.85) {DAS\\archive services};
-\node[equip] (mcc) at (6.8,-0.1) {MCC\\operator stations};
-\node[ext] (recipient) at (5.8,6.0) {Authorized\\recipient interface};
-\node[service] (shared) at (0,-2.4) {Shared site services: electrical power, cooling, internal networks and facility services};
-\begin{scope}[on background layer]
-  \node[frame,fill=TableRowLightBlue!22,fit=(cc)(dps)(ews),label={[labelbox]above:Mission-critical computing zone}] (criticalzone) {};
-  \node[frame,fill=white,fit=(das),label={[labelbox]below:Non-critical archive zone}] (archivezone) {};
-  \node[frame,fill=none,fit=(criticalzone)(archivezone),inner sep=0.47cm,label={[labelbox]above:Shared GSEG computing platform}] (platform) {};
-  \node[frame,fit=(gsn)(platform)(mcc)(shared),inner sep=0.55cm,label={[labelbox]above:GSEG -- one geographical site}] (site) {};
-\end{scope}
-\draw[flow] (sseg.south) -- (gsn.north);
-\draw[flow] (gsn.north east) to[out=40,in=180] (cc.west);
-\draw[flow] (gsn.south east) -- ++(0.35,0) |- ([yshift=-0.475cm]dps.south west) -- (dps.south west);
-\draw[flow] (dps.east) -- (ews.west);
-\draw[flow] (ews.east) -| (recipient.south);
-\draw[related] (cc.south) -- (das.west);
-\draw[related] (dps.south) -- (das.north);
-\draw[related] (ews.south) to[out=-75,in=15] (mcc.north);
-\draw[related] (cc.south east) -- ++(0,-0.525) -| ([xshift=-0.3cm]mcc.west) -- (mcc.west);
-\draw[related] (das.east) -- (mcc.west);
-\draw[related] (shared.north) -- (platform.south);
-\draw[related] (shared.west) to[out=150,in=-90] (gsn.south);
-\draw[related] (shared.east) to[out=30,in=-90] (mcc.south);
+\node[ext] (sseg) at (-5.7,6.6) {Space Segment\\(SSEG)};
+\node[ext] (orbital) at (0,6.6) {Orbital-information\\providers};
+\node[ext] (recipient) at (5.7,6.6) {Authorized recipient\\interface};
+\node[item] (gsn) at (-5.7,3.8) {\textbf{GSN}\\Satellite RF\\Gateway};
+\node[critical] (cc) at (-1.9,3.8) {\textbf{C\&C}\\LEO selection\\Commands};
+\node[critical] (dps) at (1.9,3.8) {\textbf{DPS}\\Event\\assessment};
+\node[critical] (ews) at (5.7,3.8) {\textbf{EWS}\\Warning\\delivery};
+\node[support] (mcc) at (-3.8,-1.1) {\textbf{MCC}\\Flight dynamics\\Mission planning\\Supervision};
+\node[support] (das) at (3.8,-1.1) {\textbf{DAS}\\Mission archive};
+\node[gis] (gis) at (0,-3.9) {\textbf{GIS — Ground Infrastructure Subsystem}\\Shared compute, networks, time reference, power, cooling and infrastructure management};
+\draw[edge,rounded corners=6pt] (-7.65,-4.65) rectangle (7.65,5.5);
+\node[font=\small\bfseries,text=HeadingBlue] at (0,5.25) {GSEG — one geographical site};
+
+% Shared GIS support: a logical distribution trunk with six directed branches.
+\draw[infrabus] (gis.north) -- (0,-2.65);
+\draw[infrabus] (-5.7,-2.65) -- (5.7,-2.65);
+\foreach \target/\x in {gsn/-5.7,cc/-1.9,dps/1.9,ews/5.7}{
+  \draw[infra] (\x,-2.65) -- (\target.south);
+}
+\draw[infra] (-3.0,-2.65) -- ($(mcc.south)+(0.8,0)$);
+\draw[infra] (4.6,-2.65) -- ($(das.south)+(0.8,0)$);
+
+% Status collection: GSN / C&C / DPS / EWS -> MCC.
+\draw[opsbus] (-6.2,2.0) -- (5.2,2.0);
+\foreach \source/\x in {gsn/-6.2,cc/-2.4,dps/1.4,ews/5.2}{
+  \draw[opsbus] ($(\source.south)+(-0.5,0)$) -- (\x,2.0);
+}
+\draw[ops] (-4.7,2.0) -- ($(mcc.north)+(-0.9,0)$);
+% A distinct GIS -> MCC status path, separate from infrastructure support.
+\draw[ops] ($(gis.north)+(-4.6,0)$) -- ($(mcc.south)+(-0.8,0)$);
+\draw[ops] (orbital.south) -- (0,5.85) -- (-3.8,5.85) -- (mcc.north);
+
+% Archive collection: GSN / C&C / DPS / EWS -> DAS; MCC -> DAS.
+\draw[opsbus] (-5.2,0.9) -- (6.2,0.9);
+\foreach \source/\x in {gsn/-5.2,cc/-1.4,dps/2.4,ews/6.2}{
+  \draw[opsbus] ($(\source.south)+(0.5,0)$) -- (\x,0.9);
+}
+\draw[ops] (3.8,0.9) -- (das.north);
+\draw[ops] (mcc.east) -- (das.west);
+
+% MCC control distribution: MCC -> C&C and MCC -> EWS only.
+\draw[opsbus] ($(mcc.north)+(0.9,0)$) -- (-2.9,0);
+\draw[ops] (-2.9,0) -- ($(cc.south)+(-1.0,0)$);
+\draw[ops] (-2.9,0) -- (4.9,0) -- ($(ews.south)+(-0.8,0)$);
+
+% Primary mission exchanges, including bidirectional GSEG/SSEG exchange.
+\draw[mainlink,Stealth-Stealth] (sseg.south) -- (gsn.north);
+\draw[mainlink,Stealth-Stealth] (gsn.east) -- (cc.west);
+\draw[mainlink] ($(gsn.north)+(0.5,0)$) -- (-5.2,4.95) -- (1.9,4.95) -- (dps.north);
+\draw[mainlink] (dps.east) -- (ews.west);
+\draw[mainlink] (ews.north) -- (recipient.south);
+
+% Dots mark real joins; all other crossings are deliberately unconnected.
+\foreach \x in {-6.2,-4.7,-2.4,1.4,5.2}{\node[junction] at (\x,2.0) {};}
+\foreach \x in {-5.2,-1.4,2.4,3.8,6.2}{\node[junction] at (\x,0.9) {};}
+\node[junction] at (-2.9,0) {};
+\foreach \x in {-5.7,-3.0,-1.9,0,1.9,4.6,5.7}{\node[junction] at (\x,-2.65) {};}
+\node[buslabel] at (0,2.25) {Status to MCC};
+\node[buslabel] at (0,1.15) {Records to DAS};
+\node[buslabel] at (0,0.25) {Plans / post-warning control};
+\node[buslabel] at (0,-2.40) {Shared infrastructure support};
 \end{tikzpicture}}
-\caption[GSEG physical architecture at equipment-group level.]{GSEG physical architecture at equipment-group level. Solid lines show principal mission exchanges; dashed lines show supporting exchanges or shared-infrastructure dependencies. Failure-domain topology and external-link redundancy are not resolved by this figure.}
+\caption[GSEG physical architecture and interface exchanges.]{GSEG equipment groups and logical exchanges at one site. Solid: primary mission exchanges; dashed: supervision/control/archive exchanges; dash-dot: shared infrastructure support. Dots mark joins; crossings without dots are unconnected. Shared trunks group logical exchanges, not physical links; redundancy is not detailed.}
 \label{fig:gseg_physical_architecture}
 \end{figure}
 
+C\&C automatically selects two LEO spacecraft and coordinates spacecraft commands; MCC provides flight dynamics, mission planning and mission supervision. EWS is the sole warning-message delivery path to the authorized recipient interface. GIS supports all six other subsystems and reports infrastructure health to MCC. Tables~\ref{tab:gseg_ddf_external_interfaces} and~\ref{tab:gseg_ddf_internal_interfaces} define the exchanges shown in the figure.
+
 \subsection{5.2 Product Tree}
 
-Figure~\ref{fig:gseg_product_tree} defines the GSEG product decomposition. The six operational subsystems are accompanied by a cross-cutting site-infrastructure product; the latter is not a seventh operational subsystem. Existing DAS and DPS product names are retained. Asterisks mark proposed lower-level product items requiring further definition in subsystem DDFs.
+The product tree (Figure~\ref{fig:gseg_product_tree}) defines GSEG as seven subsystem products. Only the lower-level DAS and DPS product items already identified in the project baseline are shown. GIS is a supporting seventh subsystem, not an unowned cross-cutting label. A proposed WBS extension for GIS is \texttt{123456.02.07}; its identifier remains subject to configuration-baseline confirmation.
 
 \begin{figure}[H]
 \centering
-\resizebox{\linewidth}{!}{%
+\resizebox{0.95\linewidth}{!}{%
 \begin{tikzpicture}[
-  root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,align=center,font=\bfseries\small,text width=4.3cm,minimum height=0.8cm},
-  item/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=left,font=\small,text width=3.9cm,minimum height=1.0cm,inner sep=3pt},
-  contents/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=left,font=\small,text width=6.1cm,minimum height=1.0cm,inner sep=3pt},
-  infra/.style={draw=HeadingBlue,dashed,fill=TableRowLightBlue!28,rounded corners=2pt,align=left,font=\small,text width=3.9cm,minimum height=1.0cm,inner sep=3pt},
-  link/.style={draw=HeadingBlue,thick}
+ root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,align=center,font=\bfseries\small,text width=3.0cm,minimum height=0.85cm},
+ item/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=left,font=\small,text width=3.7cm,minimum height=0.70cm,inner sep=4pt},
+ leaf/.style={draw=TableBorderBlue,fill=TableRowLightBlue!35,rounded corners=2pt,align=left,font=\small,text width=3.9cm,minimum height=0.75cm,inner sep=4pt},
+ conn/.style={draw=HeadingBlue,line width=0.65pt}
 ]
-\node[root] (gseg) at (-3.2,0) {Ground Segment (GSEG) -- CI-02};
-\node[item] (gsn) at (-3.2,-1.6) {\textbf{GSN}\\Ground Station Network};
-\node[contents] (gsnc) at (3.1,-1.6) {Satellite RF Terminal Assembly $^{*}$\\Ground Communications Gateway $^{*}$};
-\node[item] (cc) at (-3.2,-3.15) {\textbf{C\&C}\\Command and Control};
-\node[contents] (ccc) at (3.1,-3.15) {Observation Tasking Software $^{*}$\\Command Management Software $^{*}$};
-\node[item] (dps) at (-3.2,-4.7) {\textbf{DPS}\\Data Processing System};
-\node[contents] (dpsc) at (3.1,-4.7) {Data Processing Software\\Event Detection Module\\Trajectory Estimation Module};
-\node[item] (ews) at (-3.2,-6.25) {\textbf{EWS}\\Early Warning System};
-\node[contents] (ewsc) at (3.1,-6.25) {Warning Generation Software $^{*}$\\Recipient Delivery Gateway $^{*}$};
-\node[item] (mcc) at (-3.2,-7.8) {\textbf{MCC}\\Mission Control Center};
-\node[contents] (mccc) at (3.1,-7.8) {Operator Workstation System $^{*}$\\Mission Supervision Software $^{*}$};
-\node[item] (das) at (-3.2,-9.35) {\textbf{DAS}\\Data Archiving System};
-\node[contents] (dasc) at (3.1,-9.35) {Raw Data Archive\\Processed Data Archive};
-\node[infra] (infra) at (-3.2,-10.9) {\textbf{Site Infrastructure}\\\textit{cross-cutting,\\not subsystem}};
-\node[contents,dashed] (infrac) at (3.1,-10.9) {Common Computing Platform $^{*}$\\Site Utility and Network Assemblies $^{*}$};
-\draw[link] (gseg.west) -- (-5.7,0) -- (-5.7,-10.9);
-\foreach \name in {gsn,cc,dps,ews,mcc,das,infra} {
-  \draw[link] (-5.7,0 |- \name.west) -- (\name.west);
-}
-\foreach \one/\two in {gsn/gsnc,cc/ccc,dps/dpsc,ews/ewsc,mcc/mccc,das/dasc,infra/infrac} {
-  \draw[link] (\one.east) -- (\two.west);
-}
+\node[root] (gseg) at (-4.35,2.35) {Ground Segment\\CI-02};
+\node[item] (das) at (-0.4,1.45) {\textbf{DAS} — Data Archiving System};
+\node[item] (cc) at (-0.4,0.12) {\textbf{C\&C} — Command \& Control};
+\node[item] (mcc) at (-0.4,-1.21) {\textbf{MCC} — Mission Control Center};
+\node[item] (dps) at (-0.4,-2.54) {\textbf{DPS} — Data Processing System};
+\node[item] (gsn) at (-0.4,-3.87) {\textbf{GSN} — Ground Station Network};
+\node[item] (ews) at (-0.4,-5.20) {\textbf{EWS} — Early Warning System};
+\node[item,fill=TableRowLightBlue!55] (gis) at (-0.4,-6.53) {\textbf{GIS} — Ground Infrastructure Subsystem};
+\node[leaf] (dasitems) at (4.7,1.45) {Raw Data Archive\\Processed Data Archive};
+\node[leaf] (dpsitems) at (4.7,-2.54) {Data Processing Software\\Event Detection Module\\Trajectory Estimation Module};
+\draw[conn] (gseg.south) |- (-3.0,1.45);
+\draw[conn] (-3.0,1.45) -- (-3.0,-6.53);
+\foreach \n in {das,cc,mcc,dps,gsn,ews,gis}{\draw[conn] (-3.0,0 |- \n.west) -- (\n.west);}
+\draw[conn] (das.east) -- (dasitems.west);
+\draw[conn] (dps.east) -- (dpsitems.west);
 \end{tikzpicture}}
-\caption[Preliminary GSEG product tree.]{Preliminary GSEG product tree. Text within each subsystem item identifies constituent product items; asterisks mark proposed product items (not yet baselined). Shared site infrastructure is a supporting product, not a seventh subsystem.}
+\caption{GSEG product tree: seven subsystems and established DAS/DPS lower-level product items.}
 \label{fig:gseg_product_tree}
 \end{figure}
 
 \subsection{5.3 Specification Tree}
 
-The segment specification \texttt{EWAS-HSB-GSEG-TRS-02} allocates requirements to the six subsystem technical specifications shown in Figure~\ref{fig:gseg_specification_tree}. The subsystem TRS documents are planned, not approved. Segment and subsystem DDFs and DDJFs define and justify the resulting designs, but they are not branches of the \emph{specification} tree. Cross-subsystem and GSEG--SSEG interfaces are controlled in coordinated ICDs.
+The segment specification \texttt{EWAS-HSB-GSEG-TRS-02} allocates requirements to the seven subsystem technical specifications shown in Figure~\ref{fig:gseg_specification_tree}. The subsystem TRS documents are planned, not approved. Segment and subsystem DDFs and DDJFs define and justify the resulting designs, but they are not branches of the \emph{specification} tree. Cross-subsystem and GSEG--SSEG interfaces are controlled in coordinated ICDs.
 
 \begin{figure}[H]
 \centering
@@ -119,51 +151,74 @@ The segment specification \texttt{EWAS-HSB-GSEG-TRS-02} allocates requirements t
 \node[child] (dps) at (2.8,-6.2) {DPS TRS \textit{(planned)}};
 \node[child] (gsn) at (2.8,-7.3) {GSN TRS \textit{(planned)}};
 \node[child] (ews) at (2.8,-8.4) {EWS TRS \textit{(planned)}};
-\draw[link] (gseg.south) -- (0,-2.35) -- (-0.25,-2.35) -- (-0.25,-8.4);
-\foreach \name in {das,cc,mcc,dps,gsn,ews} {
+\node[child] (gis) at (2.8,-9.5) {GIS TRS \textit{(planned)}};
+\draw[link] (gseg.south) -- (0,-2.35) -- (-0.25,-2.35) -- (-0.25,-9.5);
+\foreach \name in {das,cc,mcc,dps,gsn,ews,gis} {
   \draw[link] (-0.25,0 |- \name.west) -- (\name.west);
 }
 \end{tikzpicture}}
-\caption[GSEG technical specification hierarchy.]{GSEG technical specification hierarchy; lower-level TRS documents have not yet been issued.}
+\caption{GSEG technical specification hierarchy; lower-level TRS documents have not yet been issued.}
 \label{fig:gseg_specification_tree}
 \end{figure}
 
 \subsection{5.4 Physical Elements and Redundancy Boundaries}
 
-\textbf{Satellite communications edge.} GSN contains terrestrial antenna/RF equipment and ground link-handling equipment. Its physical interfaces to the spacecraft and to the shared computing platform are distinct. Redundant coverage of critical command and mission-data paths is required; RF-unit configuration, antenna count and satellite visibility are to be established in the GSN DDF and link analyses.
+\textbf{GSN — communications edge.} Satellite antenna, RF and link-handling equipment are physically distinct from the managed computing platform. Antenna configuration, RF redundancy and the visibility and link budgets required for single-site service remain subject to GSN DDF and system-level analysis.
 
-\textbf{Shared computing platform.} C\&C, DPS and EWS are deployed as logically separated mission services on shared infrastructure, with redundant critical service instances placed in different equipment failure domains at the same site. The architecture therefore does not assume that all critical service instances share one host, storage dependency or failure point. Processing-resource allocation and state-replication details are reserved for the subsystem designs and integrated budget.
+\textbf{GIS — common infrastructure.} GIS owns the shared computing hosts, internal networks and switching, common time reference, power conditioning and backup supply, cooling and infrastructure monitoring. GIS supports logically segregated mission-critical C\&C, DPS and EWS workloads and lower-priority DAS/MCC workloads. The preliminary equipment architecture includes two independent failure domains, each provisioned for the complete critical processing load (Section~6). Host count, physical segregation, state replication and failover mechanisms are determined in lower-level designs. The site itself remains a common-cause failure domain.
 
-\textbf{Archive and operators.} DAS uses the platform's non-critical archive zone and its designated storage resources. Transfer of event records to DAS is non-blocking for the first-warning path. MCC consists of operator workstations with access to mission-supervision services; loss of an operator workstation or archival process is not, by itself, a prerequisite failure of the automatic warning chain.
+\textbf{MCC and C\&C boundary.} MCC operates the flight-dynamics and mission-planning capability, produces orbital predictions and coordinates conjunction assessment and operator-approved manoeuvre plans. C\&C retains autonomous selection of two LEO spacecraft using available orbital products, and owns the validation and execution workflow for satellite commands. MCC operator availability is not a prerequisite for first-warning tasking. C\&C consumes previously generated, validated orbital products; validity management for those products belongs in the MCC/C\&C interface definition.
 
-\textbf{Shared site services.} Power, cooling, internal communications and supporting facility services serve multiple equipment groups. The single-site constraint leaves common-cause hazards unresolved by equipment redundancy alone. Site-service redundancy, loss-of-site consequences and quantitative availability evidence remain open design and justification items; no independent GSEG availability figure is established here.
+\textbf{Archive and supervision.} DAS retains mission data; MCC provides operator workstations and operational supervision. Routine archival or supervisory workloads cannot block first-warning execution. GIS faults that affect critical hosting, connectivity, time distribution or utilities are reported to mission supervision.
+
+Equipment redundancy at one site does not remove common-cause hazards affecting site utilities or external connectivity. Detailed dependencies, quantitative availability and response to facility-wide failures remain open technical design and justification items.
 
 \subsection{5.5 Interfaces}
 
+Tables~\ref{tab:gseg_ddf_external_interfaces} and~\ref{tab:gseg_ddf_internal_interfaces} define the external and internal exchanges shown in Figure~\ref{fig:gseg_physical_architecture}. MCC owns the operational use of orbital information and the flight-dynamics and supervision functions; C\&C coordinates commands and automatically selects two LEO spacecraft using available orbital products. Operator review and archive completion do not gate the first warning. MCC authorizes applicable post-warning actions through EWS; EWS provides the sole warning-message delivery path to the authorized recipient interface.
+
 \subsubsection{5.5.1 External Interfaces}
 
-{\small\renewcommand{\arraystretch}{1.16}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}X@{}}
-\hline
-\textbf{Boundary} & \textbf{GSEG owner} & \textbf{Information exchanged}\\\hline
-GSEG--SSEG (\texttt{IF-EXT-01}) & GSN & Spacecraft commands, telemetry, GEO Event Reports, LEO Observation Packages, onboard preliminary trajectories.\\
-Authorized warning recipients & EWS & Preliminary warnings, revisions, cancellation notices, delivery status and available acknowledgements.\\
-Orbital-information providers & MCC (operational) & Conjunction/orbital-situation information for supervision and onward exchange with SSEG (coordinated with \texttt{IF-EXT-04}).\\\hline
-\end{tabularx}}
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.27\linewidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\linewidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.55\linewidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|}
+\caption{GSEG External Interfaces}\label{tab:gseg_ddf_external_interfaces}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Boundary} & \thead{GSEG owner} & \thead{Information exchanged}\\ \hline
+\endfirsthead
+\caption[]{GSEG External Interfaces (continued)}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Boundary} & \thead{GSEG owner} & \thead{Information exchanged}\\ \hline
+\endhead
+GSEG--SSEG (\texttt{IF-EXT-01}) & GSN & Spacecraft commands, telemetry, GEO Event Reports, LEO Observation Packages, onboard preliminary trajectories.\\ \hline
+Authorized warning recipients & EWS & Preliminary warnings, revisions, cancellation notices, delivery status and available acknowledgements.\\ \hline
+Orbital-information providers & MCC (operational) & Orbital predictions and conjunction/orbital-situation information for flight dynamics and supervision, with onward exchange with SSEG via C\&C and GSN (coordinated with \texttt{IF-EXT-04}).\\ \hline
+\end{longtable}}
 
 The physical ingress for orbital-information data, exact endpoint placement and external link topology remain to be defined in the relevant ICDs. The SSEG optical ISL network is external to GSEG. Availability of space-to-ground communication from one site is not assumed proven by the existence of ISLs.
 
+\newpage
 \subsubsection{5.5.2 Internal Interfaces}
 
-{\small\renewcommand{\arraystretch}{1.16}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.29\linewidth}>{\raggedright\arraybackslash}X@{}}
-\hline
-\textbf{Subsystem exchange} & \textbf{Principal products}\\\hline
-GSN $\leftrightarrow$ C\&C & GEO reports, LEO tracking requests, command and link status.\\
-GSN $\rightarrow$ DPS & LEO observation packages, onboard preliminary trajectories, receipt metadata.\\
-DPS $\rightarrow$ EWS & Ground refined trajectory, impact-area assessment, uncertainty metadata.\\
-Mission services $\rightarrow$ MCC & Spacecraft, command, service, event and warning status.\\
-MCC $\rightarrow$ EWS & Authorized post-warning confirmation, revision or cancellation.\\
-MCC $\rightarrow$ GSN & Orbital-conjunction information for onward exchange with SSEG (logical handover).\\
-GSEG services $\rightarrow$ DAS & Mission products, event records, warning versions and audit data.\\\hline
-\end{tabularx}}
+{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.34\linewidth-2\tabcolsep-1.5\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.66\linewidth-2\tabcolsep-1.5\arrayrulewidth\relax}|}
+\caption{GSEG Internal Interfaces}\label{tab:gseg_ddf_internal_interfaces}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Subsystem exchange} & \thead{Principal products}\\ \hline
+\endfirsthead
+\caption[]{GSEG Internal Interfaces (continued)}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Subsystem exchange} & \thead{Principal products}\\ \hline
+\endhead
+GSN $\leftrightarrow$ C\&C & GEO reports, LEO tracking requests, validated spacecraft commands, orbital-data forwarding packages, command and link status.\\ \hline
+GSN $\rightarrow$ DPS & LEO observation packages, onboard preliminary trajectories, receipt metadata.\\ \hline
+DPS $\rightarrow$ EWS & Ground refined trajectory, impact-area assessment, uncertainty metadata.\\ \hline
+GSN / C\&C / DPS / EWS / GIS $\rightarrow$ MCC & Spacecraft, command, service, event, warning and infrastructure health status.\\ \hline
+MCC $\rightarrow$ C\&C & Validated orbital products, conjunction information, approved mission plans and operational directives.\\ \hline
+MCC $\rightarrow$ EWS & Authorized post-warning confirmation, revision or cancellation requests.\\ \hline
+GSN / C\&C / DPS / EWS / MCC $\rightarrow$ DAS & Mission products, event records, warning versions and audit data.\\ \hline
+GIS $\rightarrow$ other GSEG subsystems & Shared compute, network, time-reference, power, cooling and infrastructure-management services.\\ \hline
+\end{longtable}}
 
 These exchanges define logical interfaces, not dedicated cables or communication protocols. Event identifiers, timestamps and data provenance are preserved across interfaces. Interface schemas, security boundaries, throughput, delivery guarantees and error handling are controlled by the relevant ICDs and allocated subsystem specifications.

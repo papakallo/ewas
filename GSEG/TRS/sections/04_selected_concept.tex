@@ -4,9 +4,9 @@
 
 \subsubsection{4.1 Integrated Ground Segment Architecture}
 
-The Ground Segment integrates constellation communications, mission control, observation processing, warning dissemination, operator supervision, and archiving. These functions are performed by GSN, C\&C, DPS, EWS, MCC, and DAS, as introduced in Section 2.
+The Ground Segment integrates constellation communications, mission control, observation processing, warning dissemination, operator supervision, and archiving. These functions are performed by GSN, C\&C, DPS, EWS, MCC, DAS and GIS, as introduced in Section 2.
 
-The logical architecture distinguishes the \textbf{event-response and warning path} from \textbf{operational and archiving functions}. Within the warning path, GSN provides spacecraft communications, C\&C coordinates observation tasks, DPS produces the threat assessment, and EWS delivers warning messages to external recipients. MCC supervises operations, while DAS retains mission data and event records.
+The logical architecture distinguishes the \textbf{event-response and warning path} from \textbf{operational and archiving functions}. Within the warning path, GSN provides spacecraft communications, C\&C coordinates observation tasks, DPS produces the threat assessment, and EWS delivers warning messages to external recipients. MCC supervises operations and flight dynamics, while DAS retains mission data and event records. GIS provides the shared hosting, networking, common time and site services needed by these functions.
 
 Cooperation with SSEG uses direct radio links and available relay paths through the onboard ISL network. GSEG external interfaces also support warning delivery to authorized institutions and the exchange of operational data with authorized orbital-information providers.
 
@@ -17,7 +17,7 @@ The nominal sequence comprises the following activities and information transfer
 \begin{enumerate}
   \item \textbf{GEO event detection.} A GEO spacecraft identifies a candidate event and produces a \emph{GEO Event Report} containing the detection time, approximate location, and available classification and observation-quality information. The report is transmitted through the communications interface to GSN. The initial detection time is the starting epoch for the measurement specified in \texttt{R-011}.
 
-  \item \textbf{Report reception and LEO selection.} GSN makes the received report available to GSEG functions. C\&C identifies two LEO spacecraft suitable for follow-up tracking, considering event location, observation geometry, spacecraft status, and communication-route availability (\texttt{R-043}).
+  \item \textbf{Report reception and LEO selection.} GSN makes the received report available to GSEG functions. C\&C autonomously identifies two LEO spacecraft suitable for follow-up tracking using current orbital products provided by MCC flight dynamics, together with event location, observation geometry, spacecraft status, and communication-route availability (\texttt{R-043}). Routine orbit-data maintenance and operator review do not gate this automatic selection.
 
   \item \textbf{Tracking command transmission.} C\&C prepares a \emph{LEO Tracking Request} for each selected spacecraft. GSN transmits the commands directly or through the SSEG ISL relay network (\texttt{R-044}). Command transmission and execution status are made available to mission-supervision functions.
 
@@ -73,7 +73,7 @@ Data exchanged among GSEG functions preserve event identification, time referenc
 \hline\rowcolor{TableHeaderBlue}
 \thead{Operating situation} & \thead{Ground Segment functions} \\ \hline
 \endhead
-\textbf{Nominal operations} & Constellation and ground infrastructure monitoring, telemetry reception, command handling, and readiness to receive events. \\ \hline
+\textbf{Nominal operations} & Constellation and GIS infrastructure monitoring, MCC flight-dynamics products, telemetry reception, command handling, and readiness to receive events. \\ \hline
 \textbf{Active event} & Automatic LEO observation coordination, ground data assessment, and first-warning delivery. \\ \hline
 \textbf{Post-warning handling} & Operator supervision, estimate updates, and warning confirmation, revision, or cancellation. \\ \hline
 \textbf{Degraded operations} & Fault detection and indication, monitoring of available functions, and execution of operational recovery procedures. \\ \hline
