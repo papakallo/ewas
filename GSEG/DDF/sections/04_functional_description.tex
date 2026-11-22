@@ -45,43 +45,42 @@ Figure~\ref{fig:gseg_function_tree} shows the first-level decomposition of GSEG 
 
 The allocation below defines the responsible subsystem at GSEG level; internal decomposition remains subject to the corresponding subsystem DDFs.
 
-{\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.13}
-\begin{longtable}{@{}p{0.14\linewidth}p{0.66\linewidth}p{0.14\linewidth}@{}}
+{\DDFTableStyle{3}%
+\begin{longtable}{|L{0.14}|L{0.72}|L{0.14}|}
 \caption{GSEG function allocation}\label{tab:gseg_function_allocation}\\
-\hline
-\textbf{ID} & \textbf{Function} & \textbf{Owner}\\\hline
+\hline\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Function} & \thead{Owner}\\\hline
 \endfirsthead
-\hline\textbf{ID} & \textbf{Function} & \textbf{Owner}\\\hline
+\hline\rowcolor{TableHeaderBlue}\thead{ID} & \thead{Function} & \thead{Owner}\\\hline
 \endhead
-F-01.1 & Receive and route GEO Event Reports. & GSN\\
-F-01.2 & Transfer LEO Tracking Requests to the SSEG interface. & GSN\\
-F-01.3 & Receive and route LEO Observation Packages and the Onboard Preliminary Trajectory. & GSN\\
-F-01.4 & Exchange spacecraft telemetry and communications status. & GSN\\
-F-02.1 & Evaluate LEO observation opportunities and select two spacecraft. & C\&C\\
-F-02.2 & Generate tracking requests and coordinate their handover. & C\&C\\
-F-02.3 & Track command transmission and execution status. & C\&C\\
-F-03.1 & Associate and validate observation inputs against the event record. & DPS\\
-F-03.2 & Perform automated ground event classification. & DPS\\
-F-03.3 & Fuse the two selected LEO observation sets and onboard preliminary trajectory. & DPS\\
-F-03.4 & Produce refined trajectory, probabilistic impact area and uncertainty information. & DPS\\
-F-03.5 & Prioritize Baltic-region threats and update assessments as new data arrive. & DPS\\
-F-04.1 & Generate and automatically deliver the first preliminary warning. & EWS\\
-F-04.2 & Track warning delivery status and available acknowledgements. & EWS\\
-F-04.3 & Disseminate authorized post-warning confirmation, revision or cancellation. & EWS\\
-F-05.1 & Present spacecraft, service, event-assessment and warning status. & MCC\\
-F-05.2 & Support authorized operator actions after first-warning delivery. & MCC\\
-F-05.3 & Coordinate orbital-conjunction information for mission supervision and SSEG. & MCC\\
-F-05.4 & Produce orbit predictions and mission plans for operational use, including current orbital products for C\&C. & MCC\\
-F-06.1 & Record mission products, commands, warning history and audit information. & DAS\\
-F-06.2 & Retain and provide authorized retrieval of mission history. & DAS\\
-F-07.1 & Enforce access control and command authenticity at relevant functions. & Shared\\
-F-07.2 & Protect information and preserve event/product traceability. & Shared\\
-F-07.3 & Detect loss of critical services and support redundant functional paths. & Shared\\
-F-08.1 & Provide shared compute and internal network infrastructure for GSEG services. & GIS\\
-F-08.2 & Provide site power, cooling and common time-reference services. & GIS\\
-F-08.3 & Monitor and maintain availability of common site infrastructure. & GIS\\
-F-08.4 & Maintain shared execution capacity for concurrent critical event workflows. & GIS\\
-\hline
+F-01.1 & Receive and route GEO Event Reports. & GSN\\ \hline
+F-01.2 & Transfer LEO Tracking Requests to the SSEG interface. & GSN\\ \hline
+F-01.3 & Receive and route LEO Observation Packages and the Onboard Preliminary Trajectory. & GSN\\ \hline
+F-01.4 & Exchange spacecraft telemetry and communications status. & GSN\\ \hline
+F-02.1 & Evaluate LEO observation opportunities and select two spacecraft. & C\&C\\ \hline
+F-02.2 & Generate tracking requests and coordinate their handover. & C\&C\\ \hline
+F-02.3 & Track command transmission and execution status. & C\&C\\ \hline
+F-03.1 & Associate and validate observation inputs against the event record. & DPS\\ \hline
+F-03.2 & Perform automated ground event classification. & DPS\\ \hline
+F-03.3 & Fuse the two selected LEO observation sets and onboard preliminary trajectory. & DPS\\ \hline
+F-03.4 & Produce refined trajectory, probabilistic impact area and uncertainty information. & DPS\\ \hline
+F-03.5 & Prioritize Baltic-region threats and update assessments as new data arrive. & DPS\\ \hline
+F-04.1 & Generate and automatically deliver the first preliminary warning. & EWS\\ \hline
+F-04.2 & Track warning delivery status and available acknowledgements. & EWS\\ \hline
+F-04.3 & Disseminate authorized post-warning confirmation, revision or cancellation. & EWS\\ \hline
+F-05.1 & Present spacecraft, service, event-assessment and warning status. & MCC\\ \hline
+F-05.2 & Support authorized operator actions after first-warning delivery. & MCC\\ \hline
+F-05.3 & Coordinate orbital-conjunction information for mission supervision and SSEG. & MCC\\ \hline
+F-05.4 & Produce orbit predictions and mission plans for operational use, including current orbital products for C\&C. & MCC\\ \hline
+F-06.1 & Record mission products, commands, warning history and audit information. & DAS\\ \hline
+F-06.2 & Retain and provide authorized retrieval of mission history. & DAS\\ \hline
+F-07.1 & Enforce access control and command authenticity at relevant functions. & Shared\\ \hline
+F-07.2 & Protect information and preserve event/product traceability. & Shared\\ \hline
+F-07.3 & Detect loss of critical services and support redundant functional paths. & Shared\\ \hline
+F-08.1 & Provide shared compute and internal network infrastructure for GSEG services. & GIS\\ \hline
+F-08.2 & Provide site power, cooling and common time-reference services. & GIS\\ \hline
+F-08.3 & Monitor and maintain availability of common site infrastructure. & GIS\\ \hline
+F-08.4 & Maintain shared execution capacity for concurrent critical event workflows. & GIS\\ \hline
 \end{longtable}}
 
 MCC owns the operational coordination of orbital-conjunction information (F-05.3). The physical ingress route and forwarding implementation are defined by the relevant interface design. Flight-dynamics products from MCC are made available for C\&C observation planning; their routine preparation and operator review do not gate automatic two-LEO selection after a GEO report. GIS provides enabling infrastructure, while security and mission-product traceability remain shared responsibilities across subsystems. DPS classification does not gate C\&C LEO selection.

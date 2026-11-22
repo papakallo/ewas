@@ -1,0 +1,21 @@
+parameter_id,parameter_name,owner,comparison,value,unit,status,source_or_reference,notes
+GSEG-PAR-001,GSEG tasking interval,GSEG,<=,2,s,B,GSEG-REQ-PERF-001,From GEO report receipt at GSN to requests handover
+GSEG-PAR-002,GSEG assessment and first-warning delivery,GSEG,<=,15,s,B,GSEG-REQ-PERF-002,From complete LEO products at GSN to recipient-interface delivery
+GSEG-PAR-003,EWAS detection-to-warning interval,EWAS,<=,60,s,B,System requirement R-011,System-level budget; not independent GSEG requirement
+GSEG-PAR-004,Mission-data minimum retention,DAS,>=,5,year,B,GSEG-REQ-DATA-005,Data retention; not product-equipment storage conditions
+GSEG-PAR-005,Constellation GEO count,SSEG,=,6,spacecraft,B,EWAS system/SSEG baseline,Peer segment boundary
+GSEG-PAR-006,Constellation LEO count,SSEG,=,72,spacecraft,B,EWAS system/SSEG baseline,Peer segment boundary
+GSEG-PAR-007,Spacecraft housekeeping generation frequency,SSEG,>=,1,Hz,B,SSEG-REQ-OPS-006,Generation not continuous GSN reception
+GSEG-PAR-008,Concurrent events design case,GSEG,=,10,event,P,GSEG DDF Ch.6 Section 6.1,Preliminary design-load scenario
+GSEG-PAR-009,GSEG tasking integration reserve,GSEG,=,0.50,s,P,GSEG DDF Ch.6 Section 6.2,Within 2 s budget; not demonstrated execution margin
+GSEG-PAR-010,GSEG warning integration reserve,GSEG,=,2.50,s,P,GSEG DDF Ch.6 Section 6.2,Within 15 s budget; not demonstrated execution margin
+GSEG-PAR-011,GIS critical equipment failure domains,GIS,=,2,domain,P,GSEG DDF Ch.5 and Ch.6,Accepted architecture direction; configuration not verified
+GSEG-PAR-012,GIS critical network capacity per domain,GIS,>=,10,Gb/s,P,GSEG DDF Ch.6 Section 6.3,Does not establish satellite contact/throughput
+GSEG-PAR-013,GIS critical compute per domain,GIS,>=,160,vCPU,P,GSEG DDF Ch.6 Section 6.3,Capacity target per surviving equipment domain
+GSEG-PAR-014,GIS critical RAM per domain,GIS,>=,320,GiB,P,GSEG DDF Ch.6 Section 6.3,Capacity target per surviving equipment domain
+GSEG-PAR-015,DAS usable archive capacity per copy,DAS,>=,50,TiB,P,GSEG DDF Ch.6 Section 6.3,Two logical copies assumed; data model not verified
+GSEG-PAR-016,DAS archive copy count,DAS,=,2,copy,P,GSEG DDF Ch.6 Section 6.3,Single-site copies; no off-site recovery claim
+GSEG-PAR-017,EWS aggregate egress capacity,EWS,>=,100,Mb/s,P,GSEG DDF Ch.6 Section 6.3,Proposed envelope for 10 recipients
+GSEG-PAR-018,GIS critical IT power planning load,GIS,=,12,kW,P,GSEG DDF Ch.6 Section 6.3,Excludes GSN RF and full-site services
+GSEG-PAR-019,GIS critical IT heat-removal target,GIS,>=,15,kW,P,GSEG DDF Ch.6 Section 6.3,Critical IT only
+GSEG-PAR-020,GIS critical IT usable UPS energy,GIS,>=,5,kWh,P,GSEG DDF Ch.6 Section 6.3,Planning envelope; not full-facility supply

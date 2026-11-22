@@ -1,0 +1,26 @@
+% GSEG DDF - Section 3; mission purpose and design drivers, not a second TRS.
+\section{3. Summary of Project and Technical Requirements}
+
+\subsection{3.1 Project and Mission Context}
+
+The Early Warning Alarm System (EWAS) is intended to detect potential ballistic-missile launches, obtain additional satellite observations, estimate event trajectories and possible impact regions, and deliver timely warning information to authorized authorities. The mission provides global surveillance with priority given to potential threats to the Baltic region. EWAS combines an orbital Space Segment (SSEG) with a terrestrial Ground Segment (GSEG).
+
+\subsection{3.2 Principal Design Drivers}
+
+The following requirements govern the segment design. This summary does not replace the complete GSEG TRS or the requirements traceability record.
+
+{\DDFTableStyle{3}%
+\begin{longtable}{|L{0.25}|L{0.43}|L{0.32}|}
+\caption{Principal GSEG design drivers}\label{tab:gseg_ddf_design_drivers}\\\hline
+\rowcolor{TableHeaderBlue}\thead{Driver} & \thead{Design boundary} & \thead{Requirement source}\\\hline\endfirsthead
+\hline\rowcolor{TableHeaderBlue}\thead{Driver} & \thead{Design boundary} & \thead{Requirement source}\\\hline\endhead
+Warning response & Two non-contiguous GSEG intervals: $\leq2$ s for LEO request handover and $\leq15$ s for ground assessment and warning delivery. & \texttt{GSEG-REQ-PERF-001/\allowbreak 002}\\\hline
+First-warning condition & Assessment of observations from two selected LEO spacecraft; no prior operator approval. & \texttt{GSEG-REQ-FUN-005}\\\hline
+Operational continuity & Redundant execution paths for critical control and first-warning functions; first-warning path independent of archive completion. & \texttt{GSEG-REQ-REL-001}, \texttt{ARC-002}\\\hline
+Ground configuration & Fixed operational infrastructure at one geographical site. & \texttt{GSEG-REQ-ARC-001}\\\hline
+External exchange & Controlled interfaces with SSEG, warning recipients and orbital-information sources. & \texttt{GSEG-REQ-IF-001}--\texttt{003}\\\hline
+Information handling & Traceability, security, warning history and at least five years of data retention. & \texttt{GSEG-REQ-DATA-001}--\texttt{006}, \texttt{SEC-001}--\texttt{005}\\\hline
+\end{longtable}
+}
+
+The EWAS availability target of $>99.9\%$ is a \emph{system-level} requirement (\texttt{R-015}); it is not an independent numerical availability allocation for GSEG. Detailed design-to values and their status are recorded in Section~6.

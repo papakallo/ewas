@@ -97,6 +97,18 @@
 \newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
 \providecommand{\abbr}[1]{#1}
 
+% Future substantive tables: group \DDFTableStyle{column count}, use bordered
+% L/R columns whose fractions sum to 1, and repeat blue headers in longtables.
+% Column widths exclude padding and rules, so the complete table fits \linewidth.
+\newlength{\DDFTableContentWidth}
+\newcommand{\DDFTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\DDFTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1\DDFTableContentWidth}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1\DDFTableContentWidth}}
+
 % =============================================================================
 % 4. HEADER AND FOOTER (WITH UNIVERSITY LOGOS)
 % =============================================================================
@@ -158,7 +170,7 @@
 {\renewcommand{\arraystretch}{1.25}%
 \arrayrulecolor{black}%
 \noindent
-\begin{tabularx}{\textwidth}{|X|X|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
     \hline
     Document Number & \DocNumber \\ \hline
     Issue           & \DocIssue{} (Draft) \\ \hline
@@ -166,12 +178,12 @@
     CI Number       & \CINumber  \\
 \end{tabularx}\par\nointerlineskip
 \noindent
-\begin{tabularx}{\textwidth}{|X|X|X|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
     \hline
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-                                 &                          &                                  \\[1.2em] \hline
+    Grzegorz Macioch             & Author                   &                                  \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
                                  &                          &                                  \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
@@ -185,21 +197,21 @@
 % -----------------------------------------------------------------------------
 \section{Document Change Record}
 
-% --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
-% Each row has 4 columns separated by &:
-% \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
-% To add a new row, copy the last line before \end{tabularx}.
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{4.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
-    \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1} & & Working draft: template cleanup and addition of Section 4, Functional Description. & Document information; Section 4 \\ \hline
-\end{tabularx}}
+% Editorial development milestones supplied by the owner; not formal releases.
+{\DDFTableStyle{4}%
+\begin{longtable}{|L{0.10}|L{0.18}|L{0.49}|L{0.23}|}
+\caption{DDF editorial development milestones}\label{tab:gseg_ddf_change_record}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
+\endhead
+Draft & 18.11.2026 & Chapters 1--4 drafted. & Sections 1--4\\ \hline
+Draft & 19.11.2026 & Chapters 5--6 drafted. & Sections 5--6\\ \hline
+Draft & 20.11.2026 & Chapters 7--8 drafted. & Sections 7--8\\ \hline
+Draft & 21.11.2026 & Chapter 9 drafted; full-document editing, revision and consistency review. & Section 9; whole document\\ \hline
+\end{longtable}}
 
 \newpage
 
@@ -208,89 +220,39 @@
 % -----------------------------------------------------------------------------
 \tableofcontents
 
-\vspace{2.5cm}
+\clearpage
 \listoftables
 
-\vspace{2.5cm}
+\vspace{1.2cm}
 \listoffigures
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
-% -----------------------------------------------------------------------------
-\section{References}
+% Sections 1--9: one controlled document register in Section 2.
+\input{sections/01_introduction_scope}
 
-\subsection{Applicable Documents (AD)}
+\clearpage
+\input{sections/02_applicable_reference_documents}
 
-% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
-% Columns are separated by &:
-% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-\end{tabularx}}
+\clearpage
+\input{sections/03_project_technical_requirements}
 
-\vspace{0.8em}
-\subsection{Reference Documents (RD)}
-
-% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
-% Columns are separated by &:
-% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Terms, Definitions and Abbreviations}
-
-% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
-% Columns are separated by &:
-% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|X|X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
-    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
-    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{GSEG} & Ground Segment \\ \hline
-    \textbf{SSEG} & Space Segment \\ \hline
-    \textbf{GSN} & Ground Station Network \\ \hline
-    \textbf{C\&C} & Command and Control \\ \hline
-    \textbf{DPS} & Data Processing System \\ \hline
-    \textbf{EWS} & Early Warning System \\ \hline
-    \textbf{MCC} & Mission Control Center \\ \hline
-    \textbf{DAS} & Data Archiving System \\ \hline
-    \textbf{GIS} & Ground Infrastructure Subsystem \\ \hline
-    \textbf{FD} & Flight Dynamics \\ \hline
-\end{tabularx}}
-
-\newpage
-
-% Sections 1--3 will be added after their content is supplied and reviewed.
-
+\clearpage
 \input{sections/04_functional_description}
+
+\clearpage
 \input{sections/05_physical_description}
+
+\clearpage
 \input{sections/06_system_technical_budgets}
 
-% Sections 7--9 will be added after their content is supplied and reviewed.
+\clearpage
+\input{sections/07_system_design_constraints}
+
+\clearpage
+\input{sections/08_engineering_data_repository}
+
+\clearpage
+\input{sections/09_conclusion_compliance}
 
 \end{document}
