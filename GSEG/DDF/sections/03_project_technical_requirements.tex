@@ -14,13 +14,13 @@ The following requirements govern the segment design. This summary does not repl
 \caption{Principal GSEG design drivers}\label{tab:gseg_ddf_design_drivers}\\\hline
 \rowcolor{TableHeaderBlue}\thead{Driver} & \thead{Design boundary} & \thead{Requirement source}\\\hline\endfirsthead
 \hline\rowcolor{TableHeaderBlue}\thead{Driver} & \thead{Design boundary} & \thead{Requirement source}\\\hline\endhead
-Warning response & Two non-contiguous GSEG intervals: $\leq2$ s for LEO request handover and $\leq15$ s for ground assessment and warning delivery. & \texttt{GSEG-REQ-PERF-001/\allowbreak 002}\\\hline
-First-warning condition & Assessment of observations from two selected LEO spacecraft; no prior operator approval. & \texttt{GSEG-REQ-FUN-005}\\\hline
-Operational continuity & Redundant execution paths for critical control and first-warning functions; first-warning path independent of archive completion. & \texttt{GSEG-REQ-REL-001}, \texttt{ARC-002}\\\hline
+Warning response & Two non-contiguous GSEG intervals: $\leq2$ s for LEO request handover and $\leq15$ s for ground assessment and delivery for warning-eligible events. & \texttt{GSEG-REQ-PERF-001/\allowbreak 002}\\\hline
+First-warning condition & Valid assessment of both selected LEO observation sets, refined trajectory and impact estimate, and a potential threat or credible threat not excluded; no prior operator approval. & \texttt{GSEG-REQ-FUN-005}\\\hline
+Operational continuity & GSEG critical-service availability $\geq99.99\%$, redundant execution paths for control and warning; first-warning path independent of archive completion. & \texttt{GSEG-REQ-REL-001}, \texttt{GSEG-REQ-REL-003}, \texttt{ARC-002}\\\hline
 Ground configuration & Fixed operational infrastructure at one geographical site. & \texttt{GSEG-REQ-ARC-001}\\\hline
 External exchange & Controlled interfaces with SSEG, warning recipients and orbital-information sources. & \texttt{GSEG-REQ-IF-001}--\texttt{003}\\\hline
 Information handling & Traceability, security, warning history and at least five years of data retention. & \texttt{GSEG-REQ-DATA-001}--\texttt{006}, \texttt{SEC-001}--\texttt{005}\\\hline
 \end{longtable}
 }
 
-The EWAS availability target of $>99.9\%$ is a \emph{system-level} requirement (\texttt{R-015}); it is not an independent numerical availability allocation for GSEG. Detailed design-to values and their status are recorded in Section~6.
+The EWAS system availability requirement remains $>99.9\%$ (\texttt{R-015}); the GSEG-controlled critical service has the separate, more stringent \(\geq99.99\%\) segment requirement (\texttt{GSEG-REQ-REL-003}). Section~6 records the preliminary lower-level availability allocation and its assessment status.

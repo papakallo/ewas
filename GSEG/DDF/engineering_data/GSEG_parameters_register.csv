@@ -19,3 +19,6 @@ GSEG-PAR-017,EWS aggregate egress capacity,EWS,>=,100,Mb/s,P,GSEG DDF Ch.6 Secti
 GSEG-PAR-018,GIS critical IT power planning load,GIS,=,12,kW,P,GSEG DDF Ch.6 Section 6.3,Excludes GSN RF and full-site services
 GSEG-PAR-019,GIS critical IT heat-removal target,GIS,>=,15,kW,P,GSEG DDF Ch.6 Section 6.3,Critical IT only
 GSEG-PAR-020,GIS critical IT usable UPS energy,GIS,>=,5,kWh,P,GSEG DDF Ch.6 Section 6.3,Planning envelope; not full-facility supply
+GSEG-PAR-021,GSEG critical-service operational availability,GSEG,>=,99.99,%,B,GSEG-REQ-REL-003,24/7 rolling 365-day period; both GSEG-controlled critical capabilities ready; maintenance downtime included
+GSEG-PAR-022,Allocated critical-service unavailability budget,GSEG,=,90,ppm,P,GSEG DDF Section 6.3.1,Sum of provisional service contributor budgets; not an availability measurement
+GSEG-PAR-023,Critical-service unallocated unavailability reserve,GSEG,=,10,ppm,P,GSEG DDF Section 6.3.1,Unallocated allowance within 100 ppm total budget

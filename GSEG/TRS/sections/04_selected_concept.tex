@@ -17,19 +17,19 @@ The nominal sequence comprises the following activities and information transfer
 \begin{enumerate}
   \item \textbf{GEO event detection.} A GEO spacecraft identifies a candidate event and produces a \emph{GEO Event Report} containing the detection time, approximate location, and available classification and observation-quality information. The report is transmitted through the communications interface to GSN. The initial detection time is the starting epoch for the measurement specified in \texttt{R-011}.
 
-  \item \textbf{Report reception and LEO selection.} GSN makes the received report available to GSEG functions. C\&C autonomously identifies two LEO spacecraft suitable for follow-up tracking using current orbital products provided by MCC flight dynamics, together with event location, observation geometry, spacecraft status, and communication-route availability (\texttt{R-043}). Routine orbit-data maintenance and operator review do not gate this automatic selection.
+  \item \textbf{Report reception and LEO selection.} GSN makes the received report available to GSEG functions. C\&C autonomously identifies two LEO spacecraft suitable for follow-up tracking using current orbital products provided by MCC flight dynamics, together with event location, observation geometry, spacecraft status, and communication-route availability (\texttt{R-043}). This automatic selection does not wait for DPS classification, ad hoc MCC flight-dynamics computation or operator approval.
 
   \item \textbf{Tracking command transmission.} C\&C prepares a \emph{LEO Tracking Request} for each selected spacecraft. GSN transmits the commands directly or through the SSEG ISL relay network (\texttt{R-044}). Command transmission and execution status are made available to mission-supervision functions.
 
   \item \textbf{LEO observation and onboard preliminary estimation.} The selected spacecraft perform stereoscopic observations and exchange timestamped Line-of-Sight (LOS) observation vectors. These observations support an initial three-dimensional onboard trajectory estimate. GSEG receives both \emph{LEO Observation Packages}, including observation data and uncertainty metadata, and the \emph{Onboard Preliminary Trajectory}.
 
-  \item \textbf{Ground event assessment.} GSN makes the received products available to DPS. The processing system associates data with the appropriate event, checks completeness, and performs authoritative multi-sensor fusion. The outputs are \emph{Ground Refined Trajectory} and \emph{Impact Area Assessment}: a refined trajectory, probabilistic impact region, confidence level, and estimation uncertainty (\texttt{R-012}, \texttt{R-013}, \texttt{R-026}, \texttt{R-027}).
+  \item \textbf{Ground event assessment.} GSN makes the received products available to DPS. DPS associates the products with the event and validates the required observations from both selected LEO spacecraft and the onboard preliminary trajectory. With sufficient valid data, DPS performs authoritative multi-sensor fusion and produces the \emph{Ground Refined Trajectory} and \emph{Impact Area Assessment}, with confidence and uncertainty information (\texttt{R-012}, \texttt{R-013}, \texttt{R-026}, \texttt{R-027}). It automatically classifies a valid assessment as potential threat, indeterminate with a credible threat not excluded, or credibly non-threatening, and determines warning eligibility. Missing, invalid or insufficient required products result in the separate \emph{Assessment Unavailable} status, not a fourth threat class.
 
-  \item \textbf{Automatic preliminary warning delivery.} Upon completion of the required assessment of data from two selected LEO spacecraft, DPS provides the assessment products to EWS. EWS prepares the \emph{Preliminary Warning} and delivers it to the appropriate authorized national interface (\texttt{R-045}). The first warning does not require prior operator approval. Delivery at this interface marks the end of the warning-time measurement specified in \texttt{R-011}.
+  \item \textbf{Conditional automatic preliminary warning delivery.} After valid assessment of both selected LEO observation sets and production of the refined trajectory and impact-area estimate, EWS automatically delivers the \emph{Preliminary Warning} when DPS assesses a potential threat or an indeterminate event for which a credible threat cannot be excluded. The warning conveys the corresponding uncertainty, explicitly including the indeterminate case, and requires no prior operator approval. For a credibly non-threatening event or \emph{Assessment Unavailable}, no external warning is issued: MCC receives the result/status and reason, and DAS receives the decision record and source data. For warning-eligible events, delivery at the authorized interface ends the warning-time measurement (\texttt{R-011}, \texttt{R-045}).
 
-  \item \textbf{Supervision and warning updates.} MCC presents the event, estimated trajectory, impact region, and dispatched message status to operators. Further observations may trigger updated DPS estimates. An authorized operator may confirm, revise, or cancel the previous warning; EWS handles the delivery of subsequent message versions (\texttt{R-014}, \texttt{R-046}).
+  \item \textbf{Supervision and warning updates.} MCC presents the available event, trajectory and impact information, classification, and warning decision/status for all assessment outcomes. Further observations may trigger updated DPS estimates. An authorized operator may confirm, revise, or cancel a previously issued warning; EWS handles delivery of subsequent message versions (\texttt{R-014}, \texttt{R-046}).
 
-  \item \textbf{Recording and archiving.} In parallel with event handling, DAS stores applicable source data, processing results, commands, warning versions, delivery acknowledgements, and audit records. The event history remains available even if the warning is subsequently cancelled (\texttt{R-036}, \texttt{R-037}, \texttt{R-047}).
+  \item \textbf{Recording and archiving.} In parallel with event handling, DAS stores applicable source data, processing and classification results, warning issue/non-issue decisions and reasons, commands, warning versions, delivery acknowledgements, and audit records. The event history remains available even if no warning is issued or an issued warning is subsequently cancelled (\texttt{R-036}, \texttt{R-037}, \texttt{R-047}).
 
 \end{enumerate}
 
@@ -49,17 +49,21 @@ The integrated GSEG exchanges eight principal information products identified in
 \hline\rowcolor{TableHeaderBlue}
 \thead{Product} & \thead{Principal content} & \thead{Exchange / use} \\ \hline
 \endhead
+\hline
+\endlastfoot
 \textbf{GEO Event Report} & Event identifier and timestamp, location, quality information & GEO \(\rightarrow\) GSN \(\rightarrow\) C\&C \\ \hline
 \textbf{LEO Tracking Request} & Event identifier, two selected LEO spacecraft, observation target, priority & C\&C \(\rightarrow\) GSN \(\rightarrow\) selected LEO spacecraft \\ \hline
 \textbf{LEO Observation Package} & LOS observations, timestamps, geometry, uncertainty metadata & LEO \(\rightarrow\) GSN \(\rightarrow\) DPS \\ \hline
 \textbf{Onboard Preliminary Trajectory} & Onboard trajectory estimate and associated uncertainty & LEO \(\rightarrow\) GSN \(\rightarrow\) DPS \\ \hline
 \textbf{Ground Refined Trajectory} & Refined trajectory, validity time, uncertainty, version & DPS \(\rightarrow\) EWS, MCC, DAS \\ \hline
-\textbf{Impact Area Assessment} & Probabilistic impact region, confidence level, threat assessment & DPS \(\rightarrow\) EWS, MCC, DAS \\ \hline
+\textbf{Impact Area Assessment} & Probabilistic impact region, confidence, uncertainty, classification and warning eligibility; separate Assessment Unavailable status & DPS \(\rightarrow\) EWS, MCC, DAS \\ \hline
 \textbf{Warning and Status Update} & Warning identifier, recipient, content, version, delivery status & EWS \(\rightarrow\) authorized authorities; status to MCC and DAS \\ \hline
-\textbf{Operational and Audit Record} & System events, commands, operator actions, delivery acknowledgements & GSEG functions \(\rightarrow\) DAS \\ \hline
+\textbf{Operational and Audit Record} & System events, classification, warning issue/non-issue decision and reason, commands, operator actions, delivery acknowledgements & GSEG functions \(\rightarrow\) DAS \\*
 \end{longtable}}
 
-Data exchanged among GSEG functions preserve event identification, time references, and product provenance. The message formats, field definitions, and exchange protocols are specified in the relevant ICDs.
+\begin{samepage}
+Data exchanged among GSEG functions preserve event identification, time references, and product provenance. The message formats, field definitions, and exchange protocols are specified in the relevant ICDs.\par
+\end{samepage}
 
 \subsubsection{4.4 Operating States and Segment Integration}
 
@@ -74,7 +78,7 @@ Data exchanged among GSEG functions preserve event identification, time referenc
 \thead{Operating situation} & \thead{Ground Segment functions} \\ \hline
 \endhead
 \textbf{Nominal operations} & Constellation and GIS infrastructure monitoring, MCC flight-dynamics products, telemetry reception, command handling, and readiness to receive events. \\ \hline
-\textbf{Active event} & Automatic LEO observation coordination, ground data assessment, and first-warning delivery. \\ \hline
+\textbf{Active event} & Automatic LEO observation coordination, ground data assessment and warning decision; first-warning delivery only for eligible events. \\ \hline
 \textbf{Post-warning handling} & Operator supervision, estimate updates, and warning confirmation, revision, or cancellation. \\ \hline
 \textbf{Degraded operations} & Fault detection and indication, monitoring of available functions, and execution of operational recovery procedures. \\ \hline
 \end{longtable}}

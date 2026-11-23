@@ -29,6 +29,7 @@ The constraints below apply to realization and use of the selected GSEG design. 
 \texttt{DC-O02} & Shared GIS resources isolate critical-service execution from non-critical workloads. Internal transport, queuing and relevant failover delays remain inside the existing $2$ s and $15$ s GSEG timing limits.\\\hline
 \texttt{DC-O03} & Automatic two-LEO selection by C\&C uses orbital products made available in advance by MCC. Event-time selection is not gated by ad hoc flight-dynamics calculation or operator approval; product validity remains controlled at the MCC--C\&C interface.\\\hline
 \texttt{DC-O04} & The proposed \textbf{P} sizing case is ten simultaneous events, including a single covered equipment failure. Each GIS failure domain is sized to support the critical load after loss of the other; this is not demonstrated performance.\\\hline
+\texttt{DC-O05} & Critical service must be observable at the GSN and EWS interfaces during continuous operations; both planned maintenance and unplanned GSEG-controlled interruptions of either required capability contribute to the $99.99\%$ availability evaluation.\\\hline
 \end{longtable}
 }
 

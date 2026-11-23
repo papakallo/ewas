@@ -1,3 +1,58 @@
-% Ground Segment TRS placeholder. Awaiting supplied document content.
+% GSEG TRS Annex A — provisional traceability, NOT approved lower-level allocations.
+% Source: final reviewed GSEG TRS Polish working version. 35 unique IDs.
 \section{Annex A: Requirements Traceability Matrix (RTM)}
-\textit{Content pending.}
+
+This matrix lists the existing parent references and provisional functional
+allocation of the 35 GSEG requirements. It is an engineering working trace,
+not an approved lower-level requirements baseline. Verified child-requirement
+identifiers and evidence will be added when available. Cross-cutting allocations
+do not establish exclusive implementation ownership.
+
+{\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.18}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.30\textwidth}|>{\raggedright\arraybackslash}p{0.29\textwidth}|>{\raggedright\arraybackslash}p{0.365\textwidth}|}
+\caption{GSEG preliminary requirements traceability}\label{tab:gseg_rtm}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{GSEG requirement} & \thead{Parent/source} & \thead{Provisional functional allocation}\\\hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{GSEG requirement} & \thead{Parent/source} & \thead{Provisional functional allocation}\\\hline
+\endhead
+\hline
+\endlastfoot
+\texttt{GSEG-REQ-FUN-001} & R-043 & C\&C \\ \hline
+\texttt{GSEG-REQ-FUN-002} & R-030, R-044 & C\&C, GSN \\ \hline
+\texttt{GSEG-REQ-FUN-003} & R-019, R-013 & DPS \\ \hline
+\texttt{GSEG-REQ-FUN-004} & R-012, R-026, R-027 & DPS \\ \hline
+\texttt{GSEG-REQ-FUN-005} & R-011, R-013, R-045 & DPS, EWS \\ \hline
+\texttt{GSEG-REQ-FUN-006} & R-014 & DPS \\ \hline
+\texttt{GSEG-REQ-FUN-007} & R-046 & MCC, EWS \\ \hline
+\texttt{GSEG-REQ-FUN-008} & R-049 & DPS, EWS \\ \hline
+\texttt{GSEG-REQ-FUN-009} & R-001 & GSEG-wide scope restriction \\ \hline
+\texttt{GSEG-REQ-ARC-001} & GSEG baseline, Section 2 & GSEG, GIS, GSN \\ \hline
+\texttt{GSEG-REQ-ARC-002} & R-011, R-045, CONOPS & C\&C, DPS, EWS, GIS; independent of MCC and DAS \\ \hline
+\texttt{GSEG-REQ-PERF-001} & R-011, R-043; Section 3.2 & GSN, C\&C, GIS \\ \hline
+\texttt{GSEG-REQ-PERF-002} & R-011, R-045; Section 3.2 & GSN, DPS, EWS, GIS \\ \hline
+\texttt{GSEG-REQ-IF-001} & R-033, R-042--044; \texttt{SSEG-REQ-IF-001} & GSN; C\&C and DPS as service consumers \\ \hline
+\texttt{GSEG-REQ-IF-002} & R-003, R-013, R-047, R-048 & EWS \\ \hline
+\texttt{GSEG-REQ-IF-003} & \texttt{SSEG-REQ-IF-004}; Section 3.3 & MCC, C\&C, GSN \\ \hline
+\texttt{GSEG-REQ-DATA-001} & R-012, R-037, R-047; data dictionary & Exchanging subsystems; GSEG oversight \\ \hline
+\texttt{GSEG-REQ-DATA-002} & R-012, R-027, R-045 & DPS \\ \hline
+\texttt{GSEG-REQ-DATA-003} & R-013 & DPS \\ \hline
+\texttt{GSEG-REQ-DATA-004} & R-037, R-047 & DAS; GSEG record producers \\ \hline
+\texttt{GSEG-REQ-DATA-005} & R-036 & DAS \\ \hline
+\texttt{GSEG-REQ-DATA-006} & R-004, R-034, R-041 & DAS \\ \hline
+\texttt{GSEG-REQ-SEC-001} & R-003, R-034 & All subsystems; cross-cutting function \\ \hline
+\texttt{GSEG-REQ-SEC-002} & R-031 & GSEG interfaces; cross-cutting function \\ \hline
+\texttt{GSEG-REQ-SEC-003} & R-035 & DAS \\ \hline
+\texttt{GSEG-REQ-SEC-004} & R-031, R-032, R-034 & C\&C, GSN; cross-cutting protection \\ \hline
+\texttt{GSEG-REQ-SEC-005} & R-037 & DAS; audit-record sources across GSEG \\ \hline
+\texttt{GSEG-REQ-REL-001} & R-017, R-030 & GSN, GIS, C\&C, DPS, EWS; GSEG integration \\ \hline
+\texttt{GSEG-REQ-REL-002} & R-015, R-017, R-030 & GIS and other subsystems; MCC presentation \\ \hline
+\texttt{GSEG-REQ-REL-003} & R-015, R-017 & GSN, C\&C, DPS, EWS, GIS; GSEG-controlled integration / egress \\ \hline
+\texttt{GSEG-REQ-OPS-001} & R-028, R-029, R-046 & MCC \\ \hline
+\texttt{GSEG-REQ-OPS-002} & R-029, R-030, R-033 & MCC \\ \hline
+\texttt{GSEG-REQ-VER-001} & R-038 & GSEG integration \\ \hline
+\texttt{GSEG-REQ-VER-002} & R-039 & GSEG integration and HIL facilities \\ \hline
+\texttt{GSEG-REQ-VER-003} & R-011, R-040, R-045 & GSEG integration with SSEG and recipients \\*
+\end{longtable}}

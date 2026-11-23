@@ -18,21 +18,21 @@ EWAS products are provided to authorized national institutions, particularly cri
 \hline\rowcolor{TableHeaderBlue}
 \thead{Need} & \thead{Required EWAS / GSEG capability} & \thead{Source} \\ \hline
 \endhead
-Timely warning & Deliver the first warning to an authorized interface within 60 s of GEO event detection, following assessment of data from two selected LEO spacecraft. & \texttt{R-011}, \texttt{R-045} \\ \hline
+Timely warning & For events qualified for automatic warning after assessment of data from two selected LEO spacecraft, deliver the first warning to an authorized interface within 60 s of GEO event detection. & \texttt{R-011}, \texttt{R-045} \\ \hline
 Reliable assessment & Generate a refined trajectory and probabilistic impact region through ground-based data fusion. & \texttt{R-012}, \texttt{R-026}, \texttt{R-027} \\ \hline
 Clear presentation of results & Provide event location, trajectory, impact region, confidence level, and uncertainty bounds. & \texttt{R-013}, \texttt{R-028}, \texttt{R-029} \\ \hline
 Up-to-date information & Update estimates and messages as additional observations become available. & \texttt{R-014}, \texttt{R-046} \\ \hline
-Operational continuity & Support continuous monitoring and system availability of \texttt{>99.9\%}, with appropriate redundancy. & \texttt{R-015}, \texttt{R-017}, \texttt{R-030} \\ \hline
+Operational continuity & Support EWAS system availability \texttt{>99.9\%} and the separate GSEG critical-service availability \(\geq 99.99\%\), with appropriate redundancy. & \texttt{R-015}, \texttt{R-017}, \texttt{R-030} \\ \hline
 Secure access & Protect communications and data and restrict access to authorized persons and institutions. & \texttt{R-003}, \texttt{R-031}--\texttt{R-035} \\ \hline
 Accountability & Retain event data, warning versions, acknowledgements, and audit records for at least five years. & \texttt{R-004}, \texttt{R-036}, \texttt{R-037}, \texttt{R-047} \\ \hline
 Threat prioritization & Assess worldwide events for potential threats to the Baltic region. & \texttt{R-049} \\ \hline
 \end{longtable}}
 
-The availability requirement of \texttt{>99.9\%} applies to EWAS as a system (\texttt{R-015}). Section 7 defines GSEG-level redundancy and service-unavailability indication requirements; no separate numerical GSEG availability allocation has been established.
+The \texttt{R-015} requirement of \texttt{>99.9\%} applies to EWAS as a whole. The separate GSEG critical-service allocation of \(\geq 99.99\%\) is defined by \texttt{GSEG-REQ-REL-003}; it is not a claim that the complete EWAS system achieves this value.
 
 \subsubsection{3.2 Warning-Chain Performance Allocation}
 
-GSEG contributes to the chain from event detection to warning delivery. The table below sets out the system timing allocation and segment responsibilities. The values are design limits.
+GSEG contributes to the chain from event detection to warning delivery. The table below sets out the system timing allocation and segment responsibilities for warning-eligible events. The values are design limits; the 15 s GSEG interval applies to first-warning delivery for those events.
 
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
 \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
@@ -48,13 +48,31 @@ GSEG contributes to the chain from event detection to warning delivery. The tabl
 2a. LEO selection --- GSEG & From receipt of the report at GSN, including forwarding and assessment, to handover of commands for two selected LEO spacecraft at the GSEG/SSEG boundary. & \(\le\)2 s \\ \hline
 2b. Command delivery --- SSEG & From GSEG command handover to receipt by both selected LEO spacecraft. & \(\le\)3 s \\ \hline
 3. LEO observation and data return --- SSEG & From receipt of commands by LEO spacecraft to receipt at GSN of both observation packages and the onboard preliminary trajectory. & \(\le\)30 s \\ \hline
-4. Assessment and warning --- GSEG & From availability of the required LEO products at GSN, including validation and data fusion, to \textbf{delivery} of the first warning at the authorized recipient interface. & \(\le\)15 s \\ \hline
+4. Assessment and warning --- GSEG & For warning-eligible events, from receipt of the complete required LEO products at GSN, including validation, data fusion and the warning decision, to \textbf{delivery} of the first warning at the authorized recipient interface. & \(\le\)15 s \\ \hline
 \textbf{Total --- EWAS} & \textbf{From GEO detection to warning delivery} (\texttt{R-011}). & \textbf{\(\le\)60 s} \\ \hline
 \end{longtable}}
 
 The total allocation for Stage 2 is \textbf{5 s} (2 s GSEG and 3 s SSEG). The stage allocations are defined in the EWAS system warning-chain budget and coordinated at the GSEG/SSEG interface. The starting epoch for \texttt{R-011} is the first GEO detection of the event.
 
-Requirement \texttt{R-045} specifies automatic delivery of the first warning after assessment of observations from two selected LEO spacecraft. Subsequent operator actions are addressed by \texttt{R-046}.
+Requirement \texttt{R-045} establishes assessment of observations from two selected LEO spacecraft as a prerequisite for the first warning. Under the segment-level policy, automatic warning applies to a potential threat or an indeterminate assessment for which a credible threat cannot be excluded. A credibly non-threatening event or an unavailable assessment is reported to MCC and recorded in DAS without an external warning; these outcomes are not warning-delivery timing cases. Subsequent operator actions are addressed by \texttt{R-046}.
+
+
+\paragraph{Critical-service availability measurement boundary.}
+For the GSEG-specific availability allocation, the critical service is considered ready only if both
+GSEG-controlled capabilities can operate within their respective deadlines: (a) GSN reception of a
+valid GEO event report through handover of the two tracking requests to SSEG within 2 s; and
+(b) GSN reception of complete valid two-LEO observation products and preliminary trajectory through
+first-warning delivery at the authorized recipient interface within 15 s for an eligible event.
+A 365-day rolling, continuous 24/7 operational observation window is used; planned maintenance,
+unplanned outages and GSEG-controlled transport or failover interruptions that prevent either
+capability count as unavailable time. GSEG-owned RF terminals, site infrastructure and controlled
+warning-egress facilities are included. Independent SSEG spacecraft failure, missing or invalid
+SSEG inputs and downstream outages of independently operated recipient systems are excluded from
+this GSEG allocation and assessed at their respective system interfaces. GSEG-controlled contracted
+links needed for delivery remain within the GSEG service model; they are not automatically excluded
+as third-party services. Readiness may be checked by controlled test inputs when real events are
+absent. This definition separates availability from the frequency of real threats and does not
+change the existing EWAS end-to-end mission deadlines.
 
 \subsubsection{3.3 External Interfaces and Operational Users}
 

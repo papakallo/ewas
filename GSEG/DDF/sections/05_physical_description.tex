@@ -106,27 +106,34 @@ The product tree (Figure~\ref{fig:gseg_product_tree}) defines GSEG as seven subs
 \resizebox{0.95\linewidth}{!}{%
 \begin{tikzpicture}[
  root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,align=center,font=\bfseries\small,text width=3.0cm,minimum height=0.85cm},
- item/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=left,font=\small,text width=3.7cm,minimum height=0.70cm,inner sep=4pt},
- leaf/.style={draw=TableBorderBlue,fill=TableRowLightBlue!35,rounded corners=2pt,align=left,font=\small,text width=3.9cm,minimum height=0.75cm,inner sep=4pt},
+ item/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,align=left,font=\small,text width=3.7cm,minimum height=0.75cm,inner sep=4pt},
+ leaf/.style={draw=TableBorderBlue,fill=TableRowLightBlue!35,rounded corners=2pt,align=left,font=\small,text width=3.9cm,minimum height=0.80cm,inner sep=4pt},
  conn/.style={draw=HeadingBlue,line width=0.65pt}
 ]
-\node[root] (gseg) at (-4.35,2.35) {Ground Segment\\CI-02};
-\node[item] (das) at (-0.4,1.45) {\textbf{DAS} — Data Archiving System};
-\node[item] (cc) at (-0.4,0.12) {\textbf{C\&C} — Command \& Control};
-\node[item] (mcc) at (-0.4,-1.21) {\textbf{MCC} — Mission Control Center};
-\node[item] (dps) at (-0.4,-2.54) {\textbf{DPS} — Data Processing System};
-\node[item] (gsn) at (-0.4,-3.87) {\textbf{GSN} — Ground Station Network};
-\node[item] (ews) at (-0.4,-5.20) {\textbf{EWS} — Early Warning System};
-\node[item,fill=TableRowLightBlue!55] (gis) at (-0.4,-6.53) {\textbf{GIS} — Ground Infrastructure Subsystem};
-\node[leaf] (dasitems) at (4.7,1.45) {Raw Data Archive\\Processed Data Archive};
-\node[leaf] (dpsitems) at (4.7,-2.54) {Data Processing Software\\Event Detection Module\\Trajectory Estimation Module};
-\draw[conn] (gseg.south) |- (-3.0,1.45);
-\draw[conn] (-3.0,1.45) -- (-3.0,-6.53);
+\node[root] (gseg) at (-4.35,3.0) {Ground Segment\\CI-02};
+\node[item] (das) at (-0.4,2.0) {\textbf{DAS} --- Data Archiving System};
+\node[item] (cc) at (-0.4,0.4) {\textbf{C\&C} --- Command \& Control};
+\node[item] (mcc) at (-0.4,-1.2) {\textbf{MCC} --- Mission Control Center};
+\node[item] (dps) at (-0.4,-2.8) {\textbf{DPS} --- Data Processing System};
+\node[item] (gsn) at (-0.4,-4.4) {\textbf{GSN} --- Ground Station Network};
+\node[item] (ews) at (-0.4,-6.0) {\textbf{EWS} --- Early Warning System};
+\node[item,fill=TableRowLightBlue!55] (gis) at (-0.4,-7.6) {\textbf{GIS} --- Ground Infrastructure Subsystem};
+\node[leaf] (rawarchive) at (4.7,2.55) {Raw Data Archive};
+\node[leaf] (processedarchive) at (4.7,1.45) {Processed Data Archive};
+\node[leaf] (processingsoftware) at (4.7,-1.7) {Data Processing Software};
+\node[leaf] (eventdetection) at (4.7,-2.8) {Event Detection Module};
+\node[leaf] (trajectoryestimation) at (4.7,-3.9) {Trajectory Estimation Module};
+\draw[conn] (gseg.south) |- (-3.0,2.0);
+\draw[conn] (-3.0,2.0) -- (-3.0,-7.6);
 \foreach \n in {das,cc,mcc,dps,gsn,ews,gis}{\draw[conn] (-3.0,0 |- \n.west) -- (\n.west);}
-\draw[conn] (das.east) -- (dasitems.west);
-\draw[conn] (dps.east) -- (dpsitems.west);
+\draw[conn] (das.east) -- (2.2,2.0);
+\draw[conn] (2.2,1.45) -- (2.2,2.55);
+\foreach \n in {rawarchive,processedarchive}{\draw[conn] (2.2,0 |- \n.west) -- (\n.west);}
+\draw[conn] (dps.east) -- (2.2,-2.8);
+\draw[conn] (2.2,-1.7) -- (2.2,-3.9);
+\foreach \n in {processingsoftware,eventdetection,trajectoryestimation}{\draw[conn] (2.2,0 |- \n.west) -- (\n.west);}
 \end{tikzpicture}}
-\caption{GSEG product tree: seven subsystems and established DAS/DPS lower-level product items.}
+\caption{GSEG product tree: seven subsystems and five separate established DAS/DPS lower-level products.}
 \label{fig:gseg_product_tree}
 \end{figure}
 
@@ -173,7 +180,13 @@ The segment specification \texttt{EWAS-HSB-GSEG-TRS-02} allocates requirements t
 
 Equipment redundancy at one site does not remove common-cause hazards affecting site utilities or external connectivity. Detailed dependencies, quantitative availability and response to facility-wide failures remain open technical design and justification items.
 
+\paragraph{Availability boundary.} The $\geq99.99\%$ GSEG critical-service target applies to the two required GSEG-controlled tasking and first-warning capabilities, not the independent SSEG constellation or the receiving authority beyond the controlled warning interface. GSN ground RF equipment, GIS services and GSEG-controlled warning egress remain within the segment model. Two GIS equipment failure domains do not eliminate ground-site common-cause failures; integrated availability and site continuity must be substantiated before compliance can be claimed.
+
 \subsection{5.5 Interfaces}
+
+\begingroup
+\setlength{\LTpre}{3pt}
+\setlength{\LTpost}{3pt}
 
 Tables~\ref{tab:gseg_ddf_external_interfaces} and~\ref{tab:gseg_ddf_internal_interfaces} define the external and internal exchanges shown in Figure~\ref{fig:gseg_physical_architecture}. MCC owns the operational use of orbital information and the flight-dynamics and supervision functions; C\&C coordinates commands and automatically selects two LEO spacecraft using available orbital products. Operator review and archive completion do not gate the first warning. MCC authorizes applicable post-warning actions through EWS; EWS provides the sole warning-message delivery path to the authorized recipient interface.
 
@@ -196,7 +209,6 @@ Orbital-information providers & MCC (operational) & Orbital predictions and conj
 
 The physical ingress for orbital-information data, exact endpoint placement and external link topology remain to be defined in the relevant ICDs. The SSEG optical ISL network is external to GSEG. Availability of space-to-ground communication from one site is not assumed proven by the existence of ISLs.
 
-\newpage
 \subsubsection{5.5.2 Internal Interfaces}
 
 {\DDFTableStyle{2}%
@@ -211,12 +223,15 @@ The physical ingress for orbital-information data, exact endpoint placement and 
 \endhead
 GSN $\leftrightarrow$ C\&C & GEO reports, LEO tracking requests, validated spacecraft commands, orbital-data forwarding packages, command and link status.\\ \hline
 GSN $\rightarrow$ DPS & LEO observation packages, onboard preliminary trajectories, receipt metadata.\\ \hline
-DPS $\rightarrow$ EWS & Ground refined trajectory, impact-area assessment, uncertainty metadata.\\ \hline
-GSN / C\&C / DPS / EWS / GIS $\rightarrow$ MCC & Spacecraft, command, service, event, warning and infrastructure health status.\\ \hline
+DPS $\rightarrow$ EWS & Ground refined trajectory, impact-area assessment, uncertainty, classification and warning-eligibility outcome. EWS delivers warnings only for eligible outcomes.\\ \hline
+GSN / C\&C / DPS / EWS / GIS $\rightarrow$ MCC & Spacecraft, command, service, event and infrastructure status, including all assessment outcomes, classification or unavailability status, and the warning decision and reason.\\ \hline
 MCC $\rightarrow$ C\&C & Validated orbital products, conjunction information, approved mission plans and operational directives.\\ \hline
 MCC $\rightarrow$ EWS & Authorized post-warning confirmation, revision or cancellation requests.\\ \hline
-GSN / C\&C / DPS / EWS / MCC $\rightarrow$ DAS & Mission products, event records, warning versions and audit data.\\ \hline
+GSN / C\&C / DPS / EWS / MCC $\rightarrow$ DAS & Mission products, event records, classification or unavailability status, warning issue/non-issue decisions and reasons, warning versions and audit data.\\ \hline
 GIS $\rightarrow$ other GSEG subsystems & Shared compute, network, time-reference, power, cooling and infrastructure-management services.\\ \hline
 \end{longtable}}
 
 These exchanges define logical interfaces, not dedicated cables or communication protocols. Event identifiers, timestamps and data provenance are preserved across interfaces. Interface schemas, security boundaries, throughput, delivery guarantees and error handling are controlled by the relevant ICDs and allocated subsystem specifications.
+
+\textbf{Common UTC time basis.} SSEG supplies UTC measurement timestamps in its observation products (\texttt{SSEG-REQ-FUN-\allowbreak 006}). Onboard time synchronization follows \texttt{SSEG-REQ-ADCS-\allowbreak 004}. GSEG retains the source measurement timestamps and distinguishes them from GSN product-reception timestamps, which define the GSEG latency-budget boundaries. GIS distributes the common UTC site time reference. Timestamp encodings and allowable correlation errors remain for coordinated ICDs and accuracy budgets; no spacecraft clock-accuracy value is adopted as a GSEG requirement.
+\endgroup
