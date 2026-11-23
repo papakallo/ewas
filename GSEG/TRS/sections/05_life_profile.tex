@@ -1,72 +1,87 @@
-% =============================================================================
-% SECTION <5>: GROUND SEGMENT LIFE PROFILE DESCRIPTION
-% Approved English translation for EWAS Ground Segment TRS
-% =============================================================================
-\subsection{5. Life Profile Description}
+\section{5. Ground Segment Life
+Profile}\label{ground-segment-life-profile}
 
-The life profile of the Ground Segment (\abbr{GSEG}, \texttt{CI-02}) covers the development, integration, verification, commissioning, operation, and decommissioning of the terrestrial infrastructure of \abbr{EWAS}. These phases are coordinated with the deployment and operation of the Space Segment and define the Ground Segment's readiness for mission operations.
+The life profile covers design, integration, verification,
+commissioning, operations and retirement of terrestrial infrastructure,
+coordinated with the SSEG lifecycle.
 
-\subsubsection{5.1 Ground Segment Development and Preparation}
+\subsection{5.1 Development and
+Preparation}\label{development-and-preparation}
 
-\begin{sloppypar}
-The development phase comprises definition of technical requirements, interfaces, and the Ground Segment configuration, followed by preparation of the infrastructure, software, and operational data.
-\end{sloppypar}
+Requirements, interfaces and the GSEG configuration are defined,
+followed by preparation of infrastructure, software, procedures and
+operational data. The seven subsystems cover communications,
+constellation control, Flight Dynamics, processing, warning, archiving
+and common infrastructure. Development is coordinated with SSEG for
+exchanged products and mission functions.
 
-The seven Ground Segment subsystems are developed to provide satellite communications, constellation control, flight dynamics and operational monitoring, mission-data processing, warning delivery, data archiving, and common ground infrastructure. Operational procedures, monitoring and control configurations, and the data required for spacecraft operations are prepared in parallel.
+\subsection{5.2 Integration, Verification and Operational
+Validation}\label{integration-verification-and-operational-validation}
 
-Ground Segment development is coordinated with the Space Segment, particularly with respect to communications interfaces, exchanged data products, and operational functions.
+Installation and configuration of equipment and integration of the seven
+subsystems are covered. Technical verification checks functions,
+performance and interfaces against requirements and the verification
+programme. Operational validation concerns personnel, procedures, data
+and coordination with SSEG. Integration tests, representative
+simulations, HIL and complete warning-chain exercises
+(\texttt{R-\allowbreak{}038}--\texttt{R-\allowbreak{}040}) are employed as applicable.
 
-\subsubsection{5.2 Integration, Verification and Operational Validation}
+\subsection{5.3 Launch Support and Constellation
+Commissioning}\label{launch-support-and-constellation-commissioning}
 
-The integration phase comprises installation and configuration of terrestrial infrastructure and integration of the individual subsystems into the complete Ground Segment.
+GSEG achieves readiness before spacecraft operations needing ground
+support. During launch and LEOP it provides communications, telemetry,
+commands and supervision in coordination with SSEG. During GEO and LEO
+commissioning it confirms communication interfaces, availability of data
+products and warning-function readiness.
 
-Technical verification addresses functional performance and internal and external interfaces against the applicable requirements and the Programme Verification Plan. Operational validation addresses readiness to conduct the mission, including personnel, procedures, operational data, and cooperation with the Space Segment.
+\newpage
+\subsection{5.4 Operation and
+Maintenance}\label{operation-and-maintenance}
 
-Integration and validation activities include, as applicable, integration tests, representative operational simulations, Hardware-in-the-Loop (\abbr{HIL}) testing, and end-to-end warning-chain exercises (\texttt{R-038}--\texttt{R-040}). Verification also covers compatibility of Ground Segment/Space Segment interfaces and continuity of mission-data exchanges.
+GSEG provides continuous constellation supervision and control, data
+reception and analysis, and warning dissemination. GIS monitors and
+maintains infrastructure, while MCC supervises the mission and plans
+orbital operations. Maintenance covers diagnosis, configuration
+management, repair and controlled updates; changes are verified before
+deployment. Security, redundancy and availability are considered
+(\texttt{R-\allowbreak{}015}, \texttt{R-\allowbreak{}017}, \texttt{R-\allowbreak{}030}--\texttt{R-\allowbreak{}037}).
 
-Completion of this phase establishes Ground Segment readiness to support the initial mission operations.
+\subsection{5.5 End of Mission and GSEG
+Decommissioning}\label{end-of-mission-and-gseg-decommissioning}
 
-\subsubsection{5.3 Launch Support and Commissioning}
+GSEG supports spacecraft commands and monitoring during mission
+close-out; spacecraft disposal remains an SSEG responsibility
+(\texttt{R-\allowbreak{}018}). This includes terminating ground services, retaining
+documentation and data, and retiring equipment and software. Archived
+data remain subject to protection, access and retention requirements.
 
-The Ground Segment reaches the required operational readiness before spacecraft activities that depend on terrestrial support commence.
-
-During launches and the Launch and Early Orbit Phase (\abbr{LEOP}), it supports spacecraft communications, telemetry reception, command transmission, and spacecraft-status monitoring in coordination with the Space Segment.
-
-As \abbr{GEO} and \abbr{LEO} spacecraft are commissioned, the Ground Segment supports their integration into constellation operations, checks communication interfaces, and confirms the availability of required mission-data products.
-
-Mission commissioning includes validation of space-to-ground cooperation and readiness of operational and warning functions. Following the applicable commissioning activities, the Ground Segment enters nominal operation.
-
-\subsubsection{5.4 Routine Operations and Maintenance}
-
-During operation, the Ground Segment provides continuous mission support, including constellation control, mission-data reception and processing, system monitoring, and warning delivery.
-
-GIS supports infrastructure performance monitoring and maintenance; mission operators use MCC for supervision and flight-dynamics planning. Maintenance activities include configuration management, corrective servicing and controlled software updates. Configuration changes and updates undergo appropriate verification before operational deployment. Maintenance activities take account of availability, redundancy, and security requirements (\texttt{R-015}, \texttt{R-017}, \texttt{R-030}--\texttt{R-037}).
-
-The Ground Segment also supports periodic performance reviews, operator training, and analysis of operational records within the purposes authorized by the system requirements. It provides mission support throughout active spacecraft operations, including fault recovery and restoration of operational readiness.
-
-\subsubsection{5.5 End-of-Mission and Ground Segment Decommissioning}
-
-At the end of the mission, the Ground Segment supports spacecraft retirement activities, including the corresponding commanding and monitoring functions. End-of-life disposal and passivation of the \abbr{GEO} and \abbr{LEO} spacecraft remain Space Segment responsibilities (\texttt{R-018}).
-
-\begin{sloppypar}
-Ground infrastructure decommissioning includes termination of active operational services, preservation of mission documentation and data, and withdrawal of terrestrial equipment and software from service.
-\end{sloppypar}
-
-Archived mission data and operational records remain subject to protection, access-control, and retention requirements, particularly \texttt{R-004}, \texttt{R-036}, and \texttt{R-047}. Final Ground Segment shutdown follows completion of the required mission operations and provision for the continued handling of retained records.
-
-\begin{table}[H]
-\centering
-\caption{Ground Segment Life Profile Summary}
-\label{tab:gseg_life_profile}
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.26\textwidth}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{0.25\textwidth}|}
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.19}|P{0.49}|P{0.32}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Phase} & \thead{Principal Activities} & \thead{End State} \\ \hline
-\textbf{1. Development} & Requirements, software, infrastructure, interfaces, and operational-data preparation. & Ready for integration. \\ \hline
-\textbf{2. Integration and Validation} & Installation, integration, verification, and operational exercises. & Ground readiness confirmed. \\ \hline
-\textbf{3. Launch Support and Commissioning} & Launch and \abbr{LEOP} support, communications checkout, and commissioning. & Ready for nominal operation. \\ \hline
-\textbf{4. Routine Operations} & Mission operations, maintenance, updates, and fault handling. & Operational capability sustained. \\ \hline
-\textbf{5. Decommissioning} & End-of-mission support, records preservation, and service retirement. & GSEG operation terminated. \\ \hline
-\end{tabularx}}
-\end{table}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Phase
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Principal activities
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+End state
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+1. Development & Requirements, design, software, infrastructure and
+operational-data preparation. & Ready for integration. \\ \hline
+2. Integration and validation & Installation, integration, verification
+and operational exercises. & Ground readiness confirmed. \\ \hline
+3. Launch and commissioning & Launch/LEOP support, communication checks
+and spacecraft commissioning. & Ready for nominal operations. \\ \hline
+4. Routine operations & Mission operations, maintenance, updates and
+fault handling. & Operational capability maintained. \\ \hline
+5. Decommissioning & End-of-mission support, records retention and
+retirement of services. & GSEG operations ended. \\*
+\end{longtable}
+\endgroup

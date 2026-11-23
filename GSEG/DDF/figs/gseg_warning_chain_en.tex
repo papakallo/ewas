@@ -1,0 +1,73 @@
+% Two GSEG intervals, separated by SSEG activity; current conditional policy.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  stage/.style={draw=TableBorderBlue,fill=TableRowLightBlue,rounded corners=2pt,
+    align=center,font=\small,
+    text width=2.35cm,minimum height=1.2cm,inner sep=3pt},
+  external/.style={stage,fill=white},
+  outcome/.style={stage,text width=4.4cm,minimum height=1.65cm},
+  result/.style={stage,fill=white,text width=4.4cm,minimum height=1.0cm},
+  flow/.style={-{Stealth[length=1.8mm]},draw=HeadingBlue,line width=0.7pt},
+  trunk/.style={draw=HeadingBlue,line width=0.7pt},
+  heading/.style={anchor=west,font=\small\bfseries,text=HeadingBlue},
+  gsegWarningJunction/.style={circle,fill=HeadingBlue,inner sep=1pt}
+]
+\node[heading] at (-7.5,1.1)
+  {Phase A: GSN report reception to request handover $\leq 2$ s};
+\node[external] (geo) at (-6.2,0) {SSEG GEO\\Event Report};
+\node[stage] (gsna) at (-3.1,0) {GSN\\Report reception};
+\node[stage] (cc) at (0,0) {C\&C\\Select two LEO};
+\node[stage] (handover) at (3.1,0) {GSN\\Hand over two requests};
+\node[external] (ssega) at (6.2,0) {SSEG\\Request interface};
+\draw[flow] (geo.east) -- (gsna.west);
+\draw[flow] (gsna.east) -- (cc.west);
+\draw[flow] (cc.east) -- (handover.west);
+\draw[flow] (handover.east) -- (ssega.west);
+
+\node[external,text width=13.4cm,minimum height=1.0cm] (space) at (0,-2.1)
+  {SSEG interval: command delivery, observations by two LEO spacecraft and product return.\\
+   Outside both GSEG timing intervals.};
+\draw[flow] (ssega.south) -- (6.2,-1.1) -| (space.north);
+
+\node[heading] at (-7.5,-3.35)
+  {Phase B: GSN complete reception to recipient $\leq 15$ s (warning-qualified events)};
+\node[external] (leo) at (-6.2,-4.5) {SSEG\\Two-LEO products};
+\node[stage] (gsnb) at (-3.1,-4.5) {GSN\\Complete LEO\\products};
+\node[stage,text width=2.7cm] (dps) at (0,-4.5)
+  {DPS\\Validate / fuse\\Classify / assess};
+\node[stage] (decision) at (5.2,-4.5) {Warning\\qualification decision};
+\draw[flow] (space.south) -- (0,-2.95) -- (-7.8,-2.95)
+  -- (-7.8,-4.5) -- (leo.west);
+\draw[flow] (leo.east) -- (gsnb.west);
+\draw[flow] (gsnb.east) -- (dps.west);
+\draw[flow] (dps.east) -- (decision.west);
+
+% A decision fan-out, with no direct route bypassing DPS or EWS.
+\draw[trunk] (decision.south) -- (5.2,-5.65) -- (-5.2,-5.65);
+\node[outcome,fill=white] (nonthreat) at (-5.2,-6.9)
+  {Credibly non-threatening\\Valid assessment;\\credible threat excluded};
+\node[outcome,fill=white] (impossible) at (0,-6.9)
+  {Assessment impossible\\Missing, invalid or\\insufficient data};
+\node[outcome] (eligible) at (5.2,-6.9)
+  {Potential threat OR\\ambiguous assessment:\\credible threat not excluded};
+\foreach \name/\x in {nonthreat/-5.2,impossible/0,eligible/5.2} {
+  \node[gsegWarningJunction] at (\x,-5.65) {};
+  \draw[flow] (\x,-5.65) -- (\name.north);
+}
+\node[result,minimum height=1.4cm] (mccn) at (-5.2,-9.0)
+  {MCC + DAS\\Result / reason\\No external warning};
+\node[result,minimum height=1.4cm] (mcci) at (0,-9.0)
+  {MCC + DAS\\Assessment status\\No external warning};
+\draw[flow] (nonthreat.south) -- (mccn.north);
+\draw[flow] (impossible.south) -- (mcci.north);
+\node[stage,text width=2.2cm,minimum height=1.4cm] (ews) at (3.7,-9.0)
+  {EWS\\Issue warning};
+\node[external,text width=2.2cm,minimum height=1.4cm] (recipient) at (6.8,-9.0)
+  {Authorized\\recipient\\interface};
+\draw[flow] (eligible.south) -- (5.2,-8.0) -| (ews.north);
+\draw[flow] (ews.east) -- (recipient.west);
+\node[font=\scriptsize,align=center,text width=5.8cm,text=HeadingBlue]
+  at (5.2,-10.15) {Automatic; uncertainty included.\\No prior operator approval.};
+\end{tikzpicture}%
+}

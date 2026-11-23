@@ -1,191 +1,403 @@
-% =============================================================================
-% SECTION 7: GROUND SEGMENT TECHNICAL REQUIREMENTS
-% Approved draft translation from EWAS_GSEG_TRS_Chapter_07_PL_draft.md
-% Exactly 34 requirements; do not change requirement IDs during integration.
-% =============================================================================
-\subsection{7. Technical Requirements}
+\section{7. GSEG Technical
+Requirements}\label{gseg-technical-requirements}
 
-This section specifies the normative technical requirements for the integrated
-Ground Segment (GSEG, \texttt{CI-02}). Requirements derive from the EWAS
-system baseline, the operational concept, segment boundaries, and the agreed
-Space Segment interfaces. Allocation to individual Ground Segment subsystems
-will be defined in subordinate specifications and the Requirements Traceability
-Matrix (RTM). The approved product architecture comprises seven subsystems,
-including the Ground Infrastructure Subsystem (GIS). GIS supports common
-computing, networks, time distribution and on-site utilities; MCC owns
-flight-dynamics and mission planning, while C\&C retains automatic two-LEO
-selection and command handling. This paragraph states the allocation context
-and does not introduce new normative requirement IDs.
+The normative word \textbf{``shall''} is used throughout. The
+``Verification'' column specifies the T/A/R/I methods.
 
-Each requirement has a persistent identifier, a parent requirement or approved
-segment-level basis, and planned verification methods: Test (T), Analysis (A),
-Review of Design (R), and Inspection (I). Verification methods do not imply
-that compliance has already been demonstrated.
+\subsection{7.1 Functional and Mission
+Requirements}\label{functional-and-mission-requirements}
 
-The 60-second end-to-end limit applies to the complete EWAS system
-(\texttt{R-011}); the Ground Segment timing allocations are 2 seconds for
-LEO selection and tracking-request handover and 15 seconds for ground
-assessment and warning delivery for warning-eligible events. The system availability requirement
-exceeding 99.9\% (\texttt{R-015}) is not an independently established
-numerical availability allocation for GSEG.
-\subsubsection{7.1 Functional and Mission Requirements (\texttt{GSEG-REQ-FUN})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Functional and Mission Requirements (\texttt{GSEG-REQ-FUN})}\label{tab:gseg_req_fun}\\
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
 \endhead
-\textbf{\texttt{GSEG-REQ-FUN-001}}\newline \emph{Selection of Two LEO Spacecraft} & Upon receipt of a GEO Event Report, the Ground Segment \textbf{shall} select two LEO spacecraft for follow-up observations based on event location, observation geometry, spacecraft status, and communication availability. & \texttt{R-043} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-002}}\newline \emph{Tracking Command Handling} & The Ground Segment \textbf{shall} generate tracking requests for both selected LEO spacecraft, hand them over to the Space Segment communications interface, and make their transmission and execution status available. & \texttt{R-030}, \texttt{R-044} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-003}}\newline \emph{Ground Event Classification} & The Ground Segment \textbf{shall} automatically distinguish assessments of valid event data among (a) potential threat, (b) indeterminate event for which a credible threat cannot be excluded, and (c) credibly non-threatening event. When the necessary valid input is missing, invalid or insufficient, the Ground Segment \textbf{shall} declare a separate \emph{Assessment Unavailable} status instead of assigning a threat class. & \texttt{R-019}, \texttt{R-013} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-004}}\newline \emph{Authoritative Ground Data Fusion} & The Ground Segment \textbf{shall} fuse timestamped stereoscopic Line-of-Sight (LOS) observations, their uncertainty metadata, and the onboard preliminary trajectory from the two selected LEO spacecraft to produce a refined trajectory and probabilistic impact area. & \texttt{R-012}, \texttt{R-026}, \texttt{R-027} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-005}}\newline \emph{Automatic First Preliminary Warning} & After receiving and validly assessing observations from both selected LEO spacecraft and producing a refined trajectory and impact-area estimate, the Ground Segment \textbf{shall automatically deliver} a first preliminary warning when (a) a potential threat is assessed or (b) the classification is indeterminate and a credible threat cannot be excluded. The warning \textbf{shall} convey the corresponding uncertainty. No first preliminary warning \textbf{shall} be issued for a credibly non-threatening event or \emph{Assessment Unavailable}. Delivery \textbf{shall} not require prior operator approval. & \texttt{R-011}, \texttt{R-013}, \texttt{R-045} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-006}}\newline \emph{Event Assessment Updates} & The Ground Segment \textbf{shall} update the refined trajectory and impact-area assessment upon receipt of additional tracking data associated with an active event. & \texttt{R-014} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-007}}\newline \emph{Warning Revision and Cancellation} & The Ground Segment \textbf{shall} enable an authorized operator to confirm, revise, or cancel a previously delivered warning and to transmit the corresponding update message. & \texttt{R-046} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-008}}\newline \emph{Baltic Region Threat Prioritization} & The Ground Segment \textbf{shall} assess events originating throughout the global surveillance area for potential threats to the Baltic region and prioritize the corresponding warning products. & \texttt{R-049} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-FUN-009}}\newline \emph{Non-Offensive Functional Scope} & The Ground Segment \textbf{shall} not provide weapon-guidance, fire-control, interceptor-control, or direct military-response asset control functions. & \texttt{R-001} & R, I \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}001}} --- Selection of Two LEO Spacecraft &
+Upon receipt of a GEO Event Report, GSEG \textbf{shall} select two LEO
+spacecraft for follow-up observation based on event location,
+observation geometry, spacecraft status and communications availability.
+& R-043 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}002}} --- Observation Request Handling &
+GSEG \textbf{shall} generate requests for both selected LEO spacecraft,
+hand them over to the SSEG communications interface, and make
+transmission and execution status available. & R-030, R-044 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}003}} --- Ground Event Classification &
+GSEG \textbf{shall} automatically distinguish (a) an event constituting
+a potential threat, (b) an ambiguous event for which a credible threat
+cannot be excluded, and (c) a credibly non-threatening event. If the
+input data do not permit the required assessment, GSEG \textbf{shall}
+indicate the distinct \textbf{``assessment impossible''} status instead
+of assigning a threat class. & R-019, R-013 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}004}} --- Authoritative Ground Data Fusion
+& GSEG \textbf{shall} fuse timestamped stereoscopic LOS observations,
+their uncertainty metadata and the onboard preliminary trajectory from
+two selected LEO spacecraft to produce a refined trajectory and
+probabilistic impact area. & R-012, R-026, R-027 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}005}} --- Automatic First Preliminary
+Warning & Following receipt and valid assessment of observations from
+two selected LEO spacecraft and estimation of the refined trajectory and
+impact area, GSEG \textbf{shall automatically} deliver the first
+preliminary warning if the assessment indicates a potential threat or
+remains ambiguous without excluding a credible threat. The warning
+\textbf{shall} convey appropriate uncertainty information. GSEG
+\textbf{shall not} issue such a warning for credibly non-threatening
+events or when the status is ``assessment impossible''. Prior operator
+approval is not required. & R-011, R-013, R-045 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}006}} --- Event Assessment Updates & GSEG
+\textbf{shall} update the refined trajectory and impact-area assessment
+upon receipt of additional observation data associated with an active
+event. & R-014 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}007}} --- Warning Revision and Cancellation
+& GSEG \textbf{shall} enable an authorized operator to confirm, revise
+or cancel a previously delivered warning and transmit the corresponding
+update. & R-046 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}008}} --- Baltic Region Threat
+Prioritization & GSEG \textbf{shall} assess events originating
+throughout the global surveillance area for threats to the Baltic region
+and prioritize the relevant warning products. & R-049 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}009}} --- Non-Offensive Scope & GSEG
+\textbf{shall not} provide weapon guidance, fire control, interceptor
+control or direct control of military response assets. & R-001 & R, I \\*
+\end{longtable}
+\endgroup
 
-\subsubsection{7.2 Ground Segment Architecture and Configuration Requirements (\texttt{GSEG-REQ-ARC})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Ground Segment Architecture and Configuration Requirements (\texttt{GSEG-REQ-ARC})}\label{tab:gseg_req_arc}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endhead
-\textbf{\texttt{GSEG-REQ-ARC-001}}\newline \emph{Single-Site Ground Configuration} & The fixed operational infrastructure of the Ground Segment \textbf{shall} be located at one geographical site. & GSEG baseline assumption (Section 2) & R, I \\ \hline
-\textbf{\texttt{GSEG-REQ-ARC-002}}\newline \emph{Independence of the Critical Warning Path} & The automatic delivery of the first warning \textbf{shall} not depend on completion of event-data archiving, historical analysis, or operator review activities. & \texttt{R-011}, \texttt{R-045}, CONOPS & T, R \\ \hline
-\end{longtable}}
+\subsection{7.2 Architecture and
+Configuration}\label{architecture-and-configuration}
 
-\subsubsection{7.3 Ground Segment Performance Requirements (\texttt{GSEG-REQ-PERF})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Ground Segment Performance Requirements (\texttt{GSEG-REQ-PERF})}\label{tab:gseg_req_perf}\\
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
 \endhead
-\textbf{\texttt{GSEG-REQ-PERF-001}}\newline \emph{LEO Selection and Tracking-Request Handover Time} & The elapsed time from receipt of the GEO Event Report by the Ground Station Network to handover of tracking requests for both selected LEO spacecraft at the GSEG/SSEG boundary, including internal report forwarding and assessment, \textbf{shall} not exceed 2 seconds. & \texttt{R-011}, \texttt{R-043}; Section 3.2 allocation & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-PERF-002}}\newline \emph{Ground Assessment and Warning-Delivery Time} & For warning-eligible events, the elapsed time from receipt by the Ground Station Network of both required LEO observation packages and the onboard preliminary trajectory to delivery of the first warning at the authorized recipient interface, including validation, fusion, the warning decision and dissemination, \textbf{shall} not exceed 15 seconds. & \texttt{R-011}, \texttt{R-045}; Section 3.2 allocation & T, A \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}001}} --- Single Ground Location & Fixed
+operational GSEG infrastructure \textbf{shall} be located at one
+geographical site. & GSEG baseline, Section 2 & R, I \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}002}} --- Critical-Path Independence &
+Automatic delivery of the first warning \textbf{shall not} depend on
+completion of event-data archiving, historical analyses or operator
+review. & R-011, R-045, CONOPS & T, R \\*
+\end{longtable}
+\endgroup
 
-\subsubsection{7.4 Segment Interface Requirements (\texttt{GSEG-REQ-IF})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Segment Interface Requirements (\texttt{GSEG-REQ-IF})}\label{tab:gseg_req_if}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endhead
-\textbf{\texttt{GSEG-REQ-IF-001}}\newline \emph{Space Segment Interface} & The Ground Segment \textbf{shall} exchange commands, telemetry, GEO Event Reports, LEO Observation Packages, and Onboard Preliminary Trajectories through interfaces conforming to the agreed ICDs and the Space Segment specification. & \texttt{R-033}, \texttt{R-042}--\texttt{R-044}; \texttt{SSEG-REQ-IF-001} & T, R \\ \hline
-\textbf{\texttt{GSEG-REQ-IF-002}}\newline \emph{Warning-Delivery Interface} & The Ground Segment \textbf{shall} provide authorized recipient interfaces with messages containing the event identifier, refined trajectory, impact area, assessment-uncertainty information including indeterminate cases, and warning status, and \textbf{shall} record available delivery acknowledgements. & \texttt{R-003}, \texttt{R-013}, \texttt{R-047}, \texttt{R-048} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-IF-003}}\newline \emph{Orbital-Situation Operational Data} & The Ground Segment \textbf{shall} support the reception and forwarding of applicable orbital conjunction information to mission-supervision functions and the agreed Space Segment interface. & \texttt{SSEG-REQ-IF-004}; Section 3.3 interface & T, R \\ \hline
-\end{longtable}}
+\subsection{7.3 Performance}\label{performance}
 
-\subsubsection{7.5 Data Processing, Traceability, and Retention Requirements (\texttt{GSEG-REQ-DATA})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Data Processing, Traceability, and Retention Requirements (\texttt{GSEG-REQ-DATA})}\label{tab:gseg_req_data}\\
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
 \endhead
-\textbf{\texttt{GSEG-REQ-DATA-001}}\newline \emph{Mission Product Traceability} & The Ground Segment \textbf{shall} preserve event identifiers, timestamps, and data provenance during reception, processing, exchange between GSEG functions, and recording of mission products. & \texttt{R-012}, \texttt{R-037}, \texttt{R-047}; data dictionary & T \\ \hline
-\textbf{\texttt{GSEG-REQ-DATA-002}}\newline \emph{Assessment Input-Data Validation} & Before admitting received data to an assessment that can trigger the first warning, the Ground Segment \textbf{shall} verify that observation packages are associated with the correct event and contain the data and metadata required for authoritative ground fusion. & \texttt{R-012}, \texttt{R-027}, \texttt{R-045} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-DATA-003}}\newline \emph{Estimation Uncertainty Representation} & The Ground Segment \textbf{shall} associate impact-area estimates with a defined confidence level and the corresponding description of uncertainty boundaries. & \texttt{R-013} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-DATA-004}}\newline \emph{Complete Event-History Retention} & The Ground Segment \textbf{shall} archive applicable source data, the classification result or \emph{Assessment Unavailable} status, the warning issue or non-issue decision and its reason, other processing results, warning versions, delivery acknowledgements and audit records, including when a previously issued warning is revised or cancelled. & \texttt{R-037}, \texttt{R-047} & T, I \\ \hline
-\textbf{\texttt{GSEG-REQ-DATA-005}}\newline \emph{Historical Data Retention} & The Ground Segment \textbf{shall} retain archived mission data for at least five years while preserving their integrity and accessibility to authorized users. & \texttt{R-036} & A, T \\ \hline
-\textbf{\texttt{GSEG-REQ-DATA-006}}\newline \emph{Controlled Archive Usage} & The Ground Segment \textbf{shall} make historical data available only to authorized users and processes for the purposes permitted by system requirement R-004. & \texttt{R-004}, \texttt{R-034}, \texttt{R-041} & T, R \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}001}} --- LEO Selection and Request
+Handover Time & The interval from receipt of the GEO report by GSN to
+handover of requests for both selected LEO spacecraft at the GSEG/SSEG
+boundary, including internal report forwarding and assessment,
+\textbf{shall not exceed 2 s}. & R-011, R-043; Section 3.2 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}002}} --- Assessment and Warning Delivery
+Time & \textbf{For events qualified for warning delivery}, the interval
+from GSN receipt of both required LEO Observation Packages and the
+onboard preliminary trajectory to first-warning delivery at the
+authorized recipient interface, including validation, fusion, the
+warning decision and dissemination, \textbf{shall not exceed 15 s}. &
+R-011, R-045; Section 3.2 & T, A \\*
+\end{longtable}
+\endgroup
 
-\subsubsection{7.6 Information Security and Access Requirements (\texttt{GSEG-REQ-SEC})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Information Security and Access Requirements (\texttt{GSEG-REQ-SEC})}\label{tab:gseg_req_sec}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endhead
-\textbf{\texttt{GSEG-REQ-SEC-001}}\newline \emph{Role-Based Access Control} & The Ground Segment \textbf{shall} restrict access to operational functions and data according to permissions assigned to user roles. & \texttt{R-003}, \texttt{R-034} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-SEC-002}}\newline \emph{Protection of Transmitted Information} & The Ground Segment \textbf{shall} apply communications encryption at system interfaces in accordance with applicable security requirements and the agreed cryptographic boundaries. & \texttt{R-031} & T, R \\ \hline
-\textbf{\texttt{GSEG-REQ-SEC-003}}\newline \emph{Encryption of Archived Mission Data} & The Ground Segment \textbf{shall} store archived mission data in encrypted form. & \texttt{R-035} & T, I \\ \hline
-\textbf{\texttt{GSEG-REQ-SEC-004}}\newline \emph{Protection Against Unauthorized Commands} & The Ground Segment \textbf{shall} detect and reject control commands whose origin or integrity has not been successfully authenticated at the relevant interface. & \texttt{R-031}, \texttt{R-032}, \texttt{R-034} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-SEC-005}}\newline \emph{Operational and Security Audit Recording} & The Ground Segment \textbf{shall} maintain audit records of user activities, command-and-control operations, system events, and warning dissemination, including their identifiers and timestamps. & \texttt{R-037} & T, I \\ \hline
-\end{longtable}}
+\subsection{7.4 Interfaces}\label{interfaces}
 
-\subsubsection{7.7 Reliability and Availability Requirements (\texttt{GSEG-REQ-REL})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Reliability and Availability Requirements (\texttt{GSEG-REQ-REL})}\label{tab:gseg_req_rel}\\
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
 \endhead
-\textbf{\texttt{GSEG-REQ-REL-001}}\newline \emph{Redundancy of Critical Functions} & The Ground Segment \textbf{shall} provide redundant execution paths for constellation-control functions and first-warning delivery, enabling these functions to continue following a failure of a single element covered by the redundancy. & \texttt{R-017}, \texttt{R-030} & T, A \\ \hline
-\textbf{\texttt{GSEG-REQ-REL-002}}\newline \emph{Loss of Operational Capability Indication} & The Ground Segment \textbf{shall} detect and report to mission-supervision functions the unavailability of services or connections required for constellation control, ground event assessment, or warning delivery. & \texttt{R-015}, \texttt{R-017}, \texttt{R-030} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-REL-003}}\newline \emph{Critical-Service Operational Availability} & During 24/7 operational mission service, GSEG \textbf{shall} achieve at least $99.99\%$ operational availability for the simultaneously ready critical GSEG-controlled tasking and first-warning capabilities defined in Section 3.2. Measured critical-service downtime \textbf{shall} include planned maintenance and fault recovery causing either capability to be unavailable. & \texttt{R-015}, \texttt{R-017} & A, T \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}001}} --- SSEG Interface & GSEG
+\textbf{shall} exchange commands, telemetry, GEO Event Reports, LEO
+Observation Packages and Onboard Preliminary Trajectories through
+interfaces consistent with the agreed ICDs and SSEG specification. &
+R-033, R-042--044; SSEG-REQ-IF-001 & T, R \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}002}} --- Warning Delivery Interface & GSEG
+\textbf{shall} provide authorized interfaces with messages containing
+the event identifier, refined trajectory, impact area,
+\textbf{assessment uncertainty (including ambiguous classification)} and
+warning status, and \textbf{shall} record available delivery
+acknowledgements. & R-003, R-013, R-047, R-048 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}003}} --- Operational Orbital-Situation Data
+& GSEG \textbf{shall} support reception and forwarding of applicable
+orbital-conjunction information to mission-supervision functions and the
+agreed SSEG interface. & SSEG-REQ-IF-004; Section 3.3 & T, R \\*
+\end{longtable}
+\endgroup
 
 \newpage
-\subsubsection{7.8 Mission Operations and Supervision Requirements (\texttt{GSEG-REQ-OPS})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Mission Operations and Supervision Requirements (\texttt{GSEG-REQ-OPS})}\label{tab:gseg_req_ops}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endhead
-\textbf{\texttt{GSEG-REQ-OPS-001}}\newline \emph{Operator Situational Awareness} & The Ground Segment \textbf{shall} present authorized operators with the available event location, refined trajectory, probabilistic impact area, confidence level and uncertainty boundaries, together with the threat classification and warning decision/status. The presentation \textbf{shall} distinguish a warning issued, no warning because a credible threat is excluded, and \emph{Assessment Unavailable} because required valid data are missing or insufficient. & \texttt{R-028}, \texttt{R-029}, \texttt{R-046} & T, I \\ \hline
-\textbf{\texttt{GSEG-REQ-OPS-002}}\newline \emph{Mission Status Monitoring} & The Ground Segment \textbf{shall} provide operators with current spacecraft status, ground operational service status, and command status, including identification of anomalies affecting mission execution. & \texttt{R-029}, \texttt{R-030}, \texttt{R-033} & T \\ \hline
-\end{longtable}}
+\subsection{7.5 Data and Retention}\label{data-and-retention}
 
-\subsubsection{7.9 Integrated Ground Segment Verification Requirements (\texttt{GSEG-REQ-VER})}
-{\footnotesize\setlength{\tabcolsep}{3.6pt}\renewcommand{\arraystretch}{1.16}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\setlength{\LTcapwidth}{\textwidth}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.22\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.51\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.18\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.09\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Integrated Ground Segment Verification Requirements (\texttt{GSEG-REQ-VER})}\label{tab:gseg_req_ver}\\
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Req. ID and Title} & \thead{Normative Requirement} & \thead{Basis} & \thead{Verif.} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
 \endhead
-\textbf{\texttt{GSEG-REQ-VER-001}}\newline \emph{Scenario-Based Verification} & Ground Segment functions relevant to warning generation \textbf{shall} be verified through representative simulation scenarios covering varied events, transmission conditions, and data availability. & \texttt{R-038} & A, R \\ \hline
-\textbf{\texttt{GSEG-REQ-VER-002}}\newline \emph{Hardware-in-the-Loop Testing of Critical Functions} & Before operational deployment, critical ground data-processing and automatic-warning functions \textbf{shall} undergo Hardware-in-the-Loop testing with representative inputs from the Space Segment or its emulator. & \texttt{R-039} & T \\ \hline
-\textbf{\texttt{GSEG-REQ-VER-003}}\newline \emph{Integrated Warning-Chain Operational Validation} & The Ground Segment \textbf{shall} participate in end-to-end exercises involving the Space Segment and an authorized recipient interface, including measurement of time boundaries and verification that observations from two LEO spacecraft are assessed before the first warning. & \texttt{R-011}, \texttt{R-040}, \texttt{R-045} & T \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}001}} --- Product Traceability & GSEG
+\textbf{shall} preserve event identifiers, timestamps and data
+provenance during reception, processing, exchange and recording of
+mission products. & R-012, R-037, R-047; Data Dictionary & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}002}} --- Assessment Input Validation &
+Before admitting data to an assessment that can trigger the first
+warning, GSEG \textbf{shall} verify that the packages belong to the
+correct event and contain the data and metadata required for
+authoritative fusion. & R-012, R-027, R-045 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}003}} --- Uncertainty Representation &
+GSEG \textbf{shall} associate an impact-area estimate with a defined
+confidence level and an appropriate description of uncertainty
+boundaries. & R-013 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}004}} --- Complete Event History & GSEG
+\textbf{shall} archive applicable source data, classification results
+and decisions to \textbf{issue or withhold} a warning with the reason,
+other processing results, warning versions, delivery acknowledgements
+and audit records, including after a warning is revised or cancelled. &
+R-037, R-047 & T, I \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}005}} --- Historical Data Retention & GSEG
+\textbf{shall} retain archived mission data for at least five years,
+preserving integrity and availability to authorized users. & R-036 & A,
+T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}006}} --- Controlled Archive Use & GSEG
+\textbf{shall} make historical data available only to authorized users
+and processes for the purposes permitted by system requirement R-004. &
+R-004, R-034, R-041 & T, R \\*
+\end{longtable}
+\endgroup
+
+\subsection{7.6 Information Security}\label{information-security-1}
+
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}001}} --- Role-Based Access Control & GSEG
+\textbf{shall} restrict access to operational functions and data
+according to permissions associated with user roles. & R-003, R-034 &
+T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}002}} --- Transmission Protection & GSEG
+\textbf{shall} apply communications encryption at system interfaces
+according to applicable security requirements and agreed cryptographic
+boundaries. & R-031 & T, R \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}003}} --- Archive Encryption & GSEG
+\textbf{shall} store archived mission data in encrypted form. & R-035 &
+T, I \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}004}} --- Protection Against Unauthorized
+Commands & GSEG \textbf{shall} detect and reject control commands whose
+origin or integrity has not been successfully authenticated at the
+relevant interface. & R-031, R-032, R-034 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}005}} --- Audit Recording & GSEG
+\textbf{shall} record audits of user activities, control operations,
+system events and warning dissemination, with identifiers and
+timestamps. & R-037 & T, I \\*
+\end{longtable}
+\endgroup
+
+\newpage
+\subsection{7.7 Reliability and
+Availability}\label{reliability-and-availability}
+
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}001}} --- Critical-Function Redundancy &
+GSEG \textbf{shall} provide redundant execution paths for
+constellation-control functions and first-warning delivery, allowing
+these functions to continue after failure of a single element covered by
+redundancy. & R-017, R-030 & T, A \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}002}} --- Indication of Capability Loss &
+GSEG \textbf{shall} detect and report to mission-supervision functions
+the unavailability of services or connections required for constellation
+control, event assessment or warning delivery. & R-015, R-017, R-030 &
+T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003}} --- Critical-Service Operational
+Availability & During continuous 24/7 operational mission service, GSEG
+\textbf{shall} achieve at least 99.99\% operational
+availability for simultaneous readiness of the GSEG-controlled critical
+tasking and first-warning capabilities as defined in Section 3.2.
+Measured critical-service downtime \textbf{shall} include scheduled
+maintenance and fault recovery that make either capability unavailable.
+& R-015, R-017 & A, T \\*
+\end{longtable}
+\endgroup
+
+\subsection{7.8 Supervision and
+Operations}\label{supervision-and-operations}
+
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}OPS-\allowbreak{}001}} --- Operator Situational Awareness &
+GSEG \textbf{shall} display to authorized operators available event
+location, trajectory, impact area, confidence level, uncertainty bounds,
+and the \textbf{classification and decision status}: warning issued,
+warning withheld because no threat was identified, or assessment
+impossible due to insufficient data. & R-028, R-029, R-046 & T, I \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}OPS-\allowbreak{}002}} --- Mission Status Monitoring & GSEG
+\textbf{shall} provide operators with current spacecraft, ground-service
+and command status, identifying anomalies that affect mission execution.
+& R-029, R-030, R-033 & T \\*
+\end{longtable}
+\endgroup
+
+\subsection{7.9 Integrated Verification}\label{integrated-verification}
+
+\begingroup\GSEGTableStyle{4}\footnotesize
+\begin{longtable}[]{|P{0.22}|P{0.48}|P{0.18}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Identifier / title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Normative requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Basis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Verification
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}001}} --- Scenario Verification & GSEG
+functions relevant to warning generation \textbf{shall} be verified in
+representative simulations covering different events, communications
+conditions and data availability. & R-038 & A, R \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}002}} --- HIL Testing of Critical Functions
+& Before operational deployment, critical ground-processing and
+automatic-warning functions \textbf{shall} undergo HIL testing with
+representative SSEG data or an SSEG emulator. & R-039 & T \\ \hline
+\textbf{\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}003}} --- Integrated Warning-Chain
+Validation & GSEG \textbf{shall} participate in complete exercises
+involving SSEG and an authorized recipient interface, measuring latency
+and confirming that observations from two LEO spacecraft were assessed
+before the first warning. & R-011, R-040, R-045 & T \\*
+\end{longtable}
+\endgroup

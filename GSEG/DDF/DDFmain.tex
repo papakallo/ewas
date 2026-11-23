@@ -1,21 +1,24 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
 \documentclass[11pt,a4paper]{article}
 
 % =============================================================================
 % 1. PACKAGES (DO NOT EDIT)
 % =============================================================================
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}[BoldFont=lmmonolt10-bold.otf,BoldItalicFont=lmmonolt10-boldoblique.otf]
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
 \usepackage{longtable}
 \usepackage{float}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
 \usepackage{amsmath}
 \usepackage[hidelinks]{hyperref}
 
@@ -48,7 +51,7 @@
 % Disable section numbering (matching the PDF template) while keeping TOC entries.
 % To enable section numbering (e.g., 1, 1.1), change -1 to 3.
 \setcounter{secnumdepth}{-1}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 
 % Section, subsection, and list title styling
 \makeatletter
@@ -140,7 +143,33 @@
 % =============================================================================
 % DOCUMENT BODY
 % =============================================================================
+
+% Technical compatibility and HSB styling for the supplied translation.
+\usepackage{booktabs,calc,etoolbox,newunicodechar,caption}
+\usepackage{amssymb}
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\captionsetup[figure]{labelformat=empty,font=small}
+\setkeys{Gin}{keepaspectratio}
+\newlength{\GSEGTableContentWidth}
+\newcommand{\GSEGTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\GSEGTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\GSEGTableContentWidth}}
+\newcommand{\GSEGHeaderText}[1]{{\color{white}\bfseries\sffamily #1}}
+
+\hypersetup{pdftitle={EWAS --- Ground Segment Design Definition File (DDF)},pdfauthor={Grzegorz Macioch},pdflang={en-GB}}
+
 \begin{document}
+
 
 % -----------------------------------------------------------------------------
 % PAGE 1: TITLE PAGE & DOCUMENT INFORMATION
@@ -153,7 +182,7 @@
     {\large \ProjectName}
 \end{center}
 
-\vspace*{5.5cm}
+\vspace*{4.5cm}
 
 \begin{center}
     {\fontsize{24}{28}\selectfont\sffamily\color{TitleBlue}\DocTitle\par}
@@ -192,68 +221,55 @@
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 2: DOCUMENT CHANGE RECORD
-% -----------------------------------------------------------------------------
+% BEGIN SUPPLIED TRANSLATION BODY
 \section{Document Change Record}
 
-% Editorial development milestones supplied by the owner; not formal releases.
-{\DDFTableStyle{4}%
-\begin{longtable}{|L{0.10}|L{0.18}|L{0.49}|L{0.23}|}
-\caption{DDF editorial development milestones}\label{tab:gseg_ddf_change_record}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
-\endfirsthead
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.10}|P{0.17}|P{0.55}|P{0.18}|}
 \hline\rowcolor{TableHeaderBlue}
 \thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
 \endhead
+\hline\endlastfoot
 Draft & 18.11.2026 & Chapters 1--4 drafted. & Sections 1--4\\ \hline
 Draft & 19.11.2026 & Chapters 5--6 drafted. & Sections 5--6\\ \hline
 Draft & 20.11.2026 & Chapters 7--8 drafted. & Sections 7--8\\ \hline
-Draft & 21.11.2026 & Chapter 9 drafted; full-document editing, revision and consistency review. & Section 9; whole document\\ \hline
-Draft & 22.11.2026 & Extensive modifications across GSEG DDF chapters: 99.99\% critical-service availability allocation, logical RBD, interface and site-failure boundaries, constraints, engineering-data traceability and compliance-status updates. & Sections 2--3, 5--9; figures; register \\ \hline
-\end{longtable}}
+Draft & 21.11.2026 & Chapter 9 and whole-document editing. & Section 9; whole document\\ \hline
+Draft & 22.11.2026 & Multi-chapter modifications: warning policy, GSEG availability requirement, RBD model, budgets and compliance statements. & Multiple chapters\\*
+\end{longtable}
+\endgroup
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 3: TABLE OF CONTENTS, LIST OF TABLES, LIST OF FIGURES (AUTO-GENERATED)
-% -----------------------------------------------------------------------------
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
 \tableofcontents
-
-\clearpage
-\listoftables
-
-\vspace{1.2cm}
-\listoffigures
-
+}
 \newpage
-
-% Sections 1--9: one controlled document register in Section 2.
 \input{sections/01_introduction_scope}
 
-\clearpage
+\newpage
 \input{sections/02_applicable_reference_documents}
 
-\clearpage
+\newpage
 \input{sections/03_project_technical_requirements}
 
-\clearpage
+\newpage
 \input{sections/04_functional_description}
 
-\clearpage
+\newpage
 \input{sections/05_physical_description}
 
-\clearpage
+\newpage
 \input{sections/06_system_technical_budgets}
 
-\clearpage
+\newpage
 \input{sections/07_system_design_constraints}
 
-\clearpage
+\newpage
 \input{sections/08_engineering_data_repository}
 
-\clearpage
+\newpage
 \input{sections/09_conclusion_compliance}
 
+% END SUPPLIED TRANSLATION BODY
 \end{document}

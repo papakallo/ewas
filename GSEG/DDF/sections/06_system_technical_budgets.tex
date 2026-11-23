@@ -1,185 +1,355 @@
-% GSEG DDF — Section 6, technical budgets and margins, review issue.
-% B = existing requirements baseline; P = proposed design-to allocation, NOT approved;
-% A = assessed by analysis; V = verified by test. No A/V claims are made here.
-% Detailed calculation evidence and trade studies belong to the segment DJF.
-\newpage
-\section{6. System Technical Budgets, Margins and Deviations}
+\section{6. System Technical Budgets, Margins and
+Deviations}\label{system-technical-budgets-margins-and-deviations}
 
-\subsection{6.1 Budget Status and Design Case}
+\subsection{6.1 Budget Status and Sizing
+Case}\label{budget-status-and-sizing-case}
 
-This section records segment-level technical allocations for seven GSEG subsystems, including the Ground Infrastructure Subsystem (GIS). \textbf{B} denotes an existing requirement baseline; \textbf{P} denotes a preliminary, unapproved design-to value. None of the P values has yet been validated by integrated analysis or test. The design basis is defined by the following controlled inputs; calculation methods and option comparisons belong to the Design Justification File (DJF).
+\textbf{B} denotes a value from the existing requirements baseline, and
+\textbf{P} a proposed design allocation that has not yet been approved
+or demonstrated by testing. Calculations justifying the allocations and
+design option comparisons belong in the GSEG DDJF.
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.49}|L{0.23}|L{0.28}|}
-\caption{GSEG budget baseline and proposed sizing case}\label{tab:gseg6_design_inputs}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Design value} & \thead{Status / origin}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Design value} & \thead{Status / origin}\\\hline\endhead
-Constellation & 6 GEO + 72 LEO & B; system/SSEG definition\\\hline
-Spacecraft housekeeping generation & at least 1 sample/s per spacecraft & B; \texttt{SSEG-REQ-OPS-006}\\\hline
-GSEG LEO-tasking / warning-eligible delivery intervals & 2 s / 15 s maximum & B; \texttt{GSEG-REQ-PERF-001/\allowbreak 002}\\\hline
-Mission-data retention & at least 5 years & B; \texttt{GSEG-REQ-DATA-005}\\\hline
-GSEG controlled critical-service operational availability & $\geq99.99\%$ (52.56 min annual downtime equivalent) & B; \texttt{GSEG-REQ-REL-003} \\ \hline
-Simultaneously active events & 10 & P; peak-load scenario\\\hline
-Events for long-term storage model & 20 per day & P; volume scenario\\\hline
-GEO report / tracking request & 4 KiB / 4 KiB & P; maximum modelled sizes\\\hline
-LEO observation package / onboard preliminary trajectory & 2 MiB / 0.25 MiB & P; maximum modelled sizes\\\hline
-Warning message / addressed recipients & 64 KiB / 10 & P; dissemination case\\\hline
-Archived housekeeping record & 2 KiB per sample & P; stored-record estimate\\\hline
-Archive indexing, audit and metadata allowance & 40\% of source volume & P; planning factor\\\hline
-Hypothetical aggregate from 20 simultaneous LEO high-rate streams & 3 Gb/s at 150 Mb/s each & P; offered-load scenario, not a visibility claim\\\hline
-\end{longtable}}
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.34}|P{0.39}|P{0.27}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Parameter
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\color{white}\bfseries\sffamily
+Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Status and source
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Constellation & 6 GEO + 72 LEO & B; system/SSEG \\ \hline
+Housekeeping telemetry generation rate & ≥1 sample/s per spacecraft & B;
+\texttt{SSEG-\allowbreak{}REQ-\allowbreak{}OPS-\allowbreak{}006} \\ \hline
+GSEG time intervals & ≤2 s / ≤15 s & B;
+\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}001/\allowbreak{}002} \\ \hline
+Data retention & ≥5 years & B; \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}005} \\ \hline
+GSEG critical-service availability & ≥99.99\%; maximum
+52.56 minutes unavailable per 365 days & B;
+\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003} \\ \hline
+Concurrent active events & 10 & P; load scenario \\ \hline
+Events in the archive model & 20 per day & P; volume model \\ \hline
+GEO Event Report / LEO Tracking Request & 4 KiB / 4 KiB & P; maximum
+modelled sizes \\ \hline
+LEO Observation Package / preliminary trajectory & 2 MiB / 0.25 MiB & P;
+maximum modelled sizes \\ \hline
+Warning / addressees & 64 KiB / 10 & P; dissemination scenario \\ \hline
+Archived housekeeping record & 2 KiB per sample & P; estimate \\ \hline
+Indexing, audit and metadata overhead & 40\% of source volume & P;
+planning factor \\ \hline
+Hypothetical aggregate input from 20 LEO links & 3 Gb/s at 150 Mb/s per
+link & P; load model, not demonstrated visibility \\*
+\end{longtable}
+\endgroup
 
-The 1 Hz SSEG figure specifies \emph{spacecraft production}, not a demonstrated continuous downlink to GSN. The archive model provisionally assumes receipt and retention of the equivalent full stream; this shall be checked through the SSEG/GSEG interface model. The proposed concurrent-event case is an evaluation load, not an accepted mission maximum.
-
-\newpage
-\subsection{6.2 End-to-End Timing Allocation}
-
-\subsubsection{6.2.1 System Boundary}
-
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.65}|L{0.18}|L{0.17}|}
-\caption{EWAS warning-time allocations (baseline)}\label{tab:gseg6_system_time}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Stage} & \thead{Owner} & \thead{Limit}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Stage} & \thead{Owner} & \thead{Limit}\\\hline\endhead
-GEO detection and reporting & SSEG & $\leq 10$ s\\\hline
-LEO selection and tracking-request handover & \textbf{GSEG} & $\leq 2$ s\\\hline
-LEO command delivery & SSEG & $\leq 3$ s\\\hline
-LEO observations and return to GSN & SSEG & $\leq 30$ s\\\hline
-Ground assessment and first-warning delivery for warning-eligible events & \textbf{GSEG} & $\leq 15$ s\\\hline
-\textbf{Detection-to-delivery EWAS total} & \textbf{System} & $\leq 60$ s\\\hline
-\end{longtable}}
-
-The five upper allocations exhaust the 60 s system limit, leaving \textbf{0 s unallocated system-level time}. Segment integration reserves in Sections~6.2.2--6.2.3 are included \emph{within} the 2 s and 15 s limits. Their values are planned allowances, not measured execution margins. The warning endpoint is delivery at the authorized recipient interface, not later acknowledgement.
-
-\newpage
-\subsubsection{6.2.2 Preliminary 2 s Tasking Budget}
-
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.68}|L{0.18}|R{0.14}|}
-\caption{GSEG tasking design-to allocation (P)}\label{tab:gseg6_tasking}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endhead
-Report acceptance and forwarding & GSN & 0.20 s\\\hline
-GSN--C\&C transfer & GIS & 0.10 s\\\hline
-Two-LEO selection and request preparation & C\&C & 0.90 s\\\hline
-C\&C--GSN transfer & GIS & 0.10 s\\\hline
-Two-request handover to SSEG & GSN & 0.20 s\\\hline
-\textbf{Unallocated GSEG integration reserve} & GSEG & \textbf{0.50 s}\\\hline
-\textbf{Total allocated interval} & & \textbf{2.00 s}\\\hline
-\end{longtable}}
-
-This budget starts at GSN reception of the GEO Event Report and ends at the GSEG/SSEG boundary (\texttt{GSEG-REQ-PERF-001}). C\&C uses current orbital products prepared in advance by MCC; neither fresh flight-dynamics computation nor operator approval gates first-event tasking. GIS transfer allocations cover internal service transport, not spacecraft RF transmission.
-
-\subsubsection{6.2.3 Preliminary 15 s Assessment and Delivery Budget}
-
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.68}|L{0.18}|R{0.14}|}
-\caption{GSEG warning design-to allocation (P)}\label{tab:gseg6_warning}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Operation} & \thead{Owner} & \thead{Allocation}\\\hline\endhead
-Complete product acceptance and handoff & GSN & 0.40 s\\\hline
-Inter-service transfer & GIS & 0.40 s\\\hline
-Observation input validation & DPS & 1.00 s\\\hline
-Classification, fusion and impact assessment & DPS & 7.20 s\\\hline
-Warning preparation and version assignment & EWS & 1.00 s\\\hline
-Delivery to authorized recipient interfaces & EWS & 2.00 s\\\hline
-Critical scheduling and queuing & GIS & 0.50 s\\\hline
-\textbf{Unallocated GSEG integration reserve} & GSEG & \textbf{2.50 s}\\\hline
-\textbf{Total allocated interval} & & \textbf{15.00 s}\\\hline
-\end{longtable}}
-
-For warning-eligible events, this budget starts upon receipt by GSN of both required LEO Observation Packages and the onboard preliminary trajectory and ends with the first warning at the authorized interface (\texttt{GSEG-REQ-PERF-002}). Valid assessment of both LEO observation sets, a refined trajectory and an impact-area estimate are prerequisites. A credibly non-threatening outcome or Assessment Unavailable produces a record and MCC status without an external warning; it is not a warning-delivery timing case. Proposed budgets apply to the 10-event peak case and to faults within the agreed redundancy coverage; failover delay does not extend the 15 s delivery limit for eligible events.
+The 1 Hz rate concerns \textbf{generation of telemetry on the
+spacecraft}, not demonstrated continuous reception at GSN. The archive
+model provisionally assumes that an equivalent volume is received; this
+must be checked by SSEG/GSEG interface analysis. Ten simultaneous events
+constitute a design scenario, not a binding upper limit on event
+occurrence.
 
 \newpage
-\subsection{6.3 Technical Resource Allocations}
+\subsection{6.2 Timing Allocations}\label{timing-allocations}
 
-The preliminary sizing model (P) assigns fixed, shared C\&C and EWS envelopes per domain for ten concurrent events; only the DPS event-processing envelope is multiplied by the number of active events. Each domain is sized for the full critical load following loss of the other domain.
+\subsubsection{6.2.1 System Boundaries}\label{system-boundaries}
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.29}|L{0.44}|L{0.27}|}
-\caption{GSEG preliminary resource design-to budgets (P)}\label{tab:gseg6_resources}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Budget / owner} & \thead{Proposed allocation} & \thead{Boundary / status}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Budget / owner} & \thead{Proposed allocation} & \thead{Boundary / status}\\\hline\endhead
-Critical internal network (GIS) & $\geq 10$ Gb/s service capacity within each active critical failure domain & Excludes proof of GSN--SSEG RF accessibility\\\hline
-External warning delivery (EWS) & $\geq 100$ Mb/s effective aggregate egress for 10 recipient interfaces & Payload rate target; availability and protocol overhead not yet verified\\\hline
-Critical processing (GIS) & Two distinct on-site equipment-failure domains; $\geq 160$ vCPU and $\geq 320$ GiB RAM available to critical services \emph{per domain} & Each domain sized for full critical load following loss of the other\\\hline
-C\&C shared service & 8 vCPU / 16 GiB per domain & P: fixed envelope for ten concurrent events\\\hline
-EWS shared service & 8 vCPU / 16 GiB per domain & P: fixed envelope for ten concurrent events\\\hline
-DPS event processing & 8 vCPU / 16 GiB per active event $\times 10 = 80$ vCPU / 160 GiB per domain & P: linear demand model, not demonstrated algorithm performance\\\hline
-Critical-service total (C\&C, DPS, EWS) & 96 vCPU / 192 GiB per domain & P: sum of the critical-service allocations\\\hline
-GIS platform and system-service overhead & 24 vCPU / 48 GiB per domain & P: platform, monitoring and execution overhead allowance\\\hline
-Total assigned capacity & 120 vCPU / 240 GiB per domain & P: 96 + 24 vCPU; 192 + 48 GiB\\\hline
-Unassigned allocation reserve & 40 vCPU / 80 GiB per domain & P: 25\% of 160 vCPU / 320 GiB; not measured performance margin\\\hline
-Mission archive (DAS) & $\geq 50$ TiB \emph{usable} space per copy; two independently maintained logical copies & Both copies on the single site; hardware and coding overhead excluded\\\hline
-Critical IT power (GIS) & 12 kW planning load for the combined critical compute/network platform & Does not cover GSN RF, DAS storage, MCC or whole-site facilities\\\hline
-Critical IT heat removal (GIS) & $\geq 15$ kW heat-removal capacity & Only for the above 12 kW critical IT load\\\hline
-Critical IT UPS (GIS) & $\geq 5$ kWh usable stored energy for a 15-minute bridging design case & Only critical IT load; full-site backup power remains to be sized\\\hline
-\end{longtable}}
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.62}|P{0.20}|P{0.18}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Stage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Responsibility
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\color{white}\bfseries\sffamily
+Limit
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+GEO detection and reporting & SSEG & ≤10 s \\ \hline
+LEO selection and request handover & \textbf{GSEG} & \textbf{≤2 s} \\ \hline
+Command delivery to LEO & SSEG & ≤3 s \\ \hline
+Observations and return of data to GSN & SSEG & ≤30 s \\ \hline
+Ground assessment and warning delivery for warning-qualified events &
+\textbf{GSEG} & \textbf{≤15 s} \\ \hline
+\textbf{Entire EWAS: detection → delivery} & \textbf{System} &
+\textbf{≤60 s} \\*
+\end{longtable}
+\endgroup
 
-The proposed archive capacity applies to the 5-year retention requirement using the Section~6.1 sizing case. The critical compute and network allocations reserve capacity for both normal and single-covered-fault operation. The proposed critical-load reserve is excluded from the capacity assigned to MCC, DAS and other non-critical services. Specific server technology, physical equipment count, storage replication method and network topology belong to lower-level designs. RF contact windows and the full site electrical budget cannot be inferred from the above capacities.
+The allocations total 60 s, so the \textbf{unallocated system-level time
+reserve is 0 s}. The GSEG reserves in the following tables are contained
+within its limits. The measurement endpoint is delivery to the
+authorized recipient interface, not a subsequent acknowledgement.
 
-The service envelopes do not prescribe a single instance, a cluster or a process count. The 40 vCPU / 80 GiB unassigned reserve per domain is an allocation reserve; it does not demonstrate compliance with the 2 s or 15 s latency limits.
+\subsubsection{6.2.2 Preliminary 2 s Budget
+(P)}\label{preliminary-2-s-budget-p}
 
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.63}|P{0.22}|P{0.15}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Operation} & \GSEGHeaderText{Owner} & \GSEGHeaderText{Allocation} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Accept and make the report available & GSN & 0.20 s \\ \hline
+GSN--C\&C transfer & GIS & 0.10 s \\ \hline
+Select two LEO spacecraft and prepare requests & C\&C & 0.90 s \\ \hline
+C\&C--GSN transfer & GIS & 0.10 s \\ \hline
+Handover both requests to SSEG & GSN & 0.20 s \\ \hline
+\textbf{Integration reserve} & GSEG & \textbf{0.50 s} \\ \hline
+\textbf{Total} & & \textbf{2.00 s} \\*
+\end{longtable}
+\endgroup
 
-\subsubsection{6.3.1 Preliminary Critical-Service Availability Allocation}
+C\&C uses orbital data previously prepared by MCC. GIS delays concern
+internal exchange, not RF transmission to a spacecraft.
 
-The GSEG critical-service operational availability baseline is $A_{\mathrm{GSEG}}\geq99.99\%$
-(\texttt{GSEG-REQ-REL-\allowbreak 003}). Its allowable unavailability is
-$U_{\mathrm{GSEG}}=1-A_{\mathrm{GSEG}}\leq100$ parts per million of scheduled time,
-equivalent to at most 52.56 minutes per rolling 365-day operational window.
-The baseline is \textbf{B}; allocations in Table~\ref{tab:gseg6_availability} are
-\textbf{P} design-to budgets, not achieved or measured availability.
+\subsubsection{6.2.3 Preliminary 15 s Budget
+(P)}\label{preliminary-15-s-budget-p}
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.40}|R{0.22}|L{0.38}|}
-\caption{Preliminary GSEG critical-service unavailability budget (P)}\label{tab:gseg6_availability}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Service / exposure} & \thead{Budget (ppm)} & \thead{Provisional minimum design-to availability}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Service / exposure} & \thead{Budget (ppm)} & \thead{Provisional minimum design-to availability}\\\hline\endhead
-GSN ground-owned communication service & 20 & $99.9980\%$\\\hline
-C\&C tasking service & 10 & $99.9990\%$\\\hline
-DPS assessment service & 10 & $99.9990\%$\\\hline
-EWS warning handover service & 15 & $99.9985\%$\\\hline
-GIS shared site and computing services & 25 & $99.9975\%$\\\hline
-GSEG-controlled interfaces and egress & 10 & $99.9990\%$\\\hline
-\textbf{Allocated unavailability} & \textbf{90} & \textbf{Budget only; no performance claim}\\\hline
-\textbf{Unallocated segment reserve} & \textbf{10} & \textbf{10 ppm not assigned to a subsystem}\\\hline
-\textbf{Critical-service maximum} & \textbf{100} & $\geq 99.9900\%$\\\hline
-\end{longtable}}
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.63}|P{0.22}|P{0.15}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Operation} & \GSEGHeaderText{Owner} & \GSEGHeaderText{Allocation} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Receive and hand over complete products & GSN & 0.40 s \\ \hline
+Inter-service transfer & GIS & 0.40 s \\ \hline
+Validate observation products & DPS & 1.00 s \\ \hline
+Classification, fusion and impact-area estimation & DPS & 7.20 s \\ \hline
+Prepare and version the warning & EWS & 1.00 s \\ \hline
+Deliver to the authorized recipient interface & EWS & 2.00 s \\ \hline
+Critical scheduling and queuing & GIS & 0.50 s \\ \hline
+\textbf{Integration reserve} & GSEG & \textbf{2.50 s} \\ \hline
+\textbf{Total} & & \textbf{15.00 s} \\*
+\end{longtable}
+\endgroup
 
-Figure~\ref{fig:gseg_availability_rbd} defines the preliminary logical availability
-model. It shows the required readiness of GSN, C\&C, DPS, EWS, shared GIS functions and
-GSEG-controlled interfaces. Two on-site GIS equipment domains support covered service
-failures; their existence does not demonstrate site-level independence.
-\input{figs/gseg_availability_rbd}
+The limits cover the ten-event scenario and failures covered by the
+adopted redundancy (P). Failover does not add time beyond 15 s.
 
-The preliminary budget uses the conservative unavailability union bound:
-$U_{\mathrm{critical}}\leq\sum U_i$ for a complete set of service-loss
-contributors. No statistical independence between service losses is assumed;
-overlapping contributors can make this estimate conservative. An achieved
-availability estimate is \emph{not} derived here. Quantitative analysis shall
-assess the covered failure set, site-wide/common-cause events, repair and
-restoration time, planned maintenance, failover coverage and downtime, and the
-operational data-collection method. The detailed RBD, fault tree, supporting
-rates and sensitivity analysis belong in the GSEG DDJF.
+Applicability: the 15 s allocation covers assessment and
+first-warning delivery \textbf{for events qualified by DPS for warning}.
+A credibly non-threatening outcome or ``assessment impossible'' status
+results in a recorded decision and an MCC notification, not an attempted
+warning transmission; this is not a warning-delivery timing case.
+
+\subsection{6.3 Technical Resource Allocations}\label{technical-resource-allocations-corrected-version}
+
+GIS resource sizing (P): C\&C and EWS have
+fixed per-domain resource envelopes shared across multiple events; DPS
+demand scales with the number of active events. The capacity of
+\emph{each} GIS domain covers the scenario in which the other domain has
+failed.
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.27}|P{0.39}|P{0.34}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Resource / owner
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Proposed design allocation P
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Boundary / note
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+GIS critical network & ≥10 Gb/s in each active domain & Does not
+demonstrate GSN--SSEG RF link availability. \\ \hline
+EWS warning egress & ≥100 Mb/s effective aggregate capacity for 10
+recipients & Proposal; protocol overhead and availability unverified. \\ \hline
+GIS critical platform & 2 separate domains; ≥160 vCPU
+and ≥320 GiB RAM in each domain & Each domain assumes the entire
+critical load after loss of the other. \\ \hline
+C\&C --- shared service & 8 vCPU / 16 GiB RAM per
+domain & \emph{Fixed} envelope for the ten-event scenario. \\ \hline
+EWS --- shared service & 8 vCPU / 16 GiB RAM per
+domain & \emph{Fixed} envelope for the ten-event scenario. \\ \hline
+DPS --- event processing & 8 vCPU / 16 GiB RAM per
+event × 10 = 80 vCPU / 160 GiB per domain & Linear load scaling in the
+model; algorithm performance not demonstrated. \\ \hline
+\textbf{Total C\&C + DPS + EWS} & \textbf{96 vCPU / 192 GiB per domain}
+& Sum of critical-service allocations. \\ \hline
+GIS platform and system-service overhead & 24 vCPU / 48 GiB per
+domain & Planning hypothesis for runtime, monitoring and platform
+overhead. \\ \hline
+\textbf{Modelled nominal capacity in use} & \textbf{120 vCPU / 240 GiB
+per domain} & 96+24 vCPU; 192+48 GiB. \\ \hline
+Reserve after allocation & 40 vCPU / 80 GiB per domain
+& 25\% of domain capacity; an allocation, not a demonstrated performance
+reserve. \\ \hline
+DAS archive & ≥50 TiB usable per copy; 2 independently maintained
+logical copies & Both copies at one site; hardware overhead excluded
+from usable capacity. \\ \hline
+GIS critical IT power & 12 kW planning load & Excludes GSN RF, DAS, MCC
+and whole-site utilities. \\ \hline
+GIS critical IT cooling & ≥15 kW heat-removal capacity & Only for the
+above 12 kW. \\ \hline
+GIS critical IT UPS & ≥5 kWh usable energy for a 15-minute bridging case
+& Not a whole-site power supply. \\*
+\end{longtable}
+\endgroup
+
+These service envelopes do not prescribe whether shared services run as
+single instances, clusters or multiple processes. The details belong to
+subsystem DDFs. The 40 vCPU / 80 GiB reserve \textbf{does not replace a
+timeliness test} for the 2 s and 15 s intervals.
+
+\subsubsection{6.3.1 Preliminary GSEG Critical-Service Availability
+Budget}\label{preliminary-gseg-critical-service-availability-budget}
+
+The operational availability requirement for critical GSEG services is
+≥99.99\% (\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003}, status B). Over a continuous
+365-day window this means at most 100 ppm unavailability, or
+52.56 minutes in total. This is the requirement limit, not a
+measured result.
+
+Readiness definition: GSEG is available when \emph{both}
+segment-controlled capabilities can operate within their deadlines upon
+receipt of valid input data:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tasking:} reception of a GEO report at GSN → handover of two
+  requests to SSEG within \textbf{≤2 s}.
+\item
+  \textbf{Assessment and warning:} reception of valid products from two
+  LEO spacecraft and the onboard preliminary trajectory at GSN →
+  preliminary warning delivery within \textbf{≤15 s}, if DPS qualifies
+  the event for warning.
+\end{itemize}
+
+The measurement covers continuous 24/7 readiness in a rolling 365-day
+window. Unavailability includes planned maintenance, faults and
+failover delays preventing either capability. In the absence of actual
+events, readiness may be checked with controlled test stimuli.
+Independent SSEG failures and failures of recipient systems beyond the
+interface boundary are excluded; links and elements controlled by GSEG
+are included.
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.40}|P{0.20}|P{0.40}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Unavailability component
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\color{white}\bfseries\sffamily
+Budget P
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\color{white}\bfseries\sffamily
+Target design availability
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{GSN} --- ground satellite communications & 20 ppm &
+≥99.9980\% \\ \hline
+\textbf{C\&C} --- request and command handling & 10 ppm & ≥99.9990\% \\ \hline
+\textbf{DPS} --- event assessment & 10 ppm & ≥99.9990\% \\ \hline
+\textbf{EWS} --- warning delivery & 15 ppm & ≥99.9985\% \\ \hline
+\textbf{GIS} --- shared infrastructure and site dependencies & 25 ppm &
+≥99.9975\% \\ \hline
+\textbf{Integration and egress connections controlled by GSEG} & 10 ppm
+& ≥99.9990\% \\ \hline
+\textbf{Total allocated} & \textbf{90 ppm} & Allocation, not a measured
+result \\ \hline
+\textbf{Unallocated reserve} & \textbf{10 ppm} & Reserve within the GSEG
+limit \\ \hline
+\textbf{Total limit} & \textbf{100 ppm} & \textbf{≥99.9900\%} \\*
+\end{longtable}
+\endgroup
+
+\begin{figure}[H]
+\centering
+\input{figs/gseg_availability_rbd_en.tex}
+\caption{Figure 6-1. Logical GSEG availability block model: joint
+readiness of the GSN, C\&C, DPS and EWS services and their dependence on
+GIS and segment-controlled connections. This is a service RBD, not a
+physical-wiring diagram or proof of failure independence.}
+\end{figure}
+
+The preliminary Reliability Block Diagram (RBD) represents
+jointly required critical-service capabilities. Allocations are
+conservatively apportioned among unavailability components and reserve;
+P values are not calculated MTBF/MTTR results or demonstrated
+performance. The DDJF analysis must cover site common-cause failures,
+GIS inter-domain dependencies, loss of GSN and outbound links, fault
+detection, failover, repair and scheduled maintenance. Two GIS domains
+alone do not demonstrate compliance with 99.99\%.
 
 \newpage
-\subsection{6.4 Margins and Deviations}
+\subsection{6.4 Margins and Deviations}\label{margins-and-deviations-corrected-version}
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.36}|L{0.28}|L{0.36}|}
-\caption{Current GSEG budget and margin status}\label{tab:gseg6_margins}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Proposed margin or reserve} & \thead{Evidence status}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Parameter} & \thead{Proposed margin or reserve} & \thead{Evidence status}\\\hline\endhead
-2 s GSEG tasking interval & 0.50 s (25\% of limit) & P: uncommitted integration reserve; not measured\\\hline
-15 s GSEG warning interval & 2.50 s (16.7\% of limit) & P: uncommitted integration reserve; not measured\\\hline
-60 s EWAS total & 0 s unallocated & B: sum of upper-stage allocations\\\hline
-GSEG critical-service availability & $\geq99.99\%$ (100 ppm maximum downtime); 90 ppm allocated, 10 ppm reserved & B target / P allocation; no qualified estimate or operational measurement yet\\\hline
-GIS critical network & 70\% nominal free at modelled 3 Gb/s intake & P: theoretical; contact windows and protocol overhead unverified\\\hline
-GIS processing per surviving domain & 40 vCPU / 80 GiB = 25\% of 160 vCPU / 320 GiB & P: after 96 vCPU / 192 GiB for services and 24 vCPU / 48 GiB for overhead; not execution-time evidence\\\hline
-DAS five-year storage & approximately 35\% free of each 50 TiB copy & P: depends on modelled sample and event volume\\\hline
-GIS critical IT cooling & 20\% of installed 15 kW cooling capacity unused at 12 kW & P: critical IT only; not full-site margin\\\hline
-Verified GSEG performance margins & None currently available & No integrated test/qualified analysis results recorded\\\hline
-Confirmed deviations from GSEG TRS & None formally established & No claim of demonstrated conformity\\\hline
-\end{longtable}}
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.30}|P{0.36}|P{0.34}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Parameter
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Design margin / reserve
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Evidence status
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+GSEG 2 s interval & 0.50 s = 25\% of limit & P; allocation reserve, not
+measured. \\ \hline
+GSEG 15 s interval & 2.50 s = 16.7\% of limit & P; allocation reserve,
+not measured. \\ \hline
+Entire EWAS 60 s & 0 s unallocated & B; sum of system allocations. \\ \hline
+GSEG critical-service availability & ≥99.99\%;
+100 ppm limit with 90 ppm allocated and \textbf{10
+ppm} reserve & Adopted requirement; P allocation without verified
+analysis or measurement. \\ \hline
+GIS critical network & Theoretically 70\% unused capacity at 3 Gb/s out
+of 10 Gb/s & P; visibility, overhead and contact windows unverified. \\ \hline
+Compute resources in surviving GIS domain & 40 vCPU /
+80 GiB = 25\% of 160 vCPU / 320 GiB & P; after subtracting 96 vCPU /
+192 GiB services and 24 vCPU / 48 GiB overhead; not measured performance
+headroom. \\ \hline
+DAS five-year archive & Approximately 35\% of each 50 TiB copy remains
+free & P; depends on the data-stream and event-count model. \\ \hline
+Critical IT cooling & 20\% of the 15 kW capacity unused under a 12 kW
+load & P; not a whole-site margin. \\ \hline
+Verified GSEG margins & No available results & No confirmed integrated
+analysis or test has been completed. \\ \hline
+Confirmed deviations from GSEG TRS & None formally identified & Does not
+imply demonstrated compliance. \\*
+\end{longtable}
+\endgroup
 
-The proposed allocation values are not approved requirements or verification results. Subsystem TRSs may adopt design-to allocations only after project review. Quantitative link visibility, integrated timing, failover capability, archival volume and site-wide power/availability require supporting analyses. Their assumptions, trade studies and validation evidence are managed in the DJF; this DDF records resulting limits and current status. Any confirmed negative margin or departure from GSEG TRS is subject to controlled corrective action rather than an automatic change of the parent requirement.
+The P values are \textbf{proposed allocations}, not approved
+requirements. Only subsequent load, satellite-contact, latency and
+failover analysis can establish resource adequacy. Selection methods and
+option comparisons belong in the DDJF. A confirmed negative margin
+requires controlled assessment and corrective action.

@@ -1,32 +1,69 @@
-% GSEG DDF - Section 2; replaces the standalone References placeholder in DDFmain.tex.
-\section{2. Applicable and Reference Documents}
+\section{2. Applicable and Reference
+Documents}\label{applicable-and-reference-documents}
 
-\subsection{2.1 Design References}
+\subsection{2.1 Primary Documents}\label{primary-documents}
 
-The documents below define or inform the GSEG design. Existing AD/RD identifiers are those used in the GSEG TRS, rather than a new DDF numbering scheme. Applicable editions are subject to the project's controlled document baseline and tailoring decisions.
+The following documents form the basis of the GSEG design. \textbf{AD}
+and \textbf{RD} identifiers retain the meanings assigned in the GSEG
+TRS; no competing reference register is established.
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.15}|L{0.43}|L{0.42}|}
-\caption{Documents used for GSEG design definition}\label{tab:gseg_ddf_references}\\\hline
-\rowcolor{TableHeaderBlue}\thead{ID} & \thead{Document} & \thead{Use in the DDF}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{ID} & \thead{Document} & \thead{Use in the DDF}\\\hline\endhead
-AD-01 & EWAS System Report & System requirements and operational concept.\\\hline
-GSEG TRS & \texttt{EWAS-HSB-GSEG-TRS-02} & Segment requirements and design boundaries.\\\hline
-AD-10 & \texttt{EWAS-HSB-SSEG-TRS-03} & Peer-segment requirements and communications interface.\\\hline
-AD-02 & \texttt{ECSS-E-ST-10C} Rev.1 (2017) & System engineering; DDF and DJF data requirements.\\\hline
-AD-03 & \texttt{ECSS-E-ST-10-06C} (2009) & Technical specification structure.\\\hline
-AD-06 & \texttt{ECSS-E-ST-10-24C} Rev.1 (2024) & Interface management.\\\hline
-AD-07 & \texttt{ECSS-E-ST-40C} Rev.1 (2025) & Software engineering, as tailored.\\\hline
-RD-06 & EWAS System Data Dictionary & Preliminary data-product definitions; not an approved ICD.\\\hline
-RD-07 & \texttt{ECSS-Q-ST-30-09C} (2008) & Availability allocation and assessment method (reference; tailoring to be agreed).\\\hline
-RD-08 & \texttt{ECSS-Q-ST-40-12C} (2008) & Fault-tree method for common-cause and integration failure assessment.\\\hline
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}[]{|P{0.32}|P{0.68}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Document
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Relevance to the GSEG DDF
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\textbf{AD-01 --- EWAS System Report} & Mission concept and parent
+system requirements \texttt{R-\allowbreak{}001}--\texttt{R-\allowbreak{}049}. \\ \hline
+\textbf{EWAS-HSB-GSEG-TRS-02 --- GSEG TRS} & Segment requirements
+underpinning the design described here. \\ \hline
+\textbf{AD-10 --- EWAS-HSB-SSEG-TRS-03} & Peer SSEG requirements and
+GSEG--SSEG interface conditions. \\ \hline
+\textbf{AD-02 --- ECSS-E-ST-10C Rev.1 (2017)} & Systems engineering
+principles and the scope of the DDF (Annex G) and DJF (Annex K). \\ \hline
+\textbf{AD-03 --- ECSS-E-ST-10-06C (2009)} & Rules for specifying and
+identifying technical requirements. \\ \hline
+\textbf{AD-06 --- ECSS-E-ST-10-24C Rev.1 (2024)} & Interface management
+and documentation. \\ \hline
+\textbf{AD-07 --- ECSS-E-ST-40C Rev.1 (2025)} & GSEG subsystem software
+design and development, to the extent adopted by the project. \\ \hline
+\textbf{RD-06 --- EWAS System Data Dictionary} & Preliminary
+data-product nomenclature; not a substitute for agreed ICDs. \\ \hline
+\textbf{RD-07 --- ECSS-Q-ST-30-09C (2008)} & Methods of availability
+analysis and allocation; reference document, without a claim of formal
+tailoring. \\ \hline
+\textbf{RD-08 --- ECSS-Q-ST-40-12C (2008)} & Fault-tree analysis,
+including common-cause failures. \\*
 \end{longtable}
-}
+\endgroup
 
-\subsection{2.2 Interface and Configuration References}
+Other standards and documents governing verification, security and
+operations remain cited in the relevant sections and controlled project
+document register. Their application is subject to approved tailoring.
 
-Approved interface definitions, when issued, govern the controlled data schemas and protocols at subsystem and external boundaries. Where an Interface Control Document (ICD) is not yet approved, the DDF identifies interface ownership and exchanged products without asserting a finalized implementation. Subsystem TRS, DDF and DDJF documents will be referenced by controlled identifiers once issued.
+\subsection{2.2 Configuration and Interface
+Documentation}\label{configuration-and-interface-documentation}
 
-\subsection{2.3 Terminology}
+Definitions of shared interfaces are controlled in agreed
+\textbf{Interface Control Documents (ICDs)}. Until a relevant ICD has an
+approved issue, the DDF description establishes interface boundaries and
+exchange products but does not claim approval of a format or protocol.
 
-The terminology of the EWAS System Report, GSEG TRS and ECSS glossary applies. The key GSEG subsystem abbreviations are defined in Section~1.2; \textbf{FD} denotes Flight Dynamics, \textbf{GIS} Ground Infrastructure Subsystem, and \textbf{ICD} Interface Control Document. Status codes \textbf{B} and \textbf{P} are defined in Section~1.3.
+When a requirement or agreed interface changes, the relevant allocations
+and design definitions are updated under configuration control. The DDF
+does not independently introduce new parent-level requirements.
+
+\subsection{2.3 Terminology}\label{terminology}
+
+The terminology of the EWAS System Report, GSEG TRS and ECSS glossary
+applies. FD denotes Flight Dynamics, GIS --- Ground Infrastructure
+Subsystem, and ICD --- Interface Control Document. The B and P statuses
+are defined in Section 1.3.

@@ -1,25 +1,53 @@
-% GSEG DDF - Section 9; design conclusion and compliance status, not a TRS recap.
-\section{9. Conclusion and Design Compliance Status}
+\section{9. Conclusion and Design Compliance
+Status}\label{conclusion-and-design-compliance-status}
 
-\subsection{9.1 Design Conclusion}
+\subsection{9.1 Design Maturity
+Conclusion}\label{design-maturity-conclusion}
 
-The GSEG preliminary design definition is sufficiently structured to guide the next level of subsystem specifications and detailed design. It is \textbf{not yet ready for formal design closure}: proposed allocations, external interfaces and integrated-performance capabilities still require controlled confirmation. Completion of a DDF working draft does not constitute verification or approval for operation.
+The preliminary GSEG design definition is sufficiently structured to
+serve as a basis for lower-level specifications and designs. \textbf{It
+is not yet ready for formal design closure:} proposed allocations,
+interfaces and properties of the integrated segment still require
+agreement and confirmation. Completion of a working DDF is not proof of
+compliance or authorization for operation.
 
-\subsection{9.2 Compliance and Closure Status}
+\subsection{9.2 Compliance Demonstration
+Status}\label{compliance-demonstration-status}
 
-{\DDFTableStyle{2}%
-\begin{longtable}{|L{0.34}|L{0.66}|}
-\caption{Open conditions for GSEG design closure}\label{tab:gseg_ddf_closure}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Subject} & \thead{Outstanding evidence or decision}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Subject} & \thead{Outstanding evidence or decision}\\\hline\endhead
-Technical allocations & Review and control proposed \textbf{P} budgets and the assumptions supporting their sizing.\\\hline
-Interfaces & Agree relevant ICDs, including space-to-ground communications and authorized-warning delivery.\\\hline
-Integrated performance and warning decision & Substantiate the 2 s tasking and 15 s warning-delivery intervals for eligible events under representative peak load and covered failures. Verify potential threat, indeterminate credible threat not excluded, credibly non-threatening, and Assessment Unavailable outcomes and their required responses.\\\hline
-Parent-requirement interpretation & Obtain controlled EWAS system-level approval of the conditional warning policy against \texttt{R-011} and \texttt{R-045}; the GSEG draft does not amend those parent requirements.\\\hline
-Communications and resilience & Establish single-site space-link feasibility and evaluate common-cause dependencies of the GIS redundancy architecture.\\\hline
-Critical-service availability & Substantiate the $\geq99.99\%$ 24/7 GSEG target using reliability block diagrams, fault-tree/common-cause analysis and representative availability/maintenance and failover evidence; validate the proposed 90 ppm allocation and 10 ppm reserve.\\\hline
-Traceability and verification & Complete lower-level allocations, configuration references and the planned compliance evidence against GSEG TRS.\\\hline
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}[]{|P{0.29}|P{0.71}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Area
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Closure condition
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Technical allocations & Review and controlled approval of P budgets and
+sizing assumptions. \\ \hline
+Interfaces & Agreement of ICDs, particularly SSEG communications and
+warning delivery. \\ \hline
+Integrated performance and warning decision & Demonstration of the 2 s
+and 15 s limits under representative load and covered faults, and
+verification of the four assessment outcomes: threat, threat not
+excluded, non-threatening event and assessment impossible. \\ \hline
+Communications and resilience & Analysis of one-site communications
+feasibility and GIS common-cause failures. \\ \hline
+GSEG critical-service availability ≥99.99\% & Demonstration of
+the 90 ppm allocation and 10 ppm reserve through RBD and fault-tree
+analysis, including common causes, maintenance, repairs and failovers;
+confirmation through tests and later operational measurements. \\ \hline
+Traceability and verification & Completion of lower-level allocations,
+configuration records and evidence of compliance with the GSEG TRS. \\*
 \end{longtable}
-}
+\endgroup
 
-No overall GSEG TRS compliance claim is made at this maturity level. Analyses, design rationales, trade-off results and evidence addressing the open conditions are recorded in the GSEG DDJF and applicable verification records.
+\textbf{Complete compliance with the GSEG TRS has not yet been
+demonstrated.} Analyses, justifications, trade studies and verification
+results will be documented in the GSEG DDJF and relevant verification
+records.

@@ -1,88 +1,145 @@
-% Approved English source: EWAS_GSEG_TRS_Chapters_01-04_EN.md
-% Ground Segment TRS; integrated product, WBS 123456.02.
-\subsection{4. Selected Concept / Product Presentation}
+\section{4. Selected Concept and Product
+Presentation}\label{selected-concept-and-product-presentation}
 
-\subsubsection{4.1 Integrated Ground Segment Architecture}
+\subsection{4.1 Integrated GSEG
+Architecture}\label{integrated-gseg-architecture}
 
-The Ground Segment integrates constellation communications, mission control, observation processing, warning dissemination, operator supervision, and archiving. These functions are performed by GSN, C\&C, DPS, EWS, MCC, DAS and GIS, as introduced in Section 2.
+GSEG provides constellation communications, control, observation
+processing, warning dissemination, operator supervision and archiving.
+The functions are provided by GSN, C\&C, DPS, EWS, MCC, DAS and GIS. The
+critical event-handling chain is distinguished from supervision,
+maintenance and archival functions. GIS provides the common platform,
+network, time and site infrastructure. Communications with SSEG use
+radio links and available relay routes through the ISL network.
 
-The logical architecture distinguishes the \textbf{event-response and warning path} from \textbf{operational and archiving functions}. Within the warning path, GSN provides spacecraft communications, C\&C coordinates observation tasks, DPS produces the threat assessment, and EWS delivers warning messages to external recipients. MCC supervises operations and flight dynamics, while DAS retains mission data and event records. GIS provides the shared hosting, networking, common time and site services needed by these functions.
-
-Cooperation with SSEG uses direct radio links and available relay paths through the onboard ISL network. GSEG external interfaces also support warning delivery to authorized institutions and the exchange of operational data with authorized orbital-information providers.
-
-\subsubsection{4.2 Nominal Event Detection and Warning Sequence}
-
-The nominal sequence comprises the following activities and information transfers between EWAS elements:
+\subsection{4.2 Nominal Event-Handling
+Sequence}\label{nominal-event-handling-sequence}
 
 \begin{enumerate}
-  \item \textbf{GEO event detection.} A GEO spacecraft identifies a candidate event and produces a \emph{GEO Event Report} containing the detection time, approximate location, and available classification and observation-quality information. The report is transmitted through the communications interface to GSN. The initial detection time is the starting epoch for the measurement specified in \texttt{R-011}.
-
-  \item \textbf{Report reception and LEO selection.} GSN makes the received report available to GSEG functions. C\&C autonomously identifies two LEO spacecraft suitable for follow-up tracking using current orbital products provided by MCC flight dynamics, together with event location, observation geometry, spacecraft status, and communication-route availability (\texttt{R-043}). This automatic selection does not wait for DPS classification, ad hoc MCC flight-dynamics computation or operator approval.
-
-  \item \textbf{Tracking command transmission.} C\&C prepares a \emph{LEO Tracking Request} for each selected spacecraft. GSN transmits the commands directly or through the SSEG ISL relay network (\texttt{R-044}). Command transmission and execution status are made available to mission-supervision functions.
-
-  \item \textbf{LEO observation and onboard preliminary estimation.} The selected spacecraft perform stereoscopic observations and exchange timestamped Line-of-Sight (LOS) observation vectors. These observations support an initial three-dimensional onboard trajectory estimate. GSEG receives both \emph{LEO Observation Packages}, including observation data and uncertainty metadata, and the \emph{Onboard Preliminary Trajectory}.
-
-  \item \textbf{Ground event assessment.} GSN makes the received products available to DPS. DPS associates the products with the event and validates the required observations from both selected LEO spacecraft and the onboard preliminary trajectory. With sufficient valid data, DPS performs authoritative multi-sensor fusion and produces the \emph{Ground Refined Trajectory} and \emph{Impact Area Assessment}, with confidence and uncertainty information (\texttt{R-012}, \texttt{R-013}, \texttt{R-026}, \texttt{R-027}). It automatically classifies a valid assessment as potential threat, indeterminate with a credible threat not excluded, or credibly non-threatening, and determines warning eligibility. Missing, invalid or insufficient required products result in the separate \emph{Assessment Unavailable} status, not a fourth threat class.
-
-  \item \textbf{Conditional automatic preliminary warning delivery.} After valid assessment of both selected LEO observation sets and production of the refined trajectory and impact-area estimate, EWS automatically delivers the \emph{Preliminary Warning} when DPS assesses a potential threat or an indeterminate event for which a credible threat cannot be excluded. The warning conveys the corresponding uncertainty, explicitly including the indeterminate case, and requires no prior operator approval. For a credibly non-threatening event or \emph{Assessment Unavailable}, no external warning is issued: MCC receives the result/status and reason, and DAS receives the decision record and source data. For warning-eligible events, delivery at the authorized interface ends the warning-time measurement (\texttt{R-011}, \texttt{R-045}).
-
-  \item \textbf{Supervision and warning updates.} MCC presents the available event, trajectory and impact information, classification, and warning decision/status for all assessment outcomes. Further observations may trigger updated DPS estimates. An authorized operator may confirm, revise, or cancel a previously issued warning; EWS handles delivery of subsequent message versions (\texttt{R-014}, \texttt{R-046}).
-
-  \item \textbf{Recording and archiving.} In parallel with event handling, DAS stores applicable source data, processing and classification results, warning issue/non-issue decisions and reasons, commands, warning versions, delivery acknowledgements, and audit records. The event history remains available even if no warning is issued or an issued warning is subsequently cancelled (\texttt{R-036}, \texttt{R-037}, \texttt{R-047}).
-
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{GEO detection:} GEO detects a candidate event and creates a
+  \texttt{GEO\ Event\ Report} including the time, approximate location
+  and available quality and classification information. The initial
+  detection starts the \texttt{R-\allowbreak{}011} measurement.
+\item
+  \textbf{Reception and LEO selection:} GSN makes the report available;
+  C\&C automatically selects two LEO spacecraft using current MCC
+  orbital products, viewing geometry, spacecraft status and route
+  availability. Selection does not wait for DPS classification or
+  operator approval.
+\item
+  \textbf{Observation requests:} C\&C prepares one request for each LEO;
+  GSN transmits commands directly or through SSEG/ISL. Status is made
+  available to supervision.
+\item
+  \textbf{LEO observation:} Two spacecraft perform stereoscopic
+  observations, exchange LOS vectors and prepare an onboard preliminary
+  trajectory. GSEG receives both observation packages and the
+  preliminary trajectory.
+\item
+  \textbf{Ground assessment:} GSN provides the products to DPS. DPS
+  validates the complete two-LEO data set, classifies the event and
+  assesses potential threat; with sufficient data, it performs fusion
+  and produces a \texttt{Ground\ Refined\ Trajectory} and
+  \texttt{Impact\ Area\ Assessment} with uncertainty. Classification
+  distinguishes a potential threat, an ambiguous result for which a
+  credible threat cannot be excluded, and a credibly non-threatening
+  event. Missing required valid data result in a separate ``assessment
+  impossible'' status.
+\item
+  \textbf{Warning decision:} After valid assessment of the required
+  two-LEO data, EWS automatically delivers the first warning if DPS
+  identifies a potential threat \textbf{or the result remains ambiguous
+  but cannot exclude a credible threat}. The message represents
+  uncertainty and does not require prior operator approval. When a
+  threat is credibly excluded or insufficient valid data are available,
+  \textbf{no external warning is issued}; MCC receives the relevant
+  status and DAS retains the assessment history. For issued warnings,
+  delivery at the recipient interface terminates the \texttt{R-\allowbreak{}011}
+  measurement.
+\item
+  \textbf{Supervision and changes:} MCC presents the event and its
+  status; new data may update the DPS assessment, and an authorized
+  operator may confirm, revise or cancel a warning. EWS distributes
+  subsequent versions.
+\item
+  \textbf{Archiving:} DAS retains source data, products, commands,
+  warning versions, acknowledgements and audits in parallel, including
+  subsequent cancellations.
 \end{enumerate}
 
-The time allocations for the individual stages are specified in Section 3.2. The architecture maintains the separation between the automatic first-warning path and subsequent operator review.
+\newpage
+\subsection{4.3 Principal Exchange
+Products}\label{principal-exchange-products}
 
-\subsubsection{4.3 Data Exchange and Information Products}
-
-The integrated GSEG exchanges eight principal information products identified in the system data dictionary (\texttt{RD-06}). The table summarizes their main content and exchange paths.
-
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.27\textwidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.37\textwidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-2\tabcolsep-1.33333\arrayrulewidth\relax}|}
-\caption{Principal Ground Segment Information Products}\label{tab:gseg_data_products}\\
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.17}|P{0.40}|P{0.43}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Product} & \thead{Principal content} & \thead{Exchange / use} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Product} & \thead{Principal content} & \thead{Exchange / use} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Product
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Core data
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Route
+\end{minipage} \\
+\hline
 \endhead
 \hline
 \endlastfoot
-\textbf{GEO Event Report} & Event identifier and timestamp, location, quality information & GEO \(\rightarrow\) GSN \(\rightarrow\) C\&C \\ \hline
-\textbf{LEO Tracking Request} & Event identifier, two selected LEO spacecraft, observation target, priority & C\&C \(\rightarrow\) GSN \(\rightarrow\) selected LEO spacecraft \\ \hline
-\textbf{LEO Observation Package} & LOS observations, timestamps, geometry, uncertainty metadata & LEO \(\rightarrow\) GSN \(\rightarrow\) DPS \\ \hline
-\textbf{Onboard Preliminary Trajectory} & Onboard trajectory estimate and associated uncertainty & LEO \(\rightarrow\) GSN \(\rightarrow\) DPS \\ \hline
-\textbf{Ground Refined Trajectory} & Refined trajectory, validity time, uncertainty, version & DPS \(\rightarrow\) EWS, MCC, DAS \\ \hline
-\textbf{Impact Area Assessment} & Probabilistic impact region, confidence, uncertainty, classification and warning eligibility; separate Assessment Unavailable status & DPS \(\rightarrow\) EWS, MCC, DAS \\ \hline
-\textbf{Warning and Status Update} & Warning identifier, recipient, content, version, delivery status & EWS \(\rightarrow\) authorized authorities; status to MCC and DAS \\ \hline
-\textbf{Operational and Audit Record} & System events, classification, warning issue/non-issue decision and reason, commands, operator actions, delivery acknowledgements & GSEG functions \(\rightarrow\) DAS \\*
-\end{longtable}}
+GEO Event Report & ID, timestamp, location, quality. & GEO → GSN →
+C\&C \\ \hline
+LEO Tracking Request & Event ID, spacecraft, target, priority. & C\&C →
+GSN → LEO \\ \hline
+LEO Observation Package & LOS, time, geometry and uncertainty. & LEO →
+GSN → DPS \\ \hline
+Onboard Preliminary Trajectory & Onboard trajectory and uncertainty. &
+LEO → GSN → DPS \\ \hline
+Ground Refined Trajectory & Trajectory, validity time, uncertainty,
+version. & DPS → EWS/MCC/DAS \\ \hline
+Impact Area Assessment & Probabilistic area, confidence, threat
+assessment and warning-qualification outcome. & DPS → EWS/MCC/DAS \\ \hline
+Warning and Status Update & ID, addressee, content, version, delivery
+status. & EWS → recipients; status → MCC/DAS \\ \hline
+Operational and Audit Record & Commands, events, operator actions,
+acknowledgements. & GSEG → DAS \\*
+\end{longtable}
+\endgroup
 
-\begin{samepage}
-Data exchanged among GSEG functions preserve event identification, time references, and product provenance. The message formats, field definitions, and exchange protocols are specified in the relevant ICDs.\par
-\end{samepage}
+Event identifiers, timestamps and product provenance are preserved
+during exchange. Formats and protocols are defined by ICDs.
 
-\subsubsection{4.4 Operating States and Segment Integration}
+\subsection{4.4 Operational Situations}\label{operational-situations}
 
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.72\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|}
-\caption{Ground Segment Operating Situations}\label{tab:gseg_operating_situations}\\
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}[]{|P{0.30}|P{0.70}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Operating situation} & \thead{Ground Segment functions} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Operating situation} & \thead{Ground Segment functions} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Situation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+GSEG behaviour
+\end{minipage} \\
+\hline
 \endhead
-\textbf{Nominal operations} & Constellation and GIS infrastructure monitoring, MCC flight-dynamics products, telemetry reception, command handling, and readiness to receive events. \\ \hline
-\textbf{Active event} & Automatic LEO observation coordination, ground data assessment and warning decision; first-warning delivery only for eligible events. \\ \hline
-\textbf{Post-warning handling} & Operator supervision, estimate updates, and warning confirmation, revision, or cancellation. \\ \hline
-\textbf{Degraded operations} & Fault detection and indication, monitoring of available functions, and execution of operational recovery procedures. \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+Nominal & Constellation and GIS supervision, MCC orbital products,
+telemetry and event readiness. \\ \hline
+Active event & LEO selection, observation coordination, ground
+assessment and warning. \\ \hline
+Post-warning & Supervision and assessment updates, confirmations,
+revisions and cancellations. \\ \hline
+Degraded & Fault detection and reporting, use of available functions and
+recovery procedures. \\*
+\end{longtable}
+\endgroup
 
-GSEG security, continuity, and functional reliability requirements derive in particular from \texttt{R-015}, \texttt{R-017}, and \texttt{R-030}--\texttt{R-037}. The first warning remains dependent on the ground assessment of observations from two selected LEO spacecraft, including during degraded operations.
-
-Segment integration maintains GSEG/SSEG interface consistency, data traceability across processing stages, and records of warning-status and version changes. The technical requirements for these functions are defined in Section 7; implementation definitions and design rationale are provided in the design documentation.
+The two-LEO assessment condition continues to apply during degraded
+operation. Segment integration must maintain SSEG/GSEG interface
+compatibility, data traceability and warning-version history.

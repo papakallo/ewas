@@ -1,30 +1,86 @@
-% GSEG DDF - Section 8; engineering design data, not operational DAS archives.
-\section{8. Engineering Data Repository}
+\section{8. Engineering Data
+Repository}\label{engineering-data-repository}
 
-\subsection{8.1 Repository Identification}
+\subsection{8.1 Identification and
+Scope}\label{identification-and-scope}
 
-The controlled GSEG engineering data set comprises design sources, interface and product definitions, technical allocations and configuration records. It is distinct from the operational Data Archiving System (DAS), which stores EWAS mission products.
+The GSEG engineering data repository contains controlled definitions of
+the segment design, particularly parameters, configurations, source
+documents and links among them. \textbf{It is not the operational DAS
+archive}, which stores EWAS mission data.
 
-The project source repository is GitHub (\texttt{papakallo/ewas}), with ground-segment sources under \texttt{GSEG/TRS/} and \texttt{GSEG/DDF/}. Version-controlled documents alone do not constitute a complete engineering-parameter baseline. The proposed register is stored in the \texttt{engineering\_data/} directory as \texttt{GSEG\_parameters\_register.csv}.
+Project-documentation sources are maintained in the GitHub repository
+\texttt{papakallo/\allowbreak{}ewas}, including \texttt{GSEG/\allowbreak{}TRS/\allowbreak{}} and
+\texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}. Version control of source files does not in itself
+constitute a complete register of all engineering parameters. GSEG
+therefore provides for \textbf{one controlled project parameter
+register} linked to document versions.
 
-\subsection{8.2 Data Set and Maturity}
+\subsection{8.2 Engineering Data
+Collections}\label{engineering-data-collections}
 
-{\DDFTableStyle{3}%
-\begin{longtable}{|L{0.32}|L{0.46}|L{0.22}|}
-\caption{GSEG controlled engineering data sets}\label{tab:gseg_ddf_repository}\\\hline
-\rowcolor{TableHeaderBlue}\thead{Data set} & \thead{Location / reference} & \thead{Maturity}\\\hline\endfirsthead
-\hline\rowcolor{TableHeaderBlue}\thead{Data set} & \thead{Location / reference} & \thead{Maturity}\\\hline\endhead
-Segment requirements and IDs & \texttt{GSEG/TRS/}, Section 7 & Existing; current baseline\\\hline
-Functional and physical architecture & \texttt{GSEG/DDF/}, Sections 4--5 & Preliminary definition\\\hline
-Technical allocations and margins & \texttt{GSEG/DDF/}, Section 6 & Baseline limits and proposed values\\\hline
-GSEG parameter register & \texttt{GSEG/DDF/engineering\_data/} & Preliminary CSV; not approved\\\hline
-Interface definitions & Applicable ICDs / IRDs & Awaiting controlled issues\\\hline
-Lower-level design and justification & Seven subsystem TRS/DDF/DDJF files and GSEG DDJF & In development\\\hline
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.28}|P{0.40}|P{0.32}|}
+\hline\rowcolor{TableHeaderBlue}
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Data collection
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Location / reference
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Status
+\end{minipage} \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Segment requirements and identifiers & \texttt{GSEG/\allowbreak{}TRS/\allowbreak{}}, Chapter 7 &
+Exists; seven-subsystem structure covered by TRS \\ \hline
+Functional and physical architecture & \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}, Chapters 4--5
+& Preliminary DDF definition \\ \hline
+Technical allocations and margins & \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}, Chapter 6 &
+Preliminary design allocations, including \textbf{100 ppm GSEG
+unavailability}: 90 ppm allocated and 10 ppm reserve \\ \hline
+Central GSEG parameter register &
+\path{GSEG/DDF/engineering_data/GSEG_parameters_register.csv} &
+\textbf{Preliminary register present in repository; not approved} \\ \hline
+GSEG--SSEG and inter-subsystem interface definitions & Relevant
+ICDs/IRDs & Agreement and controlled issues required \\ \hline
+Subsystem design data and justifications & Future subsystem TRS/DDF/DDJF
+documents and GSEG DDJF & Not yet complete \\*
 \end{longtable}
-}
+\endgroup
 
-\subsection{8.3 Parameter Identification and Control}
+\newpage
+\subsection{8.3 Parameter Identification and
+Status}\label{parameter-identification-and-status}
 
-Each recorded parameter identifies its persistent ID, name, responsible element, value and unit, status, source requirement or decision, reference version and substantiation method. \textbf{B} denotes the requirements baseline, \textbf{P} a proposed design allocation, and \textbf{A/V} a value supported by controlled analysis or verification evidence. These labels do not imply that verification has occurred merely because an entry is present.
+Each GSEG parameter-register entry should identify, at a minimum:
+\textbf{stable parameter identifier, name, responsible element, value
+with unit, status, source requirement or decision, reference version and
+confirmation method}.
 
-The register is a preliminary index, not an approved set of all subsystem parameters. It includes the GSEG critical-service availability requirement (B) and the preliminary availability budget and reserve (P) from Section~6.3.1. Supporting calculations and trade studies are referenced from the DDJF rather than reproduced in this DDF. Interface and lower-level design data will be added as their controlled versions become available.
+The \textbf{B} and \textbf{P} statuses are defined in Section 1.3.
+\textbf{A/V --- Assessed/Verified} denotes a value supported by
+controlled analysis or verification results; its mere entry in the
+register does not confer this status.
+
+Links between parent parameters and allocations to GSN, C\&C, DPS, EWS,
+MCC, DAS and GIS must permit assessment of the impact of a value change
+on the design and interfaces. Supporting allocation data remain in the
+DDJF; the register provides their identifier or location rather than
+repeating calculations.
+
+\subsection{8.4 Completeness Status}\label{completeness-status}
+
+The GSEG engineering data repository is \textbf{not declared complete}
+at this stage. Detailed ICDs, physical-item configuration identifiers,
+lower-level allocations and verification evidence in particular remain
+to be brought under control.
+
+The register accompanying this working version constitutes an initial
+list of selected segment parameters, not an approved parameter baseline
+for all seven subsystems. It will be extended and agreed as lower-level
+documentation develops.

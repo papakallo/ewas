@@ -1,107 +1,135 @@
-% Approved English source: EWAS_GSEG_TRS_Chapters_01-04_EN.md
-% Ground Segment TRS; integrated product, WBS 123456.02.
-\section{References}
+\section{1. References, Terminology and
+Abbreviations}\label{references-terminology-and-abbreviations}
 
-This chapter identifies the Applicable Documents (AD), Reference Documents (RD), and terminology used in the Ground Segment specification. The application of ECSS standards is subject to tailoring to the EWAS programme.
+\subsection{1.1 Applicable Documents
+(AD)}\label{applicable-documents-ad}
 
-\subsection{Applicable Documents (AD)}
-
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.10\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.46\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.16\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Applicable Documents}\label{tab:gseg_applicable_documents}\\
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.11}|P{0.34}|P{0.55}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+ID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Document
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Scope / status
+\end{minipage} \\
+\hline
 \endhead
-\texttt{AD-01} & EWAS --- System Report & Mission Definition, CONOPS, Overall System Requirements \texttt{R-001}--\texttt{R-049}, Functional Analysis, WBS & Current baseline \\ \hline
-\texttt{AD-02} & \texttt{ECSS-E-ST-10C} & System engineering general requirements & Rev. 1 (2017) \\ \hline
-\texttt{AD-03} & \texttt{ECSS-E-ST-10-06C} & Technical requirements specification & 2009 \\ \hline
-\texttt{AD-04} & \texttt{ECSS-E-ST-10-02C} & Verification & Rev. 1 (2018) \\ \hline
-\texttt{AD-05} & \texttt{ECSS-E-ST-70C} & Ground systems and operations & 2008 \\ \hline
-\texttt{AD-06} & \texttt{ECSS-E-ST-10-24C} & Interface management & Rev. 1 (2024) \\ \hline
-\texttt{AD-07} & \texttt{ECSS-E-ST-40C} & Software & Rev. 1 (2025) \\ \hline
-\texttt{AD-08} & \texttt{ECSS-Q-ST-80C} & Software product assurance & Rev. 2 (2025) \\ \hline
-\texttt{AD-09} & \texttt{ECSS-E-ST-80C} & Security in space systems lifecycles & 2024 \\ \hline
-\texttt{AD-10} & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment --- Technical Requirements Specification & Issue 1.3 (2026) \\ \hline
-\texttt{AD-11} & \texttt{EWAS-HSB-VP-01} & Programme Verification Plan & Issue 0.2 (2026) \\ \hline
-\texttt{AD-12} & \texttt{EWAS-HSB-VCD-01} & Programme Verification Control Document & Issue 0.3 (2026) \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+AD-01 & EWAS System Report & Mission definition, CONOPS, system
+requirements \texttt{R-\allowbreak{}001}--\texttt{R-\allowbreak{}049}, functional analysis, WBS;
+current baseline. \\ \hline
+AD-02 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}10C} Rev.1 (2017) & General systems
+engineering requirements. \\ \hline
+AD-03 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}10-\allowbreak{}06C} (2009) & Technical requirements
+specification. \\ \hline
+AD-04 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}10-\allowbreak{}02C} Rev.1 (2018) & Verification. \\ \hline
+AD-05 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}70C} (2008) & Ground systems and
+operations. \\ \hline
+AD-06 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}10-\allowbreak{}24C} Rev.1 (2024) & Interface
+management. \\ \hline
+AD-07 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}40C} Rev.1 (2025) & Software engineering. \\ \hline
+AD-08 & \texttt{ECSS-\allowbreak{}Q-\allowbreak{}ST-\allowbreak{}80C} Rev.2 (2025) & Software product
+assurance. \\ \hline
+AD-09 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}80C} (2024) & Security in space-system
+lifecycles. \\ \hline
+AD-10 & \texttt{EWAS-\allowbreak{}HSB-\allowbreak{}SSEG-\allowbreak{}TRS-\allowbreak{}03}, Issue 1.3 (2026) & Space Segment
+requirements. \\ \hline
+AD-11 & \texttt{EWAS-\allowbreak{}HSB-\allowbreak{}VP-\allowbreak{}01}, Issue 0.2 (2026) & Programme
+Verification Plan. \\ \hline
+AD-12 & \texttt{EWAS-\allowbreak{}HSB-\allowbreak{}VCD-\allowbreak{}01}, Issue 0.3 (2026) & Verification
+Control Document. \\*
+\end{longtable}
+\endgroup
 
-\subsection{Reference Documents (RD)}
+Application of ECSS standards is subject to the agreed EWAS programme
+tailoring.
 
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.10\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.46\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.16\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Reference Documents}\label{tab:gseg_reference_documents}\\
+\subsection{1.2 Reference Documents (RD)}\label{reference-documents-rd}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}[]{|P{0.11}|P{0.39}|P{0.50}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+ID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Document
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Purpose
+\end{minipage} \\
+\hline
 \endhead
-\texttt{RD-01} & \texttt{ECSS-E-ST-70-31C} & Monitoring and control data definition & 2008 \\ \hline
-\texttt{RD-02} & \texttt{ECSS-E-ST-70-41C} & Telemetry and telecommand packet utilization & 2016 \\ \hline
-\texttt{RD-03} & CCSDS 355.0-B-2 & Space Data Link Security Protocol & Issue 2 \\ \hline
-\texttt{RD-04} & \texttt{ECSS-S-ST-00-01C} & Glossary of terms & Rev. 1 (2023) \\ \hline
-\texttt{RD-05} & \texttt{ECSS-E-HB-10-02A} & Verification guidelines & 2010 \\ \hline
-\texttt{RD-06} & EWAS --- System Data Dictionary & Preliminary definition of GSEG data products and exchange paths & Current baseline \\ \hline
-\texttt{RD-07} & \texttt{ECSS-Q-ST-30-09C} & Availability analysis (allocation and assessment methodology) & 2008 \\ \hline
-\texttt{RD-08} & \texttt{ECSS-Q-ST-40-12C} & Fault tree analysis (ECSS/IEC 61025 adoption) & 2008 \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+RD-01 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}70-\allowbreak{}31C} (2008) & Monitoring and control data
+definition. \\ \hline
+RD-02 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}ST-\allowbreak{}70-\allowbreak{}41C} (2016) & Telemetry and telecommand
+packet utilization. \\ \hline
+RD-03 & CCSDS 355.0-B-2 & Space Data Link Security Protocol. \\ \hline
+RD-04 & \texttt{ECSS-\allowbreak{}S-\allowbreak{}ST-\allowbreak{}00-\allowbreak{}01C} Rev.1 (2023) & ECSS terminology. \\ \hline
+RD-05 & \texttt{ECSS-\allowbreak{}E-\allowbreak{}HB-\allowbreak{}10-\allowbreak{}02A} (2010) & Verification guidelines. \\ \hline
+RD-06 & EWAS System Data Dictionary & Preliminary GSEG data products and
+exchange routes. \\ \hline
+RD-07 & \texttt{ECSS-\allowbreak{}Q-\allowbreak{}ST-\allowbreak{}30-\allowbreak{}09C} (2008) & Availability-analysis and
+allocation methodology. \\ \hline
+RD-08 & \texttt{ECSS-\allowbreak{}Q-\allowbreak{}ST-\allowbreak{}40-\allowbreak{}12C} (2008) & Fault-tree analysis,
+including common-cause failures. \\*
+\end{longtable}
+\endgroup
 
-\subsection{Terms, Definitions and Abbreviations}
+\subsection{1.3 Terms and Abbreviations}\label{terms-and-abbreviations}
 
-The definitions below supplement the terminology in \texttt{AD-01} and \texttt{RD-04}.
-
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.27\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.73\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|}
-\caption{Terms and Definitions}\label{tab:gseg_terms}\\
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}[]{|P{0.31}|P{0.69}|}
 \hline\rowcolor{TableHeaderBlue}
-\thead{Term} & \thead{Definition} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Term} & \thead{Definition} \\ \hline
+\begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\color{white}\bfseries\sffamily
+Definition
+\end{minipage} \\
+\hline
 \endhead
-\textbf{Candidate Event} & A potential missile launch detected by a GEO spacecraft and reported for further assessment. \\ \hline
-\textbf{Onboard Preliminary Trajectory} & An initial trajectory estimate derived from stereoscopic observations by the selected LEO spacecraft and transferred to GSEG. \\ \hline
-\textbf{Ground Multi-Sensor Fusion} & The combination of relevant observations and the onboard preliminary trajectory to calculate a refined trajectory and probabilistic impact region. \\ \hline
-\textbf{Probabilistic Impact Area} & A predicted geographical impact region accompanied by a specified confidence level and information on estimation uncertainty. \\ \hline
-\textbf{Preliminary Warning} & The first warning automatically delivered to an authorized recipient after the ground assessment of observations from two selected LEO spacecraft. \\ \hline
-\end{longtable}}
+\hline
+\endlastfoot
+Candidate Event & A potential missile launch detected by a GEO
+spacecraft and reported for further assessment. \\ \hline
+Onboard Preliminary Trajectory & Preliminary trajectory estimated from
+stereoscopic observations by the selected LEO spacecraft. \\ \hline
+Ground Multi-Sensor Fusion & Combination of observations and a
+preliminary trajectory to estimate a refined trajectory and
+probabilistic impact area. \\ \hline
+Probabilistic Impact Area & Predicted geographic impact region with a
+specified confidence level and uncertainty information. \\ \hline
+Preliminary Warning & First warning delivered automatically after ground
+assessment of data from two LEO spacecraft. \\*
+\end{longtable}
+\endgroup
 
-\subsubsection*{Abbreviations}
-
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
-\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
-\caption{Abbreviations}\label{tab:gseg_abbreviations}\\
-\hline\rowcolor{TableHeaderBlue}
-\thead{Abbreviation} & \thead{Meaning} & \thead{Abbreviation} & \thead{Meaning} \\ \hline
-\endfirsthead
-\hline\rowcolor{TableHeaderBlue}
-\thead{Abbreviation} & \thead{Meaning} & \thead{Abbreviation} & \thead{Meaning} \\ \hline
-\endhead
-AD & Applicable Document & RD & Reference Document \\ \hline
-C\&C & Command and Control & RBAC & Role-Based Access Control \\ \hline
-CCSDS & Consultative Committee for Space Data Systems & RF & Radio Frequency \\ \hline
-CI & Configuration Item & RTM & Requirements Traceability Matrix \\ \hline
-CONOPS & Concept of Operations & SSEG & Space Segment \\ \hline
-DAS & Data Archiving System & TC & Telecommand \\ \hline
-DDF & Design Definition File & TM & Telemetry \\ \hline
-DDJF & Design Justification File & TRS & Technical Requirements Specification \\ \hline
-DPS & Data Processing System & TT\&C & Telemetry, Tracking and Command \\ \hline
-ECSS & European Cooperation for Space Standardization & VCD & Verification Control Document \\ \hline
-EWS & Early Warning System & VP & Verification Plan \\ \hline
-EWAS & Early Warning Alarm System & WBS & Work Breakdown Structure \\ \hline
-GEO & Geostationary Earth Orbit & HIL & Hardware-in-the-Loop \\ \hline
-GSEG & Ground Segment & HMI & Human--Machine Interface \\ \hline
-GSN & Ground Station Network & ICD & Interface Control Document \\ \hline
-IIP & Instantaneous Impact Point & ISL & Inter-Satellite Link \\ \hline
-LEO & Low Earth Orbit & LOS & Line of Sight \\ \hline
-MCC & Mission Control Center & OISL & Optical Inter-Satellite Link \\ \hline
-FD & Flight Dynamics & GIS & Ground Infrastructure Subsystem \\ \hline
-\end{longtable}}
+\textbf{Abbreviations:} C\&C --- Command \& Control; CI ---
+Configuration Item; CONOPS --- Concept of Operations; DAS --- Data
+Archiving System; DDF --- Design Definition File; DDJF --- Design
+Justification File; DPS --- Data Processing System; ECSS --- European
+Cooperation for Space Standardization; EWS --- Early Warning System;
+EWAS --- Early Warning Alarm System; FD --- Flight Dynamics; GEO ---
+Geostationary Earth Orbit; GIS --- Ground Infrastructure Subsystem; GSEG
+--- Ground Segment; GSN --- Ground Station Network; HIL ---
+Hardware-in-the-Loop; HMI --- Human--Machine Interface; ICD ---
+Interface Control Document; IIP --- Instantaneous Impact Point; ISL ---
+Inter-Satellite Link; LEO --- Low Earth Orbit; LOS --- Line of Sight;
+MCC --- Mission Control Center; OISL --- Optical Inter-Satellite Link;
+RBAC --- Role-Based Access Control; RF --- Radio Frequency; RTM ---
+Requirements Traceability Matrix; SSEG --- Space Segment; TC ---
+Telecommand; TM --- Telemetry; TRS --- Technical Requirements
+Specification; TT\&C --- Telemetry, Tracking and Command; VCD ---
+Verification Control Document; VP --- Verification Plan; WBS --- Work
+Breakdown Structure.

@@ -1,11 +1,14 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
 \documentclass[11pt,a4paper]{article}
 
 % =============================================================================
 % 1. PACKAGES (DO NOT EDIT)
 % =============================================================================
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}[BoldFont=lmmonolt10-bold.otf,BoldItalicFont=lmmonolt10-boldoblique.otf]
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
 \usepackage{longtable}
 \usepackage[table]{xcolor}
@@ -47,7 +50,7 @@
 % Disable section numbering (matching the PDF template) while keeping TOC entries.
 % To enable section numbering (e.g., 1, 1.1), change -1 to 3.
 \setcounter{secnumdepth}{-1}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 
 % Section, subsection, and list title styling
 \makeatletter
@@ -127,7 +130,33 @@
 % =============================================================================
 % DOCUMENT BODY
 % =============================================================================
+
+% Technical compatibility and HSB styling for the supplied translation.
+\usepackage{booktabs,calc,etoolbox,newunicodechar,caption}
+\usepackage{amssymb}
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\setkeys{Gin}{keepaspectratio}
+\newlength{\GSEGTableContentWidth}
+\newcommand{\GSEGTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\GSEGTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\GSEGTableContentWidth}}
+\newcommand{\GSEGHeaderText}[1]{{\color{white}\bfseries\sffamily #1}}
+
+\hypersetup{pdftitle={EWAS --- Ground Segment Technical Requirements Specification
+(TRS)},pdfauthor={Grzegorz Macioch},pdflang={en-GB}}
+
 \begin{document}
+
 
 % -----------------------------------------------------------------------------
 % PAGE 1: TITLE PAGE & DOCUMENT INFORMATION
@@ -140,7 +169,7 @@
     {\large \ProjectName}
 \end{center}
 
-\vspace*{5.5cm}
+\vspace*{4.5cm}
 
 \begin{center}
     {\fontsize{24}{28}\selectfont\sffamily\color{TitleBlue}\DocTitle\par}
@@ -179,62 +208,48 @@
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 2: DOCUMENT CHANGE RECORD
-% -----------------------------------------------------------------------------
+% BEGIN SUPPLIED TRANSLATION BODY
 \section{Document Change Record}
 
-% --- HOW TO EDIT THE DOCUMENT CHANGE RECORD TABLE ---
-% Each row has 4 columns separated by &:
-% \textbf{Issue} & {Date} & {Description} & {Sections Affected} \\ \hline
-% To add a new row, copy the last line before \end{tabularx}.
-{\footnotesize\renewcommand{\arraystretch}{1.18}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{3.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
-    \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1} & 11.11.2026 & Initial Ground Segment TRS LaTeX template, document metadata and modular section placeholders. & Document information; template \\ \hline
-    \textbf{0.2} & 12.11.2026 & Added References, Scope and Introduction, including the project document baseline, Ground Segment scope, WBS hierarchy and requirement conventions. & References; Scope; Introduction \\ \hline
-    \textbf{0.3} & 13.11.2026 & Added Section 3: User's Need Presentation, warning-chain latency allocations, mission data products and external interfaces; aligned verification references and removed the obsolete verification annex. & Section 3; References; document structure \\ \hline
-    \textbf{0.4} & 13.11.2026 & Revised Chapters 1--3 for concise, consistent segment-level presentation and added Chapter 4, Selected Concept / Product Presentation. & References; Scope and Introduction; Section 3; Section 4. \\ \hline
-    \textbf{0.5} & 14.11.2026 & Added Section 5, Life Profile Description, covering Ground Segment development, integration, commissioning, operations, maintenance, and decommissioning; consolidated maintenance and verification coverage from Section 4. & Section 5; Section 4 \\ \hline
-    \textbf{0.6} & 15.11.2026 & Added Section 6, Environment and Constraints Description, covering site conditions, communications, infrastructure availability, information security, operational constraints, and regulatory interfaces. & Section 6 \\ \hline
-    \textbf{0.7} & 16.11.2026 & Added Section 7 integrated Ground Segment technical requirements (34 verifiable requirements); corrected Section 3 cross-references to SSEG performance requirements and clarified the availability-allocation boundary. & Section 7; Section 3 \\ \hline
-    \textbf{Draft} & 22.11.2026 & Extensive modifications across GSEG TRS chapters: introduced the 99.99\% critical-service operational availability requirement, defined its measurement boundary and traceability, aligned site/reliability context and methodological references. & References; Sections 3, 6, 7; Annex A \\ \hline
-\end{tabularx}}
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.10}|P{0.17}|P{0.55}|P{0.18}|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
+\endhead
+\hline\endlastfoot
+Draft & 22.11.2026 & Extensive modifications across multiple chapters covering conditional warning policy, interfaces, RTM and reliability/availability allocation. & Multiple chapters\\*
+\end{longtable}
+\endgroup
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 3: TABLE OF CONTENTS, LIST OF TABLES, LIST OF FIGURES (AUTO-GENERATED)
-% -----------------------------------------------------------------------------
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
 \tableofcontents
-
-\vspace{2.5cm}
-\listoftables
-
-\vspace{2.5cm}
-\listoffigures
-
+}
 \newpage
-
-% =============================================================================
-% MODULAR SECTIONS (INCLUDED FROM sections/)
-% =============================================================================
 \input{sections/01_references_abbr}
+
 \newpage
 \input{sections/02_scope_intro}
+
 \newpage
 \input{sections/03_users_need}
+
+\newpage
 \input{sections/04_selected_concept}
+
+\newpage
 \input{sections/05_life_profile}
+
+\newpage
 \input{sections/06_environment_constraints}
+
+\newpage
 \input{sections/07_requirements}
+
 \newpage
 \input{sections/08_annex_a_rtm}
 
+% END SUPPLIED TRANSLATION BODY
 \end{document}

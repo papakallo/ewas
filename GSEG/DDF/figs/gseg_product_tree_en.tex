@@ -1,0 +1,39 @@
+% Seven subsystem nodes, with exactly two DAS and three DPS product nodes.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,
+    align=center,font=\small\bfseries,text width=3.0cm,minimum height=1.0cm},
+  item/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,
+    align=center,font=\small,text width=4.1cm,minimum height=1.0cm,inner sep=3pt},
+  product/.style={item,fill=TableRowLightBlue!35,text width=4.0cm},
+  link/.style={draw=HeadingBlue,line width=0.65pt}
+]
+\node[root] (gseg) at (-5.7,0) {Ground Segment\\CI-02};
+\node[item] (das) at (-0.5,0) {\textbf{DAS}\\Data Archiving System};
+\node[item] (cc) at (-0.5,-1.4) {\textbf{C\&C}\\Command and Control};
+\node[item] (mcc) at (-0.5,-2.8) {\textbf{MCC}\\Mission Control Center};
+\node[item] (dps) at (-0.5,-4.2) {\textbf{DPS}\\Data Processing System};
+\node[item] (gsn) at (-0.5,-5.6) {\textbf{GSN}\\Ground Station Network};
+\node[item] (ews) at (-0.5,-7.0) {\textbf{EWS}\\Early Warning System};
+\node[item,fill=TableRowLightBlue!55] (gis) at (-0.5,-8.4)
+  {\textbf{GIS}\\Ground Infrastructure Subsystem};
+\draw[link] (gseg.east) -- (-3.4,0) -- (-3.4,-8.4);
+\foreach \name in {das,cc,mcc,dps,gsn,ews,gis} {
+  \draw[link] (-3.4,0 |- \name.west) -- (\name.west);
+}
+\node[product] (raw) at (5.0,0.65) {Raw Data Archive};
+\node[product] (processed) at (5.0,-0.65) {Processed Data Archive};
+\draw[link] (das.east) -- (2.4,0);
+\draw[link] (2.4,0.65) -- (2.4,-0.65);
+\draw[link] (2.4,0.65) -- (raw.west);
+\draw[link] (2.4,-0.65) -- (processed.west);
+\node[product] (software) at (5.0,-2.9) {Data Processing Software};
+\node[product] (detection) at (5.0,-4.2) {Event Detection Module};
+\node[product] (trajectory) at (5.0,-5.5) {Trajectory Estimation Module};
+\draw[link] (dps.east) -- (2.4,-4.2);
+\draw[link] (2.4,-2.9) -- (2.4,-5.5);
+\foreach \name in {software,detection,trajectory} {
+  \draw[link] (2.4,0 |- \name.west) -- (\name.west);
+}
+\end{tikzpicture}%
+}

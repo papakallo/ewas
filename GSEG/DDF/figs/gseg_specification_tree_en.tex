@@ -1,0 +1,26 @@
+% Requirements hierarchy only; no DDF or DDJF branches.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  parent/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,
+    align=center,font=\small,text width=6.0cm,minimum height=0.95cm},
+  child/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,
+    align=center,font=\small,text width=4.3cm,minimum height=0.75cm},
+  link/.style={draw=HeadingBlue,line width=0.65pt}
+]
+\node[parent] (system) at (-3.8,0) {EWAS System Requirements};
+\node[parent] (gseg) at (-3.8,-1.6)
+  {GSEG TRS\\\texttt{EWAS-HSB-GSEG-TRS-02}};
+\draw[link] (system.south) -- (gseg.north);
+\node[child] (das) at (4.4,-2.5) {DAS TRS \textit{(planned)}};
+\node[child] (cc) at (4.4,-3.6) {C\&C TRS \textit{(planned)}};
+\node[child] (mcc) at (4.4,-4.7) {MCC TRS \textit{(planned)}};
+\node[child] (dps) at (4.4,-5.8) {DPS TRS \textit{(planned)}};
+\node[child] (gsn) at (4.4,-6.9) {GSN TRS \textit{(planned)}};
+\node[child] (ews) at (4.4,-8.0) {EWS TRS \textit{(planned)}};
+\node[child] (gis) at (4.4,-9.1) {GIS TRS \textit{(planned)}};
+\draw[link] (gseg.east) -- (0.5,-1.6) -- (0.5,-9.1);
+\foreach \name in {das,cc,mcc,dps,gsn,ews,gis} {
+  \draw[link] (0.5,0 |- \name.west) -- (\name.west);
+}
+\end{tikzpicture}%
+}
