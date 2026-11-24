@@ -57,7 +57,7 @@
 \endhead
 \hline\endlastfoot
 \textbf{GSEG-REQ-IF-001 — SSEG Interface} & GSEG shall exchange commands, telemetry, GEO reports, LEO products and preliminary trajectories through interfaces consistent with the agreed ICDs and the SSEG specification. & R-033, R-042–044, SSEG-REQ-IF-001 & T, R\\ \hline
-\textbf{GSEG-REQ-IF-002 — Warning Recipient Interface} & GSEG shall provide authorized recipients with messages containing the event identifier, trajectory, impact area, uncertainty assessment (including ambiguous classification) and warning status, and record available delivery acknowledgements. & R-003, R-013, R-047, R-048 & T\\ \hline
+\textbf{GSEG-REQ-IF-002 — Warning Recipient Interface} & GSEG \textbf{shall} ensure that each warning delivered through an authorized recipient interface contains the event identifier, refined trajectory, impact-area assessment, \textbf{threat classification} as defined in \texttt{GSEG-REQ-FUN-003}, \textbf{uncertainty information} associated with the trajectory and impact-area assessment, and warning status. GSEG \textbf{shall} record available delivery acknowledgements. & R-003, R-013, R-047, R-048 & T\\ \hline
 \textbf{GSEG-REQ-IF-003 — Orbital and Conjunction Data} & GSEG shall support receipt and forwarding of applicable orbital-conjunction information to mission supervision and the agreed SSEG interface. & SSEG-REQ-IF-004 & T, R\\*
 \end{longtable}
 \endgroup
