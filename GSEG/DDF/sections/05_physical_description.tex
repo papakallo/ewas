@@ -58,7 +58,7 @@ EWAS system requirements → GSEG TRS → seven planned subsystem TRSs. DDF and 
 
 \textbf{Utilities and building (P):} separate local A/\allowbreak{}B power paths and UPS, a backup source (e.g. generator), separable cooling and control of common equipment. Actual power and cooling redundancy must encompass all critical loads: GSN RF path, gateways, GIS platform, common time, EWS and required cooling elements. Final topology, usable energy, backup power start-up and maintenance scenarios depend on the detailed implementation design; resilience to building failure is not declared.
 
-\textbf{EWS (P):} two separate local communication gateways to recipients, accessible from the corresponding critical domain. Route diversity beyond the gateway is required so that a single common provider/\allowbreak{}conduit does not negate redundancy. The delivery method and measurement endpoint comply with ICD IF-002.
+\textbf{EWS (P):} two separate local communication gateways to recipients, accessible from the corresponding critical domain. Route diversity beyond the gateway is required so that a single common provider/\allowbreak{}conduit does not negate redundancy. Warning content is defined by \texttt{GSEG-REQ-IF-002}. The warning-recipient ICD, with identifier and issue to be assigned, will define the protocol, security boundary, acknowledgement behavior and delivery measurement endpoint.
 
 \textbf{MCC and DAS:} operational and archival workloads separate from critical resources; MCC has operator workstations, DAS two logical archive copies (at one site), but no synchronous MCC/\allowbreak{}DAS operation may block a warning. Two local copies do not substitute for resilience to complete loss of the center.
 
@@ -71,7 +71,8 @@ EWAS system requirements → GSEG TRS → seven planned subsystem TRSs. DDF and 
 \endhead
 \hline\endlastfoot
 GSEG–SSEG (\texttt{IF-\allowbreak{}EXT-\allowbreak{}01}) & GSN: GEO report, two initial requests and possible replacement request (P), products from two LEO spacecraft that actually performed observations, trajectory, telemetry, TC; reserve activation and statuses to be agreed in the ICD\\ \hline
-GSEG–recipient & EWS: warning, revision/\allowbreak{}cancellation, status and available acknowledgement\\ \hline
+GSEG--recipient & EWS: each warning contains the event identifier, refined trajectory, impact-area assessment, threat classification as defined in \texttt{GSEG-REQ-FUN-003}, uncertainty information associated with the trajectory and impact-area assessment, and warning status; revisions, cancellations and available delivery acknowledgements\\ \hline
+DPS$\rightarrow$EWS & Event identifier, refined trajectory, impact-area assessment, threat classification, associated uncertainty information and warning qualification/status\\ \hline
 Orbital data & MCC: predictions and conjunctions; onward MCC→C\&C→GSN→SSEG\\ \hline
 GSN↔C\&C & GEO report, pair/\allowbreak{}reserve selection, two initial requests, possible replacement request, link statuses\\ \hline
 GSN→DPS & two LEO packages, preliminary trajectory, reception metadata\\ \hline
