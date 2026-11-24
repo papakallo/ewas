@@ -2,7 +2,7 @@
 
 \subsection{9.1. Basis, Method and Status}\label{ddjf-9-1}
 
-This chapter presents a check of GSEG DDF Chapter 6 budgets, taking into account ECSS-E-ST-10C (2009), Annex I and Annex K. Values designated \textbf{B} originate from baseline requirements; \textbf{P} values are sizing proposals, not verified equipment parameters. The \textbf{allocation margin} (difference between the limit and the sum of planned allocations) is distinguished below from the \textbf{confirmed margin} (difference between the limit and the result of a verified calculation or test). No margin of the latter kind is currently documented.
+This chapter presents a check of GSEG DDF Chapter 6 budgets, taking into account ECSS-E-ST-10C Rev.1 (15 February 2017), Annexes I and K. Values designated \textbf{B} originate from baseline requirements; \textbf{P} values are sizing proposals, not verified equipment parameters. The \textbf{allocation margin} (difference between the limit and the sum of planned allocations) is distinguished below from the \textbf{confirmed margin} (difference between the limit and the result of a verified calculation or test). No margin of the latter kind is currently documented.
 
 The calculations assume a year of 365 days, binary memory units (KiB, MiB, TiB) and decimal network data rates (Mb/\allowbreak{}s, Gb/\allowbreak{}s). They do not replace measurements or validated-model reports. Budget closure requires input identifiers, hardware configuration, source of loads, measurement boundary, uncertainty estimate, margin policy and parameter history according to design maturity (Annex I).
 
@@ -17,7 +17,7 @@ The calculations assume a year of 365 days, binary memory units (KiB, MiB, TiB) 
 Observation coordination & ≤2 s (B), reserve 0.50 s (P) & Sum of allocations: 1.50 + 0.50 = 2.00 s & Arithmetic, no measurement\\ \hline
 Reserve LEO candidate (\texttt{GSEG-\allowbreak{}PAR-\allowbreak{}024}) & 1 (P), if available & 2+1 ranking within 0.90 s; replacement request outside the initial requests & No geometry analysis or tests\\ \hline
 Assessment and first warning & ≤15 s (B), reserve 2.50 s (P) & Sum of allocations: 12.50 + 2.50 = 15.00 s & Arithmetic, no measurement\\ \hline
-Whole EWAS & ≤60 s (B) & Sum of detailed allocations is 60 s & Unresolved SSEG/\allowbreak{}GSEG boundary\\ \hline
+Whole EWAS & ≤60 s (B) & Current allocations total 43 s SSEG-owned + 17 s GSEG-owned; SSEG subtotal includes a GSEG step & Boundaries and end-to-end performance open\\ \hline
 Combined critical services & ≥99.99\% (B) & 100 ppm, of which 90 ppm allocated and 10 ppm reserve (P) & No RBD/\allowbreak{}FTA with failure data\\ \hline
 GIS performance per domain & ≥160 vCPU, ≥320 GiB (P) & 120 vCPU /\allowbreak{} 240 GiB in model; 25\% of each resource unallocated & No profiling or post-failure test\\ \hline
 GIS network per domain & ≥10 Gb/\allowbreak{}s (P) & Synthetic traffic 3 Gb/\allowbreak{}s, without overhead & No effective-throughput test\\ \hline
@@ -43,9 +43,9 @@ The accounting concerns events qualified by DPS for warning. For the “no threa
 
 \subsubsection{9.3.3. Critical Relationship Between SSEG and GSEG Limits}\label{ddjf-9-3-3}
 
-The detailed budget for the entire chain in the DDF is \textbf{10 + 2 + 3 + 30 + 15 = 60 s}. SSEG is responsible for stages 10+3+30 = \textbf{43 s}, and GSEG for 2+15 = \textbf{17 s}. However, \textbf{SSEG-REQ-PERF-001} permits an aggregate \textbf{45 s}, while SSEG-REQ-PERF-002/\allowbreak{}003/\allowbreak{}004 define more restrictive stage limits. This is not a logical contradiction: if the three stages are complete and have no gaps or uncounted overheads, their sum of 43 s applies. If the actual SSEG contribution may be 45 s, however, without other restrictions, use of the GSEG limits gives \textbf{45+17=62 s}, which does not guarantee R-011. Establishing time boundaries, completeness and joint verification is essential.
+The current detailed allocation for the entire chain is \textbf{10 + 2 + 3 + 30 + 15 = 60 s}. SSEG-owned stages account for 10+3+30 = \textbf{43 s}; GSEG-owned stages account for 2+15 = \textbf{17 s}. The SSEG DDF, §6.4, also gives a \textbf{40--45 s} subtotal for Steps 1--3. That subtotal includes the \textbf{2 s GSEG selection interval} within the 5 s cueing step (2 s GSEG selection plus 3 s SSEG command routing); it is not an independent 45 s SSEG-only allocation and must not be added to all 17 s of GSEG time. The active SSEG TRS, §7.3, defines the overall 60 s limit in SSEG-REQ-PERF-002; SSEG-REQ-PERF-001 is not a 45 s timing requirement.
 
-\textbf{Recommendation:} retain staged planning of \textbf{43 s SSEG + 17 s GSEG} in the DDF and flag in the interface register the need to confirm completeness of the SSEG stage boundaries. System and SSEG owners should agree on the interpretation of the aggregate 45 s limit and, if appropriate, amend or clarify SSEG TRS/\allowbreak{}ICD. GSEG does not unilaterally change requirements of another segment. There is no system reserve in the 60 s allocation; analysis of latency distribution tails and testing of extreme cases are necessary.
+\textbf{Risk and recommendation:} the current allocation has no unallocated system reserve. Additional work that fits within the existing stage limits does not, by itself, change the 60 s sum. However, if future SSEG requirements or uncounted delays add elapsed time beyond the current 43 s SSEG allocation, the total may exceed 60 s unless time is recovered through overlap or reallocation. For example, 45 s of SSEG-owned time plus the unchanged 17 s GSEG allocation would total \textbf{62 s}. Treat this as a conditional change-control risk, not as the arithmetic of the current SSEG DDF subtotal. System, SSEG and GSEG owners should agree the measurement boundaries and verify the complete chain; GSEG should not unilaterally change another segment's requirements.
 
 \subsection{9.4. GIS Computing Resources and Memory}\label{ddjf-9-4}
 
@@ -61,7 +61,7 @@ The ISL network described in SSEG TRS enables transfer of commands and data betw
 
 The value \textbf{3 Gb/\allowbreak{}s} corresponds only to a synthetic GIS transport test scenario (“20 streams at 150 Mb/\allowbreak{}s each”). At a nominal \textbf{10 Gb/\allowbreak{}s} port it represents 30\% of line rate, leaving 70\% of nominal throughput. This is not a confirmed usable reserve after accounting for protocol overhead, competing loads, aggregation and replication traffic. Nor does it demonstrate physical visibility of 20 spacecraft or GSN radio performance.
 
-Time-varying availability of GEO–LEO–LEO routes, number of RF antennas, supported bands and throughput, and route failover time require GSEG-AN-03 analysis taking account of SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}003/\allowbreak{}006 and SSEG-REQ-PERF-003/\allowbreak{}004. Traffic rerouting capability within SSEG does not demonstrate two available paths from one ground site.
+Time-varying availability of GEO–LEO–LEO routes, number of RF antennas, supported bands and throughput, and route failover time require GSEG-AN-03 analysis against SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}004 and the stage allocations in SSEG DDF §6.4. The timing analysis must use agreed measurement boundaries and account for the GSEG selection interval included in the Steps 1--3 subtotal. Traffic-rerouting capability within SSEG does not demonstrate two available paths from one ground site or prove end-to-end timing.
 
 \subsection{9.6. DAS Data Storage Budget}\label{ddjf-9-6}
 
@@ -132,7 +132,7 @@ The two communications paths must have demonstrated actual separation along the 
 \endhead
 \hline\endlastfoot
 2/\allowbreak{}15 s time & Positive \textbf{allocation reserves}, no implementation margins & Profiling, HIL and failover tests\\ \hline
-60 s time & \textbf{Unresolved completeness of SSEG stage limits of 43 s relative to 45 s aggregate} & Agreement on system/\allowbreak{}SSEG/\allowbreak{}GSEG limits; latency distribution analysis\\ \hline
+60 s time & \textbf{Current allocation totals 43 s SSEG-owned + 17 s GSEG-owned; no system reserve} & Agree boundaries; verify full chain; assess any added SSEG time against the 60 s limit\\ \hline
 GIS CPU/\allowbreak{}RAM & 25\% nominal free allocation & Measurements under load and domain failure\\ \hline
 GIS LAN & 70\% theoretical line-rate capacity & Traffic tests including overhead and ISL, no correlation with RF contact count\\ \hline
 DAS & Approximately 35.4\% space in narrow P model & Full model of products, arrival, copies and restoration\\ \hline

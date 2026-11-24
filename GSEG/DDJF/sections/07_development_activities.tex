@@ -2,7 +2,7 @@
 
 \subsection{7.1. Purpose, Scope and Basis of the Work}\label{ddjf-7-1}
 
-This chapter presents the design activities, analyses and option comparisons justifying the adopted GSEG definition. In accordance with ECSS-E-ST-10C (6 March 2009), Annex K, § K.2.1<7>, for each relevant discipline it identifies inputs, assumptions, boundary conditions, model limitations, available results, margin assessment and justification status. Formal verification activities are discussed separately in Chapter 8.
+This chapter presents the design activities, analyses and option comparisons justifying the adopted GSEG definition. In accordance with ECSS-E-ST-10C Rev.1 (15 February 2017), Annex K, § K.2.1<7>, for each relevant discipline it identifies inputs, assumptions, boundary conditions, model limitations, available results, margin assessment and justification status. Formal verification activities are discussed separately in Chapter 8.
 
 The basis comprises GSEG TRS Issue 0.7 (including Annex A RTM), GSEG DDF Issue 0.1, proposed DDF amendments concerning GSN/\allowbreak{}GIS/\allowbreak{}EWS paths (register CH-002–CH-011), EWAS system requirements and SSEG TRS interface requirements. The project is at a preliminary stage: reports from completed orbital and ISL simulations, DPS performance measurements, failover tests and reliability data for selected equipment have not been made available. The checks below are \textbf{calculations performed for this DDJF}, not reports of tests performed or qualification evidence.
 
@@ -37,8 +37,8 @@ The following analysis register is adopted (working identifiers \textbf{GSEG-AN-
 \endhead
 \hline\endlastfoot
 GSEG-AN-01 & Functional decomposition and RTM & TRS 7, Annex A, DDF 4–5; allocation check & Preliminary documentation analysis\\ \hline
-GSEG-AN-02 & Timing budget and failover & TRS PERF-001/\allowbreak{}002, DDF 6; summation of allocations, failure scenarios & Arithmetic checked, times not measured\\ \hline
-GSEG-AN-03 & GSN–GEO/\allowbreak{}LEO–ISL routes and reserve LEO activation & SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}003/\allowbreak{}006, PERF-003/\allowbreak{}004; 2+1 pair geometry, dynamic graph, replacement-command time & To be performed\\ \hline
+GSEG-AN-02 & Timing budget and failover & GSEG TRS PERF-001/\allowbreak{}002, GSEG DDF 6, SSEG DDF §6.4 and system R-011; boundary-by-boundary summation and failure scenarios & Allocation arithmetic checked; boundaries and times not verified\\ \hline
+GSEG-AN-03 & GSN–GEO/\allowbreak{}LEO–ISL routes and reserve LEO activation & SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}004, SSEG DDF §6.4 timing allocations; 2+1 pair geometry, dynamic graph, route latency and replacement-command time & To be performed\\ \hline
 GSEG-AN-04 & DPS/\allowbreak{}GIS reservations, priorities and overload & 10 slots P, 11/\allowbreak{}20 events, dominant priority, domain failure; profiling and HIL & Totals checked, no measurements\\ \hline
 GSEG-AN-05 & Reliability and availability & RBD + FTA, MTBF/\allowbreak{}MTTR, maintenance, common failures and measurements & ppm budget checked, no empirical model\\ \hline
 GSEG-AN-06 & Power and cooling & Critical-load inventory, power profiles, losses, UPS and generator & Partial scope balance, full balance to be performed\\ \hline
@@ -56,7 +56,7 @@ Documentation analysis results may justify \textbf{the logic of architecture sel
 
 \subsubsection{7.4.1. Timing Chain}\label{ddjf-7-4-1}
 
-The detailed SSEG and GSEG stages sum to \textbf{60 s}, with no unallocated reserve at EWAS level. Within GSEG, preliminary reserves of 0.50 s (within the 2 s interval) and 2.50 s (within the 15 s interval) are adopted. The 2+1 option requires verification of selection of three candidates without extending the first interval, and priority queues and GIS failover must be accounted for within the second. Detailed figures and the relationship \textbf{43 s of SSEG stages /\allowbreak{} 45 s overall limit} are discussed in 9.3.3.
+The planned chain allocation is \textbf{10 + 2 + 3 + 30 + 15 = 60 s}: 43 s for SSEG-owned stages and 17 s for GSEG-owned stages, with no unallocated system reserve. The SSEG DDF's 40--45 s Steps 1--3 subtotal includes the 2 s GSEG selection interval and must not be compared as an independent SSEG-only limit. Any future SSEG work or uncounted delay that adds elapsed time beyond the current 43 s allocation requires time recovery, reallocation or an agreed change to the timing requirements. The 2+1 selection, priority queues and GIS failover must also be verified within their allocated intervals.
 
 \subsubsection{7.4.2. Satellite Routes and GSN Communications}\label{ddjf-7-4-2}
 

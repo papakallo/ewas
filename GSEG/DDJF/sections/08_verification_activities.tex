@@ -42,13 +42,13 @@ The cases below constitute a \textbf{proposed activity matrix}, not confirmed sp
 GSEG-QV-01 & GSN/\allowbreak{}C\&C test: GEO report, MCC data, GSN path failure, 2+1 selection & Two initial requests within ≤2 s, selection of a valid pair and reserve (where possible); status of absent candidate & To be developed\\ \hline
 GSEG-QV-02 & DPS/\allowbreak{}EWS HIL: two valid LEO packages and trajectory, load, four classification outcomes & Warning only for qualifying outcomes; correct uncertainty; delivery within ≤15 s & To be developed\\ \hline
 GSEG-QV-03 & SSEG integration through emulator or representative network configuration & Valid complete products from two LEO spacecraft, preserved identifiers, times and authenticity & To be developed\\ \hline
-GSEG-QV-04 & Geometry and dynamic-routing simulation: two GEO spacecraft, node/\allowbreak{}ISL failure, QoS queues & Existence of operational routes meeting applicable limits in specified cases; no unjustified guarantees & To be developed\\ \hline
+GSEG-QV-04 & Geometry and dynamic-routing simulation: two GEO spacecraft, node/\allowbreak{}ISL failure, QoS queues & Demonstrate applicable route and stage timing allocations for defined cases; record assumptions and boundary points & To be developed\\ \hline
 GSEG-QV-05 & Loss of GIS domain with 10 admitted events and maintenance & Demonstration of correct 2/\allowbreak{}15 s boundaries and preservation of state after a single failure covered by redundancy & To be developed\\ \hline
 GSEG-QV-06 & RBD/\allowbreak{}FTA, common utilities, UPS/\allowbreak{}generator, failures and repairs & Demonstration of ≥99.99\% critical-service availability based on acceptable data and subsequent measurements & To be developed\\ \hline
 GSEG-QV-07 & Archive and data traceability: delayed DAS, restoration, 5-year retention & No blocking of warning, complete traceability and justified capacity/\allowbreak{}retention & To be developed\\ \hline
 GSEG-QV-08 & Security: roles, encryption, command authentication, audit and test/\allowbreak{}operations separation & No unauthorized access or commands, correct audit records and environment isolation & To be developed\\ \hline
-GSEG-QV-09 & Two EWS paths: interruption of one path and warning-version change & Unambiguous message at recipient without uncontrolled duplicates, with deadline and authentication preserved & To be developed\\ \hline
-GSEG-QV-10 & Integrated EWAS chain with SSEG and test recipient & Measurement of system boundaries from detection to recipient interface, accounting for 60 s requirement and data from two LEO spacecraft & To be developed\\ \hline
+GSEG-QV-09 & Two EWS paths: interruption of one path, warning-version change and acknowledgement handling & Verify event identifier, refined trajectory, impact-area assessment, threat classification distinct from uncertainty, warning status and available delivery acknowledgements; preserve version, deadline and authentication without uncontrolled duplicates & To be developed\\ \hline
+GSEG-QV-10 & Integrated EWAS chain with SSEG and test recipient & Measure the complete chain against the 60 s limit and record intermediate stage boundaries, including the GSEG selection interval within the SSEG DDF Steps 1--3 subtotal & To be developed\\ \hline
 GSEG-QV-11 & Failure of one LEO spacecraft after 2+1 selection: early and late, valid/\allowbreak{}invalid reserve geometry & Correct replacement request; two valid observations \textbf{and consistent trajectory for the new pair}; no unjustified 60 s declaration & To be developed\\ \hline
 GSEG-QV-12 & Arrival of 10, 11 and 20 events, later urgent event, loss of one domain & Reservation and priorities without losing events; explicit saturation and measurement of deadlines for load covered by guarantee & To be developed\\*
 \end{longtable}
@@ -94,7 +94,7 @@ GSEG-REQ-ARC-002 & T, R & QV-05/\allowbreak{}07: warning with unavailable MCC an
 GSEG-REQ-PERF-001 & T, A & QV-01/\allowbreak{}11/\allowbreak{}12: ≤2 s for 2+1 selection and handover of two initial requests; load within TRS boundaries must be formally established & O\\ \hline
 GSEG-REQ-PERF-002 & T, A & QV-02/\allowbreak{}09/\allowbreak{}12: ≤15 s for qualified events; load >10 must not be considered excluded from TRS without agreement & O\\ \hline
 GSEG-REQ-IF-001 & T, R & QV-03: formats, authenticity and SSEG interface boundaries & O\\ \hline
-GSEG-REQ-IF-002 & T & QV-09: message delivery to authorized recipient & O\\ \hline
+GSEG-REQ-IF-002 & T & QV-09: verify required warning fields (event identifier, refined trajectory, impact area, threat classification, associated uncertainty and warning status), field separation, version and available delivery-acknowledgement records & O\\ \hline
 GSEG-REQ-IF-003 & T, R & QV-01/\allowbreak{}03: currency and flow of orbital products & O\\ \hline
 GSEG-REQ-DATA-001 & T & QV-03/\allowbreak{}07: identifiers, timestamps, provenance & O\\ \hline
 GSEG-REQ-DATA-002 & T & QV-02: completeness and consistency check of event products & O\\ \hline
@@ -138,7 +138,7 @@ Test/\allowbreak{}operations configuration and commissioning & Isolation of SSEG
 \end{longtable}
 \endgroup
 
-\textbf{Additional verification condition:} GSEG-QV-10 should confirm both the full chain ≤60 s and completeness of the SSEG stages totaling 43 s relative to the overall 45 s boundary. A single nominal result ≤60 s does not close analysis of boundary cases, queues and failovers. Boundary conditions should be agreed with system and SSEG requirement owners.
+\textbf{Additional verification condition:} GSEG-QV-10 should measure the complete end-to-end interval against the 60 s limit and record intermediate boundaries so that no handover or delay is omitted or counted twice. The current allocation is 43 s of SSEG-owned stages plus 17 s of GSEG-owned stages; the SSEG DDF's 40--45 s Steps 1--3 subtotal includes GSEG's 2 s selection interval. Any future increase in elapsed SSEG time beyond the current 43 s allocation must be assessed against the system limit; an additional 2 s with GSEG unchanged would produce a 62 s total. A single nominal result at or below 60 s does not close analysis of boundary cases, queues and failovers.
 
 \subsection{8.3. Acceptance Verification}\label{ddjf-8-3}
 

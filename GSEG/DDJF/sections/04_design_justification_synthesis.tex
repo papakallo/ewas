@@ -14,7 +14,7 @@ At this stage \textbf{formal compliance with none of the 35 requirements has bee
 \GSEGHeaderText{Principal requirement} & \GSEGHeaderText{Design decision} & \GSEGHeaderText{Fundamental risk /\allowbreak{} open evidence}\\ \hline
 \endhead
 \hline\endlastfoot
-GSEG-REQ-PERF-001/\allowbreak{}002; R-011 & GSN–C\&C–DPS–EWS chain with limits of 2 s and 15 s & Timing under load and after failure, SSEG 43/\allowbreak{}45 s boundary\\ \hline
+GSEG-REQ-PERF-001/\allowbreak{}002; R-011 & GSN–C\&C–DPS–EWS chain with limits of 2 s and 15 s & Timing under load and after failure; completeness of timing boundaries and no system reserve\\ \hline
 GSEG-REQ-FUN-001/\allowbreak{}004/\allowbreak{}005 & Primary LEO pair, reserve candidate P, fusion of two valid observations and warning & Geometry of replacement pairs, activation time and classification quality\\ \hline
 GSEG-REQ-ARC-001 & One geographical GSEG facility & Common-cause failure of the entire center\\ \hline
 GSEG-REQ-ARC-002 & MCC/\allowbreak{}DAS outside the first-warning path & Maintaining consistent state without synchronization with DAS\\ \hline
@@ -26,7 +26,7 @@ GSEG-REQ-IF-001/\allowbreak{}002 & Data transfer via GEO/\allowbreak{}ISL and tw
 
 \subsection{4.3. Qualification Status and Critical Points}\label{ddjf-4-3}
 
-\textbf{Formal nonconformances demonstrated by test:} no results have been made available that allow implementation compliance or noncompliance to be established. \textbf{Issue requiring agreement:} the sum of the SSEG stage limits is 43 s, but its overall limit is 45 s. This is not a logical contradiction if the 10/\allowbreak{}3/\allowbreak{}30 s limits fully cover all periods of SSEG responsibility. However, if additional overheads were permitted only under the aggregate 45 s limit, adding GSEG's 17 s could result in 62 s. The completeness of the timing boundaries must be established and the full chain verified; this is a budget-definition issue, not a measurement confirming a system defect.
+\textbf{Formal nonconformances demonstrated by test:} no results have been made available that allow implementation compliance or noncompliance to be established. \textbf{Timing issue requiring closure:} the current allocation is 43 s for SSEG-owned stages and 17 s for GSEG-owned stages, totaling 60 s. The SSEG DDF's 40--45 s Steps 1--3 subtotal includes the 2 s GSEG selection interval; it is not a separate 45 s SSEG-only allocation. No system reserve is allocated. If future SSEG requirements or uncounted delays add elapsed time beyond the current 43 s SSEG allocation, the 60 s end-to-end limit may be exceeded unless time is recovered through overlap or reallocation. For example, an additional 2 s with GSEG unchanged would result in 45+17=62 s. This is a potential consequence of future added time, not the current budget arithmetic. The timing boundaries, completeness of the stages and full-chain performance must be verified.
 
 The following are adopted as critical points: (1) reachability of the two selected LEO spacecraft through a single GSN center and routing in SSEG; (2) resilience of the entire critical chain to common failures; (3) completeness of the energy and cooling budget; (4) demonstration of limiting delays under load; (5) correctness of event qualification and warning version control; (6) accounting for all data requiring retention. Chapters 7–10 present detailed grounds and actions.
 
