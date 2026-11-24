@@ -4,180 +4,131 @@
 \section{Verification Activities and Synthesis of Results}
 \label{sec:verification}
 
-\subsection{Verification Plan}
-\label{sec:verification_plan}
+\subsection{Verification Governance and Strategy Synthesis}
+\label{sec:verification_governance}
 
-The Space Segment verification strategy is governed by the Programme Verification Plan (\textbf{AD-02}) and tracked via the Verification Control Document (\textbf{AD-03}). Four formal verification methods are employed, assigned per requirement in the TRS (\textbf{RD-02}):
+The formal verification strategy, methodology, model philosophy, and execution requirements for the \abbr{EWAS} Space Segment (\texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}) are governed normatively by the Programme Verification Plan (\textbf{AD-04}, \texttt{EWAS-HSB-VP-01}). Requirement-by-requirement verification tracking, execution evidence close-out, and qualification status monitoring are maintained dynamically in the Programme Verification Control Document (\textbf{AD-05}, \texttt{EWAS-HSB-VCD-01}).
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Code} & \thead{Method} & \thead{Application at SSEG Level} \\ \hline
-    \textbf{T} & Test & Environmental qualification (vibration, acoustic, TVAC, shock, EMC); functional end-to-end chain tests; radiometric calibration; OISL BER validation. \\ \hline
-    \textbf{A} & Analysis & Orbital coverage (GMAT), radiation dose (AP-8/AE-8, IRENE AE9/AP9), thermal modelling, structural FEM, link budgets, $\Delta v$ budgets, mass/power budgets. \\ \hline
-    \textbf{R} & Review of Design & Non-offensive scope (\texttt{R-001}), data-format compliance, design-for-demise compliance, COMSEC architecture review. \\ \hline
-    \textbf{I} & Inspection & Physical configuration audit, harness routing, cleanroom contamination logs, material outgassing certificates. \\ \hline
-\end{tabularx}}
-\caption{Space Segment Verification Methods and Level-2 Application}
-\end{table}
+In accordance with \abbr{ECSS}-E-ST-10-02C Annex~K Clause~\textless8\textgreater, this section provides the synthesis of engineering justification results and presents the formal \textbf{Requirements Status Log} for all 39 Level-2 Space Segment technical requirements established in \textbf{AD-01} (\texttt{EWAS-HSB-SSEG-TRS-03} Issue~1.5).
 
-The verification programme is structured into three campaigns:
+\subsection{Space Segment Requirements Status Log}
+\label{sec:req_status_log_section}
+
+The requirements baseline for \texttt{CI-03} comprises 39 normative requirements across 9 functional and technical categories. In Table~\ref{tab:req_status_log}, the baseline is partitioned into two distinct verification categories:
 \begin{enumerate}
-    \item \textbf{EM/STM Campaign:} Functional HIL testing and structural/thermal model correlation.
-    \item \textbf{QM/PFM Campaign:} Full environmental qualification of lead SATL and SATG.
-    \item \textbf{FM Acceptance Campaign:} Workmanship screening and payload calibration of all 72 SATL and 6 SATG flight units.
+    \item \textbf{Category 1: Requirements Justified Analytically within this DDJF (16 Requirements):} Requirements where architectural design review, astrodynamic modelling, radiometric SNR derivation, or technical budget allocations (mass, power, stiffness, $\Delta v$, radiation, latency, and bandwidth) provide complete Phase~A/B design justification.
+    \item \textbf{Category 2: Requirements Tracked in the Verification Control Document (23 Requirements):} Requirements requiring empirical qualification testing (environmental campaigns, vibration, TVAC, shock, EMC), hardware-in-the-loop (HIL) functional test bench execution, physical inspection, or in-orbit commissioning. These requirements remain open during Phase~A/B and are actively tracked to close-out in \textbf{AD-05} (\texttt{EWAS-HSB-VCD-01}).
 \end{enumerate}
 
-\subsection{Qualification Verification and Synthesis of Results}
-
-\subsubsection{Qualification Evidence}
-\label{sec:qual_evidence}
-
-The following table maps key SSEG-level requirements to their qualification verification method and evidence status:
-
-\begin{table}[H]
-\centering
-{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+{\scriptsize
+\setlength{\tabcolsep}{3.5pt}%
+\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Requirement} & \thead{Parameter} & \thead{Method} & \thead{Evidence Description} & \thead{Status} \\ \hline
-    \texttt{SSEG-REQ-FUN-001} & Non-offensive scope & R & Design review: exclusion of weapon-guidance capabilities & TBD \\ \hline
-    \texttt{SSEG-REQ-FUN-003} & Dual-tier chain execution & T, A & End-to-end HIL test with OISL loop; GMAT coverage analysis & TBD \\ \hline
-    \texttt{SSEG-REQ-FUN-005} & Proton despiking \& discrimination & T, A & SAA-simulated FPA irradiation test; algorithm validation on injected signals & TBD \\ \hline
-    \texttt{SSEG-REQ-MIS-001} & Constellation architecture (6+72) & A, R & GMAT simulation; design documentation review & TBD \\ \hline
-    \texttt{SSEG-REQ-MIS-004} & Stereoscopic geometry & A & Walker Delta coverage analysis; $\beta \in [30^\circ, 120^\circ]$ verification & TBD \\ \hline
-    \texttt{SSEG-REQ-PERF} & Detection $P_d > 95\%$, latency $\le 45$~s & T, A & Radiometric SNR analysis; end-to-end timing test & TBD \\ \hline
-    \texttt{SSEG-REQ-ALLOC-007} & Mass, power, stiffness & A, T & Mass budget; power budget; structural FEM + sine survey & TBD \\ \hline
-    \texttt{SSEG-REQ-ALLOC-008} & $\Delta v$ budgets & A & Propulsion sizing analysis; orbit-raising/deorbit trajectory analysis & TBD \\ \hline
-\end{tabularx}}
-\caption{Key Space Segment Requirements Qualification Verification and Evidence Status}
-\end{table}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}p{6.0cm}|>{\raggedright\arraybackslash}p{2.0cm}|}
+\caption{Space Segment Requirements Verification Status Log --- All 39 Level-2 TRS Requirements}
+\label{tab:req_status_log} \\
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Requirement ID} & \thead{Requirement Title \& Method} & \thead{Justification Rationale / Planned VCD Evidence} & \thead{Status} \\ \hline
+\endfirsthead
+\multicolumn{4}{l}{\cellcolor{white}\footnotesize\textit{Table~\ref{tab:req_status_log} (continued): Space Segment Requirements Verification Status Log}} \\[0.3ex]
+\hline
+\rowcolor{TableHeaderBlue}
+\thead{Requirement ID} & \thead{Requirement Title \& Method} & \thead{Justification Rationale / Planned VCD Evidence} & \thead{Status} \\ \hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
 
-\subsubsection{Implementation of Qualification Plan}
-\label{sec:qual_plan_impl}
+% =============================================================================
+% CATEGORY 1: REQUIREMENTS JUSTIFIED ANALYTICALLY WITHIN THIS DDJF
+% =============================================================================
+\multicolumn{4}{|l|}{\cellcolor{TableHeaderBlue}\textcolor{white}{\textbf{Category 1: Requirements Justified Analytically within this DDJF (16 Requirements)}}} \\ \hline
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Qualification Test} & \thead{Applicable Model} & \thead{Test Description} & \thead{Status} \\ \hline
-    \textbf{Sine Vibration} & QM/PFM (SATL, SATG) & 5--100~Hz swept sine; notching per structural FEM predictions; $\le 1.5\,g$ & TBD \\ \hline
-    \textbf{Random Vibration} & QM/PFM (SATL, SATG) & 20--2,000~Hz; $7$--$11\,g_{\text{rms}}$; 2~min/axis & TBD \\ \hline
-    \textbf{Acoustic Noise} & QM/PFM (SATL, SATG) & Reverberant chamber; $138$--$142$~dB OASPL & TBD \\ \hline
-    \textbf{Pyro-Shock} & QM/PFM (SATL) & Dispenser separation; $1{,}500$--$2{,}000\,g$ SRS $> 1{,}000$~Hz & TBD \\ \hline
-    \textbf{TVAC Qualification} & QM/PFM (SATL, SATG) & Multi-cycle hot/cold plateaus; cryocooler cooldown to $65$--$95$~K; 72--96~h bake-out at $310$--$320$~K & TBD \\ \hline
-    \textbf{EMC} & QM/PFM (SATL, SATG) & RE/CE emission and susceptibility; self-compatibility with OISL and TT\&C & TBD \\ \hline
-    \textbf{Boresight Stability} & QM/PFM & Pre-/post-environmental optical alignment verification; AKE $\le 10$--$15~\mu$rad & TBD \\ \hline
-    \textbf{Radiometric Calibration} & QM/PFM & SWIR/MWIR flat-fielding; dark-current characterization at $65$--$95$~K & TBD \\ \hline
-\end{tabularx}}
-\caption{Space Segment Qualification Test Plan Implementation and Status}
-\end{table}
+\textbf{\texttt{SSEG-REQ-FUN-001}} & Non-Offensive Civil-Protection Operation \newline [\texttt{R}] & Strictly non-offensive civil-protection warning chain. Fire-control and weapon guidance functions excluded by design. (Sec.~\ref{sec:introduction}, \ref{sec:ddjf_synthesis}) & Justified in DDJF \\ \hline
 
-\subsubsection{Validation of Models}
-\label{sec:model_validation}
+\textbf{\texttt{SSEG-REQ-FUN-002}} & Scope Exclusion of Yield and Damage Assessment \newline [\texttt{R}] & Warhead yield estimation and battle damage assessment algorithms excluded from onboard FSW and data product scope. (Sec.~\ref{sec:ddjf_synthesis}) & Justified in DDJF \\ \hline
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Analytical Model} & \thead{Validation Approach} & \thead{Status} \\ \hline
-    \textbf{GMAT Coverage Model} & Correlation of simulated Baltic visibility ($5$--$7$ SATL nodes) against Walker Delta analytical predictions & TBD \\ \hline
-    \textbf{Structural FEM} & Correlation with QM/PFM sine survey; natural frequency vs.\ prediction (target $\le 5\%$ deviation) & TBD \\ \hline
-    \textbf{Thermal Model} & Correlation with STM/QM TVAC thermal balance test data; FPA temperature stability $\pm 0.1$~K & TBD \\ \hline
-    \textbf{Radiation Dose Model} & AP-8/AE-8, IRENE AE9/AP9 at $95\%$ CL; correlation with dosimeter flight data (post-LEOP) & TBD \\ \hline
-    \textbf{Link Budget Model} & Correlation with OISL BER ground test and in-orbit commissioning results & TBD \\ \hline
-\end{tabularx}}
-\caption{Space Segment Analytical Model Validation Matrix}
-\end{table}
+\textbf{\texttt{SSEG-REQ-FUN-004}} & Baltic Region and Threat Surveillance \newline [\texttt{A}] & Constellation orbital geometry provides continuous coverage over Baltic Sea ($53^\circ\text{--}66^\circ\text{N}$) and extra-regional corridors ($>60^\circ\text{N}$). (Sec.~\ref{sec:functional_arch}) & Justified in DDJF \\ \hline
 
-\subsubsection{Requirements Status Log}
-\label{sec:req_status_log}
+\textbf{\texttt{SSEG-REQ-MIS-001}} & Hybrid Constellation Architecture \newline [\texttt{A, R}] & Dual-tier hybrid constellation justified: 6 GEO detection nodes at 35,786~km ($60^\circ$ spacing) + 72 LEO tracking nodes at 1,000~km circular orbit. (Sec.~\ref{sec:design_description}, \ref{sec:functional_arch}) & Justified in DDJF \\ \hline
 
-Detailed requirement-by-requirement verification status is maintained in the Verification Control Document (\textbf{AD-03}). The summary status at this document issue:
+\textbf{\texttt{SSEG-REQ-MIS-002}} & Continuous 24/7 Surveillance Coverage \newline [\texttt{A}] & Geometric analysis validates zero temporal or spatial coverage gaps over monitored zones; 2--3 GEO and 5--7 LEO nodes simultaneously visible. (Sec.~\ref{sec:functional_arch}) & Justified in DDJF \\ \hline
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Requirement Category} & \thead{Total Count} & \thead{Verified} & \thead{Open / TBD} \\ \hline
-    \textbf{SSEG-REQ-FUN} & 6 & TBD & TBD \\ \hline
-    \textbf{SSEG-REQ-MIS} & 5 & TBD & TBD \\ \hline
-    \textbf{SSEG-REQ-PERF} & TBD & TBD & TBD \\ \hline
-    \textbf{SSEG-REQ-ALLOC} & TBD & TBD & TBD \\ \hline
-    \textbf{Total} & TBD & TBD & TBD \\ \hline
-\end{tabularx}}
-\caption{Space Segment Requirements Verification Status Summary Log}
-\end{table}
+\textbf{\texttt{SSEG-REQ-MIS-003}} & Boost-Phase Detection Coverage \newline [\texttt{A}] & Continuous GEO staring observation geometry augmented by high-latitude LEO nodes covers ascending trajectories above cloud tops ($>15\text{ km}$). (Sec.~\ref{sec:functional_arch}) & Justified in DDJF \\ \hline
 
-\subsubsection{Manufacturing Process Status Log}
-\label{sec:mfg_status_log}
+\textbf{\texttt{SSEG-REQ-MIS-004}} & Multi-Satellite Stereoscopic Geometry \newline [\texttt{A}] & Walker Delta $72/8/1$ ($80^\circ$ incl., $\Delta u_{\text{inter}} = 22.5^\circ$) guarantees $\ge 2$ LEO satellites with stereoscopic convergence $\beta \in [30^\circ, 120^\circ]$. (Sec.~\ref{sec:design_description}, \ref{sec:functional_arch}) & Justified in DDJF \\ \hline
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Manufacturing Process} & \thead{Applicable Hardware} & \thead{Qualification Evidence} & \thead{Status} \\ \hline
-    \textbf{HgCdTe FPA fabrication} & SWIR/MWIR FPAs & Detector lot acceptance; dark-current uniformity at $65$--$95$~K & TBD \\ \hline
-    \textbf{OISL terminal assembly} & 1,550~nm laser transceivers & Optical alignment; BER ground test & TBD \\ \hline
-    \textbf{Cryocooler integration} & Pulse-tube cryocoolers & Vibration export measurement; cooldown performance & TBD \\ \hline
-    \textbf{Solar array bonding} & GaAs/InGaP MJ cells & Pull-test; thermal cycling; BOL/EOL power verification & TBD \\ \hline
-    \textbf{Propellant tank welding} & Propulsion tanks & Proof pressure test; leak test; radiographic inspection & TBD \\ \hline
-    \textbf{PCB/FPGA population} & Avionics boards & Lot-acceptance radiation test (SATL); X-ray inspection & TBD \\ \hline
-\end{tabularx}}
-\caption{Critical Space Segment Manufacturing Processes and Qualification Status Log}
-\end{table}
+\textbf{\texttt{SSEG-REQ-MIS-005}} & Constellation Maintenance Deconfliction \newline [\texttt{A, R}] & Orbit maintenance and CAM burns staggered (max 1 node offline per theatre); $\ge 5$ operational LEO nodes preserved over Baltic at all times. (Sec.~\ref{sec:functional_arch}, \ref{sec:constraints}) & Justified in DDJF \\ \hline
 
-\subsection{Acceptance Verification}
-\label{sec:acceptance_verification}
+\textbf{\texttt{SSEG-REQ-PERF-002}} & Warning Latency Contribution \newline [\texttt{T, A}] & Space Segment latency allocation $\le 40\text{--}45\text{ s}$ analytically justified across Steps 1--3 within the $\le 60.0\text{ s}$ system budget. (Sec.~\ref{sec:design_description}, \ref{sec:budgets_margins}) & Justified in DDJF \\ \hline
 
-Acceptance testing of recurring Flight Models follows the rules defined in \textbf{AD-02}:
+\textbf{\texttt{SSEG-REQ-ALLOC-005}} & Technical Budget \& Dispenser Envelope \newline [\texttt{A, T}] & Flight system mass ($\le 290\text{ kg}$ LEO / $\le 3{,}100\text{ kg}$ GEO), power, $\Delta v$, stiffness, and 9-satellite dispenser stack ($\le 2{,}800\text{ kg}$) close with margin. (Sec.~\ref{sec:budgets_margins}, \ref{sec:constraints}) & Justified in DDJF \\ \hline
 
-\begin{table}[H]
-\centering
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    \thead{Acceptance Test} & \thead{Applicable Hardware} & \thead{Test Description} & \thead{Status} \\ \hline
-    \textbf{Workmanship Vibration} & All 72 SATL FM + 6 SATG FM & Reduced-level random vibration per acceptance spectrum & TBD \\ \hline
-    \textbf{TVAC Acceptance} & All 72 SATL FM + 6 SATG FM & Shortened thermal cycling; functional verification at temperature extremes & TBD \\ \hline
-    \textbf{Payload Calibration} & All FM & Radiometric flat-fielding; geometric distortion mapping; dark-current baseline & TBD \\ \hline
-    \textbf{OISL Link Validation} & All FM & Optical acquisition and BER test per terminal & TBD \\ \hline
-    \textbf{Functional Chain Test} & All FM & End-to-end avionics chain test with flight software; FDIR injection & TBD \\ \hline
-    \textbf{Mass Properties} & All FM & Weigh and CG measurement; comparison against mass budget & TBD \\ \hline
-\end{tabularx}}
-\caption{Recurring Flight Model Acceptance Verification Programme}
-\end{table}
+\textbf{\texttt{SSEG-REQ-ISL-001}} & Mandatory OISL Network \newline [\texttt{A, T}] & End-to-end bandwidth sizing ($\ge 500\text{ Mbps}$ LEO mesh, $\ge 1.5\text{--}2.0\text{ Gbps}$ GEO trunks) justified with $\ge 205\%$ margin in nominal 8-bit tracking mode. (Sec.~\ref{sec:budgets_margins}) & Justified in DDJF \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ENV-001}} & Orbital Environment Survivability \newline [\texttt{A, T}] & Radiation dose analysis (1,000~km LEO: $\le 10\text{--}15\text{ krad}$; GEO: $\le 20\text{--}25\text{ krad}$ internal with $2\times$ RDM) validates Careful COTS / QML-V approach. (Sec.~\ref{sec:functional_arch}, \ref{sec:budgets_margins}) & Justified in DDJF \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ENV-002}} & Mandatory Active End-of-Life Disposal \newline [\texttt{A}] & Ring-fenced propellant reserve ($\Delta v_{\text{EOL}} \ge 230\text{ m/s}$ for LEO $<5\text{-year}$ demise; $\Delta v_{\text{EOL}} \ge 15\text{ m/s}$ for GEO $+300\text{ km}$ graveyard) analytically sized. (Sec.~\ref{sec:budgets_margins}, \ref{sec:constraints}) & Justified in DDJF \\ \hline
+
+\textbf{\texttt{SSEG-REQ-OPS-001}} & Operational Design Lifetimes \newline [\texttt{A}] & Mission duration sizing ($\ge 7\text{ yr}$ LEO, $\ge 15\text{ yr}$ GEO) justified across cumulative radiation fluence, battery cycle DoD, and $\Delta v$ budgets. (Sec.~\ref{sec:functional_arch}, \ref{sec:budgets_margins}) & Justified in DDJF \\ \hline
+
+\textbf{\texttt{SSEG-REQ-IF-002}} & Launcher and Dispenser Interface \newline [\texttt{T, R}] & 9-satellite dispenser mechanical interface, launch load envelopes ($6\,g$ axial), and stowed fundamental frequencies ($f_{\text{ax}} \ge 35\text{ Hz}$) justified. (Sec.~\ref{sec:physical_arch}, \ref{sec:budgets_margins}, \ref{sec:constraints}) & Justified in DDJF \\ \hline
+
+\textbf{\texttt{SSEG-REQ-VER-001}} & Constellation \& Radiometric Simulation \newline [\texttt{A, R}] & GMAT orbital coverage model and dual-band radiometric SNR performance verified by analytical and numerical simulation baselines. (Sec.~\ref{sec:functional_arch}) & Justified in DDJF \\ \hline
+
+% =============================================================================
+% CATEGORY 2: REQUIREMENTS OPEN AND TRACKED IN THE VCD
+% =============================================================================
+\multicolumn{4}{|l|}{\cellcolor{TableHeaderBlue}\textcolor{white}{\textbf{Category 2: Requirements Open and Tracked in the Verification Control Document (23 Requirements)}}} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-FUN-003}} & Dual-Tier Detection and Tracking Chain \newline [\texttt{T, A}] & Physical execution of detection-to-tracking chain across GEO/LEO assets. Verified via EM flat-sat HIL test and multi-satellite simulation. & Open (\textbf{AD-05}) \newline \texttt{TP-FUN-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-FUN-005}} & Onboard Proton Despiking \& Discrimination \newline [\texttt{T, A}] & Detector-level proton spike rejection and dual-band ratioing algorithms. Verified via SAA proton irradiation and FPA test bench. & Open (\textbf{AD-05}) \newline \texttt{TP-FUN-005} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-FUN-006}} & Archival Telemetry and Provenance \newline [\texttt{R, T}] & Downlinked telemetry packet format, UTC time-tagging, and covariance headers. Verified via ground data system interface testing. & Open (\textbf{AD-05}) \newline \texttt{TP-FUN-006} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-PERF-001}} & Boost Launch Detection Probability \newline [\texttt{T, A}] & Verification of $P_d > 95\%$ under operational background conditions. Verified by cryogenic TVAC radiometric calibration and SNR test. & Open (\textbf{AD-05}) \newline \texttt{TP-PERF-001} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-PERF-003}} & Onboard False-Alarm Suppression \newline [\texttt{T, A}] & Rejection of glint, fires, and auroral clutter. Verified via synthetic target injection and FSW algorithm qualification testing. & Open (\textbf{AD-05}) \newline \texttt{TP-PERF-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-PERF-004}} & Space Segment Operational Availability \newline [\texttt{A, T}] & $>99.9\%$ operational availability. Verified via constellation Markov reliability modeling and autonomous FDIR switchover testing. & Open (\textbf{AD-05}) \newline \texttt{AR-PERF-004} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ALLOC-001}} & Infrared Sensing Payload Allocation \newline [\texttt{T, A}] & Payload optical performance in SWIR ($2.65\text{--}2.85~\mu\mathrm{m}$) and MWIR ($4.15\text{--}4.45~\mu\mathrm{m}$). Verified via QM/PFM calibration. & Open (\textbf{AD-05}) \newline \texttt{TP-ALLOC-001} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ALLOC-002}} & Independent Optical Payload LOS Lock-On \newline [\texttt{T, A}] & Two-axis gimbal + FSM lock-on in $<5.0\text{ s}$ and stability $<2\text{ arcsec/s}$. Verified via optical dynamic bench and jitter test. & Open (\textbf{AD-05}) \newline \texttt{TP-ALLOC-002} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ALLOC-003}} & Onboard Filtering \& 3D Trajectory \newline [\texttt{T, A}] & Onboard preliminary 3D trajectory convergence within $\le 18\text{ s}$. Verified via multi-processor HIL simulation with OISL loop. & Open (\textbf{AD-05}) \newline \texttt{TP-ALLOC-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ALLOC-004}} & Stray-Light Mitigation \& Contamination \newline [\texttt{A, T}] & Rejection of off-axis solar/Earth-limb stray light and ISO Class 5 cleanliness. Verified via optical stray-light test and outgassing audit. & Open (\textbf{AD-05}) \newline \texttt{TP-ALLOC-004} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ISL-002}} & All-Weather Space-to-Ground RF Links \newline [\texttt{A, T}] & Space-to-ground S/X/Ka RF communication and rain margin. Verified via RF compatibility, link margin, and BER bench test. & Open (\textbf{AD-05}) \newline \texttt{TP-ISL-002} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ISL-003}} & End-to-End Cryptographic Security \newline [\texttt{R, T}] & COMSEC hardware encryption and key management on RF and OISL. Verified via security architecture audit and penetration testing. & Open (\textbf{AD-05}) \newline \texttt{RV-ISL-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ISL-004}} & Anti-Jamming \& Autonomous Mesh Failover \newline [\texttt{T, A}] & Electronic protection and autonomous OISL rerouting around degraded nodes. Verified via EW mesh network test and FDIR fault injection. & Open (\textbf{AD-05}) \newline \texttt{TP-ISL-004} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-ENV-003}} & End-of-Life Constellation Passivation \newline [\texttt{R, T}] & Depletion of propellant, battery cell discharge, wheel spin-down. Verified via flight software passivation test and design review. & Open (\textbf{AD-05}) \newline \texttt{RV-ENV-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-OPS-002}} & Single-Point Failure \& Safe Mode \newline [\texttt{R, T}] & Autonomous A/B redundancy failover in $<2.0\text{ s}$ and Sun-pointing Safe Mode. Verified via avionics fault-injection testing. & Open (\textbf{AD-05}) \newline \texttt{TP-OPS-002} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-OPS-003}} & Health Telemetry \& OTA Calibration \newline [\texttt{T, R}] & Non-volatile event buffering and secure over-the-air algorithm patch upload. Verified via FSW upload and memory test. & Open (\textbf{AD-05}) \newline \texttt{TP-OPS-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-IF-001}} & Space-to-Ground Interface Compliance \newline [\texttt{T, R}] & Spacecraft-to-ground station RF/data interface compatibility. Verified via compatibility testing with Ground Segment emulators. & Open (\textbf{AD-05}) \newline \texttt{TP-IF-001} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-IF-003}} & Target Plume Radiometric Interface \newline [\texttt{A, T}] & Radiometric dynamic range across solid/liquid boost plumes. Verified via optical calibration against simulated target emission profiles. & Open (\textbf{AD-05}) \newline \texttt{TP-IF-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-IF-004}} & Space Traffic Management Interface \newline [\texttt{R, A}] & Conjunction Data Message (CDM) processing for CAM and ITU frequency filings. Verified via flight dynamics review and regulatory audit. & Open (\textbf{AD-05}) \newline \texttt{RV-IF-004} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-VER-002}} & HIL Testing of Sensing, LOS, OBDH/OISL \newline [\texttt{T}] & Functional verification of payload, ADCS, OBDH, and OISL on EM flat-sat and optical bench. Verified via HIL test campaign execution. & Open (\textbf{AD-05}) \newline \texttt{TP-VER-002} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-VER-003}} & Environmental Qualification \& Acceptance \newline [\texttt{T}] & Qualification of lead units (sine, random, acoustic, shock, TVAC, EMC) and batch acceptance of 72 LEO + 6 GEO. Verified via test campaign. & Open (\textbf{AD-05}) \newline \texttt{TP-VER-003} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-VER-004}} & End-to-End Operational Validation \newline [\texttt{T}] & On-orbit functional commissioning, constellation phasing, and end-to-end warning validation. Verified via LEOP and commissioning test. & Open (\textbf{AD-05}) \newline \texttt{TP-VER-004} \\ \hline
+
+\textbf{\texttt{SSEG-REQ-VER-005}} & Post-Event Archive Analysis \& Calibration \newline [\texttt{A, R}] & In-orbit radiometric drift compensation and ground archive algorithm feedback. Verified via operational data evaluation. & Open (\textbf{AD-05}) \newline \texttt{AR-VER-005} \\ \hline
+
+\multicolumn{4}{|l|}{\cellcolor{TableRowLightBlue}\textbf{Summary: 39 Requirements Total --- 16 Justified Analytically in DDJF, 23 Tracked in VCD}} \\ \hline
+\end{longtable}}

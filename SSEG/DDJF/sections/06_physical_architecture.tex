@@ -15,17 +15,49 @@ The Space Segment physical decomposition follows the \abbr{WBS} structure:
     \end{itemize}
 \end{itemize}
 
-Each satellite CI integrates the following subsystem-level physical elements (detailed design definitions in \textbf{RD-01}):
+Both satellite CIs implement an identical eight-branch Level-4 subsystem decomposition, established in \textbf{AD-02} (DDF Table~7) and summarized below:
 \begin{itemize}
-    \item \texttt{.04} --- Mission Payload (\abbr{PLD}): SWIR/MWIR telescope, dichroic beam-splitter, cooled HgCdTe FPAs, two-axis gimbal, Fast Steering Mirror (\abbr{FSM})
-    \item \texttt{.05} --- Propulsion Subsystem (\abbr{PROP})
-    \item \texttt{.06} --- Communication Subsystem: S-band TT\&C (\texttt{.06.01}), 1,550~nm laser OISL terminals (\texttt{.06.02})
-    \item \texttt{.07} --- ADCS: fibre-optic rate sensors, star trackers, reaction wheels, magnetorquers
-    \item \texttt{.08} --- On-Board Data Handling (\abbr{OBDH}): dual-redundant processor, FPGA payload co-processor
-    \item \texttt{.09} --- Electrical Power Subsystem (\abbr{EPS}): solar arrays, Li-ion batteries, PCDU
-    \item \texttt{.10} --- Thermal Control Subsystem (\abbr{TCS}): MLI, radiators, loop heat pipes, pulse-tube cryocoolers
-    \item \texttt{.11} --- Structures and Mechanisms (\abbr{STR/MEC}): primary structure, HDRM, deployment mechanisms, NEAs
+    \item \texttt{.01} (\texttt{.01.01}/\texttt{.02}) --- Thermal Control Subsystem (\abbr{TCS}): Passive (\texttt{.01.01}: \abbr{MLI}, radiators) and Active (\texttt{.01.02}: 65--95~K cryocoolers, loop heat pipes, heaters)
+    \item \texttt{.02} --- Attitude Determination \& Control Subsystem (\abbr{ADCS}): Dual optical-bench star trackers, \abbr{FOG} \abbr{IMU}, \abbr{GNSS} receivers, reaction wheels, magnetorquers
+    \item \texttt{.03} --- Electrical Power Subsystem (\abbr{EPS}): Deployable $\mathrm{GaAs}$ solar arrays, $\mathrm{Li\text{-}ion}$ eclipse battery pack, \abbr{PCDU} with latch-up limiters
+    \item \texttt{.04} --- Mission Payload (\abbr{PLD}): Cooled dual-band \abbr{SWIR}/\abbr{MWIR} optics; independent 2-axis gimbal and \abbr{FSM} on \texttt{SATL}
+    \item \texttt{.05} --- Propulsion Subsystem (\abbr{PROP}): Orbit insertion/transfer, staggered station-keeping, \abbr{CAM}, and active \abbr{EOL} disposal propulsion
+    \item \texttt{.06} (\texttt{.06.01}--\texttt{.03}) --- Avionics: \abbr{C\&DH}/\abbr{OBDH} computers (\texttt{.06.01}), S/X/Ka \abbr{RF} and 1,550~nm \abbr{OISL} terminals (\texttt{.06.02}), Flight Software (\texttt{.06.03})
+    \item \texttt{.07} (\texttt{.07.01}/\texttt{.02}) --- Constellation Configuration (\texttt{CONF}): Segment-level astrodynamic baseline: Phasing Plan (\texttt{.07.01}) and Orbit Definition (\texttt{.07.02})
+    \item \texttt{.08} --- Structures \& Mechanisms (\abbr{STR/MEC}): Primary bus structure, 9-sat dispensers, micro-vibration isolators, $\mathrm{Al}/\mathrm{Ta}$ spot shielding, optical baffles
 \end{itemize}
+
+Table~\ref{tab:ddjf_product_tree} reproduces the Space Segment Product Tree from \textbf{AD-02} (Table~7) to guarantee 100\% hierarchy and CI code compliance across the project baseline.
+
+\begin{table}[htbp]
+\centering
+\caption{Space Segment Product Tree --- \texttt{CI-03} / \abbr{WBS} \texttt{123456.03}}
+\label{tab:ddjf_product_tree}
+\vspace{0.25em}
+{\footnotesize
+\setlength{\tabcolsep}{4pt}%
+\renewcommand{\arraystretch}{1.08}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Level} & \thead{WBS / CI Code} & \thead{Product Element} & \thead{Scope \& Quantity} \\ \hline
+    Level~2 & \texttt{123456.03} (\texttt{CI-03}) & \textbf{Space Segment (\abbr{SSEG})} & Integrated hybrid constellation (78 flight units: 72~\texttt{SATL} + 6~\texttt{SATG}) \\ \hline
+    Level~3 & \texttt{123456.03.01} & \textbf{LEO Tracking Satellite (\texttt{SATL})} & 72 Flight Models (8 planes $\times$ 9 units, 1,000~km circular orbit) \\ \hline
+    Level~3 & \texttt{123456.03.02} & \textbf{GEO Detection Satellite (\texttt{SATG})} & 6 Flight Models ($60^\circ$ equatorial ring, 35,786~km altitude) \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \multicolumn{4}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\textbf{Level~4 --- Common Subsystem Breakdown under \texttt{123456.03.01} (\texttt{SATL}) \& \texttt{123456.03.02} (\texttt{SATG})}} \\ \hline
+    Level~4 & \texttt{.01} (\texttt{.01.01}/\texttt{.02}) & Thermal Control (\abbr{TCS}) & Passive (\texttt{.01.01}: \abbr{MLI}, radiators) and Active (\texttt{.01.02}: 65--95~K cryocoolers, heat pipes, heaters) \\ \hline
+    Level~4 & \texttt{.02} & Attitude Determination \& Control (\abbr{ADCS}) & Dual optical-bench star trackers, \abbr{FOG} \abbr{IMU}, \abbr{GNSS} receivers, reaction wheels, magnetorquers \\ \hline
+    Level~4 & \texttt{.03} & Electrical Power (\abbr{EPS}) & Deployable $\mathrm{GaAs}$ solar arrays, $\mathrm{Li\text{-}ion}$ eclipse battery pack, \abbr{PCDU} with latch-up limiters \\ \hline
+    Level~4 & \texttt{.04} & Mission Payload (\abbr{PLD}) & Cooled dual-band \abbr{SWIR}/\abbr{MWIR} optics; independent 2-axis gimbal and \abbr{FSM} on \texttt{SATL} \\ \hline
+    Level~4 & \texttt{.05} & Propulsion (\abbr{PROP}) & Orbit insertion/transfer, staggered station-keeping, \abbr{CAM}, and active \abbr{EOL} disposal propulsion \\ \hline
+    Level~4 & \texttt{.06} (\texttt{.06.01}--\texttt{.03}) & Avionics (\abbr{OBDH}, Comms/\abbr{OISL}, \abbr{FSW}) & \abbr{C\&DH}/\abbr{OBDH} computers (\texttt{.06.01}), S/X/Ka \abbr{RF} \& 1,550~nm \abbr{OISL} terminals (\texttt{.06.02}), Flight Software (\texttt{.06.03}) \\ \hline
+    Level~4 & \texttt{.07} (\texttt{.07.01}/\texttt{.02}) & Constellation Configuration (\texttt{CONF}) & Segment-level astrodynamic baseline: Phasing Plan (\texttt{.07.01}) and Orbit Definition (\texttt{.07.02}) \\ \hline
+    Level~4 & \texttt{.08} & Structures \& Mechanisms (\abbr{STR/MEC}) & Primary bus structure, 9-sat dispensers, micro-vibration isolators, $\mathrm{Al}/\mathrm{Ta}$ spot shielding, optical baffles \\ \hline
+\end{tabularx}}
+\end{table}
 
 \subsection{Independent Payload Pointing Architecture}
 
@@ -37,12 +69,39 @@ The choice of \textbf{independent two-axis payload gimbal + piezo FSM} (rather t
 \end{itemize}
 
 \subsection{Cryogenic Thermal Architecture}
+\label{sec:cryogenic_thermal_arch}
 
-Each spacecraft sustains two widely separated temperature zones:
+The spacecraft thermal architecture establishes two strictly isolated thermal zones to meet detector signal-to-noise requirements (\texttt{R-009}, \texttt{R-025}) while keeping bus avionics within qualified operating limits:
+\begin{enumerate}
+    \item \textbf{Warm Electronics Zone ($263$--$323$~K):} Houses the primary avionics, power distribution, attitude sensors, and $\mathrm{Li\text{-}ion}$ battery modules (maintained between $273$--$303$~K to prevent accelerated cell degradation). Heat is rejected through dedicated honeycomb structural panel radiators with optical solar reflector (\abbr{OSR}) coatings.
+    \item \textbf{Cryogenic Payload Zone ($65$--$95$~K):} Accommodates the dual-band $\mathrm{HgCdTe}$ SWIR ($2.65\text{--}2.85~\mu\mathrm{m}$) and MWIR ($4.15\text{--}4.45~\mu\mathrm{m}$) Focal Plane Arrays (\abbr{FPA}s) operating at a nominal setpoint of $T_c = 77.0$~K maintained within $\pm 0.1$~K. An intermediate passively cooled stage ($180$--$210$~K) encloses the telescope optics, reducing the radiation parasitic load onto the detector cold finger.
+\end{enumerate}
+
+\paragraph{Thermal Decoupling and Heat Load Formulation.}
+Thermal isolation between the warm bus structure ($T_h \approx 293\text{--}300$~K) and the cryogenic detector stage ($T_c = 77.0$~K) is governed by conductive and radiative decoupling. The total heat lift load $Q_c$ demanded from the active cryocooler at the cold finger is formulated as:
+\begin{equation}
+    Q_c = Q_{\text{det}} + Q_{\text{cond}} + Q_{\text{rad}}
+    \label{eq:cryo_heat_lift}
+\end{equation}
+where:
 \begin{itemize}
-    \item \textbf{Warm zone:} Electronics bus ($263$--$323$~K, i.e.\ $-10^\circ$C to $+50^\circ$C), Li-ion batteries ($273$--$303$~K).
-    \item \textbf{Cold zone:} Telescope optics ($180$--$210$~K), HgCdTe SWIR/MWIR FPAs held at $65$--$95$~K within $\pm 0.1$~K by pulse-tube cryocoolers. Cryocooler compressor strokes generate micro-vibration at $45$--$85$~Hz, constrained by LOS jitter requirement.
+    \item $Q_{\text{det}} = P_{\text{ROIC}} + P_{\text{bias}}$ is the electrical dissipation of the dual Read-Out Integrated Circuits (\abbr{ROIC}) and detector diodes operating at $f_{\text{frame}} \ge 30$~Hz ($Q_{\text{det}} \approx 0.20$~W for SATL).
+    \item $Q_{\text{cond}} = \sum \frac{k_i A_i}{L_i} (T_{\text{optics}} - T_c)$ is the parasitic conductive heat ingress through the titanium-alloy cold-finger tubular struts and low-thermal-conductivity phosphor-bronze / polyimide flex harnesses ($Q_{\text{cond}} \approx 0.32$~W).
+    \item $Q_{\text{rad}} = \sigma \epsilon_{\text{eff}} A_{\text{shield}} (T_{\text{optics}}^4 - T_c^4) + Q_{\text{aperture}}$ is the radiative heat transfer across the cold-shield cavity and through the aperture bandpass filters ($Q_{\text{rad}} \approx 0.28$~W).
 \end{itemize}
+Applying an ECSS Phase~A/B margin of $+50\%$ to the current best estimate ($Q_{c,\text{CBE}} = 0.80$~W) yields a dimensioned thermal lift requirement of $Q_{c,\text{dim}} = 1.20$~W at $77.0$~K.
+
+\paragraph{Cryocooler Thermodynamics and Micro-Vibration Isolation.}
+Active cooling is provided by miniature Stirling-type Pulse Tube Cryocoolers (\abbr{PTC}). Because the cold finger contains no moving mechanical displacer parts, reliability is maximized over the 7-year (SATL) and 15-year (SATG) lifetimes.
+The thermodynamic coefficient of performance (\abbr{COP}) is governed by the Carnot limit:
+\begin{equation}
+    \text{COP}_{\text{Carnot}} = \frac{T_c}{T_h - T_c} = \frac{77.0}{300.0 - 77.0} = 0.3453~\text{W/W}
+\end{equation}
+Operating at a representative second-law efficiency of $\eta_{\text{Carnot}} \approx 12.0\%$, the actual cryogenic \abbr{COP} is:
+\begin{equation}
+    \text{COP}_{\text{actual}} = \eta_{\text{Carnot}} \cdot \text{COP}_{\text{Carnot}} = 0.120 \times 0.3453 = 0.0414~\text{W/W} \quad (\sim 24.15~\text{W}_{\text{elec}}/\text{W}_{\text{th}})
+\end{equation}
+The mechanical compressor incorporates dual opposed pistons driven at $45\text{--}85$~Hz by linear voice-coil motors with active dynamic balancing. To protect the payload line-of-sight stability constraint ($< 2.0$~arcsec/s RMS, \texttt{R-024}), the compressor assembly is mounted on a passive elastomeric-damper vibration isolation cradle with fundamental cut-off at $< 15$~Hz, attenuating transmitted momentum imbalances below $< 0.05$~N.
 
 \subsection{OISL Terminal Physical Configuration}
 

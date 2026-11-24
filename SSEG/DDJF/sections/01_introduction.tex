@@ -4,7 +4,7 @@
 \section{Introduction}
 \label{sec:introduction}
 
-This document constitutes the Design Definition and Justification File (\abbr{DDJF}) for the \textbf{EWAS Space Segment} (Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}), prepared in accordance with ECSS-E-ST-10C Annex~K and Annex~O.
+This document constitutes the Design Definition and Justification File (\abbr{DDJF}) for the \textbf{EWAS Space Segment} (Configuration Item \texttt{CI-03}, \abbr{WBS} Element \texttt{123456.03}), prepared in accordance with ECSS-E-ST-10-02C Annex~K.
 
 \textbf{Scope.} The \abbr{DDJF} covers the integrated dual-tier orbital constellation comprising:
 \begin{itemize}
@@ -15,18 +15,38 @@ This document constitutes the Design Definition and Justification File (\abbr{DD
 \textbf{Purpose.} This file provides a single traceable record of:
 \begin{itemize}
     \item The design rationale and trade-off decisions at \abbr{WBS} Level~2 (Space Segment).
-    \item Justification of the functional and physical architectures against parent system requirements (\texttt{R-001}--\texttt{R-049}, \textbf{AD-01}).
-    \item Technical budget allocations (mass, power, $\Delta v$, structural stiffness) with current margins.
+    \item Justification of the functional and physical architectures against parent system requirements (\texttt{R-001}--\texttt{R-049}, \textbf{AD-03}) and Level-2 requirements (\textbf{AD-01}).
+    \item Technical budget allocations (mass, power, $\Delta v$, structural stiffness, radiation, latency, and bandwidth) with current margins.
     \item Verification strategy synthesis and requirement compliance status.
     \item Constraints imposed by the design on production, operations, transportation, and maintainability.
 \end{itemize}
 
-\textbf{Relationship to Other Documents.} This \abbr{DDJF} is read in conjunction with:
-\begin{itemize}
-    \item \textbf{AD-01}: EWAS Final Report (parent system requirements \texttt{R-001}--\texttt{R-049}).
-    \item \textbf{AD-02}: Programme Verification Plan.
-    \item \textbf{AD-03}: Programme Verification Control Document.
-    \item \textbf{RD-01}: Space Segment Design Definition File (\texttt{EWAS-HSB-SSEG-DDF-03}).
-    \item \textbf{RD-02}: \texttt{SATL} Level-3 TRS (\texttt{EWAS-HSB-SATL-TRS-03.01}).
-    \item \textbf{RD-03}: \texttt{SATG} Level-3 TRS (\texttt{EWAS-HSB-SATG-TRS-03.02}).
-\end{itemize}
+\subsection{ECSS-E-ST-10-02C Annex K Document Structure Compliance Matrix}
+
+In accordance with \abbr{ECSS}-E-ST-10-02C Annex~K (\emph{Design Definition and Justification File DRD}), this \abbr{DDJF} is structured into eleven main sections reflecting the mandatory document contents. Table~\ref{tab:ecss_annex_k_mapping} defines the clause-by-clause compliance mapping between the \abbr{ECSS} DRD structure and \texttt{EWAS-HSB-SSEG-DDJF-03}.
+
+\begin{table}[H]
+\centering
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{ECSS Clause} & \thead{DDJF Section} & \thead{Technical Content and Scope Summary} \\ \hline
+    Annex~K \textless1\textgreater & Section~1: Introduction & Space Segment scope, dual-tier constellation purpose, and ECSS-E-ST-10-02C Annex~K DRD compliance mapping. \\ \hline
+    Annex~K \textless2\textgreater & Section~2: Applicable and Reference Documents & Normative Applicable Documents (\textbf{AD-01}--\textbf{AD-05}), Reference Documents (\textbf{RD-01}--\textbf{RD-04}), and key abbreviations glossary. \\ \hline
+    Annex~K \textless3\textgreater & Section~3: Design Description & High-level architectural overview, orbital baseline parameters, and latency allocation (full design baseline defined in \textbf{AD-02}). \\ \hline
+    Annex~K \textless4\textgreater & Section~4: Design Justification File Synthesis & Space Segment critical design trade-off register (TO-01 through TO-06) and design-driving requirement synthesis. \\ \hline
+    Annex~K \textless5\textgreater & Section~5: Justification of Functional Architecture & Dual-tier hybrid rationale, 1,000~km altitude selection, GEO/LEO radiation environment, GMAT coverage, two-colour ratioing, COTS philosophy, and FDIR. \\ \hline
+    Annex~K \textless6\textgreater & Section~6: Justification of Physical Architecture & Product tree, independent payload gimbal/FSM pointing, dual-zone cryogenic thermal architecture, OISL physical configuration, and stiffness. \\ \hline
+    Annex~K \textless7\textgreater & Section~7: Development Activities and Synthesis of Results & Model philosophy (EM/STM, QM/PFM, FM serial production), cleanroom/AIT facility constraints, and development status. \\ \hline
+    Annex~K \textless8\textgreater & Section~8: Verification Activities and Synthesis of Results & Verification governance (\textbf{AD-04}, \textbf{AD-05}), complete Level-2 TRS requirements status log (analytically justified vs.\ VCD-tracked). \\ \hline
+    Annex~K \textless9\textgreater & Section~9: Justification of Technical Budgets and Margins & Mass, electrical power, structural stiffness, propulsion $\Delta v$, radiation dose, latency, orbital perturbations, and link bandwidth budgets. \\ \hline
+    Annex~K \textless10\textgreater & Section~10: Justification of Constraints Imposed by the Design & Production rate, cleanroom contamination, PAT, continuous dual-band power/thermal, CONOPS, containerized transport, and maintainability. \\ \hline
+    Annex~K \textless11\textgreater & Section~11: Constituent Documents & Traceable constituent document register recording all subordinate Level-2 and Level-3 technical specifications, design files, and verification plans. \\ \hline
+\end{tabularx}}
+\caption{ECSS-E-ST-10-02C Annex K DRD Compliance Matrix for Space Segment DDJF}
+\label{tab:ecss_annex_k_mapping}
+\end{table}

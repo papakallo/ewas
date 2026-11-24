@@ -16,7 +16,7 @@ The constellation design (72~\texttt{SATL} + 6~\texttt{SATG}) imposes a serial p
 \begin{itemize}
     \item \textbf{SATL production:} 72 flight units organised in 8 plane-lots of 9 spacecraft each. The production facility must sustain a throughput of $\ge 2$ completed \texttt{SATL} units per month to meet the launch manifest timeline, requiring parallel AIT stations and batch-tested component inventories.
     \item \textbf{SATG production:} 6 flight units manufactured individually with full acceptance testing per unit.
-    \item \textbf{Component procurement:} The ``Careful COTS'' philosophy for \texttt{SATL} (\textbf{AD-01}, Section 7.2) mandates lot-acceptance radiation testing of every automotive/industrial-grade processor and FPGA lot under the project radiation-assurance rules \emph{prior to} board assembly. Lot rejection rates and lead-time variability must be absorbed by the procurement schedule with $\ge 10\%$ component over-procurement margin.
+    \item \textbf{Component procurement:} The ``Careful COTS'' philosophy for \texttt{SATL} (\textbf{AD-03}, Section 7.2) mandates lot-acceptance radiation testing of every automotive/industrial-grade processor and FPGA lot under the project radiation-assurance rules \emph{prior to} board assembly. Lot rejection rates and lead-time variability must be absorbed by the procurement schedule with $\ge 10\%$ component over-procurement margin.
 \end{itemize}
 
 \subsubsection{Cleanroom and Contamination Control}
@@ -37,7 +37,7 @@ The constellation design (72~\texttt{SATL} + 6~\texttt{SATG}) imposes a serial p
 
 \subsubsection{Recurring Production Acceptance Constraints}
 
-Per the Verification Plan (\textbf{AD-02}), every recurring \texttt{SATL} FM undergoes:
+Per the Verification Plan (\textbf{AD-04}), every recurring \texttt{SATL} FM undergoes:
 \begin{itemize}
     \item Workmanship random vibration (acceptance spectrum, reduced from qualification levels).
     \item Shortened TVAC acceptance screening (reduced cycle count relative to QM/PFM).
@@ -55,8 +55,7 @@ The 72-unit SATL fleet implies $> 500$ individual environmental test runs (vibra
 
 \begin{itemize}
     \item \textbf{LEO--GEO Cross-Layer OISL PAT:} The 1,550~nm laser OISL terminals must acquire and maintain optical lock over the full $34{,}800$--$45{,}000$~km range (\texttt{R-033}) despite relative orbital motion between the 7.350~km/s LEO node and the near-stationary GEO node. Beam pointing must be maintained below $< 1.5~\mu\mathrm{rad}$ while the \texttt{SATL} bus traverses ${\sim}13.7$~orbits/day. During Mode~N2 (Agile Stereo Tracking), the OISL terminals must sustain lock \emph{concurrently} with independent payload gimbal slewing ($\ge 15^\circ$/s), which induces structural micro-vibration coupling into the OISL fine-steering mirror control loop.
-    \item \textbf{GEO--GEO Relay Cross-Link PAT:} The \texttt{SATG}-to-\texttt{SATG} relay links operate at near-zero relative angular rates (both nodes are geostationary). PAT constraints are dominated by beam-width limitations at the ${\sim}72{,}000$~km inter-GEO chord (for $60^\circ$ longitudinal spacing at $a = 42{,}164$~km) and by spacecraft attitude perturbations during N--S/E--W station-keeping thruster firings.
-    \item \textbf{LEO--LEO Intra-Plane OISL:} Constant 5,047~km chord with zero relative azimuth rate---PAT is straightforward. Cross-plane links (5,647--6,144~km at equator, dynamically varying geometry toward $\pm 80^\circ$ latitude) require agile coarse-pointing periscopes with continuous handover logic at the polar cross-seam.
+    \item \textbf{LEO--LEO Intra-/Cross-Plane OISL PAT:} Constant 5,047~km chord with zero relative azimuth rate for intra-plane links ensures straightforward PAT lock. Cross-plane links (5,647--6,144~km at equator, dynamically varying geometry toward $\pm 80^\circ$ latitude) require agile coarse-pointing periscopes with continuous handover logic at the polar cross-seam to sustain the low-latency inter-satellite mesh.
 \end{itemize}
 
 \subsubsection{Thermal and Power Constraints During Continuous Dual-Band Streaming}
@@ -146,7 +145,7 @@ The 72-unit SATL fleet implies $> 500$ individual environmental test runs (vibra
         \item S-band TT\&C transponder (\texttt{.06.01})
         \item Cryocooler compressor and drive electronics
     \end{itemize}
-    Any LRU replacement performed after spacecraft-level environmental testing requires a re-test at acceptance levels (workmanship vibration + abbreviated TVAC) on the affected subsystem interface per the Verification Plan (\textbf{AD-02}).
+    Any LRU replacement performed after spacecraft-level environmental testing requires a re-test at acceptance levels (workmanship vibration + abbreviated TVAC) on the affected subsystem interface per the Verification Plan (\textbf{AD-04}).
     \item \textbf{Payload Non-Replaceability:} The integrated SWIR/MWIR telescope assembly with dichroic beam-splitter and cryogenic FPA cold finger is \emph{not} an LRU. It is permanently integrated during payload-level AIT and cannot be replaced at spacecraft level without full disassembly and optical re-alignment. Any payload-level failure after spacecraft integration requires return to the payload AIT facility.
     \item \textbf{Propulsion Non-Replaceability:} Once propulsion tanks and feed lines are proof-tested and welded at subsystem level, they are permanently integrated. Post-integration propulsion anomalies require spacecraft-level disposition.
 \end{itemize}

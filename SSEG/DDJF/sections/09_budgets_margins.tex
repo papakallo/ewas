@@ -64,32 +64,84 @@
 \caption{Flight System Stowed Structural Stiffness Budget for SATL and SATG}
 \end{table}
 
-\subsection{Propulsion $\Delta v$ Budget}
+\subsection{Propulsion $\Delta v$ and Propellant Mass Budget}
+\label{sec:propulsion_budget}
 
-\subsubsection{SATL Total $\Delta v \ge 380.0$~m/s}
+The required propellant mass $m_{\text{prop}}$ to execute the Space Segment orbital lifecycle is analytically derived using the Tsiolkovsky rocket equation:
+\begin{equation}
+    \Delta v = I_{\text{sp}} g_0 \ln\left(\frac{m_0}{m_f}\right) \iff \Delta m_{\text{prop}} = m_i \left(1 - \exp\left(-\frac{\Delta v}{I_{\text{sp}} g_0}\right)\right)
+    \label{eq:tsiolkovsky}
+\end{equation}
+where $g_0 = 9.80665~\mathrm{m/s^2}$, $I_{\text{sp}}$ is the thruster specific impulse, $m_0$ is the initial wet mass, and $m_f = m_0 - \Delta m_{\text{prop}}$ is the final burn mass.
+
+\subsubsection{SATL Analytical Propulsion Derivation ($\Delta v \ge 380.0$~m/s)}
+
+For the LEO tracking satellite, the launch wet mass envelope is $m_0 = 280.0$~kg (cap $\le 290.0$~kg, Table~\ref{tab:mass_budget}), with a dry mass Maximum Estimated Value (\abbr{MEV}) of $m_{\text{dry}} = 240.0$~kg ($200.0$~kg CBE $+ 20\%$ margin). The baseline propulsion subsystem employs high-performance monopropellant thrusters ($I_{\text{sp}} = 265.0$~s, effective exhaust velocity $c = I_{\text{sp}} g_0 = 2{,}598.76$~m/s):
+\begin{enumerate}
+    \item \textbf{Phase 1 --- Post-Dispenser Insertion \& Phasing ($\Delta v_{\text{ins}} = 95.0$~m/s):} Sized to correct launcher dispersion ($\le 25$~m/s) and perform semi-major axis altitude offset phasing to the assigned Walker Delta $40^\circ$ slot within 30 days ($m_0 = 280.0$~kg):
+    \begin{equation}
+        \Delta m_{\text{ins}} = 280.0 \times \left(1 - \exp\left(-\frac{95.0}{2{,}598.76}\right)\right) = 280.0 \times (1 - 0.96410) = 10.05~\text{kg}
+    \end{equation}
+    yielding post-insertion mass $m_1 = 280.0 - 10.05 = 269.95$~kg.
+    
+    \item \textbf{Phase 2 --- 7-Year Station-Keeping, Drag Make-Up \& CAM ($\Delta v_{\text{SK}} = 55.0$~m/s):} Compensates atmospheric drag decay ($1\text{--}5$~m/yr at 1,000~km circular orbit, Table~\ref{tab:perturbation_budget}), enforces along-track deadband box ($\pm 0.5^\circ$, $4\text{--}6$~m/s/yr), and provides Collision Avoidance Manoeuvres (\abbr{CAM}, $P_c > 10^{-4}$, \texttt{IF-EXT-04}):
+    \begin{equation}
+        \Delta m_{\text{SK}} = 269.95 \times \left(1 - \exp\left(-\frac{55.0}{2{,}598.76}\right)\right) = 269.95 \times (1 - 0.97906) = 5.65~\text{kg}
+    \end{equation}
+    yielding mass before end-of-life $m_2 = 269.95 - 5.65 = 264.30$~kg.
+    
+    \item \textbf{Phase 3 --- Mandatory Active EOL Deorbit Reserve ($\Delta v_{\text{disp}} = 230.0$~m/s):} Protected reserve for executing retrograde burns to lower perigee into the dense atmosphere ($h_p < 250$~km), ensuring passive demise within $< 5$~years with $\ge 99\%$ reliability and on-ground casualty risk $< 10^{-4}$ (\texttt{R-018}, \texttt{SSEG-REQ-ENV-002}):
+    \begin{equation}
+        \Delta m_{\text{disp}} = 264.30 \times \left(1 - \exp\left(-\frac{230.0}{2{,}598.76}\right)\right) = 264.30 \times (1 - 0.91530) = 22.39~\text{kg}
+    \end{equation}
+    leaving final dry spacecraft mass $m_f = 264.30 - 22.39 = 241.91$~kg ($> m_{\text{dry}} = 240.0$~kg).
+\end{enumerate}
+
+Total usable propellant consumed is $\Delta m_{\text{usable}} = 10.05 + 5.65 + 22.39 = 38.09$~kg. Accounting for $1.50$~kg of unusable propellant residuals, tank pressurant ullage, and feed-line retention, the total predicted required propellant load is:
+\begin{equation}
+    m_{\text{prop,req}} = \Delta m_{\text{usable}} + m_{\text{residuals}} = 38.09 + 1.50 = 39.59~\text{kg}
+\end{equation}
+Against the allocated tank capacity of $m_{\text{tank}} = 40.00$~kg (Table~\ref{tab:mass_budget}), the propellant budget closes with positive margin ($+0.41$~kg, $+1.0\%$) over and above the stacked $20\%$ dry mass margin and conservative $\Delta v$ allowances. Table~\ref{tab:satl_prop_budget} summarizes the SATL propulsion budget.
 
 \begin{table}[H]
 \centering
+\caption{LEO Satellite (SATL) Propulsion $\Delta v$ and Propellant Mass Budget Breakdown}
+\label{tab:satl_prop_budget}
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}X|}
     \hline
     \rowcolor{TableHeaderBlue}
-    \thead{$\Delta v$ Component} & \thead{Allocation} & \thead{Rationale} \\ \hline
-    \textbf{Post-dispenser orbit insertion \& Walker Delta phasing} & $\ge 95.0$~m/s & Dispersion correction and differential semi-major axis phasing to assigned $40^\circ$ slot \\ \hline
-    \textbf{7-year station-keeping \& CAM} & $\ge 55.0$~m/s & Along-track $\pm 0.5^\circ$ slot maintenance ($4$--$6$~m/s/yr); debris CAM ($P_c > 10^{-4}$, \texttt{IF-EXT-04}) \\ \hline
-    \textbf{EOL active deorbit (protected reserve)} & $\ge 230.0$~m/s & Retrograde perigee-lowering from 1,000~km; atmospheric demise $< 5$~yr; $\ge 99\%$ reliability; casualty risk $< 10^{-4}$ (\texttt{R-018}) \\ \hline
-    \textbf{Total} & $\ge 380.0$~m/s & \\ \hline
+    \thead{Lifecycle Phase / Manoeuvre} & \thead{$\Delta v$ Alloc.} & \thead{Propellant} & \thead{Engineering Rationale / Requirement} \\ \hline
+    \textbf{Post-dispenser insertion \& phasing} & $\ge 95.0$~m/s & 10.05~kg & Dispersion removal \& Walker Delta $40^\circ$ phasing ($\le 30$~days) \\ \hline
+    \textbf{7-year station-keeping \& CAM} & $\ge 55.0$~m/s & 5.65~kg & $\pm 0.5^\circ$ along-track maintenance ($4$--$6$~m/s/yr) + CAM ($P_c > 10^{-4}$) \\ \hline
+    \textbf{EOL active deorbit (protected reserve)} & $\ge 230.0$~m/s & 22.39~kg & Retrograde perigee lowering ($< 5$~yr demise, risk $< 10^{-4}$, \texttt{R-018}) \\ \hline
+    \textbf{Unusable residuals \& line bias} & --- & 1.50~kg & Propellant tank residuals, ullage gas margin, feedline trapping \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Total Mission Propellant Demand} & \textbf{$\ge 380.0$~m/s} & \textbf{39.59~kg} & \textbf{Closes against 40.0~kg tank capacity (Margin: $+$1.0\%)} \\ \hline
 \end{tabularx}}
-\caption{LEO Satellite (SATL) Propulsion $\Delta v$ Technical Budget Breakdown}
 \end{table}
 
-\subsubsection{SATG $\Delta v$ Budget}
+\subsubsection{SATG Analytical Propulsion Derivation ($\Delta v \ge 810.0$~m/s post-insertion)}
+
+For the geostationary detection satellite, wet launch mass is $m_0 = 2{,}960.0$~kg (cap $\le 3{,}100.0$~kg), with dry mass MEV $m_{\text{dry}} = 1{,}860.0$~kg and propellant loading $m_{\text{tank}} = 1{,}100.0$~kg. Sizing implements a hybrid propulsion architecture: high-thrust bi-propellant apogee engine ($I_{\text{sp}} = 320.0$~s) or Electric Orbit Raising (\abbr{EOR}) coupled with high-$I_{\text{sp}}$ Hall-effect thrusters ($I_{\text{sp}} = 1{,}650.0$~s, $c = 16{,}181$~m/s) for on-station operations:
+\begin{enumerate}
+    \item \textbf{GTO-to-GEO Transfer / EOR ($\Delta v_{\text{EOR}} \ge 1{,}800.0$~m/s):} Consumes $835.0$~kg during transfer from supersynchronous GTO to $35{,}786$~km circular equatorial slot ($m_{\text{GEO,initial}} \approx 2{,}125.0$~kg).
+    \item \textbf{15-Year N--S and E--W Station-Keeping ($\Delta v_{\text{SK}} \approx 780.0$~m/s):} Compensates lunisolar gravitational inclination drift (${\sim}45\text{--}51$~m/s/yr) and triaxial Earth gravity $J_{22}$ longitudinal drift (${\sim}2$~m/s/yr) within the $\pm 0.05^\circ$ box. Executed using Hall thrusters ($I_{\text{sp}} = 1{,}650$~s):
+    \begin{equation}
+        \Delta m_{\text{SK,GEO}} = 2{,}125.0 \times \left(1 - \exp\left(-\frac{780.0}{16{,}180.97}\right)\right) = 2{,}125.0 \times (1 - 0.95294) = 100.00~\text{kg}
+    \end{equation}
+    \item \textbf{Momentum Dumping \& Conjunction Avoidance ($\Delta v_{\text{CAM}} \approx 15.0$~m/s):} Reaction wheel desaturation and GEO belt debris avoidance: $\Delta m \approx 1.95$~kg.
+    \item \textbf{Mandatory EOL Graveyard Re-Orbitation ($\Delta v_{\text{disp}} \ge 15.0$~m/s):} Boosts spacecraft to super-synchronous graveyard orbit with perigee altitude $\Delta H \ge +300$~km above GEO and eccentricity $\Delta e \le 0.005$ (\texttt{R-018}, \texttt{SSEG-REQ-ENV-002}): $\Delta m_{\text{disp}} \approx 1.95$~kg.
+\end{enumerate}
+Total post-insertion propellant consumed is $\sim 104.0$~kg, leaving generous positive margin against the allocated propellant budget. Table~\ref{tab:satg_prop_budget} details the SATG propulsion allocation.
 
 \begin{table}[H]
 \centering
+\caption{GEO Satellite (SATG) Propulsion $\Delta v$ Technical Budget Breakdown}
+\label{tab:satg_prop_budget}
 {\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
@@ -98,13 +150,110 @@
     \hline
     \rowcolor{TableHeaderBlue}
     \thead{$\Delta v$ Component} & \thead{Allocation} & \thead{Rationale} \\ \hline
-    \textbf{GTO-to-GEO orbit raising (EOR)} & $\ge 1{,}800.0$~m/s & Apogee transfer / electric orbit raising to 35,786~km \\ \hline
+    \textbf{GTO-to-GEO orbit raising (EOR)} & $\ge 1{,}800.0$~m/s & Apogee transfer / electric orbit raising to 35,786~km ($I_{\text{sp}} \approx 320\text{--}1{,}650$~s) \\ \hline
     \textbf{15-year N--S / E--W station-keeping} & ${\sim}780.0$~m/s & $\pm 0.05^\circ$ box; lunisolar N--S drift ${\sim}45$--$51$~m/s/yr; $J_{22}$ E--W drift ${\sim}2$~m/s/yr \\ \hline
     \textbf{Momentum dumping \& CAM} & ${\sim}15.0$~m/s & Reaction wheel desaturation; debris/conjunction avoidance \\ \hline
     \textbf{EOL graveyard re-orbitation} & $\ge 15.0$~m/s & Super-synchronous $\Delta H \ge +300$~km above 35,786~km; $\Delta e \le 0.0005$ (\texttt{R-018}) \\ \hline
-    \textbf{Total post-insertion} & $\ge 810.0$~m/s & \\ \hline
+    \textbf{Total post-insertion} & $\ge 810.0$~m/s & Verified against $1{,}100.0$~kg tank capacity \\ \hline
 \end{tabularx}}
-\caption{GEO Satellite (SATG) Propulsion $\Delta v$ Technical Budget Breakdown}
+\end{table}
+
+\subsection{Cryogenic Thermal and Cryocooler Power Budget}
+\label{sec:cryo_thermal_budget}
+
+The thermal control subsystem (\abbr{TCS}, \texttt{WBS .01}) must continuously maintain the infrared focal plane arrays within their cryogenic operating window ($65\text{--}95$~K $\pm 0.1$~K, \texttt{R-009}, \texttt{R-025}) across all eclipse and sunlit operational phases.
+
+\subsubsection{Cold Finger Heat Lift Balance}
+
+The total heat load $Q_c$ at the cryocooler cold finger at setpoint $T_c = 77.0$~K is established by:
+\begin{equation}
+    Q_c = Q_{\text{det}} + Q_{\text{cond}} + Q_{\text{rad}}
+\end{equation}
+\begin{itemize}
+    \item \textbf{Detector Dissipation ($Q_{\text{det}}$):} For dual co-registered $640 \times 640$ SWIR/MWIR FPAs operating at $30$~Hz frame rate, total CMOS read-out integrated circuit (\abbr{ROIC}) active dissipation is $Q_{\text{det}} = 0.20$~W.
+    \item \textbf{Conductive Parasitics ($Q_{\text{cond}}$):} Conduction through titanium thin-walled support struts and phosphor-bronze signal wiring:
+    \begin{equation}
+        Q_{\text{cond}} = \sum_{i} \frac{k_i A_i}{L_i} (T_{\text{optics}} - T_c) \approx 0.32~\text{W}
+    \end{equation}
+    where $T_{\text{optics}} = 195$~K (nominal passively cooled optics bench).
+    \item \textbf{Radiative Heat Transfer ($Q_{\text{rad}}$):} Thermal radiation through the multi-layer insulation (\abbr{MLI}) blanket and cold shield aperture cavity:
+    \begin{equation}
+        Q_{\text{rad}} = \sigma \epsilon_{\text{eff}} A_{\text{shield}} (T_{\text{optics}}^4 - T_c^4) + Q_{\text{aperture}} \approx 0.28~\text{W}
+    \end{equation}
+\end{itemize}
+Summing these contributions yields the Current Best Estimate (\abbr{CBE}) cold load:
+\begin{equation}
+    Q_{c,\text{CBE}} = 0.20 + 0.32 + 0.28 = 0.80~\text{W} \quad \text{at } 77.0~\text{K}
+\end{equation}
+Applying an ECSS Phase~A/B sizing margin of $+50\%$ ($1.50\times$) provides the dimensioned cryogenic lift requirement:
+\begin{equation}
+    Q_{c,\text{dim}} = 1.50 \times Q_{c,\text{CBE}} = 1.20~\text{W} \quad \text{at } 77.0~\text{K}
+\end{equation}
+
+\subsubsection{Cryocooler Electrical Power Sizing}
+
+The electrical input power demanded by the pulse tube cryocooler compressor is derived from the thermodynamic coefficient of performance:
+\begin{equation}
+    \text{COP}_{\text{Carnot}} = \frac{T_c}{T_h - T_c} = \frac{77.0}{300.0 - 77.0} = 0.3453~\text{W/W}
+\end{equation}
+With an actual second-law efficiency $\eta_{\text{Carnot}} = 12.0\%$, the mechanical \abbr{COP} is:
+\begin{equation}
+    \text{COP}_{\text{actual}} = \eta_{\text{Carnot}} \cdot \text{COP}_{\text{Carnot}} = 0.120 \times 0.3453 = 0.0414~\text{W/W} \quad (24.15~\text{W}_{\text{elec}}/\text{W}_{\text{th}})
+\end{equation}
+The compressor mechanical power is:
+\begin{equation}
+    P_{\text{comp}} = \frac{Q_{c,\text{dim}}}{\text{COP}_{\text{actual}}} = \frac{1.20~\text{W}}{0.0414} = 28.99~\text{W}
+\end{equation}
+Accounting for the Cryocooler Drive Electronics (\abbr{CDE}) power inverter efficiency $\eta_{\text{CDE}} = 85.0\%$:
+\begin{equation}
+    P_{\text{TCS,cryo}} = \frac{P_{\text{comp}}}{\eta_{\text{CDE}}} = \frac{28.99~\text{W}}{0.850} = 34.11~\text{W}
+\end{equation}
+
+\subsubsection{Radiator Sizing for Waste Heat Rejection}
+
+Total thermal power rejected to the warm radiator plate ($T_{\text{rad}} = 285.0$~K) is:
+\begin{equation}
+    Q_{\text{rej}} = P_{\text{comp}} + Q_{c,\text{dim}} = 28.99 + 1.20 = 30.19~\text{W}
+\end{equation}
+The required radiator radiating area $A_{\text{rad}}$ is governed by the Stefan-Boltzmann radiation balance:
+\begin{equation}
+    A_{\text{rad}} = \frac{Q_{\text{rej}}}{\epsilon \sigma T_{\text{rad}}^4 - q_{\text{ext}}}
+\end{equation}
+where $\epsilon = 0.88$ (\abbr{OSR} / silver Teflon), $\sigma = 5.670 \times 10^{-8}~\text{W/(m}^2\text{K}^4)$, and $q_{\text{ext}} = 85.0~\text{W/m}^2$ represents worst-case incident Earth albedo and infrared flux at 1,000~km orbit ($\beta_\odot \approx 0^\circ$).
+The net radiating capability is:
+\begin{equation}
+    q_{\text{net}} = \epsilon \sigma T_{\text{rad}}^4 - q_{\text{ext}} = 0.88 \times (5.670 \times 10^{-8}) \times (285.0)^4 - 85.0 = 329.15 - 85.0 = 244.15~\text{W/m}^2
+\end{equation}
+The required radiator area is:
+\begin{equation}
+    A_{\text{rad,req}} = \frac{30.19~\text{W}}{244.15~\text{W/m}^2} = 0.124~\text{m}^2
+\end{equation}
+Applying a $30\%$ area margin, the baseline allocates $A_{\text{rad}} = 0.160~\text{m}^2$ on the anti-Sun spacecraft radiator panel.
+
+Table~\ref{tab:cryo_thermal_budget} consolidates the cryogenic thermal budget and verifies margin closure against the spacecraft power and mass envelopes.
+
+\begin{table}[H]
+\centering
+\caption{Cryogenic Thermal Control and Cryocooler Technical Budget Breakdown}
+\label{tab:cryo_thermal_budget}
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Thermal Parameter} & \thead{SATL Value} & \thead{SATG Value} & \thead{Engineering Basis / Standard} \\ \hline
+    \textbf{FPA Operating Temperature} & 77.0~K ($\pm 0.1$~K) & 77.0~K ($\pm 0.1$~K) & Detector SNR \& dark current (\texttt{R-009}, \texttt{R-025}) \\ \hline
+    \textbf{Optics Intermediate Stage} & $180\text{--}210$~K & $180\text{--}210$~K & Passive radiative cooling via dedicated baffle \\ \hline
+    \textbf{Cold Finger Lift Load (CBE)} & 0.80~W & 2.80~W & Detector ROIC $+$ conduction $+$ radiation \\ \hline
+    \textbf{Dimensioned Heat Load ($+50\%$)} & 1.20~W & 4.20~W & ECSS-E-ST-31C thermal sizing margin \\ \hline
+    \textbf{Cryocooler Actual COP} & 0.0414~W/W & 0.0414~W/W & Pulse Tube Cryocooler ($\eta_{\text{Carnot}} = 12.0\%$) \\ \hline
+    \textbf{Total TCS Cryo Power (incl.\ CDE)} & 34.11~W & 119.39~W & $\eta_{\text{CDE}} = 85.0\%$; continuous duty cycle \\ \hline
+    \textbf{TCS Subsystem Power Allocation} & 85--125~W & 550--800~W & DDF Table~9; margins $\ge 59\%$ (SATL) / $\ge 78\%$ (SATG) \\ \hline
+    \textbf{Waste Heat Rejection ($Q_{\text{rej}}$)} & 30.19~W & 105.67~W & Radiated to space via OSR panels ($T_{\text{rad}} \approx 285$~K) \\ \hline
+    \textbf{Radiator Sizing Area (incl.\ margin)} & $0.160~\text{m}^2$ & $0.550~\text{m}^2$ & Anti-Sun / anti-Earth oriented radiator panels \\ \hline
+\end{tabularx}}
 \end{table}
 
 \subsection{Radiation Dose Budget}
@@ -205,23 +354,27 @@ With a $1.25\times$ encapsulation factor ($25\%$ overhead for CCSDS packet heade
 \caption{Infrared Sensor Payload Raw and Encapsulated Data Rates for 8-bit and 16-bit Modes}
 \end{table}
 
-The \textbf{8-bit mode} is the nominal operational mode for real-time event tracking where dynamic range is sufficient for two-colour ratioing. The \textbf{16-bit mode} is used during radiometric calibration passes (Mode~N5) and for high-dynamic-range science data dumps, representing the worst-case link sizing.
+\paragraph{Separation of Operational Warning (Mode~N2) and Data Dump (Mode~N5) Regimes.}
+To properly size the communications architecture without over-constraining the physical links, two distinct traffic regimes must be clearly delineated:
+\begin{enumerate}
+    \item \textbf{Operational Warning Regime (Mode~N2, Real-Time $\le 60$~s Window):} During active boost-phase and midcourse missile tracking, real-time communication across the \abbr{SSEG} network does \emph{not} stream full uncompressed pixel video. Instead, onboard processing pipelines perform background subtraction, proton despiking, target extraction, and stereo Kalman filtering to generate compact \textbf{processed line-of-sight (\abbr{LOS}) packets and preliminary 3D trajectory data (\texttt{R-022}, \texttt{R-023})}. Raw imagery is buffered in radiation-tolerant non-volatile mass memory onboard each spacecraft for post-event analysis.
+    \item \textbf{Peak Calibration and Post-Event Archive Dump Regime (Mode~N5, Non-Real-Time):} Full uncompressed dual-band imagery ($2 \times 640 \times 640$ \abbr{SWIR}/\abbr{MWIR} at $30$~Hz, 8-bit and 16-bit digitisation, $1.25\times$ encapsulation) is explicitly modeled as the \textbf{peak, non-real-time traffic case}. This regime governs off-nominal radiometric sensor calibration passes and post-event mass-memory dump offloads to ground.
+\end{enumerate}
 
-Housekeeping telemetry (\abbr{HK}) from each satellite---ADCS state vectors, thermal sensor readings, EPS status, FDIR logs, OBDH health---is estimated at $\le 64$~kbps per node.
+Housekeeping telemetry (\abbr{HK}) from each satellite---ADCS state vectors, thermal sensor readings, EPS status, FDIR logs, OBDH health---is estimated at $\le 64$~kbps per node. All space-to-ground communication between satellites and the Ground Segment is conducted strictly over all-weather \textbf{radio frequency (\abbr{RF})} links (\texttt{IF-EXT-01}, \texttt{SSEG-REQ-ISL-002}); no optical ground terminals are used in the EWAS baseline.
 
 \subsubsection{Link-by-Link Bandwidth Budget}
 
-Table~\ref{tab:bandwidth_budget} presents the five inter-satellite and space-to-ground links with their traffic composition, data rates, and margins against allocated link capacity from the baseline.
+Table~\ref{tab:bandwidth_budget} presents the inter-satellite optical links and space-to-ground \abbr{RF} downlinks, structured across the operational Mode~N2 warning regime and the peak Mode~N5 calibration/archive dump regime.
 
 \begin{table}[H]
 \centering
-\label{tab:bandwidth_budget}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.15}
 \arrayrulecolor{TableBorderBlue}
 \rowcolors{2}{white}{TableRowLightBlue}
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash\hsize=0.95\hsize}X|>{\raggedright\arraybackslash\hsize=0.80\hsize}X|>{\raggedright\arraybackslash\hsize=1.65\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=0.95\hsize}X|>{\raggedright\arraybackslash\hsize=0.85\hsize}X|}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash\hsize=0.95\hsize}X|>{\raggedright\arraybackslash\hsize=0.75\hsize}X|>{\raggedright\arraybackslash\hsize=1.65\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=0.90\hsize}X|>{\raggedright\arraybackslash\hsize=1.00\hsize}X|>{\raggedright\arraybackslash\hsize=0.85\hsize}X|}
     \hline
     \rowcolor{TableHeaderBlue}
     \textcolor{white}{\textbf{Link}} & 
@@ -232,55 +385,184 @@ Table~\ref{tab:bandwidth_budget} presents the five inter-satellite and space-to-
     \textcolor{white}{\textbf{Allocated Capacity}} & 
     \textcolor{white}{\textbf{Margin}} \\ \hline
     
+    \multicolumn{7}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\textbf{Operational Warning Regime (Mode~N2, Real-Time $\le 60$~s Warning Chain)}} \\ \hline
+    
     \textbf{LEO--LEO Intra-/Cross-Plane \abbr{OISL}} & 
     \texttt{SATL} $\leftrightarrow$ \texttt{SATL} & 
-    TC relay, \abbr{LOS} vector exchange (Mode~N2), coordination \abbr{HK}, \abbr{QoS} routing & 
-    $\le 10$~Mbps & 
+    Processed \abbr{LOS} vector exchange ($10\text{--}20$~Hz), TC relay, coord.\ \abbr{HK}, \abbr{QoS} routing & 
+    $\le 10.0$~Mbps & 
     $\le 12.5$~Mbps & 
     $\ge 500$~Mbps (\texttt{R-033}) & 
     $\ge 3{,}900\%$ \\ \hline
     
     \textbf{LEO $\rightarrow$ GEO Optical Feeder} & 
     \texttt{SATL} $\rightarrow$ \texttt{SATG} & 
-    Full dual-band imagery (1~\texttt{SATL}) + \abbr{HK} + preliminary trajectory & 
-    196.61~Mbps (8-bit)\newline 393.22~Mbps (16-bit) & 
-    245.76~Mbps (8-bit)\newline 491.52~Mbps (16-bit) & 
+    Processed LEO observation package + preliminary 3D trajectory (\texttt{R-022}, \texttt{R-023}) + \abbr{HK} & 
+    $\le 10.0$~Mbps & 
+    $\le 12.5$~Mbps & 
     $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
-    $\ge 510\%$ (8-bit)\newline $\ge 205\%$ (16-bit) \\ \hline
+    $\ge 11{,}900\%$ ($1.5$~Gbps)\newline $\ge 15{,}900\%$ ($2.0$~Gbps) \\ \hline
     
     \textbf{GEO $\rightarrow$ LEO Forward Cmd.} & 
     \texttt{SATG} $\rightarrow$ \texttt{SATL} & 
     \emph{LEO Tracking Request} TC, ephemeris/sync updates, \abbr{COMSEC} key material & 
-    $\le 1$~Mbps & 
+    $\le 1.0$~Mbps & 
     $\le 1.25$~Mbps & 
     $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
     $\ge 119{,}900\%$ \\ \hline
     
-    \textbf{GEO--GEO Relay Cross-Link} & 
-    \texttt{SATG} $\leftrightarrow$ \texttt{SATG} & 
-    Aggregated relay: 2$\times$ \texttt{SATL} imagery streams + GEO--GEO coord.\ \abbr{HK} & 
-    393.22~Mbps (8-bit)\newline 786.43~Mbps (16-bit) & 
-    491.52~Mbps (8-bit)\newline 983.04~Mbps (16-bit) & 
-    $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
-    $\ge 205\%$ (8-bit)\newline $\ge 53\%$ (16-bit) \\ \hline
-    
-    \textbf{GEO $\rightarrow$ Ground Downlink} & 
+    \textbf{GEO $\rightarrow$ Ground \abbr{RF} Downlink} & 
     \texttt{SATG} $\rightarrow$ Ground & 
-    2$\times$ \texttt{SATL} processed streams + \emph{Onboard Preliminary Trajectory} + \abbr{SSEG} TM/TC return & 
-    393.22~Mbps (8-bit raw)\newline 786.43~Mbps (16-bit raw) & 
-    491.52~Mbps (8-bit)\newline 983.04~Mbps (16-bit) & 
-    TBD (Ka-band or optical ground terminal) & 
-    TBD \\ \hline
+    Aggregated \emph{GEO Event Report} + dual-\texttt{SATL} processed packages + 3D trajectory + \abbr{HK} & 
+    $\le 20.0$~Mbps & 
+    $\le 25.0$~Mbps & 
+    $\ge 150$~Mbps (Ka-band \abbr{RF}, \texttt{IF-EXT-01}) & 
+    $\ge 500\%$ \\ \hline
+    
+    \multicolumn{7}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\textbf{Peak Calibration \& Archive Dump Regime (Mode~N5, Non-Real-Time Dump)}} \\ \hline
+    
+    \textbf{LEO $\rightarrow$ GEO Optical Feeder} & 
+    \texttt{SATL} $\rightarrow$ \texttt{SATG} & 
+    Non-real-time dump: full uncompressed dual-band raw imagery ($2 \times 640 \times 640$ at $30$~Hz) & 
+    196.61~Mbps (8-bit)\newline 393.22~Mbps (16-bit) & 
+    245.76~Mbps (8-bit)\newline 491.52~Mbps (16-bit) & 
+    $\ge 1.5\text{--}2.0$~Gbps (\texttt{R-033}) & 
+    $\ge 510\%$ (8-bit)\newline $\ge 205\%$ (16-bit at $1.5$~Gbps) \\ \hline
+    
+    \textbf{GEO $\rightarrow$ Ground \abbr{RF} Downlink} & 
+    \texttt{SATG} $\rightarrow$ Ground & 
+    Non-real-time imagery archive dump offload via scheduled Ka-band \abbr{RF} passes & 
+    196.61~Mbps (8-bit)\newline 393.22~Mbps (16-bit) & 
+    245.76~Mbps (8-bit)\newline 491.52~Mbps (16-bit) & 
+    $\ge 150$~Mbps (Ka-band \abbr{RF}, scheduled passes / onboard compr.) & 
+    Pass-scheduled / $\ge 22\%$ with $\ge 2{:}1$ compression \\ \hline
 \end{tabularx}
 \caption{EWAS Space Segment Communication and Bandwidth Budget Summary}
+\label{tab:bandwidth_budget}
 \end{table}
 
 \subsubsection{Link Sizing Rationale}
 
 \begin{itemize}
-    \item \textbf{LEO--LEO \abbr{OISL} ($\ge 500$~Mbps, $\ge 6{,}500$~km):} The intra-/cross-plane links carry only lightweight traffic during Mode~N2: \abbr{GNSS}-synchronized timestamped \abbr{LOS} unit vectors (3 angular components + attitude quaternion + position + covariance matrix $\approx 200$~bytes/sample at $20\text{--}50$~Hz $= 32\text{--}80$~kbps per link) plus \abbr{QoS} routed TC relay and housekeeping telemetry. The $\ge 500$~Mbps baseline capacity provides a margin exceeding $3{,}900\%$, which absorbs multi-hop mesh routing overhead and enables future growth for onboard-processed image-chip relay if required.
-    \item \textbf{LEO $\rightarrow$ GEO Optical Feeder ($\ge 1.5\text{--}2.0$~Gbps, $34{,}800\text{--}45{,}000$~km):} This link carries the full uncompressed dual-band imagery from one cued \texttt{SATL} during Mode~N2. At nominal 8-bit depth, the encapsulated rate of 245.76~Mbps consumes $\le 16.4\%$ of the $\ge 1.5$~Gbps minimum capacity ($\ge 205\%$ margin). Even at worst-case 16-bit depth ($491.52$~Mbps), the link retains $\ge 105\%$ margin against the $\ge 1.5$~Gbps floor, or $\ge 307\%$ against the $2.0$~Gbps design point.
-    \item \textbf{GEO $\rightarrow$ LEO Forward Command ($\ge 1.5\text{--}2.0$~Gbps):} The forward command link carries only authenticated \emph{LEO Tracking Request} telecommands ($\le 1$~kbps burst), ephemeris and synchronization updates, and \abbr{COMSEC} key material (\texttt{R-031}). Total traffic $\le 1$~Mbps. The massive excess capacity is an inherent property of the symmetric bidirectional optical terminal; no separate low-rate terminal is required.
-    \item \textbf{GEO--GEO Relay Cross-Link ($\ge 1.5\text{--}2.0$~Gbps):} During a concurrent dual-\texttt{SATL} tracking event, one \texttt{SATG} node may need to relay the payload stream from a second \texttt{SATL} to an adjacent \texttt{SATG} that has a direct ground downlink path. The relay thus carries 2$\times$ encapsulated \texttt{SATL} imagery: at 8-bit depth $= 491.52$~Mbps ($\ge 205\%$ margin at $\ge 1.5$~Gbps); at 16-bit depth $= 983.04$~Mbps ($\ge 53\%$ margin at $\ge 1.5$~Gbps, or $\ge 103\%$ at $2.0$~Gbps). Coordination housekeeping adds $\le 128$~kbps.
-    \item \textbf{GEO $\rightarrow$ Ground Downlink:} The GEO-to-ground link must deliver the aggregated output of 2 cued \texttt{SATL} nodes plus the \emph{GEO Event Report} and \abbr{SSEG} housekeeping TM. The baseline does not specify an explicit GEO-to-ground capacity; this is allocated to the Ground Segment (\abbr{WBS} \texttt{123456.02.05}) via Ka-band or optical ground terminals. If onboard lossy/lossless compression is applied prior to downlink, the required throughput reduces proportionally; the compression ratio is TBD at current design maturity.
+    \item \textbf{LEO--LEO \abbr{OISL} ($\ge 500$~Mbps, $\ge 6{,}500$~km):} 
+    A strict distinction is maintained between the \textbf{onboard sensor acquisition frame rate} ($\ge 30$~Hz, per DDF Table~5 / \textbf{AD-02}) and the \textbf{inter-satellite \abbr{LOS} vector exchange rate} ($10\text{--}20$~Hz, per TRS Table~11 / \textbf{AD-01}, \texttt{SSEG-REQ-ISL-001}, \texttt{R-023}). Raw dual-band SWIR/MWIR detector frames are captured into the onboard FPGA co-processor at $\ge 30$~Hz to guarantee high-temporal background subtraction, clutter discrimination, and sub-pixel centroiding. Once centroids are extracted, the kinematic line-of-sight unit vector, error covariance, and GNSS timestamp are packaged and exchanged across the LEO--LEO \abbr{OISL} mesh at $10\text{--}20$~Hz. The two rates are not conflated.
+    
+    Each \abbr{LOS} vector message comprises $\approx 200$~bytes ($1{,}600$~bits), encompassing 3D direction cosines, attitude quaternion, orbital position, full error covariance matrix, and microsecond-accurate time tag. At $10\text{--}20$~Hz, this produces an inter-satellite generation rate of only $16\text{--}32$~kbps per active tracking link ($20\text{--}40$~kbps encapsulated). Even when budgeting for multi-hop mesh routing overhead, telecommand relay, and inter-node health monitoring, the total Mode~N2 traffic allocated to any LEO--LEO \abbr{OISL} terminal is conservatively bounded at $\le 10.0$~Mbps (encapsulated $\le 12.5$~Mbps). Against the allocated link capacity of $\ge 500$~Mbps (\texttt{R-033}), this yields a robust operational margin of $\ge 3{,}900\%$ (or $> 1{,}000{,}000\%$ relative to the pure $40$~kbps \abbr{LOS} vector traffic), providing massive headroom for routing resilience and future growth.
+    
+    \item \textbf{LEO $\rightarrow$ GEO Optical Feeder ($\ge 1.5\text{--}2.0$~Gbps, $34{,}800\text{--}45{,}000$~km):} 
+    During operational Mode~N2 tracking ($\le 60$~s warning window), the LEO spacecraft does not transmit uncompressed video across the optical trunk. It transmits the highly filtered \emph{LEO Observation Package} (centroid trajectories, target radiometric signatures) and \emph{Onboard Preliminary Trajectory} fits (\texttt{R-022}, \texttt{R-023}) alongside housekeeping telemetry, consuming $\le 10.0$~Mbps ($\le 12.5$~Mbps encapsulated). Against the $\ge 1.5$~Gbps minimum allocated optical trunk capacity, the operational warning margin is $\ge 11{,}900\%$ (or $\ge 15{,}900\%$ against $2.0$~Gbps).
+    
+    In Mode~N5 (calibration and post-event archive dumping), full uncompressed dual-band imagery is offloaded from mass memory across the feeder link. At nominal 8-bit depth ($R_{\text{enc}} = 245.76$~Mbps), the link achieves a margin of $\ge 510\%$ against $1.5$~Gbps ($\ge 714\%$ against $2.0$~Gbps). Even under worst-case 16-bit calibration dumping ($R_{\text{enc}} = 491.52$~Mbps), the link retains a $\ge 205\%$ margin against $1.5$~Gbps and $\ge 307\%$ against $2.0$~Gbps.
+    
+    \item \textbf{GEO $\rightarrow$ LEO Forward Command ($\ge 1.5\text{--}2.0$~Gbps):} 
+    The forward command link conveys authenticated \emph{LEO Tracking Request} telecommands ($\le 1$~kbps burst), constellation orbital ephemerides, time-synchronization beacons, and \abbr{COMSEC} cryptographic key updates (\texttt{R-031}, \texttt{R-044}). Total aggregate traffic is $\le 1.0$~Mbps ($\le 1.25$~Mbps encapsulated). Sized against the $\ge 1.5$~Gbps symmetric optical link hardware, the margin is $\ge 119{,}900\%$, providing deterministic, zero-contention command delivery.
+    
+    \item \textbf{GEO $\rightarrow$ Ground \abbr{RF} Downlink ($\ge 150$~Mbps Ka-band):} 
+    All Space-to-Ground communication is conducted exclusively via all-weather radio-frequency (\abbr{RF}) links to the Ground Station Network (\abbr{WBS} \texttt{123456.02.05}, \texttt{IF-EXT-01}, \texttt{SSEG-REQ-ISL-002}); no optical ground terminals are used.
+    
+    During operational Mode~N2 ($\le 60$~s warning window), the geostationary downlink transmits the aggregated \emph{GEO Event Report}, processed observation packages from the two cued \texttt{SATL} nodes, the consolidated \emph{Onboard Preliminary Trajectory} (\texttt{R-023}), and Space Segment housekeeping telemetry ($\le 20.0$~Mbps raw, $\le 25.0$~Mbps encapsulated). Against the baseline Ka-band RF downlink allocation of $\ge 150$~Mbps, the operational warning margin is $\ge 500\%$ (or $\ge 650\%$ against raw traffic).
+    
+    During Mode~N5 (post-event archive dumps and calibration passes), full raw sensor frames stored in onboard non-volatile memory are downlinked during scheduled ground-station passes. When operating in 8-bit mode ($245.76$~Mbps encapsulated), onboard lossless or low-loss compression at a modest $\ge 2{:}1$ ratio reduces the required throughput to $\approx 122.9$~Mbps, closing with $\ge 22\%$ positive margin over the $150$~Mbps Ka-band RF carrier without impacting the real-time warning mission.
 \end{itemize}
+
+\subsection{Physical Link Power Budget in dB}
+\label{sec:physical_link_budget}
+
+Per \textbf{AD-02} (DDF Issue~1.0, Section~6.1 and Table~14), every active baseline optical and radio-frequency communication link must close with a positive physical link margin:
+\begin{itemize}
+    \item \textbf{Optical Inter-Satellite Links (\abbr{OISL}):} Minimum link margin $\ge 3.0$~dB at a Bit Error Rate $\text{BER} \le 10^{-9}$.
+    \item \textbf{Space-to-Ground Radio-Frequency Links (\abbr{RF}):} Minimum link margin $\ge 3.0$~dB including an explicit $\ge 3.0$~dB rain fade margin at $99.9\%$ link availability (\texttt{SSEG-REQ-ISL-002}, \texttt{IF-EXT-01}).
+\end{itemize}
+In accordance with the EWAS system architecture baseline, all communication between satellites and the Ground Segment is conducted exclusively over all-weather \abbr{RF} links; optical ground downlinks and geostationary cross-links (GEO$\leftrightarrow$GEO) do not exist in the baseline and are excluded.
+
+\subsubsection{Link Power and Propagation Formulations}
+
+For optical inter-satellite links operating at $\lambda = 1{,}550$~nm ($1.55 \times 10^{-6}$~m), the aperture gain $G$ of a circular diffraction-limited telescope of aperture diameter $D$ is:
+\begin{equation}
+    G = \left(\frac{\pi D}{\lambda}\right)^2 \iff G~[\text{dBi}] = 20\log_{10}\left(\frac{\pi D}{\lambda}\right)
+    \label{eq:optical_aperture_gain}
+\end{equation}
+The Free-Space Path Loss (\abbr{FSPL}) over transmission slant range $d$ is:
+\begin{equation}
+    \text{FSPL} = \left(\frac{4\pi d}{\lambda}\right)^2 \iff \text{FSPL}~[\text{dB}] = 20\log_{10}\left(\frac{4\pi d}{\lambda}\right)
+    \label{eq:free_space_path_loss}
+\end{equation}
+Evaluating Eq.~\eqref{eq:free_space_path_loss} for the governing maximum operational slant ranges:
+\begin{itemize}
+    \item \textbf{LEO--LEO Maximum Slant Range ($d = 6{,}500$~km, \texttt{R-033}):}
+    \begin{equation}
+        \text{FSPL}_{\text{LEO-LEO}} = 20\log_{10}\left(\frac{4\pi \times 6.50 \times 10^6~\text{m}}{1.55 \times 10^{-6}~\text{m}}\right) = 20\log_{10}(5.2698 \times 10^{13}) = 274.44~\text{dB}
+    \end{equation}
+    \item \textbf{LEO--GEO Maximum Slant Range ($d = 45{,}000$~km, \texttt{R-033}):}
+    \begin{equation}
+        \text{FSPL}_{\text{LEO-GEO}} = 20\log_{10}\left(\frac{4\pi \times 4.50 \times 10^7~\text{m}}{1.55 \times 10^{-6}~\text{m}}\right) = 20\log_{10}(3.6483 \times 10^{14}) = 291.24~\text{dB}
+    \end{equation}
+    \item \textbf{GEO--Ground Maximum Slant Range ($d = 41{,}120$~km at $5^\circ$ elevation, Ka-band $f = 26.0$~GHz, $\lambda = 0.01153$~m):}
+    \begin{equation}
+        \text{FSPL}_{\text{GEO-GND}} = 20\log_{10}\left(\frac{4\pi \times 4.112 \times 10^7~\text{m}}{0.01153~\text{m}}\right) = 20\log_{10}(4.4820 \times 10^{10}) = 213.03~\text{dB}
+    \end{equation}
+\end{itemize}
+
+Received optical power $P_{\text{RX}}$ incorporates transmitter power $P_{\text{TX}}$, antenna gains $G_{\text{TX}}$ and $G_{\text{RX}}$, free-space path loss, pointing jitter loss $L_{\text{point}}$ (incorporating fine-pointing tracking error $< 1.5~\mu\mathrm{rad}$, \texttt{R-024}), and internal optical transmission loss $L_{\text{opt}}$:
+\begin{equation}
+    P_{\text{RX}}~[\text{dBm}] = P_{\text{TX}}~[\text{dBm}] + G_{\text{TX}}~[\text{dBi}] + G_{\text{RX}}~[\text{dBi}] - \text{FSPL}~[\text{dB}] - L_{\text{point}}~[\text{dB}] - L_{\text{opt}}~[\text{dB}]
+    \label{eq:prx_optical_calc}
+\end{equation}
+The required receiver sensitivity $P_{\text{sens}}$ at $\text{BER} \le 10^{-9}$ for an optically pre-amplified receiver is derived from the photon-per-bit figure $N_p \approx 120~\text{photons/bit}$ and photon energy $E_{\text{photon}} = hc/\lambda = 1.282 \times 10^{-19}$~J:
+\begin{equation}
+    P_{\text{sens}} = N_p \cdot E_{\text{photon}} \cdot R
+\end{equation}
+For $R = 500$~Mbps, $P_{\text{sens}} = 120 \times (1.282 \times 10^{-19}) \times (5.0 \times 10^8) = 7.69 \times 10^{-9}$~W ($-51.14$~dBm).
+For $R = 1.5$~Gbps, $P_{\text{sens}} = 120 \times (1.282 \times 10^{-19}) \times (1.5 \times 10^9) = 2.31 \times 10^{-8}$~W ($-46.37$~dBm).
+
+For the space-to-ground Ka-band \abbr{RF} link, the carrier-to-noise spectral density $C/N_0$ at the ground station receiver is:
+\begin{equation}
+    C/N_0 = \text{EIRP} - \text{FSPL} - L_{\text{atm}} - L_{\text{rain}} - L_{\text{point}} + \left(\frac{G}{T}\right)_{\text{gnd}} - k_{\text{B}}
+\end{equation}
+where $k_{\text{B}} = -228.60$~dBW/(Hz$\cdot$K). The required $C/N_0$ for transmission rate $R$ with required $(E_b/N_0)_{\text{req}} = 6.0$~dB (CCSDS LDPC rate 3/4 with implementation margin) is:
+\begin{equation}
+    (C/N_0)_{\text{req}} = \left(\frac{E_b}{N_0}\right)_{\text{req}} + 10\log_{10}(R)
+\end{equation}
+
+\subsubsection{Physical Link Budget Derivations and Margins}
+
+Table~\ref{tab:physical_link_budget} presents the line-by-line parameter derivation and resulting link margins across all four active baseline links. Every active link closes with a verified margin $\ge 3.0$~dB.
+
+\begin{table}[H]
+\centering
+\caption{Space Segment Physical Link Power Budget (dB) Summary}
+\label{tab:physical_link_budget}
+\vspace{0.25em}
+{\scriptsize
+\setlength{\tabcolsep}{3pt}%
+\renewcommand{\arraystretch}{1.12}%
+\arrayrulecolor{TableBorderBlue}%
+\rowcolors{2}{white}{TableRowLightBlue}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\centering\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{2.7cm}|>{\centering\arraybackslash}p{2.7cm}|>{\centering\arraybackslash}X|}
+    \hline
+    \rowcolor{TableHeaderBlue}
+    \thead{Parameter / Term} & \thead{LEO--LEO OISL} & \thead{LEO $\rightarrow$ GEO Feeder} & \thead{GEO $\rightarrow$ LEO Fwd Cmd} & \thead{GEO $\rightarrow$ Ground RF} \\ \hline
+    \textbf{Link Type / Carrier} & Laser (1,550~nm) & Laser (1,550~nm) & Laser (1,550~nm) & RF (Ka-band, 26~GHz) \\ \hline
+    \textbf{Design Transmission Rate ($R$)} & $\ge 500$~Mbps & $\ge 1.5$~Gbps & $\le 1.0$~Mbps & $\ge 150$~Mbps \\ \hline
+    \textbf{Maximum Slant Range ($d$)} & 6,500~km & 45,000~km & 45,000~km & 41,120~km ($5^\circ$ elev.) \\ \hline
+    \textbf{Transmitter Power ($P_{\text{TX}}$)} & $+30.0$~dBm (1.0~W) & $+34.8$~dBm (3.0~W) & $+34.8$~dBm (3.0~W) & $+14.0$~dBW (25.0~W) \\ \hline
+    \textbf{TX Aperture Diam.\ / Gain ($G_{\text{TX}}$)} & $D = 100$~mm / $+106.1$~dBi & $D = 150$~mm / $+109.7$~dBi & $D = 200$~mm / $+112.2$~dBi & $D = 0.60$~m / $+42.0$~dBi \\ \hline
+    \textbf{TX Losses / Coupling ($L_{\text{TX}}$)} & $-1.5$~dB & $-1.5$~dB & $-1.5$~dB & $-1.0$~dB \\ \hline
+    \textbf{Effective Isotropic Radiated Power} & $+134.6$~dBm & $+143.0$~dBm & $+145.5$~dBm & $+55.0$~dBW (EIRP) \\ \hline
+    \textbf{Free-Space Path Loss (FSPL)} & $-274.4$~dB & $-291.2$~dB & $-291.2$~dB & $-213.0$~dB \\ \hline
+    \textbf{Pointing Loss ($< 1.5~\mu\text{rad}$ jitter)} & $-2.5$~dB (TX$+$RX) & $-2.8$~dB (TX$+$RX) & $-2.8$~dB (TX$+$RX) & $-0.8$~dB \\ \hline
+    \textbf{Atmospheric / Rain Loss ($L_{\text{atm}} + L_{\text{rain}}$)} & 0.0~dB (space-space) & 0.0~dB (space-space) & 0.0~dB (space-space) & $-4.6$~dB ($\ge 3.0$~dB rain) \\ \hline
+    \textbf{RX Aperture Diam.\ / Gain ($G_{\text{RX}}$)} & $D = 100$~mm / $+106.1$~dBi & $D = 200$~mm / $+112.2$~dBi & $D = 150$~mm / $+109.7$~dBi & $D = 7.30$~m / $+63.8$~dBi \\ \hline
+    \textbf{RX Optical / Implementation Loss} & $-1.0$~dB & $-1.0$~dB & $-1.0$~dB & $-1.5$~dB \\ \hline
+    \textbf{Received Power ($P_{\text{RX}}$)} & $-37.2$~dBm & $-39.8$~dBm & $-39.8$~dBm & $-101.1$~dBW \\ \hline
+    \textbf{Receiver Noise Temp.\ / $G/T$} & N/A & N/A & N/A & $T_{\text{sys}} = 250$~K / $+39.8$~dB/K \\ \hline
+    \textbf{Received SNR / $C/N_0$} & Photon detection & Photon detection & Photon detection & $105.0$~dB$\cdot$Hz \\ \hline
+    \textbf{Required Sensitivity / $(C/N_0)_{\text{req}}$} & $-51.1$~dBm & $-46.4$~dBm & $-78.2$~dBm & $87.8$~dB$\cdot$Hz ($150$~Mbps) \\ \hline
+    \textbf{Bit Error Rate Target (BER)} & $\le 10^{-9}$ & $\le 10^{-9}$ & $\le 10^{-9}$ & $\le 10^{-9}$ (LDPC 3/4) \\ \hline
+    \rowcolor{TableRowLightBlue}
+    \textbf{Resulting Link Margin} & \textbf{$+$13.9~dB} & \textbf{$+$6.6~dB} & \textbf{$+$38.4~dB} & \textbf{$+$17.2~dB} \\ \hline
+    \rowcolor{white}
+    \textbf{Requirement Compliance} & \textbf{Pass ($\ge 3.0$~dB)} & \textbf{Pass ($\ge 3.0$~dB)} & \textbf{Pass ($\ge 3.0$~dB)} & \textbf{Pass ($\ge 3.0$~dB)} \\ \hline
+\end{tabularx}}
+\end{table}
