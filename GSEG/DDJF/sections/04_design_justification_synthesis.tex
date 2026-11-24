@@ -1,0 +1,39 @@
+\section{4. Design Justification File Synthesis}\label{ddjf-4}
+
+\subsection{4.1. Justification Status Against Requirements}\label{ddjf-4-1}
+
+The DDJF considers all \textbf{35 requirements} of GSEG TRS identified in Annex A (RTM), including functional, architectural, timing, interface, data, security, availability, operational and verification requirements. Their allocation to functional elements is described in Chapter 5, and the plan for obtaining evidence in Chapter 8.
+
+At this stage \textbf{formal compliance with none of the 35 requirements has been confirmed} on the basis of a complete set of qualification or acceptance results. This does not mean that these requirements have been found non-compliant: the currently available material comprises the design description, proposed allocations and selected arithmetic checks. The status in the Chapter 8 requirements log is open.
+
+\subsection{4.2. Requirements and Decisions Driving the Architecture}\label{ddjf-4-2}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.27}|P{0.38}|P{0.35}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Principal requirement} & \GSEGHeaderText{Design decision} & \GSEGHeaderText{Fundamental risk /\allowbreak{} open evidence}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-REQ-PERF-001/\allowbreak{}002; R-011 & GSN–C\&C–DPS–EWS chain with limits of 2 s and 15 s & Timing under load and after failure, SSEG 43/\allowbreak{}45 s boundary\\ \hline
+GSEG-REQ-FUN-001/\allowbreak{}004/\allowbreak{}005 & Primary LEO pair, reserve candidate P, fusion of two valid observations and warning & Geometry of replacement pairs, activation time and classification quality\\ \hline
+GSEG-REQ-ARC-001 & One geographical GSEG facility & Common-cause failure of the entire center\\ \hline
+GSEG-REQ-ARC-002 & MCC/\allowbreak{}DAS outside the first-warning path & Maintaining consistent state without synchronization with DAS\\ \hline
+GSEG-REQ-REL-001/\allowbreak{}003 & Two critical GIS domains, redundant GSN/\allowbreak{}EWS paths and pool of 10 assessments P per domain & Actual utility independence, MTBF/\allowbreak{}MTTR, overload and 100 ppm\\ \hline
+GSEG-REQ-DATA-005 & DAS with two copies and five-year retention & Incomplete model of all archival products\\ \hline
+GSEG-REQ-IF-001/\allowbreak{}002 & Data transfer via GEO/\allowbreak{}ISL and two warning-egress paths & Visibility, dynamic routes, agreed ICDs\\*
+\end{longtable}
+\endgroup
+
+\subsection{4.3. Qualification Status and Critical Points}\label{ddjf-4-3}
+
+\textbf{Formal nonconformances demonstrated by test:} no results have been made available that allow implementation compliance or noncompliance to be established. \textbf{Issue requiring agreement:} the sum of the SSEG stage limits is 43 s, but its overall limit is 45 s. This is not a logical contradiction if the 10/\allowbreak{}3/\allowbreak{}30 s limits fully cover all periods of SSEG responsibility. However, if additional overheads were permitted only under the aggregate 45 s limit, adding GSEG's 17 s could result in 62 s. The completeness of the timing boundaries must be established and the full chain verified; this is a budget-definition issue, not a measurement confirming a system defect.
+
+The following are adopted as critical points: (1) reachability of the two selected LEO spacecraft through a single GSN center and routing in SSEG; (2) resilience of the entire critical chain to common failures; (3) completeness of the energy and cooling budget; (4) demonstration of limiting delays under load; (5) correctness of event qualification and warning version control; (6) accounting for all data requiring retention. Chapters 7–10 present detailed grounds and actions.
+
+\subsection{4.4. Risks and Closure Actions}\label{ddjf-4-4}
+
+First, the system 60 s budget must be agreed, GSEG-AN-03 (visibility and satellite routes), GSEG-AN-05 (RBD/\allowbreak{}FTA), GSEG-AN-06 (complete critical utilities) and GSEG-AN-07 (archive volume) must be performed, and then GSEG-AN-02/\allowbreak{}04/\allowbreak{}08 checked under nominal and failure conditions. Agreed results must be transferred to the DDF, parameter register, RTM and VCD; in the event of unacceptable margins, the design must be changed or a deviation formally considered.
+
+\textbf{Overall assessment:} the GSEG concept is at the preliminary architectural justification stage. It has not achieved qualification status, and performance and reliability requirements remain open. This deliberately reflects documentation maturity and does not declare compliance or noncompliance with the entire TRS.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

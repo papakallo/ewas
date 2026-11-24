@@ -1,86 +1,67 @@
-\section{8. Engineering Data
-Repository}\label{engineering-data-repository}
+\section{8. Engineering Data Repository}\label{engineering-data-repository}
 
-\subsection{8.1 Identification and
-Scope}\label{identification-and-scope}
+\subsection{8.1. Scope}\label{identification-and-scope}
 
-The GSEG engineering data repository contains controlled definitions of
-the segment design, particularly parameters, configurations, source
-documents and links among them. \textbf{It is not the operational DAS
-archive}, which stores EWAS mission data.
+The GSEG design repository comprises controlled requirements, parameters, ICDs, calculations and configurations. It \textbf{is not} the DAS operational data archive. Repository source version control does not substitute for a register of values and evidence.
 
-Project-documentation sources are maintained in the GitHub repository
-\texttt{papakallo/\allowbreak{}ewas}, including \texttt{GSEG/\allowbreak{}TRS/\allowbreak{}} and
-\texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}. Version control of source files does not in itself
-constitute a complete register of all engineering parameters. GSEG
-therefore provides for \textbf{one controlled project parameter
-register} linked to document versions.
-
-\subsection{8.2 Engineering Data
-Collections}\label{engineering-data-collections}
+\subsection{8.2. Data Collections and Their Status}\label{engineering-data-collections}
 
 \begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.28}|P{0.40}|P{0.32}|}
+\begin{longtable}{|P{0.27}|P{0.38}|P{0.35}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Data collection
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Location / reference
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Status
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Element} & \GSEGHeaderText{Source} & \GSEGHeaderText{Status}\\ \hline
 \endhead
-\hline
-\endlastfoot
-Segment requirements and identifiers & \texttt{GSEG/\allowbreak{}TRS/\allowbreak{}}, Chapter 7 &
-Exists; seven-subsystem structure covered by TRS \\ \hline
-Functional and physical architecture & \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}, Chapters 4--5
-& Preliminary DDF definition \\ \hline
-Technical allocations and margins & \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}}, Chapter 6 &
-Preliminary design allocations, including \textbf{100 ppm GSEG
-unavailability}: 90 ppm allocated and 10 ppm reserve \\ \hline
-Central GSEG parameter register &
-\path{GSEG/DDF/engineering_data/GSEG_parameters_register.csv} &
-\textbf{Preliminary register present in repository; not approved} \\ \hline
-GSEG--SSEG and inter-subsystem interface definitions & Relevant
-ICDs/IRDs & Agreement and controlled issues required \\ \hline
-Subsystem design data and justifications & Future subsystem TRS/DDF/DDJF
-documents and GSEG DDJF & Not yet complete \\*
+\hline\endlastfoot
+Requirements and RTM & GSEG TRS, Chapters 7 and 8 & exist, 35 requirements\\ \hline
+Functional/\allowbreak{}physical architecture & this DDF, Chapters 4–5 & preliminary\\ \hline
+Parameters and availability & DDF 6, CSV registers in \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}engineering\_\allowbreak{}data} & P, to be updated after harmonization\\ \hline
+ICDs & applicable interface documents & not fully agreed\\ \hline
+Analysis reports & DDJF 7, identifiers GSEG-AN-01…09 & planned, not completed reports\\ \hline
+Verification evidence & DDJF 8, VP, VCD and reports & open\\*
 \end{longtable}
 \endgroup
 
-\newpage
-\subsection{8.3 Parameter Identification and
-Status}\label{parameter-identification-and-status}
+\subsection{8.3. Parameter and Status Register}\label{parameter-identification-and-status}
 
-Each GSEG parameter-register entry should identify, at a minimum:
-\textbf{stable parameter identifier, name, responsible element, value
-with unit, status, source requirement or decision, reference version and
-confirmation method}.
+The register contains ID, name, value, unit, owner, status B/\allowbreak{}P/\allowbreak{}A-V and source. The controlled version should additionally contain: configuration issue, required/\allowbreak{}planned value, calculated/\allowbreak{}measured result, uncertainty, allocation and achieved margin, evidence, approval status and date. Missing evidence \textbf{must not} be assigned A/\allowbreak{}V status.
 
-The \textbf{B} and \textbf{P} statuses are defined in Section 1.3.
-\textbf{A/V --- Assessed/Verified} denotes a value supported by
-controlled analysis or verification results; its mere entry in the
-register does not confer this status.
+\subsection{8.3.1. Consolidated Design Parameter Register}\label{ddf-8-3-1}
 
-Links between parent parameters and allocations to GSN, C\&C, DPS, EWS,
-MCC, DAS and GIS must permit assessment of the impact of a value change
-on the design and interfaces. Supporting allocation data remain in the
-DDJF; the register provides their identifier or location rather than
-repeating calculations.
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.24}|P{0.40}|P{0.24}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Register ID} & \GSEGHeaderText{Parameter} & \GSEGHeaderText{Value} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-PAR-001 & Observation coordination & ≤2 s & B\\ \hline
+GSEG-PAR-002 & Assessment and first warning & ≤15 s & B\\ \hline
+GSEG-PAR-003 & EWAS system time & ≤60 s & B\\ \hline
+GSEG-PAR-004 & Data retention & ≥5 years & B\\ \hline
+GSEG-PAR-005 & GEO count & 6 & B\\ \hline
+GSEG-PAR-006 & LEO count & 72 & B\\ \hline
+GSEG-PAR-007 & HK generation & ≥1 Hz & B\\ \hline
+GSEG-PAR-008 & Concurrent events & 10 & P\\ \hline
+GSEG-PAR-009 & Coordination reserve & 0.50 s & P\\ \hline
+GSEG-PAR-010 & Warning reserve & 2.50 s & P\\ \hline
+GSEG-PAR-011 & GIS domains & 2 & P\\ \hline
+GSEG-PAR-012 & GIS network/\allowbreak{}domain & ≥10 Gb/\allowbreak{}s & P\\ \hline
+GSEG-PAR-013 & GIS CPU/\allowbreak{}domain & ≥160 vCPU & P\\ \hline
+GSEG-PAR-014 & GIS RAM/\allowbreak{}domain & ≥320 GiB & P\\ \hline
+GSEG-PAR-015 & DAS archive/\allowbreak{}copy & ≥50 TiB usable & P\\ \hline
+GSEG-PAR-016 & DAS copy count & 2 local & P\\ \hline
+GSEG-PAR-017 & EWS egress & ≥100 Mb/\allowbreak{}s & P\\ \hline
+GSEG-PAR-018 & Critical IT power, narrow scope & 12 kW & P\\ \hline
+GSEG-PAR-019 & Critical IT cooling, narrow scope & ≥15 kW & P\\ \hline
+GSEG-PAR-020 & Critical IT UPS energy, scope not closed & ≥5 kWh & P\\ \hline
+GSEG-PAR-021 & GSEG critical-service availability & ≥99.99\% & B\\ \hline
+GSEG-PAR-022 & Unavailability allocation & 90 ppm & P\\ \hline
+GSEG-PAR-023 & Unavailability reserve & 10 ppm & P\\ \hline
+GSEG-PAR-024 & Number of initially selected reserve LEO candidates & 1 per primary pair (if available) & P\\*
+\end{longtable}
+\endgroup
 
-\subsection{8.4 Completeness Status}\label{completeness-status}
+Rows GSEG-PAR-001–023 represent \textbf{23 identifiers} of the existing DDF register; \textbf{GSEG-PAR-024} is a new working P parameter and must be transferred to the CSV register during source conversion. The source and owner of each parameter remain defined in Chapters 3 and 6; the revised wording of UPS and domain scope does not constitute approval of P values.
 
-The GSEG engineering data repository is \textbf{not declared complete}
-at this stage. Detailed ICDs, physical-item configuration identifiers,
-lower-level allocations and verification evidence in particular remain
-to be brought under control.
+\subsection{8.4. Completeness}\label{completeness-status}
 
-The register accompanying this working version constitutes an initial
-list of selected segment parameters, not an approved parameter baseline
-for all seven subsystems. It will be extended and agreed as lower-level
-documentation develops.
+Missing material: list of actual A/\allowbreak{}B equipment and connections, antennas and RF parameters, DAS data catalog, GSN+GIS+EWS energy budget, load distributions, timing analysis, RBD/\allowbreak{}FTA and ICD/\allowbreak{}VP/\allowbreak{}VCD documents and tests. Most P values remain unsupported by measurement results.

@@ -1,170 +1,65 @@
-\section{7. System Design Constraints}\label{system-design-constraints}
+\section{7. Constraints Imposed by the Design}\label{system-design-constraints}
 
-\emph{The provisions below are constraints imposed by the segment
-design. They do not replace the TRS
-requirements or operating procedures.}
-
-\subsection{7.1 Production and Integration
-Constraints}\label{production-and-integration-constraints}
-
-The adopted GSEG architecture imposes the following constraints on the
-manufacture, installation and integration of its elements.
+\subsection{7.1. Production, Installation and Integration}\label{production-and-integration-constraints}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.15}|P{0.85}|}
+\begin{longtable}{|P{0.16}|P{0.84}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-ID
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Design constraint
-\end{minipage} \\
-\hline
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\textbf{DC-P01} & All fixed GSEG infrastructure, including GSN and GIS
-equipment, must fit within \textbf{one geographical site}. Antenna
-location is constrained by local spacecraft visibility, RF conditions
-and permitted installation conditions. \\ \hline
-\textbf{DC-P02} & The shared GIS platform must permit deployment of
-critical C\&C, DPS and EWS services across \textbf{two separate
-equipment failure domains} on the site. Components of redundant critical
-paths must not depend on the same single host. \\ \hline
-\textbf{DC-P03} & Critical warning-path resources must be separable from
-MCC and DAS workloads. Integration of these services on a common
-platform must not create a dependency that blocks the first warning. \\ \hline
-\textbf{DC-P04} & The interface architecture must permit
-\textbf{isolated connection of an SSEG emulator and a test recipient}.
-Test commands and warnings must not reach operational interfaces through
-a configuration intended for testing. \\*
+\hline\endlastfoot
+DC-P01 & Fixed GSN/\allowbreak{}GIS infrastructure and other equipment fit within one site; antenna placement is determined by GEO visibility geometry and RF conditions.\\ \hline
+DC-P02 & Critical A/\allowbreak{}B domains use different hosts, switches, local power distribution boards and GSN/\allowbreak{}EWS gateway paths; common building utilities remain a common failure point.\\ \hline
+DC-P03 & MCC/\allowbreak{}DAS workloads must not block C\&C/\allowbreak{}DPS/\allowbreak{}EWS; critical state and warning versions must be available without a synchronous DAS write.\\ \hline
+DC-P04 & The SSEG emulator and test warning recipient must be isolated from operational commands and recipients.\\*
 \end{longtable}
 \endgroup
 
-The assembly sequence, commissioning schedule and test procedures are
-not specified at this level. They belong in the integration and
-verification plans.
-
-\subsection{7.2 Operational Constraints}\label{operational-constraints}
+\subsection{7.2. Operational Constraints}\label{operational-constraints}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.15}|P{0.85}|}
+\begin{longtable}{|P{0.16}|P{0.84}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-ID
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Design constraint
-\end{minipage} \\
-\hline
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\textbf{DC-O01} & The first warning must not depend on a contemporaneous
-MCC operator decision, completion of a DAS write or availability of the
-operator interface (\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}002}). \\ \hline
-\textbf{DC-O02} & Shared GIS infrastructure must protect
-critical-service execution time from non-critical workloads. The
-\textbf{2 s and 15 s} allocations also include internal transport and
-failover delays; no additional time outside these limits is foreseen. \\ \hline
-\textbf{DC-O03} & Automatic selection of two LEO spacecraft by C\&C must
-not require an ad hoc orbit calculation or approval by an MCC operator.
-The design requires previously prepared, traceable orbital products and
-a mechanism for validating their currency. Validity conditions will be
-defined in the MCC--C\&C interface. \\ \hline
-\textbf{DC-O04} & For the preliminary sizing case of \textbf{10
-simultaneous events} and a single failure covered by redundancy, each of
-the two GIS domains is designed to take over the entire critical-service
-workload. This is a \textbf{proposed design allocation (P)} from Chapter
-6, not a demonstrated capability. \\ \hline
-\textbf{DC-O05} & The design of critical services must permit readiness
-monitoring at the GSN and EWS boundaries. Unavailability during planned
-maintenance, a fault or recovery that prevents the performance of
-critical functions is counted in assessment of the required
-≥99.99\% availability. \\*
+\hline\endlastfoot
+DC-O01 & The first warning is independent of an operator decision, DAS write and MCC interface.\\ \hline
+DC-O02 & Internal transport, queues, failover and recovery times are included in 2 and 15 s; non-critical service isolation.\\ \hline
+DC-O03 & C\&C does not perform a full ad hoc orbit calculation; it uses versioned MCC products with currency checks.\\ \hline
+DC-O04 & For 10 simultaneously admitted DPS assessments and failure of one domain, the other is to have the required critical capacity; P hypothesis for testing, not a guarantee at higher arrival rates.\\ \hline
+DC-O05 & Readiness monitoring at GSN and EWS boundaries; capability loss during maintenance and failure counts toward 100 ppm.\\ \hline
+DC-O06 (design P) & Communications via two different visible GEO spacecraft are preferred; after route loss, an alternative path and dynamic ISL reachability are checked, without assuming visibility of all LEO spacecraft.\\ \hline
+DC-O07 (design P) & C\&C selects the reserve candidate with the primary pair within the 0.90 s selection budget; initial handover of two requests remains within 2 s. Reserve activation is conditional and requires consistency with ICD/\allowbreak{}SSEG and remaining mission time.\\ \hline
+DC-O08 (design P) & The pool of 10 DPS slots is protected against supporting workloads; exceeding capacity triggers priority allocation and controlled queuing. Overload status is reported to MCC and is not treated as a “no threat” classification or a timing guarantee beyond the P scope.\\*
 \end{longtable}
 \endgroup
 
-These constraints do not establish resilience to complete loss of the
-site or external links. The consequences of such failures have not yet
-been resolved.
-
-\subsection{7.3 Transportation and Storage
-Constraints}\label{transportation-and-storage-constraints}
-
-The following constraints concern \textbf{physical GSEG equipment and
-delivery packages}, not the five-year mission-data retention performed
-by DAS.
+\subsection{7.3. Transport and Equipment Storage}\label{transportation-and-storage-constraints}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.15}|P{0.85}|}
+\begin{longtable}{|P{0.16}|P{0.84}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-ID
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Design constraint
-\end{minipage} \\
-\hline
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\textbf{DC-T01} & Transport and storage of antenna, RF, computing,
-mass-storage, power and cooling equipment are constrained by
-manufacturer-permitted conditions, especially temperature, humidity,
-shock, vibration and electrostatic-discharge protection. No numerical
-values are prescribed before equipment selection. \\ \hline
-\textbf{DC-T02} & Packaging and movement of elements requiring alignment
-or calibration must not prevent their inspection and re-alignment after
-installation. \\ \hline
-\textbf{DC-T03} & Transferred media, configurations, keys and software
-packages must preserve integrity, version traceability and protection
-against unauthorized access during transport and storage. \\*
+\hline\endlastfoot
+DC-T01 & During transport and storage of antennas, RF, servers, disks, UPS and cooling equipment, manufacturer conditions for temperature, humidity, shock, vibration and ESD must be observed.\\ \hline
+DC-T02 & Assembly and transport of components requiring calibration must enable inspection and readjustment after installation.\\ \hline
+DC-T03 & Transferred media, configurations, keys and software retain integrity, version control and protection against unauthorized access.\\*
 \end{longtable}
 \endgroup
 
-\subsection{7.4 Maintainability
-Constraints}\label{maintainability-constraints}
+\subsection{7.4. Maintenance and Repairs}\label{maintainability-constraints}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.15}|P{0.85}|}
+\begin{longtable}{|P{0.16}|P{0.84}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-ID
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Design constraint
-\end{minipage} \\
-\hline
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\textbf{DC-M01} & The two GIS failure domains must permit independent
-isolation of one domain for servicing without requiring the other to be
-shut down. Maintaining critical services in this state is constrained by
-the workload allocated to the surviving domain (Chapter 6, status P). \\ \hline
-\textbf{DC-M02} & Equipment and links requiring maintenance must remain
-accessible for diagnosis, replacement or restoration without
-compromising the physical separation of the two GIS domains. Shared site
-utilities and external links are not assumed to be serviceable without
-mission impact. \\ \hline
-\textbf{DC-M03} & Critical-service configurations must permit
-unambiguous identification of the deployed version and restoration of an
-earlier compatible configuration. The design must allow changes to be
-checked without sending test commands to the operational constellation
-or test warnings to actual recipients. \\ \hline
-\textbf{DC-M04} & GIS and mission-service diagnostic interfaces must
-permit recognition of loss of a required capability and identification
-of the unavailable resource or connection for MCC supervision
-(\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}002}). \\*
+\hline\endlastfoot
+DC-M01 & Each GIS domain can be shut down independently for maintenance, with the other loaded according to the P model, without declaring confirmed continuity.\\ \hline
+DC-M02 & Access for repair and replacement does not compromise separation; common utilities and external links are not automatically maintainable without downtime.\\ \hline
+DC-M03 & Critical configurations are unambiguously identifiable and restorable; tests do not transmit actual commands/\allowbreak{}warnings.\\ \hline
+DC-M04 & Health monitoring can indicate loss of a required capability and the resource to MCC supervision.\\ \hline
+DC-M05 (design P) & Maintenance of power, cooling, RF and WAN is to account for their common dependencies and the annual 100 ppm unavailability budget.\\*
 \end{longtable}
 \endgroup
-
-Detailed repair times, spare parts, maintenance tools and failover
-procedures will be defined at lower levels. Demonstration of service
-continuity during maintenance and analysis of common-cause failures
-belong in the DDJF and verification documentation.

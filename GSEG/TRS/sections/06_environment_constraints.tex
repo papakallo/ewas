@@ -1,60 +1,25 @@
-\section{6. Environment and
-Constraints}\label{environment-and-constraints}
+\section{6. Environment and Constraints}\label{environment-and-constraints}
 
-\subsection{6.1 Site and Physical
-Environment}\label{site-and-physical-environment}
+\subsection{6.1. Site and Physical Environment}\label{site-and-physical-environment}
 
-GSEG is an operational installation at one geographical site. Its design
-must account for ambient temperature and humidity, precipitation and
-wind, lightning and electromagnetic interference, fire and flood
-hazards, and terrain constraints on antenna placement. Local values will
-be established for the chosen site and equipment.
+A single GSEG site requires analysis of temperature, humidity, wind, precipitation, lightning, electromagnetic interference, fire, flooding, building hazards and antenna installation options. Environmental values will depend on the site and the selected equipment.
 
-\subsection{6.2 Radio and Communications
-Environment}\label{radio-and-communications-environment}
+\subsection{6.2. Radio and Communications Environment}\label{radio-and-communications-environment}
 
-Ground-to-space communications depend on GEO/LEO visibility from the
-site, atmospheric attenuation, RF interference, applicable spectrum
-allocations and changes in available routes. SSEG provides direct radio
-links and a mandatory ISL network; their existence does not itself
-demonstrate link availability from the GSEG site.
+GEO and LEO visibility, atmospheric attenuation, RF interference, spectrum regulations, terminal availability, routing through GEO–LEO/\allowbreak{}LEO–LEO, message priority and behavior after failures must be analyzed. The ISL network is not evidence of continuous reachability or timeliness of every route.
 
-\subsection{6.3 Infrastructure and Service
-Availability}\label{infrastructure-and-service-availability}
+\subsection{6.3. Infrastructure and Availability}\label{infrastructure-and-service-availability}
 
-GSEG depends on power, cooling, computing, networks, common time and
-external communications provided or supported by GIS. A single site
-creates common-cause failure exposure across mission functions. Two
-on-site equipment domains do not eliminate complete-site hazards. GSEG
-contributes to the EWAS \textbf{\textgreater99.9\%} system availability
-requirement (\texttt{R-\allowbreak{}015}). Its separate critical-service operational
-availability requirement is ≥99.99\%
-(\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003}), measured against the boundary in Section
-3.2 and including common-site outages relevant to that boundary.
+The assessment scope includes GSN RF and gateways, GIS hosts/\allowbreak{}network/\allowbreak{}time/\allowbreak{}power/\allowbreak{}cooling, EWS and links to recipients under GSEG control. Single failures, maintenance, failover, MTTR, providers and common-cause failures must be considered. Two equipment domains at one site do not provide resilience to complete loss of that site. GSEG requirement: ≥99.99\%; whole-EWAS level: >99.9\%.
 
-\subsection{6.4 Information Security}\label{information-security}
+\subsection{6.4. Information Security}\label{information-security}
 
-GSEG must protect spacecraft operational information, observations and
-warnings through authorized access, protected communications, encryption
-of archived data and traceable audit records, according to the relevant
-system requirements. Detailed protection rules depend on information
-classification and agreed interfaces.
+Permissions, transmission protection, archive encryption and audit; details according to information classification and ICDs.
 
-\subsection{6.5 Operational Constraints}\label{operational-constraints}
+\subsection{6.5. Operational Constraints}\label{operational-constraints}
 
-The key constraints are the 60 s end-to-end warning deadline, the
-two-LEO data prerequisite, variable spacecraft communication and data
-availability, consistent timestamps and event identification, and
-supervision of abnormal conditions. The first warning is automatic;
-later operator confirmation, revision or cancellation is supported by
-MCC/EWS.
+60 s budget, complete valid data from two LEO spacecraft (involving the previously selected reserve spacecraft if necessary), variable connectivity, integrity of timestamps and identifiers, automatic warning and the possibility of subsequent correction. Preliminary event prioritization may be based on the GEO report, but \textbf{final threat classification remains a DPS function}. Under overload, GSEG indicates limited handling capability; merely placing an event in a queue does not constitute a DPS assessment of “no threat”.
 
-\subsection{6.6 Regulatory and External
-Conditions}\label{regulatory-and-external-conditions}
+\subsection{6.6. Regulations and External Conditions}\label{regulatory-and-external-conditions}
 
-Operation is subject to applicable spectrum and antenna regulations,
-facility safety, information-protection duties and arrangements with
-external data providers and authorized warning recipients. Applicable
-obligations depend on the selected site and external services. EWAS
-warning responsibility ends at the authorized recipient interface
-(\texttt{R-\allowbreak{}048}).
+Radio and construction authorizations, facility safety, information protection requirements, external operator conditions; EWAS boundary at the warning recipient.

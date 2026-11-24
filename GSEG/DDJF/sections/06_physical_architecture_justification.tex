@@ -1,0 +1,73 @@
+\section{6. Justification of the Physical Architecture}\label{ddjf-6}
+
+\subsection{6.1. Assessment Basis}\label{ddjf-6-1}
+
+The GSEG physical architecture follows from the restriction to one geographical site (GSEG-REQ-ARC-001), the requirement for critical-chain independence from MCC and DAS operations (GSEG-REQ-ARC-002), and redundancy and availability requirements (GSEG-REQ-REL-001–003). Chapter 5 of GSEG DDF is the reference, together with technical allocations in Chapter 6 and design constraints in Chapter 7.
+
+The justification covers equipment grouping, service separation, physical connections and infrastructure dependencies. It does not constitute evidence of compliance with timing, radio or availability requirements; appropriate analyses and verification results will be included in DDJF Chapters 7–9.
+
+\subsection{6.2. Single-Site Ground Architecture}\label{ddjf-6-2}
+
+One GSEG site is a constraint arising from GSEG-REQ-ARC-001, not an option selected in a multi-site analysis. This assumption does not exclude internal redundancy: two independently maintainable critical infrastructure chains can be implemented within one center. The design adopts A/\allowbreak{}B domains, separated local routes, two RF communications paths and redundant power and cooling. GSN, GIS, MCC and DAS remain elements of one site.
+
+The solution should be compared with a single shared infrastructure option. Two independent paths reduce the consequences of a single equipment failure and enable maintenance without planned shutdown, but increase cost and integration complexity. They do not eliminate failures affecting the entire center, e.g. fire, flood, a prolonged loss of utilities or loss of all telecommunications routes. The required availability must account for such events.
+
+\subsection{6.3. Fault-Tolerant Architecture — GIS and Critical Utilities}\label{ddjf-6-3}
+
+The two GIS equipment domains A/\allowbreak{}B contain separate hosts, switches and local power distribution paths. Each has resources sufficient to handle the entire adopted critical load after loss of the other. This choice is consistent with GSEG-REQ-REL-001. It allows a single server or switch failure to be avoided as a cause of loss of both critical functions, provided C\&C, DPS and EWS applications correctly transfer state and switch handling.
+
+In the proposed solution, each domain has its own guaranteed power path and local distribution, and the center has backup power including UPS and a generator. Redundant cooling units and the possibility of shutting down one for maintenance are provided for, independent of a single controller. Only detailed implementation analysis will determine whether separation covers entire paths, rather than merely duplicated end equipment. Common utility ingress, fuel, upstream switchgear, building hazards and operational hazards remain possible common causes.
+
+Critical services do not require a synchronous DAS write before the first warning. Active-event state, identifiers and message versions are to be retained within the critical domain for failover, retransmission and duplicate prevention. The active–active/\allowbreak{}active–standby mode is not decided at segment level; both require takeover testing within the applicable 2 s and 15 s limits. The allocations of 160 vCPU and 320 GiB RAM per domain have P status and do not confirm performance.
+
+\subsection{6.4. GSN and Use of the SSEG Relay Network}\label{ddjf-6-4}
+
+SSEG TRS describes the LEO–LEO optical network (SSEG-REQ-ISL-001), GEO–LEO links (SSEG-REQ-ISL-002), spacecraft-to-ground radio links (SSEG-REQ-ISL-003) and autonomous traffic rerouting with priority for critical messages (SSEG-REQ-ISL-006). SSEG-REQ-PERF-003 and -004 define the time boundaries for delivery of commands and observation products. It follows that the selected LEO spacecraft need not be directly within GSN reach: commands and products may be relayed through satellite nodes.
+
+The option of direct communication with a passing LEO spacecraft is limited by temporary visibility windows. The preferred GSN architecture (P) is therefore two independent RF paths, with separate antennas, radio paths, modems, gateways and local power, maintaining communication with two different GEO spacecraft (SATG) visible from the site. On the SSEG side, messages are forwarded through the optical network to the two designated LEO spacecraft, and observation products return via the same or an alternative route to GSN. Direct LEO contact is provided for as an additional path, not as mandatory contact with every spacecraft.
+
+\textbf{A single satellite connection is sufficient only conditionally:} the visible node must have an operational ISL route to the appropriate recipients, suitable transport capacity and timing capability, and GSN must receive all required products from two LEO spacecraft. The existence of OISL or a declaration of route failover in SSEG TRS does not constitute evidence of uninterrupted reachability throughout the constellation. Two GEO spacecraft and two ground paths reduce dependence on a single gateway/\allowbreak{}spacecraft, but also require analysis of visibility, route failures and availability over time.
+
+Before approval of this option, visibility and availability of at least two suitable GEO spacecraft from the selected site, compatibility of their RF paths with GSN, bidirectional traffic handling and routing times in the dynamic SSEG network model must be demonstrated. The number of simultaneous direct LEO contacts is not a measure of ISL network availability. The DDF's 3 Gb/\allowbreak{}s remains a synthetic internal GIS network load scenario, not a requirement for 20 direct RF paths.
+
+The European EDRS can be cited as a reference for the feasibility of the GEO relay concept. This solution demonstrates that the technology exists, but does not verify the geometry, terminals or latency of the specific EWAS constellation.
+
+\subsection{6.5. Physical Warning Delivery Path}\label{ddjf-6-5}
+
+EWS is the only function delivering warnings to authorized recipients. Two local egress-gateway paths and two independent, physically diverse connections to the external network have been adopted, subject to confirmation by provider route analysis. This enables transmission to be maintained during failure of one equipment item or one provider, without changing the GSEG site. Both paths must preserve warning authentication, version control and traceability.
+
+Merely selecting two telecommunications operators does not guarantee independence: they may use a common connection, conduit or traffic exchange point. Independence must be confirmed at the physical level. The 100 Mb/\allowbreak{}s selected in the DDF is not evidence of meeting the warning delivery deadline; delays, session readiness, retransmissions and failures also matter.
+
+\subsection{6.6. MCC and DAS Equipment}\label{ddjf-6-6}
+
+MCC uses dedicated operator workstations and GIS services. Its unavailability should not stop the first warning because orbital data are prepared in advance and the first-warning decision is automatic. At the same time, C\&C must recognize outdated or unavailable orbital data; assuming that a current prediction is always available is not justified.
+
+DAS uses separate storage resources and maintains two logical archive copies at one center. This solution supports data recovery after failure of a single copy but does not protect against loss of the entire site. The adopted capacity of 50 TiB per copy has a preliminary data-volume model; its assumptions, particularly actual telemetry arrival, require verification in DDJF Chapter 9.
+
+Writing to DAS must not block the first warning. Therefore, the event and message-version state needed for decision-making and transmission remains in critical services until the data are safely transferred to the archive. History recovery and record reconciliation mechanisms require lower-level design.
+
+\subsection{6.7. Availability and Common-Cause Analysis}\label{ddjf-6-7}
+
+GSEG-REQ-REL-003 requires critical-service availability of at least 99.99\%, understood as simultaneous readiness for observation coordination and first-warning delivery. This yields a limit of \textbf{52.56 min of unavailability over 365 days}. The DDF allocates 25 ppm to GIS, i.e. \textbf{13.14 min/\allowbreak{}year}. These are design limits, not results of measurement or reliability analysis.
+
+Achieving such availability at one site is a possible design objective, but requires prevention of both single equipment failures and loss of common utilities. Compliance cannot be demonstrated by multiplying the availability of two servers while ignoring interdependent failures of power, cooling, time system, communications systems and operational errors. The RBD model should be supplemented by an FTA covering common causes, failover tests, repair times and scheduled maintenance.
+
+Power planning requires correction of scope: the \textbf{12 kW} and \textbf{5 kWh of usable UPS energy} recorded in the DDF concern critical IT only. In an ideal balance, 5 kWh/\allowbreak{}12 kW gives 25 min before losses and battery aging. This does not necessarily include GSN terminals, WAN/\allowbreak{}EWS infrastructure, cooling or other elements whose loss stops warning delivery. Backup power must cover \textbf{the entire critical chain} and be sized on the basis of its full power profile and power start-up/\allowbreak{}restoration time. Generator supply and fuel reserve require separate analysis; arbitrary autonomy is not assumed.
+
+An important limitation: if an event affecting the whole center lasts longer than the remaining annual unavailability limit, even perfect server redundancy will not provide 99.99\%. Such risk cannot be completely eliminated without a second site, but can be mitigated through site selection, fire protection, zone separation, independent utilities and feasible recovery procedures. Compliance remains open until calculations and tests are completed.
+
+\subsection{6.8. Reusable Products and Technologies}\label{ddjf-6-8}
+
+At GSEG level, use of standard IT, network, storage and power infrastructure elements, including COTS solutions, is envisaged. This approach is appropriate for a ground computing system because it enables use of existing management, diagnostic and maintenance mechanisms.
+
+Specific equipment, models or suppliers have not yet been selected. Documented MTBF, MTTR, environmental resilience or compliance with the adopted budgets therefore cannot be assigned to them. Qualification of reusable products will require comparison of their declared parameters with interface, security and maintenance requirements, as well as integration tests.
+
+\subsection{6.9. Justification Synthesis and Closure Conditions}\label{ddjf-6-9}
+
+The preferred GSEG option comprises one site with two GIS domains, two independent RF paths to two visible GEO spacecraft, use of the ISL network for exchange with LEO spacecraft, redundant power and cooling paths and two physically independent warning-delivery paths. The solution reduces the number of single points of failure and is consistent with GSEG TRS functional requirements and communications described in SSEG TRS.
+
+Formal justification still requires: (1) analysis of visibility of two GEO spacecraft from the planned site; (2) analysis of links and flow in the dynamic ISL network, including after a node or link failure; (3) full power and autonomy balance for all critical elements; (4) RBD/\allowbreak{}FTA covering common failures, repair times, maintenance and external outages; (5) verification of telecommunications path independence; (6) HIL tests of failover and delivery of two-LEO data within the 60 s budget.
+
+\textbf{Chapter status: a more resilient design concept (P) has been selected, but 99.99\% availability and satellite-network continuity have not been demonstrated.}
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

@@ -1,71 +1,26 @@
-\section{3. Principal Requirements and Design
-Drivers}\label{principal-requirements-and-design-drivers}
+\section{3. Principal Requirements and Design Drivers}\label{principal-requirements-and-design-drivers}
 
-\subsection{3.1 Mission Purpose and System
-Context}\label{mission-purpose-and-system-context}
+\subsection{3.1. Mission Purpose and Context}\label{mission-purpose-and-system-context}
 
-The Early Warning Alarm System (EWAS) is intended to detect potential
-ballistic-missile launches, acquire additional observations, estimate
-trajectories and possible impact areas, and provide timely warnings to
-authorized institutions. The system combines satellite observations with
-ground-based event assessment. Surveillance is global, with priority
-given to threats affecting the Baltic region.
+EWAS is intended to acquire and assess data on potential ballistic missile launches, identify potential threats and deliver warnings. GSEG is responsible for communications, coordination of two LEO spacecraft, ground fusion, event qualification and delivery of warnings to authorized institutions. It is not a fire-control system.
 
-\subsection{3.2 Principal Design
-Requirements}\label{principal-design-requirements}
-
-The following table identifies the requirements that most strongly
-govern architectural choices. It does not replace the complete TRS or
-the requirements traceability matrix.
+\subsection{3.2. Principal Driving Requirements}\label{principal-design-requirements}
 
 \begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.20}|P{0.27}|P{0.53}|}
+\begin{longtable}{|P{0.22}|P{0.29}|P{0.49}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Area
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Basis
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Design consequence
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Area} & \GSEGHeaderText{Identifier /\allowbreak{} B limit} & \GSEGHeaderText{Design consequence}\\ \hline
 \endhead
-\hline
-\endlastfoot
-First warning & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}001}, \texttt{FUN-\allowbreak{}004},
-\texttt{FUN-\allowbreak{}005} & Automatic selection of two LEO spacecraft, ground
-fusion of their data and warning delivery without prior MCC approval. \\ \hline
-Response time & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}001/\allowbreak{}002} & Two separate GSEG
-intervals: \textbf{≤2 s} for LEO coordination and \textbf{≤15 s} for
-assessment and warning delivery. \\ \hline
-Critical-path independence & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}002} & DAS archiving
-and the MCC operator interface do not block the first warning. \\ \hline
-Location & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}001} & Fixed infrastructure at one site;
-common-cause failures must be considered. \\ \hline
-Operational resilience & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}001/\allowbreak{}002} & Redundant
-critical-function paths and indication of lost operational
-capability. \\ \hline
-GSEG critical-service availability &
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003} & ≥99.99\% operational
-availability, covering readiness of both GSEG-controlled parts of the
-warning chain; scheduled maintenance that interrupts service counts as
-unavailability. \\ \hline
-Data integrity & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}001}--\texttt{005} & Product
-traceability, uncertainty representation and at least \textbf{5 years}
-of history retention. \\ \hline
-Integration boundaries & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}001}--\texttt{003} &
-Controlled exchange with SSEG, warning recipients and
-orbital-information providers. \\ \hline
-Information protection & \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}001}--\texttt{005} &
-Access control, protected communications, command authentication and
-audit recording. \\*
+\hline\endlastfoot
+Automatic selection of two LEO spacecraft & FUN-001/\allowbreak{}002 & GSN + C\&C, current MCC orbital products\\ \hline
+Two observations, assessment and warning & FUN-003/\allowbreak{}004/\allowbreak{}005 & DPS and EWS, four assessment outcomes, without prior operator approval\\ \hline
+Coordination and warning time & PERF-001 \textbf{2 s}, PERF-002 \textbf{15 s} & two independently measured critical phases\\ \hline
+Single site & ARC-001 & common building and communications risks\\ \hline
+Independence of the first warning & ARC-002 & MCC and DAS outside the synchronous first-message path\\ \hline
+Resilience and availability & REL-001/\allowbreak{}002/\allowbreak{}003: \textbf{≥99.99\%} & redundancy, readiness status, failure model\\ \hline
+Data and security & DATA-001–006; SEC-001–005 & event identity, retention ≥5 years, protection and audit\\ \hline
+Interfaces & IF-001–003 & SSEG/\allowbreak{}recipients/\allowbreak{}orbital data, ICDs\\*
 \end{longtable}
 \endgroup
 
-The \textgreater99.9\% availability requirement applies to EWAS
-as a whole (\texttt{R-\allowbreak{}015}). The separate, more stringent GSEG
-≥99.99\% requirement (\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003}) applies only to
-critical GSEG-controlled services.
+The system requirement \textbf{>99.9\%} applies to the whole of EWAS, not all GSEG equipment; the more stringent \textbf{≥99.99\%} applies to simultaneous readiness of the two GSEG critical functions described in TRS 3.2.

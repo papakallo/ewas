@@ -1,107 +1,51 @@
-\section{Annex A. Requirements Traceability Matrix
-(RTM)}\label{annex-a.-requirements-traceability-matrix-rtm}
+\section{8. Annex A — Requirements Traceability Matrix (RTM)}\label{annex-a.-requirements-traceability-matrix-rtm}
 
-\textbf{Status: preliminary matrix --- informative allocations;
-subsystem TRSs not yet approved.} The matrix uses
-the ``Basis'' column in Chapter 7 and the functional/interface
-allocation in DDF Chapters 4--5. It adds no new requirements; functional
-owners are preliminary allocation points only.
+The matrix allocates requirements to subsystems and links them to the parent baseline; it does not confirm completion of verification.
 
-\textbf{Matrix scope:} links to future subsystem TRS requirements,
-configuration identifiers and verification evidence remain open. In
-particular, cross-cutting rows do not establish exclusive implementation
-ownership.
-
-\begingroup\GSEGTableStyle{3}\footnotesize
-\begin{longtable}[]{|P{0.29}|P{0.30}|P{0.41}|}
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.24}|P{0.33}|P{0.16}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-GSEG requirement
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Parent requirement / basis
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Preliminary allocation scope
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Requirement} & \GSEGHeaderText{Parent source} & \GSEGHeaderText{GSEG responsibility} & \GSEGHeaderText{Evidence status}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}001} & R-043 & C\&C \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}002} & R-030, R-044 & C\&C, GSN \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}003} & R-019, R-013 & DPS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}004} & R-012, R-026, R-027 & DPS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}005} & R-011, R-013, R-045 & DPS, EWS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}006} & R-014 & DPS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}007} & R-046 & MCC, EWS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}008} & R-049 & DPS, EWS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}FUN-\allowbreak{}009} & R-001 & GSEG --- scope constraint on all
-services \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}001} & GSEG baseline, Section 2 & GSEG, GIS, GSN \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}ARC-\allowbreak{}002} & R-011, R-045, CONOPS & C\&C, DPS, EWS, GIS;
-independent of MCC and DAS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}001} & R-011, R-043; Section 3.2 & GSN, C\&C,
-GIS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}PERF-\allowbreak{}002} & R-011, R-045; Section 3.2 & GSN, DPS, EWS,
-GIS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}001} & R-033, R-042--044; SSEG-REQ-IF-001 & GSN;
-C\&C and DPS as service clients \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}002} & R-003, R-013, R-047, R-048 & EWS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}IF-\allowbreak{}003} & SSEG-REQ-IF-004; Section 3.3 & MCC, C\&C,
-GSN \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}001} & R-012, R-037, R-047; data dictionary &
-Subsystems exchanging products; GSEG oversight \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}002} & R-012, R-027, R-045 & DPS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}003} & R-013 & DPS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}004} & R-037, R-047 & DAS; GSEG record sources \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}005} & R-036 & DAS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}DATA-\allowbreak{}006} & R-004, R-034, R-041 & DAS \\*
+\hline\endlastfoot
+GSEG-REQ-FUN-001 & R-043 & C\&C & Open\\ \hline
+GSEG-REQ-FUN-002 & R-030, R-044 & C\&C, GSN & Open\\ \hline
+GSEG-REQ-FUN-003 & R-019, R-013 & DPS & Open\\ \hline
+GSEG-REQ-FUN-004 & R-012, R-026, R-027 & DPS & Open\\ \hline
+GSEG-REQ-FUN-005 & R-011, R-013, R-045 & DPS, EWS & Open\\ \hline
+GSEG-REQ-FUN-006 & R-014 & DPS & Open\\ \hline
+GSEG-REQ-FUN-007 & R-046 & MCC, EWS & Open\\ \hline
+GSEG-REQ-FUN-008 & R-049 & DPS, EWS & Open\\ \hline
+GSEG-REQ-FUN-009 & R-001 & GSEG & Open\\ \hline
+GSEG-REQ-ARC-001 & GSEG baseline & GSEG, GIS, GSN & Open\\ \hline
+GSEG-REQ-ARC-002 & R-011, R-045, CONOPS & GSN, C\&C, DPS, EWS, GIS & Open\\ \hline
+GSEG-REQ-PERF-001 & R-011, R-043 & GSN, C\&C, GIS & Open\\ \hline
+GSEG-REQ-PERF-002 & R-011, R-045 & GSN, DPS, EWS, GIS & Open\\ \hline
+GSEG-REQ-IF-001 & R-033, R-042–044, SSEG-REQ-IF-001 & GSN, C\&C, DPS & Open\\ \hline
+GSEG-REQ-IF-002 & R-003, R-013, R-047, R-048 & EWS & Open\\ \hline
+GSEG-REQ-IF-003 & SSEG-REQ-IF-004 & MCC, C\&C, GSN & Open\\ \hline
+GSEG-REQ-DATA-001 & R-012, R-037, R-047 & All exchanging data & Open\\ \hline
+GSEG-REQ-DATA-002 & R-012, R-027, R-045 & DPS & Open\\ \hline
+GSEG-REQ-DATA-003 & R-013 & DPS & Open\\ \hline
+GSEG-REQ-DATA-004 & R-037, R-047 & DAS and sources & Open\\ \hline
+GSEG-REQ-DATA-005 & R-036 & DAS & Open\\ \hline
+GSEG-REQ-DATA-006 & R-004, R-034, R-041 & DAS & Open\\ \hline
+GSEG-REQ-SEC-001 & R-003, R-034 & All applicable & Open\\ \hline
+GSEG-REQ-SEC-002 & R-031 & GSEG interfaces & Open\\ \hline
+GSEG-REQ-SEC-003 & R-035 & DAS & Open\\ \hline
+GSEG-REQ-SEC-004 & R-031, R-032, R-034 & C\&C, GSN & Open\\ \hline
+GSEG-REQ-SEC-005 & R-037 & DAS and sources & Open\\ \hline
+GSEG-REQ-REL-001 & R-017, R-030 & GSN, C\&C, DPS, EWS, GIS & Open\\ \hline
+GSEG-REQ-REL-002 & R-015, R-017, R-030 & GIS, other subsystems, MCC & Open\\ \hline
+GSEG-REQ-REL-003 & R-015, R-017 & GSN, C\&C, DPS, EWS, GIS & Open\\ \hline
+GSEG-REQ-OPS-001 & R-028, R-029, R-046 & MCC & Open\\ \hline
+GSEG-REQ-OPS-002 & R-029, R-030, R-033 & MCC & Open\\ \hline
+GSEG-REQ-VER-001 & R-038 & GSEG integration & Open\\ \hline
+GSEG-REQ-VER-002 & R-039 & GSEG integration & Open\\ \hline
+GSEG-REQ-VER-003 & R-011, R-040, R-045 & GSEG integration & Open\\*
 \end{longtable}
 \endgroup
 
-\newpage
+\subsection{Annex B /\allowbreak{} VCD Status}
 
-\textbf{A.2. Security, reliability, operations and verification}
-
-\begingroup\GSEGTableStyle{3}\footnotesize
-\begin{longtable}[]{|P{0.29}|P{0.30}|P{0.41}|}
-\hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-GSEG requirement
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Parent requirement / basis
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Preliminary allocation scope
-\end{minipage} \\
-\hline
-\endhead
-\hline
-\endlastfoot
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}001} & R-003, R-034 & All subsystems ---
-cross-cutting function \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}002} & R-031 & GSEG interfaces --- cross-cutting
-function \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}003} & R-035 & DAS \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}004} & R-031, R-032, R-034 & C\&C, GSN;
-cross-cutting protection \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}SEC-\allowbreak{}005} & R-037 & DAS; GSEG audit sources \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}001} & R-017, R-030 & GSN, GIS, C\&C, DPS, EWS ---
-GSEG integration \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}002} & R-015, R-017, R-030 & GIS and other
-subsystems; MCC presentation \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003} & R-015, R-017 & GSN, C\&C, DPS, EWS, GIS;
-controlled integration and egress \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}OPS-\allowbreak{}001} & R-028, R-029, R-046 & MCC \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}OPS-\allowbreak{}002} & R-029, R-030, R-033 & MCC \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}001} & R-038 & GSEG --- integration \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}002} & R-039 & GSEG --- integration and HIL
-benches \\ \hline
-\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}VER-\allowbreak{}003} & R-011, R-040, R-045 & GSEG --- SSEG and
-recipient integration \\*
-\end{longtable}
-\endgroup
+The VCD (AD-12) is a programme document referenced in the TRS. The status log of all 35 requirements with methods T/\allowbreak{}A/\allowbreak{}R/\allowbreak{}I is developed in \textbf{DDJF 8.2.4}. The mere entry of a method does not constitute completion of verification.

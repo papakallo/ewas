@@ -1,145 +1,36 @@
 \section{3. User Needs}\label{user-needs}
 
-\subsection{3.1 Operational Context}\label{operational-context}
+\subsection{3.1. Operational Context}\label{operational-context}
 
-EWAS products are supplied to authorized national institutions,
-including crisis-management and civil-protection services. Internal GSEG
-users are mission operators and authorized technical personnel.
+EWAS delivers warnings to authorized national institutions and provides GSEG operators with supervision of the constellation, observation data, events and warnings. The principal needs are timeliness, reliable data fusion, representation of uncertainty, the ability to update warnings, security, auditability and service continuity.
+
+\subsection{3.2. Time Budget and Availability Boundary}\label{system-warning-time-budget}
 
 \begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.22}|P{0.58}|P{0.20}|}
+\begin{longtable}{|P{0.49}|P{0.28}|P{0.23}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Need
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Required capability
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Basis
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Stage} & \GSEGHeaderText{Responsibility} & \GSEGHeaderText{Maximum limit}\\ \hline
 \endhead
-\hline
-\endlastfoot
-Timely warning & Deliver the first warning within ≤60 s of GEO detection
-for events qualified for warning after assessment of data from two LEO
-spacecraft. & \texttt{R-\allowbreak{}011}, \texttt{R-\allowbreak{}045} \\ \hline
-Reliable assessment & Ground fusion of data and a probabilistic
-impact-area prediction. & \texttt{R-\allowbreak{}012}, \texttt{R-\allowbreak{}026},
-\texttt{R-\allowbreak{}027} \\ \hline
-Clear situational picture & Location, trajectory, area, confidence level
-and uncertainty bounds. & \texttt{R-\allowbreak{}013}, \texttt{R-\allowbreak{}028},
-\texttt{R-\allowbreak{}029} \\ \hline
-Currency & Update assessments and warnings following further
-observations. & \texttt{R-\allowbreak{}014}, \texttt{R-\allowbreak{}046} \\ \hline
-Continuity & Continuous supervision and a GSEG contribution to EWAS
-availability \textgreater99.9\%, with redundancy. & \texttt{R-\allowbreak{}015},
-\texttt{R-\allowbreak{}017}, \texttt{R-\allowbreak{}030} \\ \hline
-Security & Protect data and communications and permit access only to
-authorized persons. & \texttt{R-\allowbreak{}003}, \texttt{R-\allowbreak{}031}--\texttt{035} \\ \hline
-Accountability & Retain event data, warning versions and audit records
-for ≥5 years. & \texttt{R-\allowbreak{}004}, \texttt{R-\allowbreak{}036}, \texttt{R-\allowbreak{}037},
-\texttt{R-\allowbreak{}047} \\ \hline
-Threat prioritization & Global assessment prioritizing the Baltic
-region. & \texttt{R-\allowbreak{}049} \\*
+\hline\endlastfoot
+GEO detection and report to GSN & SSEG & 10 s\\ \hline
+Selection of two LEO spacecraft and request handover & GSEG & \textbf{2 s}\\ \hline
+Command routing to the selected LEO spacecraft & SSEG & 3 s\\ \hline
+LEO observations, preliminary trajectory and data return to GSN & SSEG & 30 s\\ \hline
+Assessment and first warning (for warning-qualified events) & GSEG & \textbf{15 s}\\ \hline
+\textbf{From initial GEO detection to the recipient interface} & \textbf{EWAS} & \textbf{60 s}\\*
 \end{longtable}
 \endgroup
 
-The \textbf{\textgreater99.9\% threshold applies to EWAS as a whole}.
-The separately adopted GSEG critical-service availability allocation is
-≥99.99\% (\texttt{GSEG-\allowbreak{}REQ-\allowbreak{}REL-\allowbreak{}003}), not the availability of
-the complete EWAS system.
+The 2 and 15 s limits apply to two separate periods of GSEG responsibility, respectively. No warning is sent for events assessed as non-threatening or when the status is “assessment impossible”. Subsequent operator updates do not block the first warning.
 
-\subsection{3.2 System Warning-Time
-Budget}\label{system-warning-time-budget}
+\textbf{Interface requiring agreement:} the sum of the SSEG stage limits 10+3+30 is 43 s, whereas SSEG-REQ-PERF-001 specifies an overall limit of 45 s. This does not automatically violate the 60 s limit if the stage limits cover the entire SSEG time. To demonstrate compliance of EWAS as a whole, the completeness of these stages, their measurement boundaries and the absence of additional inter-stage overheads must be confirmed; without such agreement, the inequality 45+2+15≤60 \textbf{does not hold}. The GSEG TRS does not unilaterally change SSEG requirements.
 
-\begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.32}|P{0.48}|P{0.20}|}
-\hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Stage
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Measurement boundary
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\color{white}\bfseries\sffamily
-Limit
-\end{minipage} \\
-\hline
-\endhead
-\hline
-\endlastfoot
-GEO detection and report (SSEG) & From initial detection to receipt of
-the report at GSN. & ≤10 s \\ \hline
-Two-LEO selection (GSEG) & From receipt of the report at GSN to handover
-of requests at the GSEG/SSEG boundary. & ≤2 s \\ \hline
-Request delivery (SSEG) & From the GSEG/SSEG boundary to receipt by both
-LEO spacecraft. & ≤3 s \\ \hline
-Observation and return (SSEG) & From command receipt by LEO to GSN
-receipt of both packages and the preliminary trajectory. & ≤30 s \\ \hline
-Assessment and warning (GSEG) & From the complete LEO data at GSN to
-delivery at the authorized interface. & ≤15 s \\ \hline
-\textbf{EWAS total} & \textbf{From GEO detection to warning delivery.} &
-\textbf{≤60 s} \\*
-\end{longtable}
-\endgroup
+\textbf{GSEG critical-service availability:} simultaneous readiness to: (a) accept a GEO report and hand over requests for both LEO spacecraft within 2 s; (b) following receipt of valid products from two LEO spacecraft and the preliminary trajectory, assess and deliver a qualified warning within 15 s. Measurements cover a rolling 365-day period, 24/\allowbreak{}7, including failures, maintenance and repairs. RF equipment, network, infrastructure, egress and contracted links controlled by GSEG are included; independent failures of SSEG spacecraft and recipient systems beyond the interface are excluded. Readiness can be tested with synthetic inputs when there are no actual events.
 
-The combined command-coordination stage lasts at most 5 s (2 s GSEG + 3
-s SSEG). \texttt{R-\allowbreak{}045} requires assessment of two LEO observations
-before a warning. \textbf{The warning-delivery limit applies to events
-for which DPS determines a potential threat or cannot exclude a credible
-threat.} For credibly non-threatening or unassessable events,
-information goes to MCC and DAS without an external warning. Subsequent
-operator decisions are covered by \texttt{R-\allowbreak{}046}.
+\subsection{3.3. Users and Interfaces}\label{external-interfaces-and-operational-users}
 
-\textbf{Critical-service availability measurement boundary:} GSEG is
-ready only when both GSEG-controlled capabilities can meet their
-respective limits after valid inputs: (1) GEO-report reception by GSN to
-two-request handover to SSEG within 2 s, and (2) reception by GSN of
-complete, valid two-LEO products and an onboard preliminary trajectory
-to first-warning delivery within 15 s for an event qualified for
-warning. Availability is measured over a rolling 365-day,
-continuously scheduled 24/7 window. Planned maintenance, faults and
-recovery that disable either capability count as GSEG downtime.
-GSEG-owned RF terminals, infrastructure, controlled transport and
-warning-egress links are included. Independent failures of SSEG
-spacecraft and recipient systems beyond the agreed interfaces are
-excluded; GSEG-controlled contracted links are not automatically
-excluded. In the absence of real events, readiness may be assessed with
-controlled synthetic inputs. The definition does not modify EWAS mission
-time limits.
-
-\subsection{3.3 External Interfaces and Operational
-Users}\label{external-interfaces-and-operational-users}
-
-\begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.25}|P{0.25}|P{0.50}|}
-\hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Interface
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-External entity
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Scope
-\end{minipage} \\
-\hline
-\endhead
-\hline
-\endlastfoot
-SSEG communications & GEO/LEO spacecraft & Commands, telemetry, event
-reports and observations; details as specified by ICDs and SSEG TRS. \\ \hline
-Warning delivery & Authorized institutions & Warnings, updates, status
-and available acknowledgements. Endpoint of the \texttt{R-\allowbreak{}011}
-measurement. \\ \hline
-Operational exchange & Authorized orbital-data providers & Spacecraft
-positions and conjunction information. \\*
-\end{longtable}
-\endgroup
-
-External exchange protocols and formats are defined in agreed ICDs.
+\begin{itemize}
+\item \textbf{SSEG:} GEO report, two LEO requests, two observation packages, onboard trajectory, telemetry/\allowbreak{}commands; interface according to ICD.
+\item \textbf{Warning recipient:} messages, revisions, cancellations, status and available acknowledgements; R-011 boundary.
+\item \textbf{Orbital-data providers:} position and conjunction data for MCC and SSEG.
+\end{itemize}

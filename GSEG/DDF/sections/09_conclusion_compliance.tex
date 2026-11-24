@@ -1,53 +1,27 @@
-\section{9. Conclusion and Design Compliance
-Status}\label{conclusion-and-design-compliance-status}
+\section{9. Conclusions and Design Compliance Status}\label{conclusion-and-design-compliance-status}
 
-\subsection{9.1 Design Maturity
-Conclusion}\label{design-maturity-conclusion}
+\subsection{9.1. Maturity}\label{design-maturity-conclusion}
 
-The preliminary GSEG design definition is sufficiently structured to
-serve as a basis for lower-level specifications and designs. \textbf{It
-is not yet ready for formal design closure:} proposed allocations,
-interfaces and properties of the integrated segment still require
-agreement and confirmation. Completion of a working DDF is not proof of
-compliance or authorization for operation.
+The document defines a coherent \textbf{preliminary solution} enabling further subsystem work. It does not constitute design closure or confirmation of compliance with GSEG TRS.
 
-\subsection{9.2 Compliance Demonstration
-Status}\label{compliance-demonstration-status}
+\subsection{9.2. Closure Conditions}\label{compliance-demonstration-status}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.29}|P{0.71}|}
+\begin{longtable}{|P{0.27}|P{0.73}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Area
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Closure condition
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Area} & \GSEGHeaderText{Required action}\\ \hline
 \endhead
-\hline
-\endlastfoot
-Technical allocations & Review and controlled approval of P budgets and
-sizing assumptions. \\ \hline
-Interfaces & Agreement of ICDs, particularly SSEG communications and
-warning delivery. \\ \hline
-Integrated performance and warning decision & Demonstration of the 2 s
-and 15 s limits under representative load and covered faults, and
-verification of the four assessment outcomes: threat, threat not
-excluded, non-threatening event and assessment impossible. \\ \hline
-Communications and resilience & Analysis of one-site communications
-feasibility and GIS common-cause failures. \\ \hline
-GSEG critical-service availability ≥99.99\% & Demonstration of
-the 90 ppm allocation and 10 ppm reserve through RBD and fault-tree
-analysis, including common causes, maintenance, repairs and failovers;
-confirmation through tests and later operational measurements. \\ \hline
-Traceability and verification & Completion of lower-level allocations,
-configuration records and evidence of compliance with the GSEG TRS. \\*
+\hline\endlastfoot
+SSEG/\allowbreak{}GSEG interfaces and time & agreement on completeness of the 43 s stages relative to the overall 45 s limit, ICD and full-chain 60 s test\\ \hline
+Two GSN/\allowbreak{}GEO paths & analysis of two-GEO visibility, ISL routes, throughput, failures and latency; without guaranteeing continuity based on topology alone\\ \hline
+GIS, EWS and utilities & verification of A/\allowbreak{}B redundancy, power, cooling, LAN and egress, including common failures\\ \hline
+2/\allowbreak{}15 s & HIL test under full load and failover\\ \hline
+Reserve LEO 2+1 & reserve-pair geometry analysis, ICD/\allowbreak{}SSEG amendment, test of selection within 0.90 s and conditional activation\\ \hline
+Saturation of 10 DPS slots & tests of 10/\allowbreak{}11/\allowbreak{}20 events, queuing times and capacity-overrun indication, including after domain loss\\ \hline
+99.99\% & RBD/\allowbreak{}FTA, actual reliability data, MTTR, maintenance, common causes\\ \hline
+DAS 50 TiB & 5-year product catalog, full data arrival and restoration\\ \hline
+B/\allowbreak{}P parameters & controlled approval of P and recording of evidence in DDJF/\allowbreak{}VCD\\*
 \end{longtable}
 \endgroup
 
-\textbf{Complete compliance with the GSEG TRS has not yet been
-demonstrated.} Analyses, justifications, trade studies and verification
-results will be documented in the GSEG DDJF and relevant verification
-records.
+\textbf{All analyses and criteria remaining without evidence are open.}

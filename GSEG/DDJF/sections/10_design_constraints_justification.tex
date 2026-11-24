@@ -1,0 +1,57 @@
+\section{10. Justification of Constraints Imposed by the System Design}\label{ddjf-10}
+
+\subsection{10.1. Production, Installation and Integration Constraints}\label{ddjf-10-1}
+
+Constraints DC-P01–DC-P04 in GSEG DDF Chapter 7.1 follow from the single-site GSEG architecture, division into equipment domains and the need to integrate external interfaces safely.
+
+\textbf{DC-P01 — single site.} All permanent GSEG equipment, including GSN antennas, is installed within one geographical facility in accordance with GSEG-REQ-ARC-001. This condition simplifies local data transport and maintenance but restricts available azimuths, GEO visibility and options for physical separation of antenna paths. Before selecting a configuration, a site review must be performed: terrain obstacles, radio zones, flood and fire hazards, heat removal and cable routes. The selection of one site alone does not justify 99.99\% availability.
+
+\textbf{DC-P02 — two GIS A/\allowbreak{}B domains.} Separate hosts, local networks, power distribution and supervision are intended to mitigate common equipment failures. During installation, all shared elements must be identified — upstream distribution boards, cooling controllers, time synchronization modules, cable-routing locations and WAN/\allowbreak{}RF termination points. Two sets of servers are insufficient if a critical function depends on a single common device. Route inspection and a test shutting down one domain together with its local power supply are required.
+
+\textbf{DC-P03 — separation of MCC/\allowbreak{}DAS from critical functions.} Archive and operator workloads must not block coordination and the first warning. This implies the need to isolate resources, queues, data access and configuration changes. Event state needed to issue a warning should be available in the critical portion without synchronously waiting for a DAS write. During integration, unavailability of DAS and MCC and restoration of records after their return must be tested.
+
+\textbf{DC-P04 — isolated test environments.} The SSEG emulator and test recipient must be connected in a manner preventing tests from sending commands to actual spacecraft or warnings to external institutions. Traceable interface configurations and control of switching between them are used; the physical or logical isolation method requires approval in the integration design.
+
+A DDF design extension (P) is the use of two separate antenna–RF–modem–gateway paths, preferably to two different visible GEO spacecraft, and two EWS egress gateways. This requires separate installation, power and maintenance paths; actual separation requires a physical audit. The existence of two independent external transmission networks is not assumed in advance.
+
+\subsection{10.2. Operational Constraints}\label{ddjf-10-2}
+
+Constraints DC-O01–DC-O05 and design constraints DC-O07/\allowbreak{}O08 follow from the adopted GSEG architecture.
+
+\textbf{DC-O01 — automatic first message.} Unavailability of the operator, MCC or DAS must not stop a warning qualifying for issuance. This justifies functional separation of DPS/\allowbreak{}EWS and advance preparation of orbital data. The operator remains responsible for permitted later actions, such as updates and cancellations.
+
+\textbf{DC-O02 — maintenance of time limits.} GSEG is subject to 2 s and 15 s at the specified boundaries. Queues, domain failover, loss of one WAN or RF path and retries are to fit within these limits. Changing the operating mode cannot justify adding unaccounted time. The relationship with SSEG limits requires the resolution indicated in DDJF 9.3.3.
+
+\textbf{DC-O03 and DC-O07 — prepared data and LEO reserve.} Initial 2+1 selection must use current MCC products. Ranking time for the three candidates fits within the 0.90 s P allocation, and only two initial requests within 2 s. If the reserve does not form an appropriate pair or is not reachable, C\&C reports that state. Later activation requires remaining time before T0+60 s and consistency with SSEG; it must not change the definition of the two mandatory observations.
+
+\textbf{DC-O04 and DC-O08 — allocation of limited capacity.} For the adopted 10 DPS assessments, each GIS domain is to retain the full allocation after failure of the other. New-event requests must not silently deprive critical tasks of resources. Priority and time to deadline control initiation of assessments not yet started, and saturation triggers an MCC alarm; concealed rejection of events is not provided for. This is a P policy to be verified, not a performance guarantee for arbitrary arrival rates.
+
+\textbf{DC-O05 — readiness monitoring.} Critical-service status is assessed at the GSN and EWS boundaries, including when no actual events occur. Scheduled inspections, automatic failovers and repairs may compromise readiness, in which case they are included in the 99.99\% statistic. Monitoring IT process availability without checking the ability to perform critical functions is insufficient.
+
+Additional constraints arise from encryption, recipient identification, message version control and handling of events not meeting warning conditions. Operational procedures must preserve the distinction between “no threat”, “threat cannot be excluded” and “assessment impossible”. New classification thresholds are not established without analysis and approval.
+
+\subsection{10.3. Transport and Equipment Storage Constraints}\label{ddjf-10-3}
+
+\textbf{DC-T01–DC-T03} concern transport and storage of \textbf{equipment and media}, not five-year retention of mission data in DAS. For antennas, drives, RF amplifiers, servers, batteries, cooling modules and mass storage, documented manufacturer ranges for temperature, humidity, shock, vibration and ESD protection must be applied. No universal numerical bounds are currently justified because specific equipment has not been selected.
+
+Installation of antennas and calibrated elements requires condition checks after transport, correct alignment and acceptance tests after installation. Transferred configurations, keys and media must preserve version traceability and integrity; transport must not bypass access controls.
+
+After selection of suppliers, detailed constraints will be introduced into logistics specifications and acceptance records. Their absence in the current DDJF does not confirm that no constraints exist.
+
+\subsection{10.4. Maintenance and Repair Constraints}\label{ddjf-10-4}
+
+\textbf{DC-M01 — maintenance of A/\allowbreak{}B domains.} One GIS domain should be isolatable for maintenance without shutting down the other, which takes over the entire critical load. This requires maintainability not only of hosts but also of networks, power and state recovery. Compliance must be demonstrated at the actual timing boundaries, not merely by checking service startup.
+
+\textbf{DC-M02 — equipment access.} Installation should enable identification and replacement of a failed element without compromising the parallel path. Common cooling systems, the generator, utility entry points and part of the antenna infrastructure require a separate assessment of the impact of servicing on mission operation. Scheduled maintenance limiting readiness is accounted for in the availability budget.
+
+\textbf{DC-M03 — controlled versions and safe rollback to a previous configuration.} Every critical service and interface configuration requires a traceable version and a procedure for restoring a compatible set. An update test must not trigger unauthorized commands or warnings.
+
+\textbf{DC-M04 — diagnostics.} Supervision should recognize loss of coordination, assessment and warning delivery capability, not merely states of individual devices. Information enabling the MCC operator to identify the failure impact on mission capability is required.
+
+For quantitative closure, MTTR for replaceable components, spare-parts availability, service response time, frequency of scheduled activities and their effect on readiness must be established. The existing ppm budgets are not derived from maintenance data.
+
+\subsection{10.5. Synthesis}\label{ddjf-10-5}
+
+Closure of DDF constraints requires configurations and tests of RF installation, utility separation, switching to reserve LEO and DPS pool saturation, as well as a maintenance plan consistent with the availability budget. Evidence status is given in Chapter 8.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

@@ -1,97 +1,35 @@
 \section{2. Scope and Introduction}\label{scope-and-introduction}
 
-This specification \texttt{EWAS-\allowbreak{}HSB-\allowbreak{}GSEG-\allowbreak{}TRS-\allowbreak{}02} defines functional,
-performance, interface, operational and security requirements for the
-integrated Ground Segment GSEG (\texttt{123456.02}, \texttt{CI-\allowbreak{}02}).
-Internal technical requirements of individual subsystems will be defined
-in lower-level specifications.
+\subsection{2.1. Scope of the Specification and Product Hierarchy}\label{product-structure-and-functional-responsibilities}
 
-\subsection{2.1 Product Structure and Functional
-Responsibilities}\label{product-structure-and-functional-responsibilities}
+The TRS defines functional, performance, interface, security, maintenance and verification requirements for integrated GSEG \textbf{CI-02 /\allowbreak{} WBS 123456.02}. Detailed subsystem requirements will be defined in their lower-level TRSs.
 
 \begingroup\GSEGTableStyle{3}
-\begin{longtable}[]{|P{0.20}|P{0.30}|P{0.50}|}
+\begin{longtable}{|P{0.20}|P{0.14}|P{0.66}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-WBS identifier
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Product item
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Functional scope
-\end{minipage} \\
-\hline
+\GSEGHeaderText{WBS} & \GSEGHeaderText{Subsystem} & \GSEGHeaderText{Scope}\\ \hline
 \endhead
-\hline
-\endlastfoot
-123456.02 & \textbf{Ground Segment (GSEG)} & Integrated EWAS ground
-functions and infrastructure. \\ \hline
-123456.02.01 & \textbf{Data Archiving System (DAS)} & Storage,
-protection and controlled access to mission data. \\ \hline
-123456.02.01.01 & Raw Data Archive & Source data and received
-products. \\ \hline
-123456.02.01.02 & Processed Data Archive & Analysis results and derived
-data. \\ \hline
-123456.02.02 & \textbf{Command \& Control (C\&C)} & Automatic selection
-of two LEO spacecraft using orbital data, command preparation/validation
-and execution monitoring. \\ \hline
-123456.02.03 & \textbf{Mission Control Center (MCC)} & Supervision,
-Flight Dynamics, mission planning, conjunction analysis and post-warning
-actions. \\ \hline
-123456.02.04 & \textbf{Data Processing System (DPS)} & Observation
-correlation and fusion, classification, trajectory and impact area. \\ \hline
-123456.02.04.01 & Data Processing Software & Data preparation and
-processing. \\ \hline
-123456.02.04.02 & Event Detection Module & Ground event identification
-and assessment. \\ \hline
-123456.02.04.03 & Trajectory Estimation Module & Trajectory and
-impact-area estimation. \\ \hline
-123456.02.05 & \textbf{Ground Station Network (GSN)} & Satellite
-communications, telemetry, mission data and commands. \\ \hline
-123456.02.06 & \textbf{Early Warning System (EWS)} & Warning generation,
-dissemination and version control. \\ \hline
-123456.02.07 & \textbf{Ground Infrastructure Subsystem (GIS)} & Shared
-computing, LAN, time, power, cooling and monitoring. \\*
+\hline\endlastfoot
+123456.02.01 & DAS & archive, Raw Data Archive (.01.01) and Processed Data Archive (.01.02)\\ \hline
+123456.02.02 & C\&C & selection of two LEO spacecraft, requests, commands\\ \hline
+123456.02.03 & MCC & Flight Dynamics, supervision, conjunctions, operator actions\\ \hline
+123456.02.04 & DPS & validation/\allowbreak{}fusion/\allowbreak{}classification and impact-area assessment; three elements .04.01–.04.03\\ \hline
+123456.02.05 & GSN & RF/\allowbreak{}spacecraft communications, reports and products\\ \hline
+123456.02.06 & EWS & warnings, versions, recipient interface\\ \hline
+123456.02.07 & GIS & computing, LAN, time, power, cooling, monitoring\\*
 \end{longtable}
 \endgroup
 
-GIS is the seventh subsystem supporting the others, rather than another
-stage in event assessment. The GIS product identifier is
-\texttt{123456.02.07}. The product
-tree is defined in the DDF.
+Subordinate physical elements: DAS Raw Data Archive \texttt{123456.02.01.01}, Processed Data Archive \texttt{.01.02}; DPS Data Processing Software \texttt{.04.01}, Event Detection Module \texttt{.04.02}, Trajectory Estimation Module \texttt{.04.03}. GIS is the seventh subsystem, not a threat assessment stage.
 
-\subsection{2.2 Mission and Segment
-Boundaries}\label{mission-and-segment-boundaries}
+\subsection{2.2. Mission and Segment Boundaries}\label{mission-and-segment-boundaries}
 
-EWAS provides global detection and tracking of potential launches, with
-priority assessment of threats to the Baltic region (\texttt{R-\allowbreak{}049}).
-Fixed GSEG infrastructure is at one geographical site. GSEG comprises
-ground equipment; spacecraft, the constellation and onboard ISL network
-belong to SSEG (\texttt{123456.03}). EWAS warning responsibility ends at
-the authorized recipient authority interface (\texttt{R-\allowbreak{}048});
-subsequent public warning is outside EWAS. The system does not include
-weapon guidance or interceptor control (\texttt{R-\allowbreak{}001}, \texttt{R-\allowbreak{}002}).
+GSEG performs the ground functions of EWAS at one geographical site. The satellite constellation and ISL belong to SSEG. Responsibility for warnings ends at the authorized institution interface; public warning, weapon guidance and interceptor control are outside the scope. Surveillance is global, with priority given to the Baltic Sea region.
 
-\subsection{2.3 Position in the Documentation
-Hierarchy}\label{position-in-the-documentation-hierarchy}
+\subsection{2.3. Documentation Hierarchy}\label{position-in-the-documentation-hierarchy}
 
-GSEG TRS and SSEG TRS are peer specifications derived from system
-requirements. Seven subsystem TRSs derive from the GSEG TRS. The DDF
-describes the design solution, while the DDJF contains its justification
-and analytical results. Interface agreements are controlled in ICDs.
+EWAS System → GSEG TRS and SSEG TRS (peer specifications) → seven GSEG subsystem TRSs. The DDF defines the solution, the DDJF its justification, and ICDs specify the accepted interfaces.
 
-\subsection{2.4 Requirements Convention}\label{requirements-convention}
+\subsection{2.4. Requirements Convention}\label{requirements-convention}
 
-In Chapter 7, \textbf{``shall''} denotes a mandatory requirement,
-whereas descriptive statements do not establish new requirements.
-Identifiers follow
-\texttt{GSEG-REQ-\textless{}CAT\textgreater{}-\textless{}NNN\textgreater{}};
-categories are \textbf{FUN} --- functions; \textbf{ARC} ---
-architecture; \textbf{PERF} --- performance; \textbf{IF} --- interfaces;
-\textbf{DATA} --- processing and retention; \textbf{SEC} --- security;
-\textbf{REL} --- reliability; \textbf{OPS} --- operations; and
-\textbf{VER} --- verification. Methods: \textbf{T} --- Test; \textbf{A}
---- Analysis; \textbf{R} --- Review of Design; \textbf{I} ---
-Inspection. The RTM links segment requirements to parent requirements.
+Chapter 7 is \textbf{normative}. Requirements are identified by \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}KAT-\allowbreak{}NNN}. Verification methods: T — Test; A — Analysis; R — Review of Design; I — Inspection. Concept descriptions in the remaining chapters do not establish new normative requirements.

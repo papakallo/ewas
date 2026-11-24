@@ -1,69 +1,28 @@
-\section{2. Applicable and Reference
-Documents}\label{applicable-and-reference-documents}
+\section{2. Applicable and Reference Documents}\label{applicable-and-reference-documents}
 
-\subsection{2.1 Primary Documents}\label{primary-documents}
-
-The following documents form the basis of the GSEG design. \textbf{AD}
-and \textbf{RD} identifiers retain the meanings assigned in the GSEG
-TRS; no competing reference register is established.
+\subsection{2.1. Primary Documents}\label{primary-documents}
 
 \begingroup\GSEGTableStyle{2}
-\begin{longtable}[]{|P{0.32}|P{0.68}|}
+\begin{longtable}{|P{0.43}|P{0.57}|}
 \hline\rowcolor{TableHeaderBlue}
-\begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Document
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\color{white}\bfseries\sffamily
-Relevance to the GSEG DDF
-\end{minipage} \\
-\hline
+\GSEGHeaderText{Source} & \GSEGHeaderText{Role in the DDF}\\ \hline
 \endhead
-\hline
-\endlastfoot
-\textbf{AD-01 --- EWAS System Report} & Mission concept and parent
-system requirements \texttt{R-\allowbreak{}001}--\texttt{R-\allowbreak{}049}. \\ \hline
-\textbf{EWAS-HSB-GSEG-TRS-02 --- GSEG TRS} & Segment requirements
-underpinning the design described here. \\ \hline
-\textbf{AD-10 --- EWAS-HSB-SSEG-TRS-03} & Peer SSEG requirements and
-GSEG--SSEG interface conditions. \\ \hline
-\textbf{AD-02 --- ECSS-E-ST-10C Rev.1 (2017)} & Systems engineering
-principles and the scope of the DDF (Annex G) and DJF (Annex K). \\ \hline
-\textbf{AD-03 --- ECSS-E-ST-10-06C (2009)} & Rules for specifying and
-identifying technical requirements. \\ \hline
-\textbf{AD-06 --- ECSS-E-ST-10-24C Rev.1 (2024)} & Interface management
-and documentation. \\ \hline
-\textbf{AD-07 --- ECSS-E-ST-40C Rev.1 (2025)} & GSEG subsystem software
-design and development, to the extent adopted by the project. \\ \hline
-\textbf{RD-06 --- EWAS System Data Dictionary} & Preliminary
-data-product nomenclature; not a substitute for agreed ICDs. \\ \hline
-\textbf{RD-07 --- ECSS-Q-ST-30-09C (2008)} & Methods of availability
-analysis and allocation; reference document, without a claim of formal
-tailoring. \\ \hline
-\textbf{RD-08 --- ECSS-Q-ST-40-12C (2008)} & Fault-tree analysis,
-including common-cause failures. \\*
+\hline\endlastfoot
+EWAS System Report (AD-01) & requirements R-001–R-049, mission, CONOPS, WBS\\ \hline
+EWAS-HSB-GSEG-TRS-02, Issue 0.7 & segment requirements and RTM\\ \hline
+EWAS-HSB-SSEG-TRS-03 (AD-10) & satellite interfaces and functions, particularly ISL\\ \hline
+ECSS-E-ST-10C, ECSS-E-ST-10-06C & systems engineering and requirements documentation\\ \hline
+ECSS-E-ST-10-24C Rev.1 (AD-06) & interface management\\ \hline
+ECSS-E-ST-40C Rev.1 (AD-07) & software\\ \hline
+EWAS System Data Dictionary (RD-06) & product nomenclature\\ \hline
+ECSS-Q-ST-30-09C /\allowbreak{} ECSS-Q-ST-40-12C (RD-07/\allowbreak{}RD-08) & availability and fault tree analysis\\*
 \end{longtable}
 \endgroup
 
-Other standards and documents governing verification, security and
-operations remain cited in the relevant sections and controlled project
-document register. Their application is subject to approved tailoring.
+\subsection{2.2. Configuration and ICDs}\label{configuration-and-interface-documentation}
 
-\subsection{2.2 Configuration and Interface
-Documentation}\label{configuration-and-interface-documentation}
+Final protocols, frames, cryptographic boundaries, delays, synchronization, number of channels and acknowledgement rules require agreed ICDs. The DDF source files and registers describe the current assumptions and do not replace the ICDs.
 
-Definitions of shared interfaces are controlled in agreed
-\textbf{Interface Control Documents (ICDs)}. Until a relevant ICD has an
-approved issue, the DDF description establishes interface boundaries and
-exchange products but does not claim approval of a format or protocol.
+\subsection{2.3. Terminology}\label{terminology}
 
-When a requirement or agreed interface changes, the relevant allocations
-and design definitions are updated under configuration control. The DDF
-does not independently introduce new parent-level requirements.
-
-\subsection{2.3 Terminology}\label{terminology}
-
-The terminology of the EWAS System Report, GSEG TRS and ECSS glossary
-applies. FD denotes Flight Dynamics, GIS --- Ground Infrastructure
-Subsystem, and ICD --- Interface Control Document. The B and P statuses
-are defined in Section 1.3.
+Names and abbreviations are adopted in accordance with the TRS. In particular, \textbf{GSEG} denotes one geographical site, while \textbf{GIS A/\allowbreak{}B domains} denote two independently maintainable \emph{equipment domains at the same site}; these are not two geographical centers.

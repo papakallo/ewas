@@ -22,3 +22,4 @@ GSEG-PAR-020,GIS critical IT usable UPS energy,GIS,>=,5,kWh,P,GSEG DDF Ch.6 Sect
 GSEG-PAR-021,GSEG critical-service operational availability,GSEG,>=,99.99,%,B,GSEG-REQ-REL-003,24/7 rolling 365-day period; both GSEG-controlled critical capabilities ready; maintenance downtime included
 GSEG-PAR-022,Allocated critical-service unavailability budget,GSEG,=,90,ppm,P,GSEG DDF Section 6.3.1,Sum of provisional service contributor budgets; not an availability measurement
 GSEG-PAR-023,Critical-service unallocated unavailability reserve,GSEG,=,10,ppm,P,GSEG DDF Section 6.3.1,Unallocated allowance within 100 ppm total budget
+GSEG-PAR-024,Number of initially selected reserve LEO candidates,C&C,=,1,spacecraft per primary pair,P,"GSEG DDF Sections 4.3, 6.1 and 8.3.1",If available; no routine third request or observation; reserve activation and statuses require agreement with SSEG in the ICD
