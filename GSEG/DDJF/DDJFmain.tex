@@ -1,11 +1,15 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
 \documentclass[11pt,a4paper]{article}
 
 % =============================================================================
 % 1. PACKAGES (DO NOT EDIT)
 % =============================================================================
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}[BoldFont=lmmonolt10-bold.otf,BoldItalicFont=lmmonolt10-boldoblique.otf]
+\usepackage{longtable,float}
 \usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
@@ -22,10 +26,10 @@
 \newcommand{\Organization}{HSB}                     % <-- Put organization name here (e.g., HSB)
 \newcommand{\ProjectName}{EWAS} % <-- Put project name here (remove \{ \})
 \newcommand{\DocTitle}{Ground Segment - Design Justification File}  % <-- Put document title here
-\newcommand{\DocNumber}{EWAS-HSB-GSEG-DDJF-03 0.1}         % <-- Put document number here (DOC-NO)
+\newcommand{\DocNumber}{EWAS-HSB-GSEG-DDJF-03}         % <-- Put document number here (DOC-NO)
 \newcommand{\DocIssue}{0.1}           % <-- Put issue/version number here (e.g., 1.0)
-\newcommand{\DocDate}{04.11.2026}             % <-- Put issue date here (e.g., 2026-11-04)
-\newcommand{\CINumber}{03}       % <-- Put Configuration Item (CI) number here
+\newcommand{\DocDate}{}             % <-- Set when the document is formally issued.
+\newcommand{\CINumber}{02}       % <-- Put Configuration Item (CI) number here
 
 % =============================================================================
 % 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
@@ -44,7 +48,7 @@
 % Disable section numbering (matching the PDF template) while keeping TOC entries.
 % To enable section numbering (e.g., 1, 1.1), change -1 to 3.
 \setcounter{secnumdepth}{-1}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 
 % Section, subsection, and list title styling
 \makeatletter
@@ -124,6 +128,29 @@
 % =============================================================================
 % DOCUMENT BODY
 % =============================================================================
+% Technical compatibility and HSB styling for the supplied translation.
+\usepackage{booktabs,calc,etoolbox,newunicodechar,caption}
+\usepackage{amssymb}
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\newlength{\GSEGTableContentWidth}
+\newcommand{\GSEGTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\GSEGTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\GSEGTableContentWidth}}
+\newcommand{\GSEGHeaderText}[1]{{\color{white}\bfseries\sffamily #1}}
+
+
+\hypersetup{pdftitle={EWAS --- Ground Segment Design Justification File (DDJF)},pdfauthor={Grzegorz Macioch},pdflang={en-GB}}
+
 \begin{document}
 
 % -----------------------------------------------------------------------------
@@ -157,7 +184,7 @@
 \begin{tabularx}{\textwidth}{|X|X|}
     \hline
     Document Number & \DocNumber \\ \hline
-    Issue           & \DocIssue  \\ \hline
+    Issue           & \DocIssue{} (Draft)  \\ \hline
     Issue Date      & \DocDate   \\ \hline
     CI Number       & \CINumber  \\
 \end{tabularx}\par\nointerlineskip
@@ -167,12 +194,11 @@
     % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
     Name                         & Responsibility           & Signature/Date                   \\ \hline
     Prepared by                  &                          &                                  \\ \hline
-    {Maciej Raciniewski}              & {Author}     & {Raciniewski 10.11.2026} \\[1.2em] \hline
+    Grzegorz Macioch              & Author                   & Grzegorz Macioch\newline 24.11.2026 \\[1.2em] \hline
     Checked by                   &                          &                                  \\ \hline
-    {Sergiusz Pyskowacki}              & {Reviewer}     & {Pyskowacki 10.11.2026} \\[1.2em] \hline
+    Aleksandra Susmarska          & Reviewer                 & Aleksandra Susmarska\newline 25.11.2026 \\[1.2em] \hline
     Approved by                  &                          &                                  \\ \hline
-    {Maciej Wójcik}              & {Approver}     & {Wójcik 10.11.2026} \\[1.2em] \hline
-    {Put Name here}              & {Put Role Name here}     & {Put Date/Signature or leave empty} \\[1.2em] \hline
+                                 &                          &                                  \\[1.2em] \hline
 \end{tabularx}}
 
 \newpage
@@ -190,151 +216,59 @@
 \arrayrulecolor{TableBorderBlue}%
 \rowcolors{2}{white}{TableRowLightBlue}%
 \noindent
-\begin{tabularx}{\textwidth}{|p{2.0cm}|p{2.5cm}|X|p{4.5cm}|}
+\begin{tabularx}{\textwidth}{|p{1.5cm}|p{4.5cm}|X|>{\raggedright\arraybackslash}p{3.0cm}|}
     \hline
     \rowcolor{TableHeaderBlue}
     % COLUMN 1: Issue & COLUMN 2: Date  & COLUMN 3: Description      & COLUMN 4: Sections Affected
     \thead{Issue}     & \thead{Date}    & \thead{Description}        & \thead{Sections Affected}     \\ \hline
-    \textbf{0.1}      & {Put Date here} & Initial Issue              & Initial Draft                 \\ \hline
-    \textbf{1.0}      & {Put Date here} & First Release              & All                           \\ \hline
+    Draft            & 20.11.2026 -- 24.11.2026 & Initial draft.             & Initial draft                 \\ \hline
+    Draft            & 25.11.2026 & Timing, interface, ECSS and document-control updates. & Title page; Sections 00--11 \\ \hline
     % \textbf{1.1}    & {Put Date here} & {Put change description}   & {Put affected sections}       \\ \hline
 \end{tabularx}}
 
 \newpage
 
 % -----------------------------------------------------------------------------
-% PAGE 3: TABLE OF CONTENTS, LIST OF TABLES, LIST OF FIGURES (AUTO-GENERATED)
+% PAGE 3: TABLE OF CONTENTS (AUTO-GENERATED)
 % -----------------------------------------------------------------------------
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
 \tableofcontents
-
-\vspace{2.5cm}
-\listoftables
-
-\vspace{2.5cm}
-\listoffigures
+}
 
 \newpage
 
-% -----------------------------------------------------------------------------
-% PAGE 4: REFERENCES (AD, RD, TERMS & ABBREVIATIONS)
-% -----------------------------------------------------------------------------
-\section{References}
-
-\subsection{Applicable Documents (AD)}
-
-% --- HOW TO EDIT THE APPLICABLE DOCUMENTS (AD) TABLE ---
-% Columns are separated by &:
-% \textbf{AD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: AD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{AD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{AD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{AD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Reference Documents (RD)}
-
-% --- HOW TO EDIT THE REFERENCE DOCUMENTS (RD) TABLE ---
-% Columns are separated by &:
-% \textbf{RD-XX} & {Document Number} & {Document Title} & {Issue} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|p{2.4cm}|p{3.6cm}|X|p{2.4cm}|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: RD No. & COLUMN 2: Document Number & COLUMN 3: Title         & COLUMN 4: Issue
-    \thead{RD No.}     & \thead{Document Number}   & \thead{Title}           & \thead{Issue}     \\ \hline
-    \textbf{RD-01}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-02}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-03}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-04}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-    \textbf{RD-05}     & {Put Doc. Number here}    & {Put Title here}        & {Put Issue here}  \\ \hline
-\end{tabularx}}
-
-\vspace{0.8em}
-\subsection{Terms, Definitions and Abbreviations}
-
-% --- HOW TO EDIT THE ABBREVIATIONS TABLE ---
-% Columns are separated by &:
-% \textbf{ABBREVIATION} & {Full Meaning / Definition} \\ \hline
-{\renewcommand{\arraystretch}{1.25}%
-\arrayrulecolor{TableBorderBlue}%
-\rowcolors{2}{white}{TableRowLightBlue}%
-\noindent
-\begin{tabularx}{\textwidth}{|X|X|}
-    \hline
-    \rowcolor{TableHeaderBlue}
-    % COLUMN 1: Abbreviation          & COLUMN 2: Meaning
-    \thead{Abbreviation}              & \thead{Meaning}                                   \\ \hline
-    \textbf{ECSS}                     & European Cooperation for Space Standardization    \\ \hline
-    \textbf{CI}                       & Configuration Item                                \\ \hline
-    \textbf{{Put Abbreviation here}}  & {Put Meaning / Definition here}                   \\ \hline
-\end{tabularx}}
+\input{sections/01_introduction}
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 5: SCOPE
-% -----------------------------------------------------------------------------
-\section{Scope}
-
-% ---> PUT DATA HERE (SCOPE SECTION CONTENT) <---
-{Put Scope content here.}
+\input{sections/02_applicable_reference_documents}
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 6: INTRODUCTION
-% -----------------------------------------------------------------------------
-\section{Introduction}
-
-% ---> PUT DATA HERE (INTRODUCTION SECTION CONTENT) <---
-{Put Introduction content here.}
+\input{sections/03_design_description}
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 7: MAIN CONTENT
-% -----------------------------------------------------------------------------
-\section{Main Content}
-
-% ---> PUT DATA HERE (MAIN CONTENT OF THE DOCUMENT) <---
-{Put Main Content here.}
-
-% EXAMPLE OF ADDING A SUBSECTION (uncomment if needed):
-% \subsection{Put Subsection Title here}
-% {Put subsection content here.}
+\input{sections/04_design_justification_synthesis}
 
 \newpage
-
-% -----------------------------------------------------------------------------
-% PAGE 8: ANNEX A
-% -----------------------------------------------------------------------------
-\section{Annex A}
-
-% ---> PUT DATA HERE (ANNEX A CONTENT) <---
-{Put Annex A content here.}
+\input{sections/05_functional_architecture_justification}
 
 \newpage
+\input{sections/06_physical_architecture_justification}
 
-% -----------------------------------------------------------------------------
-% PAGE 9: ANNEX B
-% -----------------------------------------------------------------------------
-\section{Annex B}
+\newpage
+\input{sections/07_development_activities}
 
-% ---> PUT DATA HERE (ANNEX B CONTENT) <---
-{Put Annex B content here.}
+\newpage
+\input{sections/08_verification_activities}
+
+\newpage
+\input{sections/09_technical_budgets_and_margins}
+
+\newpage
+\input{sections/10_design_constraints_justification}
+
+\newpage
+\input{sections/11_constituent_documents}
 
 \end{document}

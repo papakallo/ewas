@@ -1,0 +1,159 @@
+\section{8. Verification Activities and Synthesis of Results}\label{ddjf-8}
+
+\subsection{8.1. Verification Plan}\label{ddjf-8-1}
+
+\subsubsection{8.1.1. Basis and Scope}\label{ddjf-8-1-1}
+
+GSEG verification is intended to demonstrate compliance with the requirements of GSEG TRS Issue 0.7, Chapter 7, using the methods assigned to individual requirements: \textbf{T} — test, \textbf{A} — analysis, \textbf{R} — review of design, \textbf{I} — inspection. Activities cover the integrated segment, including the actual GSN–SSEG and EWS–recipient boundaries, GIS, MCC and DAS services, and all operational and degraded scenarios relevant to warning.
+
+Verification is organized on the basis of ECSS-E-ST-10-02C Rev.1 (2018), particularly Annex A concerning the Verification Plan. GSEG TRS identifies the Programme Verification Plan \textbf{EWAS-HSB-VP-01 (AD-11)} and Verification Control Document \textbf{EWAS-HSB-VCD-01 (AD-12)}. Current approved copies of these documents have not been confirmed in the available set; this chapter establishes a working activity plan and evidence register and does not replace the approved VP or VCD.
+
+\subsubsection{8.1.2. Model Philosophy and Test Levels}\label{ddjf-8-1-2}
+
+The following verification environments are envisaged:
+
+\begin{enumerate}
+\item \textbf{Analytical model:} models of ISL topology, station geometry, communications routes, power, load, archive and availability. Each model must have controlled inputs and limits of applicability.
+\item \textbf{Integration/\allowbreak{}HIL bench:} actual or representative C\&C/\allowbreak{}DPS/\allowbreak{}EWS services, test GSN gateways, isolated SSEG emulator and test-recipient interface. Sending a test command to the actual constellation or a test warning to operational recipients is not permissible.
+\item \textbf{Pre-operational configuration:} target GIS A/\allowbreak{}B domains, GSN resources, critical utilities and EWS paths, with tests of functions, failures, security and failover.
+\item \textbf{Acceptance configuration:} delivered, unambiguously identified version of hardware, software, parameters and interfaces; test results compared with the adopted qualification configuration.
+\end{enumerate}
+
+The actual number of units, bench configurations and test sequence require agreement in the VP. No qualification campaign is currently declared to have been performed.
+
+\subsection{8.2. Qualification Verification and Synthesis of Results}\label{ddjf-8-2}
+
+\subsubsection{8.2.1. Qualification Evidence}\label{ddjf-8-2-1}
+
+Appropriate qualification evidence comprises signed test reports, analysis reports with validated models, inspection records and review-of-design reports. For GSEG, results confirming the entire chain are of particular value: GEO report → selection of two LEO spacecraft → request delivery → receipt of products from both LEO spacecraft → correct DPS qualification → possible EWS warning.
+
+All requirements in the 8.2.4 register remain open. A status change requires a specific report and decision in the VCD; B/\allowbreak{}P budgets are not qualification evidence.
+
+\subsubsection{8.2.2. Implementation of Qualification Plan}\label{ddjf-8-2-2}
+
+The cases below constitute a \textbf{proposed activity matrix}, not confirmed specifications or completed tests:
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.14}|P{0.33}|P{0.33}|P{0.20}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Activity ID} & \GSEGHeaderText{Scope and boundary conditions} & \GSEGHeaderText{Basic pass criterion} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-QV-01 & GSN/\allowbreak{}C\&C test: GEO report, MCC data, GSN path failure, 2+1 selection & Two initial requests within ≤2 s, selection of a valid pair and reserve (where possible); status of absent candidate & To be developed\\ \hline
+GSEG-QV-02 & DPS/\allowbreak{}EWS HIL: two valid LEO packages and trajectory, load, four classification outcomes & Warning only for qualifying outcomes; correct uncertainty; delivery within ≤15 s & To be developed\\ \hline
+GSEG-QV-03 & SSEG integration through emulator or representative network configuration & Valid complete products from two LEO spacecraft, preserved identifiers, times and authenticity & To be developed\\ \hline
+GSEG-QV-04 & Geometry and dynamic-routing simulation: two GEO spacecraft, node/\allowbreak{}ISL failure, QoS queues & Demonstrate applicable route and stage timing allocations for defined cases; record assumptions and boundary points & To be developed\\ \hline
+GSEG-QV-05 & Loss of GIS domain with 10 admitted events and maintenance & Demonstration of correct 2/\allowbreak{}15 s boundaries and preservation of state after a single failure covered by redundancy & To be developed\\ \hline
+GSEG-QV-06 & RBD/\allowbreak{}FTA, common utilities, UPS/\allowbreak{}generator, failures and repairs & Demonstration of ≥99.99\% critical-service availability based on acceptable data and subsequent measurements & To be developed\\ \hline
+GSEG-QV-07 & Archive and data traceability: delayed DAS, restoration, 5-year retention & No blocking of warning, complete traceability and justified capacity/\allowbreak{}retention & To be developed\\ \hline
+GSEG-QV-08 & Security: roles, encryption, command authentication, audit and test/\allowbreak{}operations separation & No unauthorized access or commands, correct audit records and environment isolation & To be developed\\ \hline
+GSEG-QV-09 & Two EWS paths: interruption of one path, warning-version change and acknowledgement handling & Verify event identifier, refined trajectory, impact-area assessment, threat classification distinct from uncertainty, warning status and available delivery acknowledgements; preserve version, deadline and authentication without uncontrolled duplicates & To be developed\\ \hline
+GSEG-QV-10 & Integrated EWAS chain with SSEG and test recipient & Measure the complete chain against the 60 s limit and record intermediate stage boundaries, including the GSEG selection interval within the SSEG DDF Steps 1--3 subtotal & To be developed\\ \hline
+GSEG-QV-11 & Failure of one LEO spacecraft after 2+1 selection: early and late, valid/\allowbreak{}invalid reserve geometry & Correct replacement request; two valid observations \textbf{and consistent trajectory for the new pair}; no unjustified 60 s declaration & To be developed\\ \hline
+GSEG-QV-12 & Arrival of 10, 11 and 20 events, later urgent event, loss of one domain & Reservation and priorities without losing events; explicit saturation and measurement of deadlines for load covered by guarantee & To be developed\\*
+\end{longtable}
+\endgroup
+
+Before testing, each case must define configuration, stimulus list, data versions, load scope, measurement start and end points, clock accuracy, expected result, anomaly handling and conditions for repetition. The proposed ten-event count is a P load scenario, not a limit on the number of actual events.
+
+\subsubsection{8.2.3. Validation of Models}\label{ddjf-8-2-3}
+
+\textbf{ISL communications model:} predicted contacts, delays and failovers must be compared with results of independent orbit/\allowbreak{}topology simulation and HIL bench results; normal and failed options must be checked. SSEG TRS declarations are model requirements, not model validation.
+
+\textbf{Performance model:} C\&C and DPS times require measurement on a representative configuration. The model should distinguish selection of three candidates within 0.90 s from the time to issue any subsequent replacement command, and measure 10/\allowbreak{}11/\allowbreak{}20 events, queue ordering and failover to one domain.
+
+\textbf{RBD/\allowbreak{}FTA availability model:} failure data, repair times and independence assumptions must be validated using equipment data, common-cause analysis and failure-test results. The numerical 90+10 ppm division alone is not a validated model.
+
+\textbf{Data and energy model:} DAS sizing requires confirmation of actual product volumes; the GIS/\allowbreak{}GSN/\allowbreak{}EWS balance requires measured power, load, cooling and UPS autonomy data. These results must be related to the boundaries adopted in the DDF.
+
+\textbf{Classification and uncertainty model:} correctness of DPS assessments must be tested against reference data and defined qualification criteria, including ambiguous cases and incomplete inputs. Thresholds for considering a threat “credible” have not yet been agreed.
+
+Each model requires a version number, owner, scope of application, inputs, method of correlation with observation and unresolved limitations. \textbf{None of the listed models currently has an available validation report.}
+
+\subsubsection{8.2.4. Requirements Status Log}\label{ddjf-8-2-4}
+
+The summary covers \textbf{all 35 requirements of Chapter 7 of GSEG TRS}. T/\allowbreak{}A/\allowbreak{}R/\allowbreak{}I methods are carried over from the TRS, and the indicated GSEG-QV-xx activities are proposals to be linked to the approved VP/\allowbreak{}VCD. Code \textbf{O} means \emph{open justification — no available supporting evidence}, not formal nonconformance. All rows have status \textbf{O}, because reports and closure decisions have not been made available.
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.14}|P{0.49}|P{0.10}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Requirement} & \GSEGHeaderText{TRS methods} & \GSEGHeaderText{Planned activity /\allowbreak{} required evidence} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-REQ-FUN-001 & T, A & QV-01/\allowbreak{}04/\allowbreak{}11: selection of two LEO spacecraft, reserve candidate and valid geometry & O\\ \hline
+GSEG-REQ-FUN-002 & T & QV-01/\allowbreak{}03/\allowbreak{}11: two initial requests, status and conditional replacement request & O\\ \hline
+GSEG-REQ-FUN-003 & T, A & QV-02: four classification outcomes, criteria and reference data & O\\ \hline
+GSEG-REQ-FUN-004 & T, A & QV-02/\allowbreak{}03: fusion of both observations and onboard trajectory & O\\ \hline
+GSEG-REQ-FUN-005 & T & QV-02/\allowbreak{}09: automatic warning only for applicable cases & O\\ \hline
+GSEG-REQ-FUN-006 & T & QV-02: update of estimates after additional observations & O\\ \hline
+GSEG-REQ-FUN-007 & T & QV-09: authorized revision, cancellation and version control & O\\ \hline
+GSEG-REQ-FUN-008 & T, A & QV-02/\allowbreak{}12: preliminary and verified priority without replacing DPS decision & O\\ \hline
+GSEG-REQ-FUN-009 & R, I & Review of functions and configuration: absence of offensive functions & O\\ \hline
+GSEG-REQ-ARC-001 & R, I & Review of facility layout and single-site boundaries & O\\ \hline
+GSEG-REQ-ARC-002 & T, R & QV-05/\allowbreak{}07: warning with unavailable MCC and DAS & O\\ \hline
+GSEG-REQ-PERF-001 & T, A & QV-01/\allowbreak{}11/\allowbreak{}12: ≤2 s for 2+1 selection and handover of two initial requests; load within TRS boundaries must be formally established & O\\ \hline
+GSEG-REQ-PERF-002 & T, A & QV-02/\allowbreak{}09/\allowbreak{}12: ≤15 s for qualified events; load >10 must not be considered excluded from TRS without agreement & O\\ \hline
+GSEG-REQ-IF-001 & T, R & QV-03: formats, authenticity and SSEG interface boundaries & O\\ \hline
+GSEG-REQ-IF-002 & T & QV-09: verify required warning fields (event identifier, refined trajectory, impact area, threat classification, associated uncertainty and warning status), field separation, version and available delivery-acknowledgement records & O\\ \hline
+GSEG-REQ-IF-003 & T, R & QV-01/\allowbreak{}03: currency and flow of orbital products & O\\ \hline
+GSEG-REQ-DATA-001 & T & QV-03/\allowbreak{}07: identifiers, timestamps, provenance & O\\ \hline
+GSEG-REQ-DATA-002 & T & QV-02: completeness and consistency check of event products & O\\ \hline
+GSEG-REQ-DATA-003 & T, A & QV-02: confidence level and uncertainty boundaries & O\\ \hline
+GSEG-REQ-DATA-004 & T, I & QV-07: complete records, including withholding and cancellation & O\\ \hline
+GSEG-REQ-DATA-005 & A, T & QV-07: model and test of retention for at least 5 years & O\\ \hline
+GSEG-REQ-DATA-006 & T, R & QV-07/\allowbreak{}08: access to history only for authorized users & O\\ \hline
+GSEG-REQ-SEC-001 & T & QV-08: enforcement of roles and permissions & O\\ \hline
+GSEG-REQ-SEC-002 & T, R & QV-08: transmission protection at agreed boundaries & O\\ \hline
+GSEG-REQ-SEC-003 & T, I & QV-08: archive data encryption & O\\ \hline
+GSEG-REQ-SEC-004 & T & QV-08: rejection of commands with invalid authenticity & O\\ \hline
+GSEG-REQ-SEC-005 & T, I & QV-08: traceable audit records & O\\ \hline
+GSEG-REQ-REL-001 & T, A & QV-05/\allowbreak{}12: failure of a \textbf{GSEG} element and continuity of critical services; loss of a spacecraft is an SSEG interface scenario, not a GSEG failure & O\\ \hline
+GSEG-REQ-REL-002 & T & QV-05/\allowbreak{}06/\allowbreak{}12: explicit saturation and capability-loss status in MCC & O\\ \hline
+GSEG-REQ-REL-003 & A, T & QV-06: RBD/\allowbreak{}FTA and 24/\allowbreak{}7 readiness ≥99.99\%, including maintenance & O\\ \hline
+GSEG-REQ-OPS-001 & T, I & QV-02: MCC display of assessments, uncertainty and decision status & O\\ \hline
+GSEG-REQ-OPS-002 & T & QV-05: spacecraft, service and command states and anomalies & O\\ \hline
+GSEG-REQ-VER-001 & A, R & Review of simulation scenarios and scope of their results & O\\ \hline
+GSEG-REQ-VER-002 & T & QV-02/\allowbreak{}03/\allowbreak{}05: HIL of critical functions before operation & O\\ \hline
+GSEG-REQ-VER-003 & T & QV-10: full chain with SSEG and recipient interface & O\\*
+\end{longtable}
+\endgroup
+
+To close a row, the VP item number, evidence number (with issue), assessment of results, remaining open actions and decision of the authorized team must be entered. In the event of a negative result, nonconformance recording must be initiated; code “O” does not conceal such a result.
+
+\subsubsection{8.2.5. Manufacturing Process Status Log}\label{ddjf-8-2-5}
+
+For ground-based GSEG, preparation of installations, integration of COTS hardware, repeatable software deployments and infrastructure configuration are also part of the manufacturing process. In accordance with ECSS Annex K, their properties relevant to qualification must be recorded.
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.25}|P{0.45}|P{0.30}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Process} & \GSEGHeaderText{Required record /\allowbreak{} check} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+Selection and acceptance of RF, GIS, EWS and DAS equipment & Identification of model, parameters, certificates, compatibility and parts source & No qualification records\\ \hline
+Assembly and separation of A/\allowbreak{}B domains & Inspection of wiring, routes, local distribution boards, switches and markings & To be performed\\ \hline
+Power and cooling installation & Tests of automation, UPS/\allowbreak{}generator, control independence and safety & To be performed\\ \hline
+Software build and deployment & Version, process repeatability, package integrity, rollback to previous configuration & To be performed\\ \hline
+Test/\allowbreak{}operations configuration and commissioning & Isolation of SSEG emulator and test recipient from operational interfaces & To be performed\\*
+\end{longtable}
+\endgroup
+
+\textbf{Additional verification condition:} GSEG-QV-10 should measure the complete end-to-end interval against the 60 s limit and record intermediate boundaries so that no handover or delay is omitted or counted twice. The current allocation is 43 s of SSEG-owned stages plus 17 s of GSEG-owned stages; the SSEG DDF's 40--45 s Steps 1--3 subtotal includes GSEG's 2 s selection interval. Any future increase in elapsed SSEG time beyond the current 43 s allocation must be assessed against the system limit; an additional 2 s with GSEG unchanged would produce a 62 s total. A single nominal result at or below 60 s does not close analysis of boundary cases, queues and failovers.
+
+\subsection{8.3. Acceptance Verification}\label{ddjf-8-3}
+
+Acceptance verification is intended to confirm compliance of the \emph{delivered configuration} with the qualified design. It is not a renewed declaration of compliance with TRS based on the DDF alone.
+
+The acceptance programme must include: inspection of configuration and wiring conformity; checking both GSN and EWS paths; testing correctness of both critical functions; testing failover of one domain and maintenance without downtime; testing common time services and safeguards; checking DAS capacity and protection; checking audit entries; and testing with an isolated SSEG emulator and test recipient.
+
+Pass criteria are linked to TRS requirements and qualification results. In particular, measurements must be taken at the same boundaries as GSEG-REQ-PERF-001/\allowbreak{}002; cases not qualifying for warning must not artificially “fail” measurement of its delivery — the correct decision not to send must be checked for them. Acceptance tests should verify correct behavior after restart, during failure of one domain and after restoration of communications. Detailed tests, predicted results and report formats will be established in the VP and test specifications.
+
+\textbf{Acceptance status: not started according to available documentation; no acceptance report has been presented.}
+
+\subsection{8.4. Verification Status Synthesis}\label{ddjf-8-4}
+
+The register covers 35 TRS requirements. \textbf{0 of 35 can currently be designated verified on the basis of the available reports}; additional verification records are required for all. This does not mean the design cannot meet requirements, but that formally identified and accepted evidence is not yet available.
+
+The principal closure conditions are: (1) approved VP and VCD register; (2) agreed ICDs; (3) ISL communications and topology report; (4) validated DPS performance and qualification analyses; (5) availability model with common failures; (6) complete critical-utilities balance; (7) HIL and integrated test of the full chain; and (8) acceptance of a defined configuration. Results and open actions must be transferred to the DDJF Chapter 4 synthesis.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

@@ -1,0 +1,86 @@
+\section{5. Physical Description}\label{physical-description}
+
+\subsection{5.1. Architecture and Single Site}\label{physical-architecture}
+
+All fixed GSEG infrastructure is located at one geographical center: GSN antennas and radio paths, gateway/\allowbreak{}control equipment, C\&C/\allowbreak{}DPS/\allowbreak{}EWS computing, GIS, MCC and DAS. \textbf{No second backup site is assumed.} The critical infrastructure consists of two co-located GIS equipment domains \textbf{A/\allowbreak{}B}. Each is planned for the full load after loss of the other. A/\allowbreak{}B separation mitigates single equipment failures but does not eliminate failures of the entire building, communications provider or common utilities.
+
+\begin{figure}[H]
+\centering
+\input{figs/gseg_physical_architecture_en.tex}
+\caption{Figure 5-1. GSEG equipment groups and logical relationships.
+Solid lines: principal mission products; dashed: supervision and
+archiving; dotted: GIS support. The diagram does not define wiring or RF
+redundancy.}
+\end{figure}
+
+\textbf{Equipment topology P (description for a future drawing):} one facility → two independent internal GSN RF paths A/\allowbreak{}B to two different GEO spacecraft (after visibility confirmation) → two GIS computing domains A/\allowbreak{}B with separate hosts, local networks and power distribution → two EWS egress gateways A/\allowbreak{}B → recipient interface. Upstream power, building cooling, site damage and external routes may still constitute common causes. This description does not demonstrate actual independence of the chains.
+
+\subsection{5.2. Product Tree}\label{product-tree}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.22}|P{0.14}|P{0.64}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{WBS} & \GSEGHeaderText{Product} & \GSEGHeaderText{Subordinate elements}\\ \hline
+\endhead
+\hline\endlastfoot
+123456.02.01 & DAS & archive, Raw Data Archive (.01.01) and Processed Data Archive (.01.02)\\ \hline
+123456.02.02 & C\&C & selection of the LEO pair and reserve candidate, requests and preliminary priority handling\\ \hline
+123456.02.03 & MCC & Flight Dynamics, supervision, conjunctions, operator actions\\ \hline
+123456.02.04 & DPS & validation/\allowbreak{}fusion/\allowbreak{}classification and impact-area assessment; three elements .04.01–.04.03\\ \hline
+123456.02.05 & GSN & RF/\allowbreak{}spacecraft communications, reports and products\\ \hline
+123456.02.06 & EWS & warnings, versions, recipient interface\\ \hline
+123456.02.07 & GIS & computing, LAN, time, power, cooling, monitoring\\*
+\end{longtable}
+\endgroup
+
+\begin{figure}[H]
+\centering
+\input{figs/gseg_product_tree_en.tex}
+\caption{Figure 5-2. GSEG product tree: seven subsystems and
+five separate DAS and DPS product items.}
+\end{figure}
+
+\subsection{5.3. Specification Tree}\label{specification-tree}
+
+EWAS system requirements → GSEG TRS → seven planned subsystem TRSs. DDF and DDJF are not requirements specifications; ICDs define exchange boundaries. Detailed subsystem DDFs do not yet provide a basis for declaring the segment verified.
+
+\begin{figure}[H]
+\centering
+\input{figs/gseg_specification_tree_en.tex}
+\caption{Figure 5-3. GSEG requirements specification hierarchy.}
+\end{figure}
+
+\subsection{5.4. Physical Elements and Redundancy Boundaries}\label{physical-elements-and-redundancy-boundaries}
+
+\textbf{GSN (P):} two independently maintainable RF paths comprising antenna/\allowbreak{}front-end path/\allowbreak{}radio equipment/\allowbreak{}interface gateway, preferably to \textbf{two different GEO spacecraft} simultaneously visible from the same site. GEO spacecraft are gateways to SSEG OISL; LEO–LEO and GEO–LEO links can deliver commands and products from LEO spacecraft not directly visible from the ground. Direct GSN–LEO contact remains an optional path, not a prerequisite for two simultaneous LEO observations. The number of antennas, their geometry, bands, communications and availability must be justified by analysis in accordance with SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}003/\allowbreak{}006 and PERF-003/\allowbreak{}004. Two GEO spacecraft \textbf{do not yet guarantee} distinct end-to-end ISL routes.
+
+\textbf{GIS (P):} domains A and B have separate critical servers, local switches, internal network segments, power distribution and health monitoring. Each domain has a target of ≥160 vCPU, ≥320 GiB RAM and ≥10 Gb/\allowbreak{}s critical network capacity (status P). C\&C/\allowbreak{}DPS/\allowbreak{}EWS services may operate in an active/\allowbreak{}passive redundancy configuration or another configuration justified at a lower level, but must be able to take over all tasks after loss of one domain within the existing 2 and 15 s limits. A common single host or switch must not be assumed in supposedly independent paths.
+
+\textbf{Utilities and building (P):} separate local A/\allowbreak{}B power paths and UPS, a backup source (e.g. generator), separable cooling and control of common equipment. Actual power and cooling redundancy must encompass all critical loads: GSN RF path, gateways, GIS platform, common time, EWS and required cooling elements. Final topology, usable energy, backup power start-up and maintenance scenarios depend on the detailed implementation design; resilience to building failure is not declared.
+
+\textbf{EWS (P):} two separate local communication gateways to recipients, accessible from the corresponding critical domain. Route diversity beyond the gateway is required so that a single common provider/\allowbreak{}conduit does not negate redundancy. Warning content is defined by \texttt{GSEG-REQ-IF-002}. The warning-recipient ICD, with identifier and issue to be assigned, will define the protocol, security boundary, acknowledgement behavior and delivery measurement endpoint.
+
+\textbf{MCC and DAS:} operational and archival workloads separate from critical resources; MCC has operator workstations, DAS two logical archive copies (at one site), but no synchronous MCC/\allowbreak{}DAS operation may block a warning. Two local copies do not substitute for resilience to complete loss of the center.
+
+\subsection{5.5. External and Internal Interfaces}\label{interfaces}\label{external-interfaces}\label{internal-interfaces}
+
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}{|P{0.28}|P{0.72}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Boundary /\allowbreak{} pair} & \GSEGHeaderText{Exchanged products and responsibility}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG–SSEG (\texttt{IF-\allowbreak{}EXT-\allowbreak{}01}) & GSN: GEO report, two initial requests and possible replacement request (P), products from two LEO spacecraft that actually performed observations, trajectory, telemetry, TC; reserve activation and statuses to be agreed in the ICD\\ \hline
+GSEG--recipient & EWS: each warning contains the event identifier, refined trajectory, impact-area assessment, threat classification as defined in \texttt{GSEG-REQ-FUN-003}, uncertainty information associated with the trajectory and impact-area assessment, and warning status; revisions, cancellations and available delivery acknowledgements\\ \hline
+DPS$\rightarrow$EWS & Event identifier, refined trajectory, impact-area assessment, threat classification, associated uncertainty information and warning qualification/status\\ \hline
+Orbital data & MCC: predictions and conjunctions; onward MCC→C\&C→GSN→SSEG\\ \hline
+GSN↔C\&C & GEO report, pair/\allowbreak{}reserve selection, two initial requests, possible replacement request, link statuses\\ \hline
+GSN→DPS & two LEO packages, preliminary trajectory, reception metadata\\ \hline
+DPS→EWS & trajectory, area, uncertainty, decision qualification\\ \hline
+MCC→C\&C/\allowbreak{}EWS & orbital data /\allowbreak{} subsequent approved updates\\ \hline
+GSN/\allowbreak{}C\&C/\allowbreak{}DPS/\allowbreak{}EWS/\allowbreak{}MCC→DAS & products, logs, decisions to issue/\allowbreak{}withhold and version history, asynchronously\\ \hline
+GIS→others & computing, LAN, time synchronization, power, cooling and monitoring\\*
+\end{longtable}
+\endgroup
+
+All relationships are logical and do not describe wiring. GSEG retains the observation timestamp from SSEG and a \textbf{separate} product reception time at GSN marking the start of the 15 s budget. The SSEG synchronization accuracy requirement is not automatically assigned to GIS.

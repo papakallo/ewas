@@ -1,0 +1,128 @@
+\section{7. Development Activities and Synthesis of Development Results}\label{ddjf-7}
+
+\subsection{7.1. Purpose, Scope and Basis of the Work}\label{ddjf-7-1}
+
+This chapter presents the design activities, analyses and option comparisons justifying the adopted GSEG definition. In accordance with ECSS-E-ST-10C Rev.1 (15 February 2017), Annex K, § K.2.1<7>, for each relevant discipline it identifies inputs, assumptions, boundary conditions, model limitations, available results, margin assessment and justification status. Formal verification activities are discussed separately in Chapter 8.
+
+The basis comprises GSEG TRS Issue 0.7 (including Annex A RTM), GSEG DDF Issue 0.1, proposed DDF amendments concerning GSN/\allowbreak{}GIS/\allowbreak{}EWS paths (register CH-002–CH-011), EWAS system requirements and SSEG TRS interface requirements. The project is at a preliminary stage: reports from completed orbital and ISL simulations, DPS performance measurements, failover tests and reliability data for selected equipment have not been made available. The checks below are \textbf{calculations performed for this DDJF}, not reports of tests performed or qualification evidence.
+
+\subsection{7.2. Design Drivers and Options Considered}\label{ddjf-7-2}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.21}|P{0.20}|P{0.37}|P{0.22}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Design decision} & \GSEGHeaderText{Option considered} & \GSEGHeaderText{Preferred solution and rationale} & \GSEGHeaderText{Limitation /\allowbreak{} status}\\ \hline
+\endhead
+\hline\endlastfoot
+Organization of the first warning & MCC approval or completed archiving before transmission & Automatic GSN–C\&C–DPS–EWS path independent of these operations; follows from GSEG-REQ-ARC-002 & Requires test with MCC/\allowbreak{}DAS failure\\ \hline
+LEO selection & Identify a replacement only after failure or observe with three spacecraft from the outset & Simultaneous 2+1 selection using MCC data; two initial requests save planning time and SSEG resources & Third candidate must provide pair geometry and availability; late activation does not guarantee 60 s\\ \hline
+Access to spacecraft & Two direct RF contacts with selected LEO spacecraft & LEO–LEO and GEO–LEO network described in SSEG; two ground RF paths to two different GEO spacecraft preferred & Route feasibility and visibility require simulation\\ \hline
+Critical infrastructure & One shared GIS domain & Two A/\allowbreak{}B domains with separate local hosts, switches and power distribution, each able to take over full load & Common-site failures remain\\ \hline
+Handling >10 events & Unlimited concurrency or FIFO without priorities & Limit of 10 reserved DPS slots + queue by urgency, deadline and age; saturation indication & No timing guarantee for events beyond verified capacity\\ \hline
+Critical state & Synchronous DAS write & Event and warning state maintained in critical services, with subsequent transfer to DAS & Recovery and duplicate suppression necessary\\ \hline
+Warning link & One gateway and one route & Two EWS paths; physical independence of external routes to be confirmed & Two providers using a common connection are insufficient\\*
+\end{longtable}
+\endgroup
+
+One GSEG site is not an arbitrary choice — it follows from GSEG-REQ-ARC-001. The resilience options considered therefore concern \textbf{the same center}, without assuming a second site inconsistent with TRS.
+
+\subsection{7.3. Development Analysis Register}\label{ddjf-7-3}
+
+The following analysis register is adopted (working identifiers \textbf{GSEG-AN-xx}, not existing reports):
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.13}|P{0.24}|P{0.35}|P{0.28}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{ID} & \GSEGHeaderText{Discipline and subject} & \GSEGHeaderText{Inputs /\allowbreak{} method} & \GSEGHeaderText{Status at preparation}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-AN-01 & Functional decomposition and RTM & TRS 7, Annex A, DDF 4–5; allocation check & Preliminary documentation analysis\\ \hline
+GSEG-AN-02 & Timing budget and failover & GSEG TRS PERF-001/\allowbreak{}002, GSEG DDF 6, SSEG DDF §6.4 and system R-011; boundary-by-boundary summation and failure scenarios & Allocation arithmetic checked; boundaries and times not verified\\ \hline
+GSEG-AN-03 & GSN–GEO/\allowbreak{}LEO–ISL routes and reserve LEO activation & SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}004, SSEG DDF §6.4 timing allocations; 2+1 pair geometry, dynamic graph, route latency and replacement-command time & To be performed\\ \hline
+GSEG-AN-04 & DPS/\allowbreak{}GIS reservations, priorities and overload & 10 slots P, 11/\allowbreak{}20 events, dominant priority, domain failure; profiling and HIL & Totals checked, no measurements\\ \hline
+GSEG-AN-05 & Reliability and availability & RBD + FTA, MTBF/\allowbreak{}MTTR, maintenance, common failures and measurements & ppm budget checked, no empirical model\\ \hline
+GSEG-AN-06 & Power and cooling & Critical-load inventory, power profiles, losses, UPS and generator & Partial scope balance, full balance to be performed\\ \hline
+GSEG-AN-07 & Archiving and data flow & 78 spacecraft, 1 Hz, P sizes, 5-year retention; flow analysis & Estimate under P assumptions\\ \hline
+GSEG-AN-08 & Warning delivery and interfaces & 10 recipients P, message size P, WAN independence, acknowledgement procedures & Ideal transmission calculation, no test\\ \hline
+GSEG-AN-09 & Security, data and failure modes & TRS SEC/\allowbreak{}DATA/\allowbreak{}OPS, ICD, threat model, tests of invalid commands and products & Preliminary scope, assessment to be performed\\*
+\end{longtable}
+\endgroup
+
+\subsubsection{7.3.1. Principles for Interpreting Results}\label{ddjf-7-3-1}
+
+Documentation analysis results may justify \textbf{the logic of architecture selection}, but do not confirm its performance. Arithmetic results may demonstrate whether allocations sum consistently; they do not demonstrate the ability to perform tasks within given times. Propagation and communications models require determination of the actual station location, antenna elements, spacecraft states and route configuration. Availability models require distributions of failures, repairs, maintenance and interdependencies. Final reports should preserve inputs, model version, scope of validity, raw results and margin analysis.
+
+\subsection{7.4. Results of Preliminary Technical Analyses}\label{ddjf-7-4}
+
+\subsubsection{7.4.1. Timing Chain}\label{ddjf-7-4-1}
+
+The planned chain allocation is \textbf{10 + 2 + 3 + 30 + 15 = 60 s}: 43 s for SSEG-owned stages and 17 s for GSEG-owned stages, with no unallocated system reserve. The SSEG DDF's 40--45 s Steps 1--3 subtotal includes the 2 s GSEG selection interval and must not be compared as an independent SSEG-only limit. Any future SSEG work or uncounted delay that adds elapsed time beyond the current 43 s allocation requires time recovery, reallocation or an agreed change to the timing requirements. The 2+1 selection, priority queues and GIS failover must also be verified within their allocated intervals.
+
+\subsubsection{7.4.2. Satellite Routes and GSN Communications}\label{ddjf-7-4-2}
+
+SSEG TRS establishes the intended use of the ISL network for transmission of commands and products between LEO and GEO nodes, including autonomous traffic rerouting. It does not automatically follow that an available and sufficiently fast route exists at every instant from one GSEG site to any two LEO spacecraft. In particular, a requirement for packet rerouting capability is not evidence of connectivity of the entire graph at a particular instant.
+
+The preferred DDF option (P) is two separate RF paths to \textbf{different, visible GEO spacecraft}, followed by transmission through ISL. GSEG-AN-03 must check, for the entire orbital period: visibility geometry from the actual site, overlap of access to two GEO spacecraft, antenna allocation and compatibility, availability of GEO–LEO cross-layer terminals, delay and throughput of each segment, QoS, resource sharing, failed states and the ability to receive both LEO packages and the onboard trajectory. Variable topology makes analysis of worst-case scenarios necessary, rather than only a typical connection.
+
+Following correction, the DDF's \textbf{3 Gb/\allowbreak{}s} is a synthetic load scenario for the internal GIS network (20 streams × 150 Mb/\allowbreak{}s), \textbf{not} a declaration of 20 simultaneous RF contacts with spacecraft. The size of the antenna network must not be derived from it.
+
+\subsubsection{7.4.3. Availability, Backup Power and Common Failures}\label{ddjf-7-4-3}
+
+GSEG-REQ-REL-003 specifies critical-service availability of at least 99.99\% in continuous operation. For 365 days, this is at most \textbf{52.56 min of unavailability}. The DDF allocation of 100 ppm is divided into 90 ppm for elements and 10 ppm unallocated reserve; the division itself is arithmetically correct but is not derived from failure data. The GIS allocation of 25 ppm corresponds to \textbf{13.14 min/\allowbreak{}year}, which is particularly difficult to justify at one center.
+
+To illustrate the scale of the requirements: \textbf{one hour of complete GSEG unavailability in a 365-day period alone exceeds the 52.56 min limit}. For this reason, even duplicated servers and RF paths are insufficient without protection of power, cooling, the entire facility and external routes. FTA must distinguish single-element, failover and common-cause failures; maintenance must also be accounted for.
+
+The DDF specifies planned \textbf{12 kW} critical IT power and \textbf{5 kWh} usable UPS energy for a 15-minute bridging case. For the 12 kW load \emph{alone}, an ideal 5 kWh corresponds to \textbf{25 minutes} before losses, aging and discharge limitations. This is not an arithmetic contradiction but an \textbf{incomplete balance scope}: the figures do not necessarily include RF/\allowbreak{}GSN, EWS gateways, cooling or other critical services. It is also unspecified whether 5 kWh applies to one domain or the installation. The full energy and power balance must identify separate A/\allowbreak{}B loads, required autonomy, mains–UPS–generator switching, start-up profile and single points of failure.
+
+\textbf{Conclusion:} two GIS domains are a justified means of mitigating equipment failures, but 99.99\% availability has not been demonstrated. The acceptability of the risk of losing the entire site cannot be determined without quantitative FTA and environmental data.
+
+\subsubsection{7.4.4. Computing Resources and Event Load}\label{ddjf-7-4-4}
+
+The arithmetic of resources for one domain is correct (calculations in 9.4), but the number of ten parallel DPS assessments does not follow from a documented event-arrival profile. Compared with FIFO, controlled allocation by urgency, deadline and queue age reduces the risk of delay to the most important event, but \textbf{does not increase the actual throughput of the platform}. An eleventh assessment may overtake a waiting lower-priority assessment without taking a slot away from a task that needs to complete a safe processing stage.
+
+AN-04 should compare FIFO and priority queues under a load of 10/\allowbreak{}11/\allowbreak{}20 events, including after loss of a GIS domain, and determine the time distribution from T0 to the recipient. An unprocessed event must not be assigned the “no threat” class; saturation and risk of deadline overrun must be reported to MCC. \textbf{PERF-001/\allowbreak{}002 and R-011 remain unconditional requirements}: if arrival of more than 10 events is a mission scenario, observed overruns require a performance change or a formal decision to restrict requirements, not merely a queue.
+
+\subsubsection{7.4.5. Data Archive}\label{ddjf-7-4-5}
+
+The DAS check demonstrated that \textbf{50 TiB per copy} is sufficient in the adopted narrow P model, but the model does not identify all products requiring five-year retention. The housekeeping generation frequency does not demonstrate continuous receipt of its full volume at GSN, and synthetic \textbf{3 Gb/\allowbreak{}s} GIS network loading is not a model of data arrival at DAS.
+
+Further design requires a catalog of data classes, their sources and reception frequencies, observation-product retention rules and intermediate-data overhead. The capacity calculation and its margin are given once in Chapter \textbf{9.6}; without a catalog, DATA-005 cannot be considered quantitatively justified.
+
+\subsubsection{7.4.6. Warning Transmission}\label{ddjf-7-4-6}
+
+The EWS throughput of \textbf{100 Mb/\allowbreak{}s} is not the principal timing uncertainty for a P message of 64 KiB to ten recipients. Protocol delays, authentication, route switching and the delivery measurement boundary are more important. The detailed ideal transmission time calculation is presented in \textbf{9.9}. AN-08 and QV-09 are intended to demonstrate whether the extension to two gateways actually provides independent delivery within the allocated 2 s, without assuming compliance from throughput alone.
+
+\subsection{7.5. Scenarios and Modes Relevant to the Design}\label{ddjf-7-5}
+
+Verification scenarios should cover: \textbf{(1)} no events and normal readiness; \textbf{(2)} 10, 11 and 20 events and a priority change in the queue; \textbf{(3)} failure of one primary LEO spacecraft, availability of a reserve candidate and the situation in which there is no time to activate it; \textbf{(4)} all four DPS outcomes; \textbf{(5)} warning revision and cancellation; \textbf{(6)} absence of MCC/\allowbreak{}DAS; \textbf{(7)} loss of a GIS domain; \textbf{(8)} failure of a GSN path, GEO/\allowbreak{}ISL node or EWS egress; \textbf{(9)} outdated orbital data and invalid products; \textbf{(10)} maintenance with required readiness. Loss of the entire center must be included in FTA without declaring tolerance of it.
+
+\subsection{7.6. Lower-Level Documentation Status}\label{ddjf-7-6}
+
+On the basis of the available \texttt{ground-\allowbreak{}segment} branch, the detailed DDJFs of the seven GSEG subsystems do not constitute an approved basis for segment justification. Their status in this chapter is therefore \textbf{no confirmed lower-level evidence}. After the subsystem documentation has been prepared, a controlled list must be attached: identifier, issue number, requirements inherited from GSEG, analysis results and unresolved deviations. This does not replace GSEG responsibility for demonstrating cooperation of the elements.
+
+\subsection{7.7. Synthesis of Results and Open Issues}\label{ddjf-7-7}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.14}|P{0.30}|P{0.35}|P{0.21}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Area} & \GSEGHeaderText{What has been justified at this stage} & \GSEGHeaderText{What remains open} & \GSEGHeaderText{Risk}\\ \hline
+\endhead
+\hline\endlastfoot
+Functions and system decomposition & Link between seven subsystems and RTM and logical independence of warning chain & Behavior during failure and failover & Missing or incorrect warning\\ \hline
+Time & 60 s balance, internal totals of 2 s and 15 s & Load and boundary measurements, ISL & Deadline overrun\\ \hline
+SSEG communications & Requirements for ISL relay network & Visibility of 2 GEO spacecraft, time-varying routes, QoS & Missing commands or LEO products\\ \hline
+Availability & 100 ppm budget check & MTBF/\allowbreak{}MTTR, common-cause FTA and maintenance & Unrealistic 99.99\% level at one center\\ \hline
+Power and cooling & Known scope of partial IT balance & Whole-chain balance and actual autonomy & Service interruption despite redundant IT\\ \hline
+Computing & Correct summation of 160/\allowbreak{}320 per domain & DPS profiling and failover test & Overload, long fusion time\\ \hline
+Data & Calculation of 32.31 TiB in narrow P model (including 20 events/\allowbreak{}day) & Actual retention of observation products & Undersized archive\\ \hline
+Security & SEC requirements and interface separation & Threat model and protection tests & Unauthorized commands or data disclosure\\*
+\end{longtable}
+\endgroup
+
+No formal implementation nonconformance has been established on the basis of available \textbf{test results}, because test results have not been made available. However, \textbf{unproven and potentially overly optimistic design assumptions} have been identified, in particular unavailability limits at one site, ISL relay continuity, DPS performance and the incomplete scope of the energy balance. Adopting these assumptions without further analysis would not provide sufficient justification of the DDF.
+
+\subsection{7.8. Actions Necessary for Chapter Closure}\label{ddjf-7-8}
+
+Reports GSEG-AN-02–09 must contain inputs, model versions, test/\allowbreak{}simulation results and margins. \textbf{AN-03} should confirm the feasibility of 2+1 selection and reserve activation, and \textbf{AN-04} — the 10-slot allocation policy, queues and behavior under a load of 11/\allowbreak{}20 events. Evidence will be linked to RTM and VCD; Chapter 8 defines the current qualification status.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

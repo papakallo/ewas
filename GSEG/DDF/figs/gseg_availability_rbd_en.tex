@@ -1,0 +1,31 @@
+% Joint service readiness and shared dependencies; no packet-flow arrows.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  service/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,
+    align=center,font=\small,text width=3.0cm,minimum height=1.25cm,inner sep=3pt},
+  shared/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,
+    align=center,font=\small,text width=12.8cm,minimum height=1.25cm,inner sep=4pt},
+  readiness/.style={draw=HeadingBlue,line width=0.75pt},
+  dependency/.style={draw=HeadingBlue,dashed,line width=0.65pt}
+]
+\node[service] (gsn) at (-5.7,0) {GSN\\Ground RF / gateway};
+\node[service] (cc) at (-1.9,0) {C\&C\\Tasking service};
+\node[service] (dps) at (1.9,0) {DPS\\Assessment service};
+\node[service] (ews) at (5.7,0) {EWS\\Recipient handover};
+\draw[readiness] (gsn.east) -- (cc.west);
+\draw[readiness] (cc.east) -- (dps.west);
+\draw[readiness] (dps.east) -- (ews.west);
+\node[shared] (gis) at (0,-2.6)
+  {GIS: shared compute, networks, time and site utilities\\
+   Two on-site equipment domains; site-wide common-cause exposure remains};
+\draw[dependency] (gis.north) -- (0,-1.4);
+\draw[dependency] (-5.7,-1.4) -- (5.7,-1.4);
+\foreach \name/\x in {gsn/-5.7,cc/-1.9,dps/1.9,ews/5.7} {
+  \draw[dependency] (\x,-1.4) -- (\name.south);
+}
+\node[align=center,font=\small,text width=15.0cm] at (0,-4.9)
+  {Both GSEG-controlled capabilities must be ready: $A_{\mathrm{GSEG}}\geq99.99\%$.\\
+   Controlled integration and egress are included. Equipment-domain redundancy does not establish site independence.\\
+   Lines show logical availability dependencies, not data flow or independent failures.};
+\end{tikzpicture}%
+}

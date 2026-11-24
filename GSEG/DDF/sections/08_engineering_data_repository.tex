@@ -1,0 +1,67 @@
+\section{8. Engineering Data Repository}\label{engineering-data-repository}
+
+\subsection{8.1. Scope}\label{identification-and-scope}
+
+The GSEG design repository comprises controlled requirements, parameters, ICDs, calculations and configurations. It \textbf{is not} the DAS operational data archive. Repository source version control does not substitute for a register of values and evidence.
+
+\subsection{8.2. Data Collections and Their Status}\label{engineering-data-collections}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.27}|P{0.38}|P{0.35}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Element} & \GSEGHeaderText{Source} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+Requirements and RTM & GSEG TRS, Chapters 7 and 8 & exist, 35 requirements\\ \hline
+Functional/\allowbreak{}physical architecture & this DDF, Chapters 4–5 & preliminary\\ \hline
+Parameters and availability & DDF 6, CSV registers in \texttt{GSEG/\allowbreak{}DDF/\allowbreak{}engineering\_\allowbreak{}data} & P, to be updated after harmonization\\ \hline
+ICDs & applicable interface documents & not fully agreed\\ \hline
+Analysis reports & DDJF 7, identifiers GSEG-AN-01…09 & planned, not completed reports\\ \hline
+Verification evidence & DDJF 8, VP, VCD and reports & open\\*
+\end{longtable}
+\endgroup
+
+\subsection{8.3. Parameter and Status Register}\label{parameter-identification-and-status}
+
+The register contains ID, name, value, unit, owner, status B/\allowbreak{}P/\allowbreak{}A-V and source. The controlled version should additionally contain: configuration issue, required/\allowbreak{}planned value, calculated/\allowbreak{}measured result, uncertainty, allocation and achieved margin, evidence, approval status and date. Missing evidence \textbf{must not} be assigned A/\allowbreak{}V status.
+
+\subsection{8.3.1. Consolidated Design Parameter Register}\label{ddf-8-3-1}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.24}|P{0.40}|P{0.24}|P{0.12}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Register ID} & \GSEGHeaderText{Parameter} & \GSEGHeaderText{Value} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+GSEG-PAR-001 & Observation coordination & ≤2 s & B\\ \hline
+GSEG-PAR-002 & Assessment and first warning & ≤15 s & B\\ \hline
+GSEG-PAR-003 & EWAS system time & ≤60 s & B\\ \hline
+GSEG-PAR-004 & Data retention & ≥5 years & B\\ \hline
+GSEG-PAR-005 & GEO count & 6 & B\\ \hline
+GSEG-PAR-006 & LEO count & 72 & B\\ \hline
+GSEG-PAR-007 & HK generation & ≥1 Hz & B\\ \hline
+GSEG-PAR-008 & Concurrent events & 10 & P\\ \hline
+GSEG-PAR-009 & Coordination reserve & 0.50 s & P\\ \hline
+GSEG-PAR-010 & Warning reserve & 2.50 s & P\\ \hline
+GSEG-PAR-011 & GIS domains & 2 & P\\ \hline
+GSEG-PAR-012 & GIS network/\allowbreak{}domain & ≥10 Gb/\allowbreak{}s & P\\ \hline
+GSEG-PAR-013 & GIS CPU/\allowbreak{}domain & ≥160 vCPU & P\\ \hline
+GSEG-PAR-014 & GIS RAM/\allowbreak{}domain & ≥320 GiB & P\\ \hline
+GSEG-PAR-015 & DAS archive/\allowbreak{}copy & ≥50 TiB usable & P\\ \hline
+GSEG-PAR-016 & DAS copy count & 2 local & P\\ \hline
+GSEG-PAR-017 & EWS egress & ≥100 Mb/\allowbreak{}s & P\\ \hline
+GSEG-PAR-018 & Critical IT power, narrow scope & 12 kW & P\\ \hline
+GSEG-PAR-019 & Critical IT cooling, narrow scope & ≥15 kW & P\\ \hline
+GSEG-PAR-020 & Critical IT UPS energy, scope not closed & ≥5 kWh & P\\ \hline
+GSEG-PAR-021 & GSEG critical-service availability & ≥99.99\% & B\\ \hline
+GSEG-PAR-022 & Unavailability allocation & 90 ppm & P\\ \hline
+GSEG-PAR-023 & Unavailability reserve & 10 ppm & P\\ \hline
+GSEG-PAR-024 & Number of initially selected reserve LEO candidates & 1 per primary pair (if available) & P\\*
+\end{longtable}
+\endgroup
+
+Rows GSEG-PAR-001--023 represent the 23 identifiers in the existing DDF register; GSEG-PAR-024 is a new working P parameter. The source and owner of each parameter remain defined in Chapters 3 and 6; the revised wording of UPS and domain scope does not constitute approval of P values.
+
+\subsection{8.4. Completeness}\label{completeness-status}
+
+Missing material: list of actual A/\allowbreak{}B equipment and connections, antennas and RF parameters, DAS data catalog, GSN+GIS+EWS energy budget, load distributions, timing analysis, RBD/\allowbreak{}FTA and ICD/\allowbreak{}VP/\allowbreak{}VCD documents and tests. Most P values remain unsupported by measurement results.

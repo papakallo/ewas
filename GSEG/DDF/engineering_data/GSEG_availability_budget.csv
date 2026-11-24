@@ -1,0 +1,9 @@
+allocation_id,element,unavailability_budget_ppm,minimum_design_to_availability_percent,status,scope
+GSEG-AV-01,GSN,20,99.9980,P,Ground-owned RF terminal and gateway service
+GSEG-AV-02,C&C,10,99.9990,P,LEO tasking command service including covered failures
+GSEG-AV-03,DPS,10,99.9990,P,Ground assessment service including covered failures
+GSEG-AV-04,EWS,15,99.9985,P,Warning handover and GSEG-controlled delivery service
+GSEG-AV-05,GIS,25,99.9975,P,Shared compute network power cooling time and site common-cause exposure
+GSEG-AV-06,GSEG integration and egress,10,99.9990,P,Internal end-to-end dependencies and ground-controlled external egress
+GSEG-AV-07,Unallocated segment allowance,10,,P,Reserve not assigned to an implemented subsystem
+GSEG-AV-TOTAL,GSEG critical service,100,99.9900,B,Segment requirement total; achieved availability NOT established

@@ -1,0 +1,97 @@
+% Logical equipment groups and exchanges from DDF 5.5.1--5.5.2.
+% Named source sets summarize independent logical inputs, not extra hardware.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  gsegEquipment/.style={draw=HeadingBlue,fill=TableRowLightBlue,
+    rounded corners=2pt,align=center,font=\small,text width=2.3cm,
+    minimum height=1.4cm,inner sep=3pt},
+  gsegSupport/.style={gsegEquipment,fill=white,text width=2.5cm},
+  gsegExternal/.style={gsegEquipment,fill=white,text width=3.1cm,
+    minimum height=1.1cm},
+  gsegInfrastructure/.style={gsegEquipment,text width=11.6cm,
+    minimum height=1.15cm},
+  gsegMission/.style={draw=HeadingBlue,line width=0.85pt},
+  gsegData/.style={gsegMission,-{Stealth[length=2mm]}},
+  gsegOperations/.style={draw=HeadingBlue,dash pattern=on 5pt off 2pt,
+    line width=0.7pt,-{Stealth[length=1.8mm]}},
+  gsegArchive/.style={draw=HeadingBlue,dash pattern=on 2pt off 2pt,
+    line width=0.7pt,-{Stealth[length=1.8mm]}},
+  gsegServices/.style={draw=HeadingBlue!75,densely dotted,line width=0.65pt},
+  gsegChannelLabel/.style={align=center,font=\scriptsize,text=HeadingBlue,
+    inner sep=1pt},
+  gsegNote/.style={align=left,font=\scriptsize,text=HeadingBlue,inner sep=1pt}
+]
+% One geographical site, containing exactly the seven GSEG subsystems.
+\draw[draw=TableBorderBlue,rounded corners=5pt,line width=0.65pt]
+  (-6.4,-3.0) rectangle (6.4,6.1);
+\node[font=\small\bfseries,text=HeadingBlue] at (0,5.8)
+  {GSEG --- one geographical site};
+
+\node[gsegExternal] (sseg) at (-4.8,7.2) {Space Segment\\SSEG};
+\node[gsegExternal] (recipient) at (4.8,7.2)
+  {Authorized recipient\\interface};
+\node[gsegEquipment,fill=white] (gsn) at (-4.8,4.0)
+  {\textbf{GSN}\\Satellite RF gateway};
+\node[gsegEquipment] (cc) at (-1.6,4.0)
+  {\textbf{C\&C}\\LEO selection\\Commands};
+\node[gsegEquipment] (dps) at (1.6,4.0)
+  {\textbf{DPS}\\Event assessment};
+\node[gsegEquipment] (ews) at (4.8,4.0)
+  {\textbf{EWS}\\Warning delivery};
+
+% Primary mission exchanges. There is no C&C -> DPS substitute path.
+\draw[gsegMission,Stealth-Stealth] (sseg.south) -- (gsn.north);
+\draw[gsegMission,Stealth-Stealth] (gsn.east) -- (cc.west);
+\draw[gsegData] ($(gsn.north)+(0.5,0)$)
+  -- (-4.3,5.05) -- (1.6,5.05) -- (dps.north);
+\node[gsegChannelLabel,text width=6.0cm] at (-1.35,5.3)
+  {Two-LEO products + preliminary trajectory};
+\draw[gsegData] (dps.east) -- (ews.west);
+\draw[gsegData] (ews.north) -- (recipient.south);
+
+\node[gsegSupport] (mcc) at (-1.6,0.9)
+  {\textbf{MCC}\\Flight dynamics\\Supervision};
+\node[gsegSupport] (das) at (4.8,0.9)
+  {\textbf{DAS}\\Mission archive};
+
+% Precomputed plans/orbits and later warning revisions use separate routes.
+\draw[gsegOperations] (mcc.north) -- (cc.south);
+\node[gsegChannelLabel,align=right,text width=1.1cm] at (-2.35,2.45)
+  {Orbits /\\plans};
+\draw[gsegOperations] ($(mcc.north)+(0.65,0)$)
+  -- (-0.95,2.55) -- (4.8,2.55) -- (ews.south);
+\node[gsegChannelLabel,text width=4.0cm] at (2.0,2.8)
+  {Post-warning revisions only};
+
+% Independent source lists explicitly define the logical collection channels.
+% No collection channel is shown as a new subsystem or as routing through MCC.
+\node[gsegChannelLabel,text width=2.75cm] at (-4.85,2.0)
+  {\textbf{Status from}\\GSN / C\&C / DPS / EWS / GIS};
+\draw[gsegOperations] (-6.0,0.9) -- (mcc.west);
+\node[gsegChannelLabel,text width=3.4cm] at (1.65,1.95)
+  {\textbf{Records from}\\GSN / C\&C / DPS / EWS / MCC};
+\draw[gsegArchive] (0.8,0.9) -- (das.west);
+
+% Shared infrastructure is a provider layer, never a warning-processing stage.
+\node[gsegInfrastructure] (gis) at (0,-1.9)
+  {\textbf{GIS --- Ground Infrastructure Subsystem}\\
+   Shared compute, networks, time reference, power, cooling and monitoring};
+\draw[gsegServices] (gis.north) -- (0,-1.05);
+\draw[gsegServices] (-5.8,-1.05) -- (5.8,-1.05);
+\node[gsegChannelLabel,text width=11.6cm] at (0,-0.82)
+  {GIS services to GSN, C\&C, DPS, EWS, MCC and DAS};
+
+% Orbital-information providers are external; the entry point is MCC.
+\node[gsegExternal] (orbital) at (-4.8,-4.0)
+  {Orbital-information\\providers};
+\draw[gsegOperations] (orbital.north) -- (-4.8,-3.2)
+  -- (-6.9,-3.2) -- (-6.9,-0.4) -- (-1.6,-0.4) -- (mcc.south);
+
+\node[gsegNote,anchor=north west,text width=7.4cm] at (-1.3,-3.5) {
+  Solid: primary mission exchanges. Long dashes: status, plans and authorized control.\\
+  Short dashes: archive records. Dotted: shared GIS services.\\
+  Named source lists denote independent logical inputs, not extra equipment,
+  physical buses or prerequisites for the first warning.};
+\end{tikzpicture}%
+}

@@ -1,0 +1,31 @@
+\section{3. Design Description}\label{ddjf-3}
+
+\subsection{3.1. Purpose of GSEG}\label{ddjf-3-1}
+
+GSEG is the ground part of EWAS, responsible for coordinating satellite observations, processing data, assessing potential threats and delivering warnings to authorized institutions.
+
+The system provides global surveillance with priority assessment of threats to the Baltic Sea region. Responsibility for warning delivery ends at the authorized recipient interface.
+
+\subsection{3.2. Architecture and Operating Principle}\label{ddjf-3-2}
+
+GSEG comprises seven subsystems: Ground Station Network (GSN), Command \& Control (C\&C), Data Processing System (DPS), Early Warning System (EWS), Mission Control Center (MCC), Data Archiving System (DAS) and Ground Infrastructure Subsystem (GIS).
+
+GSN receives the GEO event report. C\&C selects two LEO spacecraft and prepares observation requests. After receiving the required LEO products, DPS checks their completeness, performs data fusion, assesses the trajectory and impact area and classifies the event.
+
+EWS delivers the first warning automatically when DPS identifies a potential threat or when a credible threat cannot be excluded. Results indicating no threat or the inability to perform an assessment do not trigger an external warning.
+
+MCC performs supervision and prepares orbital data. DAS stores the event history, and GIS provides common technical infrastructure. The first warning does not depend on an operator decision or completion of archiving.
+
+The physical architecture assumes one GSEG site and two equipment domains for the critical GIS infrastructure.
+
+\subsection{3.3. Qualification and Acceptance Verification Criteria Levels}\label{ddjf-3-3}
+
+\textbf{Qualification of the GSEG design} is intended to demonstrate that the adopted architecture and solutions enable compliance with the TRS requirements under representative operational conditions. It covers functional correctness, interface compliance, behavior under anticipated failures and achievement of the required timing and availability parameters.
+
+Qualification criteria levels derive from the limiting values and expected behavior specified in GSEG TRS. Their verification requires definition of input conditions, load, measurement boundaries and pass criteria for each verification case. Design allocations recorded in the DDF do not independently establish new qualification levels.
+
+\textbf{GSEG acceptance verification} is intended to confirm that the delivered, integrated configuration conforms to the qualified design. It includes checks of hardware and software configurations, connections, safeguards, functional correctness and cooperation with representative SSEG and warning-recipient interfaces.
+
+Qualification and acceptance results should be documented in accordance with the methods assigned to requirements in the TRS and linked to the Verification Control Document. Analyses and short-duration acceptance tests do not replace long-term confirmation of operational availability.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par
