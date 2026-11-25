@@ -1,0 +1,35 @@
+% Function hierarchy; connectors are not mission-data paths.
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  >=Stealth,
+  root/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,
+    align=center,font=\small\bfseries,text width=7.0cm,minimum height=0.8cm},
+  group/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,
+    align=center,font=\small\bfseries,text width=6.1cm,minimum height=0.8cm},
+  fn/.style={draw=TableBorderBlue,fill=TableRowLightBlue!30,rounded corners=2pt,
+    align=center,font=\small,text width=5.5cm,minimum height=0.8cm},
+  link/.style={draw=HeadingBlue,line width=0.65pt}
+]
+\node[root] (root) at (0,0) {F-00 Ground Segment mission support};
+\node[group] (critical) at (-3.8,-1.5) {Critical event-response functions};
+\node[group] (support) at (3.8,-1.5) {Supervision, retention and assurance};
+\node[fn] (f1) at (-3.4,-2.8) {F-01 SSEG data exchange (GSN)};
+\node[fn] (f2) at (-3.4,-3.9) {F-02 Observation coordination (C\&C)};
+\node[fn] (f3) at (-3.4,-5.0) {F-03 Event assessment (DPS)};
+\node[fn] (f4) at (-3.4,-6.1) {F-04 Warning delivery (EWS)};
+\node[fn] (f5) at (4.2,-2.8) {F-05 Mission supervision (MCC)};
+\node[fn] (f6) at (4.2,-3.9) {F-06 Mission record retention (DAS)};
+\node[fn] (f7) at (4.2,-5.0) {F-07 Cross-cutting assurance};
+\node[fn] (f8) at (4.2,-6.1) {F-08 Common infrastructure (GIS)};
+\draw[link] (root.south) -- (0,-0.8) -| (critical.north);
+\draw[link] (0,-0.8) -| (support.north);
+\draw[link] (critical.west) -- (-7.2,-1.5) -- (-7.2,-6.1);
+\foreach \name in {f1,f2,f3,f4} {
+  \draw[link] (-7.2,0 |- \name.west) -- (\name.west);
+}
+\draw[link] (support.west) -- (0.3,-1.5) -- (0.3,-6.1);
+\foreach \name in {f5,f6,f7,f8} {
+  \draw[link] (0.3,0 |- \name.west) -- (\name.west);
+}
+\end{tikzpicture}%
+}

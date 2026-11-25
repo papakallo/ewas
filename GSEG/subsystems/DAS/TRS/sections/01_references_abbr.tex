@@ -1,0 +1,111 @@
+% Data Archiving System TRS; WBS 123456.02.01.
+\section{References}
+
+This chapter identifies the Applicable Documents (AD), Reference Documents (RD), and terminology used in the Data Archiving System specification. The application of ECSS standards is subject to tailoring to the EWAS programme.
+
+\subsection{Applicable Documents (AD)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.10\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.46\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.16\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
+\caption{Applicable Documents}\label{tab:das_applicable_documents}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\endhead
+\texttt{AD-01} & EWAS --- System Report & Mission Definition, CONOPS, Overall System Requirements, Functional Analysis, WBS & Current baseline \\ \hline
+\texttt{AD-02} & \texttt{ECSS-E-ST-10C} & System engineering general requirements & Rev. 1 (2017) \\ \hline
+\texttt{AD-03} & \texttt{ECSS-E-ST-10-06C} & Technical requirements specification & 2009 \\ \hline
+\texttt{AD-04} & \texttt{ECSS-E-ST-70C} & Ground systems and operations & 2008 \\ \hline
+\texttt{AD-05} & \texttt{ECSS-E-ST-40C} & Software & Rev. 1 (2025) \\ \hline
+\texttt{AD-06} & \texttt{ECSS-Q-ST-80C} & Software product assurance & Rev. 2 (2025) \\ \hline
+\texttt{AD-07} & \texttt{ECSS-E-ST-80C} & Security in space systems lifecycles & 2024 \\ \hline
+\texttt{AD-08} & \texttt{EWAS-HSB-GSEG-TRS-02} & Ground Segment --- Technical Requirements Specification & Current baseline \\ \hline
+\texttt{AD-09} & \texttt{EWAS-HSB-SSEG-TRS-03} & Space Segment --- Technical Requirements Specification & Issue 1.3 (2026) \\ \hline
+\texttt{AD-10} & \texttt{EWAS-HSB-VP-01} & Programme Verification Plan & Issue 0.2 (2026) \\ \hline
+\texttt{AD-11} & \texttt{EWAS-HSB-VCD-01} & Programme Verification Control Document & Issue 0.3 (2026) \\ \hline
+\end{longtable}}
+
+\subsection{Reference Documents (RD)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.10\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.28\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.46\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.16\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
+\caption{Reference Documents}\label{tab:das_reference_documents}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{ID} & \thead{Document number} & \thead{Title / scope} & \thead{Issue} \\ \hline
+\endhead
+\texttt{RD-01} & \texttt{ECSS-E-ST-70-31C} & Monitoring and control data definition & 2008 \\ \hline
+\texttt{RD-02} & \texttt{ECSS-E-ST-70-41C} & Telemetry and telecommand packet utilization & 2016 \\ \hline
+\texttt{RD-03} & CCSDS 355.0-B-2 & Space Data Link Security Protocol & Issue 2 \\ \hline
+\texttt{RD-04} & \texttt{ECSS-S-ST-00-01C} & Glossary of terms & Rev. 1 (2023) \\ \hline
+\texttt{RD-05} & \texttt{ECSS-E-HB-10-02A} & Verification guidelines & 2010 \\ \hline
+\texttt{RD-06} & EWAS --- System Data Dictionary & Preliminary definition of mission data products, metadata and exchange paths & Current baseline \\ \hline
+%te dokumenty dwa trzba potwierdzic 
+\texttt{RD-07} & \texttt{ISO/IEC 27001} & Information security management systems --- Requirements & Applicable edition \\ \hline
+\texttt{RD-08} & \texttt{ISO/IEC 14721} & Open Archival Information System (OAIS) --- Reference model & Applicable edition \\ \hline
+\end{longtable}}
+
+\subsection{Terms, Definitions and Abbreviations}
+
+The definitions below supplement the terminology in \texttt{AD-01}, the Ground Segment specification and \texttt{RD-04}. They define terms specific to the Data Archiving System (DAS), including the Raw Data Archive (RDA) and Processed Data Archive (PDA).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.27\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.73\textwidth-2\tabcolsep-1.5\arrayrulewidth\relax}|}
+\caption{Terms and Definitions}\label{tab:das_terms}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Term} & \thead{Definition} \\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{Term} & \thead{Definition} \\ \hline
+\endhead
+\textbf{Data Archiving System} & The system responsible for the storage, organization, preservation, management and retrieval of mission data generated or received during EWAS operations. It comprises the Raw Data Archive and the Processed Data Archive. \\ \hline
+\textbf{Raw Data Archive} & A repository for original, unprocessed mission data received from spacecraft and ground stations, including telemetry, sensor observations and initial acquisition data. \\ \hline
+\textbf{Processed Data Archive} & A repository for processed and analysed mission data derived from raw data, including event records, preliminary assessments, trajectory estimates, probabilistic impact areas and warning products. \\ \hline
+\textbf{Raw Mission Data} & Original data acquired by or received from mission elements before mission-level processing, fusion, analysis or interpretation. \\ \hline
+\textbf{Processed Mission Data} & Data products generated through processing, analysis, fusion or interpretation of raw mission data, including event classifications, trajectory estimates, impact-area estimates and warning information. \\ \hline
+\textbf{Data Product} & A structured information item generated, received or maintained by the EWAS mission for operational use, analysis or historical preservation. A data product may include associated metadata. \\ \hline
+\textbf{Metadata} & Structured information describing a data product, including its source, acquisition time, format, identifier, processing status and relevant processing history. \\ \hline
+\textbf{Data Ingestion} & The process of receiving, validating, identifying and registering incoming data before it is stored in the appropriate archive. \\ \hline
+\textbf{Data Retrieval} & The process of locating and accessing archived data using identifiers, metadata, timestamps or other defined search criteria. \\ \hline
+\textbf{Data Retention Period} & The defined period during which a data product or dataset is preserved in the archive and remains available for retrieval. \\ \hline
+\textbf{Data Integrity} & The property of data remaining complete and accurate and protected against unintended or unauthorized modification, corruption or loss during transmission, storage and retrieval. \\ \hline
+\textbf{Data Provenance} & Information describing the origin and history of a data product, including its acquisition source, processing steps and transformations, enabling traceability. \\ \hline
+\textbf{Data Backup} & An additional copy of archived data maintained separately to support restoration in the event of data loss, corruption or system failure. \\ \hline
+\textbf{Data Recovery} & The process of restoring archived data or archive services following data loss, corruption or system failure. \\ \hline
+\textbf{Data Access Control} & Policies and mechanisms used to restrict access to archived data and related services to authorized users and systems. \\ \hline
+\textbf{Data Timestamp} & A time reference associated with the acquisition, observation, generation or processing of a data item or event. \\ \hline
+\textbf{Event Identifier} & A unique identifier assigned to a detected event to support association, correlation, storage and retrieval of related raw and processed data products. \\ \hline
+\textbf{Data Checksum} & A calculated value used to detect unintended changes or corruption of data during transmission, storage or retrieval. \\ \hline
+\textbf{Archive Capacity} & The amount of data that an archive can store and manage while meeting defined performance and retention requirements. \\ \hline
+\textbf{Data Format} & The defined structure and encoding used to represent, store and exchange a data item or data product. \\ \hline
+\textbf{Data Traceability} & The ability to follow a data product through its origin, processing history, storage location and associated mission event. \\ \hline
+\end{longtable}}
+
+\subsubsection*{Abbreviations}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+\arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+\begin{longtable}{|>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.14\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|>{\raggedright\arraybackslash}p{\dimexpr0.36\textwidth-2\tabcolsep-1.25\arrayrulewidth\relax}|}
+\caption{Abbreviations}\label{tab:das_abbreviations}\\
+\hline\rowcolor{TableHeaderBlue}
+\thead{Abbreviation} & \thead{Meaning} & \thead{Abbreviation} & \thead{Meaning} \\ \hline
+\endfirsthead
+\hline\rowcolor{TableHeaderBlue}
+\thead{Abbreviation} & \thead{Meaning} & \thead{Abbreviation} & \thead{Meaning} \\ \hline
+\endhead
+AD & Applicable Document & API & Application Programming Interface \\ \hline
+ACL & Access Control List & CCSDS & Consultative Committee for Space Data Systems \\ \hline
+CRC & Cyclic Redundancy Check & DAS & Data Archiving System \\ \hline
+DBMS & Database Management System & DR & Data Recovery \\ \hline
+DPA & Data Processing and Analysis & ETL & Extract, Transform, Load \\ \hline
+PDA & Processed Data Archive & RDA & Raw Data Archive \\ \hline
+RBAC & Role-Based Access Control & RD & Reference Document \\ \hline
+SHA & Secure Hash Algorithm & UTC & Coordinated Universal Time \\ \hline
+\end{longtable}}

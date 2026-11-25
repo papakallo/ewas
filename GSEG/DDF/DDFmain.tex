@@ -1,0 +1,280 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+\documentclass[11pt,a4paper]{article}
+
+% =============================================================================
+% 1. PACKAGES (DO NOT EDIT)
+% =============================================================================
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}[BoldFont=lmmonolt10-bold.otf,BoldItalicFont=lmmonolt10-boldoblique.otf]
+\usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=42pt, headsep=1.0cm]{geometry}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+% =============================================================================
+% 2. DOCUMENT METADATA
+% (Values entered here will automatically populate Page 1 and all page headers)
+% =============================================================================
+\newcommand{\Organization}{HSB}
+\newcommand{\ProjectName}{EWAS}
+\newcommand{\DocTitle}{Ground Segment - Design Definition File}
+\newcommand{\DocNumber}{EWAS-HSB-GSEG-DDF-03} % Suffix 03 retained pending owner confirmation.
+\newcommand{\DocIssue}{0.1}                  % Working draft; no approval recorded.
+\newcommand{\DocDate}{}                     % Issue date pending owner confirmation.
+\newcommand{\CINumber}{02}                  % Ground Segment CI-02.
+
+% =============================================================================
+% 3. COLORS AND TEMPLATE STYLING (DO NOT EDIT)
+% =============================================================================
+\definecolor{TitleBlue}{HTML}{1F497D}         % Main title color on Page 1
+\definecolor{HeadingBlue}{HTML}{365F91}       % Section heading color (H1)
+\definecolor{SubHeadingBlue}{HTML}{4F81BD}    % Subsection heading (H2) and rule color
+\definecolor{TableHeaderBlue}{HTML}{4F81BD}   % Table header background color
+\definecolor{TableRowLightBlue}{HTML}{DBE5F1} % Alternating table row background color
+\definecolor{TableBorderBlue}{HTML}{95B3D7}   % Styled table border color
+
+% Paragraph settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% Disable section numbering (matching the PDF template) while keeping TOC entries.
+% To enable section numbering (e.g., 1, 1.1), change -1 to 3.
+\setcounter{secnumdepth}{-1}
+\setcounter{tocdepth}{3}
+
+% Section, subsection, and list title styling
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+    {-3.0ex \@plus -1ex \@minus -.2ex}%
+    {1.5ex \@plus .2ex}%
+    {\normalfont\Large\bfseries\sffamily\color{HeadingBlue}}}
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+    {-2.5ex \@plus -1ex \@minus -.2ex}%
+    {1.0ex \@plus .2ex}%
+    {\normalfont\large\bfseries\sffamily\color{SubHeadingBlue}}}
+
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+    {-2.0ex \@plus -1ex \@minus -.2ex}%
+    {0.8ex \@plus .2ex}%
+    {\normalfont\normalsize\bfseries\sffamily\color{SubHeadingBlue}}}
+
+% Dotted leaders in the Table of Contents for top-level sections as well
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{1.5em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+
+% Centered blue headings for Table of Contents, List of Tables, and List of Figures
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\listfigurename}{List of Figures}
+
+\renewcommand\tableofcontents{
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\contentsname\par}
+    \vspace{0.8em}
+    \@starttoc{toc}
+}
+\renewcommand\listoftables{
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\listtablename\par}
+    \vspace{0.8em}
+    \@starttoc{lot}
+}
+\renewcommand\listoffigures{
+    {\centering\normalfont\Large\bfseries\sffamily\color{HeadingBlue}\listfigurename\par}
+    \vspace{0.8em}
+    \@starttoc{lof}
+}
+\makeatother
+
+% Helper macros
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\textsf{#1}}}}
+\providecommand{\abbr}[1]{#1}
+
+% Future substantive tables: group \DDFTableStyle{column count}, use bordered
+% L/R columns whose fractions sum to 1, and repeat blue headers in longtables.
+% Column widths exclude padding and rules, so the complete table fits \linewidth.
+\newlength{\DDFTableContentWidth}
+\newcommand{\DDFTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\DDFTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1\DDFTableContentWidth}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1\DDFTableContentWidth}}
+
+% =============================================================================
+% 4. HEADER AND FOOTER (WITH UNIVERSITY LOGOS)
+% =============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyhead[L]{
+    \raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}
+}
+\fancyhead[C]{
+    {\small\textbf{Early Warning Alarm System (\abbr{EWAS})}}
+}
+\fancyhead[R]{
+    \raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}
+}
+\fancyfoot[R]{\thepage}
+
+% Style for Page 1 (logos in top corners, no page number in footer)
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[L]{\raisebox{-0.5\height}{\includegraphics[height=1.05cm]{figs/hsb_logo.png}}}
+    \fancyhead[R]{\raisebox{-0.5\height}{\includegraphics[height=1.2cm]{figs/pg_logo.jpg}}}
+}
+
+% =============================================================================
+% DOCUMENT BODY
+% =============================================================================
+
+% Technical compatibility and HSB styling for the supplied translation.
+\usepackage{booktabs,calc,etoolbox,newunicodechar,caption}
+\usepackage{amssymb}
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\captionsetup[figure]{labelformat=empty,font=small}
+\setkeys{Gin}{keepaspectratio}
+\newlength{\GSEGTableContentWidth}
+\newcommand{\GSEGTableStyle}[1]{%
+    \small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.16}%
+    \arrayrulecolor{TableBorderBlue}\rowcolors{2}{white}{TableRowLightBlue}%
+    \setlength{\GSEGTableContentWidth}{\dimexpr\linewidth-2\tabcolsep*#1-\arrayrulewidth*\numexpr#1+1\relax\relax}%
+}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1\GSEGTableContentWidth}}
+\newcommand{\GSEGHeaderText}[1]{{\color{white}\bfseries\sffamily #1}}
+
+\hypersetup{pdftitle={EWAS --- Ground Segment Design Definition File (DDF)},pdfauthor={Grzegorz Macioch},pdflang={en-GB}}
+
+\begin{document}
+
+
+% -----------------------------------------------------------------------------
+% PAGE 1: TITLE PAGE & DOCUMENT INFORMATION
+% -----------------------------------------------------------------------------
+\thispagestyle{firstpage} % Use \thispagestyle{empty} if you do not want logos on Page 1
+\phantomsection
+\addcontentsline{toc}{section}{Document Information}
+
+\begin{center}
+    {\large \ProjectName}
+\end{center}
+
+\vspace*{4.5cm}
+
+\begin{center}
+    {\fontsize{24}{28}\selectfont\sffamily\color{TitleBlue}\DocTitle\par}
+    \vspace{0.35cm}
+    {\color{SubHeadingBlue}\hrule height 0.8pt}
+\end{center}
+
+\vfill
+
+% --- HOW TO EDIT THE PAGE 1 TABLE ---
+% Part 1 (first 4 rows): automatically populated from Section 2 at the top of the file.
+% Part 2 (signatures & roles): enter data between the & symbols in the format:
+%     {Full Name} & {Role Name} & {Signature/Date (or leave blank)} \\[1.2em] \hline
+{\renewcommand{\arraystretch}{1.25}%
+\arrayrulecolor{black}%
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    Document Number & \DocNumber \\ \hline
+    Issue           & \DocIssue{} (Draft) \\ \hline
+    Issue Date      & \DocDate   \\ \hline
+    CI Number       & \CINumber  \\
+\end{tabularx}\par\nointerlineskip
+\noindent
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \hline
+    % COLUMN 1: Name             & COLUMN 2: Responsibility & COLUMN 3: Signature/Date
+    Name                         & Responsibility           & Signature/Date                   \\ \hline
+    Prepared by                  &                          &                                  \\ \hline
+    Grzegorz Macioch             & Author                   & Grzegorz Macioch\newline 24.11.2026 \\[1.2em] \hline
+    Checked by                   &                          &                                  \\ \hline
+    Aleksandra Susmarska         & Reviewer                 & Aleksandra Susmarska\newline 24.11.2026 \\[1.2em] \hline
+    Approved by                  &                          &                                  \\ \hline
+                                 &                          &                                  \\[1.2em] \hline
+\end{tabularx}}
+
+\newpage
+
+% BEGIN SUPPLIED TRANSLATION BODY
+\section{Document Change Record}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.10}|P{0.17}|P{0.55}|P{0.18}|}
+\hline\rowcolor{TableHeaderBlue}
+\thead{Issue} & \thead{Date} & \thead{Description} & \thead{Sections affected}\\ \hline
+\endhead
+\hline\endlastfoot
+Draft & 18.11.2026 & Chapters 1--4 drafted. & Sections 1--4\\ \hline
+Draft & 19.11.2026 & Chapters 5--6 drafted. & Sections 5--6\\ \hline
+Draft & 20.11.2026 & Chapters 7--8 drafted. & Sections 7--8\\ \hline
+Draft & 21.11.2026 & Chapter 9 and whole-document editing. & Section 9; whole document\\ \hline
+Draft & 22.11.2026 & Multi-chapter modifications: warning policy, GSEG availability requirement, RBD model, budgets and compliance statements. & Multiple chapters\\ \hline
+Draft & 24.11.2026 & Multi-chapter modifications connected to changes in DDJF file. & Multiple chapters\\*
+Draft & 24.11.2026 & Clarified timing boundaries and warning-interface data flow; corrected the parameter-register note. & Sections 5, 6 and 8\\*
+\end{longtable}
+\endgroup
+
+\newpage
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\newpage
+\input{sections/00_document_status}
+
+\newpage
+\input{sections/01_introduction_scope}
+
+\newpage
+\input{sections/02_applicable_reference_documents}
+
+\newpage
+\input{sections/03_project_technical_requirements}
+
+\newpage
+\input{sections/04_functional_description}
+
+\newpage
+\input{sections/05_physical_description}
+
+\newpage
+\input{sections/06_system_technical_budgets}
+
+\newpage
+\input{sections/07_system_design_constraints}
+
+\newpage
+\input{sections/08_engineering_data_repository}
+
+\newpage
+\input{sections/09_conclusion_compliance}
+
+% END SUPPLIED TRANSLATION BODY
+\end{document}

@@ -1,0 +1,65 @@
+\section{7. Constraints Imposed by the Design}\label{system-design-constraints}
+
+\subsection{7.1. Production, Installation and Integration}\label{production-and-integration-constraints}
+
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}{|P{0.16}|P{0.84}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
+\endhead
+\hline\endlastfoot
+DC-P01 & Fixed GSN/\allowbreak{}GIS infrastructure and other equipment fit within one site; antenna placement is determined by GEO visibility geometry and RF conditions.\\ \hline
+DC-P02 & Critical A/\allowbreak{}B domains use different hosts, switches, local power distribution boards and GSN/\allowbreak{}EWS gateway paths; common building utilities remain a common failure point.\\ \hline
+DC-P03 & MCC/\allowbreak{}DAS workloads must not block C\&C/\allowbreak{}DPS/\allowbreak{}EWS; critical state and warning versions must be available without a synchronous DAS write.\\ \hline
+DC-P04 & The SSEG emulator and test warning recipient must be isolated from operational commands and recipients.\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.2. Operational Constraints}\label{operational-constraints}
+
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}{|P{0.16}|P{0.84}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
+\endhead
+\hline\endlastfoot
+DC-O01 & The first warning is independent of an operator decision, DAS write and MCC interface.\\ \hline
+DC-O02 & Internal transport, queues, failover and recovery times are included in 2 and 15 s; non-critical service isolation.\\ \hline
+DC-O03 & C\&C does not perform a full ad hoc orbit calculation; it uses versioned MCC products with currency checks.\\ \hline
+DC-O04 & For 10 simultaneously admitted DPS assessments and failure of one domain, the other is to have the required critical capacity; P hypothesis for testing, not a guarantee at higher arrival rates.\\ \hline
+DC-O05 & Readiness monitoring at GSN and EWS boundaries; capability loss during maintenance and failure counts toward 100 ppm.\\ \hline
+DC-O06 (design P) & Communications via two different visible GEO spacecraft are preferred; after route loss, an alternative path and dynamic ISL reachability are checked, without assuming visibility of all LEO spacecraft.\\ \hline
+DC-O07 (design P) & C\&C selects the reserve candidate with the primary pair within the 0.90 s selection budget; initial handover of two requests remains within 2 s. Reserve activation is conditional and requires consistency with ICD/\allowbreak{}SSEG and remaining mission time.\\ \hline
+DC-O08 (design P) & The pool of 10 DPS slots is protected against supporting workloads; exceeding capacity triggers priority allocation and controlled queuing. Overload status is reported to MCC and is not treated as a “no threat” classification or a timing guarantee beyond the P scope.\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.3. Transport and Equipment Storage}\label{transportation-and-storage-constraints}
+
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}{|P{0.16}|P{0.84}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
+\endhead
+\hline\endlastfoot
+DC-T01 & During transport and storage of antennas, RF, servers, disks, UPS and cooling equipment, manufacturer conditions for temperature, humidity, shock, vibration and ESD must be observed.\\ \hline
+DC-T02 & Assembly and transport of components requiring calibration must enable inspection and readjustment after installation.\\ \hline
+DC-T03 & Transferred media, configurations, keys and software retain integrity, version control and protection against unauthorized access.\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.4. Maintenance and Repairs}\label{maintainability-constraints}
+
+\begingroup\GSEGTableStyle{2}
+\begin{longtable}{|P{0.16}|P{0.84}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{ID} & \GSEGHeaderText{Design constraint}\\ \hline
+\endhead
+\hline\endlastfoot
+DC-M01 & Each GIS domain can be shut down independently for maintenance, with the other loaded according to the P model, without declaring confirmed continuity.\\ \hline
+DC-M02 & Access for repair and replacement does not compromise separation; common utilities and external links are not automatically maintainable without downtime.\\ \hline
+DC-M03 & Critical configurations are unambiguously identifiable and restorable; tests do not transmit actual commands/\allowbreak{}warnings.\\ \hline
+DC-M04 & Health monitoring can indicate loss of a required capability and the resource to MCC supervision.\\ \hline
+DC-M05 (design P) & Maintenance of power, cooling, RF and WAN is to account for their common dependencies and the annual 100 ppm unavailability budget.\\*
+\end{longtable}
+\endgroup

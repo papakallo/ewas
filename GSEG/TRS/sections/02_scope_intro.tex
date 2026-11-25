@@ -1,0 +1,35 @@
+\section{2. Scope and Introduction}\label{scope-and-introduction}
+
+\subsection{2.1. Scope of the Specification and Product Hierarchy}\label{product-structure-and-functional-responsibilities}
+
+The TRS defines functional, performance, interface, security, maintenance and verification requirements for integrated GSEG \textbf{CI-02 /\allowbreak{} WBS 123456.02}. Detailed subsystem requirements will be defined in their lower-level TRSs.
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.20}|P{0.14}|P{0.66}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{WBS} & \GSEGHeaderText{Subsystem} & \GSEGHeaderText{Scope}\\ \hline
+\endhead
+\hline\endlastfoot
+123456.02.01 & DAS & archive, Raw Data Archive (.01.01) and Processed Data Archive (.01.02)\\ \hline
+123456.02.02 & C\&C & selection of two LEO spacecraft, requests, commands\\ \hline
+123456.02.03 & MCC & Flight Dynamics, supervision, conjunctions, operator actions\\ \hline
+123456.02.04 & DPS & validation/\allowbreak{}fusion/\allowbreak{}classification and impact-area assessment; three elements .04.01–.04.03\\ \hline
+123456.02.05 & GSN & RF/\allowbreak{}spacecraft communications, reports and products\\ \hline
+123456.02.06 & EWS & warnings, versions, recipient interface\\ \hline
+123456.02.07 & GIS & computing, LAN, time, power, cooling, monitoring\\*
+\end{longtable}
+\endgroup
+
+Subordinate physical elements: DAS Raw Data Archive \texttt{123456.02.01.01}, Processed Data Archive \texttt{.01.02}; DPS Data Processing Software \texttt{.04.01}, Event Detection Module \texttt{.04.02}, Trajectory Estimation Module \texttt{.04.03}. GIS is the seventh subsystem, not a threat assessment stage.
+
+\subsection{2.2. Mission and Segment Boundaries}\label{mission-and-segment-boundaries}
+
+GSEG performs the ground functions of EWAS at one geographical site. The satellite constellation and ISL belong to SSEG. Responsibility for warnings ends at the authorized institution interface; public warning, weapon guidance and interceptor control are outside the scope. Surveillance is global, with priority given to the Baltic Sea region.
+
+\subsection{2.3. Documentation Hierarchy}\label{position-in-the-documentation-hierarchy}
+
+EWAS System → GSEG TRS and SSEG TRS (peer specifications) → seven GSEG subsystem TRSs. The DDF defines the solution, the DDJF its justification, and ICDs specify the accepted interfaces.
+
+\subsection{2.4. Requirements Convention}\label{requirements-convention}
+
+Chapter 7 is \textbf{normative}. Requirements are identified by \texttt{GSEG-\allowbreak{}REQ-\allowbreak{}KAT-\allowbreak{}NNN}. Verification methods: T — Test; A — Analysis; R — Review of Design; I — Inspection. Concept descriptions in the remaining chapters do not establish new normative requirements.

@@ -1,0 +1,26 @@
+\section{3. Principal Requirements and Design Drivers}\label{principal-requirements-and-design-drivers}
+
+\subsection{3.1. Mission Purpose and Context}\label{mission-purpose-and-system-context}
+
+EWAS is intended to acquire and assess data on potential ballistic missile launches, identify potential threats and deliver warnings. GSEG is responsible for communications, coordination of two LEO spacecraft, ground fusion, event qualification and delivery of warnings to authorized institutions. It is not a fire-control system.
+
+\subsection{3.2. Principal Driving Requirements}\label{principal-design-requirements}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.22}|P{0.29}|P{0.49}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Area} & \GSEGHeaderText{Identifier /\allowbreak{} B limit} & \GSEGHeaderText{Design consequence}\\ \hline
+\endhead
+\hline\endlastfoot
+Automatic selection of two LEO spacecraft & FUN-001/\allowbreak{}002 & GSN + C\&C, current MCC orbital products\\ \hline
+Two observations, assessment and warning & FUN-003/\allowbreak{}004/\allowbreak{}005 & DPS and EWS, four assessment outcomes, without prior operator approval\\ \hline
+Coordination and warning time & PERF-001 \textbf{2 s}, PERF-002 \textbf{15 s} & two independently measured critical phases\\ \hline
+Single site & ARC-001 & common building and communications risks\\ \hline
+Independence of the first warning & ARC-002 & MCC and DAS outside the synchronous first-message path\\ \hline
+Resilience and availability & REL-001/\allowbreak{}002/\allowbreak{}003: \textbf{≥99.99\%} & redundancy, readiness status, failure model\\ \hline
+Data and security & DATA-001–006; SEC-001–005 & event identity, retention ≥5 years, protection and audit\\ \hline
+Interfaces & IF-001–003 & SSEG/\allowbreak{}recipients/\allowbreak{}orbital data, ICDs\\*
+\end{longtable}
+\endgroup
+
+The system requirement \textbf{>99.9\%} applies to the whole of EWAS, not all GSEG equipment; the more stringent \textbf{≥99.99\%} applies to simultaneous readiness of the two GSEG critical functions described in TRS 3.2.

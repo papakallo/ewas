@@ -1,0 +1,25 @@
+\section{6. Environment and Constraints}\label{environment-and-constraints}
+
+\subsection{6.1. Site and Physical Environment}\label{site-and-physical-environment}
+
+A single GSEG site requires analysis of temperature, humidity, wind, precipitation, lightning, electromagnetic interference, fire, flooding, building hazards and antenna installation options. Environmental values will depend on the site and the selected equipment.
+
+\subsection{6.2. Radio and Communications Environment}\label{radio-and-communications-environment}
+
+GEO and LEO visibility, atmospheric attenuation, RF interference, spectrum regulations, terminal availability, routing through GEO–LEO/\allowbreak{}LEO–LEO, message priority and behavior after failures must be analyzed. The ISL network is not evidence of continuous reachability or timeliness of every route.
+
+\subsection{6.3. Infrastructure and Availability}\label{infrastructure-and-service-availability}
+
+The assessment scope includes GSN RF and gateways, GIS hosts/\allowbreak{}network/\allowbreak{}time/\allowbreak{}power/\allowbreak{}cooling, EWS and links to recipients under GSEG control. Single failures, maintenance, failover, MTTR, providers and common-cause failures must be considered. Two equipment domains at one site do not provide resilience to complete loss of that site. GSEG requirement: ≥99.99\%; whole-EWAS level: >99.9\%.
+
+\subsection{6.4. Information Security}\label{information-security}
+
+Permissions, transmission protection, archive encryption and audit; details according to information classification and ICDs.
+
+\subsection{6.5. Operational Constraints}\label{operational-constraints}
+
+60 s budget, complete valid data from two LEO spacecraft (involving the previously selected reserve spacecraft if necessary), variable connectivity, integrity of timestamps and identifiers, automatic warning and the possibility of subsequent correction. Preliminary event prioritization may be based on the GEO report, but \textbf{final threat classification remains a DPS function}. Under overload, GSEG indicates limited handling capability; merely placing an event in a queue does not constitute a DPS assessment of “no threat”.
+
+\subsection{6.6. Regulations and External Conditions}\label{regulatory-and-external-conditions}
+
+Radio and construction authorizations, facility safety, information protection requirements, external operator conditions; EWAS boundary at the warning recipient.

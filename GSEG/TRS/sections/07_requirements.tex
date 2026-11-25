@@ -1,0 +1,137 @@
+\section{7. GSEG Technical Requirements (Normative)}\label{gseg-technical-requirements}
+
+\textbf{Note:} exactly 35 identifiers and their associated verification methods from GSEG TRS Issue 0.7 have been retained; the statements are translated from the Polish editorial version, not a new issue of the requirements baseline.
+
+\subsection{7.1. Functional Requirements}\label{functional-and-mission-requirements}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-FUN-001 — Selection of Two LEO Spacecraft} & Upon receipt of a GEO Event Report, GSEG shall select two LEO spacecraft for follow-up observations based on event location, observation geometry, spacecraft status and communications availability. & R-043 & T, A\\ \hline
+\textbf{GSEG-REQ-FUN-002 — Observation Request Handling} & GSEG shall generate requests for both selected LEO spacecraft, hand them over to the SSEG communications interface and make transmission and execution status available. & R-030, R-044 & T\\ \hline
+\textbf{GSEG-REQ-FUN-003 — Ground Event Classification} & GSEG shall automatically distinguish a potential threat, an ambiguous event in which a credible threat cannot be excluded, and a credibly non-threatening event. If the required data are missing, it shall indicate the distinct “assessment impossible” status without assigning a threat class. & R-019, R-013 & T, A\\ \hline
+\textbf{GSEG-REQ-FUN-004 — Authoritative Observation Fusion} & GSEG shall combine timestamped LOS observations and uncertainty data from two selected LEO spacecraft and the onboard preliminary trajectory to obtain a refined trajectory and probabilistic impact area. & R-012, R-026, R-027 & T, A\\ \hline
+\textbf{GSEG-REQ-FUN-005 — Automatic First Warning} & Following receipt and valid assessment of observations from two LEO spacecraft and determination of the trajectory and impact area, GSEG shall automatically deliver the first warning if there is a potential threat or if an ambiguous result does not exclude a credible threat. The warning shall include uncertainty. No external warning shall be sent in the absence of a threat or when the status is “assessment impossible”. Prior operator approval is not required. & R-011, R-013, R-045 & T\\ \hline
+\textbf{GSEG-REQ-FUN-006 — Event Assessment Updates} & GSEG shall update the trajectory and impact area following receipt of further observations associated with an active event. & R-014 & T\\ \hline
+\textbf{GSEG-REQ-FUN-007 — Warning Revision and Cancellation} & GSEG shall enable an authorized operator to confirm, revise or cancel a previously sent warning and transmit the corresponding update. & R-046 & T\\ \hline
+\textbf{GSEG-REQ-FUN-008 — Baltic Sea Region Prioritization} & GSEG shall assess events originating throughout the global surveillance area for threats to the Baltic Sea region and prioritize the relevant warnings. & R-049 & T, A\\ \hline
+\textbf{GSEG-REQ-FUN-009 — Exclusion of Offensive Functions} & GSEG shall not provide weapon guidance, fire control, interceptor control or directly control military response assets. & R-001 & R, I\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.2. Architecture Requirements}\label{architecture-and-configuration}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-ARC-001 — Single Ground Location} & Fixed operational GSEG infrastructure shall be located at one geographical site. & GSEG baseline & R, I\\ \hline
+\textbf{GSEG-REQ-ARC-002 — Critical-Path Independence} & Automatic delivery of the first warning shall not depend on completion of event archiving, historical analyses or operator review. & R-011, R-045, CONOPS & T, R\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.3. Performance}\label{performance}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-PERF-001 — Two-LEO Coordination Time} & The interval from receipt of the GEO report by GSN to handover of requests for both selected LEO spacecraft at the GSEG/\allowbreak{}SSEG boundary, including internal data transfer and selection, shall not exceed \textbf{2 s}. & R-011, R-043 & T, A\\ \hline
+\textbf{GSEG-REQ-PERF-002 — Assessment and Warning Delivery Time} & For events qualified for warning, the interval from GSN receipt of the complete set of two LEO products and the preliminary trajectory to delivery of the warning at the agreed recipient interface, including validation, fusion, the decision and dissemination, shall not exceed \textbf{15 s}. & R-011, R-045 & T, A\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.4. Interfaces}\label{interfaces}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-IF-001 — SSEG Interface} & GSEG shall exchange commands, telemetry, GEO reports, LEO products and preliminary trajectories through interfaces consistent with the agreed ICDs and the SSEG specification. & R-033, R-042–044, SSEG-REQ-IF-001 & T, R\\ \hline
+\textbf{GSEG-REQ-IF-002 — Warning Recipient Interface} & GSEG \textbf{shall} ensure that each warning delivered through an authorized recipient interface contains the event identifier, refined trajectory, impact-area assessment, \textbf{threat classification} as defined in \texttt{GSEG-REQ-FUN-003}, \textbf{uncertainty information} associated with the trajectory and impact-area assessment, and warning status. GSEG \textbf{shall} record available delivery acknowledgements. & R-003, R-013, R-047, R-048 & T\\ \hline
+\textbf{GSEG-REQ-IF-003 — Orbital and Conjunction Data} & GSEG shall support receipt and forwarding of applicable orbital-conjunction information to mission supervision and the agreed SSEG interface. & SSEG-REQ-IF-004 & T, R\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.5. Data}\label{data-and-retention}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-DATA-001 — Product Traceability} & GSEG shall preserve event identifiers, timestamps and data provenance during reception, processing, exchange and archiving of mission products. & R-012, R-037, R-047 & T\\ \hline
+\textbf{GSEG-REQ-DATA-002 — Input Data Validation} & Before using data in an assessment that can trigger the first warning, GSEG shall check that the packages correspond to the event and contain all data and metadata required for fusion. & R-012, R-027, R-045 & T\\ \hline
+\textbf{GSEG-REQ-DATA-003 — Uncertainty Representation} & GSEG shall associate an impact-area estimate with a defined confidence level and a description of the uncertainty boundaries. & R-013 & T, A\\ \hline
+\textbf{GSEG-REQ-DATA-004 — Complete Event History} & GSEG shall archive applicable source data, classifications, results, decisions to issue or withhold warnings with the reason, warning versions and acknowledgements, and audit data, including after revision or cancellation of a message. & R-037, R-047 & T, I\\ \hline
+\textbf{GSEG-REQ-DATA-005 — Historical Data Retention} & GSEG shall retain mission data for \textbf{at least 5 years}, preserving integrity and availability to authorized users. & R-036 & A, T\\ \hline
+\textbf{GSEG-REQ-DATA-006 — Controlled Archive Use} & GSEG shall make historical data available only to authorized users and processes, for the purposes permitted by R-004. & R-004, R-034, R-041 & T, R\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.6. Security}\label{information-security-1}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-SEC-001 — Role-Based Access Control} & GSEG shall restrict access to operational functions and data according to permissions assigned to user roles. & R-003, R-034 & T\\ \hline
+\textbf{GSEG-REQ-SEC-002 — Transmission Protection} & GSEG shall apply encryption at interfaces according to applicable security requirements and agreed cryptographic boundaries. & R-031 & T, R\\ \hline
+\textbf{GSEG-REQ-SEC-003 — Archive Encryption} & GSEG shall store archived mission data in encrypted form. & R-035 & T, I\\ \hline
+\textbf{GSEG-REQ-SEC-004 — Protection Against Unauthorized Commands} & GSEG shall detect and reject commands whose origin or integrity has not been correctly authenticated at the applicable interface. & R-031, R-032, R-034 & T\\ \hline
+\textbf{GSEG-REQ-SEC-005 — Audit Recording} & GSEG shall record user actions, commands, system events and warning dissemination with identifiers and timestamps. & R-037 & T, I\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.7. Reliability and Availability}\label{reliability-and-availability}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-REL-001 — Critical-Function Redundancy} & GSEG shall provide redundant execution paths for constellation control and the first warning, allowing these functions to continue after failure of a single element covered by redundancy. & R-017, R-030 & T, A\\ \hline
+\textbf{GSEG-REQ-REL-002 — Indication of Capability Loss} & GSEG shall detect and report to supervisory functions the unavailability of services or connections required for constellation control, assessment and warning delivery. & R-015, R-017, R-030 & T\\ \hline
+\textbf{GSEG-REQ-REL-003 — Critical-Service Operational Availability} & During continuous 24/\allowbreak{}7 operation, GSEG shall provide operational availability of \textbf{at least 99.99\%} for simultaneous readiness of the observation-coordination and first-warning functions specified in Section 3.2. Maintenance downtime and recovery after failures that disable either function shall count as unavailability. & R-015, R-017 & A, T\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.8. Operations}\label{supervision-and-operations}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-OPS-001 — Operator Situational Awareness} & GSEG shall present authorized operators with the available event location, trajectory, impact area, confidence level, uncertainty bounds and classification and decision status (warning issued, withheld because of the absence of a threat, or assessment impossible). & R-028, R-029, R-046 & T, I\\ \hline
+\textbf{GSEG-REQ-OPS-002 — Mission Monitoring} & GSEG shall present operators with current spacecraft, ground-service and command status and anomalies affecting mission execution. & R-029, R-030, R-033 & T\\*
+\end{longtable}
+\endgroup
+
+\subsection{7.9. Verification}\label{integrated-verification}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.27}|P{0.46}|P{0.16}|P{0.11}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Identifier and title} & \GSEGHeaderText{Requirement} & \GSEGHeaderText{Source} & \GSEGHeaderText{Method}\\ \hline
+\endhead
+\hline\endlastfoot
+\textbf{GSEG-REQ-VER-001 — Scenario Verification} & GSEG functions relevant to warning shall be verified in representative simulations of different events, communications conditions and data availability. & R-038 & A, R\\ \hline
+\textbf{GSEG-REQ-VER-002 — HIL Testing of Critical Functions} & Before operational deployment, critical GSEG processing and automatic-warning functions shall undergo HIL tests with representative SSEG data or an emulator. & R-039 & T\\ \hline
+\textbf{GSEG-REQ-VER-003 — Integrated-Chain Validation} & GSEG shall participate in complete exercises with SSEG and an authorized recipient interface, measuring time and confirming assessment of data from two LEO spacecraft before the first warning. & R-011, R-040, R-045 & T\\*
+\end{longtable}
+\endgroup

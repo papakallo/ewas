@@ -1,0 +1,149 @@
+\section{9. Justification of System Technical Budgets and Margins}\label{ddjf-9}
+
+\subsection{9.1. Basis, Method and Status}\label{ddjf-9-1}
+
+This chapter presents a check of GSEG DDF Chapter 6 budgets, taking into account ECSS-E-ST-10C Rev.1 (15 February 2017), Annexes I and K. Values designated \textbf{B} originate from baseline requirements; \textbf{P} values are sizing proposals, not verified equipment parameters. The \textbf{allocation margin} (difference between the limit and the sum of planned allocations) is distinguished below from the \textbf{confirmed margin} (difference between the limit and the result of a verified calculation or test). No margin of the latter kind is currently documented.
+
+The calculations assume a year of 365 days, binary memory units (KiB, MiB, TiB) and decimal network data rates (Mb/\allowbreak{}s, Gb/\allowbreak{}s). They do not replace measurements or validated-model reports. Budget closure requires input identifiers, hardware configuration, source of loads, measurement boundary, uncertainty estimate, margin policy and parameter history according to design maturity (Annex I).
+
+\subsection{9.2. Summary of Critical Parameters}\label{ddjf-9-2}
+
+\begingroup\GSEGTableStyle{4}
+\begin{longtable}{|P{0.25}|P{0.25}|P{0.37}|P{0.13}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Parameter} & \GSEGHeaderText{Requirement or proposal} & \GSEGHeaderText{Current justification} & \GSEGHeaderText{Status}\\ \hline
+\endhead
+\hline\endlastfoot
+Observation coordination & ≤2 s (B), reserve 0.50 s (P) & Sum of allocations: 1.50 + 0.50 = 2.00 s & Arithmetic, no measurement\\ \hline
+Reserve LEO candidate (\texttt{GSEG-\allowbreak{}PAR-\allowbreak{}024}) & 1 (P), if available & 2+1 ranking within 0.90 s; replacement request outside the initial requests & No geometry analysis or tests\\ \hline
+Assessment and first warning & ≤15 s (B), reserve 2.50 s (P) & Sum of allocations: 12.50 + 2.50 = 15.00 s & Arithmetic, no measurement\\ \hline
+Whole EWAS & ≤60 s (B) & Current allocations total 43 s SSEG-owned + 17 s GSEG-owned; SSEG subtotal includes a GSEG step & Boundaries and end-to-end performance open\\ \hline
+Combined critical services & ≥99.99\% (B) & 100 ppm, of which 90 ppm allocated and 10 ppm reserve (P) & No RBD/\allowbreak{}FTA with failure data\\ \hline
+GIS performance per domain & ≥160 vCPU, ≥320 GiB (P) & 120 vCPU /\allowbreak{} 240 GiB in model; 25\% of each resource unallocated & No profiling or post-failure test\\ \hline
+GIS network per domain & ≥10 Gb/\allowbreak{}s (P) & Synthetic traffic 3 Gb/\allowbreak{}s, without overhead & No effective-throughput test\\ \hline
+EWS, connections to recipients & ≥100 Mb/\allowbreak{}s (P) & Calculation of packet transmission time, not protocol delays & No interface test\\ \hline
+DAS & ≥50 TiB usable per copy, 2 copies (P) & 5-year model approx. 32.31 TiB/\allowbreak{}copy & No approved data list\\ \hline
+Critical IT & 12 kW power, ≥15 kW cooling, ≥5 kWh UPS energy (P) & Partial IT balance & No whole-chain balance\\*
+\end{longtable}
+\endgroup
+
+\subsection{9.3. Timing Budgets}\label{ddjf-9-3}
+
+\subsubsection{9.3.1. LEO Coordination — 2 s Limit}\label{ddjf-9-3-1}
+
+The DDF allocates: GSN reception 0.20 s; GIS transfer to C\&C 0.10 s; C\&C selection of two primary LEO spacecraft and the reserve candidate and preparation of two initial requests 0.90 s; GIS transfer to GSN 0.10 s; GSN handover of two requests at the SSEG boundary 0.20 s. The sum of operations is \textbf{1.50 s}; the remaining \textbf{0.50 s} is the proposed integration reserve, i.e. 25\% of the limit. This budget does not cover subsequent request routing within SSEG.
+
+The reserve exists only in the planning sense. It must be checked whether C\&C performs 2+1 ranking within 0.90 s with ten events, outdated orbital data and after GIS domain failover; subsequent activation of the reserve receives no separate system time allocation. Queues and failovers must be accounted for within 2 s, rather than added to the budget.
+
+\subsubsection{9.3.2. Assessment and Warning Delivery — 15 s Limit}\label{ddjf-9-3-2}
+
+The DDF allocates GSN 0.40 s; GIS transfer 0.40 s; DPS validation 1.00 s and fusion/\allowbreak{}classification 7.20 s; EWS preparation 1.00 s and delivery 2.00 s; GIS queues 0.50 s. Total operations \textbf{12.50 s} and reserve \textbf{2.50 s}, i.e. 16.7\% of the limit. The endpoint means delivery to the agreed recipient interface, not a subsequent acknowledgement of receipt.
+
+The accounting concerns events qualified by DPS for warning. For the “no threat” or “assessment impossible” outcome, a delivery time must not falsely be demonstrated for a warning that the architecture does not send in accordance with TRS. There are no measurements confirming DPS 7.20 s or EWS 2.00 s; these are design allocations only.
+
+\subsubsection{9.3.3. Critical Relationship Between SSEG and GSEG Limits}\label{ddjf-9-3-3}
+
+The current detailed allocation for the entire chain is \textbf{10 + 2 + 3 + 30 + 15 = 60 s}. SSEG-owned stages account for 10+3+30 = \textbf{43 s}; GSEG-owned stages account for 2+15 = \textbf{17 s}. The SSEG DDF, §6.4, also gives a \textbf{40--45 s} subtotal for Steps 1--3. That subtotal includes the \textbf{2 s GSEG selection interval} within the 5 s cueing step (2 s GSEG selection plus 3 s SSEG command routing); it is not an independent 45 s SSEG-only allocation and must not be added to all 17 s of GSEG time. The active SSEG TRS, §7.3, defines the overall 60 s limit in SSEG-REQ-PERF-002; SSEG-REQ-PERF-001 is not a 45 s timing requirement.
+
+\textbf{Risk and recommendation:} the current allocation has no unallocated system reserve. Additional work that fits within the existing stage limits does not, by itself, change the 60 s sum. However, if future SSEG requirements or uncounted delays add elapsed time beyond the current 43 s SSEG allocation, the total may exceed 60 s unless time is recovered through overlap or reallocation. For example, 45 s of SSEG-owned time plus the unchanged 17 s GSEG allocation would total \textbf{62 s}. Treat this as a conditional change-control risk, not as the arithmetic of the current SSEG DDF subtotal. System, SSEG and GSEG owners should agree the measurement boundaries and verify the complete chain; GSEG should not unilaterally change another segment's requirements.
+
+\subsection{9.4. GIS Computing Resources and Memory}\label{ddjf-9-4}
+
+The P model provides for ≥160 vCPU and ≥320 GiB RAM on \textbf{each} of the two GIS domains. In case of loss of the other domain, planned usage is: C\&C 8 vCPU/\allowbreak{}16 GiB, EWS 8/\allowbreak{}16, DPS 10 × 8/\allowbreak{}16 = 80/\allowbreak{}160 and platform services 24/\allowbreak{}48. The total is \textbf{120 vCPU and 240 GiB}, so unused allocation is \textbf{40 vCPU and 80 GiB}, i.e. 25\% of domain capacity. Such a reserve is arithmetically correct.
+
+The model \textbf{does not imply} a 25\% reserve in computing power or response time: vCPU may be shared, and DPS performance depends on algorithm implementation, RAM bandwidth, I/\allowbreak{}O and mutual effects of events. Justification of the load distribution and the number of ten concurrent events is missing. The input profile, ratio of vCPU to physical cores, resource reservation policy and test with one domain shut down must be defined. If profiling indicates higher requirements, DDF 6.3 must be recalculated instead of retaining arbitrary values.
+
+The proposed pool of 10 reserved DPS slots per domain (P) limits the number of concurrent assessments after failure of the other domain. With arrival of 11 or more events, the priority queue may defer less urgent tasks, but without evidence that they will all meet 15 s. Measurements of queue time, scheduling time and fusion time are needed, not merely summation of vCPU.
+
+\subsection{9.5. GSN/\allowbreak{}SSEG Communications and Local Network}\label{ddjf-9-5}
+
+The ISL network described in SSEG TRS enables transfer of commands and data between LEO spacecraft and between GEO and LEO spacecraft. The preferred GSN design provides two separate RF paths to different visible GEO spacecraft, with optional direct LEO contact. It must not be assumed that GSN simultaneously requires 20 direct LEO connections.
+
+The value \textbf{3 Gb/\allowbreak{}s} corresponds only to a synthetic GIS transport test scenario (“20 streams at 150 Mb/\allowbreak{}s each”). At a nominal \textbf{10 Gb/\allowbreak{}s} port it represents 30\% of line rate, leaving 70\% of nominal throughput. This is not a confirmed usable reserve after accounting for protocol overhead, competing loads, aggregation and replication traffic. Nor does it demonstrate physical visibility of 20 spacecraft or GSN radio performance.
+
+Time-varying availability of GEO–LEO–LEO routes, number of RF antennas, supported bands and throughput, and route failover time require GSEG-AN-03 analysis against SSEG-REQ-ISL-001/\allowbreak{}002/\allowbreak{}004 and the stage allocations in SSEG DDF §6.4. The timing analysis must use agreed measurement boundaries and account for the GSEG selection interval included in the Steps 1--3 subtotal. Traffic-rerouting capability within SSEG does not demonstrate two available paths from one ground site or prove end-to-end timing.
+
+\subsection{9.6. DAS Data Storage Budget}\label{ddjf-9-6}
+
+\subsubsection{9.6.1. Housekeeping Data}\label{ddjf-9-6-1}
+
+In the P model each of \textbf{78 spacecraft} generates a housekeeping record of \textbf{2 KiB every second}. Assuming the same stream reaches the archive, five years and 40\% overhead give:
+
+\[
+V_{HK}=78\cdot2\,\mathrm{KiB/s}\cdot(365\cdot24\cdot3600)\,\mathrm{s/year}\cdot5\,\mathrm{years}\cdot1.4\approx32.07\,\mathrm{TiB}.
+\]
+
+The frequency of 1 Hz specifies onboard data generation, \textbf{not continuous GSN reception}. The adopted archive stream is a model assumption, not the result of contact and retransmission analysis.
+
+\subsubsection{9.6.2. Event Products and Total Capacity}\label{ddjf-9-6-2}
+
+With \textbf{20 events per day} and DDF sizes (GEO report 4 KiB; two LEO observations of 2 MiB each; trajectory 0.25 MiB; ten warnings of 64 KiB each), approximately \textbf{0.238 TiB} is obtained over five years with the same 40\% overhead. The combined model gives approximately \textbf{32.31 TiB per copy} and leaves \textbf{17.69 TiB (35.38\%)} of the proposed 50 TiB usable capacity.
+
+This estimate \textbf{does not include} unspecified raw image streams, additional operator products, variable volumes of updates, snapshots and other administrative reserves. Two copies of 50 TiB at the same site are not a substitute for an independent copy outside the facility. Before approval of 50 TiB, the complete catalog of archival products, arrival and retention factors, compression, file-system overhead and restoration method must be agreed. A change in the data model may require a substantial increase in capacity.
+
+\subsection{9.7. Power, Cooling and Backup Energy}\label{ddjf-9-7}
+
+The DDF adopts \textbf{12 kW} of critical IT power, \textbf{15 kW} of cooling capacity and \textbf{5 kWh} of usable UPS energy for an example transition lasting 15 min (P). For a 12 kW load and a time of 0.25 h, the minimum ideal energy is \textbf{3 kWh}; 5 kWh would theoretically suffice for \textbf{25 min}, before accounting for boundary conditions. The ratio of cooling capacity to nominal IT load gives 3 kW, i.e. \textbf{20\% of cooling capacity}. These are correct calculations for the adopted IT boundary, not a result of power or cooling qualification.
+
+Key ambiguity: the DDF does not indicate whether 5 kWh applies to each A/\allowbreak{}B domain, one UPS or the entire center, nor the point at which “usable energy” is specified. Loads of antennas and RF amplifiers, EWS gateways, switches, time system, cooling controls and power-supply losses are missing. Adopting 12 kW as the power of the \textbf{entire critical chain} would be unjustified. A peak/\allowbreak{}nominal balance after domain loss, battery characteristics and aging, actual efficiency, generator start-up time and the ability to maintain cooling during a power outage are required.
+
+Recommended DDF amendment: retain 12 kW, 15 kW and 5 kWh as \textbf{unclosed P parameters limited to the existing IT model}, without declaring autonomy of the entire GSEG. Add a separate power and backup budget for the \textbf{entire critical path}, derived from the load inventory.
+
+\subsection{9.8. Critical-Service Availability Budget}\label{ddjf-9-8}
+
+GSEG-REQ-REL-003 establishes a limit of \textbf{100 ppm} unavailability, i.e. at most \textbf{52.56 min} in 365 days (24/\allowbreak{}7 operation, including maintenance and recovery). The current DDF division is:
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.48}|P{0.22}|P{0.30}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Element} & \GSEGHeaderText{P allocation} & \GSEGHeaderText{Equivalent min/\allowbreak{}365 days}\\ \hline
+\endhead
+\hline\endlastfoot
+GSN & 20 ppm & 10.51\\ \hline
+C\&C & 10 ppm & 5.26\\ \hline
+DPS & 10 ppm & 5.26\\ \hline
+EWS & 15 ppm & 7.88\\ \hline
+GIS and common site & 25 ppm & 13.14\\ \hline
+Integration and controlled egress & 10 ppm & 5.26\\ \hline
+\textbf{Total allocated} & \textbf{90 ppm} & \textbf{47.30}\\ \hline
+\textbf{Unallocated reserve} & \textbf{10 ppm} & \textbf{5.26}\\ \hline
+\textbf{Limit} & \textbf{100 ppm} & \textbf{52.56}\\*
+\end{longtable}
+\endgroup
+
+The allocations are design assumptions, not MTBF/\allowbreak{}MTTR predictions. The sum of unavailability bounds may constitute a conservative bound on total unavailability, but only after each bound has been demonstrated with appropriate accounting for interdependencies. In particular, common causes must not be omitted, and GIS domains and the two GSN/\allowbreak{}EWS paths must not be treated as statistically independent without evidence.
+
+For repairable components, a simple long-term approximation \(U\approx MTTR/(MTBF+MTTR)\) may be used; it does not automatically account for building events, maintenance, software changes, operator errors and common parts. An RBD for service dependencies and FTA for loss of power, cooling, network, RF, WAN, time and the entire site are needed. After each such event, it must be established whether GSEG still meets both functions and their timing limits. \textbf{The 99.99\% requirement has not been demonstrated.}
+
+Assuming that a design resembling a \emph{fault tolerant} infrastructure topology automatically guarantees a specified number of minutes of unavailability would be incorrect; topology classifications do not replace measurements or an operational risk model. \href{https://journal.uptimeinstitute.com/explaining-uptime-institutes-tier-classification-system/}{Uptime Institute — Tier Classification}.
+
+\subsection{9.9. EWS Warning Transmission Budget}\label{ddjf-9-9}
+
+Ten messages of 64 KiB each give \textbf{640 KiB}, i.e. approximately \textbf{5.24 Mb}. Ideal transmission time at a throughput of 100 Mb/\allowbreak{}s is \textbf{0.052 s}. However, the internal EWS allocation of \textbf{2.00 s} for first-warning delivery concerns the entire operation of the interface: route delays, authentication, session state, access to recipients, queuing and route failover. Compliance with 2 s or 15 s does not follow from comparing 5.24 Mb and 100 Mb/\allowbreak{}s alone.
+
+The two communications paths must have demonstrated actual separation along the portion controlled by GSEG. Two devices or two operators using a common connection do not remove a single point of failure.
+
+\subsection{9.10. Margin Synthesis and Required Actions}\label{ddjf-9-10}
+
+\begingroup\GSEGTableStyle{3}
+\begin{longtable}{|P{0.25}|P{0.38}|P{0.37}|}
+\hline\rowcolor{TableHeaderBlue}
+\GSEGHeaderText{Parameter} & \GSEGHeaderText{Assessment result} & \GSEGHeaderText{Action before closure}\\ \hline
+\endhead
+\hline\endlastfoot
+2/\allowbreak{}15 s time & Positive \textbf{allocation reserves}, no implementation margins & Profiling, HIL and failover tests\\ \hline
+60 s time & \textbf{Current allocation totals 43 s SSEG-owned + 17 s GSEG-owned; no system reserve} & Agree boundaries; verify full chain; assess any added SSEG time against the 60 s limit\\ \hline
+GIS CPU/\allowbreak{}RAM & 25\% nominal free allocation & Measurements under load and domain failure\\ \hline
+GIS LAN & 70\% theoretical line-rate capacity & Traffic tests including overhead and ISL, no correlation with RF contact count\\ \hline
+DAS & Approximately 35.4\% space in narrow P model & Full model of products, arrival, copies and restoration\\ \hline
+IT cooling and UPS & 20\% cooling reserve, 5 kWh versus 3 kWh ideally & Full balance of all loads and failure conditions\\ \hline
+Availability & 10 ppm \textbf{budget} reserve, no empirical predictions & RBD/\allowbreak{}FTA, MTBF/\allowbreak{}MTTR, common failures and maintenance\\ \hline
+EWS WAN & Small ideal transmission volume & Delays, failures, protocol and physical independence of egress paths\\*
+\end{longtable}
+\endgroup
+
+In accordance with Annex I, a register of value evolution in successive issues and calculation sources and maturity levels will have to be added to the DDF. No \textbf{formally measured negative margin} has currently been identified, because the appropriate measurements are absent. However, \textbf{a risk of non-closure of the 60 s system budget} and significant gaps in definition of the archive model and total critical power have been identified.
+
+\textbf{Chapter 9 justification status:} arithmetic checks of selected P allocations have been closed; GSEG performance compliance and agreement of the aggregate SSEG/\allowbreak{}GSEG boundary have not been closed.
+
+\par\noindent{\color{TableBorderBlue}\rule{\linewidth}{0.4pt}}\par

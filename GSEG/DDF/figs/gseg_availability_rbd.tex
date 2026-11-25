@@ -1,0 +1,36 @@
+% GSEG critical-service availability model: logical RBD, not physical wiring.
+% This is an allocation model, not an achieved availability prediction.
+\begin{figure}[H]
+\centering
+\resizebox{0.94\linewidth}{!}{%
+\begin{tikzpicture}[
+ >=Stealth,
+ blk/.style={draw=HeadingBlue,fill=TableRowLightBlue,rounded corners=2pt,
+   align=center,text width=2.95cm,minimum height=1.15cm,font=\small,inner sep=3pt},
+ edge/.style={draw=HeadingBlue,thick},
+ gate/.style={draw=TableBorderBlue,fill=white,rounded corners=2pt,
+   align=center,text width=11.5cm,minimum height=0.9cm,font=\small,inner sep=4pt}
+]
+\node[blk] (gsn) at (-5.5,0) {GSN\\ground RF / gateway};
+\node[blk] (cc) at (-1.8,0) {C\&C\\tasking service};
+\node[blk] (dps) at (1.9,0) {DPS\\assessment service};
+\node[blk] (ews) at (5.6,0) {EWS\\recipient handover};
+\draw[edge] (gsn.east) -- (cc.west);
+\draw[edge] (cc.east) -- (dps.west);
+\draw[edge] (dps.east) -- (ews.west);
+\node[gate] (gis) at (0.05,-2.0) {GIS: shared computing / networking / time / site utilities and covered failover};
+\draw[draw=HeadingBlue,densely dashed,thick] (gis.north) -- (0.05,-1.35)
+   -| (gsn.south);
+\draw[draw=HeadingBlue,densely dashed,thick] (gis.north) -- (0.05,-1.35)
+   -| (cc.south);
+\draw[draw=HeadingBlue,densely dashed,thick] (gis.north) -- (0.05,-1.35)
+   -| (dps.south);
+\draw[draw=HeadingBlue,densely dashed,thick] (gis.north) -- (0.05,-1.35)
+   -| (ews.south);
+\node[font=\scriptsize\itshape,align=center,text width=12.2cm] at (0.05,-3.70)
+ {All critical capabilities must remain ready; C\&C/DPS/EWS are hosted across two GIS equipment failure domains.\\
+  GSEG-controlled integration and delivery connections are included in the availability budget.};
+\end{tikzpicture}}
+\caption{Logical availability block model for the GSEG-controlled critical service; serial readiness dependencies, not a data-flow sequence or independent-failure assumption.}
+\label{fig:gseg_availability_rbd}
+\end{figure}
